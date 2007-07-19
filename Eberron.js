@@ -373,7 +373,7 @@ Eberron.raceRules = function(rules, races) {
 
   for(var i = 0; i < races.length; i++) {
 
-    var adjustment, features, notes;
+    var adjustment, features, notes, selectableFeatures;
     var race = races[i];
 
     if(race == 'Changeling') {
@@ -391,6 +391,7 @@ Eberron.raceRules = function(rules, races) {
         'skillNotes.intuitiveFeature:+2 Sense Motive',
         'skillNotes.naturalLinguistFeature:Speak Language is a class skill'
       ];
+      selectableFeatures = null;
       rules.defineRule('classSkills.Speak Language',
         'skillNotes.naturalLinguistFeature', '=', '1'
       );
@@ -411,6 +412,7 @@ Eberron.raceRules = function(rules, races) {
         'skillNotes.humanlikeFeature:+2 Disguise (human)',
         'skillNotes.influentialFeature:+2 Bluff/Diplomacy/Intimidate'
       ];
+      selectableFeatures = null;
       rules.defineRule('magicNotes.mindlinkFeature',
         'level', 'source < 2 ? 1 : Math.floor(source / 2)'
       );
@@ -418,16 +420,69 @@ Eberron.raceRules = function(rules, races) {
     } else if(race == 'Shifter') {
 
       adjustment = '+2 dexterity/-2 intelligence/-2 charisma';
-      continue; // TODO
-      features = [
-      ];
+      features = ['Shifting'];
       notes = [
+        'abilityNotes.beasthideFeature:+2 Constitution while shifting',
+        'abilityNotes.cliffwalkFeature:+2 Dexterity while shifting',
+        'abilityNotes.longstrideFeature:+2 Dexterity/+2 speed while shifting',
+        'abilityNotes.longtoothFeature:+2 Strength while shifting',
+        'abilityNotes.razorclawFeature:+2 Strength while shifting',
+        'abilityNotes.wildhuntFeature:+2 Constitution while shifting',
+        'combatNotes.beasthideFeature:+2 AC while shifting',
+        'combatNotes.longtoothFeature:d6+%V bite attack while shifting',
+        'combatNotes.razorclawFeature:d4+%V claw attack while shifting',
+        'featureNotes.shiftingFeature:Use Shifter trait for %V rounds %1/day',
+        'featureNotes.wildhuntFeature:' +
+          'Detect creatures\' presence w/in 30 ft/track by smell',
+        'skillNotes.cliffwalkFeature:20 ft climb speed while shifting',
+        'skillNotes.wildhuntFeature:+2 Survival'
       ];
+      selectableFeatures = [
+        'Beasthide', 'Longtooth', 'Cliffwalk', 'Razorclaw', 'Longstride',
+        'Wildhunt'
+      ];
+      rules.defineRule('combatNotes.longtoothFeature',
+        'level', '=', 'Math.floor(source / 4)',
+        'strengthModifier', '+', null
+      );
+      rules.defineRule('combatNotes.razorclawFeature',
+        'level', '=', 'Math.floor(source / 4)',
+        'strengthModifier', '+', null
+      );
+      rules.defineRule('featureNotes.shiftingFeature',
+        'constitutionModifier', '=', '3 + source'
+      );
+      rules.defineRule('featureNotes.shiftingFeature.1', '', '=', '1');
+      rules.defineRule('selectableFeatureCount.Shifter',
+        'race', '=', 'source == "Shifter" ? 1 : null'
+      );
 
     } else if(race == 'Warforged') {
 
       adjustment = '+2 constitution/-2 wisdom/-2 charisma';
-      continue; // TODO
+      features = [
+        'Composite Plating', 'Construct Immunity', 'Light Fortification',
+        'Slam Weapon', 'Unhealing'
+      ];
+      notes = [
+        'combatNotes.compositePlatingFeature:+2 AC/Cannot wear armor',
+        'combatNotes.lightFortificationFeature:' +
+          '25% change of negating critical hit/sneak attack',
+        'combatNotes.slamWeaponFeature:d4 slam attack',
+        'featureNotes.unhealingFeature:' +
+          'Does not heal damage naturally/healing effects only half effective',
+        'saveNotes.constructImmunityFeature:' +
+          'Immune poison, sleep, paralysis, disease, nausea, fatigue, ' +
+          'exhaustion, sickening, energy drain'
+      ];
+      selectableFeatures = null;
+      rules.defineRule
+        ('armor', 'combatNotes.compositePlatingFeature', '=', '"None"');
+      rules.defineRule
+        ('armorClass', 'combatNotes.compositePlatingFeature', '+', '2');
+      rules.defineRule('magicNotes.arcaneSpellFailure',
+        'combatNotes.compositePlatingFeature', '+=', '5'
+      );
 
     } else
       continue;
@@ -436,6 +491,16 @@ Eberron.raceRules = function(rules, races) {
     if(notes != null) {
       rules.defineNote(notes);
     }
+    if(selectableFeatures != null) {
+      for(var j = 0; j < selectableFeatures.length; j++) {
+        var selectable = selectableFeatures[j];
+        rules.defineChoice('selectableFeatures', selectable + ':' + race);
+        rules.defineRule('features.' + selectable,
+          'selectableFeatures.' + selectable, '+=', null
+        );
+      }
+    }
+
 
   }
 
