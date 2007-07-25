@@ -28,9 +28,16 @@ function Eberron() {
   Eberron.featRules(PH35.rules, Eberron.FEATS, Eberron.SUBFEATS);
   Eberron.prestigeClassRules(PH35.rules, Eberron.PRESTIGE_CLASSES);
   Eberron.raceRules(PH35.rules, Eberron.RACES);
+  Eberron.magicRules(rules, Eberron.DOMAINS, Eberron.SPELLS);
 }
 
 Eberron.CLASSES = ['Artificer'];
+Eberron.DOMAINS = [
+  'Artifice:Ar', 'Charm:Cm', 'Commerce:Cc', 'Community:Co', 'Deathless:Dl',
+  'Decay:Dy', 'Dragon Below:Db', 'Exorcism:Ex', 'Feast:Fe', 'Life:Li',
+  'Madness:Md', 'Meditation:Mt', 'Necromancer:Ne', 'Passion:Pa', 'Shadow:Sh',
+  'Weather:We'
+];
 Eberron.FEATS = [
   'Aberrant Dragonmark', 'Action Boost', 'Action Surge',
   'Adamantine Body:Warforged', 'Ashbound', 'Attune Magic Weapon:Item Creation',
@@ -66,6 +73,89 @@ Eberron.PRESTIGE_CLASSES = [
 Eberron.RACES = [
   'Changeling', 'Kalashtar', 'Shifter', 'Warforged'
 ];
+Eberron.SPELLS = [
+  'Align Weapon:I2',
+  'Armor Enhancement:I2/Transmutation',
+  'Bear\'s Endurance:I2',
+  'Blade Barrier:I6',
+  'Bolts Of Bedevilment:Md2/Enchantment',
+  'Bull\'s Strength:I2',
+  'Cat\'s Grace:I2',
+  'Chill Metal:I2',
+  'Construct Energy Ward:I3/Abjuration',
+  'Control Deathless:Dl7/Necromancy',
+  'Create Deathless:Dl6/Necromancy',
+  'Create Greater Deathless:Dl8/Necromancy',
+  'Detect Aberration:I6/Divination',
+  'Detoxify:Fe8/Conjuration',
+  'Disable Construct:I6/Transmutation',
+  'Disrupting Weapon:I5',
+  'Eagle\'s Splendor:I2',
+  'Energy Alteration:I1/Transmutation',
+  'Enhancement Alteration:I1/Transmutation',
+  'Fabricate:I5',
+  'Feast Of Champions:C9/Fe9/Conjuration',
+  'Fox\'s Cunning:I2',
+  'Globe Of Invulnerability:I6',
+  'Greater Armor Enhancement:I3/Transmutation',
+  'Greater Construct Energy Ward:I4/Abjuration',
+  'Greater Magic Weapon:I3',
+  'Greater Status:Co4/Divination',
+  'Greater Weapon Augmentation:I6/Transmutation',
+  'Halt Deathless:Dl3/Necromancy',
+  'Hardening:Ar7/I6/W6/Transmutation',
+  'Heat Metal:I2',
+  'Hero\'s Blade:Dl9/Necromancy',
+  'Identify:I1',
+  'Inflict Critical Damage:I4/Transmutation',
+  'Inflict Light Damage:I1/Transmutation',
+  'Inflict Moderate Damage:I2/Transmutation',
+  'Inflict Serious Damage:I3/Transmutation',
+  'Iron Construct:I4/Transmutation',
+  'Item Alteration:I4/Transmutation',
+  'Legion\'s Shield Of Faith:I4/Abjuration',
+  'Lesser Armor Enhancement:I1/Transmutation',
+  'Lesser Globe Of Invulnerability:I4',
+  'Lesser Weapon Augmentation:I2/Transmutation',
+  'Light:I1',
+  'Maddening Scream:Md8/W8/Enchantment',
+  'Magecraft:W1/Divination',
+  'Magic Stone:I1',
+  'Magic Vestment:I1',
+  'Magic Weapon:I1',
+  'Major Creation:I5',
+  'Metamagic Item:I3/Transmutation',
+  'Minor Creation:I4',
+  'Move Earth:I6',
+  'Nature\'s Wrath:D4/Evocation',
+  'Owl\'s Wisdom:I2',
+  'Personal Weapon Augmentation:I1/Transmutation',
+  'Power Surge:I3/Transmutation',
+  'Repair Critical Damage:I4/Transmutation',
+  'Repair Light Damage:I1/Transmutation',
+  'Repair Moderate Damage:I2/Transmutation',
+  'Repair Serious Damage:I3/Transmutation',
+  'Resistance Item:I1/Abjuration',
+  'Rusting Grasp:I4',
+  'Return To Nature:D7/Transmutation',
+  'Shield Of Faith:I1/Abjuration',
+  'Skill Enhancement:I1/Transmutation',
+  'Spell Storing Item:I1/Transmutation',
+  'Spirit Steed:Dl4/Necromancy',
+  'Stone Construct:I3/Transmutation',
+  'Suppress Requirement:I3/Transmutation',
+  'Total Repair:I6/Transmutation',
+  'Touch Of Madness:Md2/Enchantment',
+  'Toughen Construct:I2/Transmutation',
+  'True Creation:Ar8/Conjuration',
+  'Wall Of Force:I5',
+  'Wall Of Iron:I6',
+  'Wall Of Stone:I5',
+  'Weapon Augmentation:I4/Transmutation',
+  'Weapon Augmentation:I6/Transmutation',
+  'Withering Palm:Dy7/Necromancy',
+  'Zone Of Natural Purity:D2/Evocation'
+];
 Eberron.SUBFEATS = {
 };
 
@@ -82,6 +172,29 @@ Eberron.classRules = function(rules, classes) {
     if(klass == 'Artificer') {
 
       continue; // TODO
+      baseAttack = PH35.ATTACK_BONUS_AVERAGE;
+      feats = null;
+      features = [
+      ];
+      hitDie = 6;
+      notes = [
+      ];
+      profArmor = PH35.PROFICIENCY_LIGHT;
+      profShield = PH35.PROFICIENCY_HEAVY;
+      profWeapon = PH35.PROFICIENCY_MEDIUM;
+      saveFortitude = PH35.SAVE_BONUS_POOR;
+      saveReflex = PH35.SAVE_BONUS_POOR;
+      saveWill = PH35.SAVE_BONUS_GOOD;
+      selectableFeatures = null;
+      skillPoints = 4;
+      skills = [
+        'Appraise', 'Concentration', 'Craft', 'Disable Device',
+        'Knowledge (Arcana)', 'Knowledge (Architecture)', 'Knowledge (Planes)',
+        'Open Lock', 'Profession', 'Search', 'Spellcraft', 'Use Magic Device'
+      ];
+      spellAbility = null;
+      spellsKnown = null;
+      spellsPerDay = null;
 
     } else
       continue;
@@ -106,6 +219,8 @@ Eberron.classRules = function(rules, classes) {
         );
       }
     }
+
+  }
 
   }
 
@@ -461,19 +576,24 @@ Eberron.raceRules = function(rules, races) {
 
       adjustment = '+2 constitution/-2 wisdom/-2 charisma';
       features = [
-        'Composite Plating', 'Construct Immunity', 'Light Fortification',
-        'Slam Weapon', 'Unhealing'
+        'Composite Plating', 'Construct Immunity', 'Construct Vulnerability',
+        'Light Fortification', 'Slam Weapon', 'Stable', 'Unhealing'
       ];
       notes = [
         'combatNotes.compositePlatingFeature:+2 AC/Cannot wear armor',
         'combatNotes.lightFortificationFeature:' +
           '25% change of negating critical hit/sneak attack',
+        'combatNotes.stableFeature:' +
+          'May perform strenuous activity at 0 hit points/no additional ' +
+          'loss at negative hit points',
         'combatNotes.slamWeaponFeature:d4 slam attack',
         'featureNotes.unhealingFeature:' +
-          'Does not heal damage naturally/healing effects only half effective',
+          'Does not heal damage naturally/half effect from healing spells',
         'saveNotes.constructImmunityFeature:' +
-          'Immune poison, sleep, paralysis, disease, nausea, fatigue, ' +
-          'exhaustion, sickening, energy drain'
+          'Immune to poison, sleep, paralysis, disease, nausea, fatigue, ' +
+          'exhaustion, sickening, and energy drain',
+        'saveNotes.constructVulnerabilityFeature:' +
+          'Affected by effects that target wood or metal'
       ];
       selectableFeatures = null;
       rules.defineRule
