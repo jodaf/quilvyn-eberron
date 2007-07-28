@@ -17,35 +17,68 @@ Place, Suite 330, Boston, MA 02111-1307 USA.
 
 /*
  * This module loads the rules from the Eberron campaign setting.  The Eberron
- * function contains methods that load rules for Eberron-specific races, base
- * classes, prestige classes, and feats.  These member methods can be called
- * independently in order to use a subset of the Eberron rules.  Similarly, the
- * constant fields of Eberron (CLASSES, FEATS, etc.) can be thined to limit the
- * user's choices.
+ * function contains methods that load rules for particular parts/chapters
+ * of the rule book; raceRules for character races, magicRules for spells, etc.
+ * These member methods can be called independently in order to use a subset of
+ * the Eberron rules.  Similarly, the constant fields of Eberron (DOMAINS,
+ * FEATS, etc.) can be manipulated to modify the choices.
  */
 function Eberron() {
-  Eberron.classRules(PH35.rules, Eberron.CLASSES);
-  Eberron.featRules(PH35.rules, Eberron.FEATS, Eberron.SUBFEATS);
-  Eberron.prestigeClassRules(PH35.rules, Eberron.PRESTIGE_CLASSES);
-  Eberron.raceRules(PH35.rules, Eberron.RACES);
-  Eberron.magicRules(rules, Eberron.DOMAINS, Eberron.SPELLS);
+
+  var rules = new ScribeRules('Eberron');
+  rules.editorElements = PH35.initialEditorElements();
+  Eberron.viewer = new ObjectViewer();
+  PH35.createViewer(Eberron.viewer);
+  rules.defineViewer("Standard", Eberron.viewer);
+  PH35.abilityRules(rules);
+  PH35.raceRules(rules, PH35.LANGUAGES, PH35.RACES);
+  PH35.classRules(rules, PH35.CLASSES);
+  PH35.companionRules(rules, PH35.COMPANIONS);
+  PH35.skillRules(rules, PH35.SKILLS, PH35.SUBSKILLS);
+  PH35.featRules(rules, PH35.FEATS, PH35.SUBFEATS);
+  PH35.descriptionRules(rules, PH35.ALIGNMENTS, PH35.DEITIES, PH35.GENDERS);
+  PH35.equipmentRules
+    (rules, PH35.ARMORS, PH35.GOODIES, PH35.SHIELDS, PH35.WEAPONS);
+  PH35.combatRules(rules);
+  PH35.adventuringRules(rules);
+  PH35.magicRules(rules, PH35.CLASSES, PH35.DOMAINS, PH35.SCHOOLS);
+  if(window.DMG35 != null && DMG35.npcClassRules != null) {
+    DMG35.npcClassRules(rules, DMG35.NPC_CLASSES);
+    DMG35.prestigeClassRules(rules, DMG35.PRESTIGE_CLASSES);
+    DMG35.companionRules(rules, DMG35.COMPANIONS);
+  }
+  rules.defineChoice('preset', 'race', 'levels');
+  rules.defineChoice('random', PH35.RANDOMIZABLE_ATTRIBUTES);
+  rules.randomizeOneAttribute = PH35.randomizeOneAttribute;
+  rules.makeValid = PH35.makeValid;
+
+  Eberron.classRules(rules, Eberron.CLASSES);
+  Eberron.featRules(rules, Eberron.FEATS, Eberron.SUBFEATS);
+  Eberron.magicRules
+    (rules, PH35.CLASSES.concat(Eberron.CLASSES), Eberron.DOMAINS);
+  Eberron.prestigeClassRules(rules, Eberron.PRESTIGE_CLASSES);
+  Eberron.raceRules(rules, Eberron.RACES);
+
+  Scribe.addRuleSet(rules);
+  Eberron.rules = rules;
+
 }
 
 Eberron.CLASSES = ['Artificer'];
 Eberron.DOMAINS = [
-  'Artifice:Ar', 'Charm:Cm', 'Commerce:Cc', 'Community:Co', 'Deathless:Dl',
-  'Decay:Dy', 'Dragon Below:Db', 'Exorcism:Ex', 'Feast:Fe', 'Life:Li',
-  'Madness:Md', 'Meditation:Mt', 'Necromancer:Ne', 'Passion:Pa', 'Shadow:Sh',
-  'Weather:We'
+  'Artifice', 'Charm', 'Commerce', 'Community', 'Deathless', 'Decay',
+  'Dragon Below', 'Exorcism', 'Feast', 'Life', 'Madness', 'Meditation',
+  'Necromancer', 'Passion', 'Shadow', 'Weather'
 ];
 Eberron.FEATS = [
   'Aberrant Dragonmark', 'Action Boost', 'Action Surge',
   'Adamantine Body:Warforged', 'Ashbound', 'Attune Magic Weapon:Item Creation',
   'Beast Shape', 'Beast Totem', 'Beasthide Elite:Shifter',
   'Bind Elemental:Item Creation', 'Child Of Winter', 'Cliffwalk Elite:Shifter',
-  'Double Steel Strike', 'Dragon Rage', 'Dragon Totem', 'Ecclesiarch',
-  'Education', 'Exceptional Artisan:Item Creation', 'Extend Rage',
-  'Extra Music', 'Extra Rings:Item Creation', 'Extra Shifter Trait:Shifter',
+  'Craft Construct:Item Creation', 'Double Steel Strike', 'Dragon Rage',
+  'Dragon Totem', 'Ecclesiarch', 'Education',
+  'Exceptional Artisan:Item Creation', 'Extend Rage', 'Extra Music',
+  'Extra Rings:Item Creation', 'Extra Shifter Trait:Shifter',
   'Extraordinary Artisan:Item Creation', 'Favored In House', 'Flensing Strike',
   'Gatekeeper Initiate', 'Great Bite:Shifter', 'Great Rend:Shifter',
   'Greater Dragonmark', 'Greater Powerful Charge',
@@ -55,7 +88,7 @@ Eberron.FEATS = [
   'Improved Natural Attack', 'Investigate', 'Knight Training',
   'Least Dragonmark', 'Legendary Artisan:Item Creation', 'Lesser Dragon Mark',
   'Longstride Elite:Shifter', 'Mithral Body:Warforged',
-  'Mithrl Fluidity:Warforged', 'Monastic Training', 'Music Of Growth',
+  'Mithral Fluidity:Warforged', 'Monastic Training', 'Music Of Growth',
   'Music Of Making', 'Powerful Charge', 'Precise Swing', 'Pursue',
   'Raging Luck', 'Recognize Impostor', 'Repel Aberration', 'Research',
   'Right Of Counsel', 'Serpent Strike', 'Shifter Defense:Shifter',
@@ -73,89 +106,62 @@ Eberron.PRESTIGE_CLASSES = [
 Eberron.RACES = [
   'Changeling', 'Kalashtar', 'Shifter', 'Warforged'
 ];
-Eberron.SPELLS = [
-  'Align Weapon:I2',
-  'Armor Enhancement:I2/Transmutation',
-  'Bear\'s Endurance:I2',
-  'Blade Barrier:I6',
-  'Bolts Of Bedevilment:Md2/Enchantment',
-  'Bull\'s Strength:I2',
-  'Cat\'s Grace:I2',
-  'Chill Metal:I2',
-  'Construct Energy Ward:I3/Abjuration',
-  'Control Deathless:Dl7/Necromancy',
-  'Create Deathless:Dl6/Necromancy',
-  'Create Greater Deathless:Dl8/Necromancy',
-  'Detect Aberration:I6/Divination',
-  'Detoxify:Fe8/Conjuration',
-  'Disable Construct:I6/Transmutation',
-  'Disrupting Weapon:I5',
-  'Eagle\'s Splendor:I2',
-  'Energy Alteration:I1/Transmutation',
-  'Enhancement Alteration:I1/Transmutation',
-  'Fabricate:I5',
-  'Feast Of Champions:C9/Fe9/Conjuration',
-  'Fox\'s Cunning:I2',
-  'Globe Of Invulnerability:I6',
-  'Greater Armor Enhancement:I3/Transmutation',
-  'Greater Construct Energy Ward:I4/Abjuration',
-  'Greater Magic Weapon:I3',
-  'Greater Status:Co4/Divination',
-  'Greater Weapon Augmentation:I6/Transmutation',
-  'Halt Deathless:Dl3/Necromancy',
-  'Hardening:Ar7/I6/W6/Transmutation',
-  'Heat Metal:I2',
-  'Hero\'s Blade:Dl9/Necromancy',
-  'Identify:I1',
-  'Inflict Critical Damage:I4/Transmutation',
-  'Inflict Light Damage:I1/Transmutation',
-  'Inflict Moderate Damage:I2/Transmutation',
-  'Inflict Serious Damage:I3/Transmutation',
-  'Iron Construct:I4/Transmutation',
-  'Item Alteration:I4/Transmutation',
-  'Legion\'s Shield Of Faith:I4/Abjuration',
-  'Lesser Armor Enhancement:I1/Transmutation',
-  'Lesser Globe Of Invulnerability:I4',
-  'Lesser Weapon Augmentation:I2/Transmutation',
-  'Light:I1',
-  'Maddening Scream:Md8/W8/Enchantment',
-  'Magecraft:W1/Divination',
-  'Magic Stone:I1',
-  'Magic Vestment:I1',
-  'Magic Weapon:I1',
-  'Major Creation:I5',
-  'Metamagic Item:I3/Transmutation',
-  'Minor Creation:I4',
-  'Move Earth:I6',
-  'Nature\'s Wrath:D4/Evocation',
-  'Owl\'s Wisdom:I2',
-  'Personal Weapon Augmentation:I1/Transmutation',
-  'Power Surge:I3/Transmutation',
-  'Repair Critical Damage:I4/Transmutation',
-  'Repair Light Damage:I1/Transmutation',
-  'Repair Moderate Damage:I2/Transmutation',
-  'Repair Serious Damage:I3/Transmutation',
-  'Resistance Item:I1/Abjuration',
-  'Rusting Grasp:I4',
-  'Return To Nature:D7/Transmutation',
-  'Shield Of Faith:I1/Abjuration',
-  'Skill Enhancement:I1/Transmutation',
-  'Spell Storing Item:I1/Transmutation',
-  'Spirit Steed:Dl4/Necromancy',
-  'Stone Construct:I3/Transmutation',
-  'Suppress Requirement:I3/Transmutation',
-  'Total Repair:I6/Transmutation',
-  'Touch Of Madness:Md2/Enchantment',
-  'Toughen Construct:I2/Transmutation',
-  'True Creation:Ar8/Conjuration',
-  'Wall Of Force:I5',
-  'Wall Of Iron:I6',
-  'Wall Of Stone:I5',
-  'Weapon Augmentation:I4/Transmutation',
-  'Weapon Augmentation:I6/Transmutation',
-  'Withering Palm:Dy7/Necromancy',
-  'Zone Of Natural Purity:D2/Evocation'
-];
+Eberron.spellsSchools = {
+  'Armor Enhancement':'Transmutation',
+  'Bolts Of Bedevilment':'Enchantment',
+  'Construct Energy Ward':'Abjuration',
+  'Control Deathless':'Necromancy',
+  'Create Deathless':'Necromancy',
+  'Create Greater Deathless':'Necromancy',
+  'Detect Aberration':'Divination',
+  'Detoxify':'Conjuration',
+  'Disable Construct':'Transmutation',
+  'Energy Alteration':'Transmutation',
+  'Enhancement Alteration':'Transmutation',
+  'Feast Of Champions':'Conjuration',
+  'Greater Armor Enhancement':'Transmutation',
+  'Greater Construct Energy Ward':'Abjuration',
+  'Greater Status':'Divination',
+  'Greater Weapon Augmentation':'Transmutation',
+  'Halt Deathless':'Necromancy',
+  'Hardening':'Transmutation',
+  'Hero\'s Blade':'Necromancy',
+  'Inflict Critical Damage':'Transmutation',
+  'Inflict Light Damage':'Transmutation',
+  'Inflict Moderate Damage':'Transmutation',
+  'Inflict Serious Damage':'Transmutation',
+  'Iron Construct':'Transmutation',
+  'Item Alteration':'Transmutation',
+  'Legion\'s Shield Of Faith':'Abjuration',
+  'Lesser Armor Enhancement':'Transmutation',
+  'Lesser Weapon Augmentation':'Transmutation',
+  'Maddening Scream':'Enchantment',
+  'Magecraft':'Divination',
+  'Metamagic Item':'Transmutation',
+  'Nature\'s Wrath':'Evocation',
+  'Personal Weapon Augmentation':'Transmutation',
+  'Power Surge':'Transmutation',
+  'Repair Critical Damage':'Transmutation',
+  'Repair Light Damage':'Transmutation',
+  'Repair Moderate Damage':'Transmutation',
+  'Repair Serious Damage':'Transmutation',
+  'Resistance Item':'Abjuration',
+  'Return To Nature':'Transmutation',
+  'Shield Of Faith':'Abjuration',
+  'Skill Enhancement':'Transmutation',
+  'Spell Storing Item':'Transmutation',
+  'Spirit Steed':'Necromancy',
+  'Stone Construct':'Transmutation',
+  'Suppress Requirement':'Transmutation',
+  'Total Repair':'Transmutation',
+  'Touch Of Madness':'Enchantment',
+  'Toughen Construct':'Transmutation',
+  'True Creation':'Conjuration',
+  'Weapon Augmentation':'Transmutation',
+  'Weapon Augmentation':'Transmutation',
+  'Withering Palm':'Necromancy',
+  'Zone Of Natural Purity':'Evocation'
+};
 Eberron.SUBFEATS = {
 };
 
@@ -171,13 +177,55 @@ Eberron.classRules = function(rules, classes) {
 
     if(klass == 'Artificer') {
 
-      continue; // TODO
       baseAttack = PH35.ATTACK_BONUS_AVERAGE;
-      feats = null;
+      feats = [
+        'Attune Magic Weapon', 'Craft Construct', 'Exceptional Artisan',
+        'Extra Rings', 'Extraordinary Artisan', 'Ledgendary Artisan',
+        'Wand Mastery'
+      ];
+      for(var j = 0; j < PH35.FEATS.length; j++) {
+        var pieces = PH35.FEATS[j].split(':');
+        if(pieces[1].match(/Metamagic/)) {
+          feats[feats.length] = pieces[0];
+        }
+      }
       features = [
+        '1:Artificer Knowledge', '1:Artisan Bonus', '1:Disable Trap',
+        '1:Item Creation', '1:Scribe Scroll', '2:Brew Potion',
+        '3:Craft Wondrous Item', '4:Craft Homunculus',
+        '5:Craft Magic Arms And Armor', '5:Retain Essence',
+        '6:Metamagic Spell Trigger', '7:Craft Wand',
+        '9:Craft Rod', '11:Metamagic Spell Completion', '12:Craft Staff',
+        '13:Artificer Skill Mastery', '14:Forge Ring'
       ];
       hitDie = 6;
       notes = [
+        'magicNotes.brewPotionFeature:Create potion for up to 3rd level spell',
+        'magicNotes.craftHomunculusFeature:Create homunculus',
+        'magicNotes.craftMagicArmsAndArmorFeature:' +
+          'Create magic weapon/armor/shield',
+        'magicNotes.craftRodFeature:Create magic rod',
+        'magicNotes.craftStaffFeature:Create magic staff',
+        'magicNotes.craftWandFeature:Create wand for up to 4th level spell',
+        'magicNotes.craftWondrousItemFeature:Create miscellaneous magic item',
+        'magicNotes.forgeRingFeature:Create magic ring',
+        'magicNotes.itemCreationFeature:' +
+          '+2 DC 20+caster level check to create magic items',
+        'magicNotes.metamagicSpellCompletionFeature:' +
+          'Apply metamagic feat to spell from scroll',
+        'magicNotes.metamagicSpellTriggerFeature:' +
+          'Apply metamagic feat to spell from wand',
+        'magicNotes.retainEssenceFeature:' +
+          'Drain magic item XP into craft reserve',
+        'magicNotes.scribeScrollFeature:Create scroll of any known spell',
+        'skillNotes.artificerKnowledgeFeature:' +
+          '+%V DC 15 check to determine whether an item is magical',
+        'skillNotes.artificerSkillMasteryFeature:' +
+          'Take 10 on Spellcraft/Use Magic Device when distracted',
+        'skillNotes.artisanBonusFeature:' +
+          '+2 Use Magic Device on items character can craft',
+        'skillNotes.disableTrapFeature:' +
+          'Use Search/Disable Device to find/remove DC 20+ traps'
       ];
       profArmor = PH35.PROFICIENCY_LIGHT;
       profShield = PH35.PROFICIENCY_HEAVY;
@@ -192,9 +240,26 @@ Eberron.classRules = function(rules, classes) {
         'Knowledge (Arcana)', 'Knowledge (Architecture)', 'Knowledge (Planes)',
         'Open Lock', 'Profession', 'Search', 'Spellcraft', 'Use Magic Device'
       ];
-      spellAbility = null;
-      spellsKnown = null;
-      spellsPerDay = null;
+      spellAbility = 'intelligence';
+      spellsKnown = [
+        'I1:1:"all"', 'I2:3:"all"', 'I3:5:"all"', 'I4:8:"all"', 'I5:11:"all"',
+        'I6:14:"all"'
+      ];
+      spellsPerDay = [
+        'I1:1:2/2:3/14:4',
+        'I2:3:1/4:2/5:3/15:4',
+        'I3:5:1/6:2/8:3/16:4',
+        'I4:8:1/9:2/13:3/17:4',
+        'I5:11:1/12:2/14:3/18:4',
+        'I6:14:1/15:2/17:3/19:4'
+       ];
+      rules.defineRule('featCount.Artificer',
+        'levels.Artificer', '=', 'Math.floor(source / 4)'
+      );
+      rules.defineRule('skillNotes.artificerKnowledgeFeature',
+         'levels.Artificer', '=', null,
+         'intelligenceModifier', '+', null
+        );
 
     } else
       continue;
@@ -219,8 +284,6 @@ Eberron.classRules = function(rules, classes) {
         );
       }
     }
-
-  }
 
   }
 
@@ -276,8 +339,23 @@ Eberron.featRules = function(rules, feats, subfeats) {
     } else if(feat == 'Bind Elemental') {
       continue; // TODO
     } else if(feat == 'Child Of Winter') {
-      continue; // TODO
+      notes = [
+        'magicNotes.childOfWinterFeature:Use animal Druid spells on vermin',
+        'validationNotes.childOfWinterFeatAlignment:Requires Alignment != Good',
+        'validationNotes.childOfWinterFeatFeatures:' +
+           'Requires Spontaneous Druid Spell'
+      ];
+      rules.defineRule('validationNotes.childOfWinterFeatAlignment',
+        'feats.Child Of Winter', '=', '-1',
+        'alignment', '+', 'source.indexOf("Good") < 0 ? 1 : null'
+      );
+      rules.defineRule('validationNotes.childOfWinterFeatFeatures',
+        'feats.Child Of Winter', '=', '-1',
+        'features.Spontaneous Druid Spell', '+', '1'
+      );
     } else if(feat == 'Cliffwalk Elite') {
+      continue; // TODO
+    } else if(feat == 'Craft Construct') {
       continue; // TODO
     } else if(feat == 'Double Steel Strike') {
       continue; // TODO
@@ -322,7 +400,21 @@ Eberron.featRules = function(rules, feats, subfeats) {
     } else if(feat == 'Haunting Melody') {
       continue; // TODO
     } else if(feat == 'Healing Factor') {
-      continue; // TODO
+      notes = [
+        'featureNotes.healingFactorFeature:Heal %V points when shifting ends',
+        'validationNotes.healingFactorFeatAbilities:' +
+          'Requires Constitution >= 13',
+        'validationNotes.healingFactorFeatRace:Requires Race == Shifter'
+      ];
+      rules.defineRule('featureNotes.healingFactorFeature', 'level', '=', null);
+      rules.defineRule('validationNotes.healingFactorFeatAbilities',
+        'feats.Healing Factor', '=', '-1',
+        'constitution', '+', 'source >= 13 ? 1 : null'
+      );
+      rules.defineRule('validationNotes.healingFactorFeatRace',
+        'feats.Healing Factor', '=', '-1',
+        'race', '+', 'source == "Shifter" ? 1 : null'
+      );
     } else if(feat == 'Heroic Spirit') {
       continue; // TODO
     } else if(feat == 'Improved Damage Reduction') {
@@ -345,7 +437,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
       continue; // TODO
     } else if(feat == 'Mithral Body') {
       continue; // TODO
-    } else if(feat == 'Mithrl Fluidity') {
+    } else if(feat == 'Mithral Fluidity') {
       continue; // TODO
     } else if(feat == 'Monastic Training') {
       continue; // TODO
@@ -394,21 +486,389 @@ Eberron.featRules = function(rules, feats, subfeats) {
     } else if(feat == 'Urban Tracking') {
       continue; // TODO
     } else if(feat == 'Vermin Companion') {
-      continue; // TODO
+      notes = [
+        'featureNotes.verminCompanionFeature:' +
+          'Vermin creature as animal companion',
+        'validationNotes.verminCompanionAlignment:Requires Alignment != Good',
+        'validationNotes.verminCompanionFeatFeatures:Requires Child Of Winter',
+        'validationNotes.verminCompanionFeatLevels:Requires Druid >= 3'
+      ];
+      rules.defineRule('validationNotes.verminCompanionAlignment',
+        'feats.Vermin Companion', '=', '-1',
+        'alignment', '+', 'source.indexOf("Good") < 0 ? 1 : null'
+      );
+      rules.defineRule('validationNotes.verminCompanionFeatFeatures',
+        'feats.Vermin Companion', '=', '-1',
+        'features.Child Of Winter', '+', '1'
+      );
+      rules.defineRule('validationNotes.verminCompanionFeatLevels',
+        'feats.Vermin Companion', '=', '-1',
+        'levels.Druid', '+', 'source >= 3 ? 1 : null'
+      );
     } else if(feat == 'Vermin Shape') {
-      continue; // TODO
+      notes = [
+        'magicNotes.verminShapeFeature:Wild Shape into vermin',
+        'validationNotes.verminShapeFeatAlignment:Requires Alignment != Good',
+        'validationNotes.verminShapeFeatFeatures:Requires Child Of Winter',
+        'validationNotes.verminShapeFeatLevels:Requires Druid >= 5'
+      ];
+      rules.defineRule('validationNotes.verminShapeFeatAlignment',
+        'feats.Vermin Shape', '=', '-1',
+        'alignment', '+', 'source.indexOf("Good") < 0 ? 1 : null'
+      );
+      rules.defineRule('validationNotes.verminShapeFeatFeatures',
+        'feats.Vermin Shape', '=', '-1',
+        'features.Child Of Winter', '+', '1'
+      );
+      rules.defineRule('validationNotes.verminShapeFeatLevels',
+        'feats.Vermin Shape', '=', '-1',
+        'levels.Druid', '+', 'source >= 5 ? 1 : null'
+      );
     } else if(feat == 'Wand Mastery') {
-      continue; // TODO
+      notes = [
+        'magicNotes.wandMasteryFeature:+2 spell DC/caster level w/wands',
+        'validationNotes.wandMasteryFeatFeatures:Requires Craft Wand',
+        'validationNotes.wandMasteryFeatLevels:Requires Caster Level >= 9'
+      ];
+      rules.defineRule('validationNotes.wandMasteryFeatFeatures',
+        'feats.Wand Mastery', '=', '-1',
+        'features.Craft Wand', '+', '1'
+      );
+      rules.defineRule('validationNotes.wandMasteryFeatLevels',
+        'feats.Wand Mastery', '=', '-1',
+        'casterLevel', '+', 'source >= 9 ? 1 : null'
+      );
     } else if(feat == 'Warden Initiate') {
-      continue; // TODO
+      notes = [
+        'combatNotes.wardenInitiateFeature:+2 AC in forests',
+        'magicNotes.wardenInitiateFeature:Access to additional spells',
+        'skillNotes.wardenInitiateFeature:Climb/Jump are class skills',
+        'validationNotes.wardenInitiateFeatFeatures:' +
+          'Requires Spontaneous Druid Spell'
+      ];
+      rules.defineRule
+        ('classSkills.Climb', 'skillNotes.wardenInitiateFeature', '=', '1');
+      rules.defineRule
+        ('classSkills.Jump', 'skillNotes.wardenInitiateFeature', '=', '1');
+      rules.defineRule('validationNotes.wardenInitiateFeatFeatures',
+        'feats.Warden Initiate', '=', '-1',
+        'features.Spontaneous Druid Spell', '+', '1'
+      );
     } else if(feat == 'Whirling Steel Strike') {
-      continue; // TODO
+      notes = [
+        'combatNotes.whirlingSteelStrikeFeature:Flurry Of Blows with Longsword',
+        'validationNotes.whirlingSteelStrikeFeatFeatures:' +
+          'Requires Flurry Of Blows/Weapon Focus (Longsword)'
+      ];
+      rules.defineRule('validationNotes.whirlingSteelStrikeFeatFeatures',
+        'feats.Whirling Steel Strike', '=', '-2',
+        'features.Flurry Of Blows', '+', '1',
+        'features.Weapon Focus (Longsword)', '+', '1'
+      );
     } else
       continue;
     rules.defineChoice('feats', feat + ':' + pieces[1]);
     rules.defineRule('features.' + feat, 'feats.' + feat, '=', null);
     if(notes != null)
       rules.defineNote(notes);
+  }
+
+};
+
+/* Defines the rules related to Eberron Chapter 5, Magic. */
+Eberron.magicRules = function(rules, classes, domains) {
+
+  for(var i = 0; i < classes.length; i++) {
+    var klass = classes[i];
+    var spells;
+    if(klass == 'Artificer') {
+      spells = [
+        'I1:Energy Alteration:Enhancement Alteration:Identify:' +
+        'Inflict Light Damage:Lesser Armor Enhancement:Light:Magic Stone:' +
+        'Magic Vestment:Magic Weapon:Personal Weapon Augmentation:' +
+        'Repair Light Damage:Resistance Item:Shield Of Faith:' +
+        'Skill Enhancement:Spell Storing Item',
+        'I2:Align Weapon:Armor Enhancement:Bear\'s Endurance:' +
+        'Bull\'s Strength:Cat\'s Grace:Chill Metal:Eagle\'s Splendor:' +
+        'Fox\'s Cunning:Heat Metal:Inflict Moderate Damage:' +
+        'Lesser Weapon Augmentation:Owl\'s Wisdom:Repair Moderate Damage:' +
+        'Toughen Construct',
+        'I3:Construct Energy Ward:Greater Armor Enhancement:' +
+        'Greater Magic Weapon:Inflict Serious Damage:Metamagic Item:' +
+        'Power Surge:Repair Serious Damage:Stone Construct:' +
+        'Suppress Requirement',
+        'I4:Greater Construct Energy Ward:Inflict Critical Damage:' +
+        'Item Alteration:Iron Construct:Legion\'s Shield Of Faith:' +
+        'Lesser Globe Of Invulnerability:Minor Creation:' +
+        'Repair Critical Damage:Rusting Grasp:Weapon Augmentation',
+        'I5:Disrupting Weapon:Fabricate:Major Creation:Wall Of Force:' +
+        'Wall Of Stone',
+        'I6:Blade Barrier:Disable Construct:Globe Of Invulnerability:' +
+        'Greater Weapon Augmentation:Hardening:Move Earth:Total Repair:' +
+        'Wall Of Iron'
+      ];
+    } else if(klass == 'Cleric') {
+      spells = [
+        'C9:Feast Of Champions'
+      ];
+    } else if(klass == 'Druid') {
+      spells = [
+        'D1:Detect Aberration',
+        'D2:Zone Of Natural Purity',
+        'D4:Nature\'s Wrath',
+        'D7:Return To Nature'
+      ];
+    } else if(klass == 'Sorcerer' || klass == 'Wizard') {
+      // Identical spell lists
+      spells = [
+        'W1:Magecraft:Repair Light Damage',
+        'W2:Repair Moderate Damage',
+        'W3:Repair Serious Damage',
+        'W4:Repair Critical Damage',
+        'W6:Hardening',
+        'W8:Maddening Scream'
+      ];
+    } else
+      continue;
+    if(spells != null) {
+      for(var j = 0; j < spells.length; j++) {
+        var pieces = spells[j].split(':');
+        for(var k = 1; k < pieces.length; k++) {
+          var spell = pieces[k];
+          var school = Eberron.spellsSchools[spell];
+          if(school == null) {
+            school = PH35.spellsSchools[spell];
+          }
+          if(school == null) {
+            alert('Reject ' + klass + ' ' + spell);
+            continue;
+          }
+          spell += '(' + pieces[0] + ' ' + school.substring(0, 4) + ')';
+          rules.defineChoice('spells', spell);
+        }
+      }
+    }
+  }
+
+  for(var i = 0; i < domains.length; i++) {
+    var domain = domains[i];
+    var notes;
+    var spells;
+    var turn;
+    if(domain == 'Artifice') {
+      notes = [
+        'magicNotes.artificeDomain:+1 caster level for creation spells',
+        'skillNotes.artificeDomain:+4 Craft'
+      ];
+      spells = [
+        'Animate Rope', 'Wood Shape', 'Stone Shape', 'Minor Creation',
+        'Fabricate', 'Major Creation', 'Hardening', 'True Creation',
+        'Prismatic Sphere'
+      ];
+      rules.defineRule
+        (/^skillModifier.Craft/, 'skillNotes.artificeDomain', '+', '4');
+    } else if(domain == 'Charm') {
+      notes = [
+        'abilityNotes.charmDomain:+4 charisma for 1 minute 1/day'
+      ];
+      spells = [
+        'Charm Person', 'Calm Emotions', 'Suggestion', 'Heroism',
+        'Charm Monster', 'Geas/Quest', 'Insanity', 'Demand', 'Dominate Monster'
+      ];
+    } else if(domain == 'Commerce') {
+      notes = [
+        'skillNotes.commerceDomain:' +
+          '+10 Profession (earn a living)/Appraise is a class skill'
+      ];
+      spells = [
+        'Comprehend Languages', 'Zone Of Truth', 'Tongues', 'Glibness',
+        'True Seeing', 'Leomund\'s Secret Chest', 'Refuge', 'Analyze Dweomer',
+        'Polymorph Any Object'
+      ];
+      rules.defineRule('classSkills.Appraise', 'domains.Commerce', '=', '1');
+    } else if(domain == 'Community') {
+      notes = [
+        'magicNotes.communityDomain:<i>Calm Emotions</i> 1/day',
+        'skillNotes.communityDomain:+2 Diplomacy'
+      ];
+      spells = [
+        'Bless', 'Status', 'Prayer', 'Greater Status',
+        'Rary\'s Telepathic Bond', 'Heroes\' Feast', 'Refuge', 'Sympathy',
+        'Mass Heal'
+      ];
+    } else if(domain == 'Deathless') {
+      notes = [
+        'combatNotes.deathlessDomain:' +
+          'Command deathless instead of turn undead 1/day'
+      ];
+      spells = [
+        'Detect Undead', 'Consecrate', 'Halt Deathless', 'Spirit Steed',
+        'Hallow', 'Create Deathless', 'Create Deathless', 'Control Deathless',
+        'Hero\'s Blade'
+      ];
+    } else if(domain == 'Decay') {
+      notes = [
+        'combatNotes.decayDomain:' +
+          'Touch Of Decay d4 constitution (living)/2d6+%V hp (undead) 1/day'
+      ];
+      spells = [
+        'Doom', 'Ray Of Enfeeblement', 'Contagion', 'Enervation', 'Blight',
+        'Antilife Shell', 'Withering Palm', 'Horrid Wilting', 'Energy Drain'
+      ];
+      rules.defineRule('combatNotes.decayDomain', 'levels.Cleric', '=', null);
+    } else if(domain == 'Dragon Below') {
+      notes = [
+        'featureNotes.dragonBelowDomain:Augment Summoning bonus feat'
+      ];
+      spells = [
+        'Cause Fear', 'Death Knell', 'Bestow Curse', 'Lesser Planar Ally',
+        'Slay Living', 'Planar Ally', 'Blasphemy', 'Greater Planar Ally',
+        'Gate'
+      ];
+      rules.defineRule('features.Augment Summoning',
+        'featureNotes.dragonBelowDomain', '=', '1'
+      );
+    } else if(domain == 'Exorcism') {
+      notes = [
+        'combatNotes.exorcismDomain:Turn Undead check to exorcise spirit'
+      ];
+      spells = [
+        'Protection From Evil', 'Magic Circle Against Evil', 'Remove Curse',
+        'Dismissal', 'Dispel Evil', 'Banishment', 'Holy Word', 'Holy Aura',
+        'Freedom'
+      ];
+    } else if(domain == 'Feast') {
+      notes = [
+        'saveNotes.feastDomain:Immune to ingested poison/disease'
+      ];
+      spells = [
+        'Goodberry', 'Delay Poison', 'Create Food And Water',
+        'Neutralize Poison', 'Leomund\'s Secure Shelter', 'Heroes\' Feast',
+        'Mordenkainen\'s Magnificent Mansion', 'Detoxify',
+        'Feast Of Champions'
+      ];
+    } else if(domain == 'Life') {
+      notes = [
+        'magicNotes.lifeDomain:' +
+          'Touch for d6+%V temporary hit points lasting %1 hours'
+      ];
+      rules.defineRule('magicNotes.lifeDomain', 'levels.Cleric', '=', null);
+      rules.defineRule('magicNotes.lifeDomain.1', 'levels.Cleric', '=', null);
+    } else if(domain == 'Madness') {
+      notes = [
+        'featureNotes.madnessDomain:' +
+           'Add %V to wisdom-based skill check or Will save 1/day',
+        'saveNotes.madnessDomain:-1 Will',
+        'skillNotes.madnessDomain:-1 wisdom-based skill checks'
+      ]
+      spells = [
+        'Lesser Confusion', 'Touch Of Madness', 'Rage', 'Confusion',
+        'Bolts Of Bedevilment', 'Phantasmal Killer', 'Insanity',
+        'Maddening Scream', 'Weird'
+      ];
+      rules.defineRule
+        ('featureNotes.madnessDomain', 'levels.Cleric', '=', null);
+      rules.defineRule('saves.Will', 'saveNotes.madnessDomain', '+', '-1');
+    } else if(domain == 'Meditation') {
+      notes = [
+        'magicNotes.meditationDomain:' +
+          'x1.5 designated spell variable effects 1/day'
+      ];
+      spells = [
+        'Comprehend Languages', 'Owl\'s Wisdom', 'Locate Object', 'Tongues',
+        'Spell Resistance', 'Find The Path', 'Spell Turning', 'Mind Blank',
+        'Astral Projection'
+      ];
+    } else if(domain == 'Necromancer') {
+      notes = [
+        'magicNotes.necromancyDomain:+1 caster level necromancy spells'
+      ];
+      spells = [
+        'Ray Of Enfeeblement', 'Command Undead', 'Vampiric Touch',
+        'Enervation', 'Waves Of Fatigue', 'Eyebite', 'Control Undead',
+        'Horrid Wilting', 'Energy Drain'
+      ];
+    } else if(domain == 'Passion') {
+      notes = [
+        'combatNotes.passionDomain:Rage %V rounds/day'
+      ];
+      spells = [
+        'Cause Fear', 'Tasha\'s Hideous Laughter', 'Confusion',
+        'Crushing Despair', 'Greater Command', 'Greater Heroism',
+        'Song Of Discord', 'Otto\'s Irresistible Dance', 'Dominate Monster'
+      ];
+      rules.defineRule('combatNotes.passionDomain', 'levels.Cleric', '=', null);
+    } else if(domain == 'Shadow') {
+      notes = [
+        'featureNotes.shadowDomain:Blind Fight bonus feat'
+      ];
+      spells = [
+        'Obscuring Mist', 'Darkness', 'Deeper Darkness', 'Shadow Conjuration',
+        'Shadow Evocation', 'Shadow Walk', 'Greater Shadow Conjuration',
+        'Greater Shadow Evocation', 'Shades'
+      ];
+      rules.defineRule
+        ('features.Blind Fight', 'featureNotes.shadowDomain', '=', '1');
+    } else if(domain == 'Weather') {
+      notes = [
+        'featureNotes.weatherDomain:Vision unobstructed by weather',
+        'skillNotes.weatherDomain:' +
+          '+2 Survival (weather)/Survival is a class skill'
+      ];
+      spells = [
+        'Obscuring Mist', 'Fog Cloud', 'Call Lightning', 'Sleet Storm',
+        'Call Lightning Storm', 'Control Winds', 'Control Weather',
+        'Whirlwind', 'Storm Of Vengeance'
+      ];
+      rules.defineRule
+        ('classSkills.Survival', 'skillNotes.weatherDomain', '=', '1');
+    } else
+      continue;
+    rules.defineChoice('domains', domain);
+    if(notes != null) {
+      rules.defineNote(notes);
+    }
+    if(spells != null) {
+      for(var j = 0; j < spells.length; j++) {
+        var spell = spells[j];
+        var school = Eberron.spellsSchools[spell];
+        if(school == null) {
+          school = PH35.spellsSchools[spell];
+        }
+        if(school == null) {
+          alert('Reject ' + domain + ' ' + spell);
+          continue;
+        }
+        spell += '(' + domain + (j + 1) + ' ' + school.substring(0, 4) + ')';
+        rules.defineChoice('spells', spell);
+      }
+    }
+    if(turn != null) {
+      var domainLevel = 'domainLevel.' + domain;
+      var prefix = 'turn' + turn;
+      rules.defineRule(domainLevel,
+        'domains.' + domain, '?', null,
+        'levels.Cleric', '=', null
+      );
+      rules.defineRule(prefix + '.level', domainLevel, '+=', null);
+      rules.defineRule(prefix + '.damageModifier',
+        prefix + '.level', '=', null,
+        'charismaModifier', '+', null
+      );
+      rules.defineRule(prefix + '.frequency',
+        prefix + '.level', '=', '3',
+        'charismaModifier', '+', null
+      );
+      rules.defineRule(prefix + '.maxHitDice',
+        prefix + '.level', '=', 'source * 3 - 10',
+        'charismaModifier', '+', null
+      );
+      rules.defineNote([
+        prefix + '.damageModifier:2d6+%V',
+        prefix + '.frequency:%V/day',
+        prefix + '.maxHitDice:(d20+%V)/3'
+      ]);
+    }
   }
 
 };
