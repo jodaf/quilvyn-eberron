@@ -640,7 +640,6 @@ Eberron.magicRules = function(rules, classes, domains) {
             school = PH35.spellsSchools[spell];
           }
           if(school == null) {
-            alert('Reject ' + klass + ' ' + spell);
             continue;
           }
           spell += '(' + pieces[0] + ' ' + school.substring(0, 4) + ')';
@@ -836,7 +835,6 @@ Eberron.magicRules = function(rules, classes, domains) {
           school = PH35.spellsSchools[spell];
         }
         if(school == null) {
-          alert('Reject ' + domain + ' ' + spell);
           continue;
         }
         spell += '(' + domain + (j + 1) + ' ' + school.substring(0, 4) + ')';
