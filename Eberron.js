@@ -42,7 +42,7 @@ function Eberron() {
   PH35.combatRules(rules);
   PH35.adventuringRules(rules);
   PH35.magicRules(rules, PH35.CLASSES, PH35.DOMAINS, PH35.SCHOOLS);
-  if(window.DMG35 != null && DMG35.npcClassRules != null) {
+  if(window.DMG35 != null) {
     DMG35.npcClassRules(rules, DMG35.NPC_CLASSES);
     DMG35.prestigeClassRules(rules, DMG35.PRESTIGE_CLASSES);
     DMG35.companionRules(rules, DMG35.COMPANIONS);
@@ -163,6 +163,7 @@ Eberron.spellsSchools = {
   'Zone Of Natural Purity':'Evocation'
 };
 Eberron.SUBFEATS = {
+  'Aberrant Dragonmark':'Burning Hands'
 };
 
 /* Defines the rules related to Eberron Chapter 2, Character Classes. */
@@ -318,26 +319,129 @@ Eberron.featRules = function(rules, feats, subfeats) {
     var feat = pieces[0];
     var matchInfo;
     var notes;
-    if(feat == 'Abberant Dragonmark') {
-      continue; // TODO
+    
+    if((matchInfo = feat.match(/^Aberrant Dragonmark \((.*)\)$/)) != null) {
+      var dragonmark = matchInfo[1];
+      var note = 'magicNotes.aberrantDragonmark(' + dragonmark + ')Feature';
+      var valid = 'magicNotes.aberrantDragonmark(' + dragonmark + ')Feat';
+      notes = [
+        note + ':DC %V <i>' + dragonmark + '</i> as level %1 caster 1/day',
+        valid + 'Features:' +
+          'Requires Least Dragonmark == 0/Lesser Dragonmark == 0/' +
+          'Greater Dragonmark == 0',
+        valid + 'Race:' +
+          'Requires Race == Dwarf|Race == Elf|Race == Gnome|Race == Halfling|' +
+          'Race == Half Elf|Race == Half Orc|Race == Human'
+      ];
+      rules.defineRule(note, 'charismaModifier', '=', '11 + source');
+      rules.defineRule(note + '.1', 'level', '=', 'Math.floor(source / 2)');
+      rules.defineRule(valid + 'Features',
+        'feats.' + feat, '=', '0',
+        /^features.(Least|Lesser|Greater) Dragonmark/, '+', '-1'
+      );
+      rules.defineRule(valid + 'Race',
+        'feats.' + feat, '=', '-1',
+        'race', '+', 'source.match' +
+          '(/^(Dwarf|Elf|Gnome|Half(ling| Elf| Orc)|Human)$/) ? 1 : null'
+      );
     } else if(feat == 'Action Boost') {
-      continue; // TODO
+      notes = [
+        'featureNotes.actionBoostFeature:' +
+          'Add d8 instead of d6 when using AP on attack, skill, ability, ' +
+          'level or saving throw'
+      ];
     } else if(feat == 'Action Surge') {
-      continue; // TODO
+      notes = [
+        'featureNotes.actionSurgeFeature:' +
+          'Spend 2 AP to take extra move or standard action',
+        'validationNotes.actionSurgeFeatCombat:Requires Base Attack >= 3'
+      ];
+      rules.defineRule('validationNotes.actionSurgeFeatCombat',
+        'feats.Action Surge', '=', '-1',
+        'baseAttack', '+', 'source >= 3 ? 1 : null'
+      );
     } else if(feat == 'Adamantine Body') {
-      continue; // TODO
+      notes = [
+        // TODO
+        'validationNotes.adamantineBodyFeatRace:Requires Race == Warforged'
+      ];
+      rules.defineRule('validationNotes.adamantineBodyFeatRace',
+        'feats.Adamantine Body', '=', '-1',
+        'race', '+', 'source == "Warforged" ? 1 : null'
+      );
     } else if(feat == 'Ashbound') {
-      continue; // TODO
+      notes = [
+        'magicNotes.ashboundFeature:' +
+          'Double <i>Summon Nature\'s Ally</i> duration; summoned creatures ' +
+          '+3 attack',
+        'validationNotes.ashboundFeatFeatures:Requires Spontaneous Druid Spell'
+      ];
+      rules.defineRule('validationNotes.ashboundFeatFeatures',
+        'feats.Ashbound', '=', '-1',
+        'features.Spontaneous Druid Spell', '+', '1'
+      );
     } else if(feat == 'Attune Magic Weapon') {
-      continue; // TODO
+      notes = [
+        'combatNotes.attuneMagicWeaponFeature:+1 attack/damage w/magic weapons',
+        'validationNotes.attuneMagicWeaponFeatFeatures:' +
+          'Requires Craft Magic Arms And Armor',
+        'validationNotes.ashboundFeatLevels:Requires Caster Level >= 5'
+      ];
+      rules.defineRule('validationNotes.attuneMagicWeaponFeatFeatures',
+        'feats.Ashbound', '=', '-1',
+        'features.Craft Magic Arms And Armor', '+', '1'
+      );
+      rules.defineRule('validationNotes.attuneMagicWeaponFeatLevels',
+        'feats.Ashbound', '=', '-1',
+        'casterLevel', '+', 'source >= 5 ? 1 : null'
+      );
     } else if(feat == 'Beast Shape') {
-      continue; // TODO
+      notes = [
+        // TODO
+        'validationNotes.beastShapeFeatFeatures:' +
+          'Requires Beast Totem/Wild Shape (huge creature)'
+      ];
+      rules.defineRule('validationNotes.beastShapeFeatFeatures',
+        'feats.Beast Shape', '=', '-2',
+        'features.Beast Totem', '+', '1',
+        'magicNotes.wildShapeFeature', '+',
+          'source.indexOf("Huge") >= 0 ? 1 : null'
+      );
     } else if(feat == 'Beast Totem') {
-      continue; // TODO
+      notes = [
+        // TODO
+        'validationNotes.beastTotemFeatFeatures:Requires Wild Shape'
+      ];
+      rules.defineRule('validationNotes.beastTotemFeatFeatures',
+        'feats.Beast Totem', '=', '-1',
+        'features.Wild Shape', '+', '1'
+      );
     } else if(feat == 'Beasthide Elite') {
-      continue; // TODO
+      notes = [
+        'combatNotes.beasthideEliteFeature:+2 AC',
+        'validationNotes.beasthideEliteFeatures:Requires Beasthide'
+      ];
+      rules.defineRule
+        ('armorClass', 'combatNotes.beasthideEliteFeature', '+', '2');
+      rules.defineRule('validationNotes.beasthideEliteFeatFeatures',
+        'feats.Beasthide Elite', '=', '-1',
+        'features.Beasthide', '+', '1'
+      );
     } else if(feat == 'Bind Elemental') {
-      continue; // TODO
+      notes = [
+        // TODO
+        'validationNotes.bindElementalFeatFeatures:' +
+          'Requires Craft Wondrous Item',
+        'validationNotes.bindElementalFeatLevels:Requires Caster Level >= 9'
+      ];
+      rules.defineRule('validationNotes.bindElementalFeatFeatures',
+        'feats.Bind Elemental', '=', '-1',
+        'features.Craft Wondrous Item', '+', '1'
+      );
+      rules.defineRule('validationNotes.bindElementalFeatLevels',
+        'feats.Bind Elemental', '=', '-1',
+        'casterLevel', '+', 'source >= 9 ? 1 : null'
+      );
     } else if(feat == 'Child Of Winter') {
       notes = [
         'magicNotes.childOfWinterFeature:Use animal Druid spells on vermin',
@@ -346,7 +450,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
            'Requires Spontaneous Druid Spell'
       ];
       rules.defineRule('validationNotes.childOfWinterFeatAlignment',
-        'feats.Child Of Winter', '=', '-1',
+        'feats.Child Of WInter', '=', '-1',
         'alignment', '+', 'source.indexOf("Good") < 0 ? 1 : null'
       );
       rules.defineRule('validationNotes.childOfWinterFeatFeatures',
@@ -354,51 +458,119 @@ Eberron.featRules = function(rules, feats, subfeats) {
         'features.Spontaneous Druid Spell', '+', '1'
       );
     } else if(feat == 'Cliffwalk Elite') {
-      continue; // TODO
+      notes = [
+        'abilityNotes.cliffwalkEliteFeature:+10 climb speed',
+        'validationNotes.cliffwalkEliteFeatures:Requires Cliffwalk'
+      ];
+      rules.defineRule('validationNotes.cliffwalkEliteFeatures',
+        'feats.Cliffwalk Elite', '=', '-1',
+        'features.Cliffwalk', '+', '1'
+      );
     } else if(feat == 'Craft Construct') {
-      continue; // TODO
+      notes = [
+        // TODO
+      ];
     } else if(feat == 'Double Steel Strike') {
-      continue; // TODO
+      notes = [
+        // TODO
+      ];
     } else if(feat == 'Dragon Rage') {
-      continue; // TODO
+      notes = [
+        // TODO
+      ];
     } else if(feat == 'Dragon Totem') {
-      continue; // TODO
+      notes = [
+        // TODO
+      ];
     } else if(feat == 'Ecclesiarch') {
-      continue; // TODO
+      notes = [
+        'featureNotes.ecclesiarchFeature:+2 Leadership',
+        'skillNotes.ecclesiarchFeature:' +
+          'Gather Information/Knowledge (Local) class skills',
+        'validationNotes.ecclesiarchFeatSkills:' +
+          'Requires Knowledge (Religion) >= 6'
+      ];
+      rules.defineRule('classSkills.Gather Information',
+        'skillNotes.ecclesiarchFeature', '=', '1'
+      );
+      rules.defineRule('classSkills.Knowledge (Local)',
+        'skillNotes.ecclesiarchFeature', '=', '1'
+      );
+      rules.defineRule('validationNotes.ecclesiarchFeatSkills',
+        'feats.Ecclesiarch', '=', '-1',
+        'skills.Knowledge (Religion)', '=', 'source >= 6 ? 1 : null'
+      );
     } else if(feat == 'Education') {
-      continue; // TODO
+      notes = [
+        'skillNotes.educationFeature:' +
+          'All Knowledge skills class skills/+2 two Knowledge Skills'
+      ];
+      rules.defineRule
+        (/^classSkills.Knowledge/, 'skillNotes.educationFeature', '=', '1');
     } else if(feat == 'Exceptional Artisan') {
-      continue; // TODO
+      notes = [
+        // TODO
+      ];
     } else if(feat == 'Extend Rage') {
-      continue; // TODO
+      notes = [
+        // TODO
+      ];
     } else if(feat == 'Extra Music') {
-      continue; // TODO
+      notes = [
+        // TODO
+      ];
     } else if(feat == 'Extra Rings') {
-      continue; // TODO
+      notes = [
+        // TODO
+      ];
     } else if(feat == 'Extra Shifter Trait') {
-      continue; // TODO
+      notes = [
+        // TODO
+      ];
     } else if(feat == 'Extraordinary Artisan') {
-      continue; // TODO
+      notes = [
+        // TODO
+      ];
     } else if(feat == 'Favored In House') {
-      continue; // TODO
+      notes = [
+        // TODO
+      ];
     } else if(feat == 'Flensing Strike') {
-      continue; // TODO
+      notes = [
+        // TODO
+      ];
     } else if(feat == 'Gatekeeper Initiate') {
-      continue; // TODO
+      notes = [
+        // TODO
+      ];
     } else if(feat == 'Great Bite') {
-      continue; // TODO
+      notes = [
+        // TODO
+      ];
     } else if(feat == 'Great Rend') {
-      continue; // TODO
+      notes = [
+        // TODO
+      ];
     } else if(feat == 'Greater Dragonmark') {
-      continue; // TODO
+      notes = [
+        // TODO
+      ];
     } else if(feat == 'Greater Powerful Charge') {
-      continue; // TODO
+      notes = [
+        // TODO
+      ];
     } else if(feat == 'Greater Shifter Defense') {
-      continue; // TODO
+      notes = [
+        // TODO
+      ];
     } else if(feat == 'Greensinger Initiate') {
-      continue; // TODO
+      notes = [
+        // TODO
+      ];
     } else if(feat == 'Haunting Melody') {
-      continue; // TODO
+      notes = [
+        // TODO
+      ];
     } else if(feat == 'Healing Factor') {
       notes = [
         'featureNotes.healingFactorFeature:Heal %V points when shifting ends',
@@ -412,79 +584,234 @@ Eberron.featRules = function(rules, feats, subfeats) {
         'constitution', '+', 'source >= 13 ? 1 : null'
       );
       rules.defineRule('validationNotes.healingFactorFeatRace',
-        'feats.Healing Factor', '=', '-1',
+        'feats.' + feat, '=', '-1',
         'race', '+', 'source == "Shifter" ? 1 : null'
       );
     } else if(feat == 'Heroic Spirit') {
-      continue; // TODO
+      notes = [
+        // TODO
+      ];
     } else if(feat == 'Improved Damage Reduction') {
-      continue; // TODO
+      notes = [
+        // TODO
+      ];
     } else if(feat == 'Improved Fortification') {
-      continue; // TODO
+      notes = [
+        // TODO
+      ];
     } else if(feat == 'Improved Natural Attack') {
-      continue; // TODO
+      notes = [
+        // TODO
+      ];
     } else if(feat == 'Investigate') {
-      continue; // TODO
+      notes = [
+        // TODO
+      ];
     } else if(feat == 'Knight Training') {
-      continue; // TODO
+      notes = [
+        // TODO
+      ];
     } else if(feat == 'Least Dragonmark') {
-      continue; // TODO
+      notes = [
+        // TODO
+      ];
     } else if(feat == 'Legendary Artisan') {
-      continue; // TODO
+      notes = [
+        // TODO
+      ];
     } else if(feat == 'Lesser Dragon Mark') {
-      continue; // TODO
+      notes = [
+        // TODO
+      ];
     } else if(feat == 'Longstride Elite') {
-      continue; // TODO
+      notes = [
+        // TODO
+      ];
     } else if(feat == 'Mithral Body') {
-      continue; // TODO
+      notes = [
+        // TODO
+      ];
     } else if(feat == 'Mithral Fluidity') {
-      continue; // TODO
+      notes = [
+        // TODO
+      ];
     } else if(feat == 'Monastic Training') {
-      continue; // TODO
+      notes = [
+        // TODO
+      ];
     } else if(feat == 'Music Of Growth') {
-      continue; // TODO
+      notes = [
+        // TODO
+      ];
     } else if(feat == 'Music Of Making') {
-      continue; // TODO
+      notes = [
+        // TODO
+      ];
     } else if(feat == 'Powerful Charge') {
-      continue; // TODO
+      notes = [
+        // TODO
+      ];
     } else if(feat == 'Precise Swing') {
-      continue; // TODO
+      notes = [
+        // TODO
+      ];
     } else if(feat == 'Pursue') {
-      continue; // TODO
+      notes = [
+        // TODO
+      ];
     } else if(feat == 'Raging Luck') {
-      continue; // TODO
+      notes = [
+        // TODO
+      ];
     } else if(feat == 'Recognize Impostor') {
-      continue; // TODO
+      notes = [
+        // TODO
+      ];
     } else if(feat == 'Repel Aberration') {
-      continue; // TODO
+      notes = [
+        // TODO
+      ];
     } else if(feat == 'Research') {
-      continue; // TODO
+      notes = [
+        // TODO
+      ];
     } else if(feat == 'Right Of Counsel') {
-      continue; // TODO
+      notes = [
+        // TODO
+      ];
     } else if(feat == 'Serpent Strike') {
-      continue; // TODO
+      notes = [
+        // TODO
+      ];
     } else if(feat == 'Shifter Defense') {
-      continue; // TODO
+      notes = [
+        'saveNotes.shifterDefenseFeature:DR 2/silver',
+        'validationNotes.shifterDefenseFeatFeatures:Requires 2 Shifter',
+        'validationNotes.shifterDefenseFeatRace:Requires Race == Shifter'
+      ];
+      rules.defineRule('validationNotes.shifterDefenseFeatFeatures',
+        'feats.Shifter Ferocity', '=', '-1',
+        'featCount.Shifter', '+', 'source >= 2 ? 1 : null'
+      );
+      rules.defineRule('validationNotes.shifterDefenseFeatRace',
+        'feats.Shifter Ferocity', '=', '-1',
+        'race', '+', 'source == "Shifter" ? 1 : null'
+      );
     } else if(feat == 'Shifter Ferocity') {
-      continue; // TODO
+      notes = [
+        'combatNotes.shifterFerocityFeature:' +
+          'Continue fighting below 0 HP while shifting',
+        'validationNotes.shifterFerocityFeatAbilities:Requires Wisdom >= 13',
+        'validationNotes.shifterFerocityFeatRace:Requires Race == Shifter'
+      ];
+      rules.defineRule('validationNotes.shifterFerocityFeatAbilities',
+        'feats.Shifter Ferocity', '=', '-1',
+        'wisdom', '+', 'source >= 13 ? 1 : null'
+      );
+      rules.defineRule('validationNotes.shifterFerocityFeatRace',
+        'feats.Shifter Ferocity', '=', '-1',
+        'race', '+', 'source == "Shifter" ? 1 : null'
+      );
     } else if(feat == 'Shifter Multiattack') {
-      continue; // TODO
+      notes = [
+        'combatNotes.shifterMultiattackFeature:' +
+          'Reduce additional natural attack penalty to -2',
+        'validationNotes.shifterMultiattackFeatCombat:' +
+          'Requires Base Attack >= 6',
+        'validationNotes.shifterMultiattackFeatFeature:' +
+          'Requires Longtooth|Razorclaw'
+      ];
+      rules.defineRule('validationNotes.shifterMultiattackFeatCombat',
+        'feats.Shifter Multiattack', '=', '-1',
+        'baseAttack', '+', 'source >= 6 ? 1 : null'
+      );
+      rules.defineRule('validationNotes.shifterMultiattackFeatFeatures',
+        'feats.Shifter Multiattack', '=', '-1',
+        'features.Longtooth', '+', '1',
+        'features.Razorclaw', '+', '1',
+        '', 'v', '0'
+      );
     } else if(feat == 'Silver Smite') {
-      continue; // TODO
+      notes = [
+        // TODO
+      ];
     } else if(feat == 'Song Of The Heart') {
-      continue; // TODO
+      notes = [
+        'featureNotes.songOfTheHeartFeature:+1 Bardic Music effects',
+        'validationNotes.songOfTheHeartFeatFeatures:' +
+          'Requires Bardic Music/Inspire Competence',
+        'validationNotes.songOfTheHeartFeatSkills:Requires Perform >= 6'
+      ];
+      rules.defineRule('validationNotes.songOfTheHeartFeatFeatures',
+        'feats.Soothe The Beast', '=', '-2',
+        'features.Bardic Music', '+', '1',
+        'features.Inspire Competence', '+', '1'
+      );
+      rules.defineRule('validationNotes.songOfTheHeartFeatSkills',
+        'feats.Soothe The Beast', '=', '-1',
+        'subskillTotal.Perform', '+', 'source >= 6 ? 1 : null'
+      );
     } else if(feat == 'Soothe The Beast') {
-      continue; // TODO
+      notes = [
+        'skillNotes.sootheTheBeastFeature:Perform to change animal reaction',
+        'validationNotes.sootheTheBeastFeatFeatures:Requires Bardic Music',
+        'validationNotes.sootheTheBeastFeatSkills:Requires Perform >= 6'
+      ];
+      rules.defineRule('validationNotes.sootheTheBeastFeatFeatures',
+        'feats.Soothe The Beast', '=', '-1',
+        'features.Bardic Music', '+', '1'
+      );
+      rules.defineRule('validationNotes.sootheTheBeastFeatSkills',
+        'feats.Soothe The Beast', '=', '-1',
+        'subskillTotal.Perform', '+', 'source >= 6 ? 1 : null'
+      );
     } else if(feat == 'Spontaneous Casting') {
-      continue; // TODO
+      notes = [
+        'magicNotes.spontaneousCastingFeature:' +
+          'Spend 2 AP to substitute any known spell for a prepared one',
+        'validationNotes.spontaneousCastingFeatLevels:' +
+          'Requires Caster Level >= 5',
+      ];
+      rules.defineRule('validationNotes.spontaneousCastingLevelFeatLevels',
+        'feats.Spontaneous Casting', '=', '-1',
+        'casterLevel', '+', 'source >= 5 ? 1 : null'
+      );
     } else if(feat == 'Strong Mind') {
-      continue; // TODO
+      notes = [
+        'saveNotes.strongMindFeature:+3 vs. psionics',
+        'validationNotes.strongMindFeatAbilities:Requires Wisdom >= 11'
+      ];
+      rules.defineRule('validationNotes.strongMindFeatAbilities',
+        'feats.Strong Mind', '=', '-1',
+        'wisdom', '+', 'source >= 11 ? 1 : null'
+      );
     } else if(feat == 'Totem Companion') {
-      continue; // TODO
+      notes = [
+        'companionNotes.totemCompanionFeature:' +
+          'Totem magical beast as animal companion',
+        'validationNotes.totemCompanionFeatFeatures:' +
+          'Requires Beast Totem/Wild Empathy'
+      ];
+      rules.defineRule('validationNotes.totemCompanionFeatFeatures',
+        'feats.Totem Companion', '=', '-2',
+        'features.Beast Totem', '+', '1',
+        'features.Wild Empathy', '+', '1'
+      );
     } else if(feat == 'Undead Empathy') {
-      continue; // TODO
+      notes = [
+        'skillNotes.undeadEmpathyFeature:' +
+          '+4 Diplomacy to influence undead reaction',
+        'validationNotes.undeadEmpathyFeatAbilities:Requires Charisma >= 13'
+      ];
+      rules.defineRule('validationNotes.undeadEmpathyFeatAbilities',
+        'feats.Undead Empathy', '=', '-1',
+        'charisma', '+', 'source >= 13 ? 1 : null'
+      );
     } else if(feat == 'Urban Tracking') {
-      continue; // TODO
+      notes = [
+        'skillNotes.urbanTrackingFeature:' +
+          'Gather Information to trace person w/in communities'
+      ];
     } else if(feat == 'Vermin Companion') {
       notes = [
         'featureNotes.verminCompanionFeature:' +
