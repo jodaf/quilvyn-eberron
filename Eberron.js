@@ -36,9 +36,9 @@ function Eberron() {
   PH35.companionRules(rules, PH35.COMPANIONS);
   PH35.skillRules(rules, PH35.SKILLS, PH35.SUBSKILLS);
   PH35.featRules(rules, PH35.FEATS, PH35.SUBFEATS);
-  PH35.descriptionRules(rules, PH35.ALIGNMENTS, PH35.DEITIES, PH35.GENDERS);
-  PH35.equipmentRules
-    (rules, PH35.ARMORS, PH35.GOODIES, PH35.SHIELDS, PH35.WEAPONS);
+  PH35.descriptionRules(rules, PH35.ALIGNMENTS, Eberron.DEITIES, PH35.GENDERS);
+  PH35.equipmentRules(rules, PH35.ARMORS, PH35.GOODIES, PH35.SHIELDS,
+                      PH35.WEAPONS.concat(Eberron.WEAPONS));
   PH35.combatRules(rules);
   PH35.adventuringRules(rules);
   PH35.magicRules(rules, PH35.CLASSES, PH35.DOMAINS, PH35.SCHOOLS);
@@ -65,6 +65,31 @@ function Eberron() {
 }
 
 Eberron.CLASSES = ['Artificer'];
+Eberron.DEITIES = [
+  'The Silver Flame (LG):Exorcism/Good/Law/Protection',
+  'The Sovereign Host (NG):Air/Animal/Artifice/Chaos/Charm/Commerce/' +
+    'Community/Earth/Feast/Fire/Good/Healing/Knowledge/Law/Life/Luck/Magic/' +
+    'Plant/Protection/Strength/Sun/Travel/War/Weather',
+  'Arawai (NG):Good/Life/Plant/Weather',
+  'Aureon (LN):Knowledge/Law/Magic',
+  'Balinor (N):Air/Animal/Earth',
+  'Boldrei (LG):Community/Good/Law/Protection',
+  'Dol Arrah (LG):Good/Law/Sun/War',
+  'Dol Dorn (CG):Chaos/Good/Strength/War',
+  'Kol Korran (N):Charm/Commerce/Travel',
+  'Olladra (NG):Feast/Good/Healing/Luck',
+  'Onatar (NG):Artifice/Fire/Good',
+  'The Dark Six (NE):Artifice/Chaos/Death/Decay/Destruction/Evil/Madness/' +
+     'Magic/Passion/Shadow/Travel/Trickery/War/Water/Weather',
+  'The Devourer (NE):Destruction/Evil/Water/Weather',
+  'The Fury (NE):Evil/Madness/Passion',
+  'The Keeper (NE):Death/Decay/Evil',
+  'The Mockery (NE):Destruction/Evil/Trickery/War',
+  'The Shadow (CN):Artifice/Chaos/Travel/Trickery',
+  'The Blood Of Vol (LE):Death/Evil/Law/Necromancer',
+  'The Cults Of The Dragon Below (LN):Law/Meditation/Protection',
+  'The Undying Court (NG):Deathless/Good/Protection'
+];
 Eberron.DOMAINS = [
   'Artifice', 'Charm', 'Commerce', 'Community', 'Deathless', 'Decay',
   'Dragon Below', 'Exorcism', 'Feast', 'Life', 'Madness', 'Meditation',
@@ -105,6 +130,11 @@ Eberron.PRESTIGE_CLASSES = [
 ];
 Eberron.RACES = [
   'Changeling', 'Kalashtar', 'Shifter', 'Warforged'
+];
+Eberron.WEAPONS = [
+  'Talenta Boomerang:d4r30', 'Talenta Sharrash:d10x4@19',
+  'Talenta Tangat:d10x2@18', 'Valenar Double Scimitar:d6x2@18/d6x2@18',
+  'Xen\'drik Boomerang:d6r20'
 ];
 Eberron.spellsSchools = {
   'Armor Enhancement':'Transmutation',
@@ -459,7 +489,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
       );
     } else if(feat == 'Cliffwalk Elite') {
       notes = [
-        'abilityNotes.cliffwalkEliteFeature:+10 climb speed',
+        'abilityNotes.cliffwalkEliteFeature:+10 climb speed while shifting',
         'validationNotes.cliffwalkEliteFeatFeatures:Requires Cliffwalk'
       ];
       rules.defineRule('validationNotes.cliffwalkEliteFeatFeatures',
@@ -528,7 +558,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
       );
       rules.defineRule('validationNotes.ecclesiarchFeatSkills',
         'feats.Ecclesiarch', '=', '-1',
-        'skills.Knowledge (Religion)', '=', 'source >= 6 ? 1 : null'
+        'skillModifier.Knowledge (Religion)', '=', 'source >= 6 ? 1 : null'
       );
     } else if(feat == 'Education') {
       notes = [
@@ -546,7 +576,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
       ];
       rules.defineRule('validationNotes.exceptionalArtistFeatFeatures',
         'feats.Exceptional Artisan', '=', '-1',
-        // TODO
+        // TODO any Item Creation
         '', 'v', '0'
       );
     } else if(feat == 'Extend Rage') {
@@ -614,13 +644,22 @@ Eberron.featRules = function(rules, feats, subfeats) {
       ];
       rules.defineRule('validationNotes.extraordinaryArtistFeatFeatures',
         'feats.Extraordinary Artisan', '=', '-1',
-        // TODO
+        // TODO any Item Creation
         '', 'v', '0'
       );
     } else if(feat == 'Favored In House') {
       notes = [
-        // TODO
+        // TODO effect
+        // TODO Dragonmarked house membership
+        'validationNotes.favoredInHouseFeatRace:' +
+          'Requires Race == Dwarf|Race == Elf|Race == Gnome|Race == Halfling|' +
+          'Race == Half Elf|Race == Half Orc|Race == Human'
       ];
+      rules.defineRule(valid + 'Race',
+        'feats.Favored In House', '=', '-1',
+        'race', '+', 'source.match' +
+          '(/^(Dwarf|Elf|Gnome|Half(ling| Elf| Orc)|Human)$/) ? 1 : null'
+      );
     } else if(feat == 'Flensing Strike') {
       notes = [
         // TODO effect
@@ -707,7 +746,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
         'feats.Greater Powerful Charge', '=', '-1',
         'baseAttack', '+', 'source >= 4 ? 1 : null'
       );
-      rules.defineRule('validationNotes.greaterPowerfulChargeFeatCombat',
+      rules.defineRule('validationNotes.greaterPowerfulChargeFeatFeatures',
         'feats.Greater Powerful Charge', '=', '-1',
         'features.Powerful Charge', '+', '1',
         'features.Small', '+', '-1'
@@ -764,8 +803,8 @@ Eberron.featRules = function(rules, feats, subfeats) {
         'feats.Haunting Melody', '=', '-1',
         'features.Bardic Music', '+', '1'
       );
-      rules.defineRule('validationNotes.hauntingMelodySkills',
-        'feats.hauntingMelody', '=', '-1',
+      rules.defineRule('validationNotes.hauntingMelodyFeatSkills',
+        'feats.Haunting Melody', '=', '-1',
         'subskillTotal.Perform', '+', 'source >= 9 ? 1 : null'
       );
     } else if(feat == 'Healing Factor') {
@@ -786,100 +825,267 @@ Eberron.featRules = function(rules, feats, subfeats) {
       );
     } else if(feat == 'Heroic Spirit') {
       notes = [
-        // TODO
+        // TODO effect
       ];
     } else if(feat == 'Improved Damage Reduction') {
       notes = [
-        // TODO
+        // TODO effect
+        'validationNotes.improvedDamageReductionFeatRace:' +
+          'Requires Race == Warforged'
       ];
+      rules.defineRule('validationNotes.improvedDamageReductionFeatRace',
+        'feats.Improved Damage Reduction', '=', '-1',
+        'race', '+', 'source == "Warforged" ? 1 : null'
+      );
     } else if(feat == 'Improved Fortification') {
       notes = [
-        // TODO
+        // TODO effect
+        'validationNotes.improvedFortificationFeatCombat:' +
+          'Requires Base Attack >= 6',
+        'validationNotes.improvedFortificationFeatRace:' +
+          'Requires Race == Warforged'
       ];
+      rules.defineRule('validationNotes.improvedFortificationFeatCombat',
+        'feats.Improved Fortification', '=', '-1',
+        'baseAttack', '+', 'source >= 6 ? 1 : null'
+      );
+      rules.defineRule('validationNotes.improvedFortificationFeatRace',
+        'feats.Improved Fortification', '=', '-1',
+        'race', '+', 'source == "Warforged" ? 1 : null'
+      );
     } else if(feat == 'Improved Natural Attack') {
       notes = [
-        // TODO
+        // TODO effect
+        // TODO Requires natural attack
+        'validationNotes.improvedNaturalAttackFeatCombat:' +
+          'Requires Base Attack >= 4'
       ];
+      rules.defineRule('validationNotes.improvedNaturaAttackFeatCombat',
+        'feats.Improved Natural Attack', '=', '-1',
+        'baseAttack', '+', 'source >= 4 ? 1 : null'
+      );
     } else if(feat == 'Investigate') {
       notes = [
-        // TODO
+        // TODO effect
       ];
     } else if(feat == 'Knight Training') {
       notes = [
-        // TODO
+        // TODO effect
       ];
     } else if(feat == 'Least Dragonmark') {
       notes = [
-        // TODO
+        // TODO effect
+        // TODO Requires Dragonmarked house membership
+        'validationNotes.leastDragonmarkFeatRace:' +
+          'Requires Race == Dwarf|Race == Elf|Race == Gnome|Race == Halfling|' +
+          'Race == Half Elf|Race == Half Orc|Race == Human'
       ];
+      rules.defineRule('validationNotes.leastDragonmarkFeatRace',
+        'feats.Least Dragonmark', '=', '-1',
+        'race', '+', 'source.match' +
+          '(/^(Dwarf|Elf|Gnome|Half(ling| Elf| Orc)|Human)$/) ? 1 : null'
+      );
     } else if(feat == 'Legendary Artisan') {
       notes = [
-        // TODO
+        'magicNotes.legendaryArtisanFeature:' +
+          'Reduce item creation XP price by 25%',
+        'validationNotes.legendaryArtisanFeatFeatures:' +
+          'Requires any Item Creation'
       ];
+      rules.defineRule('validationNotes.legendaryArtistFeatFeatures',
+        'feats.Legendary Artisan', '=', '-1',
+        // TODO any Item Creation
+        '', 'v', '0'
+      );
     } else if(feat == 'Lesser Dragon Mark') {
       notes = [
-        // TODO
+        // TODO effect
+        // TODO Requires Dragonmarked house membership
+        'validationNotes.lesserDragonmarkFeatFeatures:' +
+          'Requires Least Dragonmark',
+        'validationNotes.lesserDragonmarkFeatRace:' +
+          'Requires Race == Dwarf|Race == Elf|Race == Gnome|Race == Halfling|' +
+          'Race == Half Elf|Race == Half Orc|Race == Human',
+        'validationNotes.lesserDragonmarkFeatSkills:' +
+          'Requires 9 ranks in two skills'
       ];
+      rules.defineRule('validationNotes.lesserDragonmarkFeatFeatures',
+        'feats.Lesser Dragonmark', '=', '-1',
+        'features.Least Dragonmark', '+', '1'
+      );
+      rules.defineRule('validationNotes.lesserDragonmarkFeatRace',
+        'feats.Lesser Dragonmark', '=', '-1',
+        'race', '+', 'source.match' +
+          '(/^(Dwarf|Elf|Gnome|Half(ling| Elf| Orc)|Human)$/) ? 1 : null'
+      );
+      rules.defineRule('validationNotes.lesserDragonmarkFeatSkills',
+        'feats.Lesser Dragonmark', '=', '-2',
+        /^skills\./, '+', 'source >= 9 ? 1 : null',
+        '', 'v', '0'
+      );
     } else if(feat == 'Longstride Elite') {
       notes = [
-        // TODO
+        'abilityNotes.longstrideEliteFeature:+10 speed while shifting',
+        'validationNotes.longstrideEliteFeatFeatures:Requires Longstride'
       ];
+      rules.defineRule('validationNotes.longstrideEliteFeatFeatures',
+        'feats.Longstride Elite', '=', '-1',
+        'features.Longstride', '+', '1'
+      );
     } else if(feat == 'Mithral Body') {
       notes = [
-        // TODO
+        // TODO effect
+        'validationNotes.mithralBodyFeatRace:Requires Race == Warforged'
       ];
+      rules.defineRule('validationNotes.mithralBodyFeatRace',
+        'feats.Mithral Body', '=', '-1',
+        'race', '+', 'source == "Warforged" ? 1 : null'
+      );
     } else if(feat == 'Mithral Fluidity') {
       notes = [
-        // TODO
+        // TODO effect
+        'validationNotes.mithralFluidityFeatFeatures:Requires Mithral Body',
+        'validationNotes.mithralFluidityFeatRace:Requires Race == Warforged'
       ];
+      rules.defineRule('validationNotes.mithralFluidityFeatFeatures',
+        'feats.Mithral Fluidity', '=', '-1',
+        'features.Mithral Body', '+', '1'
+      );
+      rules.defineRule('validationNotes.mithralFluidityFeatRace',
+        'feats.Mithral Fluidity', '=', '-1',
+        'race', '+', 'source == "Warforged" ? 1 : null'
+      );
     } else if(feat == 'Monastic Training') {
       notes = [
-        // TODO
+        // TODO effect
       ];
     } else if(feat == 'Music Of Growth') {
       notes = [
-        // TODO
+        // TODO effect
+        'validationNotes.musicOfGrowthFeatFeatures:Requires Bardic Music',
+        'validationNotes.musicOfGrowthFeatSkills:Requires Perform >= 12'
       ];
+      rules.defineRule('validationNotes.musicOfGrowthFeatFeatures',
+        'feats.Music Of Growth', '=', '-1',
+        'features.Bardic Music', '+', '1'
+      );
+      rules.defineRule('validationNotes.musicOfGrowthFeatSkills',
+        'feats.Music Of Growth', '=', '-1',
+        'subskillTotal.Perform', '+', 'source >= 12 ? 1 : null'
+      );
     } else if(feat == 'Music Of Making') {
       notes = [
-        // TODO
+        // TODO effect
+        'validationNotes.musicOfGrowthFeatFeatures:Requires Bardic Music',
+        'validationNotes.musicOfGrowthFeatSkills:Requires Perform >= 12'
       ];
+      rules.defineRule('validationNotes.musicOfMakingFeatFeatures',
+        'feats.Music Of Making', '=', '-1',
+        'features.Bardic Music', '+', '1'
+      );
+      rules.defineRule('validationNotes.musicOfMakingFeatSkills',
+        'feats.Music Of Making', '=', '-1',
+        'subskillTotal.Perform', '+', 'source >= 9 ? 1 : null'
+      );
     } else if(feat == 'Powerful Charge') {
       notes = [
-        // TODO
+        // TODO effect
+        'validationNotes.powerfulChargeFeatCombat:Requires Base Attack >= 1',
+        'validationNotes.greaterPowerfulChargeFeatFeatures:Requires Small == 0'
       ];
+      rules.defineRule('validationNotes.powerfulChargeFeatCombat',
+        'feats.Powerful Charge', '=', '-1',
+        'baseAttack', '+', 'source >= 1 ? 1 : null'
+      );
+      rules.defineRule('validationNotes.powerfulChargeFeatFeatures',
+        'feats.Powerful Charge', '=', '0',
+        'features.Small', '+', '-1'
+      );
     } else if(feat == 'Precise Swing') {
       notes = [
-        // TODO
+        // TODO effect
+        'validationNotes.preciseSwingFeatCombat:Requires Base Attack >= 5'
       ];
+      rules.defineRule('validationNotes.preciseSwingFeatCombat',
+        'feats.Precise Swing', '=', '-1',
+        'baseAttack', '+', 'source >= 5 ? 1 : null'
+      );
     } else if(feat == 'Pursue') {
       notes = [
-        // TODO
+        // TODO effect
+        'validationNotes.pursueFeatFeatures:Requires Combat Reflexes'
       ];
+      rules.defineRule('validationNotes.pursueFeatFeatures',
+        'feats.Persue', '=', '-1',
+        'features.Combat Reflexes', '+', '1'
+      );
     } else if(feat == 'Raging Luck') {
       notes = [
-        // TODO
+        'featureNotes.ragingLuckFeature:Gain 1 AP during Frenzy/Rage',
+        'validationNotes.ragingLuckFeatFeatures:Requires Frenzy|Rage'
       ];
+      rules.defineRule('validationNotes.ragingLuckFeatFeatures',
+        'feats.Raging Luck', '=', '-1',
+        'features.Frenzy', '+', '1',
+        'features.Rage', '+', '1',
+        '', 'v', '0'
+      );
     } else if(feat == 'Recognize Impostor') {
       notes = [
-        // TODO
+        'skillNotes.recognizeImposterFeature:' +
+          '+4 Sense Motive vs. Bluff/Spot vs. Disguise',
+        'validationNotes.recognizeImpostorFeatSkills:' +
+          'Requires Sense Motive >= 3/Spot >= 3'
       ];
+      rules.defineRule('validationNotes.recognizeImpostorFeatSkills',
+        'feats.Recognize Impostor', '=', '-2',
+        'skillModifier.Sense Motive', '+', 'source >= 3 ? 1 : null',
+        'skillModifier.Spot', '+', 'source >= 3 ? 1 : null'
+      );
     } else if(feat == 'Repel Aberration') {
       notes = [
-        // TODO
+        // TODO effect
+        'validationNotes.repelAberrationFeatFeatures:' +
+          'Requires Gatekeeper Initiate',
+        'validationNotes.repelAberrationFeatLevels:Requires Druid >= 3'
       ];
+      rules.defineRule('validationNotes.repelAberrationFeatFeatures',
+        'feats.Repel Aberration', '=', '-1',
+         'features.Gatekeeper Initiate', '+', '1'
+      );
+      rules.defineRule('validationNotes.repelAberrationFeatLevels',
+        'feats.Repel Aberration', '=', '-1',
+         'levels.Druid', '+', 'source >= 3 ? 1 : null'
+      );
     } else if(feat == 'Research') {
       notes = [
-        // TODO
+        // TODO effect
       ];
     } else if(feat == 'Right Of Counsel') {
       notes = [
-        // TODO
+        // TODO effect
+        'validationNotes.rightOfCounselFeatRace:Requires Race == Elf'
       ];
+      rules.defineRule('validationNotes.rightOfCounselFeatRace',
+        'feats.rightOfCounsel', '=', '-1',
+        'race', '+', 'source == "Elf" ? 1 : null'
+      );
     } else if(feat == 'Serpent Strike') {
       notes = [
-        // TODO
+        // TODO effect
+        'validationNotes.serpentStrikeFeatFeatures:' +
+           'Requires Simple Weapon Proficiency/Weapon Focus (Longspear)/' +
+           'Flurry Of Blows'
       ];
+      rules.defineRule('validationNotes.serpentStrikeFeatFeatures',
+        'feats.Serpent Strike', '=', '-201',
+        'features.Flurry Of Blows', '+', '100',
+        'features.Weapon Focus (Longspear)', '+', '100',
+        'features.Simple Weapon Proficiency', '+', '1',
+        'weaponProficiencyLevel', '+',
+          'source >= ' + PH35.PROFICIENCY_LIGHT + ' ? 1 : null',
+        '', 'v', '0'
+      );
     } else if(feat == 'Shifter Defense') {
       notes = [
         'saveNotes.shifterDefenseFeature:DR 2/silver',
@@ -930,8 +1136,15 @@ Eberron.featRules = function(rules, feats, subfeats) {
       );
     } else if(feat == 'Silver Smite') {
       notes = [
-        // TODO
+        // TODO effect
+        'validationNotes.silverSmiteFeatDeity:' +
+          'Requires Deity == The Silver Flame',
+        'validationNotes.silverSmiteFeatFeatures:Requires Smite Evil'
       ];
+      rules.defineRule('validationNotes.silverSmiteFeatDeity',
+        'feats.Silver Smite', '=', '-1',
+        'deity', '+', 'source == "The Silver Flame" ? 1 : null'
+      );
     } else if(feat == 'Song Of The Heart') {
       notes = [
         'featureNotes.songOfTheHeartFeature:+1 Bardic Music effects',
@@ -967,7 +1180,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
         'magicNotes.spontaneousCastingFeature:' +
           'Spend 2 AP to substitute any known spell for a prepared one',
         'validationNotes.spontaneousCastingFeatLevels:' +
-          'Requires Caster Level >= 5',
+          'Requires Caster Level >= 5'
       ];
       rules.defineRule('validationNotes.spontaneousCastingFeatLevels',
         'feats.Spontaneous Casting', '=', '-1',
