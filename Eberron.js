@@ -193,7 +193,29 @@ Eberron.spellsSchools = {
   'Zone Of Natural Purity':'Evocation'
 };
 Eberron.SUBFEATS = {
-  'Aberrant Dragonmark':'Burning Hands'
+  'Aberrant Dragonmark':'Burning Hands',
+  'Beast Totem':'Chimera',
+  'Dragon Totem':'Black'
+};
+Eberron.totemAttackForms = {
+  'Black Dragon':'acid',
+  'Blue Dragon':'electricity',
+  'Brass Dragon':'fire',
+  'Bronze Dragon':'electricity',
+  'Chimera':'breath weapons',
+  'Copper Dragon':'acid',
+  'Digester':'acid',
+  'Displacer Beast':'targeted spells',
+  'Gogon':'petrification',
+  'Gold Dragon':'fire',
+  'Green Dragon':'acid',
+  'Krenshar':'fear',
+  'Red Dragon':'fire',
+  'Silver Dragon':'cold',
+  'Unicorn':'poison',
+  'White Dragon':'cold',
+  'Winter Wolf':'cold',
+  'Yrthak':'sonic'
 };
 
 /* Defines the rules related to Eberron Chapter 2, Character Classes. */
@@ -211,7 +233,7 @@ Eberron.classRules = function(rules, classes) {
       baseAttack = PH35.ATTACK_BONUS_AVERAGE;
       feats = [
         'Attune Magic Weapon', 'Craft Construct', 'Exceptional Artisan',
-        'Extra Rings', 'Extraordinary Artisan', 'Ledgendary Artisan',
+        'Extra Rings', 'Extraordinary Artisan', 'Legendary Artisan',
         'Wand Mastery'
       ];
       for(var j = 0; j < PH35.FEATS.length; j++) {
@@ -392,9 +414,23 @@ Eberron.featRules = function(rules, feats, subfeats) {
       );
     } else if(feat == 'Adamantine Body') {
       notes = [
-        // TODO effect
+        'abilityNotes.adamantineBodyFeature:Max 20 speed',
+        'combatNotes.adamantineBodyFeature:+6 AC/DR 2/adamantine',
         'validationNotes.adamantineBodyFeatRace:Requires Race == Warforged'
       ];
+      rules.defineRule
+        ('armorClass', 'combatNotes.adamantineBodyFeature', '+', '6');
+      rules.defineRule('combatNotes.dexterityArmorClassAdjustment',
+        'features.Adamantine Body', 'v', '1'
+      );
+      rules.defineRule('magicNotes.arcaneSpellFailure',
+        'features.Adamantine Body', '^', '35'
+      );
+      rules.defineRule('skillNotes.armorSkillCheckPenalty',
+        'features.Adamantine Body', '=', '-5'
+      );
+      rules.defineRule
+        ('speed', 'abilityNotes.adamantineBodyFeature', 'v', '20');
       rules.defineRule('validationNotes.adamantineBodyFeatRace',
         'feats.Adamantine Body', '=', '-1',
         'race', '+', 'source == "Warforged" ? 1 : null'
@@ -427,7 +463,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
       );
     } else if(feat == 'Beast Shape') {
       notes = [
-        // TODO effect
+        'magicNotes.beastShapeFeature:Wild Shape into beast totem 1/day',
         'validationNotes.beastShapeFeatFeatures:' +
           'Requires Beast Totem/Wild Shape (huge creature)'
       ];
@@ -437,9 +473,11 @@ Eberron.featRules = function(rules, feats, subfeats) {
         'magicNotes.wildShapeFeature', '+',
           'source.indexOf("Huge") >= 0 ? 1 : null'
       );
-    } else if(feat == 'Beast Totem') {
+    } else if((matchInfo = feat.match(/^Beast Totem \((.*)\)$/)) != null) {
+      var attack = Eberron.totemAttackForms[matchInfo[1]];
       notes = [
-        // TODO effect
+        'saveNotes.beastTotemFeature:' +
+          '+4 vs. ' + (attack == null ? 'related' : attack),
         'validationNotes.beastTotemFeatFeatures:Requires Wild Shape'
       ];
       rules.defineRule('validationNotes.beastTotemFeatFeatures',
@@ -459,7 +497,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
       );
     } else if(feat == 'Bind Elemental') {
       notes = [
-        // TODO effect
+        'magicNotes.bindElementalFeature:Bind elementals to magical objects',
         'validationNotes.bindElementalFeatFeatures:' +
           'Requires Craft Wondrous Item',
         'validationNotes.bindElementalFeatLevels:Requires Caster Level >= 9'
@@ -509,7 +547,8 @@ Eberron.featRules = function(rules, feats, subfeats) {
       );
     } else if(feat == 'Double Steel Strike') {
       notes = [
-        // TODO effect
+        'combatNotes.doubleSteelStrikeFeature:' +
+          'Flurry Of Blows w/Two-Bladed Sword',
         'validationNotes.doubleSteelStrikeFeatFeatures:' +
           'Requires Flurry Of Blows/Weapon Proficiency (Two-Bladed Sword)'
       ];
@@ -532,9 +571,11 @@ Eberron.featRules = function(rules, feats, subfeats) {
         'features.Rage', '+', '1',
         '', 'v', '0'
       );
-    } else if(feat == 'Dragon Totem') {
+    } else if((matchInfo = feat.match(/^Dragon Totem \((.*)\)$/)) != null) {
+      var attack = Eberron.totemAttackForms[matchInfo[1]];
       notes = [
-        // TODO effect
+        'saveNotes.dragonTotemFeature:' +
+          '+5 vs. ' + (attack == null ? 'related' : attack),
         'validationNotes.dragonTotemFeatCombat:Requires Base Attack >= 1'
         // TODO Requires Origin == Argonnessen | Origin == Seren
       ];
@@ -574,7 +615,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
         'validationNotes.exceptionalArtisanFeatFeatures:' +
           'Requires any Item Creation'
       ];
-      rules.defineRule('validationNotes.exceptionalArtistFeatFeatures',
+      rules.defineRule('validationNotes.exceptionalArtisanFeatFeatures',
         'feats.Exceptional Artisan', '=', '-1',
         // TODO any Item Creation
         '', 'v', '0'
@@ -623,10 +664,14 @@ Eberron.featRules = function(rules, feats, subfeats) {
       );
     } else if(feat == 'Extra Shifter Trait') {
       notes = [
-        // TODO effect
+        'featureNotes.extraShifterTraitFeature:' +
+          'Extra Shifter trait w/out ability bonus',
         'validationNotes.extraShifterFeatFeatures:Requires 2 Shifter',
         'validationNotes.extraShifterFeatRace:Requires Race == Shifter'
       ];
+      rules.defineRule('selectableFeatureCount.Shifter',
+        'featureNotes.extraShifterTraitFeature', '+', '1'
+      );
       rules.defineRule('validationNotes.extraShifterFeatFeatures',
         'feats.Extra Shifter Trait', '=', '-1',
         'featCount.Shifter', '+', 'source >= 2 ? 1 : null'
@@ -642,14 +687,14 @@ Eberron.featRules = function(rules, feats, subfeats) {
         'validationNotes.extraordinaryArtisanFeatFeatures:' +
           'Requires any Item Creation'
       ];
-      rules.defineRule('validationNotes.extraordinaryArtistFeatFeatures',
+      rules.defineRule('validationNotes.extraordinaryArtisanFeatFeatures',
         'feats.Extraordinary Artisan', '=', '-1',
         // TODO any Item Creation
         '', 'v', '0'
       );
     } else if(feat == 'Favored In House') {
       notes = [
-        // TODO effect
+        'featureNotes.favoredInHouseFeature:Acquire favors from house contacts',
         // TODO Dragonmarked house membership
         'validationNotes.favoredInHouseFeatRace:' +
           'Requires Race == Dwarf|Race == Elf|Race == Gnome|Race == Halfling|' +
@@ -662,7 +707,9 @@ Eberron.featRules = function(rules, feats, subfeats) {
       );
     } else if(feat == 'Flensing Strike') {
       notes = [
-        // TODO effect
+        'combatNotes.flensingStrikeFeature:' +
+          'Foe DC %V Fortitude save on kama strike or suffer -1 pain penalty ' +
+          'attack/save/check rolls for 1 minute',
         'validationNotes.flensingStrikeFeatFeatures:' +
           'Requires Weapon Focus (Kama)/Weapon Proficiency (Kama)'
       ];
@@ -673,10 +720,15 @@ Eberron.featRules = function(rules, feats, subfeats) {
       );
     } else if(feat == 'Gatekeeper Initiate') {
       notes = [
-        // TODO effect
+        'magicNotes.gatekeeperInitiateFeature:Access to additional spells',
+        'saveNotes.gatekeeperInitiateFeature:+2 vs. supernatural/aberrations',
+        'skillNotes.gatekeeperInitiateFeature:Knowledge (Planes) class skill',
         'validationNotes.gatekeeperInitiateFeatFeatures:' +
           'Requires Spontaneous Druid Spell'
       ];
+      rules.defineRule('classSkills.Knowledge (Planes)',
+        'skillNotes.gatekeeperInitiateFeature', '=', '1'
+      );
       rules.defineRule('validationNotes.gatekeeperInitiateFeatFeatures',
         'feats.Gatekeeper Initiate', '=', '-1',
         'features.Spontaneous Druid Spell', '+', '1'
@@ -892,7 +944,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
         'validationNotes.legendaryArtisanFeatFeatures:' +
           'Requires any Item Creation'
       ];
-      rules.defineRule('validationNotes.legendaryArtistFeatFeatures',
+      rules.defineRule('validationNotes.legendaryArtisanFeatFeatures',
         'feats.Legendary Artisan', '=', '-1',
         // TODO any Item Creation
         '', 'v', '0'
@@ -1067,7 +1119,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
         'validationNotes.rightOfCounselFeatRace:Requires Race == Elf'
       ];
       rules.defineRule('validationNotes.rightOfCounselFeatRace',
-        'feats.rightOfCounsel', '=', '-1',
+        'feats.Right Of Counsel', '=', '-1',
         'race', '+', 'source == "Elf" ? 1 : null'
       );
     } else if(feat == 'Serpent Strike') {
@@ -1088,7 +1140,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
       );
     } else if(feat == 'Shifter Defense') {
       notes = [
-        'saveNotes.shifterDefenseFeature:DR 2/silver',
+        'combatNotes.shifterDefenseFeature:DR 2/silver',
         'validationNotes.shifterDefenseFeatFeatures:Requires 2 Shifter',
         'validationNotes.shifterDefenseFeatRace:Requires Race == Shifter'
       ];
