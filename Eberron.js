@@ -880,12 +880,15 @@ Eberron.featRules = function(rules, feats, subfeats) {
       notes = [
         'magicNotes.hauntingMelodyFeature:' +
           'Foe DC %V Will save or afraid for %1 rounds',
-        'validationNotes.hauntingMelodyFeatures:Requires Bardic Music',
-        'validationNotes.hauntingMelodySkills:Requires Perform >= 9'
+        'validationNotes.hauntingMelodyFeatFeatures:Requires Bardic Music',
+        'validationNotes.hauntingMelodyFeatSkills:Requires Perform >= 9'
       ];
       rules.defineRule('magicNotes.hauntingMelodyFeature',
         'levels.Bard', '=', '10 + Math.floor(source / 2)',
         'charismaModifier', '+', null
+      );
+      rules.defineRule('magicNotes.hauntingMelodyFeature.1',
+        'subskillTotal.Perform', '=', null
       );
       rules.defineRule('validationNotes.hauntingMelodyFeatFeatures',
         'feats.Haunting Melody', '=', '-1',
@@ -913,11 +916,11 @@ Eberron.featRules = function(rules, feats, subfeats) {
       );
     } else if(feat == 'Heroic Spirit') {
       notes = [
-        'featureNotes.heroicSpiritFeature:+3 AP/level'
+        'featureNotes.heroicSpiritFeature:+3 AP'
       ];
     } else if(feat == 'Improved Damage Reduction') {
       notes = [
-        'combatNotes.improvedDamageReduction:DR +1/adamantine',
+        'combatNotes.improvedDamageReductionFeature:DR +1/adamantine',
         'validationNotes.improvedDamageReductionFeatRace:' +
           'Requires Race == Warforged'
       ];
@@ -944,13 +947,13 @@ Eberron.featRules = function(rules, feats, subfeats) {
       );
     } else if(feat == 'Improved Natural Attack') {
       notes = [
-        'combatNotes.improvedNaturalAttack:' +
+        'combatNotes.improvedNaturalAttackFeature:' +
           'Natural attack damage increases one size catagory',
         // TODO Requires natural attack
         'validationNotes.improvedNaturalAttackFeatCombat:' +
           'Requires Base Attack >= 4'
       ];
-      rules.defineRule('validationNotes.improvedNaturaAttackFeatCombat',
+      rules.defineRule('validationNotes.improvedNaturalAttackFeatCombat',
         'feats.Improved Natural Attack', '=', '-1',
         'baseAttack', '+', 'source >= 4 ? 1 : null'
       );
@@ -1058,12 +1061,14 @@ Eberron.featRules = function(rules, feats, subfeats) {
         'validationNotes.mithralFluidityFeatFeatures:Requires Mithral Body',
         'validationNotes.mithralFluidityFeatRace:Requires Race == Warforged'
       ];
+/* TODO These rules are wrong
       rules.defineRule('combatNotes.dexterityArmorClassAdjustment',
         'features.Mithril Fluidity', '+', '1'
       );
       rules.defineRule('skillNotes.armorSkillCheckPenalty',
         'features.Mithril Fluidity', '+', '1'
       );
+*/
       rules.defineRule('validationNotes.mithralFluidityFeatFeatures',
         'feats.Mithral Fluidity', '=', '-1',
         'features.Mithral Body', '+', '1'
@@ -1080,7 +1085,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
       ];
     } else if(feat == 'Music Of Growth') {
       notes = [
-        'featureNotes.musicOfGrowthFeature:' +
+        'magicNotes.musicOfGrowthFeature:' +
           '+4 strength/constitution to animal/plant creatures w/in 30 ft ' +
           'during Bardic Music',
         'validationNotes.musicOfGrowthFeatFeatures:Requires Bardic Music',
@@ -1099,8 +1104,8 @@ Eberron.featRules = function(rules, feats, subfeats) {
         'magicNotes.musicOfMakingFeature:' +
           'Double duration of conjuration spells involving Bardic Music',
         'skillNotes.musicOfMakingFeature:+4 Craft during Bardic Music',
-        'validationNotes.musicOfGrowthFeatFeatures:Requires Bardic Music',
-        'validationNotes.musicOfGrowthFeatSkills:Requires Perform >= 12'
+        'validationNotes.musicOfMakingFeatFeatures:Requires Bardic Music',
+        'validationNotes.musicOfMakingFeatSkills:Requires Perform >= 9'
       ];
       rules.defineRule('validationNotes.musicOfMakingFeatFeatures',
         'feats.Music Of Making', '=', '-1',
@@ -1145,7 +1150,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
         'validationNotes.pursueFeatFeatures:Requires Combat Reflexes'
       ];
       rules.defineRule('validationNotes.pursueFeatFeatures',
-        'feats.Persue', '=', '-1',
+        'feats.Pursue', '=', '-1',
         'features.Combat Reflexes', '+', '1'
       );
     } else if(feat == 'Raging Luck') {
@@ -1161,7 +1166,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
       );
     } else if(feat == 'Recognize Impostor') {
       notes = [
-        'skillNotes.recognizeImposterFeature:' +
+        'skillNotes.recognizeImpostorFeature:' +
           '+4 Sense Motive vs. Bluff/Spot vs. Disguise',
         'validationNotes.recognizeImpostorFeatSkills:' +
           'Requires Sense Motive >= 3/Spot >= 3'
