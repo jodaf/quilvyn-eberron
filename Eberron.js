@@ -50,7 +50,7 @@ function Eberron() {
     DMG35.prestigeClassRules(rules, DMG35.PRESTIGE_CLASSES);
     DMG35.companionRules(rules, DMG35.COMPANIONS);
   }
-  // So far, same creation procedures as PH35
+  // So far, same character creation procedures as PH35
   rules.defineChoice('preset', 'race', 'levels');
   rules.defineChoice('random', PH35.RANDOMIZABLE_ATTRIBUTES);
   rules.randomizeOneAttribute = PH35.randomizeOneAttribute;
@@ -1252,7 +1252,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
       ];
       rules.defineRule('combatNotes.shifterDefenseFeature', '', '=', '2');
       rules.defineRule('validationNotes.shifterDefenseFeatFeatures',
-        'feats.Shifter Ferocity', '=', '0', // TODO Any 2 Shifter
+        'feats.Shifter Defense', '=', '0', // TODO Any 2 Shifter
         '', 'v', '0'
       );
       rules.defineRule('validationNotes.shifterDefenseFeatRace',
@@ -1280,7 +1280,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
           'Reduce additional natural attack penalty to -2',
         'validationNotes.shifterMultiattackFeatCombat:' +
           'Requires Base Attack >= 6',
-        'validationNotes.shifterMultiattackFeatFeature:' +
+        'validationNotes.shifterMultiattackFeatFeatures:' +
           'Requires Longtooth|Razorclaw'
       ];
       rules.defineRule('validationNotes.shifterMultiattackFeatCombat',
@@ -1302,7 +1302,11 @@ Eberron.featRules = function(rules, feats, subfeats) {
       ];
       rules.defineRule('validationNotes.silverSmiteFeatDeity',
         'feats.Silver Smite', '=', '-1',
-        'deity', '+', 'source == "The Silver Flame" ? 1 : null'
+        'deity', '+', 'source.indexOf("Silver Flame") >= 0 ? 1 : null'
+      );
+      rules.defineRule('validationNotes.silverSmiteFeatFeatures',
+        'feats.Silver Smite', '=', '-1',
+        'features.Smite Evil', '+', '1'
       );
     } else if(feat == 'Song Of The Heart') {
       notes = [
@@ -1362,9 +1366,10 @@ Eberron.featRules = function(rules, feats, subfeats) {
           'Requires Beast Totem/Wild Empathy'
       ];
       rules.defineRule('validationNotes.totemCompanionFeatFeatures',
-        'feats.Totem Companion', '=', '-2',
-        'features.Beast Totem', '+', '1',
-        'features.Wild Empathy', '+', '1'
+        'feats.Totem Companion', '=', '-101',
+        'features.Wild Empathy', '+', '100',
+        /^features\.Beast Totem/, '+', '1',
+        '', 'v', '0'
       );
     } else if(feat == 'Undead Empathy') {
       notes = [
@@ -1383,7 +1388,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
       ];
     } else if(feat == 'Vermin Companion') {
       notes = [
-        'featureNotes.verminCompanionFeature:' +
+        'companionNotes.verminCompanionFeature:' +
           'Vermin creature as animal companion',
         'validationNotes.verminCompanionFeatAlignment:' +
           'Requires Alignment != Good',
@@ -1475,6 +1480,8 @@ Eberron.featRules = function(rules, feats, subfeats) {
 /* Defines the rules related to Eberron Chapter 5, Magic. */
 Eberron.magicRules = function(rules, classes, domains) {
 
+  var schools = rules.getChoices('schools');
+
   for(var i = 0; i < classes.length; i++) {
     var klass = classes[i];
     var spells;
@@ -1539,7 +1546,8 @@ Eberron.magicRules = function(rules, classes, domains) {
           if(school == null) {
             continue;
           }
-          spell += '(' + pieces[0] + ' ' + school.substring(0, 4) + ')';
+          spell += '(' + pieces[0] + ' ' +
+                    (school == 'Universal' ? 'Univ' : schools[school]) + ')';
           rules.defineChoice('spells', spell);
         }
       }
@@ -1550,7 +1558,6 @@ Eberron.magicRules = function(rules, classes, domains) {
     var domain = domains[i];
     var notes;
     var spells;
-    var turn;
     if(domain == 'Artifice') {
       notes = [
         'magicNotes.artificeDomain:+1 caster level for creation spells',
@@ -1728,41 +1735,13 @@ Eberron.magicRules = function(rules, classes, domains) {
       for(var j = 0; j < spells.length; j++) {
         var spell = spells[j];
         var school = Eberron.spellsSchools[spell];
-        if(school == null) {
-          school = PH35.spellsSchools[spell];
-        }
-        if(school == null) {
+        if(school == null && (school = PH35.spellsSchools[spell]) == null) {
           continue;
         }
-        spell += '(' + domain + (j + 1) + ' ' + school.substring(0, 4) + ')';
+        spell += '(' + domain + (j + 1) + ' ' +
+                  (school == 'Universal' ? 'Univ' : schools[school]) + ')';
         rules.defineChoice('spells', spell);
       }
-    }
-    if(turn != null) {
-      var domainLevel = 'domainLevel.' + domain;
-      var prefix = 'turn' + turn;
-      rules.defineRule(domainLevel,
-        'domains.' + domain, '?', null,
-        'levels.Cleric', '=', null
-      );
-      rules.defineRule(prefix + '.level', domainLevel, '+=', null);
-      rules.defineRule(prefix + '.damageModifier',
-        prefix + '.level', '=', null,
-        'charismaModifier', '+', null
-      );
-      rules.defineRule(prefix + '.frequency',
-        prefix + '.level', '=', '3',
-        'charismaModifier', '+', null
-      );
-      rules.defineRule(prefix + '.maxHitDice',
-        prefix + '.level', '=', 'source * 3 - 10',
-        'charismaModifier', '+', null
-      );
-      rules.defineNote([
-        prefix + '.damageModifier:2d6+%V',
-        prefix + '.frequency:%V/day',
-        prefix + '.maxHitDice:(d20+%V)/3'
-      ]);
     }
   }
 
