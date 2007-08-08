@@ -322,7 +322,7 @@ Eberron.classRules = function(rules, classes) {
       rules.defineRule('skillNotes.artificerKnowledgeFeature',
          'levels.Artificer', '=', null,
          'intelligenceModifier', '+', null
-        );
+      );
 
     } else
       continue;
@@ -459,11 +459,11 @@ Eberron.featRules = function(rules, feats, subfeats) {
     } else if(feat == 'Attune Magic Weapon') {
       notes = [
         'combatNotes.attuneMagicWeaponFeature:+1 attack/damage w/magic weapons',
-        'validationNotes.attuneMagicWeaponFeatFeatures:' +
+        'validationNotes.attuneMagicWeaponFeatFeats:' +
           'Requires Craft Magic Arms And Armor',
         'validationNotes.attuneMagicWeaponFeatLevels:Requires Caster Level >= 5'
       ];
-      rules.defineRule('validationNotes.attuneMagicWeaponFeatFeatures',
+      rules.defineRule('validationNotes.attuneMagicWeaponFeatFeats',
         'feats.Attune Magic Weapon', '=', '-1',
         'features.Craft Magic Arms And Armor', '+', '1'
       );
@@ -474,12 +474,16 @@ Eberron.featRules = function(rules, feats, subfeats) {
     } else if(feat == 'Beast Shape') {
       notes = [
         'magicNotes.beastShapeFeature:Wild Shape into beast totem 1/day',
-        'validationNotes.beastShapeFeatFeatures:' +
-          'Requires Beast Totem/Wild Shape (huge creature)'
+        'validationNotes.beastShapeFeatFeats:Requires Beast Totem',
+        'validationNotes.beastShapeFeatFeatures:Wild Shape (huge creature)'
       ];
-      rules.defineRule('validationNotes.beastShapeFeatFeatures',
-        'feats.Beast Shape', '=', '-2',
+      rules.defineRule('validationNotes.beastShapeFeatFeats',
+        'feats.Beast Shape', '=', '-1',
         /^features\.Beast Totem/, '+', '1',
+        '', 'v', '0'
+      );
+      rules.defineRule('validationNotes.beastShapeFeatFeatures',
+        'feats.Beast Shape', '=', '-1',
         'levels.Druid', '+', 'source >= 15 ? 1 : null'
       );
     } else if((matchInfo = feat.match(/^Beast Totem \((.*)\)$/)) != null) {
@@ -507,11 +511,10 @@ Eberron.featRules = function(rules, feats, subfeats) {
     } else if(feat == 'Bind Elemental') {
       notes = [
         'magicNotes.bindElementalFeature:Bind elementals to magical objects',
-        'validationNotes.bindElementalFeatFeatures:' +
-          'Requires Craft Wondrous Item',
+        'validationNotes.bindElementalFeatFeats:Requires Craft Wondrous Item',
         'validationNotes.bindElementalFeatLevels:Requires Caster Level >= 9'
       ];
-      rules.defineRule('validationNotes.bindElementalFeatFeatures',
+      rules.defineRule('validationNotes.bindElementalFeatFeats',
         'feats.Bind Elemental', '=', '-1',
         'features.Craft Wondrous Item', '+', '1'
       );
@@ -546,10 +549,10 @@ Eberron.featRules = function(rules, feats, subfeats) {
     } else if(feat == 'Craft Construct') {
       notes = [
         'magicNotes.craftConstructFeature:Create enchanted construct',
-        'validationNotes.craftConstructFeatFeatures:' +
+        'validationNotes.craftConstructFeatFeats:' +
           'Requires Craft Magic Arms And Armor/Craft Wondrous Item'
       ];
-      rules.defineRule('validationNotes.craftConstructFeatFeatures',
+      rules.defineRule('validationNotes.craftConstructFeatFeats',
         'feats.Craft Construct', '=', '-2',
         'features.Craft Magic Arms And Armor', '+', '1',
         'features.Craft Wondrous Item', '+', '1'
@@ -558,25 +561,33 @@ Eberron.featRules = function(rules, feats, subfeats) {
       notes = [
         'combatNotes.doubleSteelStrikeFeature:' +
           'Flurry Of Blows w/Two-Bladed Sword',
-        'validationNotes.doubleSteelStrikeFeatFeatures:' +
-          'Requires Flurry Of Blows/Weapon Proficiency (Two-Bladed Sword)'
+        'validationNotes.doubleSteelStrikeFeatFeats:' +
+          'Requires Weapon Proficiency (Two-Bladed Sword)',
+        'validationNotes.doubleSteelStrikeFeatFeatures:Requires Flurry Of Blows'
       ];
-      rules.defineRule('validationNotes.doubleSteelStrikeFeatFeatures',
-        'feats.Double Steel Strike', '=', '-2',
-        'features.Flurry Of Blows', '+', '1',
+      rules.defineRule('validationNotes.doubleSteelStrikeFeatFeats',
+        'feats.Double Steel Strike', '=', '-1',
         'features.Weapon Proficiency (Two-Bladed Sword)', '+', '1'
+      );
+      rules.defineRule('validationNotes.doubleSteelStrikeFeatFeatures',
+        'feats.Double Steel Strike', '=', '-1',
+        'features.Flurry Of Blows', '+', '1'
       );
     } else if(feat == 'Dragon Rage') {
       notes = [
         'combatNotes.dragonRageFeature:' +
           '+2 AC/+10 Dragon Totem resistence during frenzy/rage',
-        'validationNotes.dragonRageFeatFeatures:' +
-          'Requires Dragon Totem/Frenzy|Rage'
+        'validationNotes.dragonRageFeatFeats:Requires Dragon Totem',
+        'validationNotes.dragonRageFeatFeatures:Requires Frenzy|Rage'
         // TODO Requires Origin == Argonnessen
       ];
+      rules.defineRule('validationNotes.dragonRageFeatFeats',
+        'feats.Dragon Rage', '=', '-1',
+        /^features\.Dragon Totem/, '+', '1',
+        '', 'v', '0'
+      );
       rules.defineRule('validationNotes.dragonRageFeatFeatures',
-        'feats.Dragon Rage', '=', '-101',
-        /^features\.Dragon Totem/, '+', '100',
+        'feats.Dragon Rage', '=', '-1',
         'features.Frenzy', '+', '1',
         'features.Rage', '+', '1',
         '', 'v', '0'
@@ -624,10 +635,10 @@ Eberron.featRules = function(rules, feats, subfeats) {
       notes = [
         'magicNotes.exceptionalArtisanFeature:' +
           'Reduce item creation base time by 25%',
-        'validationNotes.exceptionalArtisanFeatFeatures:' +
+        'validationNotes.exceptionalArtisanFeatFeats:' +
           'Requires any Item Creation'
       ];
-      rules.defineRule('validationNotes.exceptionalArtisanFeatFeatures',
+      rules.defineRule('validationNotes.exceptionalArtisanFeatFeats',
         'feats.Exceptional Artisan', '=', '0', // TODO any Item Creation
         '', 'v', '0'
       );
@@ -662,10 +673,10 @@ Eberron.featRules = function(rules, feats, subfeats) {
     } else if(feat == 'Extra Rings') {
       notes = [
         'magicNotes.extraRingsFeature:Wear up to 4 magic rings at once',
-        'validationNotes.extraRingsFeatFeatures:Requires Forge Ring',
+        'validationNotes.extraRingsFeatFeats:Requires Forge Ring',
         'validationNotes.extraRingsFeatLevels:Requires Caster Level >= 12'
       ];
-      rules.defineRule('validationNotes.extraRingsFeatFeatures',
+      rules.defineRule('validationNotes.extraRingsFeatFeats',
         'feats.Extra Rings', '=', '-1',
         'features.Forge Ring', '+', '1'
       );
@@ -677,13 +688,13 @@ Eberron.featRules = function(rules, feats, subfeats) {
       notes = [
         'featureNotes.extraShifterTraitFeature:' +
           'Extra Shifter trait w/out ability bonus',
-        'validationNotes.extraShifterFeatFeatures:Requires 2 Shifter',
+        'validationNotes.extraShifterFeatFeats:Requires 2 Shifter',
         'validationNotes.extraShifterFeatRace:Requires Race == Shifter'
       ];
       rules.defineRule('selectableFeatureCount.Shifter',
         'featureNotes.extraShifterTraitFeature', '+', '1'
       );
-      rules.defineRule('validationNotes.extraShifterFeatFeatures',
+      rules.defineRule('validationNotes.extraShifterFeatFeats',
         'feats.Extra Shifter Trait', '=', '0', // TODO any 2 Shifter
         '', 'v', '0'
       );
@@ -695,10 +706,10 @@ Eberron.featRules = function(rules, feats, subfeats) {
       notes = [
         'magicNotes.extraordinaryArtisanFeature:' +
           'Reduce item creation base price by 25%',
-        'validationNotes.extraordinaryArtisanFeatFeatures:' +
+        'validationNotes.extraordinaryArtisanFeatFeats:' +
           'Requires any Item Creation'
       ];
-      rules.defineRule('validationNotes.extraordinaryArtisanFeatFeatures',
+      rules.defineRule('validationNotes.extraordinaryArtisanFeatFeats',
         'feats.Extraordinary Artisan', '=', '0', // TODO any Item Creation
         '', 'v', '0'
       );
@@ -720,14 +731,14 @@ Eberron.featRules = function(rules, feats, subfeats) {
         'combatNotes.flensingStrikeFeature:' +
           'Foe DC %V Fortitude save on kama strike or suffer -1 pain penalty ' +
           'attack/save/check rolls for 1 minute',
-        'validationNotes.flensingStrikeFeatFeatures:' +
+        'validationNotes.flensingStrikeFeatFeats:' +
           'Requires Weapon Focus (Kama)/Weapon Proficiency (Kama)'
       ];
       rules.defineRule('combatNotes.flensingStrikeFeature',
         'level', '=', '10 + Math.floor(source / 2)',
         'wisdomModifier', '+', null
       );
-      rules.defineRule('validationNotes.flensingStrikeFeatFeatures',
+      rules.defineRule('validationNotes.flensingStrikeFeatFeats',
         'feats.Flensing Strike', '=', '-2',
         'features.Weapon Focus (Kama)', '+', '1',
         'features.Weapon Proficiency (Kama)', '+', '1'
@@ -785,7 +796,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
           'DC %V+spell level greater dragonmark ability at caster level 10/' +
           'least/lesser dragonmark ability +1/day',
         // TODO Dragonmarked house membership
-        'validationNotes.greaterDragonmarkFeatFeatures:' +
+        'validationNotes.greaterDragonmarkFeatFeats:' +
           'Requires Least Dragonmark/Lesser Dragonmark',
         'validationNotes.greaterDragonmarkFeatRace:' +
           'Requires Race == Dwarf|Race == Elf|Race == Gnome|Race == Halfling|' +
@@ -796,7 +807,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
       rules.defineRule('magicNotes.greaterDragonmarkFeature',
         'charismaModifier', '=', '10 + source'
       );
-      rules.defineRule('validationNotes.greaterDragonmarkFeatFeatures',
+      rules.defineRule('validationNotes.greaterDragonmarkFeatFeats',
         'feats.Greater Dragonmark', '=', '-2',
         'features.Least Dragonmark', '+', '1',
         'features.Lesser Dragonmark', '+', '1'
@@ -817,8 +828,9 @@ Eberron.featRules = function(rules, feats, subfeats) {
           'Raise charge damage one size category to %V',
         'validationNotes.greaterPowerfulChargeFeatCombat:' +
           'Requires Base Attack >= 4',
-        'validationNotes.greaterPowerfulChargeFeatFeatures:' +
-          'Requires Powerful Charge/Small == 0'
+        'validationNotes.greaterPowerfulChargeFeatFeats:' +
+          'Requires Powerful Charge',
+        'validationNotes.greaterPowerfulChargeFeatFeatures:Requires Small == 0'
       ];
       rules.defineRule('combatNotes.greaterPowerfulChargeFeature',
         '', '=', '"2d6"',
@@ -831,23 +843,26 @@ Eberron.featRules = function(rules, feats, subfeats) {
         'feats.Greater Powerful Charge', '=', '-1',
         'baseAttack', '+', 'source >= 4 ? 1 : null'
       );
-      rules.defineRule('validationNotes.greaterPowerfulChargeFeatFeatures',
+      rules.defineRule('validationNotes.greaterPowerfulChargeFeatFeats',
         'feats.Greater Powerful Charge', '=', '-1',
-        'features.Powerful Charge', '+', '1',
+        'features.Powerful Charge', '+', '1'
+      );
+      rules.defineRule('validationNotes.greaterPowerfulChargeFeatFeatures',
+        'feats.Greater Powerful Charge', '=', '0',
         'features.Small', '+', '-1'
       );
     } else if(feat == 'Greater Shifter Defense') {
       notes = [
         'combatNotes.greaterShifterDefenseFeature:+2 Shifter Defense DR',
-        'validationNotes.greaterShifterDefenseFeatFeatures:' +
+        'validationNotes.greaterShifterDefenseFeatFeats:' +
           'Requires Shifter Defense/3 other Shifter',
         'validationNotes.greaterShifterDefenseFeatRace:Requires Race == Shifter'
       ];
       rules.defineRule('combatNotes.shifterDefenseFeature',
         'combatNotes.greaterShifterDefenseFeature', '+', '2'
       );
-      rules.defineRule('validationNotes.greaterShifterDefenseFeatFeatures',
-        'feats.Greater Shifter Defense', '=', '-1', // TODO Any 4 Shifter
+      rules.defineRule('validationNotes.greaterShifterDefenseFeatFeats',
+        'feats.Greater Shifter Defense', '=', '-1', // TODO Any 3 Shifter
         'features.Shifter Defense', '+', '1',
         '', 'v', '0'
       );
@@ -989,10 +1004,10 @@ Eberron.featRules = function(rules, feats, subfeats) {
       notes = [
         'magicNotes.legendaryArtisanFeature:' +
           'Reduce item creation XP price by 25%',
-        'validationNotes.legendaryArtisanFeatFeatures:' +
+        'validationNotes.legendaryArtisanFeatFeats:' +
           'Requires any Item Creation'
       ];
-      rules.defineRule('validationNotes.legendaryArtisanFeatFeatures',
+      rules.defineRule('validationNotes.legendaryArtisanFeatFeats',
         'feats.Legendary Artisan', '=', '0', // TODO any Item Creation
         '', 'v', '0'
       );
@@ -1002,8 +1017,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
           'DC %V+spell level lesser dragonmark ability at caster level 6/' +
           'least dragonmark ability +1/day',
         // TODO Requires Dragonmarked house membership
-        'validationNotes.lesserDragonmarkFeatFeatures:' +
-          'Requires Least Dragonmark',
+        'validationNotes.lesserDragonmarkFeatFeats:Requires Least Dragonmark',
         'validationNotes.lesserDragonmarkFeatRace:' +
           'Requires Race == Dwarf|Race == Elf|Race == Gnome|Race == Halfling|' +
           'Race == Half Elf|Race == Half Orc|Race == Human',
@@ -1013,7 +1027,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
       rules.defineRule('magicNotes.lesserDragonmarkFeature',
         'charismaModifier', '=', '10 + source'
       );
-      rules.defineRule('validationNotes.lesserDragonmarkFeatFeatures',
+      rules.defineRule('validationNotes.lesserDragonmarkFeatFeats',
         'feats.Lesser Dragonmark', '=', '-1',
         'features.Least Dragonmark', '+', '1'
       );
@@ -1058,7 +1072,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
       );
     } else if(feat == 'Mithral Fluidity') {
       notes = [
-        'validationNotes.mithralFluidityFeatFeatures:Requires Mithral Body',
+        'validationNotes.mithralFluidityFeatFeats:Requires Mithral Body',
         'validationNotes.mithralFluidityFeatRace:Requires Race == Warforged'
       ];
 /* TODO These rules are wrong
@@ -1069,7 +1083,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
         'features.Mithril Fluidity', '+', '1'
       );
 */
-      rules.defineRule('validationNotes.mithralFluidityFeatFeatures',
+      rules.defineRule('validationNotes.mithralFluidityFeatFeats',
         'feats.Mithral Fluidity', '=', '-1',
         'features.Mithral Body', '+', '1'
       );
@@ -1147,9 +1161,9 @@ Eberron.featRules = function(rules, feats, subfeats) {
       notes = [
         'combatNotes.pursueFeature:' +
           'Spend 1 AP to step into area vacated by opponent',
-        'validationNotes.pursueFeatFeatures:Requires Combat Reflexes'
+        'validationNotes.pursueFeatFeats:Requires Combat Reflexes'
       ];
-      rules.defineRule('validationNotes.pursueFeatFeatures',
+      rules.defineRule('validationNotes.pursueFeatFeats',
         'feats.Pursue', '=', '-1',
         'features.Combat Reflexes', '+', '1'
       );
@@ -1180,8 +1194,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
       notes = [
         'combatNotes.repelAberrationFeature:' +
           'Repel aberrations as cleric turns undead',
-        'validationNotes.repelAberrationFeatFeatures:' +
-          'Requires Gatekeeper Initiate',
+        'validationNotes.repelAberrationFeatFeats:Requires Gatekeeper Initiate',
         'validationNotes.repelAberrationFeatLevels:Requires Druid >= 3'
       ];
       rules.defineRule('turnAberration.level',
@@ -1205,7 +1218,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
         'turnAberration.frequency:%V/day',
         'turnAberration.maxHitDice:(d20+%V)/3'
       ]);
-      rules.defineRule('validationNotes.repelAberrationFeatFeatures',
+      rules.defineRule('validationNotes.repelAberrationFeatFeats',
         'feats.Repel Aberration', '=', '-1',
          'features.Gatekeeper Initiate', '+', '1'
       );
@@ -1231,27 +1244,30 @@ Eberron.featRules = function(rules, feats, subfeats) {
     } else if(feat == 'Serpent Strike') {
       notes = [
         'combatNotes.serpentStrikeFeature:Flurry Of Blows w/Longspear',
-        'validationNotes.serpentStrikeFeatFeatures:' +
-           'Requires Simple Weapon Proficiency/Weapon Focus (Longspear)/' +
-           'Flurry Of Blows'
+        'validationNotes.serpentStrikeFeatFeats:' +
+           'Requires Simple Weapon Proficiency/Weapon Focus (Longspear)',
+        'validationNotes.serpentStrikeFeatFeatures:Requires Flurry Of Blows'
       ];
-      rules.defineRule('validationNotes.serpentStrikeFeatFeatures',
-        'feats.Serpent Strike', '=', '-201',
-        'features.Flurry Of Blows', '+', '100',
-        'features.Weapon Focus (Longspear)', '+', '100',
+      rules.defineRule('validationNotes.serpentStrikeFeatFeats',
+        'feats.Serpent Strike', '=', '-2',
+        'features.Weapon Focus (Longspear)', '+', '1',
         'features.Simple Weapon Proficiency', '+', '1',
         'weaponProficiencyLevel', '+',
           'source >= ' + PH35.PROFICIENCY_LIGHT + ' ? 1 : null',
         '', 'v', '0'
       );
+      rules.defineRule('validationNotes.serpentStrikeFeatFeatures',
+        'feats.Serpent Strike', '=', '-1',
+        'features.Flurry Of Blows', '+', '1'
+      );
     } else if(feat == 'Shifter Defense') {
       notes = [
         'combatNotes.shifterDefenseFeature:DR %V/silver',
-        'validationNotes.shifterDefenseFeatFeatures:Requires 2 Shifter',
+        'validationNotes.shifterDefenseFeatFeats:Requires 2 Shifter',
         'validationNotes.shifterDefenseFeatRace:Requires Race == Shifter'
       ];
       rules.defineRule('combatNotes.shifterDefenseFeature', '', '=', '2');
-      rules.defineRule('validationNotes.shifterDefenseFeatFeatures',
+      rules.defineRule('validationNotes.shifterDefenseFeatFeats',
         'feats.Shifter Defense', '=', '0', // TODO Any 2 Shifter
         '', 'v', '0'
       );
@@ -1362,14 +1378,17 @@ Eberron.featRules = function(rules, feats, subfeats) {
       notes = [
         'companionNotes.totemCompanionFeature:' +
           'Totem magical beast as animal companion',
-        'validationNotes.totemCompanionFeatFeatures:' +
-          'Requires Beast Totem/Wild Empathy'
+        'validationNotes.totemCompanionFeatFeats:Requires Beast Totem',
+        'validationNotes.totemCompanionFeatFeatures:Requires Wild Empathy'
       ];
-      rules.defineRule('validationNotes.totemCompanionFeatFeatures',
-        'feats.Totem Companion', '=', '-101',
-        'features.Wild Empathy', '+', '100',
+      rules.defineRule('validationNotes.totemCompanionFeatFeats',
+        'feats.Totem Companion', '=', '-1',
         /^features\.Beast Totem/, '+', '1',
         '', 'v', '0'
+      );
+      rules.defineRule('validationNotes.totemCompanionFeatFeatures',
+        'feats.Totem Companion', '=', '-1',
+        'features.Wild Empathy', '+', '1'
       );
     } else if(feat == 'Undead Empathy') {
       notes = [
@@ -1392,14 +1411,14 @@ Eberron.featRules = function(rules, feats, subfeats) {
           'Vermin creature as animal companion',
         'validationNotes.verminCompanionFeatAlignment:' +
           'Requires Alignment != Good',
-        'validationNotes.verminCompanionFeatFeatures:Requires Child Of Winter',
+        'validationNotes.verminCompanionFeatFeats:Requires Child Of Winter',
         'validationNotes.verminCompanionFeatLevels:Requires Druid >= 3'
       ];
       rules.defineRule('validationNotes.verminCompanionFeatAlignment',
         'feats.Vermin Companion', '=', '-1',
         'alignment', '+', 'source.indexOf("Good") < 0 ? 1 : null'
       );
-      rules.defineRule('validationNotes.verminCompanionFeatFeatures',
+      rules.defineRule('validationNotes.verminCompanionFeatFeats',
         'feats.Vermin Companion', '=', '-1',
         'features.Child Of Winter', '+', '1'
       );
@@ -1411,14 +1430,14 @@ Eberron.featRules = function(rules, feats, subfeats) {
       notes = [
         'magicNotes.verminShapeFeature:Wild Shape into vermin',
         'validationNotes.verminShapeFeatAlignment:Requires Alignment != Good',
-        'validationNotes.verminShapeFeatFeatures:Requires Child Of Winter',
+        'validationNotes.verminShapeFeatFeats:Requires Child Of Winter',
         'validationNotes.verminShapeFeatLevels:Requires Druid >= 5'
       ];
       rules.defineRule('validationNotes.verminShapeFeatAlignment',
         'feats.Vermin Shape', '=', '-1',
         'alignment', '+', 'source.indexOf("Good") < 0 ? 1 : null'
       );
-      rules.defineRule('validationNotes.verminShapeFeatFeatures',
+      rules.defineRule('validationNotes.verminShapeFeatFeats',
         'feats.Vermin Shape', '=', '-1',
         'features.Child Of Winter', '+', '1'
       );
@@ -1429,10 +1448,10 @@ Eberron.featRules = function(rules, feats, subfeats) {
     } else if(feat == 'Wand Mastery') {
       notes = [
         'magicNotes.wandMasteryFeature:+2 spell DC/caster level w/wands',
-        'validationNotes.wandMasteryFeatFeatures:Requires Craft Wand',
+        'validationNotes.wandMasteryFeatFeats:Requires Craft Wand',
         'validationNotes.wandMasteryFeatLevels:Requires Caster Level >= 9'
       ];
-      rules.defineRule('validationNotes.wandMasteryFeatFeatures',
+      rules.defineRule('validationNotes.wandMasteryFeatFeats',
         'feats.Wand Mastery', '=', '-1',
         'features.Craft Wand', '+', '1'
       );
@@ -1459,13 +1478,18 @@ Eberron.featRules = function(rules, feats, subfeats) {
     } else if(feat == 'Whirling Steel Strike') {
       notes = [
         'combatNotes.whirlingSteelStrikeFeature:Flurry Of Blows with Longsword',
+        'validationNotes.whirlingSteelStrikeFeatFeats:' +
+          'Requires Weapon Focus (Longsword)',
         'validationNotes.whirlingSteelStrikeFeatFeatures:' +
-          'Requires Flurry Of Blows/Weapon Focus (Longsword)'
+          'Requires Flurry Of Blows'
       ];
-      rules.defineRule('validationNotes.whirlingSteelStrikeFeatFeatures',
-        'feats.Whirling Steel Strike', '=', '-2',
-        'features.Flurry Of Blows', '+', '1',
+      rules.defineRule('validationNotes.whirlingSteelStrikeFeatFeats',
+        'feats.Whirling Steel Strike', '=', '-1',
         'features.Weapon Focus (Longsword)', '+', '1'
+      );
+      rules.defineRule('validationNotes.whirlingSteelStrikeFeatFeatures',
+        'feats.Whirling Steel Strike', '=', '-1',
+        'features.Flurry Of Blows', '+', '1'
       );
     } else
       continue;
@@ -1759,11 +1783,256 @@ Eberron.prestigeClassRules = function(rules, classes) {
 
     if(klass == 'Dragonmark Heir') {
 
-      continue; // TODO
+      baseAttack = PH35.ATTACK_BONUS_AVERAGE;
+      feats = null;
+      features = [
+        '1:House Status', '1:Lesser Dragonmark', '2:Action Point Bonus',
+        '2:Improved Least Dragonmark', '3:Improved Lesser Dragonmark',
+        '4:Greater Dragonmark', '5:Improved Greater Dragonmark'
+      ];
+      hitDie = 8;
+      notes = [
+        'featureNotes.actionPointBonusFeature:+2 AP',
+        'magicNotes.greaterDragonmarkFeature:' +
+          'DC %V+spell level greater dragonmark ability at caster level 10/' +
+          'least/lesser dragonmark ability +1/day',
+        'magicNotes.improvedGreaterDragonmarkFeature:' +
+          '2nd greater dragonmark ability or use ability +1/day',
+        'magicNotes.improvedLeastDragonmarkFeature:' +
+          '2nd least dragonmark ability or use ability +1/day',
+        'magicNotes.improvedLesserDragonmarkFeature:' +
+          '2nd lesser dragonmark ability or use ability +1/day',
+        'magicNotes.lesserDragonmarkFeature:' +
+          'DC %V+spell level lesser dragonmark ability at caster level 6/' +
+          'least dragonmark ability +1/day',
+        'skillNotes.houseStatusFeature:' +
+          '+%V charisma-based skills w/house members',
+        // TODO Requires Dragonmarked house membership
+        'validationNotes.dragonmarkHeirClassFeats:' +
+          'Requires Favored In House/Least Dragonmark',
+        'validationNotes.dragonmarkHeirClassRace:' +
+          'Requires Race == Dwarf|Race == Elf|Race == Gnome|Race == Halfling|' +
+          'Race == Half Elf|Race == Half Orc|Race == Human',
+        'validationNotes.dragonmarkHeirClassSkills:' +
+          'Requires 7 ranks in two skills'
+      ];
+      profArmor = PH35.PROFICIENCY_NONE;
+      profShield = PH35.PROFICIENCY_NONE;
+      profWeapon = PH35.PROFICIENCY_NONE;
+      saveFortitude = PH35.SAVE_BONUS_GOOD;
+      saveReflex = PH35.SAVE_BONUS_GOOD;
+      saveWill = PH35.SAVE_BONUS_GOOD;
+      selectableFeatures = null;
+      skillPoints = 4;
+      skills = [
+        'Appraise', 'Bluff', 'Diplomacy', 'Gather Information', 'Intimidate',
+        'Knowledge (Arcana)', 'Knowledge (Nobility)', 'Perform', 'Ride',
+        'Sense Motive', 'Speak Language', 'Spellcraft'
+      ];
+      spellAbility = null;
+      spellsKnown = null;
+      spellsPerDay = null;
+      rules.defineRule('magicNotes.greaterDragonmarkFeature',
+        'charismaModifier', '=', '10 + source'
+      );
+      rules.defineRule('magicNotes.lesserDragonmarkFeature',
+        'charismaModifier', '=', '10 + source'
+      );
+      rules.defineRule
+        ('skillNotes.houseStatusFeature', 'levels.Dragonmark Heir', '=', null);
+      rules.defineRule('validationNotes.dragonmarkHeirClassFeats',
+        'levels.Dragonmark Heir', '=', '-2',
+        'features.Favored In House', '+', '1',
+        'features.Least Dragonmark', '+', '1',
+        '', 'v', '0'
+      );
+      rules.defineRule('validationNotes.favoredInHouseFeatRace',
+        'levels.Dragonmark Heir', '=', '-1',
+        'race', '+', 'source.match' +
+          '(/^(Dwarf|Elf|Gnome|Half(ling| Elf| Orc)|Human)$/) ? 1 : null'
+      );
+      rules.defineRule('validationNotes.dragonmarkHeirClassSkills',
+        'levels.Dragonmark Heir', '=', '-2',
+        /^skillModifier\./, '+', 'source >= 7 ? 1 : null',
+        '', 'v', '0'
+      );
 
     } else if(klass == 'Eldeen Ranger') {
 
-      continue; // TODO
+      baseAttack = PH35.ATTACK_BONUS_GOOD;
+      feats = null;
+      features = [
+        '1:Nature Sense', '1:Resist Aberrations', '1:Resist Nature\'s Lure',
+        '1:Resist Poison', '1:Resist The Arcane', '2:Hated Foe',
+        '3:Darkvision', '3:Ferocity', '3:Improved Critical',
+        '3:Resist Corruption', '3:Unearthly Grace', '4:Favored Enemy',
+        '5:Damage Reduction', '5:Slippery Mind', '5:Smite Evil',
+        '5:Spell Resistance', '5:Touch Of Contagion'
+      ];
+      hitDie = 8;
+      notes = [
+        'combatNotes.favoredEnemyFeature:' +
+          '+2 or more damage vs. %V type(s) of creatures',
+        'combatNotes.hatedFoeFeature:' +
+          'Spend 1 AP for double damage against favored enemy',
+        'combatNotes.ironDamageReductionFeature:DR 3/cold iron',
+        'combatNotes.ferocityFeature:Continue fighting below 0 HP',
+        'combatNotes.smiteEvilFeature:' +
+          '%V/day add %1 to attack, %2 to damage vs. evil foe',
+        'featureNotes.darkvisionFeature:60 ft b/w vision in darkness',
+        'magicNotes.touchOfContagionFeature:<i>Contagion</i> 3/day',
+        'saveNotes.resistAberrationsFeature:+2 vs. aberration abilities',
+        'saveNotes.resistCorruptionFeature:Immune disease/+2 vs. mind-altering',
+        'saveNotes.resistNature\'sLureFeature:+4 vs. spells of feys',
+        'saveNotes.resistTheArcaneFeature:+2 vs. arcane spells',
+        'saveNotes.resistPoisonFeature:+2 vs. poison',
+        'saveNotes.slipperyMindFeature:Second save vs. enchantment',
+        'saveNotes.spellResistanceFeature:DC 20 spell resistance',
+        'saveNotes.unearthlyGraceFeature:+%V all saves',
+        'skillNotes.favoredEnemyFeature:' +
+          '+2 or more vs. %V type(s) of creatures on ' +
+          'Bluff/Listen/Sense Motive/Spot/Survival',
+        'skillNotes.natureSenseFeature:+2 Knowledge (Nature)/Survival',
+        'validationNotes.childrenOfWinterSelectableFeatureAlignment:' +
+          'Requires Alignment != Good',
+        'validationNotes.eldeenRangerClassCombat:Requires Base Attack >= 5',
+        'validationNotes.eldeenRangerClassFeats:Requires Track',
+        'validationNotes.eldeenRangerClassFeatures:Requires Favored Enemy',
+        'validationNotes.eldeenRangerClassSkills:' +
+          'Requires Knowledge (Nature) >= 6/Survival >= 8',
+        'validationNotes.gatekeepersSelectableFeatureAlignment:' +
+          'Requires Alignment != Evil',
+        'validationNotes.greensingersSelectableFeatureAlignment:' +
+          'Requires Alignment == Chaotic',
+        'validationNotes.wardensOfTheWoodSelectableFeatureAlignment:' +
+          'Requires Alignment != Evil'
+      ];
+      profArmor = PH35.PROFICIENCY_LIGHT;
+      profShield = PH35.PROFICIENCY_HEAVY;
+      profWeapon = PH35.PROFICIENCY_MEDIUM;
+      saveFortitude = PH35.SAVE_BONUS_GOOD;
+      saveReflex = PH35.SAVE_BONUS_GOOD;
+      saveWill = PH35.SAVE_BONUS_POOR;
+      selectableFeatures = [
+        'Ashbound', 'Children Of Winter', 'Gatekeepers', 'Greensingers',
+        'Wardens Of The Wood'
+      ];
+      skillPoints = 6;
+      skills = [
+        'Climb', 'Craft', 'Handle Animal', 'Heal', 'Hide', 'Jump',
+        'Knowledge (Dungeoneering)', 'Knowledge (Geography)',
+        'Knowledge (Nature)', 'Listen', 'Move Silently', 'Profession', 'Ride',
+        'Search', 'Spot', 'Survival', 'Swim', 'Use Rope'
+      ];
+      spellAbility = null;
+      spellsKnown = null;
+      spellsPerDay = null;
+      rules.defineRule('combatNotes.favoredEnemyFeature',
+        'levels.' + klass, '+=', 'source >= 4 ? 1 : null'
+      );
+      rules.defineRule('skillNotes.favoredEnemyFeature',
+        'levels.' + klass, '+=', 'source >= 4 ? 1 : null'
+      );
+      rules.defineRule
+        ('combatNotes.smiteEvilFeature', 'levels.' + klass, '+=', '1');
+      rules.defineRule
+        ('combatNotes.smiteEvilFeature.1', 'charismaModifier', '=', null);
+      rules.defineRule
+        ('combatNotes.smiteEvilFeature.2', 'levels.' + klass, '=', null);
+      rules.defineRule('eldeenRangerFeatures.Damage Reduction',
+        'selectableFeatures.Greensingers', '?', null
+      );
+      rules.defineRule('eldeenRangerFeatures.Darkvision',
+        'selectableFeatures.Gatekeepers', '?', null
+      );
+      rules.defineRule('eldeenRangerFeatures.Ferocity',
+        'selectableFeatures.Ashbound', '?', null
+      );
+      rules.defineRule('eldeenRangerFeatures.Improved Critical',
+        'selectableFeatures.Wardens Of The Wood', '?', null
+      );
+      rules.defineRule('eldeenRangerFeatures.Nature Sense',
+        'selectableFeatures.Wardens Of The Wood', '?', null
+      );
+      rules.defineRule('eldeenRangerFeatures.Resist Aberrations',
+        'selectableFeatures.Gatekeepers', '?', null
+      );
+      rules.defineRule('eldeenRangerFeatures.Resist Corruption',
+        'selectableFeatures.Children Of Winter', '?', null
+      );
+      rules.defineRule('eldeenRangerFeatures.Resist Nature\'s Lure',
+        'selectableFeatures.Greensingers', '?', null
+      );
+      rules.defineRule('eldeenRangerFeatures.Resist Poison',
+        'selectableFeatures.Children Of Winter', '?', null
+      );
+      rules.defineRule('eldeenRangerFeatures.Resist The Arcane',
+        'selectableFeatures.Ashbound', '?', null
+      );
+      rules.defineRule('eldeenRangerFeatures.Slippery Mind',
+        'selectableFeatures.Gatekeepers', '?', null
+      );
+      rules.defineRule('eldeenRangerFeatures.Smite Evil',
+        'selectableFeatures.Wardens Of The Wood', '?', null
+      );
+      rules.defineRule('eldeenRangerFeatures.Spell Resistance',
+        'selectableFeatures.Ashbound', '?', null
+      );
+      rules.defineRule('eldeenRangerFeatures.Touch Of Contagion',
+        'selectableFeatures.Children Of Winter', '?', null
+      );
+      rules.defineRule('eldeenRangerFeatures.Unearthly Grace',
+        'selectableFeatures.Greensingers', '?', null
+      );
+      rules.defineRule('featCount.Fighter',
+        'eldeenRangerFeatures.Improved Critical', '+=', '1'
+      );
+      rules.defineRule
+        ('save.Fortitude', 'saveNotes.unearthlyGraceFeature', '+', null);
+      rules.defineRule
+        ('save.Reflex', 'saveNotes.unearthlyGraceFeature', '+', null);
+      rules.defineRule
+        ('save.Will', 'saveNotes.unearthlyGraceFeature', '+', null);
+      rules.defineRule
+        ('saveNotes.unearthlyGraceFeature', 'charismaModifier', '=', null);
+      rules.defineRule('selectableFeatureCount.Eldeen Ranger',
+        'levels.Eldeen Ranger', '=', '1'
+      );
+      rules.defineRule(
+        'validationNotes.childrenOfWinterSelectableFeatureAlignment',
+        'selectableFeatures.Children Of Winter', '=', '-1',
+        'alignment', '+', 'source.indexOf("Good") < 0 ? 1 : null'
+      );
+      rules.defineRule('validationNotes.eldeenRangerClassCombat',
+        'levels.Eldeen Ranger', '=', '-1',
+        'baseAttack', '+', 'source >= 5 ? 1 : null'
+      );
+      rules.defineRule('validationNotes.eldeenRangerClassFeats',
+        'levels.Eldeen Ranger', '=', '-1',
+        'features.Track', '+', '1'
+      );
+      rules.defineRule('validationNotes.eldeenRangerClassFeatures',
+        'levels.Eldeen Ranger', '=', '-1',
+        'features.Favored Enemy', '+', '1'
+      );
+      rules.defineRule('validationNotes.eldeenRangerClassSkills',
+        'levels.Eldeen Ranger', '=', '-2',
+        'skillModifier.Knowledge (Nature)', '+', 'source >= 6 ? 1 : null',
+        'skillModifier.Survival', '+', 'source >= 8 ? 1 : null'
+      );
+      rules.defineRule('validationNotes.gatekeepersSelectableFeatureAlignment',
+        'selectableFeatures.Gatekeepers', '=', '-1',
+        'alignment', '+', 'source.indexOf("Evil") < 0 ? 1 : null'
+      );
+      rules.defineRule('validationNotes.greensingersSelectableFeatureAlignment',
+        'selectableFeatures.Greensingers', '=', '-1',
+        'alignment', '+', 'source.indexOf("Chaotic") >= 0 ? 1 : null'
+      );
+      rules.defineRule(
+        'validationNotes.wardensOfTheWoodSelectableFeatureAlignment',
+        'selectableFeatures.Wardens Of The Wood', '=', '-1',
+        'alignment', '+', 'source.indexOf("Evil") < 0 ? 1 : null'
+      );
 
     } else if(klass == 'Exorcist Of The Silver Flame') {
 
