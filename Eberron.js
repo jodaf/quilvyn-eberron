@@ -1934,11 +1934,11 @@ Eberron.prestigeClassRules = function(rules, classes) {
         'levels.' + klass, '+=', 'source >= 4 ? 1 : null'
       );
       rules.defineRule
-        ('combatNotes.smiteEvilFeature', 'levels.' + klass, '+=', '1');
+        ('combatNotes.smiteEvilFeature', 'levels.Eldeen Ranger', '+=', '1');
       rules.defineRule
         ('combatNotes.smiteEvilFeature.1', 'charismaModifier', '=', null);
       rules.defineRule
-        ('combatNotes.smiteEvilFeature.2', 'levels.' + klass, '=', null);
+        ('combatNotes.smiteEvilFeature.2', 'levels.Eldeen Ranger', '=', null);
       rules.defineRule('eldeenRangerFeatures.Damage Reduction',
         'selectableFeatures.Greensingers', '?', null
       );
@@ -2036,27 +2036,564 @@ Eberron.prestigeClassRules = function(rules, classes) {
 
     } else if(klass == 'Exorcist Of The Silver Flame') {
 
-      continue; // TODO
+      baseAttack = PH35.ATTACK_BONUS_GOOD;
+      feats = null;
+      features = [
+        '1:Flame Of Censure', '1:Weapon Of The Exorcist',
+        '2:Caster Level Bonus', '3:Darkvision', '3:Resist Charm',
+        '3:Resist Possession', '3:Resist Unnatural', '3:Smite Evil',
+        '4:Detect Thoughts', '5:Silver Exorcism', '6:Weapon Of Flame',
+        '10:Warding Flame'
+      ];
+      hitDie = 8;
+      notes = [
+        'combatNotes.flameOfCensureFeature:' +
+          'Stun/banish Outsiders w/turning check',
+        'combatNotes.silverExorcismFeature:+2 exorcism checks',
+        'combatNotes.smiteEvilFeature:' +
+          '%V/day add %1 to attack, %2 to damage vs. evil foe',
+        'combatNotes.wardingFlameFeature:' +
+          'Warding glow for +2 AC/striking evil foes DC %V Fortitude save ' +
+          'or blinded',
+        'combatNotes.weaponOfFlameFeature:+%Vd6 flame damage w/sacred weapon',
+        'combatNotes.weaponOfTheExorcistFeature:' +
+          '+1 damage w/sacred weapon treated as %V',
+         // TODO 30 ft at level 3, 60 at level 6
+        'featureNotes.darkvisionFeature:60 ft b/w vision in darkness',
+        'magicNotes.casterLevelBonusFeature:' +
+          'Add %V to base class level for spells known/per day',
+        'magicNotes.detectThoughtsFeature:DC %V <i>Detect Thoughts</i> at will',
+        'magicNotes.wardingFlameFeature:Warding glow for spell resistance 25',
+        'saveNotes.resistCharmFeature:+2 vs. charm/compulsion',
+        'saveNotes.resistPossessionFeature:+4 vs. possession',
+        'saveNotes.resistUnnaturalFeature:+2 vs. effects of outsiders/undead',
+        'magicNotes.silverExorcismFeature:+2 checks vs. evil outsiders',
+        'turnOutsider.damageModifier:2d6+%V',
+        'turnOutsider.frequency:%V/day',
+        'turnOutsider.maxHitDice:(d20+%V)/3',
+        'validationNotes.exorcistOfTheSilverFlameClassCombat:' +
+          'Requires Base Attack >= 3',
+        'validationNotes.exorcistOfTheSilverFlameClassDeity:' +
+          'Requires Deity == The Silver Flame (LG)',
+        'validationNotes.exorcistOfTheSilverFlameClassLevels:' +
+          'Requires Caster Level Divine >= 1',
+        'validationNotes.exorcistOfTheSilverFlameClassSkills:' +
+          'Requires Knowledge (Planes) >= 3/Knowledge (Religion) >= 8'
+      ];
+      profArmor = PH35.PROFICIENCY_NONE;
+      profShield = PH35.PROFICIENCY_NONE;
+      profWeapon = PH35.PROFICIENCY_NONE;
+      saveFortitude = PH35.SAVE_BONUS_GOOD;
+      saveReflex = PH35.SAVE_BONUS_POOR;
+      saveWill = PH35.SAVE_BONUS_GOOD;
+      selectableFeatures = null;
+      skillPoints = 2;
+      skills = [
+        'Concentration', 'Craft', 'Intimidate', 'Knowledge (Arcana)',
+        'Knowledge (Planes)', 'Knowledge (Religion)', 'Profession',
+        'Sense Motive', 'Spellcraft'
+      ];
+      spellAbility = null;
+      spellsKnown = null;
+      spellsPerDay = null;
+      rules.defineRule('combatNotes.smiteEvilFeature',
+        'levels.Exorcist Of The Silver Flame', '+=',
+        'source >= 7 ? 2 : source >= 3 ? 1 : null'
+      );
+      rules.defineRule
+        ('combatNotes.smiteEvilFeature.1', 'charismaModifier', '=', null);
+      rules.defineRule('combatNotes.smiteEvilFeature.2',
+        'levels.Exorcist Of The Silver Flame', '=', 'source>=3 ? source : null'
+      );
+      rules.defineRule('combatNotes.wardingFlameFeature',
+        'charismaModifier', '=', '20 + source'
+      );
+      rules.defineRule('combatNotes.weaponOfFlameFeature',
+        'levels.Exorcist Of The Silver Flame', '=',
+        'source >= 9 ? 2 : source >= 6 ? 1 : null'
+      );
+      rules.defineRule('combatNotes.weaponOfTheExorcistFeature',
+        'levels.Exorcist Of The Silver Flame', '=',
+        '["magic"]' +
+        '.concat(source >= 2 ? ["silver"] : [])' +
+        '.concat(source >= 4 ? ["good"] : [])' +
+        '.concat(source >= 8 ? ["lawful"] : []).sort().join("/")'
+      );
+      rules.defineRule('magicNotes.casterLevelBonusFeature',
+        'levels.Exorcist Of The Silver Flame', '+=', 'Math.floor(source*2/3)'
+      );
+      rules.defineRule('magicNotes.detectThoughtsFeature',
+        'levels.Exorcist Of The Silver Flame', '=', '10 + source',
+        'charismaModifier', '+', null
+      );
+      rules.defineRule('turnOutsider.level',
+        'levels.Exorcist Of The Silver Flame', '=', null
+      );
+      rules.defineRule('turnOutsider.damageModifier',
+        'turnOutsider.level', '=', null,
+        'charismaModifier', '+', null
+      );
+      rules.defineRule('turnOutsider.frequency',
+        'turnOutsider.level', '=', '3',
+        'charismaModifier', '+', null
+      );
+      rules.defineRule('turnOutsider.maxHitDice',
+        'turnOutsider.level', '?', null,
+        'level', '=', 'source * 3 - 10',
+        'charismaModifier', '+', null
+      );
+      rules.defineRule('validationNotes.exorcistOfTheSilverFlameClassCombat',
+        'levels.Exorcist Of The Silver Flame', '=', '-1',
+        'baseAttack', '+', 'source >= 3 ? 1 : null'
+      );
+      rules.defineRule('validationNotes.exorcistOfTheSilverFlameClassDeity',
+        'levels.Exorcist Of The Silver Flame', '=', '-1',
+        'deity', '+', 'source == "The Silver Flame (LG)" ? 1 : null'
+      );
+      rules.defineRule('validationNotes.exorcistOfTheSilverFlameClassLevels',
+        'levels.Exorcist Of The Silver Flame', '=', '-1',
+        'casterLevelDivine', '+', 'source >= 1 ? 1 : null'
+      );
+      rules.defineRule('validationNotes.exorcistOfTheSilverFlameClassSkills',
+        'levels.Exorcist Of The Silver Flame', '=', '-2',
+        'skillModifier.Knowledge (Planes)', '+', 'source >= 3 ? 1 : null',
+        'skillModifier.Knowledge (Religion)', '+', 'source >= 8 ? 1 : null'
+      );
 
     } else if(klass == 'Extreme Explorer') {
 
-      continue; // TODO
+      baseAttack = PH35.ATTACK_BONUS_AVERAGE;
+      feats = [
+        'Action Surge', 'Heroic Spirit', 'Persue', 'Spontaneous Casting'
+      ];
+      features = [
+        '1:Action Point Bonus', '1:Trap Sense', '2:Dodge Bonus', '2:Evasion',
+        '2:Extreme Hustle', '4:Extreme Action'
+      ];
+      hitDie = 8;
+      notes = [
+        'combatNotes.dodgeBonusFeature:+%V AC when unencumbered',
+        'featureNotes.actionPointBonusFeature:+2 AP',
+        'featureNotes.extremeActionFeature:' +
+          'Retain AP on successful AP roll of 8',
+        'featureNotes.extremeHustleFeature:Spend 1 AP to gain a move action',
+        'saveNotes.evasionFeature:Reflex save yields no damage instead of 1/2',
+        'saveNotes.trapSenseFeature:+%V Reflex and AC vs. traps',
+        'validationNotes.extremeExplorerClassCombat:Requires Base Attack >= 4',
+        'validationNotes.extremeExplorerClassFeats:Requires Action Boost',
+        'validationNotes.extremeExplorerClassSkills:' +
+          'Requires Knowledge (Dungeoneering) >= 4/Survival >= 4'
+      ];
+      profArmor = PH35.PROFICIENCY_NONE;
+      profShield = PH35.PROFICIENCY_NONE;
+      profWeapon = PH35.PROFICIENCY_NONE;
+      saveFortitude = PH35.SAVE_BONUS_POOR;
+      saveReflex = PH35.SAVE_BONUS_GOOD;
+      saveWill = PH35.SAVE_BONUS_POOR;
+      selectableFeatures = null;
+      skillPoints = 6;
+      skills = [
+        'Balance', 'Climb', 'Decipher Script', 'Disable Device',
+        'Escape Artist', 'Jump', 'Knowledge (Arcana)',
+        'Knowledge (Dungeoneering)', 'Knowledge (History)', 'Listen',
+        'Open Lock', 'Ride', 'Search', 'Speak Language', 'Survival', 'Swim',
+        'Tumble', 'Use Magic Device', 'Use Rope'
+      ];
+      spellAbility = null;
+      spellsKnown = null;
+      spellsPerDay = null;
+      rules.defineRule
+       ('armorClass', 'combatNotes.dodgeBonusFeature', '+', null);
+      rules.defineRule('combatNotes.dodgeBonusFeature',
+        'levels.Extreme Explorer', '+=', 'Math.floor(source / 2)'
+      );
+      rules.defineRule('featCount.Extreme Explorer',
+        'levels.Extreme Explorer', '=',
+        'source < 3 ? null : Math.floor((source - 1) / 2)'
+      );
+      rules.defineRule('saveNotes.trapSenseFeature',
+        'levels.Extreme Explorer', '+=', 'Math.floor((source + 1) / 2)'
+      );
 
     } else if(klass == 'Heir Of Siberys') {
 
-      continue; // TODO
+      baseAttack = PH35.ATTACK_BONUS_GOOD;
+      feats = [
+        'Action Boost', 'Action Surge', 'Favored In House', 'Pursue',
+        'Spontaneous Casting'
+      ];
+      features = [
+        '1:Action Point Bonus', '2:Siberys Mark', '2:Caster Level Bonus'
+      ];
+      hitDie = 6;
+      notes = [
+        'featureNotes.actionPointBonusFeature:+2 AP',
+        'magicNotes.casterLevelBonusFeature:' +
+          'Add %V to base class level for spells known/per day',
+        'magicNotes.siberysMarkFeature:Spell-like ability %V/day',
+        'validationNotes.heirOfSiberysClassFeats:' +
+          'Requires Heroic Spirit/Aberrant Dragonmark == 0/' +
+          'Least Dragonmark == 0/Lesser Dragonmark == 0/' +
+          'Greater Dragonmark == 0',
+        'validationNotes.heirOfSiberysClassRace:' +
+          'Requires Race == Dwarf|Race == Elf|Race == Gnome|Race == Halfling|' +
+          'Race == Half Elf|Race == Half Orc|Race == Human',
+        'validationNotes.heirOfSiberysClassSkills:' +
+          'Requires 15 ranks in two skills'
+      ];
+      profArmor = PH35.PROFICIENCY_NONE;
+      profShield = PH35.PROFICIENCY_NONE;
+      profWeapon = PH35.PROFICIENCY_NONE;
+      saveFortitude = PH35.SAVE_BONUS_GOOD;
+      saveReflex = PH35.SAVE_BONUS_GOOD;
+      saveWill = PH35.SAVE_BONUS_GOOD;
+      selectableFeatures = null;
+      skillPoints = 2;
+      skills = [ ];
+      spellAbility = null;
+      spellsKnown = null;
+      spellsPerDay = null;
+      rules.defineRule
+        ('featCount.General', 'heirOfSiberysFeatures.Feat Bonus', '+=', null);
+      rules.defineRule
+        ('featCount.Heir Of Siberys', 'levels.Heir Of Siberys', '=', '1');
+      rules.defineRule
+        ('heirOfSiberysFeatures.Caster Level Bonus', 'isCaster', '?', null);
+      rules.defineRule('heirOfSiberysFeatures.Feat Bonus',
+        'isCaster', '?', '!source',
+        'levels.Heir Of Siberys', '=', 'source>=3 ? 2 : source==2 ? 1 : null'
+      );
+      rules.defineRule('isCaster',
+        '', '=', 'false',
+        'casterLevel', '=', 'true'
+      );
+      rules.defineRule('magicNotes.casterLevelBonusFeature',
+        'levels.Heir Of Siberys', '+=', 'source - 1'
+      );
+      rules.defineRule('magicNotes.siberysMarkFeature',
+        'levels.Heir Of Siberys', '=',
+        'source >= 3 ? 2 : source == 2 ? 1 : null'
+      );
+      rules.defineRule('validationNotes.heirOfSiberysClassFeats',
+        'levels.Heir Of Siberys', '=', '-1',
+        'features.Heroic Spirit', '+', '1',
+        'feats.Aberrant Dragonmark', '+', '-1',
+        'feats.Greater Dragonmark', '+', '-1',
+        'feats.Least Dragonmark', '+', '-1',
+        'feats.Lesser Dragonmark', '+', '-1'
+      );
+      rules.defineRule('validationNotes.heirOfSiberysClassRace',
+        'levels.Heir Of Siberys', '=', '-1',
+        'race', '+', 'source.match' +
+          '(/^(Dwarf|Elf|Gnome|Half(ling| Elf| Orc)|Human)$/) ? 1 : null'
+      );
+      rules.defineRule('validationNotes.heirOfSiberysClassSkills',
+        'levels.Heir Of Siberys', '=', '-2',
+        /^skillModifier\./, '+', 'source >= 15 ? 1 : null',
+        '', 'v', '0'
+      );
 
     } else if(klass == 'Master Inquisitive') {
 
-      continue; // TODO
+      baseAttack = PH35.ATTACK_BONUS_AVERAGE;
+      feats = [
+        'Alertness', 'Deceitful', 'Heroic Spirit', 'Improved Initiative',
+        'Iron Will', 'Negotiator', 'Persuasive', 'Recognize Impostor',
+        'Research', 'Toughness', 'Track', 'Urban Tracking'
+      ];
+      features = [
+        '1:Zone Of Truth', '2:Contact', '3:Discern Lies', '4:Improved Contact',
+        '5:True Seeing'
+      ];
+      hitDie = 8;
+      notes = [
+        'featureNotes.contactFeature:3rd level associate/informant',
+        'featureNotes.improvedContactFeature:6th level associate/informant',
+        'magicNotes.discernLiesFeature:' +
+          '<i>Discern Lies</i> 1/day; spend 2 AP for 2nd',
+        'magicNotes.trueSeeingFeature:' +
+          '<i>True Seeing</i> 1/day; spend 2 AP for 2nd',
+        'magicNotes.zoneOfTruthFeature:' +
+          '<i>Zone Of Truth</i> 1/day; spend 2 AP for 2nd',
+        'validationNotes.masterInquisitiveClassFeats:Requires Investigate',
+        'validationNotes.masterInquisitiveClassSkills:' +
+          'Requires Gather Information >= 6/Search >= 3/Sense Motive >= 6'
+      ];
+      profArmor = PH35.PROFICIENCY_NONE;
+      profShield = PH35.PROFICIENCY_NONE;
+      profWeapon = PH35.PROFICIENCY_NONE;
+      saveFortitude = PH35.SAVE_BONUS_POOR;
+      saveReflex = PH35.SAVE_BONUS_GOOD;
+      saveWill = PH35.SAVE_BONUS_POOR;
+      selectableFeatures = null;
+      skillPoints = 6;
+      skills = [
+        'Bluff', 'Decipher Script', 'Gather Information', 'Knowledge (Local)',
+        'Listen', 'Search', 'Sense Motive', 'Spot'
+      ];
+      spellAbility = null;
+      spellsKnown = null;
+      spellsPerDay = null;
+      rules.defineRule('featCount.Master Inquisitive',
+        'levels.Master Inquisitive', '=',
+        'source < 2 ? null : Math.floor(source / 2)'
+      );
+      rules.defineRule('validationNotes.masterInquisitiveClassFeats',
+        'levels.Master Inquisitive', '=', '-1',
+        'features.Investigate', '+', '1'
+      );
+      rules.defineRule('validationNotes.masterInquisitiveClassSkills',
+        'levels.Master Inquisitive', '=', '-3',
+        'skillModifier.Gather Information', '+', 'source >= 6 ? 1 : null',
+        'skillModifier.Search', '+', 'source >= 3 ? 1 : null',
+        'skillModifier.Sense Motive', '+', 'source >= 6 ? 1 : null'
+      );
 
     } else if(klass == 'Warforged Juggernaut') {
 
-      continue; // TODO
+      baseAttack = PH35.ATTACK_BONUS_AVERAGE;
+      feats = null;
+      features = [
+        '1:Armor Spikes', '1:Expert Bull Rush', '1:Powerful Charge',
+        '1:Reserved', '2:Charge Bonus', '2:Construct Perfection',
+        '2:Extended Charge', '3:Healing Immunity', '3:Mental Immunity',
+        '3:Superior Bull Rush', '4:Death Immunity', '5:Ability Immunity',
+        '5:Greater Powerful Charge'
+      ];
+      hitDie = 12;
+      notes = [
+        'abilityNotes.extendedChargeFeature:+5 speed when charging',
+        'combatNotes.armorSpikesFeature:Grapple attack for %V damage',
+        'combatNotes.chargeBonusFeature:+%V attack when charging',
+        'combatNotes.constructPerfectionFeature:' +
+          'Immune nonlethal damage/critical hits',
+        'combatNotes.expertBullRushFeature:+%V bull rush/door breakage',
+        'combatNotes.greaterPowerfulChargeFeature:' +
+          'Raise charge damage one size category to %V',
+        'combatNotes.superiorBullRushFeature:+%V+%1 damage from bull rush',
+        'combatNotes.powerfulChargeFeature:+%V damage from successful charge',
+        'saveNotes.abilityImmunityFeature:Immune to ability damage/drain',
+        'saveNotes.deathImmunityFeature:Immune to death/necromancy effects',
+        'saveNotes.healingImmunityFeature:No effect from healing spells',
+        'saveNotes.mentalImmunityFeature:Immune to mind-altering effects',
+        'skillNotes.reservedFeature:' +
+          '-%V Bluff/Diplomacy/Gather Information/Sense Motive',
+        'validationNotes.warforgedJuggernautClassCombat:' +
+          'Requires Base Attack >= 5',
+        'validationNotes.warforgedJuggernautClassFeats:' +
+          'Requires Adamantine Body/Improved Bull Rush/Power Attack',
+        'validationNotes.warforgedJuggernautRace:Requires Race == Warforged'
+      ];
+      profArmor = PH35.PROFICIENCY_NONE;
+      profShield = PH35.PROFICIENCY_NONE;
+      profWeapon = PH35.PROFICIENCY_NONE;
+      saveFortitude = PH35.SAVE_BONUS_GOOD;
+      saveReflex = PH35.SAVE_BONUS_POOR;
+      saveWill = PH35.SAVE_BONUS_POOR;
+      selectableFeatures = null;
+      skillPoints = 2;
+      skills = [
+        'Climb', 'Craft', 'Intimidate', 'Jump', 'Survival', 'Swim'
+      ];
+      spellAbility = null;
+      spellsKnown = null;
+      spellsPerDay = null;
+      rules.defineRule('combatNotes.armorSpikesFeature',
+        'levels.Warforged Juggernaut', '=', 'source >= 4 ? "1d8" : "1d6"'
+      );
+      rules.defineRule('combatNotes.chargeBonusFeature',
+        'levels.Warforged Juggernaut', '=',
+        'source < 2 ? null : Math.floor(source / 2)'
+      );
+      rules.defineRule('combatNotes.expertBullRushFeature',
+        'levels.Warforged Juggernaut', '=', null
+      );
+      rules.defineRule('combatNotes.greaterPowerfulChargeFeature',
+        '', '=', '"2d6"',
+        'features.Large', '=', '"3d6"'
+      );
+      rules.defineRule('combatNotes.powerfulChargeFeature',
+        '', '=', '"d8"',
+        'features.Large', '=', '"2d6"'
+      );
+      rules.defineRule('combatNotes.superiorBullRushFeature',
+        'levels.Warforged Juggernaut', '=', 'source >= 4 ? "1d8" : "1d6"'
+      );
+      rules.defineRule('combatNotes.superiorBullRushFeature.1',
+        'strengthModifier', '=', null
+      );
+      rules.defineRule('skillNotes.reservedFeature',
+        'levels.Warforged Juggernaut', '=', null
+      );
+      rules.defineRule('skillNotes.reservedFeature',
+        'levels.Warforged Juggernaut', '=', null
+      );
+      rules.defineRule('validationNotes.warforgedJuggernautClassCombat',
+        'levels.Warforged Juggernaut', '=', '-1',
+        'baseAttack', '+', 'source >= 5 ? 1 : null'
+      );
+      rules.defineRule('validationNotes.warforgedJuggernautClassFeats',
+        'levels.Warforged Juggernaut', '=', '-3',
+        'features.Adamantine Body', '+', '1',
+        'features.Improved Bull Rush', '+', '1',
+        'features.Power Attack', '+', '1'
+      );
+      rules.defineRule('validationNotes.warforgedJuggernautClassRace',
+        'levels.Warforged Juggernaut', '=', '-1',
+        'race', '+', 'source == "Warforged" ? 1 : null'
+      );
 
     } else if(klass == 'Weretouched Master') {
 
-      continue; // TODO
+      baseAttack = PH35.ATTACK_BONUS_AVERAGE;
+      feats = null;
+      features = [
+        '1:Weretouched Claws', '1:Weretouched Fangs', '1:Weretouched Tusks',
+        '2:Wild Empathy', '3:Climb Speed', '3:Fierce Will', '3:Improved Grab',
+        '3:Pounce', '3:Weretouched Rage', '3:Trip', '4:Frightful Shifting',
+        '5:Alternate Form'
+      ];
+      hitDie = 8;
+      notes = [
+        'abilityNotes.alternateFormFeature:Shift to %V--%1--or bipedal hybrid',
+        // TODO Cliffwalk => +10 climb speed
+        'abilityNotes.climbSpeedFeature:' +
+          '20 ft dexterity-based climb speed while shifting',
+        'abilityNotes.weretouchedClawsFeature:+2 strength while shifting',
+        'abilityNotes.weretouchedFangsFeature:+2 dexterity while shifting',
+        'abilityNotes.weretouchedTusksFeature:+2 constitution while shifting',
+        'combatNotes.frightfulShiftingFeature:' +
+           'Foes w/< %V hit dice w/in 30 ft who see attack/charge DC %1 Will ' +
+           'save or shaken for 5d6 rounds',
+        'combatNotes.improvedGrabFeature:Grapple w/out AOO after claw hit',
+        'combatNotes.pounceFeature:Full attack when charging',
+        'combatNotes.tripFeature:Trip w/out AOO after bite hit',
+        // TODO Razorclaw => next size category
+        'combatNotes.weretouchedClawsFeature:d4+%V claw attack while shifting',
+        // TODO Longtooth => next size category
+        'combatNotes.weretouchedFangsFeature:d6+%V fang attack while shifting',
+        'combatNotes.weretouchedRageFeature:' +
+          '+2 strength/constitution/-2 AC for 1 round after taking damage',
+        // TODO Longtooth => next size category
+        'combatNotes.weretouchedTusksFeature:d6+%V tusk attack while shifting',
+        'saveNotes.fierceWillFeature:+4 Will while shifting',
+        'skillNotes.wildEmpathyFeature:+%V Diplomacy check with animals',
+        'validationNotes.weretouchedMasterClassCombat:' +
+          'Requires Base Attack >= 4',
+        'validationNotes.weretouchedMasterClassFeats:Requires Any Shifter',
+        'validationNotes.weretouchedMasterClassRace:Requires Race == Shifter',
+        'validationNotes.weretouchedMasterClassSkills:' +
+          'Requires Knowledge (Nature) >= 5/Survival >= 8'
+      ];
+      profArmor = PH35.PROFICIENCY_NONE;
+      profShield = PH35.PROFICIENCY_NONE;
+      profWeapon = PH35.PROFICIENCY_NONE;
+      saveFortitude = PH35.SAVE_BONUS_GOOD;
+      saveReflex = PH35.SAVE_BONUS_GOOD;
+      saveWill = PH35.SAVE_BONUS_POOR;
+      selectableFeatures = [
+        'Bear', 'Boar', 'Rat', 'Tiger', 'Wolf', 'Wolverine'
+      ];
+      skillPoints = 2;
+      skills = [
+        'Balance', 'Climb', 'Handle Animal', 'Hide', 'Intimidate', 'Jump',
+        'Knowledge (Nature)', 'Listen', 'Move Silently', 'Spot', 'Survival',
+        'Swim'
+      ];
+      spellAbility = null;
+      spellsKnown = null;
+      spellsPerDay = null;
+        'combatNotes.weretouchedClawsFeature:d4+%V claw attack while shifting',
+      rules.defineRule('abilityNotes.alternateFormFeature',
+        'weretouchedMasterAnimal', '=', null
+      );
+      rules.defineRule('abilityNotes.alternateFormFeature.1',
+        'weretouchedMasterAnimal', '=',
+        'source == "Bear"?"+16 strength/+2 dexterity/+8 consitutution":' +
+        'source == "Boar"?"+4 strength/+6 consitutution":' +
+        'source == "Rat"?"+6 dexterity/+2 consitutution":' +
+        'source == "Tiger"?"+12 strength/+4 dexterity/+6 consitutution":' +
+        'source == "Wolf"?"+2 strength/+4 dexterity/+4 consitutution":' +
+        'source == "Wolverine"?"+4 strength/+4 dexterity/+8 consitutution":""'
+      );
+      rules.defineRule
+        ('combatNotes.frightfulShiftingFeature', 'level', '=', null);
+      rules.defineRule('combatNotes.frightfulShiftingFeature.1',
+        'levels.Weretouched Master', '=', 'source + 10',
+        'charismaModifier', '+', null
+      );
+      rules.defineRule('combatNotes.weretouchedClawsFeature',
+        'level', '=', 'Math.floor(source / 4)'
+      );
+      rules.defineRule('combatNotes.weretouchedFangsFeature',
+        'level', '=', 'Math.floor(source / 4)'
+      );
+      rules.defineRule('combatNotes.weretouchedTusksFeature',
+        'level', '=', 'Math.floor(source / 4)'
+      );
+      rules.defineRule('featCount.Shifter',
+        'levels.Weretouched Master', '+=',
+        'source < 2 ? null : Math.floor(source / 2)'
+      );
+      rules.defineRule('selectableFeatureCount.Weretouched Master',
+        'levels.Weretouched Master', '=', '1'
+      );
+      rules.defineRule('skillNotes.wildEmpathyFeature',
+        'levels.Weretouched Master', '+=', null,
+        'charismaModifier', '+', null
+      );
+      rules.defineRule('validationNotes.weretouchedMasterClassCombat',
+        'levels.Weretouched Master', '=', '-1',
+        'baseAttack', '+', 'source >= 4 ? 1 : null'
+      );
+      rules.defineRule('validationNotes.weretouchedMasterClassFeats',
+        'levels.Weretouched Master', '=', '0', // TODO Any shifter
+        '', 'v', '0'
+      );
+      rules.defineRule('validationNotes.weretouchedMasterClassRace',
+        'levels.Weretouched Master', '=', '-1',
+        'race', '+', 'source == "Shifter" ? 1 : null'
+      );
+      rules.defineRule('validationNotes.weretouchedMasterClassSkills',
+        'levels.Weretouched Master', '=', '-2',
+        'skillModifier.Knowledge (Nature)', '+', 'source >= 5 ? 1 : null',
+        'skillModifier.Survival', '+', 'source >= 8 ? 1 : null'
+      );
+      rules.defineRule('weretouchedMasterAnimal',
+        'selectableFeatures.Bear', '=', '"Bear"',
+        'selectableFeatures.Boar', '=', '"Boar"',
+        'selectableFeatures.Rat', '=', '"Rat"',
+        'selectableFeatures.Tiger', '=', '"Tiger"',
+        'selectableFeatures.Wolf', '=', '"Wolf"',
+        'selectableFeatures.Wolverine', '=', '"Wolverine"'
+      );
+      rules.defineRule('weretouchedMasterFeatures.Climb Speed',
+        'selectableFeatures.Rat', '?', null
+      );
+      rules.defineRule('weretouchedMasterFeatures.Fierce Will',
+        'selectableFeatures.Boar', '?', null
+      );
+      rules.defineRule('weretouchedMasterFeatures.Improved Grab',
+        'selectableFeatures.Bear', '?', null
+      );
+      rules.defineRule('weretouchedMasterFeatures.Pounce',
+        'selectableFeatures.Tiger', '?', null
+      );
+      rules.defineRule('weretouchedMasterFeatures.Trip',
+        'selectableFeatures.Wolf', '?', null
+      );
+      rules.defineRule('weretouchedMasterFeatures.Weretouched Claws',
+        'weretouchedMasterAnimal', '?', '"BearTiger".indexOf(source) >= 0'
+      );
+      rules.defineRule('weretouchedMasterFeatures.Weretouched Fangs',
+        'weretouchedMasterAnimal', '?', '"RatWolf".indexOf(source) >= 0'
+      );
+      rules.defineRule('weretouchedMasterFeatures.Weretouched Rage',
+        'selectableFeatures.Wolverine', '?', null
+      );
+      rules.defineRule('weretouchedMasterFeatures.Weretouched Tusks',
+        'weretouchedMasterAnimal', '?', '"BoarWolverine".indexOf(source) >= 0'
+      );
 
     } else
       continue;
