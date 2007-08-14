@@ -58,6 +58,7 @@ function Eberron() {
   // Add Eberron-specific rules
   Eberron.classRules(rules, Eberron.CLASSES);
   Eberron.featRules(rules, Eberron.FEATS, Eberron.SUBFEATS);
+  Eberron.heroicRules(rules, Eberron.HOUSES);
   Eberron.magicRules
     (rules, PH35.CLASSES.concat(Eberron.CLASSES), Eberron.DOMAINS);
   Eberron.prestigeClassRules(rules, Eberron.PRESTIGE_CLASSES);
@@ -129,6 +130,11 @@ Eberron.FEATS = [
   'Vermin Companion', 'Vermin Shape', 'Wand Mastery', 'Warden Initiate',
   'Whirling Steel Strike'
 ];
+Eberron.HOUSES = [
+  'Cannith', 'Deneith', 'Ghallanda', 'Jorasco', 'Kundarak', 'Lyrandar',
+  'Medani', 'None', 'Orien', 'Phiarlan', 'Sivis', 'Tharashk', 'Thuranni',
+  'Vadalis'
+];
 Eberron.PRESTIGE_CLASSES = [
   'Dragonmark Heir', 'Eldeen Ranger', 'Exorcist Of The Silver Flame',
   'Extreme Explorer', 'Heir Of Siberys', 'Master Inquisitive',
@@ -151,6 +157,97 @@ Eberron.WEAPONS = [
 ];
 
 // Related information used internally by Eberron
+Eberron.artificerCraftReserves = [
+  0, 20, 40, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 900, 1200, 1500,
+  2000, 2500, 3000, 4000, 5000
+];
+Eberron.dragonmarksSpells = {
+  'Detection': [
+    '<i>Detect Magic</i> (x2)|<i>Detect Poison</i> (x2)',
+    '<i>Detect Scrying</i>|<i>See Invisible</i>',
+    '<i>True Seeing</i>',
+    '<i>Moment Of Prescience</i>'
+  ],
+  'Finding': [
+    '<i>Identify</i>|<i>Know Direction</i> (x2)|<i>Locate Object</i>',
+    '<i>Helping Hand</i>|<i>Locate Creature</i>',
+    '<i>Find The Path</i>',
+    '<i>Discern Location</i>'
+  ],
+  'Handling': [
+    '<i>Calm Animals</i>|<i>Charm Animals</i>|<i>Speak With Animals</i>',
+    '<i>Dominate Animal</i>|<i>Greater Magic Fang</i>',
+    '<i>Animal Growth</i>|<i>Summon Nature\'s Ally V</i>',
+    '<i>Awaken</i>|<i>Summon Nature\'s Ally</i>'
+  ],
+  'Healing': [
+    '<i>Cure Light Wounds</i>|<i>Lesser Restoration</i>',
+    '<i>Cure Serious Wounds</i>|<i>Neutralize Poison</i>|' +
+      '<i>Remove Disease</i>|<i>Restoration</i>',
+    '<i>Heal</i>',
+    '<i>Mass Heal</i>'
+  ],
+  'Hospitality': [
+    '<i>Prestidigitation</i> (x2)|<i>Purify Food And Drink</i> (x2)|' +
+      '<i>Unseen Servant</i>',
+    '<i>Create Food And Water</i>|<i>Leomund\'s Secure Shelter</i>',
+    '<i>Heroes\' Feast</i>|<i>Mordenkainen\'s Magnificent Mansion</i>',
+    '<i>Refuge</i>'
+  ],
+  'Making': [
+    '<i>Make Whole</i>|<i>Mending</i> (x2)|<i>Repair Light Damage</i>',
+    '<i>Minor Creation</i>|<i>Repair Serious Damage</i>',
+    '<i>Fabricate</i>|<i>Major Creation</i>',
+    '<i>True Creation</i>'
+  ],
+  'Passage': [
+    '<i>Dimension Leap</i>|<i>Expeditious Retreat</i>|<i>Mount</i>',
+    '<i>Dimension Door</i>|<i>Phantom Steed</i>',
+    '<i>Overland Flight</i>|<i>Teleport</i>',
+    '<i>Greater Teleport</i>'
+  ],
+  'Scribing': [
+    '<i>Arcane Mark</i> (x2)|<i>Comprehend Languages</i>|' +
+      '<i>Whispering Wind</i>',
+    '<i>Illusory Script</i>|<i>Secret Page</i>|<i>Tongues</i>',
+    '<i>Sending</i>',
+    '<i>Symbol Of Death</i>'
+  ],
+  'Sentinel': [
+    '<i>Mage Armor</i>|<i>Protection From Arrows</i>|<i>Shield Of Faith</i>|' +
+      '<i>Shield Other</i>',
+    '<i>Lesser Globe Of Invulnerability</i>|<i>Protection From Energy</i>',
+    '<i>Globe Of Invulnerability</i>',
+    '<i>Mind Blank</i>'
+  ],
+  'Shadow': [
+    '<i>Darkness</i>|<i>Disguise Self</i>|<i>Minor Image</i>',
+    '<i>Clairaudience/Clairvoyance</i>|<i>Scrying</i>|' +
+      '<i>Shadow Conjuration</i>',
+    '<i>Mislead</i>|<i>Prying Eyes</i>|<i>Shadow Walk</i>',
+    '<i>Greater Prying Eyes</i>'
+  ],
+  'Storm': [
+    '<i>Endure Elements</i>|<i>Fog Cloud</i>|<i>Gust Of Wind</i>',
+    '<i>Sleet Storm</i>|<i>Wind Wall</i>|<i>Wind\'s Favor</i>',
+    '<i>Control Weather</i>|<i>Control Winds</i>',
+    '<i>Storm Of Vengeance</i>'
+  ],
+  'Warding': [
+    '<i>Alarm</i>|<i>Arcane Lock</i>|<i>Misdirection</i>',
+    '<i>Explosive Runes</i>|<i>Glyph Of Warding</i>|<i>Nondetection</i>',
+    '<i>Greater Glyph Of Warding</i>|<i>Guards And Wards</i>|' +
+      '<i>Mordenkainen\'s Faithful Hound</i>',
+    '<i>Prismatic Wall</i>'
+  ]
+};
+Eberron.housesDragonmarks = {
+  'Cannith':'Making', 'Deneith':'Sentinel', 'Ghallanda':'Hospitality',
+  'Jorasco':'Healing', 'Kundarak':'Warding', 'Lyrandar':'Storm',
+  'Medani':'Detection', 'Orien':'Passage', 'Phiarlan':'Shadow',
+  'Sivis':'Scribing', 'Tharashk':'Finding', 'Thuranni':'Shadow',
+  'Vadalis':'Handling'
+};
 Eberron.spellsSchools = {
   'Armor Enhancement':'Transmutation',
   'Bolts Of Bedevilment':'Enchantment',
@@ -253,9 +350,9 @@ Eberron.classRules = function(rules, classes) {
         }
       }
       features = [
-        '1:Artificer Knowledge', '1:Artisan Bonus', '1:Disable Trap',
-        '1:Item Creation', '1:Scribe Scroll', '2:Brew Potion',
-        '3:Craft Wondrous Item', '4:Craft Homunculus',
+        '1:Artificer Knowledge', '1:Artisan Bonus', '1:Craft Reserve',
+        '1:Disable Trap', '1:Item Creation', '1:Scribe Scroll',
+        '2:Brew Potion', '3:Craft Wondrous Item', '4:Craft Homunculus',
         '5:Craft Magic Arms And Armor', '5:Retain Essence',
         '6:Metamagic Spell Trigger', '7:Craft Wand',
         '9:Craft Rod', '11:Metamagic Spell Completion', '12:Craft Staff',
@@ -267,6 +364,7 @@ Eberron.classRules = function(rules, classes) {
         'magicNotes.craftHomunculusFeature:Create homunculus',
         'magicNotes.craftMagicArmsAndArmorFeature:' +
           'Create magic weapon/armor/shield',
+        'magicNotes.craftReserveFeature:%V',
         'magicNotes.craftRodFeature:Create magic rod',
         'magicNotes.craftStaffFeature:Create magic staff',
         'magicNotes.craftWandFeature:Create wand for up to 4th level spell',
@@ -318,6 +416,9 @@ Eberron.classRules = function(rules, classes) {
        ];
       rules.defineRule('featCount.Artificer',
         'levels.Artificer', '=', 'Math.floor(source / 4)'
+      );
+      rules.defineRule('magicNotes.craftReserveFeature',
+        'levels.Artificer', '=', 'Eberron.artificerCraftReserves[source]'
       );
       rules.defineRule('skillNotes.artificerKnowledgeFeature',
          'levels.Artificer', '=', null,
@@ -716,11 +817,15 @@ Eberron.featRules = function(rules, feats, subfeats) {
     } else if(feat == 'Favored In House') {
       notes = [
         'featureNotes.favoredInHouseFeature:Acquire favors from house contacts',
-        // TODO Dragonmarked house membership
+        'validationNotes.favoredInHouseFeatHouse:Requires House != None',
         'validationNotes.favoredInHouseFeatRace:' +
           'Requires Race == Dwarf|Race == Elf|Race == Gnome|Race == Halfling|' +
           'Race == Half Elf|Race == Half Orc|Race == Human'
       ];
+      rules.defineRule('validationNotes.favoredInHouseFeatHouse',
+        'feats.Favored In House', '=', '-1',
+        'house', '+', 'source != "None" ? 1 : null'
+      );
       rules.defineRule('validationNotes.favoredInHouseFeatRace',
         'feats.Favored In House', '=', '-1',
         'race', '+', 'source.match' +
@@ -793,11 +898,11 @@ Eberron.featRules = function(rules, feats, subfeats) {
     } else if(feat == 'Greater Dragonmark') {
       notes = [
         'magicNotes.greaterDragonmarkFeature:' +
-          'DC %V+spell level greater dragonmark ability at caster level 10/' +
+          'DC %V+spell level %1 at caster level 10/' +
           'least/lesser dragonmark ability +1/day',
-        // TODO Dragonmarked house membership
         'validationNotes.greaterDragonmarkFeatFeats:' +
           'Requires Least Dragonmark/Lesser Dragonmark',
+        'validationNotes.greaterDragonmarkFeatHouse:Requires House != None',
         'validationNotes.greaterDragonmarkFeatRace:' +
           'Requires Race == Dwarf|Race == Elf|Race == Gnome|Race == Halfling|' +
           'Race == Half Elf|Race == Half Orc|Race == Human',
@@ -807,10 +912,19 @@ Eberron.featRules = function(rules, feats, subfeats) {
       rules.defineRule('magicNotes.greaterDragonmarkFeature',
         'charismaModifier', '=', '10 + source'
       );
+      rules.defineRule('magicNotes.greaterDragonmarkFeature.1',
+        'dragonmark', '=',
+        'Eberron.dragonmarksSpells[source] == null ? null : ' +
+        'Eberron.dragonmarksSpells[source][2]'
+      );
       rules.defineRule('validationNotes.greaterDragonmarkFeatFeats',
         'feats.Greater Dragonmark', '=', '-2',
         'features.Least Dragonmark', '+', '1',
         'features.Lesser Dragonmark', '+', '1'
+      );
+      rules.defineRule('validationNotes.greaterDragonmarkFeatHouse',
+        'feats.Greater Dragonmark', '=', '-1',
+        'house', '+', 'source != "None" ? 1 : null'
       );
       rules.defineRule('validationNotes.greaterDragonmarkFeatRace',
         'feats.Greater Dragonmark', '=', '-1',
@@ -931,8 +1045,10 @@ Eberron.featRules = function(rules, feats, subfeats) {
       );
     } else if(feat == 'Heroic Spirit') {
       notes = [
-        'featureNotes.heroicSpiritFeature:+3 AP'
+        'abilityNotes.heroicSpiritFeature:+3 AP'
       ];
+      rules.defineRule
+       ('actionPoints', 'abilityNotes.heroicSpiritFeature', '+', '3');
     } else if(feat == 'Improved Damage Reduction') {
       notes = [
         'combatNotes.improvedDamageReductionFeature:DR +1/adamantine',
@@ -986,14 +1102,23 @@ Eberron.featRules = function(rules, feats, subfeats) {
     } else if(feat == 'Least Dragonmark') {
       notes = [
         'magicNotes.leastDragonmarkFeature:' +
-          'DC %V+spell level least dragonmark ability at caster level 1',
-        // TODO Requires Dragonmarked house membership
+          'DC %V+spell level %1 at caster level 1',
+        'validationNotes.leastDragonmarkFeatHouse:Requires House != None',
         'validationNotes.leastDragonmarkFeatRace:' +
           'Requires Race == Dwarf|Race == Elf|Race == Gnome|Race == Halfling|' +
           'Race == Half Elf|Race == Half Orc|Race == Human'
       ];
       rules.defineRule('magicNotes.leastDragonmarkFeature',
         'charismaModifier', '=', '10 + source'
+      );
+      rules.defineRule('magicNotes.leastDragonmarkFeature.1',
+        'dragonmark', '=',
+        'Eberron.dragonmarksSpells[source] == null ? null : ' +
+        'Eberron.dragonmarksSpells[source][0]'
+      );
+      rules.defineRule('validationNotes.leastDragonmarkFeatHouse',
+        'feats.Least Dragonmark', '=', '-1',
+        'house', '+', 'source != "None" ? 1 : null'
       );
       rules.defineRule('validationNotes.leastDragonmarkFeatRace',
         'feats.Least Dragonmark', '=', '-1',
@@ -1014,9 +1139,9 @@ Eberron.featRules = function(rules, feats, subfeats) {
     } else if(feat == 'Lesser Dragonmark') {
       notes = [
         'magicNotes.lesserDragonmarkFeature:' +
-          'DC %V+spell level lesser dragonmark ability at caster level 6/' +
+          'DC %V+spell level %1 at caster level 6/' +
           'least dragonmark ability +1/day',
-        // TODO Requires Dragonmarked house membership
+        'validationNotes.lesserDragonmarkFeatHouse:Requires House != None',
         'validationNotes.lesserDragonmarkFeatFeats:Requires Least Dragonmark',
         'validationNotes.lesserDragonmarkFeatRace:' +
           'Requires Race == Dwarf|Race == Elf|Race == Gnome|Race == Halfling|' +
@@ -1027,9 +1152,18 @@ Eberron.featRules = function(rules, feats, subfeats) {
       rules.defineRule('magicNotes.lesserDragonmarkFeature',
         'charismaModifier', '=', '10 + source'
       );
+      rules.defineRule('magicNotes.lesserDragonmarkFeature.1',
+        'dragonmark', '=',
+        'Eberron.dragonmarksSpells[source] == null ? null : ' +
+        'Eberron.dragonmarksSpells[source][1]'
+      );
       rules.defineRule('validationNotes.lesserDragonmarkFeatFeats',
         'feats.Lesser Dragonmark', '=', '-1',
         'features.Least Dragonmark', '+', '1'
+      );
+      rules.defineRule('validationNotes.lesserDragonmarkFeatHouse',
+        'feats.Lesser Dragonmark', '=', '-1',
+        'house', '+', 'source != "None" ? 1 : null'
       );
       rules.defineRule('validationNotes.lesserDragonmarkFeatRace',
         'feats.Lesser Dragonmark', '=', '-1',
@@ -1501,6 +1635,23 @@ Eberron.featRules = function(rules, feats, subfeats) {
 
 };
 
+/* Defines non-feat rules from Eberron Chapter 3, Heroic Characteristics. */
+Eberron.heroicRules = function(rules, houses) {
+  rules.defineChoice('houses', houses);
+  rules.defineChoice('random', PH35.RANDOMIZABLE_ATTRIBUTES.concat(['house']));
+  rules.defineEditorElement
+    ('house', 'House', 'select-one', 'houses', 'experience');
+  rules.defineRule('actionPoints', 'level', '=', '5 + Math.floor(source / 2)');
+  rules.defineRule('actionDice', 'level', '=', '1 + Math.floor(source / 7)');
+  rules.defineRule
+    ('dragonmark', 'house', '=', 'Eberron.housesDragonmarks[source]');
+  rules.defineSheetElement('Heroics', 'Description');
+  rules.defineSheetElement('House', 'Heroics/');
+  rules.defineSheetElement('Dragonmark', 'Heroics/');
+  rules.defineSheetElement('Action Points', 'Heroics/');
+  rules.defineSheetElement('Action Dice', 'Heroics/');
+};
+
 /* Defines the rules related to Eberron Chapter 5, Magic. */
 Eberron.magicRules = function(rules, classes, domains) {
 
@@ -1792,9 +1943,9 @@ Eberron.prestigeClassRules = function(rules, classes) {
       ];
       hitDie = 8;
       notes = [
-        'featureNotes.actionPointBonusFeature:+2 AP',
+        'abilityNotes.actionPointBonusFeature:+2 AP',
         'magicNotes.greaterDragonmarkFeature:' +
-          'DC %V+spell level greater dragonmark ability at caster level 10/' +
+          'DC %V+spell level %1 at caster level 10/' +
           'least/lesser dragonmark ability +1/day',
         'magicNotes.improvedGreaterDragonmarkFeature:' +
           '2nd greater dragonmark ability or use ability +1/day',
@@ -1803,13 +1954,13 @@ Eberron.prestigeClassRules = function(rules, classes) {
         'magicNotes.improvedLesserDragonmarkFeature:' +
           '2nd lesser dragonmark ability or use ability +1/day',
         'magicNotes.lesserDragonmarkFeature:' +
-          'DC %V+spell level lesser dragonmark ability at caster level 6/' +
+          'DC %V+spell level %1 at caster level 6/' +
           'least dragonmark ability +1/day',
         'skillNotes.houseStatusFeature:' +
           '+%V charisma-based skills w/house members',
-        // TODO Requires Dragonmarked house membership
         'validationNotes.dragonmarkHeirClassFeats:' +
           'Requires Favored In House/Least Dragonmark',
+        'validationNotes.dragonmarkHeirClassHouse:Requires House != None',
         'validationNotes.dragonmarkHeirClassRace:' +
           'Requires Race == Dwarf|Race == Elf|Race == Gnome|Race == Halfling|' +
           'Race == Half Elf|Race == Half Orc|Race == Human',
@@ -1832,11 +1983,23 @@ Eberron.prestigeClassRules = function(rules, classes) {
       spellAbility = null;
       spellsKnown = null;
       spellsPerDay = null;
+      rules.defineRule
+        ('actionPoints', 'abilityNotes.actionPointBonusFeature', '+', '2');
       rules.defineRule('magicNotes.greaterDragonmarkFeature',
         'charismaModifier', '=', '10 + source'
       );
+      rules.defineRule('magicNotes.greaterDragonmarkFeature.1',
+        'dragonmark', '=',
+        'Eberron.dragonmarksSpells[source] == null ? null : ' +
+        'Eberron.dragonmarksSpells[source][2]'
+      );
       rules.defineRule('magicNotes.lesserDragonmarkFeature',
         'charismaModifier', '=', '10 + source'
+      );
+      rules.defineRule('magicNotes.lesserDragonmarkFeature.1',
+        'dragonmark', '=',
+        'Eberron.dragonmarksSpells[source] == null ? null : ' +
+        'Eberron.dragonmarksSpells[source][1]'
       );
       rules.defineRule
         ('skillNotes.houseStatusFeature', 'levels.Dragonmark Heir', '=', null);
@@ -1846,7 +2009,11 @@ Eberron.prestigeClassRules = function(rules, classes) {
         'features.Least Dragonmark', '+', '1',
         '', 'v', '0'
       );
-      rules.defineRule('validationNotes.favoredInHouseFeatRace',
+      rules.defineRule('validationNotes.dragonmarkHeirClassHouse',
+        'levels.Dragonmark Heir', '=', '-1',
+        'house', '+', 'source != "None" ? 1 : null'
+      );
+      rules.defineRule('validationNotes.dragonmarkHeirClassRace',
         'levels.Dragonmark Heir', '=', '-1',
         'race', '+', 'source.match' +
           '(/^(Dwarf|Elf|Gnome|Half(ling| Elf| Orc)|Human)$/) ? 1 : null'
@@ -2172,8 +2339,8 @@ Eberron.prestigeClassRules = function(rules, classes) {
       ];
       hitDie = 8;
       notes = [
+        'abilityNotes.actionPointBonusFeature:+2 AP',
         'combatNotes.dodgeBonusFeature:+%V AC when unencumbered',
-        'featureNotes.actionPointBonusFeature:+2 AP',
         'featureNotes.extremeActionFeature:' +
           'Retain AP on successful AP roll of 8',
         'featureNotes.extremeHustleFeature:Spend 1 AP to gain a move action',
@@ -2203,6 +2370,8 @@ Eberron.prestigeClassRules = function(rules, classes) {
       spellsKnown = null;
       spellsPerDay = null;
       rules.defineRule
+        ('actionPoints', 'abilityNotes.actionPointBonusFeature', '+', '2');
+      rules.defineRule
        ('armorClass', 'combatNotes.dodgeBonusFeature', '+', null);
       rules.defineRule('combatNotes.dodgeBonusFeature',
         'levels.Extreme Explorer', '+=', 'Math.floor(source / 2)'
@@ -2227,10 +2396,11 @@ Eberron.prestigeClassRules = function(rules, classes) {
       ];
       hitDie = 6;
       notes = [
-        'featureNotes.actionPointBonusFeature:+2 AP',
+        'abilityNotes.actionPointBonusFeature:+2 AP',
         'magicNotes.casterLevelBonusFeature:' +
           'Add %V to base class level for spells known/per day',
-        'magicNotes.siberysMarkFeature:Spell-like ability %V/day',
+        'magicNotes.siberysMarkFeature:' +
+          'DC %V+spell level %1 at caster level 15 %2/day',
         'validationNotes.heirOfSiberysClassFeats:' +
           'Requires Heroic Spirit/Aberrant Dragonmark == 0/' +
           'Least Dragonmark == 0/Lesser Dragonmark == 0/' +
@@ -2254,6 +2424,8 @@ Eberron.prestigeClassRules = function(rules, classes) {
       spellsKnown = null;
       spellsPerDay = null;
       rules.defineRule
+        ('actionPoints', 'abilityNotes.actionPointBonusFeature', '+', '2');
+      rules.defineRule
         ('featCount.General', 'heirOfSiberysFeatures.Feat Bonus', '+=', null);
       rules.defineRule
         ('featCount.Heir Of Siberys', 'levels.Heir Of Siberys', '=', '1');
@@ -2271,6 +2443,14 @@ Eberron.prestigeClassRules = function(rules, classes) {
         'levels.Heir Of Siberys', '+=', 'source - 1'
       );
       rules.defineRule('magicNotes.siberysMarkFeature',
+        'charismaModifier', '=', '10 + source'
+      );
+      rules.defineRule('magicNotes.siberysMarkFeature.1',
+        'dragonmark', '=',
+        'Eberron.dragonmarksSpells[source] == null ? null : ' +
+        'Eberron.dragonmarksSpells[source][3]'
+      );
+      rules.defineRule('magicNotes.siberysMarkFeature.2',
         'levels.Heir Of Siberys', '=',
         'source >= 3 ? 2 : source == 2 ? 1 : null'
       );
