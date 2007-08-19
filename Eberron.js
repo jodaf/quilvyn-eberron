@@ -94,7 +94,8 @@ Eberron.DEITIES = [
   'The Shadow (CN):Artifice/Chaos/Travel/Trickery',
   'The Blood Of Vol (LE):Death/Evil/Law/Necromancer',
   'The Cults Of The Dragon Below (LN):Law/Meditation/Protection',
-  'The Undying Court (NG):Deathless/Good/Protection'
+  'The Undying Court (NG):Deathless/Good/Protection',
+  'None:'
 ];
 Eberron.DOMAINS = [
   'Artifice', 'Charm', 'Commerce', 'Community', 'Deathless', 'Decay',
@@ -594,11 +595,11 @@ Eberron.featRules = function(rules, feats, subfeats) {
       var valid = 'validationNotes.beastTotem(' + beast + ')Feat';
       notes = [
         note + ':+4 vs. ' + (attack == null ? 'related' : attack),
-        valid + 'Features:Requires Wild Shape'
+        valid + 'Features:Requires Wild Empathy'
       ];
       rules.defineRule(valid + 'Features',
         'feats.' + feat, '=', '-1',
-        'features.Wild Shape', '+', '1'
+        'features.Wild Empathy', '+', '1'
       );
     } else if(feat == 'Beasthide Elite') {
       notes = [
