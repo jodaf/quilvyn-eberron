@@ -414,7 +414,9 @@ Eberron.classRules = function(rules, classes) {
         'I4:8:1/9:2/13:3/17:4',
         'I5:11:1/12:2/14:3/18:4',
         'I6:14:1/15:2/17:3/19:4'
-       ];
+      ];
+      // Artificer infusions are neither arcane nor divine, but they are casters
+      rules.defineRule('casterLevel', 'levels.Artificer', '+=', null);
       rules.defineRule('featCount.Artificer',
         'levels.Artificer', '=', 'Math.floor(source / 4)'
       );
@@ -494,7 +496,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
       rules.defineRule(note + '.1', 'level', '=', 'Math.floor(source / 2)');
       rules.defineRule(
         'validationNotes.aberrantDragonmark(' + dragonmark + ')FeatFeats',
-        'feats.Abberrant Dragonmark (' + dragonmark + ')', '=', '0',
+        'feats.' + feat, '=', '0',
         /^feats.(Greater|Least|Lesser) Dragonmark/, '+', '-1'
       );
     } else if(feat == 'Action Boost') {
@@ -597,6 +599,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
       notes = [
         'combatNotes.doubleSteelStrikeFeature:' +
           'Flurry Of Blows w/Two-Bladed Sword',
+        'sanityNotes.doubleSteelStrikeFeatWeapons:Requires Two-Bladed Sword',
         'validationNotes.doubleSteelStrikeFeatFeats:' +
           'Requires Weapon Proficiency (Two-Bladed Sword)',
         'validationNotes.doubleSteelStrikeFeatFeatures:Requires Flurry Of Blows'
@@ -604,7 +607,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
     } else if(feat == 'Dragon Rage') {
       notes = [
         'combatNotes.dragonRageFeature:' +
-          '+2 AC/+10 Dragon Totem resistence during frenzy/rage',
+          '+2 AC/+10 Dragon Totem resistence during Rage',
         'validationNotes.dragonRageFeatFeats:Requires Max Dragon Totem >= 1',
         'validationNotes.dragonRageFeatFeatures:Requires Rage'
         // TODO Requires Origin == Argonnessen
@@ -622,6 +625,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
     } else if(feat == 'Ecclesiarch') {
       notes = [
         'featureNotes.ecclesiarchFeature:+2 Leadership',
+        'sanityNotes..ecclesiarchFeatFeats:Requires Leadership',
         'skillNotes.ecclesiarchFeature:' +
           'Gather Information/Knowledge (Local) class skills',
         'validationNotes.ecclesiarchFeatSkills:' +
@@ -636,7 +640,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
     } else if(feat == 'Education') {
       notes = [
         'skillNotes.educationFeature:' +
-          'All Knowledge skills class skills/+2 two Knowledge Skills'
+          'All Knowledge skills class skills/+2 any 2 Knowledge skills'
       ];
       rules.defineRule
         (/^classSkills\.Knowledge/, 'skillNotes.educationFeature', '=', '1');
@@ -657,9 +661,6 @@ Eberron.featRules = function(rules, feats, subfeats) {
       ];
       rules.defineRule
         ('combatNotes.rageFeature', 'combatNotes.extendRageFeature', '+', '5');
-      rules.defineRule(
-        'combatNotes.frenzyFeature', 'combatNotes.extendRageFeature', '+', '5'
-      );
     } else if(feat == 'Extra Music') {
       notes = [
         'featureNotes.extraMusicFeature:Bardic Music 4 extra times/day',
@@ -823,7 +824,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
       rules.defineRule('classSkills.Hide',
         'skillNotes.greensingerInitiateFeature', '=', '1'
       );
-      rules.defineRule(/^classSkills.Perform/,
+      rules.defineRule('classSkills.Perform',
         'skillNotes.greensingerInitiateFeature', '=', '1'
       );
     } else if(feat == 'Haunting Melody') {
@@ -962,6 +963,8 @@ Eberron.featRules = function(rules, feats, subfeats) {
       );
     } else if(feat == 'Mithral Fluidity') {
       notes = [
+        'combatNotes.mithralFluidityFeature:' +
+          'Reduce Mithral Body AC/skill penalty by 1',
         'validationNotes.mithralFluidityFeatFeats:Requires Mithral Body',
         'validationNotes.mithralFluidityFeatRace:Requires Race == Warforged'
       ];
@@ -1076,10 +1079,11 @@ Eberron.featRules = function(rules, feats, subfeats) {
     } else if(feat == 'Serpent Strike') {
       notes = [
         'combatNotes.serpentStrikeFeature:Flurry Of Blows w/Longspear',
+        'sanityNotes.serpentStrikeFeatWeapons:Requires Longspear',
         'validationNotes.serpentStrikeFeatFeats:Weapon Focus (Longspear)',
         'validationNotes.serpentStrikeFeatFeatures:Requires Flurry Of Blows',
         'validationNotes.serpentStrikeFeatWeaponProficiencyLevel:' +
-          'Requires Weapon Proficiency Level>= ' + PH35.PROFICIENCY_LIGHT
+          'Requires Weapon Proficiency Level >= ' + PH35.PROFICIENCY_LIGHT
       ];
     } else if(feat == 'Shifter Defense') {
       notes = [
@@ -1192,9 +1196,10 @@ Eberron.featRules = function(rules, feats, subfeats) {
         ('classSkills.Climb', 'skillNotes.wardenInitiateFeature', '=', '1');
       rules.defineRule
         ('classSkills.Jump', 'skillNotes.wardenInitiateFeature', '=', '1');
-    } else if(feat == 'Whirling Steel Strike') {
+     } else if(feat == 'Whirling Steel Strike') {
       notes = [
         'combatNotes.whirlingSteelStrikeFeature:Flurry Of Blows with Longsword',
+        'sanityNotes.whirlingSteelStrikeFeatWeapons:Requires Longsword',
         'validationNotes.whirlingSteelStrikeFeatFeats:' +
           'Requires Weapon Focus (Longsword)',
         'validationNotes.whirlingSteelStrikeFeatFeatures:' +
@@ -1443,7 +1448,8 @@ Eberron.magicRules = function(rules, classes, domains) {
       ];
     } else if(domain == 'Passion') {
       notes = [
-        'combatNotes.passionDomain:Rage %V rounds/day'
+        'combatNotes.passionDomain:' +
+          '+4 strength/constitution/+2 Will save/-2 AC for %V rounds 1/day'
       ];
       spells = [
         'Cause Fear', 'Tasha\'s Hideous Laughter', 'Confusion',
@@ -1656,9 +1662,6 @@ Eberron.prestigeClassRules = function(rules, classes) {
       rules.defineRule('combatNotes.favoredEnemyFeature',
         'levels.' + klass, '+=', 'source >= 4 ? 1 : null'
       );
-      rules.defineRule('skillNotes.favoredEnemyFeature',
-        'levels.' + klass, '+=', 'source >= 4 ? 1 : null'
-      );
       rules.defineRule
         ('combatNotes.smiteEvilFeature', 'levels.Eldeen Ranger', '+=', '1');
       rules.defineRule
@@ -1723,6 +1726,9 @@ Eberron.prestigeClassRules = function(rules, classes) {
         ('saveNotes.unearthlyGraceFeature', 'charismaModifier', '=', null);
       rules.defineRule('selectableFeatureCount.Eldeen Ranger',
         'levels.Eldeen Ranger', '=', '1'
+      );
+      rules.defineRule('skillNotes.favoredEnemyFeature',
+        'levels.' + klass, '+=', 'source >= 4 ? 1 : null'
       );
 
     } else if(klass == 'Exorcist Of The Silver Flame') {
@@ -1833,6 +1839,7 @@ Eberron.prestigeClassRules = function(rules, classes) {
         'level', '=', 'source * 3 - 10',
         'charismaModifier', '+', null
       );
+      rules.defineSheetElement('Turn Outsider', 'Turn Undead', null, ' * ');
 
     } else if(klass == 'Extreme Explorer') {
 
@@ -2092,9 +2099,6 @@ Eberron.prestigeClassRules = function(rules, classes) {
       rules.defineRule('skillNotes.reservedFeature',
         'levels.Warforged Juggernaut', '=', null
       );
-      rules.defineRule('skillNotes.reservedFeature',
-        'levels.Warforged Juggernaut', '=', null
-      );
 
     } else if(klass == 'Weretouched Master') {
 
@@ -2156,7 +2160,6 @@ Eberron.prestigeClassRules = function(rules, classes) {
       spellAbility = null;
       spellsKnown = null;
       spellsPerDay = null;
-        'combatNotes.weretouchedClawsFeature:d4+%V claw attack while shifting',
       rules.defineRule('abilityNotes.alternateFormFeature',
         'weretouchedMasterAnimal', '=', null
       );
@@ -2275,13 +2278,13 @@ Eberron.raceRules = function(rules, races) {
 
       adjustment = null;
       features = [
-        'Charm Resistance', 'Deceptive', 'Intuitive', 'Minor Shape Change',
-        'Natural Linguist', 'Sleep Resistance'
+        'Deceptive', 'Intuitive', 'Minor Shape Change', 'Natural Linguist',
+        'Resist Charm', 'Resist Sleep'
       ];
       notes = [
         'magicNotes.minorShapeChange:<i>Shape Change</i> body at will',
-        'saveNotes.charmResistanceFeature:+2 vs. charm effects',
-        'saveNotes.sleepResistanceFeature:+2 vs. sleep effects',
+        'saveNotes.resistCharmFeature:+2 vs. charm effects',
+        'saveNotes.resistSleepFeature:+2 vs. sleep effects',
         'skillNotes.deceptiveFeature:+2 Bluff/Intimidate',
         'skillNotes.intuitiveFeature:+2 Sense Motive',
         'skillNotes.naturalLinguistFeature:Speak Language is a class skill'
@@ -2290,26 +2293,36 @@ Eberron.raceRules = function(rules, races) {
       rules.defineRule('classSkills.Speak Language',
         'skillNotes.naturalLinguistFeature', '=', '1'
       );
+      rules.defineRule
+        ('resistance.Charm', 'saveNotes.resistCharmFeature', '+=', '2');
+      rules.defineRule
+        ('resistance.Sleep', 'saveNotes.resistSleepFeature', '+=', '2');
 
     } else if(race == 'Kalashtar') {
 
       adjustment = null;
       features = [
-        'Dreamless', 'Humanlike', 'Influential', 'Mental Resistance',
-        'Mindlink', 'Natural Psionic', 'Possession Resistance'
+        'Dreamless', 'Humanlike', 'Influential', 'Mindlink', 'Natural Psionic',
+        'Resist Mental', 'Resist Possession'
       ];
       notes = [
         'magicNotes.mindlinkFeature:<i>Mindlink</i> as level %V wilder 1/day',
         'magicNotes.naturalPsionicFeature:+1 power point/level',
         'saveNotes.dreamlessFeature:Immune <i>Dream</i>, <i>Nightmare</i>',
-        'saveNotes.mentalResistanceFeature:+2 vs. mind-altering effects',
-        'saveNotes.possessionResistanceFeature:+2 vs. possession',
+        'saveNotes.resistMentalFeature:+2 vs. mind-altering effects',
+        'saveNotes.resistPossessionFeature:+2 vs. possession',
         'skillNotes.humanlikeFeature:+2 Disguise (human)',
         'skillNotes.influentialFeature:+2 Bluff/Diplomacy/Intimidate'
       ];
       selectableFeatures = null;
       rules.defineRule('magicNotes.mindlinkFeature',
         'level', 'source < 2 ? 1 : Math.floor(source / 2)'
+      );
+      rules.defineRule('resistance.Mind-Altering',
+        'saveNotes.resistMentalFeature', '+=', '2'
+      );
+      rules.defineRule('resistance.Possession',
+        'saveNotes.resistPossessionFeature', '+=', '2'
       );
 
     } else if(race == 'Shifter') {
