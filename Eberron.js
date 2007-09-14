@@ -28,9 +28,7 @@ function Eberron() {
   // Define a new rule set w/the same editor and standard viewer as PH35
   var rules = new ScribeRules('Eberron');
   rules.editorElements = PH35.initialEditorElements();
-  Eberron.viewer = new ObjectViewer();
-  PH35.createViewer(Eberron.viewer);
-  rules.defineViewer("Standard", Eberron.viewer);
+  PH35.createViewers(rules, PH35.VIEWERS);
   // Pick up the PH35 rules, w/minor mods for deities and weapons
   PH35.abilityRules(rules);
   PH35.raceRules(rules, PH35.LANGUAGES, PH35.RACES);
