@@ -49,7 +49,7 @@ function Eberron() {
     DMG35.companionRules(rules, DMG35.COMPANIONS);
   }
   // So far, same character creation procedures as PH35
-  rules.defineChoice('preset', 'race', 'levels');
+  rules.defineChoice('preset', 'race', 'experience', 'levels');
   rules.defineChoice('random', PH35.RANDOMIZABLE_ATTRIBUTES);
   rules.randomizeOneAttribute = PH35.randomizeOneAttribute;
   rules.makeValid = PH35.makeValid;
