@@ -487,8 +487,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
         'validationNotes.aberrantDragonmark(' + dragonmark + ')FeatFeats:' +
           'Requires no Dragonmark feats',
         'validationNotes.aberrantDragonmark(' + dragonmark + ')FeatRace:' +
-          'Requires Race == Dwarf|Race == Elf|Race == Gnome|Race == Halfling|' +
-          'Race == Half Elf|Race == Half Orc|Race == Human'
+          'Requires Race =~ Dwarf|Elf|Gnome|Halfling|Half Orc|Human'
       ];
       rules.defineRule(note, 'charismaModifier', '=', '11 + source');
       rules.defineRule(note + '.1', 'level', '=', 'Math.floor(source / 2)');
@@ -703,8 +702,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
         'featureNotes.favoredInHouseFeature:Acquire favors from house contacts',
         'validationNotes.favoredInHouseFeatHouse:Requires House != None',
         'validationNotes.favoredInHouseFeatRace:' +
-          'Requires Race == Dwarf|Race == Elf|Race == Gnome|Race == Halfling|' +
-          'Race == Half Elf|Race == Half Orc|Race == Human'
+          'Requires Race =~ Dwarf|Elf|Gnome|Halfling|Half Orc|Human'
       ];
     } else if(feat == 'Flensing Strike') {
       notes = [
@@ -754,8 +752,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
           'Requires Least Dragonmark/Lesser Dragonmark',
         'validationNotes.greaterDragonmarkFeatHouse:Requires House != None',
         'validationNotes.greaterDragonmarkFeatRace:' +
-          'Requires Race == Dwarf|Race == Elf|Race == Gnome|Race == Halfling|' +
-          'Race == Half Elf|Race == Half Orc|Race == Human',
+          'Requires Race =~ Dwarf|Elf|Gnome|Halfling|Half Orc|Human',
         'validationNotes.greaterDragonmarkFeatSkills:Requires any 2 >= 12'
       ];
       rules.defineRule('magicNotes.greaterDragonmarkFeature',
@@ -892,8 +889,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
           'DC %V+spell level %1 at caster level 1',
         'validationNotes.leastDragonmarkFeatHouse:Requires House != None',
         'validationNotes.leastDragonmarkFeatRace:' +
-          'Requires Race == Dwarf|Race == Elf|Race == Gnome|Race == Halfling|' +
-          'Race == Half Elf|Race == Half Orc|Race == Human'
+          'Requires Race =~ Dwarf|Elf|Gnome|Halfling|Half Orc|Human'
       ];
       rules.defineRule('magicNotes.leastDragonmarkFeature',
         'charismaModifier', '=', '10 + source'
@@ -921,8 +917,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
         'validationNotes.lesserDragonmarkFeatHouse:Requires House != None',
         'validationNotes.lesserDragonmarkFeatFeats:Requires Least Dragonmark',
         'validationNotes.lesserDragonmarkFeatRace:' +
-          'Requires Race == Dwarf|Race == Elf|Race == Gnome|Race == Halfling|' +
-          'Race == Half Elf|Race == Half Orc|Race == Human',
+          'Requires Race =~ Dwarf|Elf|Gnome|Halfling|Half Orc|Human',
         'validationNotes.lesserDragonmarkFeatSkills:Requires any 2 >= 9'
       ];
       rules.defineRule('magicNotes.lesserDragonmarkFeature',
@@ -1108,7 +1103,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
         'validationNotes.shifterMultiattackFeatBaseAttack:' +
           'Requires Base Attack >= 6',
         'validationNotes.shifterMultiattackFeatFeatures:' +
-          'Requires Longtooth|Razorclaw'
+          'Requires Longtooth||Razorclaw'
       ];
     } else if(feat == 'Silver Smite') {
       notes = [
@@ -1541,8 +1536,7 @@ Eberron.prestigeClassRules = function(rules, classes) {
           'Requires Favored In House/Least Dragonmark',
         'validationNotes.dragonmarkHeirClassHouse:Requires House != None',
         'validationNotes.dragonmarkHeirClassRace:' +
-          'Requires Race == Dwarf|Race == Elf|Race == Gnome|Race == Halfling|' +
-          'Race == Half Elf|Race == Half Orc|Race == Human',
+          'Requires Race =~ Dwarf|Elf|Gnome|Halfling|Half Orc|Human',
         'validationNotes.dragonmarkHeirClassSkills:Requires any 2 >= 7'
       ];
       profArmor = PH35.PROFICIENCY_NONE;
@@ -1917,8 +1911,7 @@ Eberron.prestigeClassRules = function(rules, classes) {
         'validationNotes.heirOfSiberysClassFeats:' +
           'Requires Heroic Spirit/no Dragonmark feats',
         'validationNotes.heirOfSiberysClassRace:' +
-          'Requires Race == Dwarf|Race == Elf|Race == Gnome|Race == Halfling|' +
-          'Race == Half Elf|Race == Half Orc|Race == Human',
+          'Requires Race =~ Dwarf|Elf|Gnome|Halfling|Half Orc|Human',
         'validationNotes.heirOfSiberysClassSkills:Requires any 2 >= 15'
       ];
       profArmor = PH35.PROFICIENCY_NONE;
