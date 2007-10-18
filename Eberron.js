@@ -330,8 +330,8 @@ Eberron.classRules = function(rules, classes) {
   for(var i = 0; i < classes.length; i++) {
 
     var baseAttack, feats, features, hitDie, notes, profArmor, profShield,
-        profWeapon, saveFortitude, saveReflex, saveWill, selectableFeatures,
-        skillPoints, skills, spellAbility, spellsKnown, spellsPerDay;
+        profWeapon, saveFortitude, saveReflex, saveWill, skillPoints, skills,
+        spellAbility, spellsKnown, spellsPerDay;
     var klass = classes[i];
 
     if(klass == 'Artificer') {
@@ -393,7 +393,6 @@ Eberron.classRules = function(rules, classes) {
       saveFortitude = PH35.SAVE_BONUS_POOR;
       saveReflex = PH35.SAVE_BONUS_POOR;
       saveWill = PH35.SAVE_BONUS_GOOD;
-      selectableFeatures = null;
       skillPoints = 4;
       skills = [
         'Appraise', 'Concentration', 'Craft', 'Disable Device',
@@ -438,15 +437,6 @@ Eberron.classRules = function(rules, classes) {
     if(feats != null) {
       for(var j = 0; j < feats.length; j++) {
         rules.defineChoice('feats', feats[j] + ':' + klass);
-      }
-    }
-    if(selectableFeatures != null) {
-      for(var j = 0; j < selectableFeatures.length; j++) {
-        var selectable = selectableFeatures[j];
-        rules.defineChoice('selectableFeatures', selectable + ':' + klass);
-        rules.defineRule('features.' + selectable,
-          'selectableFeatures.' + selectable, '+=', null
-        );
       }
     }
 
