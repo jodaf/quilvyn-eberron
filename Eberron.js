@@ -21,9 +21,14 @@ Place, Suite 330, Boston, MA 02111-1307 USA.
  * of the rule book; raceRules for character races, magicRules for spells, etc.
  * These member methods can be called independently in order to use a subset of
  * the Eberron rules.  Similarly, the constant fields of Eberron (DOMAINS,
- * FEATS, etc.) can be manipulated to modify the choices.
+ * FEATS, etc.) can be thinned to limit the user's choices.
  */
 function Eberron() {
+
+  if(window.PH35 == null) {
+    alert('The Eberron module requires use of the PH35 module');
+    return;
+  }
 
   // Define a new rule set w/the same editor and standard viewer as PH35
   var rules = new ScribeRules('Eberron');
@@ -2395,7 +2400,6 @@ Eberron.raceRules = function(rules, races) {
         );
       }
     }
-
 
   }
 
