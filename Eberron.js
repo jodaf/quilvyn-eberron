@@ -25,45 +25,47 @@ Place, Suite 330, Boston, MA 02111-1307 USA.
  */
 function Eberron() {
 
-  if(window.PH35 == null) {
-    alert('The Eberron module requires use of the PH35 module');
+  if(window.SRD35 == null) {
+    alert('The Eberron module requires use of the SRD35 module');
     return;
   }
 
-  // Define a new rule set w/the same editor and standard viewer as PH35
+  // Define a new rule set w/the same editor and standard viewer as SRD35
   var rules = new ScribeRules('Eberron');
-  rules.editorElements = PH35.initialEditorElements();
-  PH35.createViewers(rules, PH35.VIEWERS);
-  // Pick up the PH35 rules, w/minor mods for deities and weapons
-  PH35.abilityRules(rules);
-  PH35.raceRules(rules, PH35.LANGUAGES, PH35.RACES);
-  PH35.classRules(rules, PH35.CLASSES);
-  PH35.companionRules(rules, PH35.COMPANIONS);
-  PH35.skillRules(rules, PH35.SKILLS, PH35.SUBSKILLS);
-  PH35.featRules(rules, PH35.FEATS, PH35.SUBFEATS);
-  PH35.descriptionRules(rules, PH35.ALIGNMENTS, Eberron.DEITIES, PH35.GENDERS);
-  PH35.equipmentRules(rules, PH35.ARMORS, PH35.GOODIES, PH35.SHIELDS,
-                      PH35.WEAPONS.concat(Eberron.WEAPONS));
-  PH35.combatRules(rules);
-  PH35.adventuringRules(rules);
-  PH35.magicRules(rules, PH35.CLASSES, PH35.DOMAINS, PH35.SCHOOLS);
+  rules.editorElements = SRD35.initialEditorElements();
+  SRD35.createViewers(rules, SRD35.VIEWERS);
+  // Pick up the SRD35 rules, w/minor mods for deities and weapons
+  SRD35.abilityRules(rules);
+  SRD35.raceRules(rules, SRD35.LANGUAGES, SRD35.RACES);
+  SRD35.classRules(rules, SRD35.CLASSES);
+  SRD35.companionRules(rules, SRD35.COMPANIONS);
+  SRD35.skillRules(rules, SRD35.SKILLS, SRD35.SUBSKILLS);
+  SRD35.featRules(rules, SRD35.FEATS, SRD35.SUBFEATS);
+  SRD35.descriptionRules
+    (rules, SRD35.ALIGNMENTS, Eberron.DEITIES, SRD35.GENDERS);
+  SRD35.equipmentRules(rules, SRD35.ARMORS, SRD35.GOODIES, SRD35.SHIELDS,
+                      SRD35.WEAPONS.concat(Eberron.WEAPONS));
+  SRD35.combatRules(rules);
+  SRD35.adventuringRules(rules);
+  SRD35.magicRules(rules, SRD35.CLASSES, SRD35.DOMAINS, SRD35.SCHOOLS);
   // Pick up the DMG rules, if available
-  if(window.DMG35 != null) {
-    DMG35.npcClassRules(rules, DMG35.NPC_CLASSES);
-    DMG35.prestigeClassRules(rules, DMG35.PRESTIGE_CLASSES);
-    DMG35.companionRules(rules, DMG35.COMPANIONS);
+  if(window.SRD35PrestigeNPC != null) {
+    SRD35PrestigeNPC.npcClassRules(rules, SRD35PrestigeNPC.NPC_CLASSES);
+    SRD35PrestigeNPC.prestigeClassRules
+      (rules, SRD35PrestigeNPC.PRESTIGE_CLASSES);
+    SRD35PrestigeNPC.companionRules(rules, SRD35PrestigeNPC.COMPANIONS);
   }
-  // So far, same character creation procedures as PH35
+  // So far, same character creation procedures as SRD35
   rules.defineChoice('preset', 'race', 'experience', 'levels');
-  rules.defineChoice('random', PH35.RANDOMIZABLE_ATTRIBUTES);
-  rules.randomizeOneAttribute = PH35.randomizeOneAttribute;
-  rules.makeValid = PH35.makeValid;
+  rules.defineChoice('random', SRD35.RANDOMIZABLE_ATTRIBUTES);
+  rules.randomizeOneAttribute = SRD35.randomizeOneAttribute;
+  rules.makeValid = SRD35.makeValid;
   // Add Eberron-specific rules
   Eberron.classRules(rules, Eberron.CLASSES);
   Eberron.featRules(rules, Eberron.FEATS, Eberron.SUBFEATS);
   Eberron.heroicRules(rules, Eberron.HOUSES);
   Eberron.magicRules
-    (rules, PH35.CLASSES.concat(Eberron.CLASSES), Eberron.DOMAINS);
+    (rules, SRD35.CLASSES.concat(Eberron.CLASSES), Eberron.DOMAINS);
   Eberron.prestigeClassRules(rules, Eberron.PRESTIGE_CLASSES);
   Eberron.raceRules(rules, Eberron.RACES);
   // Let Scribe know we're here
@@ -341,14 +343,14 @@ Eberron.classRules = function(rules, classes) {
 
     if(klass == 'Artificer') {
 
-      baseAttack = PH35.ATTACK_BONUS_AVERAGE;
+      baseAttack = SRD35.ATTACK_BONUS_AVERAGE;
       feats = [
         'Attune Magic Weapon', 'Craft Construct', 'Exceptional Artisan',
         'Extra Rings', 'Extraordinary Artisan', 'Legendary Artisan',
         'Wand Mastery'
       ];
-      for(var j = 0; j < PH35.FEATS.length; j++) {
-        var pieces = PH35.FEATS[j].split(':');
+      for(var j = 0; j < SRD35.FEATS.length; j++) {
+        var pieces = SRD35.FEATS[j].split(':');
         if(pieces[1].match(/Metamagic/)) {
           feats[feats.length] = pieces[0];
         }
@@ -392,12 +394,12 @@ Eberron.classRules = function(rules, classes) {
         'skillNotes.disableTrapFeature:' +
           'Use Search/Disable Device to find/remove DC 20+ traps'
       ];
-      profArmor = PH35.PROFICIENCY_LIGHT;
-      profShield = PH35.PROFICIENCY_HEAVY;
-      profWeapon = PH35.PROFICIENCY_MEDIUM;
-      saveFortitude = PH35.SAVE_BONUS_POOR;
-      saveReflex = PH35.SAVE_BONUS_POOR;
-      saveWill = PH35.SAVE_BONUS_GOOD;
+      profArmor = SRD35.PROFICIENCY_LIGHT;
+      profShield = SRD35.PROFICIENCY_HEAVY;
+      profWeapon = SRD35.PROFICIENCY_MEDIUM;
+      saveFortitude = SRD35.SAVE_BONUS_POOR;
+      saveReflex = SRD35.SAVE_BONUS_POOR;
+      saveWill = SRD35.SAVE_BONUS_GOOD;
       skillPoints = 4;
       skills = [
         'Appraise', 'Concentration', 'Craft', 'Disable Device',
@@ -433,7 +435,7 @@ Eberron.classRules = function(rules, classes) {
     } else
       continue;
 
-    PH35.defineClass
+    SRD35.defineClass
       (rules, klass, hitDie, skillPoints, baseAttack, saveFortitude, saveReflex,
        saveWill, profArmor, profShield, profWeapon, skills, features,
        spellsKnown, spellsPerDay, spellAbility);
@@ -1071,7 +1073,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
         'validationNotes.serpentStrikeFeatFeats:Weapon Focus (Longspear)',
         'validationNotes.serpentStrikeFeatFeatures:Requires Flurry Of Blows',
         'validationNotes.serpentStrikeFeatWeaponProficiencyLevel:' +
-          'Requires Weapon Proficiency Level >= ' + PH35.PROFICIENCY_LIGHT
+          'Requires Weapon Proficiency Level >= ' + SRD35.PROFICIENCY_LIGHT
       ];
     } else if(feat == 'Shifter Defense') {
       notes = [
@@ -1206,7 +1208,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
 /* Defines non-feat rules from Eberron Chapter 3, Heroic Characteristics. */
 Eberron.heroicRules = function(rules, houses) {
   rules.defineChoice('houses', houses);
-  rules.defineChoice('random', PH35.RANDOMIZABLE_ATTRIBUTES.concat(['house']));
+  rules.defineChoice('random', SRD35.RANDOMIZABLE_ATTRIBUTES.concat(['house']));
   rules.defineEditorElement
     ('house', 'House', 'select-one', 'houses', 'experience');
   rules.defineRule('actionPoints', 'level', '=', '5 + Math.floor(source / 2)');
@@ -1284,7 +1286,7 @@ Eberron.magicRules = function(rules, classes, domains) {
           var spell = pieces[k];
           var school = Eberron.spellsSchools[spell];
           if(school == null) {
-            school = PH35.spellsSchools[spell];
+            school = SRD35.spellsSchools[spell];
           }
           if(school == null) {
             continue;
@@ -1479,7 +1481,7 @@ Eberron.magicRules = function(rules, classes, domains) {
       for(var j = 0; j < spells.length; j++) {
         var spell = spells[j];
         var school = Eberron.spellsSchools[spell];
-        if(school == null && (school = PH35.spellsSchools[spell]) == null) {
+        if(school == null && (school = SRD35.spellsSchools[spell]) == null) {
           continue;
         }
         spell += '(' + domain + (j + 1) + ' ' +
@@ -1503,7 +1505,7 @@ Eberron.prestigeClassRules = function(rules, classes) {
 
     if(klass == 'Dragonmark Heir') {
 
-      baseAttack = PH35.ATTACK_BONUS_AVERAGE;
+      baseAttack = SRD35.ATTACK_BONUS_AVERAGE;
       feats = null;
       features = [
         '1:House Status', '1:Lesser Dragonmark', '2:Action Point Bonus',
@@ -1534,12 +1536,12 @@ Eberron.prestigeClassRules = function(rules, classes) {
           'Requires Race =~ Dwarf|Elf|Gnome|Halfling|Half Orc|Human',
         'validationNotes.dragonmarkHeirClassSkills:Requires any 2 >= 7'
       ];
-      profArmor = PH35.PROFICIENCY_NONE;
-      profShield = PH35.PROFICIENCY_NONE;
-      profWeapon = PH35.PROFICIENCY_NONE;
-      saveFortitude = PH35.SAVE_BONUS_GOOD;
-      saveReflex = PH35.SAVE_BONUS_GOOD;
-      saveWill = PH35.SAVE_BONUS_GOOD;
+      profArmor = SRD35.PROFICIENCY_NONE;
+      profShield = SRD35.PROFICIENCY_NONE;
+      profWeapon = SRD35.PROFICIENCY_NONE;
+      saveFortitude = SRD35.SAVE_BONUS_GOOD;
+      saveReflex = SRD35.SAVE_BONUS_GOOD;
+      saveWill = SRD35.SAVE_BONUS_GOOD;
       selectableFeatures = null;
       skillPoints = 4;
       skills = [
@@ -1578,7 +1580,7 @@ Eberron.prestigeClassRules = function(rules, classes) {
 
     } else if(klass == 'Eldeen Ranger') {
 
-      baseAttack = PH35.ATTACK_BONUS_GOOD;
+      baseAttack = SRD35.ATTACK_BONUS_GOOD;
       feats = null;
       features = [
         '1:Nature Sense', '1:Resist Aberrations', '1:Resist Nature\'s Lure',
@@ -1598,7 +1600,7 @@ Eberron.prestigeClassRules = function(rules, classes) {
         'combatNotes.ferocityFeature:Continue fighting below 0 HP',
         'combatNotes.smiteEvilFeature:' +
           '%V/day add %1 to attack, %2 to damage vs. evil foe',
-        'featureNotes.darkvisionFeature:60 ft b/w vision in darkness',
+        'featureNotes.darkvisionFeature:%V ft b/w vision in darkness',
         'magicNotes.touchOfContagionFeature:<i>Contagion</i> 3/day',
         'saveNotes.resistAberrationsFeature:+2 vs. aberration abilities',
         'saveNotes.resistCorruptionFeature:Immune disease/+2 vs. mind-altering',
@@ -1626,12 +1628,12 @@ Eberron.prestigeClassRules = function(rules, classes) {
         'validationNotes.wardensOfTheWoodSelectableFeatureAlignment:' +
           'Requires Alignment !~ Evil'
       ];
-      profArmor = PH35.PROFICIENCY_LIGHT;
-      profShield = PH35.PROFICIENCY_HEAVY;
-      profWeapon = PH35.PROFICIENCY_MEDIUM;
-      saveFortitude = PH35.SAVE_BONUS_GOOD;
-      saveReflex = PH35.SAVE_BONUS_GOOD;
-      saveWill = PH35.SAVE_BONUS_POOR;
+      profArmor = SRD35.PROFICIENCY_LIGHT;
+      profShield = SRD35.PROFICIENCY_HEAVY;
+      profWeapon = SRD35.PROFICIENCY_MEDIUM;
+      saveFortitude = SRD35.SAVE_BONUS_GOOD;
+      saveReflex = SRD35.SAVE_BONUS_GOOD;
+      saveWill = SRD35.SAVE_BONUS_POOR;
       selectableFeatures = [
         'Ashbound', 'Children Of Winter', 'Gatekeepers', 'Greensingers',
         'Wardens Of The Wood'
@@ -1703,6 +1705,9 @@ Eberron.prestigeClassRules = function(rules, classes) {
       rules.defineRule('featCount.Fighter',
         'eldeenRangerFeatures.Improved Critical', '+=', '1'
       );
+      rules.defineRule('featureNotes.darkvisionFeature',
+        'eldeenRangerFeatures.Darkvision', '+=', '60'
+      );
       rules.defineRule
         ('save.Fortitude', 'saveNotes.unearthlyGraceFeature', '+', null);
       rules.defineRule
@@ -1720,7 +1725,7 @@ Eberron.prestigeClassRules = function(rules, classes) {
 
     } else if(klass == 'Exorcist Of The Silver Flame') {
 
-      baseAttack = PH35.ATTACK_BONUS_GOOD;
+      baseAttack = SRD35.ATTACK_BONUS_GOOD;
       feats = null;
       features = [
         '1:Flame Of Censure', '1:Weapon Of The Exorcist',
@@ -1742,8 +1747,7 @@ Eberron.prestigeClassRules = function(rules, classes) {
         'combatNotes.weaponOfFlameFeature:+%Vd6 flame damage w/sacred weapon',
         'combatNotes.weaponOfTheExorcistFeature:' +
           '+1 damage w/sacred weapon treated as %V',
-         // TODO 30 ft at level 3, 60 at level 6
-        'featureNotes.darkvisionFeature:60 ft b/w vision in darkness',
+        'featureNotes.darkvisionFeature:%V ft b/w vision in darkness',
         'magicNotes.casterLevelBonusFeature:' +
           'Add %V to base class level for spells known/per day',
         'magicNotes.detectThoughtsFeature:DC %V <i>Detect Thoughts</i> at will',
@@ -1764,12 +1768,12 @@ Eberron.prestigeClassRules = function(rules, classes) {
         'validationNotes.exorcistOfTheSilverFlameClassSkills:' +
           'Requires Knowledge (Planes) >= 3/Knowledge (Religion) >= 8'
       ];
-      profArmor = PH35.PROFICIENCY_NONE;
-      profShield = PH35.PROFICIENCY_NONE;
-      profWeapon = PH35.PROFICIENCY_NONE;
-      saveFortitude = PH35.SAVE_BONUS_GOOD;
-      saveReflex = PH35.SAVE_BONUS_POOR;
-      saveWill = PH35.SAVE_BONUS_GOOD;
+      profArmor = SRD35.PROFICIENCY_NONE;
+      profShield = SRD35.PROFICIENCY_NONE;
+      profWeapon = SRD35.PROFICIENCY_NONE;
+      saveFortitude = SRD35.SAVE_BONUS_GOOD;
+      saveReflex = SRD35.SAVE_BONUS_POOR;
+      saveWill = SRD35.SAVE_BONUS_GOOD;
       selectableFeatures = null;
       skillPoints = 2;
       skills = [
@@ -1803,6 +1807,10 @@ Eberron.prestigeClassRules = function(rules, classes) {
         '.concat(source >= 4 ? ["good"] : [])' +
         '.concat(source >= 8 ? ["lawful"] : []).sort().join("/")'
       );
+      rules.defineRule('featureNotes.darkvisionFeature',
+        'levels.Exorcist Of The Silver Flame', '+=',
+        'source >= 6 ? 60 : source >= 3 ? 30 : null'
+      );
       rules.defineRule('magicNotes.casterLevelBonusFeature',
         'levels.Exorcist Of The Silver Flame', '+=', 'Math.floor(source*2/3)'
       );
@@ -1830,7 +1838,7 @@ Eberron.prestigeClassRules = function(rules, classes) {
 
     } else if(klass == 'Extreme Explorer') {
 
-      baseAttack = PH35.ATTACK_BONUS_AVERAGE;
+      baseAttack = SRD35.ATTACK_BONUS_AVERAGE;
       feats = [
         'Action Surge', 'Heroic Spirit', 'Persue', 'Spontaneous Casting'
       ];
@@ -1853,12 +1861,12 @@ Eberron.prestigeClassRules = function(rules, classes) {
         'validationNotes.extremeExplorerClassSkills:' +
           'Requires Knowledge (Dungeoneering) >= 4/Survival >= 4'
       ];
-      profArmor = PH35.PROFICIENCY_NONE;
-      profShield = PH35.PROFICIENCY_NONE;
-      profWeapon = PH35.PROFICIENCY_NONE;
-      saveFortitude = PH35.SAVE_BONUS_POOR;
-      saveReflex = PH35.SAVE_BONUS_GOOD;
-      saveWill = PH35.SAVE_BONUS_POOR;
+      profArmor = SRD35.PROFICIENCY_NONE;
+      profShield = SRD35.PROFICIENCY_NONE;
+      profWeapon = SRD35.PROFICIENCY_NONE;
+      saveFortitude = SRD35.SAVE_BONUS_POOR;
+      saveReflex = SRD35.SAVE_BONUS_GOOD;
+      saveWill = SRD35.SAVE_BONUS_POOR;
       selectableFeatures = null;
       skillPoints = 6;
       skills = [
@@ -1888,7 +1896,7 @@ Eberron.prestigeClassRules = function(rules, classes) {
 
     } else if(klass == 'Heir Of Siberys') {
 
-      baseAttack = PH35.ATTACK_BONUS_GOOD;
+      baseAttack = SRD35.ATTACK_BONUS_GOOD;
       feats = [
         'Action Boost', 'Action Surge', 'Favored In House', 'Pursue',
         'Spontaneous Casting'
@@ -1909,12 +1917,12 @@ Eberron.prestigeClassRules = function(rules, classes) {
           'Requires Race =~ Dwarf|Elf|Gnome|Halfling|Half Orc|Human',
         'validationNotes.heirOfSiberysClassSkills:Requires any 2 >= 15'
       ];
-      profArmor = PH35.PROFICIENCY_NONE;
-      profShield = PH35.PROFICIENCY_NONE;
-      profWeapon = PH35.PROFICIENCY_NONE;
-      saveFortitude = PH35.SAVE_BONUS_GOOD;
-      saveReflex = PH35.SAVE_BONUS_GOOD;
-      saveWill = PH35.SAVE_BONUS_GOOD;
+      profArmor = SRD35.PROFICIENCY_NONE;
+      profShield = SRD35.PROFICIENCY_NONE;
+      profWeapon = SRD35.PROFICIENCY_NONE;
+      saveFortitude = SRD35.SAVE_BONUS_GOOD;
+      saveReflex = SRD35.SAVE_BONUS_GOOD;
+      saveWill = SRD35.SAVE_BONUS_GOOD;
       selectableFeatures = null;
       skillPoints = 2;
       skills = [ ];
@@ -1965,7 +1973,7 @@ Eberron.prestigeClassRules = function(rules, classes) {
 
     } else if(klass == 'Master Inquisitive') {
 
-      baseAttack = PH35.ATTACK_BONUS_AVERAGE;
+      baseAttack = SRD35.ATTACK_BONUS_AVERAGE;
       feats = [
         'Alertness', 'Deceitful', 'Heroic Spirit', 'Improved Initiative',
         'Iron Will', 'Negotiator', 'Persuasive', 'Recognize Impostor',
@@ -1989,12 +1997,12 @@ Eberron.prestigeClassRules = function(rules, classes) {
         'validationNotes.masterInquisitiveClassSkills:' +
           'Requires Gather Information >= 6/Search >= 3/Sense Motive >= 6'
       ];
-      profArmor = PH35.PROFICIENCY_NONE;
-      profShield = PH35.PROFICIENCY_NONE;
-      profWeapon = PH35.PROFICIENCY_NONE;
-      saveFortitude = PH35.SAVE_BONUS_POOR;
-      saveReflex = PH35.SAVE_BONUS_GOOD;
-      saveWill = PH35.SAVE_BONUS_POOR;
+      profArmor = SRD35.PROFICIENCY_NONE;
+      profShield = SRD35.PROFICIENCY_NONE;
+      profWeapon = SRD35.PROFICIENCY_NONE;
+      saveFortitude = SRD35.SAVE_BONUS_POOR;
+      saveReflex = SRD35.SAVE_BONUS_GOOD;
+      saveWill = SRD35.SAVE_BONUS_POOR;
       selectableFeatures = null;
       skillPoints = 6;
       skills = [
@@ -2011,7 +2019,7 @@ Eberron.prestigeClassRules = function(rules, classes) {
 
     } else if(klass == 'Warforged Juggernaut') {
 
-      baseAttack = PH35.ATTACK_BONUS_AVERAGE;
+      baseAttack = SRD35.ATTACK_BONUS_AVERAGE;
       feats = null;
       features = [
         '1:Armor Spikes', '1:Expert Bull Rush', '1:Powerful Charge',
@@ -2044,12 +2052,12 @@ Eberron.prestigeClassRules = function(rules, classes) {
           'Requires Adamantine Body/Improved Bull Rush/Power Attack',
         'validationNotes.warforgedJuggernautRace:Requires Race == Warforged'
       ];
-      profArmor = PH35.PROFICIENCY_NONE;
-      profShield = PH35.PROFICIENCY_NONE;
-      profWeapon = PH35.PROFICIENCY_NONE;
-      saveFortitude = PH35.SAVE_BONUS_GOOD;
-      saveReflex = PH35.SAVE_BONUS_POOR;
-      saveWill = PH35.SAVE_BONUS_POOR;
+      profArmor = SRD35.PROFICIENCY_NONE;
+      profShield = SRD35.PROFICIENCY_NONE;
+      profWeapon = SRD35.PROFICIENCY_NONE;
+      saveFortitude = SRD35.SAVE_BONUS_GOOD;
+      saveReflex = SRD35.SAVE_BONUS_POOR;
+      saveWill = SRD35.SAVE_BONUS_POOR;
       selectableFeatures = null;
       skillPoints = 2;
       skills = [
@@ -2088,7 +2096,7 @@ Eberron.prestigeClassRules = function(rules, classes) {
 
     } else if(klass == 'Weretouched Master') {
 
-      baseAttack = PH35.ATTACK_BONUS_AVERAGE;
+      baseAttack = SRD35.ATTACK_BONUS_AVERAGE;
       feats = null;
       features = [
         '1:Weretouched Claws', '1:Weretouched Fangs', '1:Weretouched Tusks',
@@ -2128,12 +2136,12 @@ Eberron.prestigeClassRules = function(rules, classes) {
         'validationNotes.weretouchedMasterClassSkills:' +
           'Requires Knowledge (Nature) >= 5/Survival >= 8'
       ];
-      profArmor = PH35.PROFICIENCY_NONE;
-      profShield = PH35.PROFICIENCY_NONE;
-      profWeapon = PH35.PROFICIENCY_NONE;
-      saveFortitude = PH35.SAVE_BONUS_GOOD;
-      saveReflex = PH35.SAVE_BONUS_GOOD;
-      saveWill = PH35.SAVE_BONUS_POOR;
+      profArmor = SRD35.PROFICIENCY_NONE;
+      profShield = SRD35.PROFICIENCY_NONE;
+      profWeapon = SRD35.PROFICIENCY_NONE;
+      saveFortitude = SRD35.SAVE_BONUS_GOOD;
+      saveReflex = SRD35.SAVE_BONUS_GOOD;
+      saveWill = SRD35.SAVE_BONUS_POOR;
       selectableFeatures = [
         'Bear', 'Boar', 'Rat', 'Tiger', 'Wolf', 'Wolverine'
       ];
@@ -2227,7 +2235,7 @@ Eberron.prestigeClassRules = function(rules, classes) {
     } else
       continue;
 
-    PH35.defineClass
+    SRD35.defineClass
       (rules, klass, hitDie, skillPoints, baseAttack, saveFortitude, saveReflex,
        saveWill, profArmor, profShield, profWeapon, skills, features,
        spellsKnown, spellsPerDay, spellAbility);
@@ -2387,7 +2395,7 @@ Eberron.raceRules = function(rules, races) {
     } else
       continue;
 
-    PH35.defineRace(rules, race, adjustment, features);
+    SRD35.defineRace(rules, race, adjustment, features);
     if(notes != null) {
       rules.defineNote(notes);
     }
