@@ -1,4 +1,4 @@
-/* $Id: Eberron.js,v 1.26 2007/11/08 14:22:32 Jim Exp $ */
+/* $Id: Eberron.js,v 1.27 2007/11/29 02:57:42 Jim Exp $ */
 
 /*
 Copyright 2005, James J. Hayes
@@ -46,30 +46,33 @@ function Eberron() {
   SRD35.descriptionRules
     (rules, SRD35.ALIGNMENTS, Eberron.DEITIES, SRD35.GENDERS);
   SRD35.equipmentRules(rules, SRD35.ARMORS, SRD35.GOODIES, SRD35.SHIELDS,
-                      SRD35.WEAPONS.concat(Eberron.WEAPONS));
+                       SRD35.WEAPONS.concat(Eberron.WEAPONS));
   SRD35.combatRules(rules);
   SRD35.adventuringRules(rules);
   SRD35.magicRules(rules, SRD35.CLASSES, SRD35.DOMAINS, SRD35.SCHOOLS);
-  // Pick up the DMG rules, if available
+  // Pick up the Prestige/NPC rules, if available
   if(window.SRD35PrestigeNPC != null) {
     SRD35PrestigeNPC.npcClassRules(rules, SRD35PrestigeNPC.NPC_CLASSES);
     SRD35PrestigeNPC.prestigeClassRules
       (rules, SRD35PrestigeNPC.PRESTIGE_CLASSES);
     SRD35PrestigeNPC.companionRules(rules, SRD35PrestigeNPC.COMPANIONS);
   }
-  // So far, same character creation procedures as SRD35
-  rules.defineChoice('preset', 'race', 'experience', 'levels');
-  rules.defineChoice('random', SRD35.RANDOMIZABLE_ATTRIBUTES);
-  rules.randomizeOneAttribute = SRD35.randomizeOneAttribute;
-  rules.makeValid = SRD35.makeValid;
   // Add Eberron-specific rules
+  Eberron.raceRules(rules, Eberron.RACES);
   Eberron.classRules(rules, Eberron.CLASSES);
   Eberron.featRules(rules, Eberron.FEATS, Eberron.SUBFEATS);
   Eberron.heroicRules(rules, Eberron.HOUSES);
   Eberron.magicRules
     (rules, SRD35.CLASSES.concat(Eberron.CLASSES), Eberron.DOMAINS);
   Eberron.prestigeClassRules(rules, Eberron.PRESTIGE_CLASSES);
-  Eberron.raceRules(rules, Eberron.RACES);
+  // So far, same character creation procedures as SRD35
+  rules.defineChoice('preset', 'race', 'level', 'levels');
+  rules.defineChoice('random', SRD35.RANDOMIZABLE_ATTRIBUTES);
+  rules.randomizeOneAttribute = SRD35.randomizeOneAttribute;
+  rules.makeValid = SRD35.makeValid;
+  if(window.Experience != null) {
+    Experience.experienceRules(rules);
+  }
   // Let Scribe know we're here
   Scribe.addRuleSet(rules);
   Eberron.rules = rules;
@@ -1210,13 +1213,13 @@ Eberron.featRules = function(rules, feats, subfeats) {
 /* Defines non-feat rules from Eberron Chapter 3, Heroic Characteristics. */
 Eberron.heroicRules = function(rules, houses) {
   rules.defineChoice('houses', houses);
-  rules.defineChoice('random', SRD35.RANDOMIZABLE_ATTRIBUTES.concat(['house']));
-  rules.defineEditorElement
-    ('house', 'House', 'select-one', 'houses', 'experience');
   rules.defineRule('actionPoints', 'level', '=', '5 + Math.floor(source / 2)');
   rules.defineRule('actionDice', 'level', '=', '1 + Math.floor(source / 7)');
   rules.defineRule
     ('dragonmark', 'house', '=', 'Eberron.housesDragonmarks[source]');
+  rules.defineChoice('random', 'house');
+  rules.defineEditorElement
+    ('house', 'House', 'select-one', 'houses', 'levels');
   rules.defineSheetElement('Heroics', 'Description');
   rules.defineSheetElement('House', 'Heroics/');
   rules.defineSheetElement('Dragonmark', 'Heroics/');
