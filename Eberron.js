@@ -1,4 +1,4 @@
-/* $Id: Eberron.js,v 1.27 2007/11/29 02:57:42 Jim Exp $ */
+/* $Id: Eberron.js,v 1.28 2007/12/01 07:27:51 Jim Exp $ */
 
 /*
 Copyright 2005, James J. Hayes
@@ -50,12 +50,14 @@ function Eberron() {
   SRD35.combatRules(rules);
   SRD35.adventuringRules(rules);
   SRD35.magicRules(rules, SRD35.CLASSES, SRD35.DOMAINS, SRD35.SCHOOLS);
-  // Pick up the Prestige/NPC rules, if available
+  // Pick up the NPC/Prestige rules, if available
+  if(window.SRD35NPC != null) {
+    SRD35NPC.classRules(rules, SRD35NPC.CLASSES);
+    SRD35NPC.companionRules(rules, SRD35NPC.COMPANIONS);
+  }
   if(window.SRD35PrestigeNPC != null) {
-    SRD35PrestigeNPC.npcClassRules(rules, SRD35PrestigeNPC.NPC_CLASSES);
-    SRD35PrestigeNPC.prestigeClassRules
-      (rules, SRD35PrestigeNPC.PRESTIGE_CLASSES);
-    SRD35PrestigeNPC.companionRules(rules, SRD35PrestigeNPC.COMPANIONS);
+    SRD35Prestige.classRules(rules, SRD35Prestige.CLASSES);
+    SRD35Prestige.companionRules(rules, SRD35Prestige.COMPANIONS);
   }
   // Add Eberron-specific rules
   Eberron.raceRules(rules, Eberron.RACES);
