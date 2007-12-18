@@ -1,4 +1,4 @@
-/* $Id: Eberron.js,v 1.28 2007/12/01 07:27:51 Jim Exp $ */
+/* $Id: Eberron.js,v 1.29 2007/12/18 22:19:24 Jim Exp $ */
 
 /*
 Copyright 2005, James J. Hayes
@@ -1759,7 +1759,7 @@ Eberron.prestigeClassRules = function(rules, classes) {
           'Add %V to base class level for spells known/per day',
         'magicNotes.detectThoughtsFeature:DC %V <i>Detect Thoughts</i> at will',
         'magicNotes.wardingFlameFeature:Warding glow for spell resistance 25',
-        'saveNotes.resistCharmFeature:+2 vs. charm/compulsion',
+        'saveNotes.resistCharmFeature:+2 vs. charm effects',
         'saveNotes.resistPossessionFeature:+4 vs. possession',
         'saveNotes.resistUnnaturalFeature:+2 vs. effects of outsiders/undead',
         'magicNotes.silverExorcismFeature:+2 checks vs. evil outsiders',
