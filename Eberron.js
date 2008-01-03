@@ -1,4 +1,4 @@
-/* $Id: Eberron.js,v 1.29 2007/12/18 22:19:24 Jim Exp $ */
+/* $Id: Eberron.js,v 1.30 2008/01/03 07:58:26 Jim Exp $ */
 
 /*
 Copyright 2005, James J. Hayes
@@ -1756,7 +1756,7 @@ Eberron.prestigeClassRules = function(rules, classes) {
           '+1 damage w/sacred weapon treated as %V',
         'featureNotes.darkvisionFeature:%V ft b/w vision in darkness',
         'magicNotes.casterLevelBonusFeature:' +
-          'Add %V to base class level for spells known/per day',
+          '+%V base class level for spells known/per day',
         'magicNotes.detectThoughtsFeature:DC %V <i>Detect Thoughts</i> at will',
         'magicNotes.wardingFlameFeature:Warding glow for spell resistance 25',
         'saveNotes.resistCharmFeature:+2 vs. charm effects',
@@ -1915,7 +1915,7 @@ Eberron.prestigeClassRules = function(rules, classes) {
       notes = [
         'abilityNotes.actionPointBonusFeature:+2 AP',
         'magicNotes.casterLevelBonusFeature:' +
-          'Add %V to base class level for spells known/per day',
+          '+%V base class level for spells known/per day',
         'magicNotes.siberysMarkFeature:' +
           'DC %V+spell level %1 at caster level 15 %2/day',
         'validationNotes.heirOfSiberysClassFeats:' +
