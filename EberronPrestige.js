@@ -1,4 +1,4 @@
-/* $Id: EberronPrestige.js,v 1.2 2008/03/27 05:12:22 Jim Exp $ */
+/* $Id: EberronPrestige.js,v 1.3 2008/04/04 16:19:30 Jim Exp $ */
 
 /*
 Copyright 2008, James J. Hayes
@@ -295,11 +295,11 @@ EberronPrestige.classRules = function(rules, classes) {
         'magicNotes.casterLevelBonusFeature:' +
           '+%V base class level for spells known/per day',
         'magicNotes.detectThoughtsFeature:DC %V <i>Detect Thoughts</i> at will',
+        'magicNotes.silverExorcismFeature:+2 vs. evil outsiders resistance',
         'magicNotes.wardingFlameFeature:Warding glow for spell resistance 25',
         'saveNotes.resistCharmFeature:+2 vs. charm effects',
         'saveNotes.resistPossessionFeature:+4 vs. possession',
         'saveNotes.resistUnnaturalFeature:+2 vs. effects of outsiders/undead',
-        'magicNotes.silverExorcismFeature:+2 checks vs. evil outsiders',
         'turnOutsider.damageModifier:2d6+%V',
         'turnOutsider.frequency:%V/day',
         'turnOutsider.maxHitDice:(d20+%V)/3',

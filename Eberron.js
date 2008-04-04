@@ -1,4 +1,4 @@
-/* $Id: Eberron.js,v 1.33 2008/04/04 05:33:19 Jim Exp $ */
+/* $Id: Eberron.js,v 1.34 2008/04/04 16:19:30 Jim Exp $ */
 
 /*
 Copyright 2008, James J. Hayes
@@ -16,6 +16,8 @@ You should have received a copy of the GNU General Public License along with
 this program; if not, write to the Free Software Foundation, Inc., 59 Temple
 Place, Suite 330, Boston, MA 02111-1307 USA.
 */
+
+var EBERRON_VERSION = '1.0beta-080404';
 
 /*
  * This module loads the rules from the Eberron campaign setting.  The Eberron
@@ -731,7 +733,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
       ];
     } else if(feat == 'Great Rend') {
       notes = [
-        'combatNotes.greatRendFeature:+d4+%V damage from hit w/both claws',
+        'combatNotes.greatRendFeature:+d4+%V damage on hit w/both claws',
         'validationNotes.greatRendFeatBaseAttack:Requires Base Attack >= 4',
         'validationNotes.greatRendFeatFeatures:Requires Razorclaw'
       ];
@@ -1646,16 +1648,19 @@ Eberron.raceRules = function(rules, races) {
 };
 
 Eberron.ruleNotes = function() {
-  return "" +
-    "<h3>Usage Notes</h3>\n" +
-    "<p>\n" +
-    "TODO\n" +
-    "\n" +
-    "</p>\n" +
-    "\n" +
-    "<h3>Limitations</h3>\n" +
-    "<p>\n" +
-    "TODO\n" +
-    "\n" +
-    "</p>\n";
+  return '' +
+    '<h2>Eberron Scribe Module Notes</h2>\n' +
+    'Eberron Scribe Module Version ' + EBERRON_VERSION + '\n' +
+    '\n' +
+    '<h3>Usage Notes</h3>\n' +
+    '<p>\n' +
+    'TODO\n' +
+    '\n' +
+    '</p>\n' +
+    '\n' +
+    '<h3>Limitations</h3>\n' +
+    '<p>\n' +
+    'TODO\n' +
+    '\n' +
+    '</p>\n';
 }
