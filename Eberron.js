@@ -1,4 +1,4 @@
-/* $Id: Eberron.js,v 1.32 2008/03/27 05:12:22 Jim Exp $ */
+/* $Id: Eberron.js,v 1.33 2008/04/04 05:33:19 Jim Exp $ */
 
 /*
 Copyright 2008, James J. Hayes
@@ -71,9 +71,7 @@ function Eberron() {
   rules.defineChoice('random', SRD35.RANDOMIZABLE_ATTRIBUTES);
   rules.randomizeOneAttribute = SRD35.randomizeOneAttribute;
   rules.makeValid = SRD35.makeValid;
-  if(window.Experience != null) {
-    Experience.experienceRules(rules);
-  }
+  rules.ruleNotes = Eberron.ruleNotes;
   // Let Scribe know we're here
   Scribe.addRuleSet(rules);
   Eberron.rules = rules;
@@ -1646,3 +1644,18 @@ Eberron.raceRules = function(rules, races) {
   }
 
 };
+
+Eberron.ruleNotes = function() {
+  return "" +
+    "<h3>Usage Notes</h3>\n" +
+    "<p>\n" +
+    "TODO\n" +
+    "\n" +
+    "</p>\n" +
+    "\n" +
+    "<h3>Limitations</h3>\n" +
+    "<p>\n" +
+    "TODO\n" +
+    "\n" +
+    "</p>\n";
+}
