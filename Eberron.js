@@ -1,4 +1,4 @@
-/* $Id: Eberron.js,v 1.34 2008/04/04 16:19:30 Jim Exp $ */
+/* $Id: Eberron.js,v 1.35 2008/04/08 04:42:06 Jim Exp $ */
 
 /*
 Copyright 2008, James J. Hayes
@@ -17,7 +17,7 @@ this program; if not, write to the Free Software Foundation, Inc., 59 Temple
 Place, Suite 330, Boston, MA 02111-1307 USA.
 */
 
-var EBERRON_VERSION = '1.0beta-080404';
+var EBERRON_VERSION = '1.0beta-080408';
 
 /*
  * This module loads the rules from the Eberron campaign setting.  The Eberron
@@ -674,13 +674,13 @@ Eberron.featRules = function(rules, feats, subfeats) {
       notes = [
         'featureNotes.extraShifterTraitFeature:' +
           'Extra Shifter trait w/out ability bonus',
-        'validationNotes.extraShifterFeatFeats:Requires any 2 Shifter',
-        'validationNotes.extraShifterFeatRace:Requires Race == Shifter'
+        'validationNotes.extraShifterTraitFeatFeats:Requires any 2 Shifter',
+        'validationNotes.extraShifterTraitFeatRace:Requires Race == Shifter'
       ];
       rules.defineRule('selectableFeatureCount.Shifter',
         'featureNotes.extraShifterTraitFeature', '+', '1'
       );
-      rules.defineRule('validationNotes.extraShifterFeatFeats',
+      rules.defineRule('validationNotes.extraShifterTraitFeatFeats',
         'feats.Extra Shifter Trait', '=', '0', // TODO any 2 Shifter
         '', 'v', '0'
       );
@@ -744,7 +744,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
     } else if(feat == 'Greater Dragonmark') {
       notes = [
         'magicNotes.greaterDragonmarkFeature:' +
-          'DC %V+spell level %1 at caster level 10/' +
+          'DC %V+spell level choice of %1 daily at caster level 10/' +
           'least/lesser dragonmark ability +1/day',
         'validationNotes.greaterDragonmarkFeatFeats:' +
           'Requires Least Dragonmark/Lesser Dragonmark',
@@ -758,7 +758,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
       );
       rules.defineRule('magicNotes.greaterDragonmarkFeature.1',
         'dragonmark', '=',
-        'Eberron.dragonmarksSpells[source] == null ? null : ' +
+        'Eberron.dragonmarksSpells[source] == null ? "spells" : ' +
         'Eberron.dragonmarksSpells[source][2]'
       );
       rules.defineRule('validationNotes.greaterDragonmarkFeatSkills',
@@ -884,7 +884,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
     } else if(feat == 'Least Dragonmark') {
       notes = [
         'magicNotes.leastDragonmarkFeature:' +
-          'DC %V+spell level %1 at caster level 1',
+          'DC %V+spell level choice of %1 daily at caster level 1',
         'validationNotes.leastDragonmarkFeatHouse:Requires House != None',
         'validationNotes.leastDragonmarkFeatRace:' +
           'Requires Race =~ Dwarf|Elf|Gnome|Halfling|Half Orc|Human'
@@ -894,7 +894,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
       );
       rules.defineRule('magicNotes.leastDragonmarkFeature.1',
         'dragonmark', '=',
-        'Eberron.dragonmarksSpells[source] == null ? null : ' +
+        'Eberron.dragonmarksSpells[source] == null ? "spells" : ' +
         'Eberron.dragonmarksSpells[source][0]'
       );
     } else if(feat == 'Legendary Artisan') {
@@ -910,7 +910,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
     } else if(feat == 'Lesser Dragonmark') {
       notes = [
         'magicNotes.lesserDragonmarkFeature:' +
-          'DC %V+spell level %1 at caster level 6/' +
+          'DC %V+spell level choice of %1 daily at caster level 6/' +
           'least dragonmark ability +1/day',
         'validationNotes.lesserDragonmarkFeatHouse:Requires House != None',
         'validationNotes.lesserDragonmarkFeatFeats:Requires Least Dragonmark',
@@ -923,7 +923,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
       );
       rules.defineRule('magicNotes.lesserDragonmarkFeature.1',
         'dragonmark', '=',
-        'Eberron.dragonmarksSpells[source] == null ? null : ' +
+        'Eberron.dragonmarksSpells[source] == null ? "spells" : ' +
         'Eberron.dragonmarksSpells[source][1]'
       );
       rules.defineRule('validationNotes.lesserDragonmarkFeatSkills',
