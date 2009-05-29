@@ -1,4 +1,4 @@
-/* $Id: Eberron.js,v 1.35 2008/04/08 04:42:06 Jim Exp $ */
+/* $Id: Eberron.js,v 1.36 2009/05/29 03:52:30 Jim Exp $ */
 
 /*
 Copyright 2008, James J. Hayes
@@ -35,7 +35,7 @@ function Eberron() {
   }
 
   // Define a new rule set w/the same editor and standard viewer as SRD35
-  var rules = new ScribeRules('Eberron');
+  var rules = new ScribeRules('Eberron', EBERRON_VERSION);
   rules.editorElements = SRD35.initialEditorElements();
   SRD35.createViewers(rules, SRD35.VIEWERS);
   // Pick up the SRD35 rules, w/minor mods for deities and weapons
