@@ -1,7 +1,7 @@
-/* $Id: Eberron.js,v 1.36 2009/05/29 03:52:30 Jim Exp $ */
+/* $Id: Eberron.js,v 1.37 2011/03/24 23:04:18 jhayes Exp $ */
 
 /*
-Copyright 2008, James J. Hayes
+Copyright 2011, James J. Hayes
 
 This program is free software; you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software
