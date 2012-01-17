@@ -1,7 +1,7 @@
-/* $Id: Eberron.js,v 1.37 2011/03/24 23:04:18 jhayes Exp $ */
+/* $Id: Eberron.js,v 1.38 2012/01/17 06:25:50 jhayes Exp $ */
 
 /*
-Copyright 2011, James J. Hayes
+Copyright 2008, James J. Hayes
 
 This program is free software; you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software
@@ -43,7 +43,7 @@ function Eberron() {
   SRD35.raceRules(rules, SRD35.LANGUAGES, SRD35.RACES);
   SRD35.classRules(rules, SRD35.CLASSES);
   SRD35.companionRules(rules, SRD35.COMPANIONS);
-  SRD35.skillRules(rules, SRD35.SKILLS, SRD35.SUBSKILLS);
+  SRD35.skillRules(rules, SRD35.SKILLS, SRD35.SUBSKILLS, SRD35.SYNERGIES);
   SRD35.featRules(rules, SRD35.FEATS, SRD35.SUBFEATS);
   SRD35.descriptionRules
     (rules, SRD35.ALIGNMENTS, Eberron.DEITIES, SRD35.GENDERS);
