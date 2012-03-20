@@ -1,4 +1,4 @@
-/* $Id: EberronPrestige.js,v 1.5 2012/01/17 06:25:51 jhayes Exp $ */
+/* $Id: EberronPrestige.js,v 1.6 2012/03/20 02:48:25 jhayes Exp $ */
 
 /*
 Copyright 2008, James J. Hayes
@@ -672,7 +672,7 @@ EberronPrestige.classRules = function(rules, classes) {
         // TODO Longtooth => next size category
         'combatNotes.weretouchedTusksFeature:d6+%V tusk attack while shifting',
         'saveNotes.fierceWillFeature:+4 Will while shifting',
-        'skillNotes.wildEmpathyFeature:+%V Diplomacy check with animals',
+        'skillNotes.wildEmpathyFeature:+%V Diplomacy w/animals',
         'validationNotes.weretouchedMasterClassBaseAttack:' +
           'Requires Base Attack >= 4',
         'validationNotes.weretouchedMasterClassFeats:Requires any Shifter',

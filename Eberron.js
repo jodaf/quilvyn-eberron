@@ -1,4 +1,4 @@
-/* $Id: Eberron.js,v 1.38 2012/01/17 06:25:50 jhayes Exp $ */
+/* $Id: Eberron.js,v 1.39 2012/03/20 02:48:24 jhayes Exp $ */
 
 /*
 Copyright 2008, James J. Hayes
