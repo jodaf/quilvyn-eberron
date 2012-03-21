@@ -1,4 +1,4 @@
-/* $Id: Eberron.js,v 1.39 2012/03/20 02:48:24 jhayes Exp $ */
+/* $Id: Eberron.js,v 1.40 2012/03/21 05:50:24 jhayes Exp $ */
 
 /*
 Copyright 2008, James J. Hayes
@@ -115,32 +115,32 @@ Eberron.DOMAINS = [
 ];
 // NOTE: Craft Construct from MM, needed for Artificer class
 Eberron.FEATS = [
-  'Aberrant Dragonmark', 'Action Boost', 'Action Surge',
-  'Adamantine Body:Warforged', 'Ashbound', 'Attune Magic Weapon:Item Creation',
-  'Beast Shape', 'Beast Totem', 'Beasthide Elite:Shifter',
-  'Bind Elemental:Item Creation', 'Child Of Winter', 'Cliffwalk Elite:Shifter',
-  'Craft Construct:Item Creation', 'Double Steel Strike', 'Dragon Rage',
-  'Dragon Totem', 'Ecclesiarch', 'Education',
-  'Exceptional Artisan:Item Creation', 'Extend Rage', 'Extra Music',
+  'Aberrant Dragonmark:', 'Action Boost:', 'Action Surge:',
+  'Adamantine Body:Warforged', 'Ashbound:', 'Attune Magic Weapon:Item Creation',
+  'Beast Shape:', 'Beast Totem:', 'Beasthide Elite:Shifter',
+  'Bind Elemental:Item Creation', 'Child Of Winter:', 'Cliffwalk Elite:Shifter',
+  'Craft Construct:Item Creation', 'Double Steel Strike:', 'Dragon Rage:',
+  'Dragon Totem:', 'Ecclesiarch:', 'Education:',
+  'Exceptional Artisan:Item Creation', 'Extend Rage:', 'Extra Music:',
   'Extra Rings:Item Creation', 'Extra Shifter Trait:Shifter',
-  'Extraordinary Artisan:Item Creation', 'Favored In House', 'Flensing Strike',
-  'Gatekeeper Initiate', 'Great Bite:Shifter', 'Great Rend:Shifter',
-  'Greater Dragonmark', 'Greater Powerful Charge',
-  'Greater Shifter Defense:Shifter', 'Greensinger Initiate', 'Haunting Melody',
-  'Healing Factor:Shifter', 'Heroic Spirit',
+  'Extraordinary Artisan:Item Creation', 'Favored In House:',
+  'Flensing Strike:', 'Gatekeeper Initiate:', 'Great Bite:Shifter',
+  'Great Rend:Shifter', 'Greater Dragonmark:', 'Greater Powerful Charge:',
+  'Greater Shifter Defense:Shifter', 'Greensinger Initiate:',
+  'Haunting Melody:', 'Healing Factor:Shifter', 'Heroic Spirit:',
   'Improved Damage Reduction:Warforged', 'Improved Fortification:Warforged',
-  'Improved Natural Attack', 'Investigate', 'Knight Training',
-  'Least Dragonmark', 'Legendary Artisan:Item Creation', 'Lesser Dragonmark',
+  'Improved Natural Attack:', 'Investigate:', 'Knight Training:',
+  'Least Dragonmark:', 'Legendary Artisan:Item Creation', 'Lesser Dragonmark:',
   'Longstride Elite:Shifter', 'Mithral Body:Warforged',
-  'Mithral Fluidity:Warforged', 'Monastic Training', 'Music Of Growth',
-  'Music Of Making', 'Powerful Charge', 'Precise Swing', 'Pursue',
-  'Raging Luck', 'Recognize Impostor', 'Repel Aberration', 'Research',
-  'Right Of Counsel', 'Serpent Strike', 'Shifter Defense:Shifter',
-  'Shifter Ferocity:Shifter', 'Shifter Multiattack:Shifter', 'Silver Smite',
-  'Song Of The Heart', 'Soothe The Beast', 'Spontaneous Casting',
-  'Strong Mind', 'Totem Companion', 'Undead Empathy', 'Urban Tracking',
-  'Vermin Companion', 'Vermin Shape', 'Wand Mastery', 'Warden Initiate',
-  'Whirling Steel Strike'
+  'Mithral Fluidity:Warforged', 'Monastic Training:', 'Music Of Growth:',
+  'Music Of Making:', 'Powerful Charge:', 'Precise Swing:', 'Pursue:',
+  'Raging Luck:', 'Recognize Impostor:', 'Repel Aberration:', 'Research:',
+  'Right Of Counsel:', 'Serpent Strike:', 'Shifter Defense:Shifter',
+  'Shifter Ferocity:Shifter', 'Shifter Multiattack:Shifter', 'Silver Smite:',
+  'Song Of The Heart:', 'Soothe The Beast:', 'Spontaneous Casting:',
+  'Strong Mind:', 'Totem Companion:', 'Undead Empathy:', 'Urban Tracking:',
+  'Vermin Companion:', 'Vermin Shape:', 'Wand Mastery:', 'Warden Initiate:',
+  'Whirling Steel Strike:'
 ];
 Eberron.HOUSES = [
   'Cannith', 'Deneith', 'Ghallanda', 'Jorasco', 'Kundarak', 'Lyrandar',
@@ -370,13 +370,14 @@ Eberron.classRules = function(rules, classes) {
         'magicNotes.brewPotionFeature:Create potion for up to 3rd level spell',
         'magicNotes.craftHomunculusFeature:Create homunculus',
         'magicNotes.craftMagicArmsAndArmorFeature:' +
-          'Create magic weapon/armor/shield',
+          'Create/mend magic weapon/armor/shield',
         'magicNotes.craftReserveFeature:%V',
         'magicNotes.craftRodFeature:Create magic rod',
         'magicNotes.craftStaffFeature:Create magic staff',
         'magicNotes.craftWandFeature:Create wand for up to 4th level spell',
-        'magicNotes.craftWondrousItemFeature:Create miscellaneous magic item',
-        'magicNotes.forgeRingFeature:Create magic ring',
+        'magicNotes.craftWondrousItemFeature:' +
+          'Create/mend miscellaneous magic item',
+        'magicNotes.forgeRingFeature:Create/mend magic ring',
         'magicNotes.itemCreationFeature:' +
           '+2 DC 20+caster level check to create magic items',
         'magicNotes.metamagicSpellCompletionFeature:' +
@@ -1450,7 +1451,7 @@ Eberron.magicRules = function(rules, classes, domains) {
       rules.defineRule('combatNotes.passionDomain', 'levels.Cleric', '=', null);
     } else if(domain == 'Shadow') {
       notes = [
-        'featureNotes.shadowDomain:Blind Fight bonus feat'
+        'featureNotes.shadowDomain:Blind-Fight bonus feat'
       ];
       spells = [
         'Obscuring Mist', 'Darkness', 'Deeper Darkness', 'Shadow Conjuration',
@@ -1458,7 +1459,7 @@ Eberron.magicRules = function(rules, classes, domains) {
         'Greater Shadow Evocation', 'Shades'
       ];
       rules.defineRule
-        ('features.Blind Fight', 'featureNotes.shadowDomain', '=', '1');
+        ('features.Blind-Fight', 'featureNotes.shadowDomain', '=', '1');
     } else if(domain == 'Weather') {
       notes = [
         'featureNotes.weatherDomain:Vision unobstructed by weather',
@@ -1538,7 +1539,7 @@ Eberron.raceRules = function(rules, races) {
         'magicNotes.naturalPsionicFeature:+1 power point/level',
         'saveNotes.dreamlessFeature:Immune <i>Dream</i>, <i>Nightmare</i>',
         'saveNotes.resistMentalFeature:+2 vs. mind-altering effects',
-        'saveNotes.resistPossessionFeature:+2 vs. possession',
+        'saveNotes.resistPossessionFeature:+%V vs. possession',
         'skillNotes.humanlikeFeature:+2 Disguise (human)',
         'skillNotes.influentialFeature:+2 Bluff/Diplomacy/Intimidate'
       ];
@@ -1550,7 +1551,10 @@ Eberron.raceRules = function(rules, races) {
         'saveNotes.resistMentalFeature', '+=', '2'
       );
       rules.defineRule('resistance.Possession',
-        'saveNotes.resistPossessionFeature', '+=', '2'
+        'saveNotes.resistPossessionFeature', '+=', null
+      );
+      rules.defineRule('saveNotes.resistPossessionFeature',
+        'kalashtarFeatures.Resist Possession', '+=', '2'
       );
 
     } else if(race == 'Shifter') {

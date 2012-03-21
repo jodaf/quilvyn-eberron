@@ -1,4 +1,4 @@
-/* $Id: EberronPrestige.js,v 1.6 2012/03/20 02:48:25 jhayes Exp $ */
+/* $Id: EberronPrestige.js,v 1.7 2012/03/21 05:50:25 jhayes Exp $ */
 
 /*
 Copyright 2008, James J. Hayes
@@ -60,7 +60,7 @@ EberronPrestige.classRules = function(rules, classes) {
       notes = [
         'abilityNotes.actionPointBonusFeature:+2 AP',
         'magicNotes.greaterDragonmarkFeature:' +
-          'DC %V+spell level %1 at caster level 10/' +
+          'DC %V+spell level choice of %1 daily at caster level 10/' +
           'least/lesser dragonmark ability +1/day',
         'magicNotes.improvedGreaterDragonmarkFeature:' +
           '2nd greater dragonmark ability or use ability +1/day',
@@ -69,7 +69,7 @@ EberronPrestige.classRules = function(rules, classes) {
         'magicNotes.improvedLesserDragonmarkFeature:' +
           '2nd lesser dragonmark ability or use ability +1/day',
         'magicNotes.lesserDragonmarkFeature:' +
-          'DC %V+spell level %1 at caster level 6/' +
+          'DC %V+spell level choice of %1 daily at caster level 6/' +
           'least dragonmark ability +1/day',
         'skillNotes.houseStatusFeature:' +
           '+%V charisma-based skills w/house members',
@@ -143,7 +143,7 @@ EberronPrestige.classRules = function(rules, classes) {
         'combatNotes.ironDamageReductionFeature:DR 3/cold iron',
         'combatNotes.ferocityFeature:Continue fighting below 0 HP',
         'combatNotes.smiteEvilFeature:' +
-          '%V/day add %1 to attack, %2 to damage vs. evil foe',
+          '+%V attack/+%1 damage vs. evil foe %2/day',
         'featureNotes.darkvisionFeature:%V ft b/w vision in darkness',
         'magicNotes.touchOfContagionFeature:<i>Contagion</i> 3/day',
         'saveNotes.resistAberrationsFeature:+2 vs. aberration abilities',
@@ -155,8 +155,8 @@ EberronPrestige.classRules = function(rules, classes) {
         'saveNotes.spellResistanceFeature:DC 20 spell resistance',
         'saveNotes.unearthlyGraceFeature:+%V all saves',
         'skillNotes.favoredEnemyFeature:' +
-          '+2 or more vs. %V type(s) of creatures on ' +
-          'Bluff/Listen/Sense Motive/Spot/Survival',
+          '+2 or more Bluff/Listen/Sense Motive/Spot/Survival ' +
+          'vs. %V type(s) of creatures',
         'skillNotes.natureSenseFeature:+2 Knowledge (Nature)/Survival',
         'validationNotes.childrenOfWinterSelectableFeatureAlignment:' +
           'Requires Alignment !~ Good',
@@ -284,7 +284,7 @@ EberronPrestige.classRules = function(rules, classes) {
           'Stun/banish Outsiders w/turning check',
         'combatNotes.silverExorcismFeature:+2 exorcism checks',
         'combatNotes.smiteEvilFeature:' +
-          '%V/day add %1 to attack, %2 to damage vs. evil foe',
+          '+%V attack/+%1 damage vs. evil foe %2/day',
         'combatNotes.wardingFlameFeature:' +
           'Warding glow for +2 AC/striking evil foes DC %V Fortitude save ' +
           'or blinded',
@@ -298,7 +298,7 @@ EberronPrestige.classRules = function(rules, classes) {
         'magicNotes.silverExorcismFeature:+2 vs. evil outsiders resistance',
         'magicNotes.wardingFlameFeature:Warding glow for spell resistance 25',
         'saveNotes.resistCharmFeature:+2 vs. charm effects',
-        'saveNotes.resistPossessionFeature:+4 vs. possession',
+        'saveNotes.resistPossessionFeature:+%V vs. possession',
         'saveNotes.resistUnnaturalFeature:+2 vs. effects of outsiders/undead',
         'turnOutsider.damageModifier:2d6+%V',
         'turnOutsider.frequency:%V/day',
@@ -361,6 +361,12 @@ EberronPrestige.classRules = function(rules, classes) {
       rules.defineRule('magicNotes.detectThoughtsFeature',
         'levels.Exorcist Of The Silver Flame', '=', '10 + source',
         'charismaModifier', '+', null
+      );
+      rules.defineRule('resistance.Possession',
+        'saveNotes.resistPossessionFeature', '+=', null
+      );
+      rules.defineRule('saveNotes.resistPossessionFeature',
+        'exorcistOfTheSilverFlameFeatures.Resist Possession', '+=', '4'
       );
       rules.defineRule('turnOutsider.level',
         'levels.Exorcist Of The Silver Flame', '=', null
