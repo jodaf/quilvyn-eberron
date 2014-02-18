@@ -1,4 +1,4 @@
-/* $Id: EberronPrestige.js,v 1.7 2012/03/21 05:50:25 jhayes Exp $ */
+/* $Id: EberronPrestige.js,v 1.8 2014/02/18 01:36:57 jhayes Exp $ */
 
 /*
 Copyright 2008, James J. Hayes
@@ -202,49 +202,49 @@ EberronPrestige.classRules = function(rules, classes) {
       rules.defineRule
         ('combatNotes.smiteEvilFeature.2', 'levels.Eldeen Ranger', '=', null);
       rules.defineRule('eldeenRangerFeatures.Damage Reduction',
-        'selectableFeatures.Greensingers', '?', null
+        'eldeenRangerFeatures.Greensingers', '?', null
       );
       rules.defineRule('eldeenRangerFeatures.Darkvision',
-        'selectableFeatures.Gatekeepers', '?', null
+        'eldeenRangerFeatures.Gatekeepers', '?', null
       );
       rules.defineRule('eldeenRangerFeatures.Ferocity',
-        'selectableFeatures.Ashbound', '?', null
+        'eldeenRangerFeatures.Ashbound', '?', null
       );
       rules.defineRule('eldeenRangerFeatures.Improved Critical',
-        'selectableFeatures.Wardens Of The Wood', '?', null
+        'eldeenRangerFeatures.Wardens Of The Wood', '?', null
       );
       rules.defineRule('eldeenRangerFeatures.Nature Sense',
-        'selectableFeatures.Wardens Of The Wood', '?', null
+        'eldeenRangerFeatures.Wardens Of The Wood', '?', null
       );
       rules.defineRule('eldeenRangerFeatures.Resist Aberrations',
-        'selectableFeatures.Gatekeepers', '?', null
+        'eldeenRangerFeatures.Gatekeepers', '?', null
       );
       rules.defineRule('eldeenRangerFeatures.Resist Corruption',
-        'selectableFeatures.Children Of Winter', '?', null
+        'eldeenRangerFeatures.Children Of Winter', '?', null
       );
       rules.defineRule('eldeenRangerFeatures.Resist Nature\'s Lure',
-        'selectableFeatures.Greensingers', '?', null
+        'eldeenRangerFeatures.Greensingers', '?', null
       );
       rules.defineRule('eldeenRangerFeatures.Resist Poison',
-        'selectableFeatures.Children Of Winter', '?', null
+        'eldeenRangerFeatures.Children Of Winter', '?', null
       );
       rules.defineRule('eldeenRangerFeatures.Resist The Arcane',
-        'selectableFeatures.Ashbound', '?', null
+        'eldeenRangerFeatures.Ashbound', '?', null
       );
       rules.defineRule('eldeenRangerFeatures.Slippery Mind',
-        'selectableFeatures.Gatekeepers', '?', null
+        'eldeenRangerFeatures.Gatekeepers', '?', null
       );
       rules.defineRule('eldeenRangerFeatures.Smite Evil',
-        'selectableFeatures.Wardens Of The Wood', '?', null
+        'eldeenRangerFeatures.Wardens Of The Wood', '?', null
       );
       rules.defineRule('eldeenRangerFeatures.Spell Resistance',
-        'selectableFeatures.Ashbound', '?', null
+        'eldeenRangerFeatures.Ashbound', '?', null
       );
       rules.defineRule('eldeenRangerFeatures.Touch Of Contagion',
-        'selectableFeatures.Children Of Winter', '?', null
+        'eldeenRangerFeatures.Children Of Winter', '?', null
       );
       rules.defineRule('eldeenRangerFeatures.Unearthly Grace',
-        'selectableFeatures.Greensingers', '?', null
+        'eldeenRangerFeatures.Greensingers', '?', null
       );
       rules.defineRule('featCount.Fighter',
         'eldeenRangerFeatures.Improved Critical', '+=', '1'
@@ -747,27 +747,27 @@ EberronPrestige.classRules = function(rules, classes) {
         '', 'v', '0'
       );
       rules.defineRule('weretouchedMasterAnimal',
-        'selectableFeatures.Bear', '=', '"Bear"',
-        'selectableFeatures.Boar', '=', '"Boar"',
-        'selectableFeatures.Rat', '=', '"Rat"',
-        'selectableFeatures.Tiger', '=', '"Tiger"',
-        'selectableFeatures.Wolf', '=', '"Wolf"',
-        'selectableFeatures.Wolverine', '=', '"Wolverine"'
+        'weretouchedMasterFeatures.Bear', '=', '"Bear"',
+        'weretouchedMasterFeatures.Boar', '=', '"Boar"',
+        'weretouchedMasterFeatures.Rat', '=', '"Rat"',
+        'weretouchedMasterFeatures.Tiger', '=', '"Tiger"',
+        'weretouchedMasterFeatures.Wolf', '=', '"Wolf"',
+        'weretouchedMasterFeatures.Wolverine', '=', '"Wolverine"'
       );
       rules.defineRule('weretouchedMasterFeatures.Climb Speed',
-        'selectableFeatures.Rat', '?', null
+        'weretouchedMasterFeatures.Rat', '?', null
       );
       rules.defineRule('weretouchedMasterFeatures.Fierce Will',
-        'selectableFeatures.Boar', '?', null
+        'weretouchedMasterFeatures.Boar', '?', null
       );
       rules.defineRule('weretouchedMasterFeatures.Improved Grab',
-        'selectableFeatures.Bear', '?', null
+        'weretouchedMasterFeatures.Bear', '?', null
       );
       rules.defineRule('weretouchedMasterFeatures.Pounce',
-        'selectableFeatures.Tiger', '?', null
+        'weretouchedMasterFeatures.Tiger', '?', null
       );
       rules.defineRule('weretouchedMasterFeatures.Trip',
-        'selectableFeatures.Wolf', '?', null
+        'weretouchedMasterFeatures.Wolf', '?', null
       );
       rules.defineRule('weretouchedMasterFeatures.Weretouched Claws',
         'weretouchedMasterAnimal', '?', '"BearTiger".indexOf(source) >= 0'
@@ -776,7 +776,7 @@ EberronPrestige.classRules = function(rules, classes) {
         'weretouchedMasterAnimal', '?', '"RatWolf".indexOf(source) >= 0'
       );
       rules.defineRule('weretouchedMasterFeatures.Weretouched Rage',
-        'selectableFeatures.Wolverine', '?', null
+        'weretouchedMasterFeatures.Wolverine', '?', null
       );
       rules.defineRule('weretouchedMasterFeatures.Weretouched Tusks',
         'weretouchedMasterAnimal', '?', '"BoarWolverine".indexOf(source) >= 0'
@@ -799,9 +799,13 @@ EberronPrestige.classRules = function(rules, classes) {
     if(selectableFeatures != null) {
       for(var j = 0; j < selectableFeatures.length; j++) {
         var selectable = selectableFeatures[j];
-        rules.defineChoice('selectableFeatures', selectable + ':' + klass);
+        var choice = klass + ' - ' + selectable;
+        rules.defineChoice('selectableFeatures', choice + ':' + klass);
+        rules.defineRule(klass + 'Features.' + selectable,
+          'selectableFeatures.' + choice, '+=', null
+        );
         rules.defineRule('features.' + selectable,
-          'selectableFeatures.' + selectable, '+=', null
+          'selectableFeatures.' + choice, '+=', null
         );
       }
     }

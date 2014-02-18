@@ -1,4 +1,4 @@
-/* $Id: Eberron.js,v 1.40 2012/03/21 05:50:24 jhayes Exp $ */
+/* $Id: Eberron.js,v 1.41 2014/02/18 01:36:57 jhayes Exp $ */
 
 /*
 Copyright 2008, James J. Hayes
@@ -1640,9 +1640,13 @@ Eberron.raceRules = function(rules, races) {
     if(selectableFeatures != null) {
       for(var j = 0; j < selectableFeatures.length; j++) {
         var selectable = selectableFeatures[j];
-        rules.defineChoice('selectableFeatures', selectable + ':' + race);
+        var choice = race + ' - ' + selectable;
+        rules.defineChoice('selectableFeatures', choice + ':' + race);
+        rules.defineRule(race + 'Features.' + selectable,
+          'selectableFeatures.' + choice, '+=', null
+        );
         rules.defineRule('features.' + selectable,
-          'selectableFeatures.' + selectable, '+=', null
+          'selectableFeatures.' + choice, '+=', null
         );
       }
     }
