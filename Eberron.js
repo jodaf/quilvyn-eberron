@@ -1,4 +1,4 @@
-/* $Id: Eberron.js,v 1.41 2014/02/18 01:36:57 jhayes Exp $ */
+/* $Id: Eberron.js,v 1.42 2014/02/18 01:42:25 jhayes Exp $ */
 
 /*
 Copyright 2008, James J. Hayes
@@ -17,7 +17,7 @@ this program; if not, write to the Free Software Foundation, Inc., 59 Temple
 Place, Suite 330, Boston, MA 02111-1307 USA.
 */
 
-var EBERRON_VERSION = '1.0beta-080408';
+var EBERRON_VERSION = '1.1beta-20140217';
 
 /*
  * This module loads the rules from the Eberron campaign setting.  The Eberron
