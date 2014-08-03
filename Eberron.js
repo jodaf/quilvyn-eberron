@@ -1,4 +1,4 @@
-/* $Id: Eberron.js,v 1.43 2014/08/03 04:47:07 jhayes Exp $ */
+/* $Id: Eberron.js,v 1.44 2014/08/03 06:18:47 jhayes Exp $ */
 
 /*
 Copyright 2008, James J. Hayes
@@ -308,7 +308,6 @@ Eberron.spellsSchools = {
   'Touch Of Madness':'Enchantment',
   'Toughen Construct':'Transmutation',
   'True Creation':'Conjuration',
-  'Weapon Augmentation':'Transmutation',
   'Weapon Augmentation':'Transmutation',
   'Withering Palm':'Necromancy',
   'Zone Of Natural Purity':'Evocation'
