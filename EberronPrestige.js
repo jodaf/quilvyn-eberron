@@ -1,4 +1,4 @@
-/* $Id: EberronPrestige.js,v 1.8 2014/02/18 01:36:57 jhayes Exp $ */
+/* $Id: EberronPrestige.js,v 1.9 2014/08/03 04:47:07 jhayes Exp $ */
 
 /*
 Copyright 2008, James J. Hayes
@@ -16,6 +16,8 @@ You should have received a copy of the GNU General Public License along with
 this program; if not, write to the Free Software Foundation, Inc., 59 Temple
 Place, Suite 330, Boston, MA 02111-1307 USA.
 */
+
+"use strict";
 
 /*
  * This module loads the rules for the Eberron campaign setting prestige
