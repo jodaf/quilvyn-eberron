@@ -657,9 +657,8 @@ EberronPrestige.classRules = function(rules, classes) {
       hitDie = 8;
       notes = [
         'abilityNotes.alternateFormFeature:Shift to %V--%1--or bipedal hybrid',
-        // TODO Cliffwalk => +10 climb speed
         'abilityNotes.climbSpeedFeature:' +
-          '20 ft dexterity-based climb speed while shifting',
+          '20 ft climb speed (+10 for Cliffwalker) while shifting',
         'abilityNotes.weretouchedClawsFeature:+2 strength while shifting',
         'abilityNotes.weretouchedFangsFeature:+2 dexterity while shifting',
         'abilityNotes.weretouchedTusksFeature:+2 constitution while shifting',
@@ -669,14 +668,11 @@ EberronPrestige.classRules = function(rules, classes) {
         'combatNotes.improvedGrabFeature:Grapple w/out AOO after claw hit',
         'combatNotes.pounceFeature:Full attack when charging',
         'combatNotes.tripFeature:Trip w/out AOO after bite hit',
-        // TODO Razorclaw => next size category
-        'combatNotes.weretouchedClawsFeature:d4+%V claw attack while shifting',
-        // TODO Longtooth => next size category
-        'combatNotes.weretouchedFangsFeature:d6+%V fang attack while shifting',
+        'combatNotes.weretouchedClawsFeature:d4+%V claw attack (next size for Razorclaw) while shifting',
+        'combatNotes.weretouchedFangsFeature:d6+%V fang attack (next size for Longtooth) while shifting',
         'combatNotes.weretouchedRageFeature:' +
           '+2 strength/constitution/-2 AC for 1 round after taking damage',
-        // TODO Longtooth => next size category
-        'combatNotes.weretouchedTusksFeature:d6+%V tusk attack while shifting',
+        'combatNotes.weretouchedTusksFeature:d6+%V tusk attack (next size for Longtooth) while shifting',
         'saveNotes.fierceWillFeature:+4 Will while shifting',
         'skillNotes.wildEmpathyFeature:+%V Diplomacy w/animals',
         'validationNotes.weretouchedMasterClassBaseAttack:' +
@@ -743,31 +739,33 @@ EberronPrestige.classRules = function(rules, classes) {
         'charismaModifier', '+', null
       );
       rules.defineRule('validationNotes.weretouchedMasterClassFeats',
-        'levels.Weretouched Master', '=', '0', // TODO Any shifter
+        'levels.Weretouched Master', '=', '-1',
+        /feats.((Beasthide|Cliffwalk|Longstride) Elite|Great (Bite|Rend)|Extra Shifter Trait|Greater Shifter Defense|Healing Factor|Improved Natural Attack|Shifter (Defense|Ferocity|Multiattack))/, '+', '1',
         '', 'v', '0'
       );
       rules.defineRule('weretouchedMasterAnimal',
-        'weretouchedMasterFeatures.Bear', '=', '"Bear"',
-        'weretouchedMasterFeatures.Boar', '=', '"Boar"',
-        'weretouchedMasterFeatures.Rat', '=', '"Rat"',
-        'weretouchedMasterFeatures.Tiger', '=', '"Tiger"',
-        'weretouchedMasterFeatures.Wolf', '=', '"Wolf"',
-        'weretouchedMasterFeatures.Wolverine', '=', '"Wolverine"'
+        '', '=', '"None"',
+        'Weretouched MasterFeatures.Bear', '=', '"Bear"',
+        'Weretouched MasterFeatures.Boar', '=', '"Boar"',
+        'Weretouched MasterFeatures.Rat', '=', '"Rat"',
+        'Weretouched MasterFeatures.Tiger', '=', '"Tiger"',
+        'Weretouched MasterFeatures.Wolf', '=', '"Wolf"',
+        'Weretouched MasterFeatures.Wolverine', '=', '"Wolverine"'
       );
       rules.defineRule('weretouchedMasterFeatures.Climb Speed',
-        'weretouchedMasterFeatures.Rat', '?', null
+        'weretouchedMasterAnimal', '?', 'source == "Rat"'
       );
       rules.defineRule('weretouchedMasterFeatures.Fierce Will',
-        'weretouchedMasterFeatures.Boar', '?', null
+        'weretouchedMasterAnimal', '?', 'source == "Boar"'
       );
       rules.defineRule('weretouchedMasterFeatures.Improved Grab',
-        'weretouchedMasterFeatures.Bear', '?', null
+        'weretouchedMasterAnimal', '?', 'source == "Bear"'
       );
       rules.defineRule('weretouchedMasterFeatures.Pounce',
-        'weretouchedMasterFeatures.Tiger', '?', null
+        'weretouchedMasterAnimal', '?', 'source == "Tiger"'
       );
       rules.defineRule('weretouchedMasterFeatures.Trip',
-        'weretouchedMasterFeatures.Wolf', '?', null
+        'weretouchedMasterAnimal', '?', 'source == "Wolf"'
       );
       rules.defineRule('weretouchedMasterFeatures.Weretouched Claws',
         'weretouchedMasterAnimal', '?', '"BearTiger".indexOf(source) >= 0'
@@ -776,7 +774,7 @@ EberronPrestige.classRules = function(rules, classes) {
         'weretouchedMasterAnimal', '?', '"RatWolf".indexOf(source) >= 0'
       );
       rules.defineRule('weretouchedMasterFeatures.Weretouched Rage',
-        'weretouchedMasterFeatures.Wolverine', '?', null
+        'weretouchedMasterAnimal', '?', 'source == "Wolverine"'
       );
       rules.defineRule('weretouchedMasterFeatures.Weretouched Tusks',
         'weretouchedMasterAnimal', '?', '"BoarWolverine".indexOf(source) >= 0'

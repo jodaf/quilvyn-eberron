@@ -584,6 +584,9 @@ Eberron.featRules = function(rules, feats, subfeats) {
         'abilityNotes.cliffwalkEliteFeature:+10 climb speed while shifting',
         'validationNotes.cliffwalkEliteFeatFeatures:Requires Cliffwalk'
       ];
+      rules.defineRule('abilityNotes.cliffwalkFeature',
+        'abilityNotes.cliffwalkEliteFeature', '+', '10'
+      );
     } else if(feat == 'Craft Construct') {
       notes = [
         'magicNotes.craftConstructFeature:Create enchanted construct',
@@ -604,8 +607,8 @@ Eberron.featRules = function(rules, feats, subfeats) {
         'combatNotes.dragonRageFeature:' +
           '+2 AC/+10 Dragon Totem resistence during Rage',
         'validationNotes.dragonRageFeatFeats:Requires Max Dragon Totem >= 1',
-        'validationNotes.dragonRageFeatFeatures:Requires Rage'
-        // TODO Requires Origin == Argonnessen
+        'validationNotes.dragonRageFeatFeatures:Requires Rage',
+        'validationNotes.dragonRageFeatOrigin:Requires Origin == Argonnessen'
       ];
     } else if((matchInfo = feat.match(/^Dragon Totem \((.*)\)$/)) != null) {
       var dragon = matchInfo[1];
@@ -614,8 +617,9 @@ Eberron.featRules = function(rules, feats, subfeats) {
       notes = [
         note + ':+5 vs. ' + (attack == null ? 'related' : attack),
         'validationNotes.dragonTotem(' + dragon + ')FeatBaseAttack:' +
-          'Requires Base Attack >= 1'
-        // TODO Requires Origin == Argonnessen | Origin == Seren
+          'Requires Base Attack >= 1',
+        'validationNotes.dragonTotem(' + dragon + ')FeatOrigin:' +
+          'Requires Origin =~ Argonnessen|Seren'
       ];
     } else if(feat == 'Ecclesiarch') {
       notes = [
@@ -646,7 +650,8 @@ Eberron.featRules = function(rules, feats, subfeats) {
         'validationNotes.exceptionalArtisanFeatFeats:Requires any Item Creation'
       ];
       rules.defineRule('validationNotes.exceptionalArtisanFeatFeats',
-        'feats.Exceptional Artisan', '=', '0', // TODO any Item Creation
+        'feats.Exceptional Artisan', '=', '-1',
+        /feats.(Brew Potion|Craft (Magic Arms And Armor|Staff|Wand|Wondrous Item)|Forge Ring|Scribe Scroll|Attune Magical Weapon|Bind Elemental|(Extraordinary|Legendary) Artisan|Extra Rings|Wand Mastery)/, '+', '1',
         '', 'v', '0'
       );
     } else if(feat == 'Extend Rage') {
@@ -681,7 +686,8 @@ Eberron.featRules = function(rules, feats, subfeats) {
         'featureNotes.extraShifterTraitFeature', '+', '1'
       );
       rules.defineRule('validationNotes.extraShifterTraitFeatFeats',
-        'feats.Extra Shifter Trait', '=', '0', // TODO any 2 Shifter
+        'feats.Extra Shifter Trait', '=', '-2',
+        /feats.((Beasthide|Cliffwalk|Longstride) Elite|Great (Bite|Rend)|Greater Shifter Defense|Healing Factor|Improved Natural Attack|Shifter (Defense|Ferocity|Multiattack))/, '+', '1',
         '', 'v', '0'
       );
     } else if(feat == 'Extraordinary Artisan') {
@@ -692,7 +698,8 @@ Eberron.featRules = function(rules, feats, subfeats) {
           'Requires any Item Creation'
       ];
       rules.defineRule('validationNotes.extraordinaryArtisanFeatFeats',
-        'feats.Extraordinary Artisan', '=', '0', // TODO any Item Creation
+        'feats.Extraordinary Artisan', '=', '-1',
+        /feats.(Brew Potion|Craft (Magic Arms And Armor|Staff|Wand|Wondrous Item)|Forge Ring|Scribe Scroll|Attune Magical Weapon|Bind Elemental|(Exceptional|Legendary) Artisan|Extra Rings|Wand Mastery)/, '+', '1',
         '', 'v', '0'
       );
     } else if(feat == 'Favored In House') {
@@ -799,8 +806,9 @@ Eberron.featRules = function(rules, feats, subfeats) {
         'combatNotes.greaterShifterDefenseFeature', '+', '2'
       );
       rules.defineRule('validationNotes.greaterShifterDefenseFeatFeats',
-        'feats.Greater Shifter Defense', '=', '-1', // TODO Any 3 Shifter
-        'features.Shifter Defense', '+', '1',
+        'feats.Greater Shifter Defense', '=', '-13',
+        'feats.Shifter Defense', '+', '10',
+        /feats.((Beasthide|Cliffwalk|Longstride) Elite|Extra Shifter Trait|Great (Bite|Rend)|Healing Factor|Improved Natural Attack|Shifter (Ferocity|Multiattack))/, '+', '1',
         '', 'v', '0'
       );
     } else if(feat == 'Greensinger Initiate') {
@@ -866,15 +874,13 @@ Eberron.featRules = function(rules, feats, subfeats) {
       notes = [
         'combatNotes.improvedNaturalAttackFeature:' +
           'Natural attack damage increases one size catagory',
-        // TODO Requires natural attack
         'validationNotes.improvedNaturalAttackFeatBaseAttack:' +
           'Requires Base Attack >= 4'
       ];
     } else if(feat == 'Investigate') {
       notes = [
-        'skillNotes.investigateFeature:Use Search to find/analyze clues'
+        'skillNotes.investigateFeature:Use Search to find/analyze clues, synergy with appropriate Knowledge'
       ];
-      // TODO Synergy with "appropriate Knowledge skill"
     } else if((matchInfo=feat.match(/^Knight Training \((.*)\)$/)) != null) {
       var klass = matchInfo[1];
       notes = [
@@ -904,7 +910,8 @@ Eberron.featRules = function(rules, feats, subfeats) {
         'validationNotes.legendaryArtisanFeatFeats:Requires any Item Creation'
       ];
       rules.defineRule('validationNotes.legendaryArtisanFeatFeats',
-        'feats.Legendary Artisan', '=', '0', // TODO any Item Creation
+        'feats.Legendary Artisan', '=', '-1',
+        /feats.(Brew Potion|Craft (Magic Arms And Armor|Staff|Wand|Wondrous Item)|Forge Ring|Scribe Scroll|Attune Magical Weapon|Bind Elemental|(Exceptional|Extraordinary) Artisan|Extra Rings|Wand Mastery)/, '+', '1',
         '', 'v', '0'
       );
     } else if(feat == 'Lesser Dragonmark') {
@@ -1084,7 +1091,8 @@ Eberron.featRules = function(rules, feats, subfeats) {
       ];
       rules.defineRule('combatNotes.shifterDefenseFeature', '', '=', '2');
       rules.defineRule('validationNotes.shifterDefenseFeatFeats',
-        'feats.Shifter Defense', '=', '0', // TODO Any 2 Shifter
+        'feats.Shifter Defense', '=', '-2',
+        /feats.((Beasthide|Cliffwalk|Longstride) Elite|Extra Shifter Trait|Great (Bite|Rend)|Greater Shifter Defense|Healing Factor|Improved Natural Attack|Shifter (Ferocity|Multiattack))/, '+', '1',
         '', 'v', '0'
       );
     } else if(feat == 'Shifter Ferocity') {
@@ -1561,13 +1569,13 @@ Eberron.raceRules = function(rules, races) {
       adjustment = '+2 dexterity/-2 intelligence/-2 charisma';
       features = ['Shifting'];
       notes = [
-        'abilityNotes.beasthideFeature:+2 Constitution while shifting',
+        'abilityNotes.beasthideFeature:+2 constitution while shifting',
         'abilityNotes.cliffwalkFeature:' +
-          '+2 Dexterity/20 climb speed while shifting',
-        'abilityNotes.longstrideFeature:+2 Dexterity/+10 speed while shifting',
-        'abilityNotes.longtoothFeature:+2 Strength while shifting',
-        'abilityNotes.razorclawFeature:+2 Strength while shifting',
-        'abilityNotes.wildhuntFeature:+2 Constitution while shifting',
+          '+2 Dexterity/%V climb speed while shifting',
+        'abilityNotes.longstrideFeature:+2 dexterity/+10 speed while shifting',
+        'abilityNotes.longtoothFeature:+2 strength while shifting',
+        'abilityNotes.razorclawFeature:+2 strength while shifting',
+        'abilityNotes.wildhuntFeature:+2 constitution while shifting',
         'combatNotes.beasthideFeature:+2 AC while shifting',
         'combatNotes.longtoothFeature:d6+%V bite attack while shifting',
         'combatNotes.razorclawFeature:d4+%V claw attack while shifting',
@@ -1581,6 +1589,7 @@ Eberron.raceRules = function(rules, races) {
         'Beasthide', 'Longtooth', 'Cliffwalk', 'Razorclaw', 'Longstride',
         'Wildhunt'
       ];
+      rules.defineRule('abilityNotes.cliffwalkFeature', '', '=', '20');
       rules.defineRule('combatNotes.longtoothFeature',
         'level', '=', 'Math.floor(source / 4)',
         'strengthModifier', '+', null
