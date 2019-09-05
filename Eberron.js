@@ -17,7 +17,7 @@ Place, Suite 330, Boston, MA 02111-1307 USA.
 
 "use strict";
 
-var EBERRON_VERSION = '1.1beta-20140217';
+var EBERRON_VERSION = '1.1';
 
 /*
  * This module loads the rules from the Eberron campaign setting.  The Eberron
@@ -521,7 +521,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
         'features.Adamantine Body', '^', '35'
       );
       rules.defineRule('skillNotes.armorSkillCheckPenalty',
-        'features.Adamantine Body', '=', '-5'
+        'features.Adamantine Body', '=', '5'
       );
       rules.defineRule
         ('speed', 'abilityNotes.adamantineBodyFeature', 'v', '20');
@@ -951,29 +951,29 @@ Eberron.featRules = function(rules, feats, subfeats) {
       rules.defineRule
         ('armorClass', 'combatNotes.mithralBodyFeature', '+', '3');
       rules.defineRule('combatNotes.dexterityArmorClassAdjustment',
-        'features.Mithral Body', 'v', '5'
+        'mithralBodyDexACCap', 'v', null
       );
       rules.defineRule('magicNotes.arcaneSpellFailure',
         'features.Mithral Body', '^', '15'
       );
+      rules.defineRule
+        ('mithralBodyDexACCap', 'features.Mithral Body', '=', '5');
       rules.defineRule('skillNotes.armorSkillCheckPenalty',
-        'features.Mithral Body', '=', '-2'
+        'features.Mithral Body', '=', '2'
       );
     } else if(feat == 'Mithral Fluidity') {
       notes = [
         'combatNotes.mithralFluidityFeature:' +
-          'Reduce Mithral Body AC/skill penalty by 1',
+          'Raise Mithral Body Reflex AC limit by 1',
+        'skillNotes.mithralFluidityFeature:Reduce skill penalty by 1',
         'validationNotes.mithralFluidityFeatFeats:Requires Mithral Body',
         'validationNotes.mithralFluidityFeatRace:Requires Race == Warforged'
       ];
-/* TODO These rules are wrong
-      rules.defineRule('combatNotes.dexterityArmorClassAdjustment',
-        'features.Mithril Fluidity', '+', '1'
-      );
+      rules.defineRule
+        ('mithralBodyDexACCap', 'combatNotes.mithralFluidityFeature', '+', '1');
       rules.defineRule('skillNotes.armorSkillCheckPenalty',
-        'features.Mithril Fluidity', '+', '1'
+        'skillNotes.mithralFluidityFeature', '+', '-1'
       );
-*/
     } else if((matchInfo=feat.match(/^Monastic Training \((.*)\)$/)) != null) {
       var klass = matchInfo[1];
       notes = [
@@ -1670,13 +1670,11 @@ Eberron.ruleNotes = function() {
     '\n' +
     '<h3>Usage Notes</h3>\n' +
     '<p>\n' +
-    'TODO\n' +
-    '\n' +
+    'None, currently\n' +
     '</p>\n' +
     '\n' +
     '<h3>Limitations</h3>\n' +
     '<p>\n' +
-    'TODO\n' +
-    '\n' +
+    'None, currently\n' +
     '</p>\n';
 }
