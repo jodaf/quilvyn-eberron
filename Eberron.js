@@ -83,29 +83,26 @@ function Eberron() {
 // Arrays of choices
 Eberron.CLASSES = ['Artificer'];
 Eberron.DEITIES = [
-  'The Silver Flame (LG):Exorcism/Good/Law/Protection',
-  'The Sovereign Host (NG):Air/Animal/Artifice/Chaos/Charm/Commerce/' +
-    'Community/Earth/Feast/Fire/Good/Healing/Knowledge/Law/Life/Luck/Magic/' +
-    'Plant/Protection/Strength/Sun/Travel/War/Weather',
-  'Arawai (NG):Good/Life/Plant/Weather',
-  'Aureon (LN):Knowledge/Law/Magic',
-  'Balinor (N):Air/Animal/Earth',
-  'Boldrei (LG):Community/Good/Law/Protection',
-  'Dol Arrah (LG):Good/Law/Sun/War',
-  'Dol Dorn (CG):Chaos/Good/Strength/War',
-  'Kol Korran (N):Charm/Commerce/Travel',
-  'Olladra (NG):Feast/Good/Healing/Luck',
-  'Onatar (NG):Artifice/Fire/Good',
-  'The Dark Six (NE):Artifice/Chaos/Death/Decay/Destruction/Evil/Madness/' +
-     'Magic/Passion/Shadow/Travel/Trickery/War/Water/Weather',
-  'The Devourer (NE):Destruction/Evil/Water/Weather',
-  'The Fury (NE):Evil/Madness/Passion',
-  'The Keeper (NE):Death/Decay/Evil',
-  'The Mockery (NE):Destruction/Evil/Trickery/War',
-  'The Shadow (CN):Artifice/Chaos/Travel/Trickery',
-  'The Blood Of Vol (LE):Death/Evil/Law/Necromancer',
-  'The Cults Of The Dragon Below (LN):Law/Meditation/Protection',
-  'The Undying Court (NG):Deathless/Good/Protection',
+  'The Silver Flame (LG):Longbow:Exorcism/Good/Law/Protection',
+  'Arawai (NG):Morningstar:Good/Life/Plant/Weather',
+  'Aureon (LN):Quarterstaff:Knowledge/Law/Magic',
+  'Balinor (N):Battleaxe:Air/Animal/Earth',
+  'Boldrei (LG):Spear:Community/Good/Law/Protection',
+  'Dol Arrah (LG):Halberd:Good/Law/Sun/War',
+  'Dol Dorn (CG):Longsword:Chaos/Good/Strength/War',
+  'Kol Korran (N):Heavy Mace/Light Mace:Charm/Commerce/Travel',
+  'Olladra (NG):Sickle:Feast/Good/Healing/Luck',
+  'Onatar (NG):Warhammer:Artifice/Fire/Good',
+  'The Devourer (NE):Trident:Destruction/Evil/Water/Weather',
+  'The Fury (NE):Rapier:Evil/Madness/Passion',
+  'The Keeper (NE):Scythe:Death/Decay/Evil',
+  'The Mockery (NE):Kama:Destruction/Evil/Trickery/War',
+  'The Shadow (CE):Quarterstaff:Chaos/Evil/Magic/Shadow',
+  'The Traveler (CN):Scimitar:Artifice/Chaos/Travel/Trickery',
+  'The Blood Of Vol (LE):Dagger:Death/Evil/Law/Necromancer',
+  'The Cults Of The Dragon Below (LN):Heavy Pick:Dragon Below/Earth/Evil/Madness',
+  'The Path Of Light (LN):Unarmed:Law/Meditation/Protection',
+  'The Undying Court (NG):Scimitar:Deathless/Good/Protection',
   'None:'
 ];
 Eberron.DOMAINS = [
