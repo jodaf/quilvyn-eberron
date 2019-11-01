@@ -75,7 +75,7 @@ EberronPrestige.classRules = function(rules, classes) {
           '+%V charisma-based skills w/house members',
         'validationNotes.dragonmarkHeirClassFeats:' +
           'Requires Favored In House/Least Dragonmark',
-        'validationNotes.dragonmarkHeirClassHouse:Requires House != None',
+        'validationNotes.dragonmarkHeirClassHouse:Requires House != "None"',
         'validationNotes.dragonmarkHeirClassRace:' +
           'Requires Race =~ Dwarf|Elf|Gnome|Halfling|Half Orc|Human',
         'validationNotes.dragonmarkHeirClassSkills:Requires any 2 >= 7'
@@ -600,7 +600,7 @@ EberronPrestige.classRules = function(rules, classes) {
           'Requires Base Attack >= 5',
         'validationNotes.warforgedJuggernautClassFeats:' +
           'Requires Adamantine Body/Improved Bull Rush/Power Attack',
-        'validationNotes.warforgedJuggernautRace:Requires Race == Warforged'
+        'validationNotes.warforgedJuggernautRace:Requires Race == "Warforged"'
       ];
       profArmor = SRD35.PROFICIENCY_NONE;
       profShield = SRD35.PROFICIENCY_NONE;
@@ -678,7 +678,7 @@ EberronPrestige.classRules = function(rules, classes) {
         'validationNotes.weretouchedMasterClassBaseAttack:' +
           'Requires Base Attack >= 4',
         'validationNotes.weretouchedMasterClassFeats:Requires any Shifter',
-        'validationNotes.weretouchedMasterClassRace:Requires Race == Shifter',
+        'validationNotes.weretouchedMasterClassRace:Requires Race == "Shifter"',
         'validationNotes.weretouchedMasterClassSkills:' +
           'Requires Knowledge (Nature) >= 5/Survival >= 8'
       ];

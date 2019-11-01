@@ -507,7 +507,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
       notes = [
         'abilityNotes.adamantineBodyFeature:Max 20 speed',
         'combatNotes.adamantineBodyFeature:+6 AC/DR 2/adamantine',
-        'validationNotes.adamantineBodyFeatRace:Requires Race == Warforged'
+        'validationNotes.adamantineBodyFeatRace:Requires Race == "Warforged"'
       ];
       rules.defineRule
         ('armorClass', 'combatNotes.adamantineBodyFeature', '+', '6');
@@ -605,7 +605,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
           '+2 AC/+10 Dragon Totem resistence during Rage',
         'validationNotes.dragonRageFeatFeats:Requires Max Dragon Totem >= 1',
         'validationNotes.dragonRageFeatFeatures:Requires Rage',
-        'validationNotes.dragonRageFeatOrigin:Requires Origin == Argonnessen'
+        'validationNotes.dragonRageFeatOrigin:Requires Origin == "Argonnessen"'
       ];
     } else if((matchInfo = feat.match(/^Dragon Totem \((.*)\)$/)) != null) {
       var dragon = matchInfo[1];
@@ -677,7 +677,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
         'featureNotes.extraShifterTraitFeature:' +
           'Extra Shifter trait w/out ability bonus',
         'validationNotes.extraShifterTraitFeatFeats:Requires any 2 Shifter',
-        'validationNotes.extraShifterTraitFeatRace:Requires Race == Shifter'
+        'validationNotes.extraShifterTraitFeatRace:Requires Race == "Shifter"'
       ];
       rules.defineRule('selectableFeatureCount.Shifter',
         'featureNotes.extraShifterTraitFeature', '+', '1'
@@ -702,7 +702,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
     } else if(feat == 'Favored In House') {
       notes = [
         'featureNotes.favoredInHouseFeature:Acquire favors from house contacts',
-        'validationNotes.favoredInHouseFeatHouse:Requires House != None',
+        'validationNotes.favoredInHouseFeatHouse:Requires House != "None"',
         'validationNotes.favoredInHouseFeatRace:' +
           'Requires Race =~ Dwarf|Elf|Gnome|Halfling|Half Orc|Human'
       ];
@@ -752,7 +752,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
           'least/lesser dragonmark ability +1/day',
         'validationNotes.greaterDragonmarkFeatFeats:' +
           'Requires Least Dragonmark/Lesser Dragonmark',
-        'validationNotes.greaterDragonmarkFeatHouse:Requires House != None',
+        'validationNotes.greaterDragonmarkFeatHouse:Requires House != "None"',
         'validationNotes.greaterDragonmarkFeatRace:' +
           'Requires Race =~ Dwarf|Elf|Gnome|Halfling|Half Orc|Human',
         'validationNotes.greaterDragonmarkFeatSkills:Requires any 2 >= 12'
@@ -797,7 +797,8 @@ Eberron.featRules = function(rules, feats, subfeats) {
         'combatNotes.greaterShifterDefenseFeature:+2 Shifter Defense DR',
         'validationNotes.greaterShifterDefenseFeatFeats:' +
           'Requires Shifter Defense/any 3 other Shifter',
-        'validationNotes.greaterShifterDefenseFeatRace:Requires Race == Shifter'
+        'validationNotes.greaterShifterDefenseFeatRace:' +
+          'Requires Race == "Shifter"'
       ];
       rules.defineRule('combatNotes.shifterDefenseFeature',
         'combatNotes.greaterShifterDefenseFeature', '+', '2'
@@ -843,7 +844,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
       notes = [
         'featureNotes.healingFactorFeature:Heal %V points when shifting ends',
         'validationNotes.healingFactorFeatAbility:Requires Constitution >= 13',
-        'validationNotes.healingFactorFeatRace:Requires Race == Shifter'
+        'validationNotes.healingFactorFeatRace:Requires Race == "Shifter"'
       ];
       rules.defineRule('featureNotes.healingFactorFeature', 'level', '=', null);
     } else if(feat == 'Heroic Spirit') {
@@ -856,7 +857,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
       notes = [
         'combatNotes.improvedDamageReductionFeature:DR +1/adamantine',
         'validationNotes.improvedDamageReductionFeatRace:' +
-          'Requires Race == Warforged'
+          'Requires Race == "Warforged"'
       ];
     } else if(feat == 'Improved Fortification') {
       notes = [
@@ -865,7 +866,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
         'validationNotes.improvedFortificationFeatBaseAttack:' +
           'Requires Base Attack >= 6',
         'validationNotes.improvedFortificationFeatRace:' +
-          'Requires Race == Warforged'
+          'Requires Race == "Warforged"'
       ];
     } else if(feat == 'Improved Natural Attack') {
       notes = [
@@ -888,7 +889,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
       notes = [
         'magicNotes.leastDragonmarkFeature:' +
           'DC %V+spell level choice of %1 daily at caster level 1',
-        'validationNotes.leastDragonmarkFeatHouse:Requires House != None',
+        'validationNotes.leastDragonmarkFeatHouse:Requires House != "None"',
         'validationNotes.leastDragonmarkFeatRace:' +
           'Requires Race =~ Dwarf|Elf|Gnome|Halfling|Half Orc|Human'
       ];
@@ -916,7 +917,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
         'magicNotes.lesserDragonmarkFeature:' +
           'DC %V+spell level choice of %1 daily at caster level 6/' +
           'least dragonmark ability +1/day',
-        'validationNotes.lesserDragonmarkFeatHouse:Requires House != None',
+        'validationNotes.lesserDragonmarkFeatHouse:Requires House != "None"',
         'validationNotes.lesserDragonmarkFeatFeats:Requires Least Dragonmark',
         'validationNotes.lesserDragonmarkFeatRace:' +
           'Requires Race =~ Dwarf|Elf|Gnome|Halfling|Half Orc|Human',
@@ -943,7 +944,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
     } else if(feat == 'Mithral Body') {
       notes = [
         'combatNotes.mithralBodyFeature:+3 AC',
-        'validationNotes.mithralBodyFeatRace:Requires Race == Warforged'
+        'validationNotes.mithralBodyFeatRace:Requires Race == "Warforged"'
       ];
       rules.defineRule
         ('armorClass', 'combatNotes.mithralBodyFeature', '+', '3');
@@ -964,7 +965,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
           'Raise Mithral Body Reflex AC limit by 1',
         'skillNotes.mithralFluidityFeature:Reduce skill penalty by 1',
         'validationNotes.mithralFluidityFeatFeats:Requires Mithral Body',
-        'validationNotes.mithralFluidityFeatRace:Requires Race == Warforged'
+        'validationNotes.mithralFluidityFeatRace:Requires Race == "Warforged"'
       ];
       rules.defineRule
         ('mithralBodyDexACCap', 'combatNotes.mithralFluidityFeature', '+', '1');
@@ -1069,7 +1070,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
       notes = [
         'featureNotes.rightOfCounselFeature:' +
           'Seek advice from deathless ancestor',
-        'validationNotes.rightOfCounselFeatRace:Requires Race == Elf'
+        'validationNotes.rightOfCounselFeatRace:Requires Race == "Elf"'
       ];
     } else if(feat == 'Serpent Strike') {
       notes = [
@@ -1084,7 +1085,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
       notes = [
         'combatNotes.shifterDefenseFeature:DR %V/silver',
         'validationNotes.shifterDefenseFeatFeats:Requires any 2 Shifter',
-        'validationNotes.shifterDefenseFeatRace:Requires Race == Shifter'
+        'validationNotes.shifterDefenseFeatRace:Requires Race == "Shifter"'
       ];
       rules.defineRule('combatNotes.shifterDefenseFeature', '', '=', '2');
       rules.defineRule('validationNotes.shifterDefenseFeatFeats',
@@ -1097,7 +1098,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
         'combatNotes.shifterFerocityFeature:' +
           'Continue fighting below 0 HP while shifting',
         'validationNotes.shifterFerocityFeatAbility:Requires Wisdom >= 13',
-        'validationNotes.shifterFerocityFeatRace:Requires Race == Shifter'
+        'validationNotes.shifterFerocityFeatRace:Requires Race == "Shifter"'
       ];
     } else if(feat == 'Shifter Multiattack') {
       notes = [
