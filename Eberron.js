@@ -17,7 +17,7 @@ Place, Suite 330, Boston, MA 02111-1307 USA.
 
 "use strict";
 
-var EBERRON_VERSION = '1.4.0.0';
+var EBERRON_VERSION = '1.4.1.0';
 
 /*
  * This module loads the rules from the Eberron campaign setting.  The Eberron
@@ -252,6 +252,61 @@ Eberron.housesDragonmarks = {
   'Sivis':'Scribing', 'Tharashk':'Finding', 'Thuranni':'Shadow',
   'Vadalis':'Handling'
 };
+Eberron.spellsDescriptions = {
+  'Armor Enhancement':'Touched armor/shield +3/35K GP enhancement for $L10 min',
+  'Bolts Of Bedevilment':"R$RM' 3 targets (1/rd) stunned (Will neg) for $L2 rd",
+  "Construct Energy Ward": "Touched construct DR ${lvl>10?30:lvl>6?20:10} from specified energy for $L10 min",
+  'Control Deathless':"R$RS' Command $L2 HD deathless in 30' area for $L min",
+  'Create Deathless':"R$RS' Create deathless soldier",
+  'Create Greater Deathless':"R$RS' Create undying councilor",
+  "Detect Aberration": "R60' cone info on aberrations for conc/$L min",
+  'Detoxify':"Neutralize venom w/in 30' for $L10 min",
+  'Disable Construct':'Touched construct $L10 HP (Will half)',
+  'Energy Alteration':'Touched affects different energy type for $L10 min',
+  'Enhancement Alteration':'Touched shield/weapon enhancement applies to bash/defense for $L10 min',
+  'Feast Of Champions':'Hour-long feast cures conditions, 2d8+$L HP',
+  'Greater Armor Enhancement':'Touched armor/shield +5/100K GP enhancement for $L10 min',
+  "Greater Construct Energy Ward": "Touched construct ignores up to ${Math.min(lvl*12,120)} HP from specified energy for $L10 min",
+  "Greater Status": "Monitor condition/position of, cast L0-2 touch spell on $Ldiv3 touched allies for $L hr",
+  'Greater Weapon Augmentation':'',
+  'Weapon Augmentation':'Touched weapon +5/200K GP enhancement for $L10 min',
+  'Halt Deathless':"R$RM' 3 deathless in 30' area immobilized (Will neg) for $L rd",
+  'Hardening':'Touched $L10 cubic ft item resists damage',
+  'Hero\'s Blade':'Touched blade good-aligned, dbl crit threat, +2d6 HP to evil (+2d8 outsider/undead), blind and deafen evil 1d4 rd on crit (Will neg) for $L min',
+  'Inflict Critical Damage':'Touched construct 4d8+$Lmin20 HP',
+  'Inflict Light Damage':'Touched construct 1d8+$Lmin5 HP',
+  'Inflict Moderate Damage':'Touched construct 2d8+$Lmin10 HP',
+  'Inflict Serious Damage':'Touched construct 3d8+$Lmin15 HP',
+  'Iron Construct':'Touched construct DR 15/adamantine, half acid/fire damage, +4 Str, -4 Dex, x5 weigh for $L min',
+  'Item Alteration':'Touched item grants bonus differently for $L10 min',
+  "Legion\'s Shield Of Faith": "R$RM' Allies in 20' area +${Math.min(2+Math.floor(lvl/6),5)} AC for $L min",
+  'Lesser Armor Enhancement':'Touched armor/shield +1/5K GP enhancement for $L10 min',
+  'Lesser Weapon Augmentation':'Touched weapon +1/10K GP enhancement for $L10 min',
+  'Maddening Scream':'Touched acts madly for 1d4+1 rd',
+  'Magecraft':'Self +5 same day Craft check',
+  'Metamagic Item':'Imbue touched magic item w/metamagic property for $L rd',
+  'Nature\'s Wrath':"R$RM' 20' radius aberrations $L{min10}d6 HP and dazed 1 rd, other unnatural ${Math.min(Math.floor(lvl/2),5)}d8 HP (Will half)",
+  'Personal Weapon Augmentation':'Touched self weapon +1/10K GP enhancement for $L10 min',
+  'Power Surge':'Touched gains ${Math.floor(lvl/5)} charges for $L min',
+  "Repair Critical Damage": "Touched construct repair 4d8+$Lmin20",
+  "Repair Light Damage": "Touched construct repair 1d8+$Lmin5",
+  "Repair Moderate Damage": "Touched construct repair 2d8+$Lmin10",
+  "Repair Serious Damage": "Touched construct repair 3d8+$Lmin15",
+  'Resistance Item':'Touched grants +${1+Math.floor(lvl/4)} saves for $L10 min',
+  'Return To Nature':"R$RS' Target reduce Int, magic",
+  'Skill Enhancement':'Touched grants +${2+Math.floor(lvl/2)} specified skill checks for $L10 min',
+  'Spell Storing Item':'Imbue touched item with spell up to ${Math.min(Math.floor(lvl/2),4)} level',
+  'Spirit Steed':'Touched animal speed +30/x6, no hustle damage for L$ hr',
+  'Stone Construct':'Touched construct DR 10/adamantine for ${Math.min(lvl*10,150)} HP',
+  'Suppress Requirement':'Remove usage requirement from touched magic item for $L10 min',
+  'Total Repair':'Touched construct conditions removed, ${Math.min(lvl*10,150)} HP repaired',
+  'Touch Of Madness':'Touched dazed for $L2 rd',
+  'Toughen Construct':'Touched construct +${Math.min(2+Math.floor((lvl-3)/3),5)} AC',
+  "True Creation": "Create permanent $L' cu plant/mineral object",
+  'Weapon Augmentation':'Touched weapon +3/70K GP enhancement for $L10 min',
+  'Withering Palm':'Touched loses $Ldiv2 Str and Con (Fort neg)',
+  'Zone Of Natural Purity':"R$RS' fey/plants in 20' radius +1 attack/damage/save, abberations -1, for $L2 hr"
+};
 Eberron.spellsSchools = {
   'Armor Enhancement':'Transmutation',
   'Bolts Of Bedevilment':'Enchantment',
@@ -293,7 +348,6 @@ Eberron.spellsSchools = {
   'Repair Serious Damage':'Transmutation',
   'Resistance Item':'Abjuration',
   'Return To Nature':'Transmutation',
-  'Shield Of Faith':'Abjuration',
   'Skill Enhancement':'Transmutation',
   'Spell Storing Item':'Transmutation',
   'Spirit Steed':'Necromancy',
