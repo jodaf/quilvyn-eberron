@@ -155,7 +155,7 @@ EberronPrestige.classRules = function(rules, classes) {
         'saveNotes.spellResistanceFeature:DC 20 spell resistance',
         'saveNotes.unearthlyGraceFeature:+%V all saves',
         'skillNotes.favoredEnemyFeature:' +
-          '+2 or more Bluff/Listen/Sense Motive/Spot/Survival ' +
+          '+2 or more Bluff, Listen, Sense Motive, Spot, Survival ' +
           'vs. %V type(s) of creatures',
         'skillNotes.natureSenseFeature:+2 Knowledge (Nature)/Survival',
         'validationNotes.childrenOfWinterSelectableFeatureAlignment:' +
@@ -674,7 +674,7 @@ EberronPrestige.classRules = function(rules, classes) {
           '+2 strength/constitution/-2 AC for 1 round after taking damage',
         'combatNotes.weretouchedTusksFeature:d6+%V tusk attack (next size for Longtooth) while shifting',
         'saveNotes.fierceWillFeature:+4 Will while shifting',
-        'skillNotes.wildEmpathyFeature:+%V Diplomacy w/animals',
+        'skillNotes.wildEmpathyFeature:+%V Diplomacy (animals)',
         'validationNotes.weretouchedMasterClassBaseAttack:' +
           'Requires Base Attack >= 4',
         'validationNotes.weretouchedMasterClassFeats:Requires any Shifter',

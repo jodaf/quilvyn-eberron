@@ -47,8 +47,9 @@ function Eberron() {
   SRD35.featRules(rules, SRD35.FEATS, SRD35.SUBFEATS);
   SRD35.descriptionRules
     (rules, SRD35.ALIGNMENTS, Eberron.DEITIES, SRD35.GENDERS);
-  SRD35.equipmentRules(rules, SRD35.ARMORS, SRD35.GOODIES, SRD35.SHIELDS,
+  SRD35.equipmentRules(rules, SRD35.ARMORS, SRD35.SHIELDS,
                        SRD35.WEAPONS.concat(Eberron.WEAPONS));
+  SRD35.goodiesRules(rules, SRD35.GOODIES);
   SRD35.combatRules(rules);
   SRD35.movementRules(rules);
   SRD35.magicRules(rules, SRD35.CLASSES, SRD35.DOMAINS, SRD35.SCHOOLS);
@@ -1387,7 +1388,7 @@ Eberron.magicRules = function(rules, classes, domains) {
     } else if(domain == 'Commerce') {
       notes = [
         'skillNotes.commerceDomain:' +
-          '+10 Profession (earn a living)/Appraise is a class skill'
+          '+10 Profession (earn a living), Appraise is a class skill'
       ];
       spells = [
         'Comprehend Languages', 'Zone Of Truth', 'Tongues', 'Glibness',
@@ -1480,8 +1481,7 @@ Eberron.magicRules = function(rules, classes, domains) {
       rules.defineRule('saves.Will', 'saveNotes.madnessDomain', '+', '-1');
     } else if(domain == 'Meditation') {
       notes = [
-        'magicNotes.meditationDomain:' +
-          'x1.5 designated spell variable effects 1/day'
+        'magicNotes.meditationDomain:x1.5 chosen spell variable effects 1/day'
       ];
       spells = [
         'Comprehend Languages', 'Owl\'s Wisdom', 'Locate Object', 'Tongues',
@@ -1623,7 +1623,7 @@ Eberron.raceRules = function(rules, races) {
       notes = [
         'abilityNotes.beasthideFeature:+2 constitution while shifting',
         'abilityNotes.cliffwalkFeature:' +
-          '+2 Dexterity/%V climb speed while shifting',
+          '+2 Dexterity, %V climb speed while shifting',
         'abilityNotes.longstrideFeature:+2 dexterity/+10 speed while shifting',
         'abilityNotes.longtoothFeature:+2 strength while shifting',
         'abilityNotes.razorclawFeature:+2 strength while shifting',
@@ -1634,7 +1634,6 @@ Eberron.raceRules = function(rules, races) {
         'featureNotes.shiftingFeature:Use Shifter trait for %V rounds %1/day',
         'featureNotes.wildhuntFeature:' +
           'Detect creatures\' presence w/in 30 ft/track by smell',
-        'skillNotes.cliffwalkFeature:20 ft climb speed while shifting',
         'skillNotes.wildhuntFeature:+2 Survival'
       ];
       selectableFeatures = [
