@@ -17,7 +17,7 @@ Place, Suite 330, Boston, MA 02111-1307 USA.
 
 "use strict";
 
-var EBERRON_VERSION = '1.4.1.0';
+var EBERRON_VERSION = '1.4.1.1';
 
 /*
  * This module loads the rules from the Eberron campaign setting.  The Eberron
@@ -156,9 +156,9 @@ Eberron.SUBFEATS = {
   'Monastic Training':''
 };
 Eberron.WEAPONS = [
-  'Talenta Boomerang:d4r30', 'Talenta Sharrash:d10x4@19',
-  'Talenta Tangat:d10x2@18', 'Valenar Double Scimitar:d6x2@18/d6x2@18',
-  'Xen\'drik Boomerang:d6r20'
+  'Talenta Boomerang:d4r30 Ex', 'Talenta Sharrash:d10x4@19 2h Ex',
+  'Talenta Tangat:d10x2@18 2h Ex', 'Valenar Double Scimitar:d6/d6x2@18 2h Ex',
+  'Xen\'drik Boomerang:d6r20 Ex'
 ];
 
 // Related information used internally by Eberron
