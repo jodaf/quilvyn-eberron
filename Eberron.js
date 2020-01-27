@@ -17,7 +17,7 @@ Place, Suite 330, Boston, MA 02111-1307 USA.
 
 "use strict";
 
-var EBERRON_VERSION = '1.4.1.1';
+var EBERRON_VERSION = '1.5.1.0';
 
 /*
  * This module loads the rules from the Eberron campaign setting.  The Eberron
@@ -49,7 +49,6 @@ function Eberron() {
     (rules, SRD35.ALIGNMENTS, Eberron.DEITIES, SRD35.GENDERS);
   SRD35.equipmentRules(rules, SRD35.ARMORS, SRD35.SHIELDS,
                        SRD35.WEAPONS.concat(Eberron.WEAPONS));
-  SRD35.goodiesRules(rules, SRD35.GOODIES);
   SRD35.combatRules(rules);
   SRD35.movementRules(rules);
   SRD35.magicRules(rules, SRD35.CLASSES, SRD35.DOMAINS, SRD35.SCHOOLS);
