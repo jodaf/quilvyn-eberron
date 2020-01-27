@@ -68,6 +68,8 @@ function Eberron() {
   Eberron.heroicRules(rules, Eberron.HOUSES);
   Eberron.magicRules
     (rules, SRD35.CLASSES.concat(Eberron.CLASSES), Eberron.DOMAINS);
+  SRD35.spellRules
+    (rules, null, Object.assign({}, SRD35.spellsDescriptions, Eberron.spellsDescriptions));
   // So far, same character creation procedures as SRD35
   rules.defineChoice('preset', 'race', 'level', 'levels');
   rules.defineChoice('random', SRD35.RANDOMIZABLE_ATTRIBUTES);
