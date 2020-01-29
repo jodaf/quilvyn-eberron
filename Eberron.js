@@ -1,5 +1,5 @@
 /*
-Copyright 2019, James J. Hayes
+Copyright 2020, James J. Hayes
 
 This program is free software; you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software
@@ -1277,7 +1277,7 @@ Eberron.heroicRules = function(rules, houses) {
     ('dragonmark', 'house', '=', 'Eberron.housesDragonmarks[source]');
   rules.defineChoice('random', 'house');
   rules.defineEditorElement
-    ('house', 'House', 'select-one', 'houses', 'levels');
+    ('house', 'House', 'select-one', 'houses', 'experience');
   rules.defineSheetElement('Heroics', 'Description');
   rules.defineSheetElement('House', 'Heroics/');
   rules.defineSheetElement('Dragonmark', 'Heroics/');
