@@ -35,7 +35,7 @@ function Eberron() {
   }
 
   // Define a new rule set w/the same editor and standard viewer as SRD35
-  var rules = new ScribeRules('Eberron', EBERRON_VERSION);
+  var rules = new QuilvynRules('Eberron', EBERRON_VERSION);
   rules.editorElements = SRD35.initialEditorElements();
   SRD35.createViewers(rules, SRD35.VIEWERS);
   // Pick up the SRD35 rules, w/minor mods for deities and weapons
@@ -76,8 +76,8 @@ function Eberron() {
   rules.randomizeOneAttribute = SRD35.randomizeOneAttribute;
   rules.makeValid = SRD35.makeValid;
   rules.ruleNotes = Eberron.ruleNotes;
-  // Let Scribe know we're here
-  Scribe.addRuleSet(rules);
+  // Let Quilvyn know we're here
+  Quilvyn.addRuleSet(rules);
   Eberron.rules = rules;
 
 }
@@ -1717,8 +1717,8 @@ Eberron.raceRules = function(rules, races) {
 
 Eberron.ruleNotes = function() {
   return '' +
-    '<h2>Eberron Scribe Module Notes</h2>\n' +
-    'Eberron Scribe Module Version ' + EBERRON_VERSION + '\n' +
+    '<h2>Eberron Quilvyn Module Notes</h2>\n' +
+    'Eberron Quilvyn Module Version ' + EBERRON_VERSION + '\n' +
     '\n' +
     '<h3>Usage Notes</h3>\n' +
     '<p>\n' +
