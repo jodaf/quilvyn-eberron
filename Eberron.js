@@ -17,7 +17,7 @@ Place, Suite 330, Boston, MA 02111-1307 USA.
 
 "use strict";
 
-var EBERRON_VERSION = '1.5.1.0';
+var EBERRON_VERSION = '1.5.1.1';
 
 /*
  * This module loads the rules from the Eberron campaign setting.  The Eberron
@@ -55,9 +55,8 @@ function Eberron() {
   // Pick up the NPC/Prestige rules, if available
   if(window.SRD35NPC != null) {
     SRD35NPC.classRules(rules, SRD35NPC.CLASSES);
-    SRD35NPC.companionRules(rules, SRD35NPC.COMPANIONS);
   }
-  if(window.SRD35PrestigeNPC != null) {
+  if(window.SRD35Prestige != null) {
     SRD35Prestige.classRules(rules, SRD35Prestige.CLASSES);
     SRD35Prestige.companionRules(rules, SRD35Prestige.COMPANIONS);
   }
