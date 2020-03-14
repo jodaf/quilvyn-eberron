@@ -59,18 +59,12 @@ EberronPrestige.classRules = function(rules, classes) {
       hitDie = 8;
       notes = [
         'abilityNotes.actionPointBonusFeature:+2 AP',
-        'magicNotes.greaterDragonmarkFeature:' +
-          'DC %V+spell level choice of %1 daily at caster level 10/' +
-          'least/lesser dragonmark ability +1/day',
         'magicNotes.improvedGreaterDragonmarkFeature:' +
-          '2nd greater dragonmark ability or use ability +1/day',
+          '2nd Greater Dragonmark spell or +1/day',
         'magicNotes.improvedLeastDragonmarkFeature:' +
-          '2nd least dragonmark ability or use ability +1/day',
+          '2nd Least Dragonmark spell or +1/day',
         'magicNotes.improvedLesserDragonmarkFeature:' +
-          '2nd lesser dragonmark ability or use ability +1/day',
-        'magicNotes.lesserDragonmarkFeature:' +
-          'DC %V+spell level choice of %1 daily at caster level 6/' +
-          'least dragonmark ability +1/day',
+          '2nd Lesser Dragonmark spell or +1/day',
         'skillNotes.houseStatusFeature:' +
           '+%V charisma-based skills w/house members',
         'validationNotes.dragonmarkHeirClassFeats:' +
@@ -98,21 +92,14 @@ EberronPrestige.classRules = function(rules, classes) {
       spellsPerDay = null;
       rules.defineRule
         ('actionPoints', 'abilityNotes.actionPointBonusFeature', '+', '2');
-      rules.defineRule('magicNotes.greaterDragonmarkFeature',
-        'charismaModifier', '=', '10 + source'
+      rules.defineRule('casterLevels.Greater Dragonmark',
+        'levels.Dragonmark Heir', '+', null
       );
-      rules.defineRule('magicNotes.greaterDragonmarkFeature.1',
-        'dragonmark', '=',
-        'Eberron.dragonmarksSpells[source] == null ? null : ' +
-        'Eberron.dragonmarksSpells[source][2]'
+      rules.defineRule('casterLevels.Least Dragonmark',
+        'levels.Dragonmark Heir', '+', null
       );
-      rules.defineRule('magicNotes.lesserDragonmarkFeature',
-        'charismaModifier', '=', '10 + source'
-      );
-      rules.defineRule('magicNotes.lesserDragonmarkFeature.1',
-        'dragonmark', '=',
-        'Eberron.dragonmarksSpells[source] == null ? null : ' +
-        'Eberron.dragonmarksSpells[source][1]'
+      rules.defineRule('casterLevels.Lesser Dragonmark',
+        'levels.Dragonmark Heir', '+', null
       );
       rules.defineRule
         ('skillNotes.houseStatusFeature', 'levels.Dragonmark Heir', '=', null);
@@ -127,7 +114,7 @@ EberronPrestige.classRules = function(rules, classes) {
       baseAttack = SRD35.ATTACK_BONUS_GOOD;
       feats = null;
       features = [
-        '1:Nature Sense', '1:Resist Aberrations', '1:Resist Nature\'s Lure',
+        '1:Nature Sense', '1:Resist Aberrations', "1:Resist Nature's Lure",
         '1:Resist Poison', '1:Resist The Arcane', '2:Hated Foe',
         '3:Darkvision', '3:Ferocity', '3:Improved Critical',
         '3:Resist Corruption', '3:Unearthly Grace', '4:Favored Enemy',
@@ -148,7 +135,7 @@ EberronPrestige.classRules = function(rules, classes) {
         'magicNotes.touchOfContagionFeature:<i>Contagion</i> 3/day',
         'saveNotes.resistAberrationsFeature:+2 vs. aberration abilities',
         'saveNotes.resistCorruptionFeature:Immune disease/+2 vs. mind-altering',
-        'saveNotes.resistNature\'sLureFeature:+4 vs. spells of feys',
+        "saveNotes.resistNature'sLureFeature:+4 vs. spells of feys",
         'saveNotes.resistTheArcaneFeature:+2 vs. arcane spells',
         'saveNotes.resistPoisonFeature:+2 vs. poison',
         'saveNotes.slipperyMindFeature:Second save vs. enchantment',
@@ -192,6 +179,16 @@ EberronPrestige.classRules = function(rules, classes) {
       spellAbility = null;
       spellsKnown = null;
       spellsPerDay = null;
+      rules.defineRule('casterLevels.Eldeen Ranger',
+        'eldeenRangerFeatures.Touch Of Contagion', '?', null,
+        'levels.Eldeen Ranger', '=', 'source < 5 ? null : source'
+      );
+      rules.defineRule
+        ('casterLevels.Contagion', 'casterLevels.Eldeen Ranger', '^=', null);
+      // Set casterLevels.W to a minimal value so that spell DC will be
+      // calcuated even for non-Wizard Eldeen Rangers.
+      rules.defineRule
+        ('casterLevels.W', 'casterLevels.Eldeen Ranger', '^=', '1');
       rules.defineRule('combatNotes.favoredEnemyFeature',
         'levels.' + klass, '+=', 'source >= 4 ? 1 : null'
       );
@@ -222,7 +219,7 @@ EberronPrestige.classRules = function(rules, classes) {
       rules.defineRule('eldeenRangerFeatures.Resist Corruption',
         'eldeenRangerFeatures.Children Of Winter', '?', null
       );
-      rules.defineRule('eldeenRangerFeatures.Resist Nature\'s Lure',
+      rules.defineRule("eldeenRangerFeatures.Resist Nature's Lure",
         'eldeenRangerFeatures.Greensingers', '?', null
       );
       rules.defineRule('eldeenRangerFeatures.Resist Poison',
@@ -294,7 +291,7 @@ EberronPrestige.classRules = function(rules, classes) {
         'featureNotes.darkvisionFeature:%V ft b/w vision in darkness',
         'magicNotes.casterLevelBonusFeature:' +
           '+%V base class level for spells known/per day',
-        'magicNotes.detectThoughtsFeature:DC %V <i>Detect Thoughts</i> at will',
+        'magicNotes.detectThoughtsFeature:<i>Detect Thoughts</i> at will',
         'magicNotes.silverExorcismFeature:+2 vs. evil outsiders resistance',
         'magicNotes.wardingFlameFeature:Warding glow for spell resistance 25',
         'saveNotes.resistCharmFeature:+2 vs. charm effects',
@@ -357,10 +354,6 @@ EberronPrestige.classRules = function(rules, classes) {
       );
       rules.defineRule('magicNotes.casterLevelBonusFeature',
         'levels.Exorcist Of The Silver Flame', '+=', 'Math.floor(source*2/3)'
-      );
-      rules.defineRule('magicNotes.detectThoughtsFeature',
-        'levels.Exorcist Of The Silver Flame', '=', '10 + source',
-        'charismaModifier', '+', null
       );
       rules.defineRule('resistance.Possession',
         'saveNotes.resistPossessionFeature', '+=', null
@@ -459,8 +452,7 @@ EberronPrestige.classRules = function(rules, classes) {
         'abilityNotes.actionPointBonusFeature:+2 AP',
         'magicNotes.casterLevelBonusFeature:' +
           '+%V base class level for spells known/per day',
-        'magicNotes.siberysMarkFeature:' +
-          'DC %V+spell level %1 at caster level 15 %2/day',
+        'magicNotes.siberysMarkFeature:Choice of %V',
         'validationNotes.heirOfSiberysClassFeats:' +
           'Requires Heroic Spirit/no Dragonmark feats',
         'validationNotes.heirOfSiberysClassRace:' +
@@ -482,6 +474,8 @@ EberronPrestige.classRules = function(rules, classes) {
       rules.defineRule
         ('actionPoints', 'abilityNotes.actionPointBonusFeature', '+', '2');
       rules.defineRule
+        ('casterLevels.Heir Of Siberys', 'levels.Heir Of Siberys', '=', '15');
+      rules.defineRule
         ('featCount.General', 'heirOfSiberysFeatures.Feat Bonus', '+=', null);
       rules.defineRule
         ('featCount.Heir Of Siberys', 'levels.Heir Of Siberys', '=', '1');
@@ -498,18 +492,30 @@ EberronPrestige.classRules = function(rules, classes) {
       rules.defineRule('magicNotes.casterLevelBonusFeature',
         'levels.Heir Of Siberys', '+=', 'source - 1'
       );
-      rules.defineRule('magicNotes.siberysMarkFeature',
-        'charismaModifier', '=', '10 + source'
-      );
+      rules.defineRule
+        ('magicNotes.siberysMarkFeature', '', '=', '"spells %1/day"');
       rules.defineRule('magicNotes.siberysMarkFeature.1',
-        'dragonmark', '=',
-        'Eberron.dragonmarksSpells[source] == null ? null : ' +
-        'Eberron.dragonmarksSpells[source][3]'
+        'levels.Heir Of Siberys', '=', 'source < 2 ? null : Math.min(source + 1, 2)'
       );
-      rules.defineRule('magicNotes.siberysMarkFeature.2',
-        'levels.Heir Of Siberys', '=',
-        'source >= 3 ? 2 : source == 2 ? 1 : null'
-      );
+      // Set casterLevels.[CS] to a minimal value so that spell DC will be
+      // calcuated even for non-caster characters.
+      rules.defineRule
+        ('casterLevels.C', 'casterLevels.Heir Of Siberys', '^=', '1');
+      rules.defineRule
+        ('casterLevels.S', 'casterLevels.Heir Of Siberys', '^=', '1');
+      for(var dragonmark in Eberron.dragonmarksSpells) {
+        var spells = Eberron.dragonmarksSpells[dragonmark][3].split(/,\s*/);
+        for(var j = 0; j < spells.length; j++) {
+          var spell = spells[j];
+          rules.defineRule('casterLevels.' + spell,
+            'casterLevels.Heir Of Siberys', '^=', null
+          );
+          spells[j] = '<i>' + spell + '</i> %1/day';
+        }
+        rules.defineRule('magicNotes.siberysMarkFeature',
+          'isDragonmark.' + dragonmark, '=', '"' + spells.join(', ') + '"'
+        );
+      };
       rules.defineRule('validationNotes.heirOfSiberysClassFeats',
         'levels.Heir Of Siberys', '=', '-10',
         'features.Heroic Spirit', '+', '10',
@@ -562,6 +568,23 @@ EberronPrestige.classRules = function(rules, classes) {
       spellAbility = null;
       spellsKnown = null;
       spellsPerDay = null;
+      rules.defineRule('casterLevels.Master Inquisitive',
+        'masterInquisitiveFeatures.Natural Spells', '?', null,
+        'levels.Master Inquisitive', '=', null
+      );
+      rules.defineRule('casterLevels.Discern Lies',
+        'casterLevels.Master Inquisitive', '^=', null
+      );
+      rules.defineRule('casterLevels.True Seeing',
+        'casterLevels.Master Inquisitive', '^=', null
+      );
+      rules.defineRule('casterLevels.Zome Of Truth',
+        'casterLevels.Master Inquisitive', '^=', null
+      );
+      // Set casterLevels.C to a minimal value so that spell DC will be
+      // calcuated even for non-Cleric Master Inquisitives.
+      rules.defineRule
+        ('casterLevels.C', 'casterLevels.Master Inquisitive', '^=', '1');
       rules.defineRule('featCount.Master Inquisitive',
         'levels.Master Inquisitive', '=',
         'source < 2 ? null : Math.floor(source / 2)'
