@@ -17,7 +17,7 @@ Place, Suite 330, Boston, MA 02111-1307 USA.
 
 "use strict";
 
-var EBERRON_VERSION = '1.7.1.0';
+var EBERRON_VERSION = '1.7.1.1';
 
 /*
  * This module loads the rules from the Eberron campaign setting.  The Eberron
@@ -257,54 +257,53 @@ Eberron.housesDragonmarks = {
 Eberron.spellsDescriptions = {
   'Armor Enhancement':'Touched armor/shield +3/35K GP enhancement for $L10 min',
   'Bolts Of Bedevilment':"R$RM' 3 targets (1/rd) stunned (Will neg) for $L2 rd",
-  "Construct Energy Ward": "Touched construct DR ${lvl>10?30:lvl>6?20:10} from specified energy for $L10 min",
+  'Construct Energy Ward': "Touched construct DR ${lvl>10?30:lvl>6?20:10} from specified energy for $L10 min",
   'Control Deathless':"R$RS' Command $L2 HD deathless in 30' area for $L min",
   'Create Deathless':"R$RS' Create deathless soldier",
   'Create Greater Deathless':"R$RS' Create undying councilor",
-  "Detect Aberration": "R60' cone info on aberrations for conc/$L min",
+  'Detect Aberration': "R60' cone info on aberrations for conc/$L min",
   'Detoxify':"Neutralize venom w/in 30' for $L10 min",
   'Disable Construct':'Touched construct $L10 HP (Will half)',
   'Energy Alteration':'Touched affects different energy type for $L10 min',
   'Enhancement Alteration':'Touched shield/weapon enhancement applies to bash/defense for $L10 min',
   'Feast Of Champions':'Hour-long feast cures conditions, 2d8+$L HP',
   'Greater Armor Enhancement':'Touched armor/shield +5/100K GP enhancement for $L10 min',
-  "Greater Construct Energy Ward": "Touched construct ignores up to ${Math.min(lvl*12,120)} HP from specified energy for $L10 min",
-  "Greater Status": "Monitor condition/position of, cast L0-2 touch spell on $Ldiv3 touched allies for $L hr",
-  'Greater Weapon Augmentation':'',
-  'Weapon Augmentation':'Touched weapon +5/200K GP enhancement for $L10 min',
+  'Greater Construct Energy Ward': "Touched construct ignores up to $L12min120 HP from specified energy for $L10 min",
+  'Greater Status': "Monitor condition/position of, cast L0-2 touch spell on $Ldiv3 touched allies for $L hr",
+  'Greater Weapon Augmentation':'Touched weapon +5/200K GP enhancement for $L10 min',
   'Halt Deathless':"R$RM' 3 deathless in 30' area immobilized (Will neg) for $L rd",
   'Hardening':'Touched $L10 cubic ft item resists damage',
-  'Hero\'s Blade':'Touched blade good-aligned, dbl crit threat, +2d6 HP to evil (+2d8 outsider/undead), blind and deafen evil 1d4 rd on crit (Will neg) for $L min',
+  "Hero's Blade":'Touched blade good-aligned, dbl crit threat, +2d6 HP to evil (+2d8 outsider/undead), blind and deafen evil 1d4 rd on crit (Will neg) for $L min',
   'Inflict Critical Damage':'Touched construct 4d8+$Lmin20 HP',
   'Inflict Light Damage':'Touched construct 1d8+$Lmin5 HP',
   'Inflict Moderate Damage':'Touched construct 2d8+$Lmin10 HP',
   'Inflict Serious Damage':'Touched construct 3d8+$Lmin15 HP',
   'Iron Construct':'Touched construct DR 15/adamantine, half acid/fire damage, +4 Str, -4 Dex, x5 weigh for $L min',
   'Item Alteration':'Touched item grants bonus differently for $L10 min',
-  "Legion\'s Shield Of Faith": "R$RM' Allies in 20' area +${Math.min(2+Math.floor(lvl/6),5)} AC for $L min",
+  "Legion's Shield Of Faith": "R$RM' Allies in 20' area +$Ldiv6plus2min5 AC for $L min",
   'Lesser Armor Enhancement':'Touched armor/shield +1/5K GP enhancement for $L10 min',
   'Lesser Weapon Augmentation':'Touched weapon +1/10K GP enhancement for $L10 min',
   'Maddening Scream':'Touched acts madly for 1d4+1 rd',
   'Magecraft':'Self +5 same day Craft check',
   'Metamagic Item':'Imbue touched magic item w/metamagic property for $L rd',
-  'Nature\'s Wrath':"R$RM' 20' radius aberrations $L{min10}d6 HP and dazed 1 rd, other unnatural ${Math.min(Math.floor(lvl/2),5)}d8 HP (Will half)",
+  "Nature's Wrath":"R$RM' 20' radius aberrations ${Lmin10}d6 HP and dazed 1 rd, other unnatural ${Ldiv2min5}d8 HP (Will half)",
   'Personal Weapon Augmentation':'Touched self weapon +1/10K GP enhancement for $L10 min',
-  'Power Surge':'Touched gains ${Math.floor(lvl/5)} charges for $L min',
-  "Repair Critical Damage": "Touched construct repair 4d8+$Lmin20",
-  "Repair Light Damage": "Touched construct repair 1d8+$Lmin5",
-  "Repair Moderate Damage": "Touched construct repair 2d8+$Lmin10",
-  "Repair Serious Damage": "Touched construct repair 3d8+$Lmin15",
-  'Resistance Item':'Touched grants +${1+Math.floor(lvl/4)} saves for $L10 min',
+  'Power Surge':'Touched gains $Ldiv5 charges for $L min',
+  'Repair Critical Damage': "Touched construct repair 4d8+$Lmin20",
+  'Repair Light Damage': "Touched construct repair 1d8+$Lmin5",
+  'Repair Moderate Damage': "Touched construct repair 2d8+$Lmin10",
+  'Repair Serious Damage': "Touched construct repair 3d8+$Lmin15",
+  'Resistance Item':'Touched grants +$Ldiv4plus1 saves for $L10 min',
   'Return To Nature':"R$RS' Target reduce Int, magic",
-  'Skill Enhancement':'Touched grants +${2+Math.floor(lvl/2)} specified skill checks for $L10 min',
-  'Spell Storing Item':'Imbue touched item with spell up to ${Math.min(Math.floor(lvl/2),4)} level',
+  'Skill Enhancement':'Touched grants +$Ldiv2plus2 specified skill checks for $L10 min',
+  'Spell Storing Item':'Imbue touched item with spell up to $Ldiv2min4 level',
   'Spirit Steed':'Touched animal speed +30/x6, no hustle damage for L$ hr',
-  'Stone Construct':'Touched construct DR 10/adamantine for ${Math.min(lvl*10,150)} HP',
+  'Stone Construct':'Touched construct DR 10/adamantine for $L10min150 HP',
   'Suppress Requirement':'Remove usage requirement from touched magic item for $L10 min',
-  'Total Repair':'Touched construct conditions removed, ${Math.min(lvl*10,150)} HP repaired',
+  'Total Repair':'Touched construct conditions removed, $L10min150 HP repaired',
   'Touch Of Madness':'Touched dazed for $L2 rd',
-  'Toughen Construct':'Touched construct +${Math.min(2+Math.floor((lvl-3)/3),5)} AC',
-  "True Creation": "Create permanent $L' cu plant/mineral object",
+  'Toughen Construct':'Touched construct +$Ldiv3plus1max2min5 AC',
+  'True Creation': "Create permanent $L' cu plant/mineral object",
   'Weapon Augmentation':'Touched weapon +3/70K GP enhancement for $L10 min',
   'Withering Palm':'Touched loses $Ldiv2 Str and Con (Fort neg)',
   'Zone Of Natural Purity':"R$RS' fey/plants in 20' radius +1 attack/damage/save, abberations -1, for $L2 hr"
@@ -328,20 +327,20 @@ Eberron.spellsSchools = {
   'Greater Weapon Augmentation':'Transmutation',
   'Halt Deathless':'Necromancy',
   'Hardening':'Transmutation',
-  'Hero\'s Blade':'Necromancy',
+  "Hero's Blade":'Necromancy',
   'Inflict Critical Damage':'Transmutation',
   'Inflict Light Damage':'Transmutation',
   'Inflict Moderate Damage':'Transmutation',
   'Inflict Serious Damage':'Transmutation',
   'Iron Construct':'Transmutation',
   'Item Alteration':'Transmutation',
-  'Legion\'s Shield Of Faith':'Abjuration',
+  "Legion's Shield Of Faith":'Abjuration',
   'Lesser Armor Enhancement':'Transmutation',
   'Lesser Weapon Augmentation':'Transmutation',
   'Maddening Scream':'Enchantment',
   'Magecraft':'Divination',
   'Metamagic Item':'Transmutation',
-  'Nature\'s Wrath':'Evocation',
+  "Nature's Wrath":'Evocation',
   'Personal Weapon Augmentation':'Transmutation',
   'Power Surge':'Transmutation',
   'Repair Critical Damage':'Transmutation',
@@ -473,6 +472,10 @@ Eberron.classRules = function(rules, classes) {
         'I5:11:1/12:2/14:3/18:4',
         'I6:14:1/15:2/17:3/19:4'
       ];
+      rules.defineRule('casterLevels.I',
+        'levels.Artificer', '=', null,
+         'magicNotes.casterLevelBonusFeature', '+', null
+      );
       // Artificer infusions are neither arcane nor divine, but they are casters
       rules.defineRule('casterLevel', 'levels.Artificer', '+=', null);
       rules.defineRule('featCount.Artificer',
@@ -589,7 +592,7 @@ Eberron.featRules = function(rules, feats, subfeats) {
     } else if(feat == 'Ashbound') {
       notes = [
         'magicNotes.ashboundFeature:' +
-          'Double <i>Summon Nature\'s Ally</i> duration; summoned creatures ' +
+          "Double <i>Summon Nature's Ally</i> duration; summoned creatures " +
           '+3 attack',
         'validationNotes.ashboundFeatFeatures:Requires Spontaneous Druid Spell'
       ];
@@ -1374,17 +1377,16 @@ Eberron.magicRules = function(rules, classes, domains) {
         'Magic Vestment:Magic Weapon:Personal Weapon Augmentation:' +
         'Repair Light Damage:Resistance Item:Shield Of Faith:' +
         'Skill Enhancement:Spell Storing Item',
-        'I2:Align Weapon:Armor Enhancement:Bear\'s Endurance:' +
-        'Bull\'s Strength:Cat\'s Grace:Chill Metal:Eagle\'s Splendor:' +
-        'Fox\'s Cunning:Heat Metal:Inflict Moderate Damage:' +
-        'Lesser Weapon Augmentation:Owl\'s Wisdom:Repair Moderate Damage:' +
-        'Toughen Construct',
+        "I2:Align Weapon:Armor Enhancement:Bear's Endurance:Bull's Strength:" +
+        "Cat's Grace:Chill Metal:Eagle's Splendor:Fox's Cunning:Heat Metal:" +
+        "Inflict Moderate Damage:Lesser Weapon Augmentation:Owl's Wisdom:" +
+        'Repair Moderate Damage:Toughen Construct',
         'I3:Construct Energy Ward:Greater Armor Enhancement:' +
         'Greater Magic Weapon:Inflict Serious Damage:Metamagic Item:' +
         'Power Surge:Repair Serious Damage:Stone Construct:' +
         'Suppress Requirement',
         'I4:Greater Construct Energy Ward:Inflict Critical Damage:' +
-        'Item Alteration:Iron Construct:Legion\'s Shield Of Faith:' +
+        "Item Alteration:Iron Construct:Legion's Shield Of Faith:" +
         'Lesser Globe Of Invulnerability:Minor Creation:' +
         'Repair Critical Damage:Rusting Grasp:Weapon Augmentation',
         'I5:Disrupting Weapon:Fabricate:Major Creation:Wall Of Force:' +
@@ -1401,7 +1403,7 @@ Eberron.magicRules = function(rules, classes, domains) {
       spells = [
         'D1:Detect Aberration',
         'D2:Zone Of Natural Purity',
-        'D4:Nature\'s Wrath',
+        "D4:Nature's Wrath",
         'D7:Return To Nature'
       ];
     } else if(klass == 'Sorcerer' || klass == 'Wizard') {
@@ -1467,7 +1469,7 @@ Eberron.magicRules = function(rules, classes, domains) {
       ];
       spells = [
         'Comprehend Languages', 'Zone Of Truth', 'Tongues', 'Glibness',
-        'True Seeing', 'Leomund\'s Secret Chest', 'Refuge', 'Analyze Dweomer',
+        'True Seeing', 'Secret Chest', 'Refuge', 'Analyze Dweomer',
         'Polymorph Any Object'
       ];
       rules.defineRule('classSkills.Appraise', 'domains.Commerce', '=', '1');
@@ -1477,9 +1479,8 @@ Eberron.magicRules = function(rules, classes, domains) {
         'skillNotes.communityDomain:+2 Diplomacy'
       ];
       spells = [
-        'Bless', 'Status', 'Prayer', 'Greater Status',
-        'Rary\'s Telepathic Bond', 'Heroes\' Feast', 'Refuge', 'Sympathy',
-        'Mass Heal'
+        'Bless', 'Status', 'Prayer', 'Greater Status', 'Telepathic Bond',
+        "Heroes' Feast", 'Refuge', 'Sympathy', 'Mass Heal'
       ];
     } else if(domain == 'Deathless') {
       notes = [
@@ -1488,8 +1489,8 @@ Eberron.magicRules = function(rules, classes, domains) {
       ];
       spells = [
         'Detect Undead', 'Consecrate', 'Halt Deathless', 'Spirit Steed',
-        'Hallow', 'Create Deathless', 'Create Deathless', 'Control Deathless',
-        'Hero\'s Blade'
+        'Hallow', 'Create Deathless', 'Create Greater Deathless',
+        'Control Deathless', "Hero's Blade"
       ];
     } else if(domain == 'Decay') {
       notes = [
@@ -1528,9 +1529,8 @@ Eberron.magicRules = function(rules, classes, domains) {
       ];
       spells = [
         'Goodberry', 'Delay Poison', 'Create Food And Water',
-        'Neutralize Poison', 'Leomund\'s Secure Shelter', 'Heroes\' Feast',
-        'Mordenkainen\'s Magnificent Mansion', 'Detoxify',
-        'Feast Of Champions'
+        'Neutralize Poison', 'Secure Shelter', "Heroes' Feast",
+        "Mage's Magnificent Mansion", 'Detoxify', 'Feast Of Champions'
       ];
     } else if(domain == 'Life') {
       notes = [
@@ -1559,7 +1559,7 @@ Eberron.magicRules = function(rules, classes, domains) {
         'magicNotes.meditationDomain:x1.5 chosen spell variable effects 1/day'
       ];
       spells = [
-        'Comprehend Languages', 'Owl\'s Wisdom', 'Locate Object', 'Tongues',
+        'Comprehend Languages', "Owl's Wisdom", 'Locate Object', 'Tongues',
         'Spell Resistance', 'Find The Path', 'Spell Turning', 'Mind Blank',
         'Astral Projection'
       ];
@@ -1578,9 +1578,9 @@ Eberron.magicRules = function(rules, classes, domains) {
           '+4 strength/constitution/+2 Will save/-2 AC for %V rounds 1/day'
       ];
       spells = [
-        'Cause Fear', 'Tasha\'s Hideous Laughter', 'Confusion',
-        'Crushing Despair', 'Greater Command', 'Greater Heroism',
-        'Song Of Discord', 'Otto\'s Irresistible Dance', 'Dominate Monster'
+        'Cause Fear', 'Hideous Laughter', 'Confusion', 'Crushing Despair',
+        'Greater Command', 'Greater Heroism', 'Song Of Discord',
+        'Irresistible Dance', 'Dominate Monster'
       ];
       rules.defineRule('combatNotes.passionDomain', 'levels.Cleric', '=', null);
     } else if(domain == 'Shadow') {
@@ -1723,7 +1723,7 @@ Eberron.raceRules = function(rules, races) {
         'combatNotes.razorclawFeature:d4+%V claw attack while shifting',
         'featureNotes.shiftingFeature:Use Shifter trait for %V rounds %1/day',
         'featureNotes.wildhuntFeature:' +
-          'Detect creatures\' presence w/in 30 ft/track by smell',
+          "Detect creatures' presence w/in 30 ft/track by smell",
         'skillNotes.wildhuntFeature:+2 Survival'
       ];
       selectableFeatures = [
