@@ -145,18 +145,18 @@ EberronPrestige.classRules = function(rules, classes) {
           '+2 or more Bluff, Listen, Sense Motive, Spot, Survival ' +
           'vs. %V type(s) of creatures',
         'skillNotes.natureSenseFeature:+2 Knowledge (Nature)/Survival',
-        'validationNotes.childrenOfWinterSelectableFeatureAlignment:' +
+        'validationNotes.eldeenRanger - ChildrenOfWinterSelectableFeatureAlignment:' +
           'Requires Alignment !~ Good',
         'validationNotes.eldeenRangerClassBaseAttack:Requires Base Attack >= 5',
         'validationNotes.eldeenRangerClassFeats:Requires Track',
         'validationNotes.eldeenRangerClassFeatures:Requires Favored Enemy',
         'validationNotes.eldeenRangerClassSkills:' +
           'Requires Knowledge (Nature) >= 6/Survival >= 8',
-        'validationNotes.gatekeepersSelectableFeatureAlignment:' +
+        'validationNotes.eldeenRanger - GatekeepersSelectableFeatureAlignment:' +
           'Requires Alignment !~ Evil',
-        'validationNotes.greensingersSelectableFeatureAlignment:' +
+        'validationNotes.eldeenRanger - GreensingersSelectableFeatureAlignment:' +
           'Requires Alignment =~ Chaotic',
-        'validationNotes.wardensOfTheWoodSelectableFeatureAlignment:' +
+        'validationNotes.eldeenRanger - WardensOfTheWoodSelectableFeatureAlignment:' +
           'Requires Alignment !~ Evil'
       ];
       profArmor = SRD35.PROFICIENCY_LIGHT;
