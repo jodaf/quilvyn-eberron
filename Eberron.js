@@ -17,7 +17,7 @@ Place, Suite 330, Boston, MA 02111-1307 USA.
 
 "use strict";
 
-var EBERRON_VERSION = '1.7.1.2';
+var EBERRON_VERSION = '1.7.1.3';
 
 /*
  * This module loads the rules from the Eberron campaign setting.  The Eberron
@@ -70,6 +70,7 @@ function Eberron() {
   SRD35.spellRules
     (rules, null, Object.assign({}, SRD35.spellsDescriptions, Eberron.spellsDescriptions));
   // So far, same character creation procedures as SRD35
+  rules.defineChoice('extras', 'feats', 'featCount', 'selectableFeatureCount');
   rules.defineChoice('preset', 'race', 'level', 'levels');
   rules.defineChoice('random', SRD35.RANDOMIZABLE_ATTRIBUTES);
   rules.randomizeOneAttribute = SRD35.randomizeOneAttribute;
@@ -1636,6 +1637,8 @@ Eberron.raceRules = function(rules, races) {
 
     var adjustment, features, notes, selectableFeatures;
     var race = races[i];
+    var raceNoSpace =
+      race.substring(0,1).toLowerCase() + race.substring(1).replace(/ /g, '');
 
     if(race == 'Changeling') {
 
@@ -1791,7 +1794,7 @@ Eberron.raceRules = function(rules, races) {
         var selectable = selectableFeatures[j];
         var choice = race + ' - ' + selectable;
         rules.defineChoice('selectableFeatures', choice + ':' + race);
-        rules.defineRule(race + 'Features.' + selectable,
+        rules.defineRule(raceNoSpace + 'Features.' + selectable,
           'selectableFeatures.' + choice, '+=', null
         );
         rules.defineRule('features.' + selectable,
