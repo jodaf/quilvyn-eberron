@@ -17,7 +17,7 @@ Place, Suite 330, Boston, MA 02111-1307 USA.
 
 "use strict";
 
-var EBERRON_VERSION = '1.7.1.3';
+var EBERRON_VERSION = '1.7.1.4';
 
 /*
  * This module loads the rules from the Eberron campaign setting.  The Eberron
@@ -1726,7 +1726,7 @@ Eberron.raceRules = function(rules, races) {
         'combatNotes.razorclawFeature:d4+%V claw attack while shifting',
         'featureNotes.shiftingFeature:Use Shifter trait for %V rounds %1/day',
         'featureNotes.wildhuntFeature:' +
-          "Detect creatures' presence w/in 30 ft/track by smell",
+          "Detect creatures' presence w/in 30', track by smell",
         'skillNotes.wildhuntFeature:+2 Survival'
       ];
       selectableFeatures = [

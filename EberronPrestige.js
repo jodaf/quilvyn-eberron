@@ -131,7 +131,7 @@ EberronPrestige.classRules = function(rules, classes) {
         'combatNotes.ferocityFeature:Continue fighting below 0 HP',
         'combatNotes.smiteEvilFeature:' +
           '+%V attack/+%1 damage vs. evil foe %2/day',
-        'featureNotes.darkvisionFeature:%V ft b/w vision in darkness',
+        "featureNotes.darkvisionFeature:%V' b/w vision in darkness",
         'magicNotes.touchOfContagionFeature:<i>Contagion</i> 3/day',
         'saveNotes.resistAberrationsFeature:+2 vs. aberration abilities',
         'saveNotes.resistCorruptionFeature:Immune disease/+2 vs. mind-altering',
@@ -288,7 +288,7 @@ EberronPrestige.classRules = function(rules, classes) {
         'combatNotes.weaponOfFlameFeature:+%Vd6 flame damage w/sacred weapon',
         'combatNotes.weaponOfTheExorcistFeature:' +
           '+1 damage w/sacred weapon treated as %V',
-        'featureNotes.darkvisionFeature:%V ft b/w vision in darkness',
+        "featureNotes.darkvisionFeature:%V' b/w vision in darkness",
         'magicNotes.casterLevelBonusFeature:' +
           '+%V base class level for spells known/per day',
         'magicNotes.detectThoughtsFeature:<i>Detect Thoughts</i> at will',
@@ -681,13 +681,13 @@ EberronPrestige.classRules = function(rules, classes) {
       notes = [
         'abilityNotes.alternateFormFeature:Shift to %V--%1--or bipedal hybrid',
         'abilityNotes.climbSpeedFeature:' +
-          '20 ft climb speed (+10 for Cliffwalker) while shifting',
+          "20' climb speed (+10 for Cliffwalker) while shifting",
         'abilityNotes.weretouchedClawsFeature:+2 strength while shifting',
         'abilityNotes.weretouchedFangsFeature:+2 dexterity while shifting',
         'abilityNotes.weretouchedTusksFeature:+2 constitution while shifting',
         'combatNotes.frightfulShiftingFeature:' +
-           'Foes w/< %V hit dice w/in 30 ft who see attack/charge DC %1 Will ' +
-           'save or shaken for 5d6 rounds',
+           "Foes w/lt %V hit dice w/in 30' who see attack/charge shaken for " +
+           '5d6 rounds (DC %1 Will neg)',
         'combatNotes.improvedGrabFeature:Grapple w/out AOO after claw hit',
         'combatNotes.pounceFeature:Full attack when charging',
         'combatNotes.tripFeature:Trip w/out AOO after bite hit',
