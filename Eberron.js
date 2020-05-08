@@ -273,7 +273,7 @@ Eberron.spellsDescriptions = {
   'Greater Status': "Monitor condition/position of, cast L0-2 touch spell on $Ldiv3 touched allies for $L hr",
   'Greater Weapon Augmentation':'Touched weapon +5/200K GP enhancement for $L10 min',
   'Halt Deathless':"R$RM' 3 deathless in 30' area immobilized (Will neg) for $L rd",
-  'Hardening':'Touched $L10 cubic ft item resists damage',
+  'Hardening':"Touched $L10' cu item resists damage",
   "Hero's Blade":'Touched blade good-aligned, dbl crit threat, +2d6 HP to evil (+2d8 outsider/undead), blind and deafen evil 1d4 rd on crit (Will neg) for $L min',
   'Inflict Critical Damage':'Touched construct 4d8+$Lmin20 HP',
   'Inflict Light Damage':'Touched construct 1d8+$Lmin5 HP',
