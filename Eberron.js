@@ -17,7 +17,7 @@ Place, Suite 330, Boston, MA 02111-1307 USA.
 
 "use strict";
 
-var EBERRON_VERSION = '1.7.1.4';
+var EBERRON_VERSION = '1.8.1.0';
 
 /*
  * This module loads the rules from the Eberron campaign setting.  The Eberron
