@@ -112,7 +112,7 @@ Eberron.DOMAINS = [
   'Dragon Below', 'Exorcism', 'Feast', 'Life', 'Madness', 'Meditation',
   'Necromancer', 'Passion', 'Shadow', 'Weather'
 ];
-// NOTE: Craft Construct from MM, needed for Artificer class
+// Craft Construct from MM needed for Artificer class
 Eberron.FEATS = [
   'Aberrant Dragonmark:', 'Action Boost:', 'Action Surge:',
   'Adamantine Body:Warforged', 'Ashbound:', 'Attune Magic Weapon:Item Creation',
