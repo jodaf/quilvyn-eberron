@@ -46,6 +46,10 @@ EberronPrestige.classRules = function(rules, classes) {
         profWeapon, saveFortitude, saveReflex, saveWill, selectableFeatures,
         skillPoints, skills, spellAbility, spellsKnown, spellsPerDay;
     var klass = classes[i];
+    var klassNoSpace =
+      klass.substring(0,1).toLowerCase() + klass.substring(1).replace(/ /g, '');
+    console.log(klass);
+    console.log(klassNoSpace);
 
     if(klass == 'Dragonmark Heir') {
 
@@ -768,12 +772,12 @@ EberronPrestige.classRules = function(rules, classes) {
       );
       rules.defineRule('weretouchedMasterAnimal',
         '', '=', '"None"',
-        'Weretouched MasterFeatures.Bear', '=', '"Bear"',
-        'Weretouched MasterFeatures.Boar', '=', '"Boar"',
-        'Weretouched MasterFeatures.Rat', '=', '"Rat"',
-        'Weretouched MasterFeatures.Tiger', '=', '"Tiger"',
-        'Weretouched MasterFeatures.Wolf', '=', '"Wolf"',
-        'Weretouched MasterFeatures.Wolverine', '=', '"Wolverine"'
+        'weretouchedMasterFeatures.Bear', '=', '"Bear"',
+        'weretouchedMasterFeatures.Boar', '=', '"Boar"',
+        'weretouchedMasterFeatures.Rat', '=', '"Rat"',
+        'weretouchedMasterFeatures.Tiger', '=', '"Tiger"',
+        'weretouchedMasterFeatures.Wolf', '=', '"Wolf"',
+        'weretouchedMasterFeatures.Wolverine', '=', '"Wolverine"'
       );
       rules.defineRule('weretouchedMasterFeatures.Climb Speed',
         'weretouchedMasterAnimal', '?', 'source == "Rat"'
@@ -822,7 +826,7 @@ EberronPrestige.classRules = function(rules, classes) {
         var selectable = selectableFeatures[j];
         var choice = klass + ' - ' + selectable;
         rules.defineChoice('selectableFeatures', choice + ':' + klass);
-        rules.defineRule(klass + 'Features.' + selectable,
+        rules.defineRule(klassNoSpace + 'Features.' + selectable,
           'selectableFeatures.' + choice, '+=', null
         );
         rules.defineRule('features.' + selectable,
