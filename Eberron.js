@@ -17,7 +17,7 @@ Place, Suite 330, Boston, MA 02111-1307 USA.
 
 "use strict";
 
-var EBERRON_VERSION = '1.8.1.1';
+var EBERRON_VERSION = '2.0.1.0';
 
 /*
  * This module loads the rules from the Eberron campaign setting.  The Eberron
@@ -34,335 +34,533 @@ function Eberron() {
     return;
   }
 
-  // Define a new rule set w/the same editor and standard viewer as SRD35
-  var rules = new QuilvynRules('Eberron', EBERRON_VERSION);
+  if(window.Pathfinder == null || Pathfinder.SRD35_SKILL_MAP == null) {
+    Eberron.USE_PATHFINDER = false;
+  }
+  Eberron.baseRules = Eberron.USE_PATHFINDER ? Pathfinder : SRD35;
+
+  var rules = new QuilvynRules
+    ('Eberron' + (Eberron.USE_PATHFINDER ? ' - PF' : ''), EBERRON_VERSION);
+  Eberron.rules = rules;
+
+  Eberron.CHOICES = Eberron.baseRules.CHOICES.concat(Eberron.CHOICES_ADDED);
+  rules.defineChoice('choices', Eberron.CHOICES);
+  rules.choiceEditorElements = Eberron.choiceEditorElements;
+  rules.choiceRules = Eberron.choiceRules;
   rules.editorElements = SRD35.initialEditorElements();
+  rules.getFormats = SRD35.getFormats;
+  rules.makeValid = SRD35.makeValid;
+  rules.randomizeOneAttribute = Eberron.randomizeOneAttribute;
+  Eberron.RANDOMIZABLE_ATTRIBUTES =
+    Eberron.baseRules.RANDOMIZABLE_ATTRIBUTES.concat
+    (Eberron.RANDOMIZABLE_ATTRIBUTES_ADDED);
+  rules.defineChoice('random', Eberron.RANDOMIZABLE_ATTRIBUTES);
+  rules.ruleNotes = Eberron.ruleNotes;
+
   SRD35.createViewers(rules, SRD35.VIEWERS);
-  // Pick up the SRD35 rules, w/minor mods for deities and weapons
-  SRD35.abilityRules(rules);
-  SRD35.raceRules(rules, SRD35.LANGUAGES, SRD35.RACES);
-  SRD35.classRules(rules, SRD35.CLASSES);
-  SRD35.companionRules(rules, SRD35.COMPANIONS);
-  SRD35.skillRules(rules, SRD35.SKILLS, SRD35.SUBSKILLS, SRD35.SYNERGIES);
-  SRD35.featRules(rules, SRD35.FEATS, SRD35.SUBFEATS);
-  SRD35.descriptionRules
-    (rules, SRD35.ALIGNMENTS, Eberron.DEITIES, SRD35.GENDERS);
-  SRD35.equipmentRules(rules, SRD35.ARMORS, SRD35.SHIELDS,
-                       SRD35.WEAPONS.concat(Eberron.WEAPONS));
-  SRD35.combatRules(rules);
-  SRD35.movementRules(rules);
-  SRD35.magicRules(rules, SRD35.CLASSES, SRD35.DOMAINS, SRD35.SCHOOLS);
-  // Pick up the NPC/Prestige rules, if available
-  if(window.SRD35NPC != null) {
-    SRD35NPC.classRules(rules, SRD35NPC.CLASSES);
-  }
-  if(window.SRD35Prestige != null) {
-    SRD35Prestige.classRules(rules, SRD35Prestige.CLASSES);
-    SRD35Prestige.companionRules(rules, SRD35Prestige.COMPANIONS);
-  }
-  // Add Eberron-specific rules
-  Eberron.raceRules(rules, Eberron.RACES);
-  Eberron.classRules(rules, Eberron.CLASSES);
-  Eberron.featRules(rules, Eberron.FEATS, Eberron.SUBFEATS);
-  Eberron.heroicRules(rules, Eberron.HOUSES);
-  Eberron.magicRules
-    (rules, SRD35.CLASSES.concat(Eberron.CLASSES), Eberron.DOMAINS);
-  SRD35.spellRules
-    (rules, null, Object.assign({}, SRD35.spellsDescriptions, Eberron.spellsDescriptions));
-  // So far, same character creation procedures as SRD35
   rules.defineChoice('extras', 'feats', 'featCount', 'selectableFeatureCount');
   rules.defineChoice('preset', 'race', 'level', 'levels');
-  rules.defineChoice('random', SRD35.RANDOMIZABLE_ATTRIBUTES);
-  rules.randomizeOneAttribute = SRD35.randomizeOneAttribute;
-  rules.makeValid = SRD35.makeValid;
-  rules.ruleNotes = Eberron.ruleNotes;
-  // Let Quilvyn know we're here
+
+  Eberron.ALIGNMENTS = Object.assign({}, Eberron.baseRules.ALIGNMENTS);
+  Eberron.ANIMAL_COMPANIONS =
+    Object.assign( {}, Eberron.baseRules.ANIMAL_COMPANIONS);
+  Eberron.ARMORS = Object.assign({}, Eberron.baseRules.ARMORS);
+  Eberron.DOMAINS =
+    Object.assign({}, Eberron.baseRules.DOMAINS, Eberron.DOMAINS_ADDED);
+  Eberron.FAMILIARS = Object.assign({}, Eberron.baseRules.FAMILIARS);
+  Eberron.FEATS =
+    Object.assign({}, Eberron.baseRules.FEATS, Eberron.FEATS_ADDED);
+  Eberron.FEATURES =
+    Object.assign({}, Eberron.baseRules.FEATURES, Eberron.FEATURES_ADDED);
+  Eberron.GENDERS = Object.assign({}, Eberron.baseRules.GENDERS);
+  Eberron.LANGUAGES =
+    Object.assign({}, Eberron.baseRules.LANGUAGES, Eberron.LANGUAGES_ADDED);
+  Eberron.RACES =
+    Object.assign({}, Eberron.baseRules.RACES, Eberron.RACES_ADDED);
+  Eberron.SCHOOLS = Object.assign({}, Eberron.baseRules.SCHOOLS);
+  Eberron.SHIELDS = Object.assign({}, Eberron.baseRules.SHIELDS);
+  Eberron.SKILLS = Object.assign({}, Eberron.baseRules.SKILLS);
+  Eberron.SPELLS =
+    Object.assign({}, Eberron.baseRules.SPELLS, Eberron.SPELLS_ADDED);
+  Eberron.WEAPONS =
+    Object.assign({}, Eberron.baseRules.WEAPONS, Eberron.WEAPONS_ADDED);
+
+  Eberron.abilityRules(rules);
+  Eberron.aideRules(rules, Eberron.ANIMAL_COMPANIONS, Eberron.FAMILIARS);
+  Eberron.combatRules(rules, Eberron.ARMORS, Eberron.SHIELDS, Eberron.WEAPONS);
+  // Spell definition is handled by each individual class and domain. Schools
+  // have to be defined before this can be done.
+  Eberron.magicRules(rules, Eberron.SCHOOLS, []);
+  // Feats must be defined before classes
+  Eberron.talentRules
+    (rules, Eberron.FEATS, Eberron.FEATURES, Eberron.LANGUAGES, Eberron.SKILLS);
+  Eberron.identityRules(
+    rules, Eberron.ALIGNMENTS, Eberron.CLASSES, Eberron.DEITIES,
+    Eberron.DOMAINS, Eberron.GENDERS, Eberron.HOUSES, Eberron.RACES
+  );
+  Eberron.goodiesRules(rules);
+
+  if(window.SRD35NPC != null) {
+    SRD35NPC.identityRules(rules, SRD35NPC.CLASSES);
+    SRD35NPC.talentRules(rules, SRD35NPC.FEATURES);
+  }
+
   Quilvyn.addRuleSet(rules);
-  Eberron.rules = rules;
 
 }
 
-// Arrays of choices
-Eberron.CLASSES = ['Artificer'];
-Eberron.DEITIES = [
-  'The Silver Flame (LG):Longbow:Exorcism/Good/Law/Protection',
-  'Arawai (NG):Morningstar:Good/Life/Plant/Weather',
-  'Aureon (LN):Quarterstaff:Knowledge/Law/Magic',
-  'Balinor (N):Battleaxe:Air/Animal/Earth',
-  'Boldrei (LG):Spear:Community/Good/Law/Protection',
-  'Dol Arrah (LG):Halberd:Good/Law/Sun/War',
-  'Dol Dorn (CG):Longsword:Chaos/Good/Strength/War',
-  'Kol Korran (N):Heavy Mace/Light Mace:Charm/Commerce/Travel',
-  'Olladra (NG):Sickle:Feast/Good/Healing/Luck',
-  'Onatar (NG):Warhammer:Artifice/Fire/Good',
-  'The Devourer (NE):Trident:Destruction/Evil/Water/Weather',
-  'The Fury (NE):Rapier:Evil/Madness/Passion',
-  'The Keeper (NE):Scythe:Death/Decay/Evil',
-  'The Mockery (NE):Kama:Destruction/Evil/Trickery/War',
-  'The Shadow (CE):Quarterstaff:Chaos/Evil/Magic/Shadow',
-  'The Traveler (CN):Scimitar:Artifice/Chaos/Travel/Trickery',
-  'The Blood Of Vol (LE):Dagger:Death/Evil/Law/Necromancer',
-  'The Cults Of The Dragon Below (LN):Heavy Pick:Dragon Below/Earth/Evil/Madness',
-  'The Path Of Light (LN):Unarmed:Law/Meditation/Protection',
-  'The Undying Court (NG):Scimitar:Deathless/Good/Protection',
-  'None:'
-];
-Eberron.DOMAINS = [
-  'Artifice', 'Charm', 'Commerce', 'Community', 'Deathless', 'Decay',
-  'Dragon Below', 'Exorcism', 'Feast', 'Life', 'Madness', 'Meditation',
-  'Necromancer', 'Passion', 'Shadow', 'Weather'
-];
-// Craft Construct from MM needed for Artificer class
-Eberron.FEATS = [
-  'Aberrant Dragonmark:', 'Action Boost:', 'Action Surge:',
-  'Adamantine Body:Warforged', 'Ashbound:', 'Attune Magic Weapon:Item Creation',
-  'Beast Shape:', 'Beast Totem:', 'Beasthide Elite:Shifter',
-  'Bind Elemental:Item Creation', 'Child Of Winter:', 'Cliffwalk Elite:Shifter',
-  'Craft Construct:Item Creation', 'Double Steel Strike:', 'Dragon Rage:',
-  'Dragon Totem:', 'Ecclesiarch:', 'Education:',
-  'Exceptional Artisan:Item Creation', 'Extend Rage:', 'Extra Music:',
-  'Extra Rings:Item Creation', 'Extra Shifter Trait:Shifter',
-  'Extraordinary Artisan:Item Creation', 'Favored In House:',
-  'Flensing Strike:', 'Gatekeeper Initiate:', 'Great Bite:Shifter',
-  'Great Rend:Shifter', 'Greater Dragonmark:', 'Greater Powerful Charge:',
-  'Greater Shifter Defense:Shifter', 'Greensinger Initiate:',
-  'Haunting Melody:', 'Healing Factor:Shifter', 'Heroic Spirit:',
-  'Improved Damage Reduction:Warforged', 'Improved Fortification:Warforged',
-  'Improved Natural Attack:', 'Investigate:', 'Knight Training:',
-  'Least Dragonmark:', 'Legendary Artisan:Item Creation', 'Lesser Dragonmark:',
-  'Longstride Elite:Shifter', 'Mithral Body:Warforged',
-  'Mithral Fluidity:Warforged', 'Monastic Training:', 'Music Of Growth:',
-  'Music Of Making:', 'Powerful Charge:', 'Precise Swing:', 'Pursue:',
-  'Raging Luck:', 'Recognize Impostor:', 'Repel Aberration:', 'Research:',
-  'Right Of Counsel:', 'Serpent Strike:', 'Shifter Defense:Shifter',
-  'Shifter Ferocity:Shifter', 'Shifter Multiattack:Shifter', 'Silver Smite:',
-  'Song Of The Heart:', 'Soothe The Beast:', 'Spontaneous Casting:',
-  'Strong Mind:', 'Totem Companion:', 'Undead Empathy:', 'Urban Tracking:',
-  'Vermin Companion:', 'Vermin Shape:', 'Wand Mastery:', 'Warden Initiate:',
-  'Whirling Steel Strike:'
-];
-Eberron.HOUSES = [
-  'Cannith', 'Deneith', 'Ghallanda', 'Jorasco', 'Kundarak', 'Lyrandar',
-  'Medani', 'None', 'Orien', 'Phiarlan', 'Sivis', 'Tharashk', 'Thuranni',
-  'Vadalis'
-];
-Eberron.RACES = [
-  'Changeling', 'Kalashtar', 'Shifter', 'Warforged'
-];
-Eberron.SUBFEATS = {
-  'Aberrant Dragonmark':
-    'Burning Hands/Cause Fear/Charm Person/Chill Touch/Detect Secret Doors/' +
-    'Feather Fall/Floating Disk/Inflict Light Wounds/Jump/Light/' +
-    'Pass Without Trace/Produce Flame/Shield',
-  'Beast Totem':
-    'Chimera/Digester/Displacer Beast/Gorgon/Krenshar/Unicorn/Winter Wolf/' +
-    'Yrthak',
-  'Dragon Totem':
-    'Black Dragon/Blue Dragon/Brass Dragon/Bronze Dragon/Copper Dragon/' +
-    'Gold Dragon/Green Dragon/Red Dragon/Silver Dragon/White Dragon',
-  'Knight Training':'',
-  'Monastic Training':''
+// Eberron uses SRD35 as its default base ruleset. If USE_PATHFINDER is true,
+// the Eberron function will instead use rules taken from the Pathfinder plugin.
+Eberron.USE_PATHFINDER = false;
+
+Eberron.CHOICES_ADDED = ['House'];
+Eberron.CHOICES = SRD35.CHOICES.concat(Eberron.CHOICES_ADDED);
+Eberron.RANDOMIZABLE_ATTRIBUTES_ADDED = ['house'];
+Eberron.RANDOMIZABLE_ATTRIBUTES =
+  SRD35.RANDOMIZABLE_ATTRIBUTES.concat(Eberron.RANDOMIZABLE_ATTRIBUTES_ADDED);
+
+Eberron.ALIGNMENTS = Object.assign({}, SRD35.ALIGNMENTS);
+Eberron.ANIMAL_COMPANIONS = Object.assign({}, SRD35.ANIMAL_COMPANIONS);
+Eberron.ARMORS = Object.assign({}, SRD35.ARMORS);
+Eberron.DEITIES = {
+  'None':'',
+  'Arawai':'Alignment=NG Weapon=Morningstar Domain=Good,Life,Plant,Weather',
+  'Aureon':'Alignment=LN Weapon=Quarterstaff Domain=Knowledge,Law,Magic',
+  'Balinor':'Alignment=N Weapon=Battleaxe Domain=Air,Animal,Earth',
+  'Boldrei':'Alignment=LG Weapon=Spear Domain=Community,Good,Law,Protection',
+  'Dol Arrah':'Alignment=LG Weapon=Halberd Domain=Good,Law,Sun,War',
+  'Dol Dorn':'Alignment=CG Weapon=Longsword Domain=Chaos,Good,Strength,War',
+  'Kol Korran':
+    'Alignment=N Weapon="Heavy Mace","Light Mace" Domain=Charm,Commerce,Travel',
+  'Olladra':'Alignment=NG Weapon=Sickle Domain=Feast,Good,Healing,Luck',
+  'Onatar':'Alignment=NG Weapon=Warhammer Domain=Artifice,Fire,Good',
+  'The Blood Of Vol':
+    'Alignment=LE Weapon=Dagger Domain=Death,Evil,Law,Necromancer',
+  'The Cults Of The Dragon Below':
+    'Alignment=LN Weapon="Heavy Pick" Domain=Dragon Below,Earth,Evil,Madness',
+  'The Devourer':
+    'Alignment=NE Weapon=Trident Domain=Destruction,Evil,Water,Weather',
+  'The Fury':'Alignment=NE Weapon=Rapier Domain=Evil,Madness,Passion',
+  'The Keeper':'Alignment=NE Weapon=Scythe Domain=Death,Decay,Evil',
+  'The Mockery':'Alignment=NE Weapon=Kama Domain=Destruction,Evil,Trickery,War',
+  'The Path Of Light':
+    'Alignment=LN Weapon=Unarmed Domain=Law,Meditation,Protection',
+  'The Shadow':
+    'Alignment=CE Weapon=Quarterstaff Domain=Chaos,Evil,Magic,Shadow',
+  'The Silver Flame':
+    'Alignment=LG Weapon=Longbow Domain=Exorcism,Good,Law,Protection',
+  'The Traveler':
+    'Alignment=CN Weapon=Scimitar Domain=Artifice,Chaos,Travel,Trickery',
+  'The Undying Court':
+    'Alignment=NG Weapon=Scimitar Domain=Deathless,Good,Protection'
 };
-Eberron.WEAPONS = [
-  'Talenta Boomerang:d4r30 Ex', 'Talenta Sharrash:d10x4@19 2h Ex',
-  'Talenta Tangat:d10x2@18 2h Ex', 'Valenar Double Scimitar:d6/d6x2@18 2h Ex',
-  "Xen'drik Boomerang:d6r20 Ex"
-];
+Eberron.DOMAINS_ADDED = {
+  'Artifice':'',
+  'Charm':'',
+  'Commerce':'',
+  'Community':'',
+  'Deathless':'',
+  'Decay':'',
+  'Dragon Below':'',
+  'Exorcism':'',
+  'Feast':'',
+  'Life':'',
+  'Madness':'',
+  'Meditation':'',
+  'Necromancer':'',
+  'Passion':'',
+  'Shadow':'',
+  'Weather':''
+};
+Eberron.DOMAINS = Object.assign({}, SRD35.DOMAINS, Eberron.DOMAINS_ADDED);
+Eberron.FAMILIARS = Object.assign({}, SRD35.FAMILIARS);
+Eberron.FEATS_ADDED = {
+  'Aberrant Dragonmark (Burning Hands)':'Type=General',
+  'Aberrant Dragonmark (Cause Fear)':'Type=General',
+  'Aberrant Dragonmark (Charm Person)':'Type=General',
+  'Aberrant Dragonmark (Chill Touch)':'Type=General',
+  'Aberrant Dragonmark (Detect Secret Doors)':'Type=General',
+  'Aberrant Dragonmark (Feather Fall)':'Type=General',
+  'Aberrant Dragonmark (Floating Disk)':'Type=General',
+  'Aberrant Dragonmark (Inflict Light Wounds)':'Type=General',
+  'Aberrant Dragonmark (Jump)':'Type=General',
+  'Aberrant Dragonmark (Light)':'Type=General',
+  'Aberrant Dragonmark (Pass Without Trace)':'Type=General',
+  'Aberrant Dragonmark (produce Flame)':'Type=General',
+  'Aberrant Dragonmark (Shield)':'Type=General',
+  'Action Boost':'Type=General',
+  'Action Surge':'Type=General',
+  'Adamantine Body':'Type=Warforged',
+  'Ashbound':'Type=General',
+  'Attune Magic Weapon':'Type=Item Creation',
+  'Beast Shape':'Type=General',
+  'Beast Totem (Chimera)':'Type=General',
+  'Beast Totem (Digester)':'Type=General',
+  'Beast Totem (Displacer Beast)':'Type=General',
+  'Beast Totem (Gorgon)':'Type=General',
+  'Beast Totem (krenshar)':'Type=General',
+  'Beast Totem (Unicorn)':'Type=General',
+  'Beast Totem (Winter Wolf)':'Type=General',
+  'Beast Totem (Yrthak)':'Type=General',
+  'Beasthide Elite':'Type=Shifter',
+  'Bind Elemental':'Type=Item Creation',
+  'Child Of Winter':'Type=General',
+  'Cliffwalk Elite':'Type=Shifter',
+// Craft Construct from MM needed for Artificer class
+  'Craft Construct':'Type=Item Creation',
+  'Double Steel Strike':'Type=General',
+  'Dragon Rage':'Type=General',
+  'Dragon Totem (Black)':'Type=General',
+  'Dragon Totem (Blue)':'Type=General',
+  'Dragon Totem (Brass)':'Type=General',
+  'Dragon Totem (Bronze)':'Type=General',
+  'Dragon Totem (Copper)':'Type=General',
+  'Dragon Totem (Gold)':'Type=General',
+  'Dragon Totem (Green)':'Type=General',
+  'Dragon Totem (Red)':'Type=General',
+  'Dragon Totem (Silver)':'Type=General',
+  'Dragon Totem (White)':'Type=General',
+  'Ecclesiarch':'Type=General',
+  'Education':'Type=General',
+  'Exceptional Artisan':'Type=Item Creation',
+  'Extend Rage':'Type=General',
+  'Extra Music':'Type=General',
+  'Extra Rings':'Type=Item Creation',
+  'Extra Shifter Trait':'Type=Shifter',
+  'Extraordinary Artisan':'Type=Item Creation',
+  'Favored In House':'Type=General',
+  'Flensing Strike':'Type=General',
+  'Gatekeeper Initiate':'Type=General',
+  'Great Bite':'Type=Shifter',
+  'Great Rend':'Type=Shifter',
+  'Greater Dragonmark':'Type=General',
+  'Greater Powerful Charge':'Type=General',
+  'Greater Shifter Defense':'Type=Shifter',
+  'Greensinger Initiate':'Type=General',
+  'Haunting Melody':'Type=General',
+  'Healing Factor':'Type=Shifter',
+  'Heroic Spirit':'Type=General',
+  'Improved Damage Reduction':'Type=Warforged',
+  'Improved Fortification':'Type=Warforged',
+  'Improved Natural Attack':'Type=General',
+  'Investigate':'Type=General',
+  'Knight Training':'Type=General',
+  'Knight Training (Cleric)':'Type=General',
+  'Least Dragonmark':'Type=General',
+  'Legendary Artisan':'Type=Item Creation',
+  'Lesser Dragonmark':'Type=General',
+  'Longstride Elite':'Type=Shifter',
+  'Mithral Body':'Type=Warforged',
+  'Mithral Fluidity':'Type=Warforged',
+  'Monastic Training (Cleric)':'Type=General',
+  'Music Of Growth':'Type=General',
+  'Music Of Making':'Type=General',
+  'Powerful Charge':'Type=General',
+  'Precise Swing':'Type=General',
+  'Pursue':'Type=General',
+  'Raging Luck':'Type=General',
+  'Recognize Impostor':'Type=General',
+  'Repel Aberration':'Type=General',
+  'Research':'Type=General',
+  'Right Of Counsel':'Type=General',
+  'Serpent Strike':'Type=General',
+  'Shifter Defense':'Type=Shifter',
+  'Shifter Ferocity':'Type=Shifter',
+  'Shifter Multiattack':'Type=Shifter',
+  'Silver Smite':'Type=General',
+  'Song Of The Heart':'Type=General',
+  'Soothe The Beast':'Type=General',
+  'Spontaneous Casting':'Type=General',
+  'Strong Mind':'Type=General',
+  'Totem Companion':'Type=General',
+  'Undead Empathy':'Type=General',
+  'Urban Tracking':'Type=General',
+  'Vermin Companion':'Type=General',
+  'Vermin Shape':'Type=General',
+  'Wand Mastery':'Type=General',
+  'Warden Initiate':'Type=General',
+  'Whirling Steel Strike':'Type=General'
+};
+Eberron.FEATS = Object.assign({}, SRD35.FEATS, Eberron.FEATS_ADDED);
+Eberron.FEATURES_ADDED = {
+};
+Eberron.FEATURES = Object.assign({}, SRD35.FEATURES, Eberron.FEATURES_ADDED);
+Eberron.GENDERS = Object.assign({}, SRD35.GENDERS);
+Eberron.HOUSES = {
+  'None':
+    '',
+  'Cannith':
+    'Dragonmark=Making ' +
+    'Spells=' +
+      '"Make Whole",Mending,Mending,"Repair Light Damage","Minor Creation",' +
+      '"Repair Serious Damage",Fabricate,"Major Creation","True Creation"',
+  'Deneith':
+    'Dragonmark=Sentinel ' +
+    'Spells=' +
+      '"Mage Armor","Protection From Arrows","Shield Of Faith",' +
+      '"Shield Other","Lesser Globe Of Invulnerability",' +
+      '"Protection From Energy","Globe Of Invulnerability","Mind Blank"',
+  'Ghallanda':
+    'Dragonmark=Hospitality ' +
+    'Spells=' +
+      'Prestidigitation,Prestidigitation,"Purify Food And Drink",' +
+      '"Purify Food And Drink","Unseen Servant","Create Food And Water",' +
+      '"Secure Shelter","Heroes\' Feast","Mage\'s Magnificent Mansion",' +
+      'Refuge',
+  'Jorasco':
+    'Dragonmark=Healing ' +
+    'Spells=' +
+      '"Cure Light Wounds","Lesser Restoration","Cure Serious Wounds",' +
+      '"Neutralize Poison","Remove Disease",Restoration,Heal,"Mass Heal"',
+  'Kundarak':
+    'Dragonmark=Warding ' +
+    'Spells=' +
+      'Alarm,"Arcane Lock",Misdirection,"Explosive Runes",' +
+      '"Glyph Of Warding",Nondetection,"Greater Glyph Of Warding",' +
+      '"Guards And Wards","Mage\'s Faithful Hound","Prismatic Wall"',
+  'Lyrandar':
+    'Dragonmark=Storm ' +
+    'Spells=' +
+      '"Endure Elements","Fog Cloud","Gust Of Wind","Sleet Storm",' +
+      '"Wind Wall","Wind\'s Favor","Control Weather","Control Winds",' +
+      '"Storm Of Vengeance"',
+  'Medani':
+    'Dragonmark=Detection ' +
+    'Spells=' +
+      '"Detect Magic","Detect Magic","Detect Poison","Detect Poison",' +
+      '"Detect Scrying","See Invisible","True Seeing","Moment Of Prescience"',
+  'Orien':
+    'Dragonmark=Passage ' +
+    'Spells=' +
+      '"Dimension Leap","Expeditious Retreat",Mount,"Dimension Door",' +
+      '"Phantom Steed","Overland Flight",Teleport,"Greater Teleport"',
+  'Phiarlan':
+    'Dragonmark=Shadow ' +
+    'Spells=' +
+      'Darkness,"Disguise Self","Minor Image",Clairaudience/Clairvoyance,' +
+      'Scrying,"Shadow Conjuration",Mislead,"Prying Eyes","Shadow Walk",' +
+      'Greater Prying Eyes',
+  'Sivis':
+    'Dragonmark=Scribing ' +
+    'Spells=' +
+      '"Arcane Mark","Arcane Mark","Comprehend Languages","Whispering Wind",' +
+      '"Illusory Script","Secret Page",Tongues,Sending,"Symbol Of Death"',
+  'Tharashk':
+    'Dragonmark=Finding ' +
+    'Spells=' +
+      'Identify,"Know Direction","Know Direction","Locate Object",' +
+      '"Helping Hand","Locate Creature","Find The Path","Discern Location"',
+  'Thuranni':
+    'Dragonmark=Shadow ' +
+    'Spells=' +
+      'Darkness,"Disguise Self","Minor Image",Clairaudience/Clairvoyance,' +
+      'Scrying,"Shadow Conjuration",Mislead,"Prying Eyes","Shadow Walk",' +
+      'Greater Prying Eyes',
+  'Vadalis':
+    'Dragonmark=Handling ' +
+    'Spells=' +
+      '"Calm Animals","Charm Animals","Speak With Animals","Dominate Animal",' +
+      '"Greater Magic Fang","Animal Growth","Summon Nature\'s Ally V",' +
+      'Awaken,"Summon Nature\'s Ally"'
+};
+Eberron.dragonmarksSpells = {
+};
+Eberron.LANGUAGES_ADDED = {
+  'Argon':'',
+  'Daan':'',
+  'Daelkyr':'',
+  'Irial':'',
+  'Kythric':'',
+  'Mabran':'',
+  'Quori':'',
+  'Riedran':'',
+  'Risian':'',
+  'Syranian':''
+};
+Eberron.LANGUAGES = Object.assign({}, SRD35.LANGUAGES, Eberron.LANGUAGES_ADDED);
+Eberron.RACES_ADDED = {
+  'Changeling':'',
+  'Kalashtar':'',
+  'Shifter':'',
+  'Warforged':''
+};
+Eberron.RACES = Object.assign({}, SRD35.RACES, Eberron.RACES_ADDED);
+Eberron.SCHOOLS = Object.assign({}, SRD35.SCHOOLS);
+Eberron.SHIELDS = Object.assign({}, SRD35.SHIELDS);
+Eberron.SKILLS = Object.assign({}, SRD35.SKILLS);
+Eberron.SPELLS_ADDED = {
+  'Armor Enhancement':
+    'School=Transmutation ' +
+    'Description="Touched armor or shield +3, 35K GP enhancement for $L10 min"',
+  'Bolts Of Bedevilment':
+    'School=Enchantment ' +
+    'Description="R$RM\' 3 targets (1/rd) stunned for $L2 rd (Will neg)"',
+  'Construct Energy Ward':
+    'School=Abjuration ' +
+    'Description="Touched construct DR ${lvl>10?30:lvl>6?20:10} from chosen energy for $L10 min"',
+  'Control Deathless':
+    'School=Necromancy ' +
+    'Description="R$RS\' Command $L2 HD deathless in 30\' area for $L min"',
+  'Create Deathless':
+    'School=Necromancy ' +
+    'Description="R$RS\' Create deathless soldier"',
+  'Create Greater Deathless':
+    'School=Necromancy ' +
+    'Description="R$RS\' Create undying councilor"',
+  'Detect Aberration':
+    'School=Divination ' +
+    'Description="R60\' cone info on aberrations for conc/$L min"',
+  'Detoxify':
+    'School=Conjuration ' +
+    'Description="R30\' Neutralize venom for $L10 min"',
+  'Disable Construct':
+    'School=Transmutation ' +
+    'Description="Touched construct $L10 HP (Will half)"',
+  'Energy Alteration':
+    'School=Transmutation ' +
+    'Description="Touched affects different energy type for $L10 min"',
+  'Enhancement Alteration':
+    'School=Transmutation ' +
+    'Description="Touched shield or weapon enhancement applies to bash and defense for $L10 min"',
+  'Feast Of Champions':
+    'School=Conjuration ' +
+    'Description="Hour-long feast cures conditions, 2d8+$L HP"',
+  'Greater Armor Enhancement':
+    'School=Transmutation ' +
+    'Description="Touched armor or shield +5, 100K GP enhancement for $L10 min"',
+  'Greater Construct Energy Ward':
+    'School=Abjuration ' +
+     'Description="Touched construct ignores up to $L12min120 HP from specified energy for $L10 min"',
+  'Greater Status':
+    'School=Divination ' +
+    'Description="Monitor condition and position of, cast L0-2 touch spell on $Ldiv3 touched allies for $L hr"',
+  'Greater Weapon Augmentation':
+    'School=Transmutation ' +
+    'Description="Touched weapon +5 and 200K GP enhancement for $L10 min"',
+  'Halt Deathless':
+    'School=Necromancy ' +
+    'Description="R$RM\' 3 deathless in 30\' area immobilized for $L rd (Will neg)"',
+  'Hardening':
+    'School=Transmutation ' +
+    'Description="Touched $L10\' cu item resists damage"',
+  "Hero's Blade":
+    'School=Necromancy ' +
+    'Description="Touched blade good-aligned, dbl crit threat, +2d6 HP to evil (+2d8 outsider or undead), blind and deafen evil 1d4 rd on crit (Will neg) for $L min"',
+  'Inflict Critical Damage':
+    'School=Transmutation ' +
+    'Description="Touched construct 4d8+$Lmin20 HP"',
+  'Inflict Light Damage':
+    'School=Transmutation ' +
+    'Description="Touched construct 1d8+$Lmin5 HP"',
+  'Inflict Moderate Damage':
+    'School=Transmutation ' +
+    'Description="Touched construct 2d8+$Lmin10 HP"',
+  'Inflict Serious Damage':
+    'School=Transmutation ' +
+    'Description="Touched construct 3d8+$Lmin15 HP"',
+  'Iron Construct':
+    'School=Transmutation ' +
+    'Description="Touched construct DR 15/adamantine, half acid and fire damage, +4 Str, -4 Dex, x5 weigh for $L min"',
+  'Item Alteration':
+    'School=Transmutation ' +
+    'Description="Touched item grants bonus differently for $L10 min"',
+  "Legion's Shield Of Faith":
+    'School=Abjuration ' +
+    'Description="R$RM\' Allies in 20\' area +$Ldiv6plus2min5 AC for $L min"',
+  'Lesser Armor Enhancement':
+    'School=Transmutation ' +
+    'Description="Touched armor or shield +1 and 5K GP enhancement for $L10 min"',
+  'Lesser Weapon Augmentation':
+    'School=Transmutation ' +
+    'Description="Touched weapon +1 and 10K GP enhancement for $L10 min"',
+  'Maddening Scream':
+    'School=Enchantment ' +
+    'Description="Touched acts madly for 1d4+1 rd"',
+  'Magecraft':
+    'School=Divination ' +
+    'Description="Self +5 same day Craft check"',
+  'Metamagic Item':
+    'School=Transmutation ' +
+    'Description="Imbue touched magic item w/metamagic property for $L rd"',
+  "Nature's Wrath":
+    'School=Evocation ' +
+    'Description="R$RM\' 20\' radius aberrations ${Lmin10}d6 HP and dazed 1 rd, other unnatural ${Ldiv2min5}d8 HP (Will half)"',
+  'Personal Weapon Augmentation':
+    'School=Transmutation ' +
+    'Description="Touched self weapon +1 and 10K GP enhancement for $L10 min"',
+  'Power Surge':
+    'School=Transmutation ' +
+    'Description="Touched gains $Ldiv5 charges for $L min"',
+  'Repair Critical Damage':
+    'School=Transmutation ' +
+     'Description="Touched construct repair 4d8+$Lmin20"',
+  'Repair Light Damage':
+    'School=Transmutation ' +
+    'Description="Touched construct repair 1d8+$Lmin5"',
+  'Repair Moderate Damage':
+    'School=Transmutation ' +
+    'Description="Touched construct repair 2d8+$Lmin10"',
+  'Repair Serious Damage':
+    'School=Transmutation ' +
+    'Description="Touched construct repair 3d8+$Lmin15"',
+  'Resistance Item':
+    'School=Abjuration ' +
+    'Description="Touched grants +$Ldiv4plus1 saves for $L10 min"',
+  'Return To Nature':
+    'School=Transmutation ' +
+    'Description="R$RS\' Target reduce Int, magic"',
+  'Skill Enhancement':
+    'School=Transmutation ' +
+    'Description="Touched grants +$Ldiv2plus2 specified skill checks for $L10 min"',
+  'Spell Storing Item':
+    'School=Transmutation ' +
+    'Description="Imbue touched item with spell up to $Ldiv2min4 level"',
+  'Spirit Steed':
+    'School=Necromancy ' +
+    'Description="Touched animal speed +30/x6, no hustle damage for L$ hr"',
+  'Stone Construct':
+    'School=Transmutation ' +
+    'Description="Touched construct DR 10/adamantine for $L10min150 HP"',
+  'Suppress Requirement':
+    'School=Transmutation ' +
+    'Description="Remove usage requirement from touched magic item for $L10 min"',
+  'Total Repair':
+    'School=Transmutation ' +
+    'Description="Touched construct conditions removed, $L10min150 HP repaired"',
+  'Touch Of Madness':
+    'School=Enchantment ' +
+    'Description="Touched dazed for $L2 rd"',
+  'Toughen Construct':
+    'School=Transmutation ' +
+    'Description="Touched construct +$Ldiv3plus1max2min5 AC"',
+  'True Creation':
+    'School=Conjuration ' +
+    'Description="Create permanent $L\' cu plant or mineral object"',
+  'Weapon Augmentation':
+    'School=Transmutation ' +
+    'Description="Touched weapon +3 and 70K GP enhancement for $L10 min"',
+  'Withering Palm':
+    'School=Necromancy ' +
+    'Description="Touched loses $Ldiv2 Str and Con (Fort neg)"',
+  'Zone Of Natural Purity':
+    'School=Evocation ' +
+    'Description="R$RS\' fey and plants in 20\' radius +1 attack, damage, save, abberations -1, for $L2 hr"'
+};
+Eberron.SPELLS = Object.assign({}, SRD35.SPELLS, Eberron.SPELLS_ADDED);
+Eberron.WEAPONS_ADDED = {
+  'Talenta Boomerang':'Level=3 Category=R Damage=d4 Range=30',
+  'Talenta Sharrash':'Level=3 Category=2h Damage=d10 Crit=4 Threat=19',
+  'Talenta Tangat':'Level=3 Category=2h Damage=d10 Threat=18',
+  'Valenar Double Scimitar':'Level=3 Damage=d6,d6 Threat=18',
+  "Xen'drik Boomerang":'Level=3 Category=R Damage=d6 Range=20'
+};
+Eberron.WEAPONS = Object.assign({}, SRD35.WEAPONS, Eberron.WEAPONS_ADDED);
 
 // Related information used internally by Eberron
 Eberron.artificerCraftReserves = [
   0, 20, 40, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 900, 1200, 1500,
   2000, 2500, 3000, 4000, 5000
 ];
-Eberron.dragonmarksSpells = {
-  'Detection': [
-    'Detect Magic x2, Detect Poison x2',
-    'Detect Scrying, See Invisible',
-    'True Seeing',
-    'Moment Of Prescience'
-  ],
-  'Finding': [
-    'Identify, Know Direction x2, Locate Object',
-    'Helping Hand, Locate Creature',
-    'Find The Path',
-    'Discern Location'
-  ],
-  'Handling': [
-    'Calm Animals, Charm Animals, Speak With Animals',
-    'Dominate Animal, Greater Magic Fang',
-    "Animal Growth, Summon Nature's Ally V",
-    "Awaken, Summon Nature's Ally"
-  ],
-  'Healing': [
-    'Cure Light Wounds, Lesser Restoration',
-    'Cure Serious Wounds, Neutralize Poison, Remove Disease, Restoration',
-    'Heal',
-    'Mass Heal'
-  ],
-  'Hospitality': [
-    'Prestidigitation x2, Purify Food And Drink x2, Unseen Servant',
-    'Create Food And Water, Secure Shelter',
-    "Heroes' Feast, Mage's Magnificent Mansion",
-    'Refuge'
-  ],
-  'Making': [
-    'Make Whole, Mending x2, Repair Light Damage',
-    'Minor Creation, Repair Serious Damage',
-    'Fabricate, Major Creation',
-    'True Creation'
-  ],
-  'Passage': [
-    'Dimension Leap, Expeditious Retreat, Mount',
-    'Dimension Door, Phantom Steed',
-    'Overland Flight, Teleport',
-    'Greater Teleport'
-  ],
-  'Scribing': [
-    'Arcane Mark x2, Comprehend Languages, Whispering Wind',
-    'Illusory Script, Secret Page, Tongues',
-    'Sending',
-    'Symbol Of Death'
-  ],
-  'Sentinel': [
-    'Mage Armor, Protection From Arrows, Shield Of Faith, Shield Other',
-    'Lesser Globe Of Invulnerability, Protection From Energy',
-    'Globe Of Invulnerability',
-    'Mind Blank'
-  ],
-  'Shadow': [
-    'Darkness, Disguise Self, Minor Image',
-    'Clairaudience/Clairvoyance, Scrying, Shadow Conjuration',
-    'Mislead, Prying Eyes, Shadow Walk',
-    'Greater Prying Eyes'
-  ],
-  'Storm': [
-    'Endure Elements, Fog Cloud, Gust Of Wind',
-    "Sleet Storm, Wind Wall, Wind's Favor",
-    'Control Weather, Control Winds',
-    'Storm Of Vengeance'
-  ],
-  'Warding': [
-    'Alarm, Arcane Lock, Misdirection',
-    'Explosive Runes, Glyph Of Warding, Nondetection',
-    "Greater Glyph Of Warding, Guards And Wards, Mage's Faithful Hound",
-    'Prismatic Wall'
-  ]
-};
-Eberron.housesDragonmarks = {
-  'Cannith':'Making', 'Deneith':'Sentinel', 'Ghallanda':'Hospitality',
-  'Jorasco':'Healing', 'Kundarak':'Warding', 'Lyrandar':'Storm',
-  'Medani':'Detection', 'Orien':'Passage', 'Phiarlan':'Shadow',
-  'Sivis':'Scribing', 'Tharashk':'Finding', 'Thuranni':'Shadow',
-  'Vadalis':'Handling'
-};
-Eberron.spellsDescriptions = {
-  'Armor Enhancement':'Touched armor/shield +3/35K GP enhancement for $L10 min',
-  'Bolts Of Bedevilment':"R$RM' 3 targets (1/rd) stunned (Will neg) for $L2 rd",
-  'Construct Energy Ward': "Touched construct DR ${lvl>10?30:lvl>6?20:10} from specified energy for $L10 min",
-  'Control Deathless':"R$RS' Command $L2 HD deathless in 30' area for $L min",
-  'Create Deathless':"R$RS' Create deathless soldier",
-  'Create Greater Deathless':"R$RS' Create undying councilor",
-  'Detect Aberration': "R60' cone info on aberrations for conc/$L min",
-  'Detoxify':"Neutralize venom w/in 30' for $L10 min",
-  'Disable Construct':'Touched construct $L10 HP (Will half)',
-  'Energy Alteration':'Touched affects different energy type for $L10 min',
-  'Enhancement Alteration':'Touched shield/weapon enhancement applies to bash/defense for $L10 min',
-  'Feast Of Champions':'Hour-long feast cures conditions, 2d8+$L HP',
-  'Greater Armor Enhancement':'Touched armor/shield +5/100K GP enhancement for $L10 min',
-  'Greater Construct Energy Ward': "Touched construct ignores up to $L12min120 HP from specified energy for $L10 min",
-  'Greater Status': "Monitor condition/position of, cast L0-2 touch spell on $Ldiv3 touched allies for $L hr",
-  'Greater Weapon Augmentation':'Touched weapon +5/200K GP enhancement for $L10 min',
-  'Halt Deathless':"R$RM' 3 deathless in 30' area immobilized (Will neg) for $L rd",
-  'Hardening':"Touched $L10' cu item resists damage",
-  "Hero's Blade":'Touched blade good-aligned, dbl crit threat, +2d6 HP to evil (+2d8 outsider/undead), blind and deafen evil 1d4 rd on crit (Will neg) for $L min',
-  'Inflict Critical Damage':'Touched construct 4d8+$Lmin20 HP',
-  'Inflict Light Damage':'Touched construct 1d8+$Lmin5 HP',
-  'Inflict Moderate Damage':'Touched construct 2d8+$Lmin10 HP',
-  'Inflict Serious Damage':'Touched construct 3d8+$Lmin15 HP',
-  'Iron Construct':'Touched construct DR 15/adamantine, half acid/fire damage, +4 Str, -4 Dex, x5 weigh for $L min',
-  'Item Alteration':'Touched item grants bonus differently for $L10 min',
-  "Legion's Shield Of Faith": "R$RM' Allies in 20' area +$Ldiv6plus2min5 AC for $L min",
-  'Lesser Armor Enhancement':'Touched armor/shield +1/5K GP enhancement for $L10 min',
-  'Lesser Weapon Augmentation':'Touched weapon +1/10K GP enhancement for $L10 min',
-  'Maddening Scream':'Touched acts madly for 1d4+1 rd',
-  'Magecraft':'Self +5 same day Craft check',
-  'Metamagic Item':'Imbue touched magic item w/metamagic property for $L rd',
-  "Nature's Wrath":"R$RM' 20' radius aberrations ${Lmin10}d6 HP and dazed 1 rd, other unnatural ${Ldiv2min5}d8 HP (Will half)",
-  'Personal Weapon Augmentation':'Touched self weapon +1/10K GP enhancement for $L10 min',
-  'Power Surge':'Touched gains $Ldiv5 charges for $L min',
-  'Repair Critical Damage': "Touched construct repair 4d8+$Lmin20",
-  'Repair Light Damage': "Touched construct repair 1d8+$Lmin5",
-  'Repair Moderate Damage': "Touched construct repair 2d8+$Lmin10",
-  'Repair Serious Damage': "Touched construct repair 3d8+$Lmin15",
-  'Resistance Item':'Touched grants +$Ldiv4plus1 saves for $L10 min',
-  'Return To Nature':"R$RS' Target reduce Int, magic",
-  'Skill Enhancement':'Touched grants +$Ldiv2plus2 specified skill checks for $L10 min',
-  'Spell Storing Item':'Imbue touched item with spell up to $Ldiv2min4 level',
-  'Spirit Steed':'Touched animal speed +30/x6, no hustle damage for L$ hr',
-  'Stone Construct':'Touched construct DR 10/adamantine for $L10min150 HP',
-  'Suppress Requirement':'Remove usage requirement from touched magic item for $L10 min',
-  'Total Repair':'Touched construct conditions removed, $L10min150 HP repaired',
-  'Touch Of Madness':'Touched dazed for $L2 rd',
-  'Toughen Construct':'Touched construct +$Ldiv3plus1max2min5 AC',
-  'True Creation': "Create permanent $L' cu plant/mineral object",
-  'Weapon Augmentation':'Touched weapon +3/70K GP enhancement for $L10 min',
-  'Withering Palm':'Touched loses $Ldiv2 Str and Con (Fort neg)',
-  'Zone Of Natural Purity':"R$RS' fey/plants in 20' radius +1 attack/damage/save, abberations -1, for $L2 hr"
-};
-Eberron.spellsSchools = {
-  'Armor Enhancement':'Transmutation',
-  'Bolts Of Bedevilment':'Enchantment',
-  'Construct Energy Ward':'Abjuration',
-  'Control Deathless':'Necromancy',
-  'Create Deathless':'Necromancy',
-  'Create Greater Deathless':'Necromancy',
-  'Detect Aberration':'Divination',
-  'Detoxify':'Conjuration',
-  'Disable Construct':'Transmutation',
-  'Energy Alteration':'Transmutation',
-  'Enhancement Alteration':'Transmutation',
-  'Feast Of Champions':'Conjuration',
-  'Greater Armor Enhancement':'Transmutation',
-  'Greater Construct Energy Ward':'Abjuration',
-  'Greater Status':'Divination',
-  'Greater Weapon Augmentation':'Transmutation',
-  'Halt Deathless':'Necromancy',
-  'Hardening':'Transmutation',
-  "Hero's Blade":'Necromancy',
-  'Inflict Critical Damage':'Transmutation',
-  'Inflict Light Damage':'Transmutation',
-  'Inflict Moderate Damage':'Transmutation',
-  'Inflict Serious Damage':'Transmutation',
-  'Iron Construct':'Transmutation',
-  'Item Alteration':'Transmutation',
-  "Legion's Shield Of Faith":'Abjuration',
-  'Lesser Armor Enhancement':'Transmutation',
-  'Lesser Weapon Augmentation':'Transmutation',
-  'Maddening Scream':'Enchantment',
-  'Magecraft':'Divination',
-  'Metamagic Item':'Transmutation',
-  "Nature's Wrath":'Evocation',
-  'Personal Weapon Augmentation':'Transmutation',
-  'Power Surge':'Transmutation',
-  'Repair Critical Damage':'Transmutation',
-  'Repair Light Damage':'Transmutation',
-  'Repair Moderate Damage':'Transmutation',
-  'Repair Serious Damage':'Transmutation',
-  'Resistance Item':'Abjuration',
-  'Return To Nature':'Transmutation',
-  'Skill Enhancement':'Transmutation',
-  'Spell Storing Item':'Transmutation',
-  'Spirit Steed':'Necromancy',
-  'Stone Construct':'Transmutation',
-  'Suppress Requirement':'Transmutation',
-  'Total Repair':'Transmutation',
-  'Touch Of Madness':'Enchantment',
-  'Toughen Construct':'Transmutation',
-  'True Creation':'Conjuration',
-  'Weapon Augmentation':'Transmutation',
-  'Withering Palm':'Necromancy',
-  'Zone Of Natural Purity':'Evocation'
-};
 Eberron.totemAttackForms = {
   'Black Dragon':'acid',
   'Blue Dragon':'electricity',
@@ -383,9 +581,314 @@ Eberron.totemAttackForms = {
   'Winter Wolf':'cold',
   'Yrthak':'sonic'
 };
+Eberron.CLASSES = ['Artificer'];
+
+/* Defines the rules related to character abilities. */
+Eberron.abilityRules = function(rules) {
+  Eberron.baseRules.abilityRules(rules);
+  // No changes needed to the rules defined by base method
+};
+
+/* Defines rules related to animal companions and familiars. */
+Eberron.aideRules = function(rules, companions, familiars) {
+  Eberron.baseRules.aideRules(rules, companions, familiars);
+  // No changes needed to the rules defined by base method
+};
+
+/* Defines rules related to combat. */
+Eberron.combatRules = function(rules, armors, shields, weapons) {
+  Eberron.baseRules.combatRules(rules, armors, shields, weapons);
+  // No changes needed to the rules defined by base method
+};
+
+/* Defines the rules related to goodies included in character notes. */
+Eberron.goodiesRules = function(rules) {
+  Eberron.baseRules.goodiesRules(rules);
+  // No changes needed to the rules defined by base method
+};
+
+/* Defines rules related to basic character identity. */
+Eberron.identityRules = function(
+  rules, alignments, classes, deities, domains, genders, houses, races
+) {
+  if(Eberron.baseRules == Pathfinder)
+    Pathfinder.identityRules
+      (rules, alignments, Pathfinder.BLOODLINES, classes, deities, domains,
+       [], genders, races, Pathfinder.TRAITS);
+  else
+    SRD35.identityRules
+      (rules, alignments, classes, deities, domains, genders, races)
+  for(var path in houses) {
+    rules.choiceRules(rules, 'House', path, houses[house]);
+  }
+  // No changes needed to the rules defined by base method
+};
+
+/* Defines rules related to magic use. */
+Eberron.magicRules = function(rules, schools, spells) {
+  Eberron.baseRules.magicRules(rules, schools, spells);
+  // No changes needed to the rules defined by base method
+};
+
+/* Defines rules related to character feats, languages, and skills. */
+Eberron.talentRules = function(rules, feats, features, languages, skills) {
+  Eberron.baseRules.talentRules(rules, feats, features, languages, skills);
+  // No changes needed to the rules defined by base method
+};
+
+/*
+ * Adds #name# as a possible user #type# choice and parses #attrs# to add rules
+ * related to selecting that choice.
+ */
+Eberron.choiceRules = function(rules, type, name, attrs) {
+  if(type == 'Alignment')
+    Eberron.alignmentRules(rules, name);
+  else if(type == 'Animal Companion')
+    Eberron.companionRules(rules, name,
+      QuilvynUtils.getAttrValue(attrs, 'Str'),
+      QuilvynUtils.getAttrValue(attrs, 'Dex'),
+      QuilvynUtils.getAttrValue(attrs, 'Con'),
+      QuilvynUtils.getAttrValue(attrs, 'Int'),
+      QuilvynUtils.getAttrValue(attrs, 'Wis'),
+      QuilvynUtils.getAttrValue(attrs, 'Cha'),
+      QuilvynUtils.getAttrValue(attrs, 'HD'),
+      QuilvynUtils.getAttrValue(attrs, 'AC'),
+      QuilvynUtils.getAttrValue(attrs, 'Attack'),
+      QuilvynUtils.getAttrValueArray(attrs, 'Dam'),
+      QuilvynUtils.getAttrValue(attrs, 'Level'),
+      QuilvynUtils.getAttrValue(attrs, 'Size')
+    );
+  else if(type == 'Armor')
+    Eberron.armorRules(rules, name,
+      QuilvynUtils.getAttrValue(attrs, 'AC'),
+      QuilvynUtils.getAttrValue(attrs, 'Weight'),
+      QuilvynUtils.getAttrValue(attrs, 'Dex'),
+      QuilvynUtils.getAttrValue(attrs, 'Skill'),
+      QuilvynUtils.getAttrValue(attrs, 'Spell')
+    );
+  else if(type == 'Bloodline') {
+    Pathfinder.bloodlineRules(rules, name,
+      QuilvynUtils.getAttrValueArray(attrs, 'Features'),
+      QuilvynUtils.getAttrValueArray(attrs, 'Feats'),
+      QuilvynUtils.getAttrValueArray(attrs, 'Skills'),
+      QuilvynUtils.getAttrValueArray(attrs, 'Spells'),
+      Pathfinder.SPELLS
+    );
+    Pathfinder.bloodlineRulesExtra(rules, name);
+  } else if(type == 'Class') {
+    Eberron.classRules(rules, name,
+      QuilvynUtils.getAttrValueArray(attrs, 'Require'),
+      QuilvynUtils.getAttrValueArray(attrs, 'Imply'),
+      QuilvynUtils.getAttrValue(attrs, 'HitDie'),
+      QuilvynUtils.getAttrValue(attrs, 'Attack'),
+      QuilvynUtils.getAttrValue(attrs, 'SkillPoints'),
+      QuilvynUtils.getAttrValue(attrs, 'Fortitude'),
+      QuilvynUtils.getAttrValue(attrs, 'Reflex'),
+      QuilvynUtils.getAttrValue(attrs, 'Will'),
+      QuilvynUtils.getAttrValueArray(attrs, 'Skills'),
+      QuilvynUtils.getAttrValueArray(attrs, 'Features'),
+      QuilvynUtils.getAttrValueArray(attrs, 'Selectables'),
+      QuilvynUtils.getAttrValueArray(attrs, 'Languages'),
+      QuilvynUtils.getAttrValue(attrs, 'CasterLevelArcane'),
+      QuilvynUtils.getAttrValue(attrs, 'CasterLevelDivine'),
+      QuilvynUtils.getAttrValue(attrs, 'SpellAbility'),
+      QuilvynUtils.getAttrValueArray(attrs, 'SpellsPerDay'),
+      spells,
+      Eberron.SPELLS
+    );
+    Eberron.classRulesExtra(rules, name);
+  } else if(type == 'Deity')
+    Eberron.deityRules(rules, name,
+      QuilvynUtils.getAttrValue(attrs, 'Alignment'),
+      QuilvynUtils.getAttrValueArray(attrs, 'Domain'),
+      QuilvynUtils.getAttrValueArray(attrs, 'Weapon')
+    );
+  else if(type == 'Domain')
+    Eberron.domainRules(rules, name,
+      QuilvynUtils.getAttrValueArray(attrs, 'Features'),
+      QuilvynUtils.getAttrValueArray(attrs, 'Spells'),
+      Eberron.SPELLS
+    );
+  else if(type == 'Familiar')
+    Eberron.familiarRules(rules, name,
+      QuilvynUtils.getAttrValue(attrs, 'Str'),
+      QuilvynUtils.getAttrValue(attrs, 'Dex'),
+      QuilvynUtils.getAttrValue(attrs, 'Con'),
+      QuilvynUtils.getAttrValue(attrs, 'Int'),
+      QuilvynUtils.getAttrValue(attrs, 'Wis'),
+      QuilvynUtils.getAttrValue(attrs, 'Cha'),
+      QuilvynUtils.getAttrValue(attrs, 'HD'),
+      QuilvynUtils.getAttrValue(attrs, 'AC'),
+      QuilvynUtils.getAttrValue(attrs, 'Attack'),
+      QuilvynUtils.getAttrValueArray(attrs, 'Dam'),
+      QuilvynUtils.getAttrValue(attrs, 'Level'),
+      QuilvynUtils.getAttrValue(attrs, 'Size')
+    );
+  else if(type == 'Feat') {
+    Eberron.featRules(rules, name,
+      QuilvynUtils.getAttrValueArray(attrs, 'Require'),
+      QuilvynUtils.getAttrValueArray(attrs, 'Imply'),
+      QuilvynUtils.getAttrValueArray(attrs, 'Type')
+    );
+    Eberron.featRulesExtra(rules, name, Eberron.SPELLS);
+  } else if(type == 'Feature')
+     Eberron.featureRules(rules, name,
+      QuilvynUtils.getAttrValueArray(attrs, 'Section'),
+      QuilvynUtils.getAttrValueArray(attrs, 'Note')
+    );
+  else if(type == 'Gender')
+    Eberron.genderRules(rules, name);
+  else if(type == 'House')
+    Eberron.houseRules(rules, name,
+      QuilvynUtils.getAttrValue(attrs, 'Dragonmark'),
+      QuilvynUtils.getAttrValueArray(attrs, 'Spells'),
+      Eberron.SPELLS
+    );
+  else if(type == 'Language')
+    Eberron.languageRules(rules, name);
+  else if(type == 'Race') {
+    Eberron.raceRules(rules, name,
+      QuilvynUtils.getAttrValueArray(attrs, 'Features'),
+      QuilvynUtils.getAttrValueArray(attrs, 'Selectables'),
+      QuilvynUtils.getAttrValueArray(attrs, 'Languages'),
+      QuilvynUtils.getAttrValue(attrs, 'SpellAbility'),
+      QuilvynUtils.getAttrValueArray(attrs, 'Spells'),
+      Eberron.SPELLS
+    );
+    Eberron.raceRulesExtra(rules, name);
+  } else if(type == 'School')
+    Eberron.schoolRules(rules, name,
+      QuilvynUtils.getAttrValueArray(attrs, 'Features')
+    );
+  else if(type == 'Shield')
+    Eberron.shieldRules(rules, name,
+      QuilvynUtils.getAttrValue(attrs, 'AC'),
+      QuilvynUtils.getAttrValue(attrs, 'Weight'),
+      QuilvynUtils.getAttrValue(attrs, 'Skill'),
+      QuilvynUtils.getAttrValue(attrs, 'Spell')
+    );
+  else if(type == 'Skill') {
+    var untrained = QuilvynUtils.getAttrValue(attrs, 'Untrained');
+    Eberron.skillRules(rules, name,
+      QuilvynUtils.getAttrValue(attrs, 'Ability'),
+      untrained != 'n' && untrained != 'N',
+      QuilvynUtils.getAttrValueArray(attrs, 'Class'),
+      QuilvynUtils.getAttrValueArray(attrs, 'Synergies')
+    );
+  } else if(type == 'Spell')
+    Eberron.spellRules(rules, name,
+      QuilvynUtils.getAttrValue(attrs, 'School'),
+      QuilvynUtils.getAttrValue(attrs, 'Group'),
+      QuilvynUtils.getAttrValue(attrs, 'Level'),
+      QuilvynUtils.getAttrValue(attrs, 'Description')
+    );
+  else if(type == 'Trait')
+    Pathfinder.traitRules(rules, name,
+      QuilvynUtils.getAttrValue(attrs, 'Type'),
+      QuilvynUtils.getAttrValue(attrs, 'Subtype')
+    );
+  else if(type == 'Weapon')
+    Eberron.weaponRules(rules, name,
+      QuilvynUtils.getAttrValue(attrs, 'Level'),
+      QuilvynUtils.getAttrValue(attrs, 'Category'),
+      QuilvynUtils.getAttrValue(attrs, 'Damage'),
+      QuilvynUtils.getAttrValue(attrs, 'Threat'),
+      QuilvynUtils.getAttrValue(attrs, 'Crit'),
+      QuilvynUtils.getAttrValue(attrs, 'Range')
+    );
+  else {
+    console.log('Unknown choice type "' + type + '"');
+    return;
+  }
+  if(type != 'Feature') {
+    type = type == 'Class' ? 'levels' :
+    type = type == 'Deity' ? 'deities' :
+    (type.substring(0,1).toLowerCase() + type.substring(1).replace(/ /g, '') + 's');
+    rules.addChoice(type, name, attrs);
+  }
+};
+
+/* Defines in #rules# the rules associated with alignment #name#. */
+Eberron.alignmentRules = function(rules, name) {
+  Eberron.baseRules.alignmentRules(rules, name);
+  // No changes needed to the rules defined by base method
+};
+
+/*
+ * Defines in #rules# the rules associated with armor #name#, which adds #ac#
+ * to the character's armor class, requires a #weight# proficiency level to
+ * use effectively, allows a maximum dex bonus to ac of #maxDex#, imposes
+ * #skillPenalty# on specific skills and yields a #spellFail# percent chance of
+ * arcane spell failure.
+ */
+Eberron.armorRules = function(
+  rules, name, ac, weight, maxDex, skillPenalty, spellFail
+) {
+  Eberron.baseRules.armorRules
+    (rules, name, ac, weight, maxDex, skillPenalty, spellFail);
+  // No changes needed to the rules defined by base method
+};
+
+/*
+ * Defines in #rules# the rules associated with class #name#, which has the list
+ * of hard prerequisites #requires# and soft prerequisites #implies#. The class
+ * grants #hitDie# (format [n]'d'n) additional hit points and #skillPoints#
+ * additional skill points with each level advance. #attack# is one of '1',
+ * '1/2', or '3/4', indicating the base attack progression for the class;
+ * similarly, #saveFort#, #saveRef#, and #saveWill# are each one of '1/2' or
+ * '1/3', indicating the saving throw progressions. #skills# indicate class
+ * skills for the class; see skillRules for an alternate way these can be
+ * defined. #features# and #selectables# list the fixed and selectable features
+ * acquired as the character advances in class level, and #languages# list any
+ * automatic languages for the class. #casterLevelArcane# and
+ * #casterLevelDivine#, if specified, give the Javascript expression for
+ * determining the caster level for the class; these can incorporate a class
+ * level attribute (e.g., 'levels.Fighter') or the character level attribute
+ * 'level'. #spellAbility#, if specified, contains the ability for computing
+ * spell difficulty class for cast spells. #spellsPerDay# lists the number of
+ * spells per level per day that the class can cast, and #spells# lists spells
+ * defined by the class.
+ */
+Eberron.classRules = function(
+  rules, name, requires, implies, hitDie, attack, skillPoints, saveFort,
+  saveRef, saveWill, skills, features, selectables, languages,
+  casterLevelArcane, casterLevelDivine, spellAbility, spellsPerDay, spells,
+  spellDict
+) {
+  if(Eberron.baseRules == Pathfinder) {
+    for(var i = 0; i < requires.length; i++) {
+      for(var skill in Pathfinder.SRD35_SKILL_MAP) {
+        requires[i] =
+          requires[i].replaceAll(skill, Pathfinder.SRD35_SKILL_MAP[skill]);
+      }
+    }
+    for(var i = 0; i < implies.length; i++) {
+      for(var skill in Pathfinder.SRD35_SKILL_MAP) {
+        implies[i] =
+          implies[i].replaceAll(skill, Pathfinder.SRD35_SKILL_MAP[skill]);
+      }
+    }
+    for(var i = skills.length - 1; i >= 0; i--) {
+      var skill = skills[i];
+      if(!(skill in Pathfinder.SRD35_SKILL_MAP))
+        continue;
+      if(Pathfinder.SRD35_SKILL_MAP[skill] == '')
+        skills.splice(i, 1);
+      else
+        skills[i] = Pathfinder.SRD35_SKILL_MAP[skill];
+    }
+  }
+  Eberron.baseRules.classRules(
+    rules, name, requires, implies, hitDie, attack, skillPoints, saveFort,
+    saveRef, saveWill, skills, features, selectables, languages,
+    casterLevelArcane, casterLevelDivine, spellAbility, spellsPerDay, spells,
+    spellDict
+  );
+  // No changes needed to the rules defined by base method
+};
 
 /* Defines the rules related to Eberron character classes. */
-Eberron.classRules = function(rules, classes) {
+Eberron.classRulesExtra = function(rules, classes) {
 
   for(var i = 0; i < classes.length; i++) {
 
@@ -509,8 +1012,68 @@ Eberron.classRules = function(rules, classes) {
 
 };
 
+/*
+ * Defines in #rules# the rules associated with animal companion #name#, which
+ * has abilities #str#, #dex#, #con#, #intel#, #wis#, and #cha#, hit dice #hd#,
+ * and armor class #ac#. The companion has attack bonus #attack# and does
+ * #damage# damage. If specified, #level# indicates the minimum master level
+ * the character needs to have this animal as a companion.
+ */
+Eberron.companionRules = function(
+  rules, name, str, dex, con, intel, wis, cha, hd, ac, attack, damage, level, size
+) {
+  Eberron.baseRules.companionRules(
+    rules, name, str, dex, con, intel, wis, cha, hd, ac, attack, damage, size, level
+  );
+  // No changes needed to the rules defined by base method
+};
+
+/*
+ * Defines in #rules# the rules associated with deity #name#. #alignment# gives
+ * the deity's alignment, and #domains# and #weapons# list the associated
+ * domains and favored weapons.
+ */
+Eberron.deityRules = function(rules, name, alignment, domains, weapons) {
+  Eberron.baseRules.deityRules(rules, name, alignment, domains, weapons);
+  // No changes needed to the rules defined by base method
+};
+
+/*
+ * Defines in #rules# the rules associated with domain #name#. #features# and
+ * #spells# list the associated features and domain spells.
+ */
+Eberron.domainRules = function(rules, name, features, spells, spellDict) {
+  Eberron.baseRules.domainRules(rules, name, features, spells, spellDict);
+  // No changes needed to the rules defined by base method
+};
+
+/*
+ * Defines in #rules# the rules associated with familiar #name#, which has
+ * abilities #str#, #dex#, #con#, #intel#, #wis#, and #cha#, hit dice #hd#,
+ * and armor class #ac#. The familiar has attack bonus #attack# and does
+ * #damage# damage. If specified, #level# indicates the minimum master level
+ * the character needs to have this animal as a familiar.
+ */
+Eberron.familiarRules = function(
+  rules, name, str, dex, con, intel, wis, cha, hd, ac, attack, damage, level, size
+) {
+  Eberron.baseRules.familiarRules
+    (rules, name, str, dex, con, intel, wis, cha, hd, ac, attack, damage, size, level);
+  // No changes needed to the rules defined by base method
+};
+
+/*
+ * Defines in #rules# the rules associated with feat #name#. #require# and
+ * #implies# list any hard and soft prerequisites for the feat, and #types#
+ * lists the categories of the feat.
+ */
+Eberron.featRules = function(rules, name, requires, implies, types) {
+  Eberron.baseRules.featRules(rules, name, requires, implies, types);
+  // No changes needed to the rules defined by SRD35 method
+};
+
 /* Defines the rules related to Eberron character feats. */
-Eberron.featRules = function(rules, feats, subfeats) {
+Eberron.featRulesExtra = function(rules, feats, subfeats) {
 
   var allFeats = [];
   for(var i = 0; i < feats.length; i++) {
@@ -1340,8 +1903,46 @@ Eberron.featRules = function(rules, feats, subfeats) {
 
 };
 
-/* Defines rules related to Eberron heroic characteristics. */
-Eberron.heroicRules = function(rules, houses) {
+/*
+ * Defines in #rules# the rules associated with feature #name#. #sections# lists
+ * the sections of the notes related to the feature and #notes# the note texts;
+ * the two must have the same number of elements.
+ */
+Eberron.featureRules = function(rules, name, sections, notes) {
+  if(typeof sections == 'string')
+    sections = [sections];
+  if(typeof notes == 'string')
+    notes = [notes];
+  if(Eberron.baseRules == Pathfinder) {
+    for(var i = 0; i < sections.length; i++) {
+      if(sections[i] != 'skill')
+        continue;
+      var note = notes[i];
+      for(var skill in Pathfinder.SRD35_SKILL_MAP) {
+        if(note.indexOf(skill) < 0)
+          continue;
+        var pfSkill = Pathfinder.SRD35_SKILL_MAP[skill];
+        if(pfSkill == '' || note.indexOf(pfSkill) >= 0) {
+          note = note.replace(new RegExp('[,/]?[^,/:]*' + skill + '[^,/]*', 'g'), '');
+        } else {
+          note = note.replace(new RegExp(skill, 'g'), pfSkill);
+        }
+      }
+      notes[i] = note;
+    }
+  }
+  Eberron.baseRules.featureRules(rules, name, sections, notes);
+  // No changes needed to the rules defined by base method
+};
+
+/* Defines in #rules# the rules associated with gender #name#. */
+Eberron.genderRules = function(rules, name) {
+  Eberron.baseRules.genderRules(rules, name);
+  // No changes needed to the rules defined by base method
+};
+
+/* Defines rules related to Eberron house characteristics. */
+Eberron.houseRules = function(rules, houses) {
   rules.defineChoice('houses', houses);
   rules.defineRule('actionPoints', 'level', '=', '5 + Math.floor(source / 2)');
   rules.defineRule('actionDice', 'level', '=', '1 + Math.floor(source / 7)');
@@ -1361,6 +1962,12 @@ Eberron.heroicRules = function(rules, houses) {
   rules.defineSheetElement('Dragonmark', 'Heroics/');
   rules.defineSheetElement('Action Points', 'Heroics/');
   rules.defineSheetElement('Action Dice', 'Heroics/');
+};
+
+/* Defines in #rules# the rules associated with language #name#. */
+Eberron.languageRules = function(rules, name) {
+  Eberron.baseRules.languageRules(rules, name);
+  // No changes needed to the rules defined by base method
 };
 
 /* Defines the rules related to Eberron spells and domains. */
@@ -1630,8 +2237,23 @@ Eberron.magicRules = function(rules, classes, domains) {
 
 };
 
+/*
+ * Defines in #rules# the rules associated with race #name#. #features# and
+ * #selectables# list associated features and #languages# the automatic
+ * languages. #spells# lists any natural spells, for which #spellAbility# is
+ * used to compute the save DC.
+ */
+Eberron.raceRules = function(
+  rules, name, features, selectables, languages, spellAbility, spells, spellDict
+) {
+  Eberron.baseRules.raceRules
+    (rules, name, features, selectables, languages, spellAbility, spells,
+     spellDict);
+  // No changes needed to the rules defined by base method
+};
+
 /* Defines the rules related to Eberron character races. */
-Eberron.raceRules = function(rules, races) {
+Eberron.raceRulesExtra = function(rules, races) {
 
   for(var i = 0; i < races.length; i++) {
 
@@ -1805,6 +2427,75 @@ Eberron.raceRules = function(rules, races) {
 
   }
 
+};
+
+/* Defines in #rules# the rules associated with magic school #name#. */
+Eberron.schoolRules = function(rules, name, features) {
+  Eberron.baseRules.schoolRules(rules, name, features);
+  // No changes needed to the rules defined by base method
+};
+
+/*
+ * Defines in #rules# the rules associated with shield #name#, which adds #ac#
+ * to the character's armor class, requires a #profLevel# proficiency level to
+ * use effectively, imposes #skillPenalty# on specific skills
+ * and yields a #spellFail# percent chance of arcane spell failure.
+ */
+Eberron.shieldRules = function(
+  rules, name, ac, profLevel, skillFail, spellFail
+) {
+  Eberron.baseRules.shieldRules
+    (rules, name, ac, profLevel, skillFail, spellFail);
+  // No changes needed to the rules defined by SRD35 method
+};
+
+/*
+ * Defines in #rules# the rules associated with skill #name#, associated with
+ * #ability# (one of 'strength', 'intelligence', etc.). #untrained#, if
+ * specified is a boolean indicating whether or not the skill can be used
+ * untrained; the default is true. #classes# lists the classes for which this
+ * is a class skill; a value of "all" indicates that this is a class skill for
+ * all classes. #synergies#, if specified, lists synergies to other skills and
+ * abilities granted by high ranks in this skill.
+ */
+Eberron.skillRules = function(
+  rules, name, ability, untrained, classes, synergies
+) {
+  Eberron.baseRules.skillRules
+    (rules, name, ability, untrained, classes, synergies);
+  // No changes needed to the rules defined by base method
+};
+
+/*
+ * Defines in #rules# the rules associated with spell #name#, which is from
+ * magic school #school#. #casterGroup# and #level# are used to compute any
+ * saving throw value required by the spell. #description# is a verbose
+ * description of the spell's effects.
+ */
+Eberron.spellRules = function(
+  rules, name, school, casterGroup, level, description
+) {
+  Eberron.baseRules.spellRules
+    (rules, name, school, casterGroup, level, description);
+  // No changes needed to the rules defined by base method
+};
+
+/*
+ * Defines in #rules# the rules associated with weapon #name#, which requires a
+ * #profLevel# proficiency level to use effectively and belongs to weapon
+ * category #category# (one of '1h', '2h', 'Li', 'R', 'Un' or their spelled-out
+ * equivalents). The weapon does #damage# HP on a successful attack and
+ * threatens x#critMultiplier# (default 2) damage on a roll of #threat# (default
+ * 20). If specified, the weapon can be used as a ranged weapon with a range
+ * increment of #range# feet.
+ */
+Eberron.weaponRules = function(
+  rules, name, profLevel, category, damage, threat, critMultiplier, range
+) {
+  Eberron.baseRules.weaponRules(
+    rules, name, profLevel, category, damage, threat, critMultiplier, range
+  );
+  // No changes needed to the rules defined by base method
 };
 
 Eberron.ruleNotes = function() {
