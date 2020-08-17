@@ -125,6 +125,8 @@ Eberron.RANDOMIZABLE_ATTRIBUTES_ADDED = ['house'];
 Eberron.RANDOMIZABLE_ATTRIBUTES =
   SRD35.RANDOMIZABLE_ATTRIBUTES.concat(Eberron.RANDOMIZABLE_ATTRIBUTES_ADDED);
 
+SRD35.ABBREVIATIONS['AP'] = 'Action Points';
+
 Eberron.ALIGNMENTS = Object.assign({}, SRD35.ALIGNMENTS);
 Eberron.ANIMAL_COMPANIONS = Object.assign({}, SRD35.ANIMAL_COMPANIONS);
 Eberron.ARMORS_ADDED = {
@@ -335,7 +337,7 @@ Eberron.FEATS_ADDED = {
   'Great Rend':'Type=Shifter Require="baseAttack >= 4",features.Razorclaw',
     // TODO Require any 2 skills >= 12
   'Greater Dragonmark':
-    'Type=General Require="features.Least Dragonmark","features.Lesser Dragonmark","house != \'None\'",race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Orc|Human\'"',
+    'Type=General Require="features.Least Dragonmark","features.Lesser Dragonmark","house != \'None\'","race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Orc|Human\'"',
     // TODO Require !Small
   'Greater Powerful Charge':'Type=General Require="baseAttack >= 4","features.Powerful Charge"',
     // TODO Require 4 Shifter
@@ -355,12 +357,12 @@ Eberron.FEATS_ADDED = {
   'Investigate':'Type=General',
   'Knight Training (Cleric)':'Type=General',
   'Least Dragonmark':
-    'Type=General Require="house != \'None\'",race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Orc|Human\'"',
+    'Type=General Require="house != \'None\'","race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Orc|Human\'"',
     // TODO Require Any Item Creation
   'Legendary Artisan':'Type="Item Creation"',
     // TODO Require 2 skills >= 9
   'Lesser Dragonmark':
-    'Type=General Require="house != \'None\'",race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Orc|Human\'","features.Least Dragonmark"',
+    'Type=General Require="house != \'None\'","race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Orc|Human\'","features.Least Dragonmark"',
   'Longstride Elite':'Type=Shifter Require=features.Longstride',
   'Mithral Body':'Type=Warforged Require="race == \'Warforged\'"',
   'Mithral Fluidity':
@@ -459,9 +461,9 @@ Eberron.FEATURES_ADDED = {
   // Feat
   'Aberrant Dragonmark':'Section=magic Note="Cast chosen spell 1/dy"',
   'Action Boost':
-    'section=feature Note="Add d8 instead of d6 when using AP on attack, skill, ability, level or saving throw"',
+    'section=ability Note="Add d8 instead of d6 when using AP on attack, skill, ability, level or saving throw"',
   'Action Surge':
-    'Section=feature Note="Spend 2 AP to take extra move or standard action"',
+    'Section=ability Note="Spend 2 AP to take extra move or standard action"',
   'Adamantine Body':
     'Section=ability,combat Note="Max 20 speed","+6 AC/DR 2/adamantine"',
   'Ashbound':
@@ -482,6 +484,7 @@ Eberron.FEATURES_ADDED = {
   'Child Of Winter':'Section=magic Note="Use animal Druid spells on vermin"',
   'Cliffwalker Elite':'Section=ability Note="+10 climb speed while shifting"',
   'Craft Construct':'Section=magic Note="Create enchanted construct"',
+  'Detective':'Section=skill Note="+2 Spot"',
   'Double Steel Strike':
     'Section=combat Note="Flurry Of Blows w/Two-Bladed Sword"',
   'Dragon Rage':
@@ -503,14 +506,15 @@ Eberron.FEATURES_ADDED = {
   'Exceptional Artisan':
     'Section=magic Note="Reduce item creation base time by 25%"',
   'Extend Rage':'Section=combat Note="Add 5 rd to Rage duration"',
-  'Extra Music':'Section=feature Note="Bardic Musci 4 extra times/dy"',
+  'Extra Music':'Section=feature Note="Bardic Music 4 extra times/dy"',
   'Extra Rings':'Section=magic Note="Wear up to 4 magic rings at once"',
   'Extra Shifter Trait':
-    'Section=feature Note="Extra Shifter trait w/out ability bonus',
+    'Section=feature Note="Extra Shifter trait w/out ability bonus"',
   'Extraordinary Artisan':
     'Section=magic Note="Reduce item creation base price by 25%"',
   'Favored In House':
     'Section=feature Note="Acquire favors from house contacts"',
+  'Finder':'Section=skill Note="+2 Search"',
   'Flensing Strike':
     'Section=combat Note="Kama causes -1 pain penalty to foe attack, save, checks for 1 min (DC %V Fort neg)"',
   'Gatekeeper Initiate':
@@ -523,10 +527,13 @@ Eberron.FEATURES_ADDED = {
   'Greater Shifter Defense':'Section=combat Note="+2 Shifter Defense DR"',
   'Greensinger Initiate':
     'Section=magic,skill Note="Access to additional spells","Bluff is a class skill/Hide is a class skill/Perform is a class skill"',
+  'Handler':'Section=skill Note="+2 Handle Animal"',
   'Haunting Melody':
     'Section=magic Note="Foe afraid for %1 rd (DC %V Will neg)"',
-  'Healing Factor':'Section=feature Note="Heal %V points when shifting ends"',
+  'Healer':'Section=skill Note="+2 Heal"',
+  'Healing Factor':'Section=combat Note="Heal %V points when shifting ends"',
   'Heroic Spirit':'Section=ability Note="+3 AP"',
+  'Hospitaler':'Section=skill Note="+2 Diplomacy"',
   'Improved Damage Reduction':'Section=combat Note="DR +1/adamantine"',
   'Improved Fortification':
     'Section=combat Note="Immune sneak attac, critical hit, healing"',
@@ -541,9 +548,10 @@ Eberron.FEATURES_ADDED = {
     'Section=magic Note="Reduce item creation XP price by 25%"',
   'Lesser Dragonmark':'Section=magic Note="Choice of %V"',
   'Longstride Elite':'Section=ability Note="+10 Speed while shifting"',
+  'Maker':'Section=skill Note="+2 All Craft"',
   'Mithral Body':'Section=combat Note="+3 AC"',
   'Mithral Fluidity':
-    'Section=combat,skill Note=Raise Mithral Body Reflex AC limit by 1","Reduce skill penalty by 1"',
+    'Section=combat,skill Note="Raise Mithral Body Reflex AC limit by 1","Reduce skill penalty by 1"',
   'Monastic Training (Cleric)':
     'Section=ability Note="No restrictions on Monk/Cleric level advancement"',
   'Music Of Growth':
@@ -555,7 +563,7 @@ Eberron.FEATURES_ADDED = {
     'Section=combat Note="Melee attack ignores less-than-total cover"',
   'Pursue':
     'Section=combat Note="Spend 1 AP to step into area vacated by opponent"',
-  'Raging Luck':'Section=feature Note="Gain 1 AP during Rage"',
+  'Raging Luck':'Section=ability Note="Gain 1 AP during Rage"',
   'Recognize Imposter':
     'Section=skill Note="+4 Sense Motive vs. Bluff and Spot vs. Disguise"',
   'Repel Aberration':
@@ -563,20 +571,25 @@ Eberron.FEATURES_ADDED = {
   'Research':'Section=skill Note=Use Knowledge skill on library and records"',
   'Right Of Counsel':
     'Section=feature Note="Seek advice from deathless ancestor"',
+  'Scribe':'Section=skill Note="+2 Decipher Script"',
+  'Shadower':'Section=skill Note="+2 Gather Information"',
   'Shifter Defense':'Section=combat Note="DR %V/silver"',
   'Shifter Ferocity':
     'Section=combat Note="Continue fighting below 0 HP while shifting"',
+  'Sentinel':'Section=skill Note="+2 Sense Motive"',
   'Serpent Strike':'Section=combat Note="Flurry Of Blows w/longspear"',
   'Shifter Multiattack':
     'Section=combat Note="Reduce additional natural attack penalty to -2"',
   'Silver Smite':'Section=combat Note="Smite Evil +d6"',
-  'Song Of The Heart':'Section=feature Note="+1 Bardic Music effects"',
+  'Song Of The Heart':'Section=magic Note="+1 Bardic Music effects"',
   'Soothe The Beast':'Section=skill Note="Perform to change animal reaction"',
   'Spontaneous Casting':
     'Section=magic Note=Spend 2 AP to substitute any known spell for a prepared one"',
+  'Storm Walker':'Section=skill Note="+2 Balance"',
   'Strong Mind':'Section=save Note="+3 vs. psionics"',
   'Totem Companion':
     'Section=companion Note="Totem magical beast as animal companion"',
+  'Traveler':'Section=skill Note="+2 Survival"',
   'Undead Empathy':
     'Section=skill Note="+4 Diplomacy to influence undead reaction"',
   'Urban Tracking':
@@ -587,7 +600,9 @@ Eberron.FEATURES_ADDED = {
   'Wand Mastery':'Section=magic Note="+2 spell DC and caster level w/wands"',
   'Warden Initiate':
     'Section=combat,magic,skill Note="+2 AC (forests)","Access to additional spells","Climb is a class skill/Jump is a class skill"',
-  'Whirling Steel Strike':'Section=combat Note="Flurry Of Blows with longsword',
+  'Warder':'Section=skill Note="+2 Search"',
+  'Whirling Steel Strike':
+    'Section=combat Note="Flurry Of Blows with longsword"',
   // Race
   'Beasthide':
     'Section=ability,combat Note="+2 Con while shifting","+2 AC while shifting"',
@@ -612,7 +627,7 @@ Eberron.FEATURES_ADDED = {
   'Natural Psionic':'Section=magic Note="+1 PP/level"',
   'Natural Linguist':'Section=skill Note="Speak Language is a class skill"',
   'Razorclaw':
-    'Section=ability,combat Note="+2 Str while shifting","d4+%V claw attack while shifting',
+    'Section=ability,combat Note="+2 Str while shifting","d4+%V claw attack while shifting"',
   'Resist Charm':'Section=save Note="+2 vs. charm effects"',
   'Resist Mental':'Section=save Note="+2 vs. mind-altering effects"',
   'Resist Sleep':'Section=save Note="+2 vs. <i>Sleep</i>"',
@@ -621,7 +636,7 @@ Eberron.FEATURES_ADDED = {
   'Shifting':'Section=feature Note="Use Shifter trait for %V rd %1/day"',
   'Slam Weapon':'Section=combat Note="d4 slam attack"',
   'Stable':
-    'Section=combat Note="May perform strenuous activity at 0 HP, no additional loss at negative HP',
+    'Section=combat Note="May perform strenuous activity at 0 HP, no additional loss at negative HP"',
   'Unhealing':
     'Section=combat Note="Does not heal damage naturally, half effect from healing spells"',
   'Warforged Ability Adjustment':
@@ -636,77 +651,94 @@ Eberron.HOUSES = {
     '',
   'Cannith':
     'Dragonmark=Making ' +
+    'Features=Maker ' +
     'Spells=' +
-      '"Make Whole",Mending,Mending,"Repair Light Damage","Minor Creation",' +
-      '"Repair Serious Damage",Fabricate,"Major Creation","True Creation"',
+      '"1:Make Whole",1:Mending:2,"1:Repair Light Damage","2:Minor Creation",' +
+      '"2:Repair Serious Damage",3:Fabricate,"3:Major Creation",' +
+      '"4:True Creation"',
   'Deneith':
     'Dragonmark=Sentinel ' +
+    'Features=Sentinel ' +
     'Spells=' +
-      '"Mage Armor","Protection From Arrows","Shield Of Faith",' +
-      '"Shield Other","Lesser Globe Of Invulnerability",' +
-      '"Protection From Energy","Globe Of Invulnerability","Mind Blank"',
+      '"1:Mage Armor","1:Protection From Arrows","1:Shield Of Faith",' +
+      '"1:Shield Other","2:Lesser Globe Of Invulnerability",' +
+      '"2:Protection From Energy","3:Globe Of Invulnerability","4:Mind Blank"',
   'Ghallanda':
     'Dragonmark=Hospitality ' +
+    'Features=Hospitaler ' +
     'Spells=' +
-      'Prestidigitation,Prestidigitation,"Purify Food And Drink",' +
-      '"Purify Food And Drink","Unseen Servant","Create Food And Water",' +
-      '"Secure Shelter","Heroes\' Feast","Mage\'s Magnificent Mansion",' +
-      'Refuge',
+      '1:Prestidigitation:2,"1:Purify Food And Drink:2",' +
+      '"1:Unseen Servant","2:Create Food And Water",' +
+      '"2:Secure Shelter","3:Heroes\' Feast","3:Mage\'s Magnificent Mansion",' +
+      '4:Refuge',
   'Jorasco':
     'Dragonmark=Healing ' +
+    'Features=Healer ' +
     'Spells=' +
-      '"Cure Light Wounds","Lesser Restoration","Cure Serious Wounds",' +
-      '"Neutralize Poison","Remove Disease",Restoration,Heal,"Mass Heal"',
+      '"1:Cure Light Wounds","1:Lesser Restoration","2:Cure Serious Wounds",' +
+      '"2:Neutralize Poison","2:Remove Disease",2:Restoration,3:Heal,' +
+      '"4:Mass Heal"',
   'Kundarak':
     'Dragonmark=Warding ' +
+    'Features=Warder ' +
     'Spells=' +
-      'Alarm,"Arcane Lock",Misdirection,"Explosive Runes",' +
-      '"Glyph Of Warding",Nondetection,"Greater Glyph Of Warding",' +
-      '"Guards And Wards","Mage\'s Faithful Hound","Prismatic Wall"',
+      '1:Alarm,"1:Arcane Lock","1:Fire Trap",1:Misdirection,' +
+      '"2:Explosive Runes","2:Glyph Of Warding",2:Nondetection,' +
+      '"3:Greater Glyph Of Warding","3:Guards And Wards",' +
+      '"3:Mage\'s Faithful Hound","4:Prismatic Wall"',
   'Lyrandar':
     'Dragonmark=Storm ' +
+    'Features="Storm Walker" ' +
     'Spells=' +
-      '"Endure Elements","Fog Cloud","Gust Of Wind","Sleet Storm",' +
-      '"Wind Wall","Wind\'s Favor","Control Weather","Control Winds",' +
-      '"Storm Of Vengeance"',
+      '"1:Endure Elements","1:Fog Cloud","1:Gust Of Wind","2:Sleet Storm",' +
+      '"2:Wind Wall","2:Wind\'s Favor","3:Control Weather","3:Control Winds",' +
+      '"4:Storm Of Vengeance"',
   'Medani':
     'Dragonmark=Detection ' +
+    'Features=Detective ' +
     'Spells=' +
-      '"Detect Magic","Detect Magic","Detect Poison","Detect Poison",' +
-      '"Detect Scrying","See Invisible","True Seeing","Moment Of Prescience"',
+      '"1:Detect Magic:2","1:Detect Poison:2","2:Detect Scrying",' +
+      '"2:See Invisibility","3:True Seeing","4:Moment Of Prescience"',
   'Orien':
     'Dragonmark=Passage ' +
+    'Features=Traveler ' +
     'Spells=' +
-      '"Dimension Leap","Expeditious Retreat",Mount,"Dimension Door",' +
-      '"Phantom Steed","Overland Flight",Teleport,"Greater Teleport"',
+      '"1:Dimension Leap","1:Expeditious Retreat",1:Mount,"2:Dimension Door",' +
+      '"2:Phantom Steed","3:Overland Flight",3:Teleport,"4:Greater Teleport"',
   'Phiarlan':
     'Dragonmark=Shadow ' +
+    'Features=Shadower ' +
     'Spells=' +
-      'Darkness,"Disguise Self","Minor Image",Clairaudience/Clairvoyance,' +
-      'Scrying,"Shadow Conjuration",Mislead,"Prying Eyes","Shadow Walk",' +
-      'Greater Prying Eyes',
+      '1:Darkness,"1:Disguise Self","1:Minor Image",' +
+      '2:Clairaudience/Clairvoyance,2:Scrying,"2:Shadow Conjuration",' +
+      '3:Mislead,"3:Prying Eyes","3:Shadow Walk","4:Greater Prying Eyes"',
   'Sivis':
     'Dragonmark=Scribing ' +
+    'Features=Scribe ' +
     'Spells=' +
-      '"Arcane Mark","Arcane Mark","Comprehend Languages","Whispering Wind",' +
-      '"Illusory Script","Secret Page",Tongues,Sending,"Symbol Of Death"',
+      '"1:Arcane Mark:2","1:Comprehend Languages","1:Whispering Wind",' +
+      '"2:Illusory Script","2:Secret Page",2:Tongues,3:Sending,' +
+      '"4:Symbol Of Death"',
   'Tharashk':
     'Dragonmark=Finding ' +
+    'Features=Finder ' +
     'Spells=' +
-      'Identify,"Know Direction","Know Direction","Locate Object",' +
-      '"Helping Hand","Locate Creature","Find The Path","Discern Location"',
+      '1:Identify,"1:Know Direction:2","1:Locate Object","2:Helping Hand",' +
+      '"2:Locate Creature","3:Find The Path","4:Discern Location"',
   'Thuranni':
     'Dragonmark=Shadow ' +
+    'Features=Shadower ' +
     'Spells=' +
-      'Darkness,"Disguise Self","Minor Image",Clairaudience/Clairvoyance,' +
-      'Scrying,"Shadow Conjuration",Mislead,"Prying Eyes","Shadow Walk",' +
-      'Greater Prying Eyes',
+      '1:Darkness,"1:Disguise Self","1:Minor Image",' +
+      '2:Clairaudience/Clairvoyance,2:Scrying,"2:Shadow Conjuration",' +
+      '3:Mislead,"3:Prying Eyes","3:Shadow Walk","4:Greater Prying Eyes"',
   'Vadalis':
     'Dragonmark=Handling ' +
+    'Features=Handler ' +
     'Spells=' +
-      '"Calm Animals","Charm Animals","Speak With Animals","Dominate Animal",' +
-      '"Greater Magic Fang","Animal Growth","Summon Nature\'s Ally V",' +
-      'Awaken,"Summon Nature\'s Ally"'
+      '"1:Calm Animals","1:Charm Animal","1:Speak With Animals",' +
+      '"2:Dominate Animal","2:Greater Magic Fang","3:Animal Growth",' +
+      '"3:Summon Nature\'s Ally V",4:Awaken,"4:Summon Nature\'s Ally VI"'
 };
 Eberron.LANGUAGES_ADDED = {
   'Argon':'',
@@ -770,6 +802,9 @@ Eberron.SPELLS_ADDED = {
   'Detoxify':
     'School=Conjuration ' +
     'Description="R30\' Neutralize venom for $L10 min"',
+  'Dimension Leap':
+    'School=Conjuration ' +
+    'Description="Teleport self up to $L10\'"',
   'Disable Construct':
     'School=Transmutation ' +
     'Description="Touched construct $L10 HP (Will half)"',
@@ -896,6 +931,9 @@ Eberron.SPELLS_ADDED = {
   'Weapon Augmentation':
     'School=Transmutation ' +
     'Description="Touched weapon +3 and 70K GP enhancement for $L10 min"',
+  "Wind's Favor":
+    'School=Transmutation ' +
+    'Description="R$RM\' 10\'x10\'x$L20plus100\' 30 MPH wind for $L hr',
   'Withering Palm':
     'School=Necromancy ' +
     'Description="Touched loses $Ldiv2 Str and Con (Fort neg)"',
@@ -944,7 +982,7 @@ Eberron.CLASSES_ADDED = {
       'A5:11=1;12=2;14=3;18=4,' +
       'A6:14=1;15=2;17=3;19=4 ' +
     'Spells=' +
-      '"A1:Energy Alteration;;Enhancement Alteration;Identify;' +
+      '"A1:Energy Alteration;Enhancement Alteration;Identify;' +
       'Inflict Light Damage;Lesser Armor Enhancement;Light;Magic Stone;' +
       'Magic Vestment;Magic Weapon;Repair Light Damage;' +
       'Personal Weapon Augmentation;Resistance Item;Shield Of Faith;' +
@@ -963,8 +1001,8 @@ Eberron.CLASSES_ADDED = {
       'Rusting Grasp;Weapon Augmentation",' +
       '"A5:Disrupting Weapon;Fabricate;Major Creation;Wall Of Force;' +
       'Wall Of Stone",' +
-      '"A6:Blade Barrier;Disable Construct;Globe Of Invulnerabiity;Hardening;' +
-      'Move Earth;Total Repair;Wall Of Iron;Weapon Augmentation"'
+      '"A6:Blade Barrier;Disable Construct;Globe Of Invulnerability;' +
+      'Hardening;Move Earth;Total Repair;Wall Of Iron;Weapon Augmentation"'
 };
 Eberron.CLASS_SPELLS_ADDED = {
   'Cleric':
@@ -982,7 +1020,6 @@ for(var clas in Eberron.CLASS_SPELLS_ADDED) {
   Eberron.CLASSES[clas] = Eberron.CLASSES[clas].replace('Spells=', 'Spells=' + Eberron.CLASS_SPELLS_ADDED[clas] + ',');
 }
 
-// Related information used internally by Eberron
 Eberron.artificerCraftReserves = [
   0, 20, 40, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 900, 1200, 1500,
   2000, 2500, 3000, 4000, 5000
@@ -1027,9 +1064,27 @@ Eberron.identityRules = function(
     rules.choiceRules(rules, 'House', house, houses[house]);
   }
   // No changes needed to the rules defined by base method
-  rules.defineSheetElement('Heroics', 'Description');
   rules.defineRule('actionPoints', 'level', '=', '5 + Math.floor(source / 2)');
   rules.defineRule('actionDice', 'level', '=', '1 + Math.floor(source / 7)');
+  rules.defineRule('casterLevels.Dragonmark',
+    'features.Least Dragonmark', '=', '1',
+    'features.Lesser Dragonmark', '^=', '6',
+    'features.Greater Dragonmark', '^=', '10',
+    'levels.Heir Of Siberys', '^=', 'source >= 2 ? 15 : null' // TODO move to EberronPrestige
+  );
+  rules.defineRule('spellDifficultyClass.Dragonmark',
+    'casterLevels.Dragonmark', '?', null,
+    'charismaModifier', '=', '10 + source'
+  );
+  rules.defineRule
+    ('spellsPerDay.Dragonmark1', 'features.Least Dragonmark', '=', '1');
+  rules.defineRule
+    ('spellsPerDay.Dragonmark2', 'features.Lesser Dragonmark', '=', '1');
+  rules.defineRule
+    ('spellsPerDay.Dragonmark3', 'features.Greater Dragonmark', '=', '1');
+  rules.defineRule
+    ('spellsPerDay.Dragonmark4', 'levels.Heir Of Siberys', '=', 'source >= 2 ? 1 : null'); // TODO move
+  rules.defineSheetElement('Heroics', 'Description');
   rules.defineSheetElement('House', 'Heroics/');
   rules.defineSheetElement('Dragonmark', 'Heroics/');
   rules.defineSheetElement('Action Points', 'Heroics/');
@@ -1107,6 +1162,7 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
       QuilvynUtils.getAttrValue(attrs, 'CasterLevelDivine'),
       QuilvynUtils.getAttrValue(attrs, 'SpellAbility'),
       QuilvynUtils.getAttrValueArray(attrs, 'SpellsPerDay'),
+      QuilvynUtils.getAttrValueArray(attrs, 'Spells'),
       Eberron.SPELLS
     );
     Eberron.classRulesExtra(rules, name);
@@ -1155,6 +1211,7 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
   else if(type == 'House')
     Eberron.houseRules(rules, name,
       QuilvynUtils.getAttrValue(attrs, 'Dragonmark'),
+      QuilvynUtils.getAttrValueArray(attrs, 'Features'),
       QuilvynUtils.getAttrValueArray(attrs, 'Spells'),
       Eberron.SPELLS
     );
@@ -1301,7 +1358,10 @@ Eberron.classRules = function(
   // No changes needed to the rules defined by base method
 };
 
-/* Defines the rules related to Eberron character classes. */
+/*
+ * Defines in #rules# the rules associated with class #name# that are not
+ * directly derived from the parmeters passed to classRules.
+ */
 Eberron.classRulesExtra = function(rules, name) {
   if(name == 'Artificer') {
     var allFeats = rules.getChoices('feats');
@@ -1319,6 +1379,8 @@ Eberron.classRulesExtra = function(rules, name) {
        'levels.Artificer', '=', null,
        'intelligenceModifier', '+', null
     );
+  } else if(Eberron.baseRules.classRulesExtra) {
+    Eberron.baseRules.classRulesExtra(rules, name);
   }
 };
 
@@ -1370,9 +1432,10 @@ Eberron.domainRulesExtra = function(rules, name) {
   } else if(name == 'Madness') {
     rules.defineRule
       ('featureNotes.madnessDomain', 'levels.Cleric', '=', null);
-    rules.defineRule('saves.Will', 'saveNotes.madnessDomain', '+', '-1');
   } else if(name == 'Passion') {
     rules.defineRule('combatNotes.passionDomain', 'levels.Cleric', '=', null);
+  } else if(Eberron.baseRules.domainRulesExtra) {
+    Eberron.baseRules.domainRulesExtra(rules, name);
   }
 };
 
@@ -1407,8 +1470,6 @@ Eberron.featRules = function(rules, name, requires, implies, types) {
  */
 Eberron.featRulesExtra = function(rules, name) {
 
-  var matchInfo;
-
   if(name == 'Adamantine Body') {
     rules.defineRule('combatNotes.dexterityArmorClassAdjustment',
       'features.Adamantine Body', 'v', '1'
@@ -1442,37 +1503,6 @@ Eberron.featRulesExtra = function(rules, name) {
       'level', '=', 'Math.floor(source / 4)',
       'strengthModifier', '+', 'Math.floor(source / 2)'
     );
-  } else if(name == 'Greater Dragonmark') {
-    rules.defineRule('casterLevels.Greater Dragonmark',
-      'features.Least Dragonmark', '=', '10'
-    );
-    rules.defineRule
-      ('magicNotes.greaterDragonmark', '', '=', '"spells %1/day"');
-    rules.defineRule('magicNotes.greaterDragonmark.1',
-      'features.Greater Dragonmark', '=', '1'
-    );
-    rules.defineRule('magicNotes.leastDragonmark.1',
-      'features.Greater Dragonmark', '+', '1'
-    );
-    rules.defineRule('magicNotes.leastDragonmark.2',
-      'features.Greater Dragonmark', '+', '1'
-    );
-    rules.defineRule('magicNotes.lesserDragonmark.1',
-      'features.Greater Dragonmark', '+', '1'
-    );
-    for(var dragonmark in Eberron.dragonmarksSpells) {
-      var spells = Eberron.dragonmarksSpells[dragonmark][2].split(/,\s*/);
-      for(var j = 0; j < spells.length; j++) {
-        var spell = spells[j];
-        rules.defineRule('casterLevels.' + spell,
-          'casterLevels.Greater Dragonmark', '^=', null
-        );
-        spells[j] = '<i>' + spell + '</i> %1/day';
-      }
-      rules.defineRule('magicNotes.greaterDragonmark',
-        'isDragonmark.' + dragonmark, '=', '"' + spells.join(', ') + '"'
-      );
-    };
   } else if(name == 'Greater Powerful Charge') {
     rules.defineRule('combatNotes.greaterPowerfulCharge',
       '', '=', '"2d6"',
@@ -1495,72 +1525,6 @@ Eberron.featRulesExtra = function(rules, name) {
     );
   } else if(name == 'Healing Factor') {
     rules.defineRule('featureNotes.healingFactor', 'level', '=', null);
-  } else if(name == 'Least Dragonmark') {
-    rules.defineRule('casterLevels.Least Dragonmark',
-      'features.Least Dragonmark', '=', '1'
-    );
-    rules.defineRule
-      ('magicNotes.leastDragonmark', '', '=', '"spells %1/day"');
-    rules.defineRule('magicNotes.leastDragonmark.1',
-      'features.Least Dragonmark', '=', '1'
-    );
-    rules.defineRule('magicNotes.leastDragonmark.2',
-      'features.Least Dragonmark', '=', '2'
-    );
-    // Set casterLevels.[CS] to a minimal value so that spell DC will be
-    // calcuated even for non-caster characters.
-    rules.defineRule
-      ('casterLevels.C', 'casterLevels.Least Dragonmark', '^=', '1');
-    rules.defineRule
-      ('casterLevels.S', 'casterLevels.Least Dragonmark', '^=', '1');
-    for(var dragonmark in Eberron.dragonmarksSpells) {
-      var spells = Eberron.dragonmarksSpells[dragonmark][0].split(/,\s*/);
-      for(var j = 0; j < spells.length; j++) {
-        var spell = spells[j];
-        var spellNoX2 = spell.replace(/\s+x2$/, '');
-        rules.defineRule('casterLevels.' + spellNoX2,
-          'casterLevels.Least Dragonmark', '^=', null
-        );
-        spells[j] =
-          '<i>' + spellNoX2 + '</i> %' + (spell==spellNoX2?'1':'2') + '/day';
-      }
-      rules.defineRule('magicNotes.leastDragonmark',
-        'isDragonmark.' + dragonmark, '=', '"' + spells.join(', ') + '"'
-      );
-    };
-  } else if(name == 'Lesser Dragonmark') {
-    rules.defineRule('casterLevels.Lesser Dragonmark',
-      'features.Least Dragonmark', '=', '6'
-    );
-    rules.defineRule
-      ('magicNotes.lesserDragonmark', '', '=', '"spells %1/day"');
-    rules.defineRule('magicNotes.lesserDragonmark.1',
-      'features.Lesser Dragonmark', '=', '1'
-    );
-    rules.defineRule('magicNotes.leastDragonmark.1',
-      'features.Lesser Dragonmark', '+', '1'
-    );
-    rules.defineRule('magicNotes.leastDragonmark.2',
-      'features.Lesser Dragonmark', '+', '1'
-    );
-    for(var dragonmark in Eberron.dragonmarksSpells) {
-      var spells = Eberron.dragonmarksSpells[dragonmark][1].split(/,\s*/);
-      for(var j = 0; j < spells.length; j++) {
-        var spell = spells[j];
-        rules.defineRule('casterLevels.' + spell,
-          'casterLevels.Lesser Dragonmark', '^=', null
-        );
-        spells[j] = '<i>' + spell + '</i> %1/day';
-      }
-      rules.defineRule('magicNotes.lesserDragonmark',
-        'isDragonmark.' + dragonmark, '=', '"' + spells.join(', ') + '"'
-      );
-    };
-    rules.defineRule('validationNotes.lesserDragonmarkFeatSkills',
-      'feats.Lesser Dragonmark', '=', '-2',
-      /^skillModifier\./, '+', 'source >= 9 ? 1 : null',
-      '', 'v', '0'
-    );
   } else if(name == 'Mithral Body') {
     rules.defineRule('combatNotes.dexterityArmorClassAdjustment',
       'mithralBodyDexACCap', 'v', null
@@ -1585,6 +1549,8 @@ Eberron.featRulesExtra = function(rules, name) {
     );
   } else if(name == 'Shifter Defense') {
     rules.defineRule('combatNotes.shifterDefense', '', '=', '2');
+  } else if (Eberron.baseRules.featRulesExtra) {
+    Eberron.baseRules.featRulesExtra(rules, name);
   }
 
 };
@@ -1617,7 +1583,6 @@ Eberron.featureRules = function(rules, name, sections, notes) {
       notes[i] = note;
     }
   }
-  console.log(name);
   Eberron.baseRules.featureRules(rules, name, sections, notes);
   // No changes needed to the rules defined by base method
 };
@@ -1629,13 +1594,92 @@ Eberron.genderRules = function(rules, name) {
 };
 
 /* Defines rules related to Eberron house characteristics. */
-Eberron.houseRules = function(rules, name, dragonmark, spells) {
-  rules.defineRule(name + 'Level',
+Eberron.houseRules = function(
+  rules, name, dragonmark, features, spells, spellDict
+) {
+
+  if(!name) {
+    console.log('Empty house name');
+    return;
+  }
+  if(!dragonmark) {
+    console.log('Empty dragonmark for house ' + name);
+    return;
+  }
+
+  if(rules.houseStats == null) {
+    rules.houseStats = {
+      dragonmark:{},
+      spells1:{},
+      spells2:{},
+      spells3:{},
+      spells4:{}
+    };
+  }
+  rules.houseStats.dragonmark[name] = dragonmark;
+  rules.houseStats.spells1[name] = '';
+  rules.houseStats.spells2[name] = '';
+  rules.houseStats.spells3[name] = '';
+  rules.houseStats.spells4[name] = '';
+
+  var houseLevel = name + 'Level';
+
+  rules.defineRule(houseLevel,
     'house', '?', 'source == "' + name + '"',
     'level', '=', null
   );
-  rules.defineRule('dragonmark', name + 'Level', '=', '"' + dragonmark + '"');
-  // TODO
+  rules.defineRule('dragonmark',
+    'house', '=', QuilvynUtils.dictLit(rules.houseStats.dragonmark) + '[source]'
+  );
+  SRD35.featureListRules(rules, features, name, houseLevel, false);
+
+  for(var i = 0; i < spells.length; i++) {
+    var pieces = spells[i].split(':');
+    if(pieces.length < 2) {
+      console.log('Bad format for spell list "' + spells[i] + '"');
+      break;
+    }
+    var level = pieces[0];
+    var spellName = pieces[1];
+    if(spellDict[spellName] == null) {
+      console.log('Unknown spell "' + spellName + '"');
+      continue;
+    }
+    if(!level.match(/^[1234]$/)) {
+      console.log('Bad level "' + level + '" for spell ' + spellName);
+      continue;
+    }
+    var school = QuilvynUtils.getAttrValue(spellDict[spellName], 'School');
+    if(school == null) {
+      console.log('No school given for spell ' + spellName);
+      continue;
+    }
+    var fullSpell =
+      spellName + '(Dragonmark' + level + ' ' + school.substring(0, 4) + ')';
+    var spellChoice =
+      '<i>' + spellName + '</i> ' + (pieces.length < 3 ? '1' : pieces[2]) + '/dy';
+    rules.choiceRules
+      (rules, 'Spell', fullSpell,
+       spellDict[spellName] + ' Group=Dragonmark Level=' + level);
+    if(rules.houseStats['spells' + level][name] != '')
+      rules.houseStats['spells' + level][name] += ', ';
+    rules.houseStats['spells' + level][name] += spellChoice;
+  }
+
+  rules.defineRule('magicNotes.leastDragonmark',
+    'house', '=', QuilvynUtils.dictLit(rules.houseStats.spells1) + '[source]'
+  );
+  rules.defineRule('magicNotes.lesserDragonmark',
+    'house', '=', QuilvynUtils.dictLit(rules.houseStats.spells2) + '[source]'
+  );
+  rules.defineRule('magicNotes.greaterDragonmark',
+    'house', '=', QuilvynUtils.dictLit(rules.houseStats.spells3) + '[source]'
+  );
+  rules.defineRule('magicNotes.heirOfSiberys',
+    'levels.Heir Of Siberys', '?', null,
+    'house', '=', QuilvynUtils.dictLit(rules.houseStats.spells4) + '[source]'
+  );
+
 };
 
 /* Defines in #rules# the rules associated with language #name#. */
@@ -1685,6 +1729,8 @@ Eberron.raceRulesExtra = function(rules, name) {
     rules.defineRule('magicNotes.arcaneSpellFailure',
       'combatNotes.compositePlating', '+=', '5'
     );
+  } else if(Eberron.baseRules.raceRulesExtra) {
+    Eberron.baseRules.raceRulesExtra(rules, name);
   }
 
 };
@@ -1779,3 +1825,32 @@ Eberron.ruleNotes = function() {
     'None, currently\n' +
     '</p>\n';
 }
+
+/* Returns an ObjectViewer loaded with the default character sheet format. */
+Eberron.createViewers = function(rules, viewers) {
+  Eberron.baseRules.createViewers(rules, viewers);
+  // No changes needed to the return value of the base method
+};
+
+/*
+ * Returns the list of editing elements needed by #choiceRules# to add a #type#
+ * item to #rules#.
+ */
+Eberron.choiceEditorElements = function(rules, type) {
+  var result = [];
+  if(type == 'House')
+    result.push(
+      ['Dragonmark', 'Dragonmark', 'text', [20]],
+      ['Features', 'Features', 'text', [40]]
+      ['Spells', 'Spells', 'text', [80]]
+    );
+  else
+    return Eberron.baseRules.choiceEditorElements(rules, type);
+  return result
+};
+
+/* Sets #attributes#'s #attribute# attribute to a random value. */
+Eberron.randomizeOneAttribute = function(attributes, attribute) {
+  Eberron.baseRules.randomizeOneAttribute.apply(this, [attributes, attribute]);
+  // No changes needed to the return value of the base method
+};
