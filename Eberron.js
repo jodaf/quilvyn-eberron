@@ -262,8 +262,7 @@ Eberron.DOMAINS = Object.assign({}, SRD35.DOMAINS, Eberron.DOMAINS_ADDED);
 Eberron.FAMILIARS = Object.assign({}, SRD35.FAMILIARS);
 Eberron.FEATS_ADDED = {
   'Aberrant Dragonmark':
-    'Type=General Require="race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Orc|Human\'"',
-    // TODO Require !feats.(Greater|Least|Lesser) Dragonmark
+    'Type=General Require="feats.Least Dragonmark == 0","race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Orc|Human\'"',
   'Action Boost':'Type=General',
   'Action Surge':'Type=General Require="baseAttack >= 3"',
   'Adamantine Body':'Type=Warforged Require="race == \'Warforged\'"',
@@ -271,8 +270,8 @@ Eberron.FEATS_ADDED = {
   'Attune Magic Weapon':
     'Type="Item Creation" Require="casterLevel >= 5","features.Craft Magic Arms And Armor"',
   'Beast Shape':
-    // TODO requires wild shape into huge creature
-    'Type=General Require="Max \'^features.Beast Totem\' > 0","features.Wild Shape"',
+    'Type=General Require="Max \'^features.Beast Totem\' > 0",' +
+    '"levels.Druid >= 15"', // i.e., Wild Shape to huge creature
   'Beast Totem (Chimera)':'Type=General Require="features.Wild Empathy"',
   'Beast Totem (Digester)':'Type=General Require="features.Wild Empathy"',
   'Beast Totem (Displacer Beast)':
@@ -317,16 +316,16 @@ Eberron.FEATS_ADDED = {
   'Ecclesiarch':
     'Type=General Require="skills.Knowledge (Religion) >= 6" Imply=features.Leadership',
   'Education':'Type=General',
-    // TODO Requires Item Creation
-  'Exceptional Artisan':'Type="Item Creation"',
+  'Exceptional Artisan':
+    'Type="Item Creation" Require="SumItemCreationFeats >= 2"',
   'Extend Rage':'Type=General Require=features.Rage',
   'Extra Music':'Type=General Require="features.Bardic Music"',
   'Extra Rings':
     'Type="Item Creation" Require="casterLevel >= 12","feaures.Forge Ring"',
-    // TODO Requires 2 Shifter
-  'Extra Shifter Trait':'Type=Shifter Require="race == \'Shifter\'"',
-    // TODO Requires Item Creation
-  'Extraordinary Artisan':'Type="Item Creation"',
+  'Extra Shifter Trait':
+    'Type=Shifter Require="race == \'Shifter\'","SumShifterFeats >= 3"',
+  'Extraordinary Artisan':
+    'Type="Item Creation" Require="SumItemCreationFeats >= 2"',
   'Favored In House':
     'Type=General Require="house != \'None\'","race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Orc|Human\'"',
   'Flensing Strike':
@@ -335,14 +334,11 @@ Eberron.FEATS_ADDED = {
     'Type=General Require="features.Spontaneous Druid Spell"',
   'Great Bite':'Type=Shifter Require="baseAttack >= 6",features.Longtooth',
   'Great Rend':'Type=Shifter Require="baseAttack >= 4",features.Razorclaw',
-    // TODO Require any 2 skills >= 12
   'Greater Dragonmark':
-    'Type=General Require="features.Least Dragonmark","features.Lesser Dragonmark","house != \'None\'","race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Orc|Human\'"',
-    // TODO Require !Small
-  'Greater Powerful Charge':'Type=General Require="baseAttack >= 4","features.Powerful Charge"',
-    // TODO Require 4 Shifter
+    'Type=General Require="features.Least Dragonmark","features.Lesser Dragonmark","house != \'None\'","race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Orc|Human\'","CountSkillsGe12 >= 2"',
+  'Greater Powerful Charge':'Type=General Require="baseAttack >= 4","features.Powerful Charge","features.Small == 0"',
   'Greater Shifter Defense':
-    'Type=Shifter Require="feaures.Shifter Defense","race == \'Shifter\'"',
+    'Type=Shifter Require="feaures.Shifter Defense","race == \'Shifter\'","SumShifterFeats >= 5"',
   'Greensinger Initiate':
     'Type=General Require="features.Spontaneous Druid Spell"',
   'Haunting Melody':
@@ -358,11 +354,10 @@ Eberron.FEATS_ADDED = {
   'Knight Training (Cleric)':'Type=General Imply="levels.Paladin > 0"',
   'Least Dragonmark':
     'Type=General Require="house != \'None\'","race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Orc|Human\'"',
-    // TODO Require Any Item Creation
-  'Legendary Artisan':'Type="Item Creation"',
-    // TODO Require 2 skills >= 9
+  'Legendary Artisan':
+    'Type="Item Creation" Require="SumItemCreationFeats >= 2"',
   'Lesser Dragonmark':
-    'Type=General Require="house != \'None\'","race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Orc|Human\'","features.Least Dragonmark"',
+    'Type=General Require="house != \'None\'","race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Orc|Human\'","features.Least Dragonmark","CountSkillsGe9 >= 2"',
   'Longstride Elite':'Type=Shifter Require=features.Longstride',
   'Mithral Body':'Type=Warforged Require="race == \'Warforged\'"',
   'Mithral Fluidity':
@@ -372,8 +367,8 @@ Eberron.FEATS_ADDED = {
     'Type=General Require="features.Bardic Music","Sum \'^skills.Perform\' >= 12"',
   'Music Of Making':
     'Type=General Require="features.Bardic Music","Sum \'^skills.Perform\' >= 9"',
-    // TODO Require Size > S
-  'Powerful Charge':'Type=General Require="baseAttack >= 1"',
+  'Powerful Charge':
+    'Type=General Require="baseAttack >= 1","features.Small == 0"',
   'Precise Swing':'Type=General Require="baseAttack >= 5"',
   'Pursue':'Type=General Require="features.Combat Reflexes"',
   'Raging Luck':'Type=General Require=features.Rage',
@@ -382,8 +377,8 @@ Eberron.FEATS_ADDED = {
   'Research':'Type=General',
   'Right Of Counsel':'Type=General Require="race == \'Elf\'"',
   'Serpent Strike':'Type=General Require="Weapon Focus (Longspear)","features.Flurry Of Blows","weaponProficiencyLevel >= 1" Imply="weapons.Longspear"',
-    // TODO Require any 2 Shifter
-  'Shifter Defense':'Type=Shifter Require="race == \'Shifter\'"',
+  'Shifter Defense':
+    'Type=Shifter Require="race == \'Shifter\'","SumShifterFeats >= 3"',
   'Shifter Ferocity':
     'Type=Shifter Require="wisdom >= 13","race == \'Shifter\'"',
   'Shifter Multiattack':'Type=Shifter Require="baseAttack >= 6","features.Longtooth||features.Razorclaw"',
@@ -1103,6 +1098,18 @@ Eberron.magicRules = function(rules, schools, spells) {
 Eberron.talentRules = function(rules, feats, features, languages, skills) {
   Eberron.baseRules.talentRules(rules, feats, features, languages, skills);
   // No changes needed to the rules defined by base method
+  for(var feat in feats) {
+    if(feats[feat].indexOf('Item Creation') >= 0)
+      rules.defineRule('SumItemCreationFeats', 'feats.' + feat, '+=', null);
+    if(feats[feat].indexOf('Shifter') >= 0)
+      rules.defineRule('SumShifterFeats', 'feats.' + feat, '+=', null);
+  }
+  for(var skill in skills) {
+    rules.defineRule
+      ('CountSkillsGe9', 'skills.' + skill, '+=', 'source >= 9 ? 1 : null');
+    rules.defineRule
+      ('CountSkillsGe12', 'skills.' + skill, '+=', 'source >= 12 ? 1 : null');
+  }
 };
 
 /*
@@ -1460,6 +1467,11 @@ Eberron.familiarRules = function(
  * lists the categories of the feat.
  */
 Eberron.featRules = function(rules, name, requires, implies, types) {
+  if(name == 'Beast Shape' && Eberron.baseRules == Pathfinder) {
+    // PF allows Wild Shape to Huge at level 8 instead of 15
+    for(var i = 0; i < requires.length; i++)
+      requires[i] = requires[i].replace(/Druid\s*>=\s*15/, 'Druid >= 8');
+  }
   Eberron.baseRules.featRules(rules, name, requires, implies, types);
   // No changes needed to the rules defined by SRD35 method
 };
