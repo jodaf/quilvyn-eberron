@@ -278,7 +278,7 @@ Eberron.FEATS_ADDED = {
   'Beast Totem (Displacer Beast)':
     'Type=General Require="features.Wild Empathy"',
   'Beast Totem (Gorgon)':'Type=General Require="features.Wild Empathy"',
-  'Beast Totem (krenshar)':'Type=General Require="features.Wild Empathy"',
+  'Beast Totem (Krenshar)':'Type=General Require="features.Wild Empathy"',
   'Beast Totem (Unicorn)':'Type=General Require="features.Wild Empathy"',
   'Beast Totem (Winter Wolf)':'Type=General Require="features.Wild Empathy"',
   'Beast Totem (Yrthak)':'Type=General Require="features.Wild Empathy"',
@@ -355,7 +355,7 @@ Eberron.FEATS_ADDED = {
     'Type=Warforged Require="baseAttack >= 6","race == \'Warforged\'"',
   'Improved Natural Attack':'Type=General Require="baseAttack >= 4"',
   'Investigate':'Type=General',
-  'Knight Training (Cleric)':'Type=General',
+  'Knight Training (Cleric)':'Type=General Imply="levels.Paladin > 0"',
   'Least Dragonmark':
     'Type=General Require="house != \'None\'","race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Orc|Human\'"',
     // TODO Require Any Item Creation
@@ -377,7 +377,7 @@ Eberron.FEATS_ADDED = {
   'Precise Swing':'Type=General Require="baseAttack >= 5"',
   'Pursue':'Type=General Require="features.Combat Reflexes"',
   'Raging Luck':'Type=General Require=features.Rage',
-  'Recognize Impostor':'Type=General Require="skills.Sense Motive >=3","skills.Spot >= 3"',
+  'Recognize Imposter':'Type=General Require="skills.Sense Motive >=3","skills.Spot >= 3"',
   'Repel Aberration':'Type=General Require="features.Gatekeeper Initiate","levels.Druid >= 3"',
   'Research':'Type=General',
   'Right Of Counsel':'Type=General Require="race == \'Elf\'"',
@@ -475,7 +475,7 @@ Eberron.FEATURES_ADDED = {
   'Beast Totem (Digester)':'Section=save Note="+4 vs. acid"',
   'Beast Totem (Displacer Beast)':'Section=save Note="+4 vs. targeted spells"',
   'Beast Totem (Gorgon)':'Section=save Note="+4 vs. petrification"',
-  'Beast Totem (krenshar)':'Section=save Note="+4 vs. fear"',
+  'Beast Totem (Krenshar)':'Section=save Note="+4 vs. fear"',
   'Beast Totem (Unicorn)':'Section=save Note="+4 vs. poison"',
   'Beast Totem (Winter Wolf)':'Section=save Note="+4 vs. cold"',
   'Beast Totem (Yrthak)':'Section=save Note="+4 vs. sonic"',
@@ -541,7 +541,7 @@ Eberron.FEATURES_ADDED = {
     'Section=combat Note="Natural attack damage increases one size catagory"',
   'Investigate':
     'Section=skill Note="Use Search to find and analyze clues, synergy with appropriate Knowledge"',
-  'Knight Trainging (Cleric)':
+  'Knight Training (Cleric)':
     'Section=ability Note="No restrictions on Paladin/Cleric advancement"',
   'Least Dragonmark':'Section=magic Note="Choice of %V"',
   'Legendary Artisan':
@@ -568,7 +568,7 @@ Eberron.FEATURES_ADDED = {
     'Section=skill Note="+4 Sense Motive vs. Bluff and Spot vs. Disguise"',
   'Repel Aberration':
     'Section=combat Note="Repel aberrations as cleric turns undead"',
-  'Research':'Section=skill Note=Use Knowledge skill on library and records"',
+  'Research':'Section=skill Note="Use Knowledge skill on library and records"',
   'Right Of Counsel':
     'Section=feature Note="Seek advice from deathless ancestor"',
   'Scribe':'Section=skill Note="+2 Decipher Script"',
@@ -584,7 +584,7 @@ Eberron.FEATURES_ADDED = {
   'Song Of The Heart':'Section=magic Note="+1 Bardic Music effects"',
   'Soothe The Beast':'Section=skill Note="Perform to change animal reaction"',
   'Spontaneous Casting':
-    'Section=magic Note=Spend 2 AP to substitute any known spell for a prepared one"',
+    'Section=magic Note="Spend 2 AP to substitute any known spell for a prepared one"',
   'Storm Walker':'Section=skill Note="+2 Balance"',
   'Strong Mind':'Section=save Note="+3 vs. psionics"',
   'Totem Companion':
@@ -1425,15 +1425,15 @@ Eberron.domainRules = function(rules, name, features, spells, spellDict) {
  */
 Eberron.domainRulesExtra = function(rules, name) {
   if(name == 'Decay') {
-    rules.defineRule('combatNotes.decayDomain', 'levels.Cleric', '=', null);
+    rules.defineRule('magicNotes.touchOfDecay', 'levels.Cleric', '=', null);
   } else if(name == 'Life') {
-    rules.defineRule('magicNotes.lifeDomain', 'levels.Cleric', '=', null);
-    rules.defineRule('magicNotes.lifeDomain.1', 'levels.Cleric', '=', null);
+    rules.defineRule('magicNotes.addLife', 'levels.Cleric', '=', null);
+    rules.defineRule('magicNotes.addLife.1', 'levels.Cleric', '=', null);
   } else if(name == 'Madness') {
     rules.defineRule
-      ('featureNotes.madnessDomain', 'levels.Cleric', '=', null);
+      ('featureNotes.flashOfUnderstanding', 'levels.Cleric', '=', null);
   } else if(name == 'Passion') {
-    rules.defineRule('combatNotes.passionDomain', 'levels.Cleric', '=', null);
+    rules.defineRule('combatNotes.fitOfPassion', 'levels.Cleric', '=', null);
   } else if(Eberron.baseRules.domainRulesExtra) {
     Eberron.baseRules.domainRulesExtra(rules, name);
   }
@@ -1524,7 +1524,7 @@ Eberron.featRulesExtra = function(rules, name) {
       /^skillModifier.Perform/, '+=', null
     );
   } else if(name == 'Healing Factor') {
-    rules.defineRule('featureNotes.healingFactor', 'level', '=', null);
+    rules.defineRule('combatNotes.healingFactor', 'level', '=', null);
   } else if(name == 'Mithral Body') {
     rules.defineRule('combatNotes.dexterityArmorClassAdjustment',
       'mithralBodyDexACCap', 'v', null
@@ -1602,6 +1602,8 @@ Eberron.houseRules = function(
     console.log('Empty house name');
     return;
   }
+  if(name == 'None')
+    return;
   if(!dragonmark) {
     console.log('Empty dragonmark for house ' + name);
     return;
@@ -1716,9 +1718,8 @@ Eberron.raceRulesExtra = function(rules, name) {
       'level', '=', 'Math.floor(source / 4)',
       'strengthModifier', '+', null
     );
-    rules.defineRule('featureNotes.shifting',
-      'constitutionModifier', '=', '3 + source'
-    );
+    rules.defineRule
+      ('featureNotes.shifting', 'constitutionModifier', '=', '3 + source');
     rules.defineRule('featureNotes.shifting.1', '', '=', '1');
     rules.defineRule('selectableFeatureCount.Shifter',
       'race', '=', 'source == "Shifter" ? 1 : null'
