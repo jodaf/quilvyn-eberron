@@ -1064,8 +1064,7 @@ Eberron.identityRules = function(
   rules.defineRule('casterLevels.Dragonmark',
     'features.Least Dragonmark', '=', '1',
     'features.Lesser Dragonmark', '^=', '6',
-    'features.Greater Dragonmark', '^=', '10',
-    'levels.Heir Of Siberys', '^=', 'source >= 2 ? 15 : null' // TODO move to EberronPrestige
+    'features.Greater Dragonmark', '^=', '10'
   );
   rules.defineRule('spellDifficultyClass.Dragonmark',
     'casterLevels.Dragonmark', '?', null,
@@ -1077,8 +1076,6 @@ Eberron.identityRules = function(
     ('spellsPerDay.Dragonmark2', 'features.Lesser Dragonmark', '=', '1');
   rules.defineRule
     ('spellsPerDay.Dragonmark3', 'features.Greater Dragonmark', '=', '1');
-  rules.defineRule
-    ('spellsPerDay.Dragonmark4', 'levels.Heir Of Siberys', '=', 'source >= 2 ? 1 : null'); // TODO move
   rules.defineSheetElement('Heroics', 'Description');
   rules.defineSheetElement('House', 'Heroics/');
   rules.defineSheetElement('Dragonmark', 'Heroics/');

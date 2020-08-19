@@ -47,15 +47,7 @@ EberronPrestige.CLASSES = {
     'Features=' +
       '"1:House Status","1:Lesser Dragonmark","2:Action Point Bonus",' +
       '"2:Improved Least Dragonmark","3:Improved Lesser Dragonmark",' +
-      '"4:Greater Dragonmark","5:Improved Greater Dragonmark" ' +
-    'CasterLevelArcane="levels.Ancestral Bladebearer" ' +
-    'SpellAbility=charisma ' +
-    'SpellsPerDay=' +
-      'AB1:3=1;7=2,' +
-      'AB2:5=1;9=2 ' +
-    'Spells=' +
-      '"AB1:Alarm;Detect Secret Doors",' +
-      '"AB2:Augury;Protection From Arrows"',
+      '"4:Greater Dragonmark","5:Improved Greater Dragonmark"',
   'Eldeen Ranger':
     'Require=' +
       '"baseAttack >= 5","features.Track","features.Favored Enemy",' +
@@ -69,23 +61,29 @@ EberronPrestige.CLASSES = {
     'Features=' +
       '"1:Armor Proficiency (Light)","1:Shield Proficiency (Heavy)",' +
       '"1:Weapon Proficiency (Martial)",' +
-      '"1:Nature Sense","1:Resist Aberrations","1:Resist Nature\'s Lure",' +
-      '"1:Resist Poison","1:Resist The Arcane","2:Hated Foe",3:Darkvision,' +
-      '3:Ferocity,"3:Improved Critical","3:Resist Corruption",' +
-      '"3:Unearthly Grace","4:Favored Enemy","5:Damage Reduction",' +
-      '"5:Slippery Mind","5:Smite Evil","5:Spell Resistance",' +
-      '"5:Touch Of Contagion" ' +
+      '"features.Ashbound ? 1:Resist The Arcane",' +
+      '"features.Children Of Winter ? 1:Resist Poison",' +
+      '"features.Gatekeepers ? 1:Resist Aberrations",' +
+      '"features.Greensingers ? 1:Resist Nature\'s Lure",' +
+      '"features.Wardens Of The Wood ? 1:Nature Sense",' +
+      '"2:Hated Foe",' +
+      '"features.Ashbound ? 3:Ferocity",' +
+      '"features.Children Of Winter ? 3:Resist Corruption",' +
+      '"features.Gatekeepers ? 3:Darkvision",' +
+      '"features.Greensingers ? 3:Unearthly Grace",' +
+      '"features.Wardens Of The Wood ? 3:Improved Critical",' +
+      '"4:Favored Enemy",' +
+      '"features.Ashbound ? 5:Spell Resistance",' +
+      '"features.Children Of Winter ? 5:Touch Of Contagion",' +
+      '"features.Gatekeepers ? 5:Slippery Mind",' +
+      '"features.Greensingers ? 5:Damage Reduction",' +
+      '"features.Wardens Of The Wood ? 5:Smite Evil" ' +
     'Selectables=' +
-      '1:Ashbound,"1:Children Of Winter",1:Gatekeepers,1:Greensingers,' +
-      '"1:Wardens Of The Wood" ' +
-//      'validationNotes.eldeenRanger - ChildrenOfWinterSelectableFeatureAlignment:' +
-//        'Requires Alignment !~ Good',
-//      'validationNotes.eldeenRanger - GatekeepersSelectableFeatureAlignment:' +
-//        'Requires Alignment !~ Evil',
-//      'validationNotes.eldeenRanger - GreensingersSelectableFeatureAlignment:' +
-//        'Requires Alignment =~ Chaotic',
-//      'validationNotes.eldeenRanger - WardensOfTheWoodSelectableFeatureAlignment:' +
-//        'Requires Alignment !~ Evil'
+      '1:Ashbound,' +
+      '"alignment !~ \'Good\' ? 1:Children Of Winter",' +
+      '"alignment !~ \'Evil\' ? 1:Gatekeepers",' +
+      '"alignment =~ \'Chaotic\' ? 1:Greensingers",' +
+      '"alignment !~ \'Evil\' ? 1:Wardens Of The Wood"',
   'Exorcist Of The Silver Flame':
     'Require=' +
       '"baseAttack >= 3","casterLevelDivine >= 1",' +
@@ -101,12 +99,12 @@ EberronPrestige.CLASSES = {
       '"2:Caster Level Bonus",3:Darkvision,"3:Resist Charm",' +
       '"3:Resist Possession","3:Resist Unnatural","3:Smite Evil",' +
       '"4:Detect Thoughts","5:Silver Exorcism","6:Weapon Of Flame",' +
-      '"10:Warding Flame" ' +
+      '"10:Warding Flame"',
   'Extreme Explorer':
     'Require=' +
-      '"baseAttack >= 4","features.Action Boost","skills.Survival >= 4",' +
-      '"skills.Knowledge (Dungeoneering) >= 4" ' +
-    'HitDie=d8 Attack=3/4 SkillPoints=2 Fortitude=1/3 Reflex=1/2 Will=1/3 ' +
+      '"baseAttack >= 4","features.Action Boost",' +
+      '"skills.Knowledge (Dungeoneering) >= 4","skills.Survival >= 4"' +
+    'HitDie=d8 Attack=3/4 SkillPoints=6 Fortitude=1/3 Reflex=1/2 Will=1/3 ' +
     'Skills=' +
       'Balance,Climb,"Decipher Script","Disable Device","Escape Artist",' +
       'Jump,"Knowledge (Arcana)","Knowledge (Dungeoneering)",' +
@@ -114,31 +112,42 @@ EberronPrestige.CLASSES = {
       'Survival,Swim,Tumble,"Use Magic Device","Use Rope" ' +
     'Features=' +
       '"1:Action Point Bonus","1:Trap Sense","2:Dodge Bonus",2:Evasion,' +
-      '"2:Extreme Hustle","4:Extreme Action" ' +
+      '"2:Extreme Hustle","4:Extreme Action"',
   'Heir Of Siberys':
     'Require=' +
-      '"features.Heroic Spirit","features.Least Dragonmark == 0",' +
-      '"race =~ \'race =~ Dwarf|Elf|Gnome|Halfling|Half Orc|Human\'",' +
-      '"CountSkillsGe15 >= 2" ' +
+      '"features.Aberrant Dragonmark == 0","features.Heroic Spirit",' +
+      '"features.Least Dragonmark == 0",' +
+      '"race =~ \'Dwarf|Elf|Gnome|Halfling|Half Orc|Human\'",' +
+      '"CountSkillGe15 >= 2" ' +
     'HitDie=d6 Attack=1 SkillPoints=2 Fortitude=1/2 Reflex=1/2 Will=1/2 ' +
-    'Skills= ' +
     'Features=' +
-      '"1:Action Point Bonus","2:Siberys Mark","2:Caster Level Bonus" ' +
+      '"1:Action Point Bonus","2:Siberys Mark",' +
+      '"casterLevel ? 2:Caster Level Bonus",' +
+      '"casterLevel == 0 ? 2:Feat Bonus"',
   'Master Inquisitive':
     'Require=' +
-      '"features.Investigative","skills.Gather Information >= 6",' +
+      '"features.Investigate","skills.Gather Information >= 6",' +
       '"skills.Search >= 3","skills.Sense Motive >= 6" ' +
     'HitDie=d8 Attack=3/4 SkillPoints=6 Fortitude=1/3 Reflex=1/2 Will=1/3 ' +
     'Skills=' +
       'Bluff,"Decipher Script","Gather Information","Knowledge (Local)",' +
       'Listen,Search,"Sense Motive",Spot ' +
     'Features=' +
-      '"1:Zone Of Truth",2:Contact,"3:Discern Lies","4:Improved Contact",' +
-      '"5:True Seeing" ' +
+      '"1:Inquisitive Spells",2:Contact,"4:Improved Contact" ' +
+    'CasterLevelDivine="levels.Master Inquisitive" ' +
+    'SpellAbility=intelligence ' +
+    'SpellsPerDay=' +
+      'MI2:1=1,' +
+      'MI4:3=1,' +
+      'MI5:5=1 ' +
+    'Spells=' +
+      '"MI2:Zone Of Truth",' +
+      '"MI4:Discern Lies",' +
+      '"MI5:True Seeing"',
   'Warforged Juggernaut':
     'Require=' +
      '"baseAttack >= 5","features.Adamantine Body",' +
-     '"features.Improved Bush Rush","features.Power Attack",' +
+     '"features.Improved Bull Rush","features.Power Attack",' +
      '"race == \'Warforged\'" ' +
     'HitDie=d12 Attack=3/4 SkillPoints=2 Fortitude=1/2 Reflex=1/3 Will=1/3 ' +
     'Skills=' +
@@ -147,131 +156,116 @@ EberronPrestige.CLASSES = {
       '"1:Armor Spikes","1:Expert Bull Rush","1:Powerful Charge",1:Reserved,' +
       '"2:Charge Bonus","2:Construct Perfection","2:Extended Charge",' +
       '"3:Healing Immunity","3:Mental Immunity","3:Superior Bull Rush",' +
-      '"4:Death Immunity","5:Ability Immunity","5:Greater Powerful Charge" ' +
+      '"4:Death Immunity","5:Ability Immunity","5:Greater Powerful Charge"',
   'Weretouched Master':
-    '"baseAttack >= 4","CountShifterFeats >= 1","race == \'Shifter\'",' +
-    '"skills.Knowledge (Nature) >= 5","skills.Survival >= 8" ' +
+    'Require=' +
+      '"baseAttack >= 4","CountShifterFeats >= 1","race == \'Shifter\'",' +
+      '"skills.Knowledge (Nature) >= 5","skills.Survival >= 8" ' +
     'HitDie=d8 Attack=3/4 SkillPoints=2 Fortitude=1/2 Reflex=1/2 Will=1/3 ' +
     'Skills=' +
       'Balance,Climb,"Handle Animal",Hide,Intimidate,Jump,' +
       '"Knowledge (Nature)",Listen,"Move Silently",Spot,Survival,Swim ' +
     'Features=' +
-      '"1:Weretouched Claws","1:Weretouched Fangs","1:Weretouched Tusks",' +
-      '"2:Wild Empathy","3:Climb Speed","3:Fierce Will","3:Improved Grab",' +
-      '3:Pounce,"3:Weretouched Rage",3:Trip,"4:Frightful Shifting",' +
-      '"5:Alternate Form" ' +
+      '"features.Bear || features.Tiger ? 1:Weretouched Claws",' +
+      '"features.Boar || features.Wolverine ? 1:Weretouched Tusks",' +
+      '"features.Rat || features.Wolf ? 1:Weretouched Fangs",' +
+      '"2:Wild Empathy",' +
+      '"features.Bear ? 3:Improved Grab",' +
+      '"features.Boar ? 3:Fierce Will",' +
+      '"features.Rat ? 3:Climb Speed",' +
+      '"features.Tiger ? 3:Pounce",' +
+      '"features.Wolf ? 3:Trip,"' +
+      '"features.Wolverine ? 3:Weretouched Rage",' +
+      '"4:Frightful Shifting",' +
+      '"features.Bear ? 5:Alternate Bear Form",' +
+      '"features.Boar ? 5:Alternate Boar Form",' +
+      '"features.Rat ? 5:Alternate Rat Form",' +
+      '"features.Tiger ? 5:Alternate Tiger Form",' +
+      '"features.Wolf ? 5:Alternate Wolf Form",' +
+      '"features.Wolverine ? 5:Alternate Wolverine Form" ' +
     'Selectables=' +
-      '1:Bear,1:Boar,1:Rat,1:Tiger,1:Wolf,1:Wolverine ' +
+      '1:Bear,1:Boar,1:Rat,1:Tiger,1:Wolf,1:Wolverine'
 };
 EberronPrestige.FEATURES = {
+  'Ability Immunity':'Section=save Note="Immune to ability damage and drain"',
   'Action Point Bonus':'Section=ability Note="+2 AP"',
-      'magicNotes.improvedGreaterDragonmarkFeature:' +
-        '2nd Greater Dragonmark spell or +1/day',
-      'magicNotes.improvedLeastDragonmarkFeature:' +
-        '2nd Least Dragonmark spell or +1/day',
-      'magicNotes.improvedLesserDragonmarkFeature:' +
-        '2nd Lesser Dragonmark spell or +1/day',
-      'skillNotes.houseStatusFeature:' +
-        '+%V charisma-based skills w/house members',
-      'combatNotes.favoredEnemyFeature:' +
-        '+2 or more damage vs. %V type(s) of creatures',
-      'combatNotes.hatedFoeFeature:' +
-        'Spend 1 AP for double damage against favored enemy',
-      'combatNotes.ironDamageReductionFeature:DR 3/cold iron',
-      'combatNotes.ferocityFeature:Continue fighting below 0 HP',
-      'combatNotes.smiteEvilFeature:' +
-        '+%V attack/+%1 damage vs. evil foe %2/day',
-      "featureNotes.darkvisionFeature:%V' b/w vision in darkness",
-      'magicNotes.touchOfContagionFeature:<i>Contagion</i> 3/day',
-      'saveNotes.resistAberrationsFeature:+2 vs. aberration abilities',
-      'saveNotes.resistCorruptionFeature:Immune disease/+2 vs. mind-altering',
-      "saveNotes.resistNature'sLureFeature:+4 vs. spells of feys",
-      'saveNotes.resistTheArcaneFeature:+2 vs. arcane spells',
-      'saveNotes.resistPoisonFeature:+2 vs. poison',
-      'saveNotes.slipperyMindFeature:Second save vs. enchantment',
-      'saveNotes.spellResistanceFeature:DC 20 spell resistance',
-      'saveNotes.unearthlyGraceFeature:+%V all saves',
-      'skillNotes.favoredEnemyFeature:' +
-        '+2 or more Bluff, Listen, Sense Motive, Spot, Survival ' +
-        'vs. %V type(s) of creatures',
-      'skillNotes.natureSenseFeature:+2 Knowledge (Nature)/Survival',
-      'combatNotes.flameOfCensureFeature:' +
-        'Stun/banish Outsiders w/turning check',
-      'combatNotes.silverExorcismFeature:+2 exorcism checks',
-      'combatNotes.smiteEvilFeature:' +
-        '+%V attack/+%1 damage vs. evil foe %2/day',
-      'combatNotes.wardingFlameFeature:' +
-        'Warding glow for +2 AC/striking evil foes DC %V Fortitude save ' +
-        'or blinded',
-      'combatNotes.weaponOfFlameFeature:+%Vd6 flame damage w/sacred weapon',
-      'combatNotes.weaponOfTheExorcistFeature:' +
-        '+1 damage w/sacred weapon treated as %V',
-      "featureNotes.darkvisionFeature:%V' b/w vision in darkness",
-      'magicNotes.casterLevelBonusFeature:' +
-        '+%V base class level for spells known/per day',
-      'magicNotes.detectThoughtsFeature:<i>Detect Thoughts</i> at will',
-      'magicNotes.silverExorcismFeature:+2 vs. evil outsiders resistance',
-      'magicNotes.wardingFlameFeature:Warding glow for spell resistance 25',
-      'saveNotes.resistCharmFeature:+2 vs. charm effects',
-      'saveNotes.resistPossessionFeature:+%V vs. possession',
-      'saveNotes.resistUnnaturalFeature:+2 vs. effects of outsiders/undead',
-      'turnOutsider.damageModifier:2d6+%V',
-      'turnOutsider.frequency:%V/day',
-      'turnOutsider.maxHitDice:(d20+%V)/3',
-      'abilityNotes.actionPointBonusFeature:+2 AP',
-      'combatNotes.dodgeBonusFeature:+%V AC when unencumbered',
-      'featureNotes.extremeActionFeature:' +
-        'Retain AP on successful AP roll of 8',
-      'featureNotes.extremeHustleFeature:Spend 1 AP to gain a move action',
-      'saveNotes.evasionFeature:Reflex save yields no damage instead of 1/2',
-      'saveNotes.trapSenseFeature:+%V Reflex and AC vs. traps',
-      'abilityNotes.actionPointBonusFeature:+2 AP',
-      'magicNotes.casterLevelBonusFeature:' +
-        '+%V base class level for spells known/per day',
-      'magicNotes.siberysMarkFeature:Choice of %V',
-      'featureNotes.contactFeature:3rd level associate/informant',
-      'featureNotes.improvedContactFeature:6th level associate/informant',
-      'magicNotes.discernLiesFeature:' +
-        '<i>Discern Lies</i> 1/day; spend 2 AP for 2nd',
-      'magicNotes.trueSeeingFeature:' +
-        '<i>True Seeing</i> 1/day; spend 2 AP for 2nd',
-      'magicNotes.zoneOfTruthFeature:' +
-        '<i>Zone Of Truth</i> 1/day; spend 2 AP for 2nd',
-      'abilityNotes.extendedChargeFeature:+5 speed when charging',
-      'combatNotes.armorSpikesFeature:Grapple attack for %V damage',
-      'combatNotes.chargeBonusFeature:+%V attack when charging',
-      'combatNotes.constructPerfectionFeature:' +
-        'Immune nonlethal damage/critical hits',
-      'combatNotes.expertBullRushFeature:+%V bull rush/door breakage',
-      'combatNotes.greaterPowerfulChargeFeature:' +
-        'Raise charge damage one size category to %V',
-      'combatNotes.superiorBullRushFeature:+%V+%1 damage from bull rush',
-      'combatNotes.powerfulChargeFeature:+%V damage from successful charge',
-      'saveNotes.abilityImmunityFeature:Immune to ability damage/drain',
-      'saveNotes.deathImmunityFeature:Immune to death/necromancy effects',
-      'saveNotes.healingImmunityFeature:No effect from healing spells',
-      'saveNotes.mentalImmunityFeature:Immune to mind-altering effects',
-      'skillNotes.reservedFeature:' +
-        '-%V Bluff/Diplomacy/Gather Information/Sense Motive',
-      'abilityNotes.alternateFormFeature:Shift to %V--%1--or bipedal hybrid',
-      'abilityNotes.climbSpeedFeature:' +
-        "20' climb speed (+10 for Cliffwalker) while shifting",
-      'abilityNotes.weretouchedClawsFeature:+2 strength while shifting',
-      'abilityNotes.weretouchedFangsFeature:+2 dexterity while shifting',
-      'abilityNotes.weretouchedTusksFeature:+2 constitution while shifting',
-      'combatNotes.frightfulShiftingFeature:' +
-         "Foes w/lt %V hit dice w/in 30' who see attack/charge shaken for " +
-         '5d6 rounds (DC %1 Will neg)',
-      'combatNotes.improvedGrabFeature:Grapple w/out AOO after claw hit',
-      'combatNotes.pounceFeature:Full attack when charging',
-      'combatNotes.tripFeature:Trip w/out AOO after bite hit',
-      'combatNotes.weretouchedClawsFeature:d4+%V claw attack (next size for Razorclaw) while shifting',
-      'combatNotes.weretouchedFangsFeature:d6+%V fang attack (next size for Longtooth) while shifting',
-      'combatNotes.weretouchedRageFeature:' +
-        '+2 strength/constitution/-2 AC for 1 round after taking damage',
-      'combatNotes.weretouchedTusksFeature:d6+%V tusk attack (next size for Longtooth) while shifting',
-      'saveNotes.fierceWillFeature:+4 Will while shifting',
-      'skillNotes.wildEmpathyFeature:+%V Diplomacy (animals)',
+  'Alternate Bear Form':'Section=ability Note="Shift to animal (+16 Str/+2 Dex/+8 Con) or bipedal hybrid"',
+  'Alternate Boar Form':'Section=ability Note="Shift to animal (+4 Str/+6 Con) or bipedal hybrid"',
+  'Alternate Rat Form':'Section=ability Note="Shift to animal (+6 Dex/+2 Con) or bipedal hybrid"',
+  'Alternate Tiger Form':'Section=ability Note="Shift to animal (+12 Str/+4 Dex/+6 Con) or bipedal hybrid"',
+  'Alternate Wolf Form':'Section=ability Note="Shift to animal (+2 Str/+4 Dex/+4 Con) or bipedal hybrid"',
+  'Alternate Wolverine Form':'Section=ability Note="Shift to animal (+4 Str/+4 Dex/+8 Con) or bipedal hybrid"',
+  'Armor Spikes':'Section=combat Note="Grapple attack for %V damage"',
+  'Caster Level Bonus':
+    'Section=magic Note="+%V base class level for spells known/per day"',
+  'Charge Bonus':'Section=combat Note="+%V attack when charging"',
+  'Climb Speed':
+    'Section=ability Note="20\' climb speed (+10 for Cliffwalker) while shifting\"',
+  'Construct Perfection':
+    'Section=combat Note="Immune nonlethal damage and critical hits"',
+  'Contact':'Section=feature Note="Level 3 associate or informant"',
+  'Death Immunity':'Section=save Note="Immune to death and necromancy effects"',
+  'Detect Thoughts':'Section=magic Note="<i>Detect Thoughts</i> at will"',
+  'Dodge Bonus':'Section=combat Note="+%V AC when unencumbered"',
+  'Expert Bull Rush':'Section=combat Note="+%V bull rush and door breakage"',
+  'Extended Charge':'Section=ability Note="+5 speed when charging"',
+  'Extreme Action':
+    'Section=ability Note="Retain AP on successful AP roll of 8"',
+  'Extreme Hustle':'Section=combat Note="Spend 1 AP to gain a move action"',
+  'Ferocity':'Section=combat Note="Continue fighting below 0 HP"',
+  'Fierce Will':'Section=save Note="+4 Will while shifting"',
+  'Flame Of Censure':
+    'Section=combat Note="Stun or banish Outsiders w/turning check"',
+  'Frightful Shifting':
+    'Section=combat Note="R30\' Foes lt %V hit dice shaken for 5d6 rounds (DC %1 Will neg)"',
+  'Hated Foe':
+    'Section=combat Note="Spend 1 AP for double damage against favored enemy"',
+  'Healing Immunity':'Section=save Note="No effect from healing spells"',
+  'House Status':
+    'Section=skill Note="+%V charisma-based skills w/house members"',
+  'Improved Contact':'Section=feature Note="Level 6 associate or informant"',
+  'Improved Grab':'Section=combat Note="Grapple w/out AOO after claw hit"',
+  'Improved Greater Dragonmark':
+    'Section=magic Note="2nd Greater Dragonmark spell or +1/day"',
+  'Improved Least Dragonmark':
+    'Section=magic Note="2nd Least Dragonmark spell or +1/day"',
+  'Improved Lesser Dragonmark':
+    'Section=magic Note="2nd Lesser Dragonmark spell or +1/day"',
+  'Improved Critical':'Section=feature Note="+1 Combat Feat"',
+  'Inqisitive Spells':'Section=magic Note="1/dy, spend 2 AP for 2nd"',
+  'Iron Damage Reduction':'Section=combat Note="DR 3/cold iron"',
+  'Metal Immunity':'Section=save Note="Immune to mind-altering effects"',
+  'Pounce':'Section=combat Note="Full attack when charging"',
+  'Reserved':
+    'Section=skill Note="-%V Bluff/-%V Diplomacy/-%V Gather Information/-%V Sense Motive"',
+  'Resist Aberrations':'Section=save Note="+2 vs. aberration abilities"',
+  'Resist Corruption':
+    'Section=save Note="Immune disease, +2 vs. mind-altering"',
+  'Resist Possession':'Section=save Note="+%V vs. possession"',
+  'Resist The Arcane':'Section=save Note="+2 vs. arcane spells"',
+  'Resist Unnatural':
+    'Section=save Note="+2 vs. effects of outsiders and undead"',
+  'Siberys Mark':'Section=magic Note="Choice of %V"',
+  'Silver Exorcism':'Section=combat Note="+2 exorcism checks"',
+  'Spell Resistance':'Section=save Note="DC 20 spell resistance"',
+  'Superior Bull Rush':'Section=combat Note="+%V+%1 damage from bull rush"',
+  'Touch Of Contagion':'Section=magic Note="<i>Contagion</i> 3/day"',
+  'Trip':'Section=combat Note="Trip w/out AOO after bite hit"',
+  'Unearthly Grace':'Section=save Note="+%V Fortitude/+%V Reflex/+%V Will"',
+  'Warding Flame':
+    'Section=combat Note="Warding glow for +2 AC, struck evil foe  blinded (DC %V Fort neg)"',
+  'Weapon Of The Exorcist':
+    'Section=combat Note="+1 damage w/sacred weapon treated as %V"',
+  'Weapon Of The Flame':
+    'Section=combat Note="+%Vd6 flame damage w/sacred weapon"',
+  'Weretouched Claws':
+    'Section=ability,combat Note="+2 Str while shifting","d4+%V claw attack (next size for Razorclaw) while shifting"',
+  'Weretouched Fangs':
+    'Section=ability,combat Note="+2 Dex while shifting","d6+%V fang attack (next size for Longtooth) while shifting"',
+  'Weretouched Rage':
+    'Section=combat Note="+2 Str, +2 Con, -2 AC for 1 rd after taking damage"',
+  'Weretouched Tusks':
+    'Section=ability,combat Note="+2 Con while shifting","d6+%V tusk attack (next size for Longtooth) while shifting"'
 };
 
 
@@ -298,259 +292,148 @@ EberronPrestige.classRulesExtra = function(rules, name) {
 
   if(name == 'Dragonmark Heir') {
 
+    var allSkills = rules.getChoices('skills');
+    for(var skill in allSkills) {
+      rules.defineRule
+        ('CountSkillGe7', 'skills.' + skill, '+=', 'source >= 7 ? 1 : null');
+    }
     rules.defineRule
-      ('actionPoints', 'abilityNotes.actionPointBonusFeature', '+', '2');
-    rules.defineRule('casterLevels.Greater Dragonmark',
-      'levels.Dragonmark Heir', '+', null
-    );
-    rules.defineRule('casterLevels.Least Dragonmark',
-      'levels.Dragonmark Heir', '+', null
-    );
-    rules.defineRule('casterLevels.Lesser Dragonmark',
-      'levels.Dragonmark Heir', '+', null
-    );
-    rules.defineRule
-      ('skillNotes.houseStatusFeature', 'levels.Dragonmark Heir', '=', null);
+      ('skillNotes.houseStatus', 'levels.Dragonmark Heir', '=', null);
 
   } else if(name == 'Eldeen Ranger') {
 
-    rules.defineRule('casterLevels.Eldeen Ranger',
-      'eldeenRangerFeatures.Touch Of Contagion', '?', null,
-      'levels.Eldeen Ranger', '=', 'source < 5 ? null : source'
+    rules.defineRule('combatNotes.favoredEnemy',
+      'levels.Eldeed Ranger', '+=', 'source >= 4 ? 1 : null'
     );
     rules.defineRule
-      ('casterLevels.Contagion', 'casterLevels.Eldeen Ranger', '^=', null);
-    // Set casterLevels.W to a minimal value so that spell DC will be
-    // calcuated even for non-Wizard Eldeen Rangers.
-    rules.defineRule
-      ('casterLevels.W', 'casterLevels.Eldeen Ranger', '^=', '1');
-    rules.defineRule('combatNotes.favoredEnemyFeature',
-      'levels.' + klass, '+=', 'source >= 4 ? 1 : null'
+      ('combatNotes.smiteEvil', 'levels.Eldeen Ranger', '+=', '1');
+    rules.defineRule('combatNotes.smiteEvil.1',
+      'features.Smite Evil', '?', null,
+      'charismaModifier', '=', null
     );
-    rules.defineRule
-      ('combatNotes.smiteEvilFeature', 'levels.Eldeen Ranger', '+=', '1');
-    rules.defineRule
-      ('combatNotes.smiteEvilFeature.1', 'charismaModifier', '=', null);
-    rules.defineRule
-      ('combatNotes.smiteEvilFeature.2', 'levels.Eldeen Ranger', '=', null);
-    rules.defineRule('eldeenRangerFeatures.Damage Reduction',
-      'eldeenRangerFeatures.Greensingers', '?', null
+    rules.defineRule('combatNotes.smiteEvil.2',
+      'features.Smite Evil', '?', null,
+      'levels.Eldeen Ranger', '=', null
     );
-    rules.defineRule('eldeenRangerFeatures.Darkvision',
-      'eldeenRangerFeatures.Gatekeepers', '?', null
-    );
-    rules.defineRule('eldeenRangerFeatures.Ferocity',
-      'eldeenRangerFeatures.Ashbound', '?', null
-    );
-    rules.defineRule('eldeenRangerFeatures.Improved Critical',
-      'eldeenRangerFeatures.Wardens Of The Wood', '?', null
-    );
-    rules.defineRule('eldeenRangerFeatures.Nature Sense',
-      'eldeenRangerFeatures.Wardens Of The Wood', '?', null
-    );
-    rules.defineRule('eldeenRangerFeatures.Resist Aberrations',
-      'eldeenRangerFeatures.Gatekeepers', '?', null
-    );
-    rules.defineRule('eldeenRangerFeatures.Resist Corruption',
-      'eldeenRangerFeatures.Children Of Winter', '?', null
-    );
-    rules.defineRule("eldeenRangerFeatures.Resist Nature's Lure",
-      'eldeenRangerFeatures.Greensingers', '?', null
-    );
-    rules.defineRule('eldeenRangerFeatures.Resist Poison',
-      'eldeenRangerFeatures.Children Of Winter', '?', null
-    );
-    rules.defineRule('eldeenRangerFeatures.Resist The Arcane',
-      'eldeenRangerFeatures.Ashbound', '?', null
-    );
-    rules.defineRule('eldeenRangerFeatures.Slippery Mind',
-      'eldeenRangerFeatures.Gatekeepers', '?', null
-    );
-    rules.defineRule('eldeenRangerFeatures.Smite Evil',
-      'eldeenRangerFeatures.Wardens Of The Wood', '?', null
-    );
-    rules.defineRule('eldeenRangerFeatures.Spell Resistance',
-      'eldeenRangerFeatures.Ashbound', '?', null
-    );
-    rules.defineRule('eldeenRangerFeatures.Touch Of Contagion',
-      'eldeenRangerFeatures.Children Of Winter', '?', null
-    );
-    rules.defineRule('eldeenRangerFeatures.Unearthly Grace',
-      'eldeenRangerFeatures.Greensingers', '?', null
-    );
-    rules.defineRule('featCount.Fighter',
-      'eldeenRangerFeatures.Improved Critical', '+=', '1'
-    );
-    rules.defineRule('featureNotes.darkvisionFeature',
-      'eldeenRangerFeatures.Darkvision', '+=', '60'
-    );
-    rules.defineRule
-      ('save.Fortitude', 'saveNotes.unearthlyGraceFeature', '+', null);
-    rules.defineRule
-      ('save.Reflex', 'saveNotes.unearthlyGraceFeature', '+', null);
-    rules.defineRule
-      ('save.Will', 'saveNotes.unearthlyGraceFeature', '+', null);
-    rules.defineRule
-      ('saveNotes.unearthlyGraceFeature', 'charismaModifier', '=', null);
+    rules.defineRule('saveNotes.unearthlyGrace', 'charismaModifier', '=', null);
     rules.defineRule('selectableFeatureCount.Eldeen Ranger',
       'levels.Eldeen Ranger', '=', '1'
     );
-    rules.defineRule('skillNotes.favoredEnemyFeature',
-      'levels.' + klass, '+=', 'source >= 4 ? 1 : null'
+    rules.defineRule('skillNotes.favoredEnemy',
+      'levels.' + name, '+=', 'source >= 4 ? 1 : null'
     );
 
   } else if(name == 'Exorcist Of The Silver Flame') {
 
-    rules.defineRule('combatNotes.smiteEvilFeature',
+    rules.defineRule('combatNotes.smiteEvil',
       'levels.Exorcist Of The Silver Flame', '+=',
       'source >= 7 ? 2 : source >= 3 ? 1 : null'
     );
-    rules.defineRule
-      ('combatNotes.smiteEvilFeature.1', 'charismaModifier', '=', null);
-    rules.defineRule('combatNotes.smiteEvilFeature.2',
+    rules.defineRule('combatNotes.smiteEvil.1',
+      'features.Smite Evil', '?', null,
+      'charismaModifier', '=', null
+    );
+    rules.defineRule('combatNotes.smiteEvil.2',
+      'features.Smite Evil', '?', null,
       'levels.Exorcist Of The Silver Flame', '=', 'source>=3 ? source : null'
     );
-    rules.defineRule('combatNotes.wardingFlameFeature',
+    rules.defineRule('combatNotes.wardingFlame',
       'charismaModifier', '=', '20 + source'
     );
-    rules.defineRule('combatNotes.weaponOfFlameFeature',
+    rules.defineRule('combatNotes.weaponOfFlame',
       'levels.Exorcist Of The Silver Flame', '=',
       'source >= 9 ? 2 : source >= 6 ? 1 : null'
     );
-    rules.defineRule('combatNotes.weaponOfTheExorcistFeature',
+    rules.defineRule('combatNotes.weaponOfTheExorcist',
       'levels.Exorcist Of The Silver Flame', '=',
       '["magic"]' +
       '.concat(source >= 2 ? ["silver"] : [])' +
       '.concat(source >= 4 ? ["good"] : [])' +
       '.concat(source >= 8 ? ["lawful"] : []).sort().join("/")'
     );
-    rules.defineRule('featureNotes.darkvisionFeature',
-      'levels.Exorcist Of The Silver Flame', '+=',
-      'source >= 6 ? 60 : source >= 3 ? 30 : null'
-    );
-    rules.defineRule('magicNotes.casterLevelBonusFeature',
+    rules.defineRule('magicNotes.casterLevelBonus',
       'levels.Exorcist Of The Silver Flame', '+=', 'Math.floor(source*2/3)'
     );
-    rules.defineRule('resistance.Possession',
-      'saveNotes.resistPossessionFeature', '+=', null
-    );
-    rules.defineRule('saveNotes.resistPossessionFeature',
+    rules.defineRule('saveNotes.resistPossession',
       'exorcistOfTheSilverFlameFeatures.Resist Possession', '+=', '4'
     );
-    rules.defineRule('turnOutsider.level',
-      'levels.Exorcist Of The Silver Flame', '=', null
-    );
-    rules.defineRule('turnOutsider.damageModifier',
-      'turnOutsider.level', '=', null,
-      'charismaModifier', '+', null
-    );
-    rules.defineRule('turnOutsider.frequency',
-      'turnOutsider.level', '=', '3',
-      'charismaModifier', '+', null
-    );
-    rules.defineRule('turnOutsider.maxHitDice',
-      'turnOutsider.level', '?', null,
-      'level', '=', 'source * 3 - 10',
-      'charismaModifier', '+', null
-    );
-    rules.defineSheetElement('Turn Outsider', 'Turn Undead', null, ' * ');
 
   } else if(name == 'Extreme Explorer') {
 
-    feats = [
-      'Action Surge', 'Heroic Spirit', 'Persue', 'Spontaneous Casting'
-    ];
-    rules.defineRule
-      ('actionPoints', 'abilityNotes.actionPointBonusFeature', '+', '2');
-    rules.defineRule
-     ('armorClass', 'combatNotes.dodgeBonusFeature', '+', null);
-    rules.defineRule('combatNotes.dodgeBonusFeature',
+    var allFeats = rules.getChoices('feats');
+    for(var feat in
+      {'Action Surge':'', 'Heroic Spirit':'', 'Pursue':'',
+       'Spontaneous Casting':''}
+    ) {
+      if(feat in allFeats) {
+        allFeats[feat] =
+          allFeats[feat].replace('Type=', 'Type="Extreme Explorer",');
+      } else {
+        console.log('Missing Extreme Explorer feat "' + feat + '"');
+      }
+    }
+    rules.defineRule('combatNotes.dodgeBonus',
       'levels.Extreme Explorer', '+=', 'Math.floor(source / 2)'
     );
     rules.defineRule('featCount.Extreme Explorer',
       'levels.Extreme Explorer', '=',
       'source < 3 ? null : Math.floor((source - 1) / 2)'
     );
-    rules.defineRule('saveNotes.trapSenseFeature',
+    rules.defineRule('saveNotes.trapSense',
       'levels.Extreme Explorer', '+=', 'Math.floor((source + 1) / 2)'
     );
 
   } else if(name == 'Heir Of Siberys') {
 
-    feats = [
-      'Action Boost', 'Action Surge', 'Favored In House', 'Pursue',
-      'Spontaneous Casting'
-    ];
-    rules.defineRule
-      ('actionPoints', 'abilityNotes.actionPointBonusFeature', '+', '2');
-    rules.defineRule
-      ('casterLevels.Heir Of Siberys', 'levels.Heir Of Siberys', '=', '15');
-    rules.defineRule
-      ('featCount.General', 'heirOfSiberysFeatures.Feat Bonus', '+=', null);
+    var allFeats = rules.getChoices('feats');
+    for(var feat in
+      {'Action Boost':'', 'Action Surge':'', 'Favored In House':'', 'Pursue':'',
+       'Spontaneous Casting':''}
+    ) {
+      if(feat in allFeats) {
+        allFeats[feat] =
+          allFeats[feat].replace('Type=', 'Type="Heir Of Siberys",');
+      } else {
+        console.log('Missing Heir Of Siberys feat "' + feat + '"');
+      }
+    }
+    var allSkills = rules.getChoices('skills');
+    for(var skill in allSkills) {
+      rules.defineRule
+        ('CountSkillGe15', 'skills.' + skill, '+=', 'source >= 15 ? 1 : null');
+    }
+    rules.defineRule('casterLevels.Dragonmark',
+      'levels.Heir Of Siberys', '^=', 'source >= 2 ? 15 : null'
+    );
     rules.defineRule
       ('featCount.Heir Of Siberys', 'levels.Heir Of Siberys', '=', '1');
-    rules.defineRule
-      ('heirOfSiberysFeatures.Caster Level Bonus', 'isCaster', '?', null);
-    rules.defineRule('heirOfSiberysFeatures.Feat Bonus',
-      'isCaster', '?', '!source',
-      'levels.Heir Of Siberys', '=', 'source>=3 ? 2 : source==2 ? 1 : null'
-    );
-    rules.defineRule('isCaster',
-      '', '=', 'false',
-      'casterLevel', '=', 'true'
-    );
-    rules.defineRule('magicNotes.casterLevelBonusFeature',
+    rules.defineRule('magicNotes.casterLevelBonus',
       'levels.Heir Of Siberys', '+=', 'source - 1'
     );
-    rules.defineRule
-      ('magicNotes.siberysMarkFeature', '', '=', '"spells %1/day"');
-    rules.defineRule('magicNotes.siberysMarkFeature.1',
-      'levels.Heir Of Siberys', '=', 'source < 2 ? null : Math.min(source + 1, 2)'
+    rules.defineRule('magicNotes.siberysMark.1',
+      'features.Siberys Mark', '?', null,
+      'levels.Heir Of Siberys', '=', 'source >= 3 ? 2 : 1'
     );
-    // Set casterLevels.[CS] to a minimal value so that spell DC will be
-    // calcuated even for non-caster characters.
-    rules.defineRule
-      ('casterLevels.C', 'casterLevels.Heir Of Siberys', '^=', '1');
-    rules.defineRule
-      ('casterLevels.S', 'casterLevels.Heir Of Siberys', '^=', '1');
-    for(var dragonmark in Eberron.dragonmarksSpells) {
-      var spells = Eberron.dragonmarksSpells[dragonmark][3].split(/,\s*/);
-      for(var j = 0; j < spells.length; j++) {
-        var spell = spells[j];
-        rules.defineRule('casterLevels.' + spell,
-          'casterLevels.Heir Of Siberys', '^=', null
-        );
-        spells[j] = '<i>' + spell + '</i> %1/day';
-      }
-      rules.defineRule('magicNotes.siberysMarkFeature',
-        'isDragonmark.' + dragonmark, '=', '"' + spells.join(', ') + '"'
-      );
-    };
+    rules.defineRule('spellsPerDay.Dragonmark4',
+      'levels.Heir Of Siberys', '=', 'source >= 2 ? 1 : null'
+    );
 
   } else if(name == 'Master Inquisitive') {
 
-    feats = [
-      'Alertness', 'Deceitful', 'Heroic Spirit', 'Improved Initiative',
-      'Iron Will', 'Negotiator', 'Persuasive', 'Recognize Impostor',
-      'Research', 'Toughness', 'Track', 'Urban Tracking'
-    ];
-    rules.defineRule('casterLevels.Master Inquisitive',
-      'masterInquisitiveFeatures.Natural Spells', '?', null,
-      'levels.Master Inquisitive', '=', null
-    );
-    rules.defineRule('casterLevels.Discern Lies',
-      'casterLevels.Master Inquisitive', '^=', null
-    );
-    rules.defineRule('casterLevels.True Seeing',
-      'casterLevels.Master Inquisitive', '^=', null
-    );
-    rules.defineRule('casterLevels.Zome Of Truth',
-      'casterLevels.Master Inquisitive', '^=', null
-    );
-    // Set casterLevels.C to a minimal value so that spell DC will be
-    // calcuated even for non-Cleric Master Inquisitives.
-    rules.defineRule
-      ('casterLevels.C', 'casterLevels.Master Inquisitive', '^=', '1');
+    var allFeats = rules.getChoices('feats');
+    for(var feat in
+      {'Alertness':'', 'Deceitful':'', 'Heroic Spirit':'',
+       'Improved Initiative':'', 'Iron Will':'', 'Negotiator':'',
+       'Persuasive':'', 'Recognize Imposter':'', 'Research':'', 'Toughness':'',
+       'Track':'', 'Urban Tracking':''}
+    ) {
+      if(feat in allFeats) {
+        allFeats[feat] =
+          allFeats[feat].replace('Type=', 'Type="Master Inquisitive",');
+      } else {
+        console.log('Missing Master Inquisitive feat "' + feat + '"');
+      }
+    }
     rules.defineRule('featCount.Master Inquisitive',
       'levels.Master Inquisitive', '=',
       'source < 2 ? null : Math.floor(source / 2)'
@@ -558,61 +441,52 @@ EberronPrestige.classRulesExtra = function(rules, name) {
 
   } else if(name == 'Warforged Juggernaut') {
 
-    rules.defineRule('combatNotes.armorSpikesFeature',
+    rules.defineRule('combatNotes.armorSpikes',
       'levels.Warforged Juggernaut', '=', 'source >= 4 ? "1d8" : "1d6"'
     );
-    rules.defineRule('combatNotes.chargeBonusFeature',
+    rules.defineRule('combatNotes.chargeBonus',
       'levels.Warforged Juggernaut', '=',
       'source < 2 ? null : Math.floor(source / 2)'
     );
-    rules.defineRule('combatNotes.expertBullRushFeature',
-      'levels.Warforged Juggernaut', '=', null
-    );
-    rules.defineRule('combatNotes.greaterPowerfulChargeFeature',
+    rules.defineRule
+      ('combatNotes.expertBullRush', 'levels.Warforged Juggernaut', '=', null);
+    rules.defineRule('combatNotes.greaterPowerfulCharge',
       '', '=', '"2d6"',
       'features.Large', '=', '"3d6"'
     );
-    rules.defineRule('combatNotes.powerfulChargeFeature',
+    rules.defineRule('combatNotes.powerfulCharge',
       '', '=', '"d8"',
       'features.Large', '=', '"2d6"'
     );
-    rules.defineRule('combatNotes.superiorBullRushFeature',
+    rules.defineRule('combatNotes.superiorBullRush',
       'levels.Warforged Juggernaut', '=', 'source >= 4 ? "1d8" : "1d6"'
     );
-    rules.defineRule('combatNotes.superiorBullRushFeature.1',
+    rules.defineRule('combatNotes.superiorBullRush.1',
+      'features.Superior Bull Rush', '?', null,
       'strengthModifier', '=', null
     );
-    rules.defineRule('skillNotes.reservedFeature',
-      'levels.Warforged Juggernaut', '=', null
-    );
+    rules.defineRule
+      ('skillNotes.reserved', 'levels.Warforged Juggernaut', '=', null);
 
   } else if(name == 'Weretouched Master') {
 
-    rules.defineRule('abilityNotes.alternateFormFeature',
-      'weretouchedMasterAnimal', '=', null
-    );
-    rules.defineRule('abilityNotes.alternateFormFeature.1',
-      'weretouchedMasterAnimal', '=',
-      'source == "Bear"?"+16 strength/+2 dexterity/+8 consitutution":' +
-      'source == "Boar"?"+4 strength/+6 consitutution":' +
-      'source == "Rat"?"+6 dexterity/+2 consitutution":' +
-      'source == "Tiger"?"+12 strength/+4 dexterity/+6 consitutution":' +
-      'source == "Wolf"?"+2 strength/+4 dexterity/+4 consitutution":' +
-      'source == "Wolverine"?"+4 strength/+4 dexterity/+8 consitutution":""'
-    );
-    rules.defineRule
-      ('combatNotes.frightfulShiftingFeature', 'level', '=', null);
-    rules.defineRule('combatNotes.frightfulShiftingFeature.1',
+    var allFeats = rules.getChoices('feats');
+    for(var feat in allFeats) {
+      if(allFeats[feat].indexOf('Shifter') >= 0)
+        rules.defineRule('CountShifterFeats', 'feats.' + feat, '+=', '1');
+    }
+    rules.defineRule('combatNotes.frightfulShifting', 'level', '=', null);
+    rules.defineRule('combatNotes.frightfulShifting.1',
       'levels.Weretouched Master', '=', 'source + 10',
       'charismaModifier', '+', null
     );
-    rules.defineRule('combatNotes.weretouchedClawsFeature',
+    rules.defineRule('combatNotes.weretouchedClaws',
       'level', '=', 'Math.floor(source / 4)'
     );
-    rules.defineRule('combatNotes.weretouchedFangsFeature',
+    rules.defineRule('combatNotes.weretouchedFangs',
       'level', '=', 'Math.floor(source / 4)'
     );
-    rules.defineRule('combatNotes.weretouchedTusksFeature',
+    rules.defineRule('combatNotes.weretouchedTusks',
       'level', '=', 'Math.floor(source / 4)'
     );
     rules.defineRule('featCount.Shifter',
@@ -622,45 +496,9 @@ EberronPrestige.classRulesExtra = function(rules, name) {
     rules.defineRule('selectableFeatureCount.Weretouched Master',
       'levels.Weretouched Master', '=', '1'
     );
-    rules.defineRule('skillNotes.wildEmpathyFeature',
+    rules.defineRule('skillNotes.wildEmpathy',
       'levels.Weretouched Master', '+=', null,
       'charismaModifier', '+', null
-    );
-    rules.defineRule('weretouchedMasterAnimal',
-      '', '=', '"None"',
-      'weretouchedMasterFeatures.Bear', '=', '"Bear"',
-      'weretouchedMasterFeatures.Boar', '=', '"Boar"',
-      'weretouchedMasterFeatures.Rat', '=', '"Rat"',
-      'weretouchedMasterFeatures.Tiger', '=', '"Tiger"',
-      'weretouchedMasterFeatures.Wolf', '=', '"Wolf"',
-      'weretouchedMasterFeatures.Wolverine', '=', '"Wolverine"'
-    );
-    rules.defineRule('weretouchedMasterFeatures.Climb Speed',
-      'weretouchedMasterAnimal', '?', 'source == "Rat"'
-    );
-    rules.defineRule('weretouchedMasterFeatures.Fierce Will',
-      'weretouchedMasterAnimal', '?', 'source == "Boar"'
-    );
-    rules.defineRule('weretouchedMasterFeatures.Improved Grab',
-      'weretouchedMasterAnimal', '?', 'source == "Bear"'
-    );
-    rules.defineRule('weretouchedMasterFeatures.Pounce',
-      'weretouchedMasterAnimal', '?', 'source == "Tiger"'
-    );
-    rules.defineRule('weretouchedMasterFeatures.Trip',
-      'weretouchedMasterAnimal', '?', 'source == "Wolf"'
-    );
-    rules.defineRule('weretouchedMasterFeatures.Weretouched Claws',
-      'weretouchedMasterAnimal', '?', '"BearTiger".indexOf(source) >= 0'
-    );
-    rules.defineRule('weretouchedMasterFeatures.Weretouched Fangs',
-      'weretouchedMasterAnimal', '?', '"RatWolf".indexOf(source) >= 0'
-    );
-    rules.defineRule('weretouchedMasterFeatures.Weretouched Rage',
-      'weretouchedMasterAnimal', '?', 'source == "Wolverine"'
-    );
-    rules.defineRule('weretouchedMasterFeatures.Weretouched Tusks',
-      'weretouchedMasterAnimal', '?', '"BoarWolverine".indexOf(source) >= 0'
     );
 
   }
