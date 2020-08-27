@@ -1151,7 +1151,6 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
   } else if(type == 'Class') {
     Eberron.classRules(rules, name,
       QuilvynUtils.getAttrValueArray(attrs, 'Require'),
-      QuilvynUtils.getAttrValueArray(attrs, 'Imply'),
       QuilvynUtils.getAttrValue(attrs, 'HitDie'),
       QuilvynUtils.getAttrValue(attrs, 'Attack'),
       QuilvynUtils.getAttrValue(attrs, 'SkillPoints'),
@@ -1223,6 +1222,7 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
     Eberron.languageRules(rules, name);
   else if(type == 'Race') {
     Eberron.raceRules(rules, name,
+      QuilvynUtils.getAttrValueArray(attrs, 'Require'),
       QuilvynUtils.getAttrValueArray(attrs, 'Features'),
       QuilvynUtils.getAttrValueArray(attrs, 'Selectables'),
       QuilvynUtils.getAttrValueArray(attrs, 'Languages'),
@@ -1325,22 +1325,15 @@ Eberron.armorRules = function(
  * defined by the class.
  */
 Eberron.classRules = function(
-  rules, name, requires, implies, hitDie, attack, skillPoints, saveFort,
-  saveRef, saveWill, skills, features, selectables, languages,
-  casterLevelArcane, casterLevelDivine, spellAbility, spellsPerDay, spells,
-  spellDict
+  rules, name, requires, hitDie, attack, skillPoints, saveFort, saveRef,
+  saveWill, skills, features, selectables, languages, casterLevelArcane,
+  casterLevelDivine, spellAbility, spellsPerDay, spells, spellDict
 ) {
   if(Eberron.baseRules == Pathfinder) {
     for(var i = 0; i < requires.length; i++) {
       for(var skill in Pathfinder.SRD35_SKILL_MAP) {
         requires[i] =
           requires[i].replaceAll(skill, Pathfinder.SRD35_SKILL_MAP[skill]);
-      }
-    }
-    for(var i = 0; i < implies.length; i++) {
-      for(var skill in Pathfinder.SRD35_SKILL_MAP) {
-        implies[i] =
-          implies[i].replaceAll(skill, Pathfinder.SRD35_SKILL_MAP[skill]);
       }
     }
     for(var i = skills.length - 1; i >= 0; i--) {
@@ -1354,10 +1347,9 @@ Eberron.classRules = function(
     }
   }
   Eberron.baseRules.classRules(
-    rules, name, requires, implies, hitDie, attack, skillPoints, saveFort,
-    saveRef, saveWill, skills, features, selectables, languages,
-    casterLevelArcane, casterLevelDivine, spellAbility, spellsPerDay, spells,
-    spellDict
+    rules, name, requires, hitDie, attack, skillPoints, saveFort, saveRef,
+    saveWill, skills, features, selectables, languages, casterLevelArcane,
+    casterLevelDivine, spellAbility, spellsPerDay, spells, spellDict
   );
   // No changes needed to the rules defined by base method
 };
@@ -1700,17 +1692,20 @@ Eberron.languageRules = function(rules, name) {
 };
 
 /*
- * Defines in #rules# the rules associated with race #name#. #features# and
- * #selectables# list associated features and #languages# the automatic
- * languages. #spells# lists any natural spells, for which #spellAbility# is
- * used to compute the save DC.
+ * Defines in #rules# the rules associated with race #name#, which has the list
+ * of hard prerequisites #requires#. #features# and #selectables# list
+ * associated features and #languages# the automatic languages. #spells# lists
+ * any natural spells, for which #spellAbility# is used to compute the save DC.
+ * #spellDict# is the dictionary of all spells used to look up individual spell
+ * attributes.
  */
 Eberron.raceRules = function(
-  rules, name, features, selectables, languages, spellAbility, spells, spellDict
+  rules, name, requires, features, selectables, languages, spellAbility,
+  spells, spellDict
 ) {
   Eberron.baseRules.raceRules
-    (rules, name, features, selectables, languages, spellAbility, spells,
-     spellDict);
+    (rules, name, requires, features, selectables, languages, spellAbility,
+     spells, spellDict);
   // No changes needed to the rules defined by base method
 };
 
