@@ -245,7 +245,8 @@ EberronPrestige.FEATURES = {
   'Resist The Arcane':'Section=save Note="+2 vs. arcane spells"',
   'Resist Unnatural':
     'Section=save Note="+2 vs. effects of outsiders and undead"',
-  'Siberys Mark':'Section=magic Note="Choice of %V"',
+  'Siberys Mark':
+    'Section=magic Note="Choice of house dragonmark spell 1/dy"',
   'Silver Exorcism':'Section=combat Note="+2 exorcism checks"',
   'Spell Resistance':'Section=save Note="DC 20 spell resistance"',
   'Superior Bull Rush':'Section=combat Note="+%V+%1 damage from bull rush"',
