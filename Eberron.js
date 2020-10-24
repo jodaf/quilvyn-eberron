@@ -1237,8 +1237,8 @@ Eberron.identityRules = function(
 
   if(Eberron.baseRules == window.Pathfinder)
     Pathfinder.identityRules(
-      rules, alignments, classes, deities, [], genders, paths, races,
-      Pathfinder.TRAITS
+      rules, alignments, classes, deities, {}, genders, paths, races,
+      Pathfinder.TRACKS, Pathfinder.TRAITS
     );
   else
     SRD35.identityRules
@@ -1315,16 +1315,7 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
       QuilvynUtils.getAttrValue(attrs, 'Skill'),
       QuilvynUtils.getAttrValue(attrs, 'Spell')
     );
-  else if(type == 'Bloodline') {
-    Pathfinder.bloodlineRules(rules, name,
-      QuilvynUtils.getAttrValueArray(attrs, 'Features'),
-      QuilvynUtils.getAttrValueArray(attrs, 'Feats'),
-      QuilvynUtils.getAttrValueArray(attrs, 'Skills'),
-      QuilvynUtils.getAttrValueArray(attrs, 'Spells'),
-      Pathfinder.SPELLS
-    );
-    Pathfinder.bloodlineRulesExtra(rules, name);
-  } else if(type == 'Class') {
+  else if(type == 'Class') {
     Eberron.classRules(rules, name,
       QuilvynUtils.getAttrValueArray(attrs, 'Require'),
       QuilvynUtils.getAttrValue(attrs, 'HitDie'),
@@ -1413,11 +1404,13 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
       Eberron.SPELLS
     );
     Eberron.raceRulesExtra(rules, name);
-  } else if(type == 'School')
+  } else if(type == 'School') {
     Eberron.schoolRules(rules, name,
       QuilvynUtils.getAttrValueArray(attrs, 'Features')
     );
-  else if(type == 'Shield')
+    if(Eberron.baseRules.schoolRulesExtra)
+      Eberron.baseRules.schoolRulesExtra(rules, name);
+  } else if(type == 'Shield')
     Eberron.shieldRules(rules, name,
       QuilvynUtils.getAttrValue(attrs, 'AC'),
       QuilvynUtils.getAttrValue(attrs, 'Weight'),
@@ -1432,6 +1425,8 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
       QuilvynUtils.getAttrValueArray(attrs, 'Class'),
       QuilvynUtils.getAttrValueArray(attrs, 'Synergies')
     );
+    if(Eberron.baseRules.skillRulesExtra)
+      Eberron.baseRules.skillRulesExtra(rules, name);
   } else if(type == 'Spell')
     Eberron.spellRules(rules, name,
       QuilvynUtils.getAttrValue(attrs, 'School'),
@@ -1439,12 +1434,18 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
       QuilvynUtils.getAttrValue(attrs, 'Level'),
       QuilvynUtils.getAttrValue(attrs, 'Description')
     );
-  else if(type == 'Trait')
+  else if(type == 'Track')
+    Pathfinder.trackRules(rules, name,
+      QuilvynUtils.getAttrValueArray(attrs, 'Progression')
+    );
+  else if(type == 'Trait') {
     Pathfinder.traitRules(rules, name,
       QuilvynUtils.getAttrValue(attrs, 'Type'),
       QuilvynUtils.getAttrValue(attrs, 'Subtype')
     );
-  else if(type == 'Weapon')
+    if(Pathfinder.traitRulesExtra)
+      Pathfinder.traitRulesExtra(rules, name);
+  } else if(type == 'Weapon')
     Eberron.weaponRules(rules, name,
       QuilvynUtils.getAttrValue(attrs, 'Level'),
       QuilvynUtils.getAttrValue(attrs, 'Category'),
@@ -1833,10 +1834,16 @@ Eberron.pathRules = function(
   rules, name, group, levelAttr, features, selectables, spellAbility,
   spellSlots, spells, spellDict
 ) {
-  Eberron.baseRules.pathRules(
-    rules, name, group, levelAttr, features, selectables, spellAbility,
-    spellSlots, spells, spellDict
-  );
+  if(Eberron.baseRules == window.Pathfinder)
+    Eberron.baseRules.pathRules(
+      rules, name, group, levelAttr, features, selectables, [], [],
+      spellAbility, spellSlots, spells, spellDict
+    );
+  else
+    Eberron.baseRules.pathRules(
+      rules, name, group, levelAttr, features, selectables, spellAbility,
+      spellSlots, spells, spellDict
+    );
   // No changes needed to the rules defined by base method
 }
 
@@ -1874,7 +1881,7 @@ Eberron.raceRules = function(
 ) {
   Eberron.baseRules.raceRules
     (rules, name, requires, features, selectables, languages, spellAbility,
-     spells, spellDict);
+     spells, spellSlots, spellDict);
   // No changes needed to the rules defined by base method
 };
 
