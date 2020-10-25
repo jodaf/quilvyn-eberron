@@ -71,7 +71,6 @@ function Eberron() {
     Object.assign({}, Eberron.baseRules.FEATS, Eberron.FEATS_ADDED);
   Eberron.FEATURES =
     Object.assign({}, Eberron.baseRules.FEATURES, Eberron.FEATURES_ADDED);
-  Eberron.GENDERS = Object.assign({}, Eberron.baseRules.GENDERS);
   Eberron.LANGUAGES =
     Object.assign({}, Eberron.baseRules.LANGUAGES, Eberron.LANGUAGES_ADDED);
   Eberron.PATHS =
@@ -102,7 +101,7 @@ function Eberron() {
     (rules, Eberron.FEATS, Eberron.FEATURES, Eberron.LANGUAGES, Eberron.SKILLS);
   Eberron.identityRules(
     rules, Eberron.ALIGNMENTS, Eberron.CLASSES, Eberron.DEITIES,
-    Eberron.GENDERS, Eberron.HOUSES, Eberron.PATHS, Eberron.RACES
+    Eberron.HOUSES, Eberron.PATHS, Eberron.RACES
   );
   Eberron.goodiesRules(rules);
 
@@ -551,7 +550,6 @@ Eberron.FEATURES_ADDED = {
     'Section=ability,feature,skill Note="+2 Con while shifting","R30\' Detect creature presence, track by smell","+2 Survival"'
 };
 Eberron.FEATURES = Object.assign({}, SRD35.FEATURES, Eberron.FEATURES_ADDED);
-Eberron.GENDERS = Object.assign({}, SRD35.GENDERS);
 Eberron.HOUSES = {
   'None':
     '',
@@ -1230,19 +1228,18 @@ Eberron.goodiesRules = function(rules) {
 
 /* Defines rules related to basic character identity. */
 Eberron.identityRules = function(
-  rules, alignments, classes, deities, genders, houses, paths, races
+  rules, alignments, classes, deities, houses, paths, races
 ) {
 
   QuilvynUtils.checkAttrTable(houses, ['Dragonmark', 'Features', 'Spells']);
 
   if(Eberron.baseRules == window.Pathfinder)
     Pathfinder.identityRules(
-      rules, alignments, classes, deities, {}, genders, paths, races,
-      Pathfinder.TRACKS, Pathfinder.TRAITS
+      rules, alignments, classes, deities, {}, paths, races, Pathfinder.TRACKS,
+      Pathfinder.TRAITS
     );
   else
-    SRD35.identityRules
-      (rules, alignments, classes, deities, genders, paths, races)
+    SRD35.identityRules(rules, alignments, classes, deities, paths, races)
   // No changes needed to the rules defined by base method
 
   for(var house in houses) {
@@ -1369,8 +1366,6 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
       QuilvynUtils.getAttrValueArray(attrs, 'Section'),
       QuilvynUtils.getAttrValueArray(attrs, 'Note')
     );
-  else if(type == 'Gender')
-    Eberron.genderRules(rules, name);
   else if(type == 'House')
     Eberron.houseRules(rules, name,
       QuilvynUtils.getAttrValue(attrs, 'Dragonmark'),
@@ -1739,12 +1734,6 @@ Eberron.featureRules = function(rules, name, sections, notes) {
     }
   }
   Eberron.baseRules.featureRules(rules, name, sections, notes);
-  // No changes needed to the rules defined by base method
-};
-
-/* Defines in #rules# the rules associated with gender #name#. */
-Eberron.genderRules = function(rules, name) {
-  Eberron.baseRules.genderRules(rules, name);
   // No changes needed to the rules defined by base method
 };
 
