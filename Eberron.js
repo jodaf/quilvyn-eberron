@@ -1875,7 +1875,10 @@ Eberron.raceRules = function(
   // No changes needed to the rules defined by base method
 };
 
-/* Defines the rules related to Eberron character races. */
+/*
+ * Defines in #rules# the rules associated with race #name# that are not
+ * directly derived from the parmeters passed to raceRules.
+ */
 Eberron.raceRulesExtra = function(rules, name) {
 
   if(name == 'Shifter') {
