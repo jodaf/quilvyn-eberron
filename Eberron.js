@@ -679,6 +679,16 @@ Eberron.PATHS_ADDED = {
     'Features=' +
       '"1:Empowered Creation","1:Craft Master" ' +
     'SpellAbility=wisdom ' +
+    'SpellSlots=' +
+      'Artifice1:1=1,' +
+      'Artifice2:3=1,' +
+      'Artifice3:5=1,' +
+      'Artifice4:7=1,' +
+      'Artifice5:9=1,' +
+      'Artifice6:11=1,' +
+      'Artifice7:13=1,' +
+      'Artifice8:15=1,' +
+      'Artifice9:17=1 ' +
     'Spells=' +
       '"Artifice1:Animate Rope",' +
       '"Artifice2:Wood Shape",' +
@@ -695,6 +705,16 @@ Eberron.PATHS_ADDED = {
     'Features=' +
       '"1:Turn It On" ' +
     'SpellAbility=wisdom ' +
+    'SpellSlots=' +
+      'Charm1:1=1,' +
+      'Charm2:3=1,' +
+      'Charm3:5=1,' +
+      'Charm4:7=1,' +
+      'Charm5:9=1,' +
+      'Charm6:11=1,' +
+      'Charm7:13=1,' +
+      'Charm8:15=1,' +
+      'Charm9:17=1 ' +
     'Spells=' +
       '"Charm1:Charm Person",' +
       '"Charm2:Calm Emotions",' +
@@ -711,6 +731,16 @@ Eberron.PATHS_ADDED = {
     'Features=' +
       '1:Merchant ' +
     'SpellAbility=wisdom ' +
+    'SpellSlots=' +
+      'Commerce1:1=1,' +
+      'Commerce2:3=1,' +
+      'Commerce3:5=1,' +
+      'Commerce4:7=1,' +
+      'Commerce5:9=1,' +
+      'Commerce6:11=1,' +
+      'Commerce7:13=1,' +
+      'Commerce8:15=1,' +
+      'Commerce9:17=1 ' +
     'Spells=' +
       '"Commerce1:Comprehend Languages",' +
       '"Commerce2:Zone Of Truth",' +
@@ -727,6 +757,16 @@ Eberron.PATHS_ADDED = {
     'Features=' +
       '"1:Calming Influence","1:Community Pillar" ' +
     'SpellAbility=wisdom ' +
+    'SpellSlots=' +
+      'Community1:1=1,' +
+      'Community2:3=1,' +
+      'Community3:5=1,' +
+      'Community4:7=1,' +
+      'Community5:9=1,' +
+      'Community6:11=1,' +
+      'Community7:13=1,' +
+      'Community8:15=1,' +
+      'Community9:17=1 ' +
     'Spells=' +
       'Community1:Bless,' +
       'Community2:Status,' +
@@ -743,6 +783,16 @@ Eberron.PATHS_ADDED = {
     'Features=' +
       '"1:Master Deathless" ' +
     'SpellAbility=wisdom ' +
+    'SpellSlots=' +
+      'Deathless1:1=1,' +
+      'Deathless2:3=1,' +
+      'Deathless3:5=1,' +
+      'Deathless4:7=1,' +
+      'Deathless5:9=1,' +
+      'Deathless6:11=1,' +
+      'Deathless7:13=1,' +
+      'Deathless8:15=1,' +
+      'Deathless9:17=1 ' +
     'Spells=' +
       '"Deathless1:Detect Undead",' +
       'Deathless2:Consecrate,' +
@@ -759,6 +809,16 @@ Eberron.PATHS_ADDED = {
     'Features=' +
       '"1:Touch Of Decay" ' +
     'SpellAbility=wisdom ' +
+    'SpellSlots=' +
+      'Decay1:1=1,' +
+      'Decay2:3=1,' +
+      'Decay3:5=1,' +
+      'Decay4:7=1,' +
+      'Decay5:9=1,' +
+      'Decay6:11=1,' +
+      'Decay7:13=1,' +
+      'Decay8:15=1,' +
+      'Decay9:17=1 ' +
     'Spells=' +
       'Decay1:Doom,' +
       '"Decay2:Ray Of Enfeeblement",' +
@@ -775,6 +835,16 @@ Eberron.PATHS_ADDED = {
     'Features=' +
       '"1:Augment Summoning" ' +
     'SpellAbility=wisdom ' +
+    'SpellSlots=' +
+      'Dragon1:1=1,' +
+      'Dragon2:3=1,' +
+      'Dragon3:5=1,' +
+      'Dragon4:7=1,' +
+      'Dragon5:9=1,' +
+      'Dragon6:11=1,' +
+      'Dragon7:13=1,' +
+      'Dragon8:15=1,' +
+      'Dragon9:17=1 ' +
     'Spells=' +
       '"Dragon1:Cause Fear",' +
       '"Dragon2:Death Knell",' +
@@ -791,6 +861,16 @@ Eberron.PATHS_ADDED = {
     'Features=' +
       '1:Exorcise ' +
     'SpellAbility=wisdom ' +
+    'SpellSlots=' +
+      'Exorcism1:1=1,' +
+      'Exorcism2:3=1,' +
+      'Exorcism3:5=1,' +
+      'Exorcism4:7=1,' +
+      'Exorcism5:9=1,' +
+      'Exorcism6:11=1,' +
+      'Exorcism7:13=1,' +
+      'Exorcism8:15=1,' +
+      'Exorcism9:17=1 ' +
     'Spells=' +
       '"Exorcism1:Protection From Evil",' +
       '"Exorcism2:Magic Circle Against Evil",' +
@@ -807,6 +887,16 @@ Eberron.PATHS_ADDED = {
     'Features=' +
       '"1:Iron Gut" ' +
     'SpellAbility=wisdom ' +
+    'SpellSlots=' +
+      'Feast1:1=1,' +
+      'Feast2:3=1,' +
+      'Feast3:5=1,' +
+      'Feast4:7=1,' +
+      'Feast5:9=1,' +
+      'Feast6:11=1,' +
+      'Feast7:13=1,' +
+      'Feast8:15=1,' +
+      'Feast9:17=1 ' +
     'Spells=' +
       'Feast1:Goodberry,' +
       '"Feast2:Delay Poison",' +
@@ -823,6 +913,16 @@ Eberron.PATHS_ADDED = {
     'Features=' +
       '"1:Add Life" ' +
     'SpellAbility=wisdom ' +
+    'SpellSlots=' +
+      'Life1:1=1,' +
+      'Life2:3=1,' +
+      'Life3:5=1,' +
+      'Life4:7=1,' +
+      'Life5:9=1,' +
+      'Life6:11=1,' +
+      'Life7:13=1,' +
+      'Life8:15=1,' +
+      'Life9:17=1 ' +
     'Spells=' +
       '"Life1:Hide From Undead",' +
       '"Life2:Lesser Restoration",' +
@@ -839,6 +939,16 @@ Eberron.PATHS_ADDED = {
     'Features=' +
       '"1:Flash Of Understanding",1:Weak-Willed ' +
     'SpellAbility=wisdom ' +
+    'SpellSlots=' +
+      'Madness1:1=1,' +
+      'Madness2:3=1,' +
+      'Madness3:5=1,' +
+      'Madness4:7=1,' +
+      'Madness5:9=1,' +
+      'Madness6:11=1,' +
+      'Madness7:13=1,' +
+      'Madness8:15=1,' +
+      'Madness9:17=1 ' +
     'Spells=' +
       '"Madness1:Lesser Confusion",' +
       '"Madness2:Touch Of Madness",' +
@@ -855,6 +965,16 @@ Eberron.PATHS_ADDED = {
     'Features=' +
       '"1:Focused Casting" ' +
     'SpellAbility=wisdom ' +
+    'SpellSlots=' +
+      'Meditation1:1=1,' +
+      'Meditation2:3=1,' +
+      'Meditation3:5=1,' +
+      'Meditation4:7=1,' +
+      'Meditation5:9=1,' +
+      'Meditation6:11=1,' +
+      'Meditation7:13=1,' +
+      'Meditation8:15=1,' +
+      'Meditation9:17=1 ' +
     'Spells=' +
       '"Meditation1:Comprehend Languages",' +
       '"Meditation2:Owl\'s Wisdom",' +
@@ -871,6 +991,16 @@ Eberron.PATHS_ADDED = {
     'Features=' +
       '"1:Empowered Necromancy" ' +
     'SpellAbility=wisdom ' +
+    'SpellSlots=' +
+      'Necromancer1:1=1,' +
+      'Necromancer2:3=1,' +
+      'Necromancer3:5=1,' +
+      'Necromancer4:7=1,' +
+      'Necromancer5:9=1,' +
+      'Necromancer6:11=1,' +
+      'Necromancer7:13=1,' +
+      'Necromancer8:15=1,' +
+      'Necromancer9:17=1 ' +
     'Spells=' +
       '"Necromancer1:Ray Of Enfeeblement",' +
       '"Necromancer2:Command Undead",' +
@@ -887,6 +1017,16 @@ Eberron.PATHS_ADDED = {
     'Features=' +
       '"1:Fit Of Passion" ' +
     'SpellAbility=wisdom ' +
+    'SpellSlots=' +
+      'Passion1:1=1,' +
+      'Passion2:3=1,' +
+      'Passion3:5=1,' +
+      'Passion4:7=1,' +
+      'Passion5:9=1,' +
+      'Passion6:11=1,' +
+      'Passion7:13=1,' +
+      'Passion8:15=1,' +
+      'Passion9:17=1 ' +
     'Spells=' +
       '"Passion1:Cause Fear",' +
       '"Passion2:Hideous Laughter",' +
@@ -903,6 +1043,16 @@ Eberron.PATHS_ADDED = {
     'Features=' +
       '1:Blind-Fight ' +
     'SpellAbility=wisdom ' +
+    'SpellSlots=' +
+      'Shadow1:1=1,' +
+      'Shadow2:3=1,' +
+      'Shadow3:5=1,' +
+      'Shadow4:7=1,' +
+      'Shadow5:9=1,' +
+      'Shadow6:11=1,' +
+      'Shadow7:13=1,' +
+      'Shadow8:15=1,' +
+      'Shadow9:17=1 ' +
     'Spells=' +
       '"Shadow1:Obscuring Mist",' +
       'Shadow2:Darkness,' +
@@ -919,6 +1069,16 @@ Eberron.PATHS_ADDED = {
     'Features=' +
       '1:Clear-Eyed,1:Meteorologist ' +
     'SpellAbility=wisdom ' +
+    'SpellSlots=' +
+      'Weather1:1=1,' +
+      'Weather2:3=1,' +
+      'Weather3:5=1,' +
+      'Weather4:7=1,' +
+      'Weather5:9=1,' +
+      'Weather6:11=1,' +
+      'Weather7:13=1,' +
+      'Weather8:15=1,' +
+      'Weather9:17=1 ' +
     'Spells=' +
       '"Weather1:Obscuring Mist",' +
       '"Weather2:Fog Cloud",' +
@@ -1835,6 +1995,9 @@ Eberron.pathRules = function(
       spellSlots, spells, spellDict
     );
   // No changes needed to the rules defined by base method
+  if(name.match(/Domain$/))
+    QuilvynRules.featureListRules
+      (rules, ["deityDomains =~ '" + name.replace(' Domain', '') + "' ? 1:" + name], 'Cleric', 'levels.Cleric', true);
 }
 
 /*
