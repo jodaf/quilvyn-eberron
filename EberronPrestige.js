@@ -137,7 +137,7 @@ EberronPrestige.CLASSES = {
       '"1:Inquisitive Spells",2:Contact,"4:Improved Contact" ' +
     'CasterLevelDivine="levels.Master Inquisitive" ' +
     'SpellAbility=intelligence ' +
-    'SpellsPerDay=' +
+    'SpellSlots=' +
       'MI2:1=1,' +
       'MI4:3=1,' +
       'MI5:5=1 ' +
@@ -271,7 +271,7 @@ EberronPrestige.FEATURES = {
 };
 
 
-/* Defines the rules related to LastAge Prestige Classes. */
+/* Defines rules related to basic character identity. */
 EberronPrestige.identityRules = function(rules, classes) {
   for(var clas in classes) {
     rules.choiceRules(rules, 'Class', clas, classes[clas]);
@@ -279,7 +279,7 @@ EberronPrestige.identityRules = function(rules, classes) {
   }
 };
 
-/* Defines rules related to character features. */
+/* Defines rules related to character feats, languages, and skills. */
 EberronPrestige.talentRules = function(rules, features) {
   for(var feature in features) {
     rules.choiceRules(rules, 'Feature', feature, features[feature]);
@@ -416,7 +416,7 @@ EberronPrestige.classRulesExtra = function(rules, name) {
       'features.Siberys Mark', '?', null,
       'levels.Heir Of Siberys', '=', 'source >= 3 ? 2 : 1'
     );
-    rules.defineRule('spellsPerDay.Dragonmark4',
+    rules.defineRule('spellSlots.Dragonmark4',
       'levels.Heir Of Siberys', '=', 'source >= 2 ? 1 : null'
     );
 
