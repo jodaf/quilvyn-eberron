@@ -1095,21 +1095,26 @@ Eberron.RACES_ADDED = {
   'Changeling':
     'Features=' +
       '1:Deceptive,1:Intuitive,"1:Minor Shape Change","1:Natural Linguist",' +
-      '"1:Resist Charm","1:Resist Sleep"',
+      '"1:Resist Charm","1:Resist Sleep" ' +
+    'Languages=Common',
   'Kalashtar':
     'Features=' +
       '1:Dreamless,1:Humanlike,1:Influential,1:Mindlink,"1:Natural Psionic",' +
-      '"1:Resist Mental","1:Resist Possession"',
+      '"1:Resist Mental","1:Resist Possession" ' +
+    'Languages=Common,Quor',
   'Shifter':
     'Features=' +
       '"1:Shifter Ability Adjustment",1:Shifting ' +
     'Selectables=' +
-      '1:Beasthide,1:Longtooth,1:Cliffwalk,1:Razorclaw,1:Longstride,1:Wildhunt',
+      '1:Beasthide,1:Longtooth,1:Cliffwalk,1:Razorclaw,1:Longstride,' +
+      '1:Wildhunt ' +
+    'Languages=Common',
   'Warforged':
     'Features=' +
       '"1:Composite Plating","1:Construct Immunity",' +
       '"1:Construct Vulnerability","1:Light Fortification","1:Slam Weapon",' +
-      '1:Stable,1:Unhealing,"1:Warforged Ability Adjustment"'
+      '1:Stable,1:Unhealing,"1:Warforged Ability Adjustment" ' +
+    'Languages=Common'
 };
 Eberron.RACES = Object.assign({}, SRD35.RACES, Eberron.RACES_ADDED);
 Eberron.SCHOOLS = Object.assign({}, SRD35.SCHOOLS);
