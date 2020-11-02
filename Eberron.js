@@ -299,7 +299,7 @@ Eberron.FEATS_ADDED = {
   'Spontaneous Casting':'Type=General Require="casterLevel >= 5"',
   'Strong Mind':'Type=General Require="wisdom >= 11"',
   'Totem Companion':
-    'Type=General Require="Max \'features.Beast Totem\' >= 1","features.Wild Empathy"',
+    'Type=General Require="Max \'^features.Beast Totem\' >= 1","features.Wild Empathy"',
   'Undead Empathy':'Type=General Require="charisma >= 13"',
   'Urban Tracking':'Type=General',
   'Vermin Companion':
@@ -1921,7 +1921,9 @@ Eberron.houseRules = function(
   }
   rules.houseStats.dragonmark[name] = dragonmark;
 
-  var houseLevel = name + 'Level';
+  var prefix =
+    name.charAt(0).toLowerCase() + name.substring(1).replaceAll(' ', '');
+  var houseLevel = prefix + 'Level';
 
   rules.defineRule(houseLevel,
     'house', '?', 'source == "' + name + '"',
@@ -1930,6 +1932,8 @@ Eberron.houseRules = function(
 
   QuilvynRules.featureListRules(rules, features, name, houseLevel, false);
   QuilvynRules.spellListRules(rules, spells, spellDict);
+  rules.defineSheetElement(name + ' Features', 'Feats+', null, '; ');
+  rules.defineChoice('extras', prefix + 'Features');
 
   rules.defineRule('casterLevels.' + name,
     'house', '?', 'source == "' + name + '"',
