@@ -19,9 +19,10 @@ Place, Suite 330, Boston, MA 02111-1307 USA.
 "use strict";
 
 /*
- * This module loads the rules for the Eberron campaign setting prestige
- * classes.  The EberronPrestige.CLASSES constant field can be manipulated in
- * order to trim the choices offered.
+ * This module loads the prestige class rules from the Eberron 3E rule book.
+ * Member methods can be called independently in order to use a subset of the
+ * rules. Similarly, the constant fields of LastAgePrestige (CLASSES,
+ * FEATURES) can be manipulated to modify the choices.
  */
 function EberronPrestige() {
   if(window.SRD35 == null || window.Eberron == null) {
@@ -190,18 +191,29 @@ EberronPrestige.CLASSES = {
 EberronPrestige.FEATURES = {
   'Ability Immunity':'Section=save Note="Immune to ability damage and drain"',
   'Action Point Bonus':'Section=ability Note="+2 AP"',
-  'Alternate Bear Form':'Section=ability Note="Shift to animal (+16 Str/+2 Dex/+8 Con) or bipedal hybrid"',
-  'Alternate Boar Form':'Section=ability Note="Shift to animal (+4 Str/+6 Con) or bipedal hybrid"',
-  'Alternate Rat Form':'Section=ability Note="Shift to animal (+6 Dex/+2 Con) or bipedal hybrid"',
-  'Alternate Tiger Form':'Section=ability Note="Shift to animal (+12 Str/+4 Dex/+6 Con) or bipedal hybrid"',
-  'Alternate Wolf Form':'Section=ability Note="Shift to animal (+2 Str/+4 Dex/+4 Con) or bipedal hybrid"',
-  'Alternate Wolverine Form':'Section=ability Note="Shift to animal (+4 Str/+4 Dex/+8 Con) or bipedal hybrid"',
+  'Alternate Bear Form':
+    'Section=ability ' +
+    'Note="Shift to animal (+16 Str/+2 Dex/+8 Con) or bipedal hybrid"',
+  'Alternate Boar Form':
+    'Section=ability Note="Shift to animal (+4 Str/+6 Con) or bipedal hybrid"',
+  'Alternate Rat Form':
+    'Section=ability Note="Shift to animal (+6 Dex/+2 Con) or bipedal hybrid"',
+  'Alternate Tiger Form':
+    'Section=ability ' +
+    'Note="Shift to animal (+12 Str/+4 Dex/+6 Con) or bipedal hybrid"',
+  'Alternate Wolf Form':
+    'Section=ability ' +
+    'Note="Shift to animal (+2 Str/+4 Dex/+4 Con) or bipedal hybrid"',
+  'Alternate Wolverine Form':
+    'Section=ability ' +
+    'Note="Shift to animal (+4 Str/+4 Dex/+8 Con) or bipedal hybrid"',
   'Armor Spikes':'Section=combat Note="Grapple attack for %V damage"',
   'Caster Level Bonus':
     'Section=magic Note="+%V base class level for spells known/per day"',
   'Charge Bonus':'Section=combat Note="+%V attack when charging"',
   'Climb Speed':
-    'Section=ability Note="20\' climb speed (+10 for Cliffwalker) while shifting\"',
+    'Section=ability ' +
+    'Note="20\' climb speed (+10 for Cliffwalker) while shifting\"',
   'Construct Perfection':
     'Section=combat Note="Immune nonlethal damage and critical hits"',
   'Contact':'Section=feature Note="Level 3 associate or informant"',
@@ -218,7 +230,8 @@ EberronPrestige.FEATURES = {
   'Flame Of Censure':
     'Section=combat Note="Stun or banish Outsiders w/turning check"',
   'Frightful Shifting':
-    'Section=combat Note="R30\' Foes lt %V hit dice shaken for 5d6 rounds (DC %1 Will neg)"',
+    'Section=combat ' +
+    'Note="R30\' Foes lt %V hit dice shaken for 5d6 rounds (DC %1 Will neg)"',
   'Hated Foe':
     'Section=combat Note="Spend 1 AP for double damage against favored enemy"',
   'Healing Immunity':'Section=save Note="No effect from healing spells"',
@@ -238,7 +251,8 @@ EberronPrestige.FEATURES = {
   'Metal Immunity':'Section=save Note="Immune to mind-altering effects"',
   'Pounce':'Section=combat Note="Full attack when charging"',
   'Reserved':
-    'Section=skill Note="-%V Bluff/-%V Diplomacy/-%V Gather Information/-%V Sense Motive"',
+    'Section=skill ' +
+    'Note="-%V Bluff/-%V Diplomacy/-%V Gather Information/-%V Sense Motive"',
   'Resist Aberrations':'Section=save Note="+2 vs. aberration abilities"',
   'Resist Corruption':
     'Section=save Note="Immune disease, +2 vs. mind-altering"',
@@ -255,21 +269,27 @@ EberronPrestige.FEATURES = {
   'Trip':'Section=combat Note="Trip w/out AOO after bite hit"',
   'Unearthly Grace':'Section=save Note="+%V Fortitude/+%V Reflex/+%V Will"',
   'Warding Flame':
-    'Section=combat Note="Warding glow for +2 AC, struck evil foe  blinded (DC %V Fort neg)"',
+    'Section=combat ' +
+    'Note="Warding glow for +2 AC, struck evil foe  blinded (DC %V Fort neg)"',
   'Weapon Of The Exorcist':
     'Section=combat Note="+1 damage w/sacred weapon treated as %V"',
   'Weapon Of The Flame':
     'Section=combat Note="+%Vd6 flame damage w/sacred weapon"',
   'Weretouched Claws':
-    'Section=ability,combat Note="+2 Str while shifting","d4+%V claw attack (next size for Razorclaw) while shifting"',
+    'Section=ability,combat ' +
+    'Note="+2 Str while shifting",' +
+         '"d4+%V claw attack (next size for Razorclaw) while shifting"',
   'Weretouched Fangs':
-    'Section=ability,combat Note="+2 Dex while shifting","d6+%V fang attack (next size for Longtooth) while shifting"',
+    'Section=ability,combat ' +
+    'Note="+2 Dex while shifting",' +
+         '"d6+%V fang attack (next size for Longtooth) while shifting"',
   'Weretouched Rage':
     'Section=combat Note="+2 Str, +2 Con, -2 AC for 1 rd after taking damage"',
   'Weretouched Tusks':
-    'Section=ability,combat Note="+2 Con while shifting","d6+%V tusk attack (next size for Longtooth) while shifting"'
+    'Section=ability,combat ' +
+    'Note="+2 Con while shifting",' +
+         '"d6+%V tusk attack (next size for Longtooth) while shifting"'
 };
-
 
 /* Defines rules related to basic character identity. */
 EberronPrestige.identityRules = function(rules, classes) {
@@ -279,14 +299,17 @@ EberronPrestige.identityRules = function(rules, classes) {
   }
 };
 
-/* Defines rules related to character feats, languages, and skills. */
+/* Defines rules related to character aptitudes. */
 EberronPrestige.talentRules = function(rules, features) {
   for(var feature in features) {
     rules.choiceRules(rules, 'Feature', feature, features[feature]);
   }
 };
 
-/* Defines the rules related to Eberron prestige classes. */
+/*
+ * Defines in #rules# the rules associated with class #name# that cannot be
+ * derived directly from the attributes passed to classRules.
+ */
 EberronPrestige.classRulesExtra = function(rules, name) {
 
   var prefix =

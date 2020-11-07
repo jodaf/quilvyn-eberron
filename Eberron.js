@@ -94,8 +94,8 @@ function Eberron() {
   Eberron.abilityRules(rules);
   Eberron.aideRules(rules, Eberron.ANIMAL_COMPANIONS, Eberron.FAMILIARS);
   Eberron.combatRules(rules, Eberron.ARMORS, Eberron.SHIELDS, Eberron.WEAPONS);
-  // Spell definition is handled by each individual class and domain. Schools
-  // have to be defined before this can be done.
+  // Most spell definitions are handled by individual classes and domain.
+  // Schools must be defined before this can be done.
   Eberron.magicRules(rules, Eberron.SCHOOLS, []);
   // Feats must be defined before classes
   Eberron.talentRules
@@ -170,16 +170,20 @@ Eberron.DEITIES = {
 Eberron.FAMILIARS = Object.assign({}, SRD35.FAMILIARS);
 Eberron.FEATS_ADDED = {
   'Aberrant Dragonmark':
-    'Type=General Require="feats.Least Dragonmark == 0","race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Orc|Human\'"',
+    'Type=General ' +
+    'Require="feats.Least Dragonmark == 0",' +
+            '"race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Orc|Human\'"',
   'Action Boost':'Type=General',
   'Action Surge':'Type=General Require="baseAttack >= 3"',
   'Adamantine Body':'Type=Warforged Require="race == \'Warforged\'"',
   'Ashbound':'Type=General Require="features.Spontaneous Druid Spell"',
   'Attune Magic Weapon':
-    'Type="Item Creation" Require="casterLevel >= 5","features.Craft Magic Arms And Armor"',
+    'Type="Item Creation" ' +
+    'Require="casterLevel >= 5","features.Craft Magic Arms And Armor"',
   'Beast Shape':
-    'Type=General Require="Max \'^features.Beast Totem\' > 0",' +
-    '"levels.Druid >= 15"', // i.e., Wild Shape to huge creature
+    'Type=General ' +
+    'Require="Max \'^features.Beast Totem\' > 0",' +
+            '"levels.Druid >= 15"', // i.e., Wild Shape to huge creature
   'Beast Totem (Chimera)':'Type=General Require="features.Wild Empathy"',
   'Beast Totem (Digester)':'Type=General Require="features.Wild Empathy"',
   'Beast Totem (Displacer Beast)':
@@ -191,16 +195,29 @@ Eberron.FEATS_ADDED = {
   'Beast Totem (Yrthak)':'Type=General Require="features.Wild Empathy"',
   'Beasthide Elite':'Type=Shifter Require=features.Beasthide',
   'Bind Elemental':
-    'Type="Item Creation" Require="casterLevel >= 9","features.Craft Wondrous Item"',
+    'Type="Item Creation" ' +
+    'Require="casterLevel >= 9",' +
+            '"features.Craft Wondrous Item"',
   'Child Of Winter':
-    'Type=General Require="alignment !~ \'Good\'","features.Spontaneous Druid Spell"',
+    'Type=General ' +
+    'Require="alignment !~ \'Good\'",' +
+            '"features.Spontaneous Druid Spell"',
   'Cliffwalk Elite':'Type=Shifter Require=features.Cliffwalk',
 // Craft Construct from MM needed for Artificer class
   'Craft Construct':
-    'Type="Item Creation" Require="features.Craft Magic Arms And Armor","features.Craft Wondrous Item"',
-  'Double Steel Strike':'Type=General Require="Weapon Proficiency (Two-Bladed Sword)","features.Flurry Of Blows" Imply="weapons.Two-Bladed Sword"',
+    'Type="Item Creation" ' +
+    'Require="features.Craft Magic Arms And Armor",' +
+            '"features.Craft Wondrous Item"',
+  'Double Steel Strike':
+    'Type=General ' +
+    'Require="Weapon Proficiency (Two-Bladed Sword)",' +
+            '"features.Flurry Of Blows" ' +
+    'Imply="weapons.Two-Bladed Sword"',
   'Dragon Rage':
-    'Type=General Require="Max \'^features.Dragon Totem\' > 0",features.Rage,origin=Argonnessen',
+    'Type=General ' +
+    'Require="Max \'^features.Dragon Totem\' > 0",' +
+             'features.Rage,' +
+             'origin=Argonnessen',
   'Dragon Totem (Black)':
     'Type=General Require="baseAttack >= 1","origin =~ \'Argonnessen|Seren\'"',
   'Dragon Totem (Blue)':
@@ -222,20 +239,24 @@ Eberron.FEATS_ADDED = {
   'Dragon Totem (White)':
     'Type=General Require="baseAttack >= 1","origin =~ \'Argonnessen|Seren\'"',
   'Ecclesiarch':
-    'Type=General Require="skills.Knowledge (Religion) >= 6" Imply=features.Leadership',
+    'Type=General ' +
+    'Require="skills.Knowledge (Religion) >= 6" ' +
+    'Imply=features.Leadership',
   'Education':'Type=General',
   'Exceptional Artisan':
-    'Type="Item Creation" Require="SumItemCreationFeats >= 2"',
+    'Type="Item Creation" Require="sumItemCreationFeats >= 2"',
   'Extend Rage':'Type=General Require=features.Rage',
   'Extra Music':'Type=General Require="features.Bardic Music"',
   'Extra Rings':
     'Type="Item Creation" Require="casterLevel >= 12","feaures.Forge Ring"',
   'Extra Shifter Trait':
-    'Type=Shifter Require="race == \'Shifter\'","SumShifterFeats >= 3"',
+    'Type=Shifter Require="race == \'Shifter\'","sumShifterFeats >= 3"',
   'Extraordinary Artisan':
-    'Type="Item Creation" Require="SumItemCreationFeats >= 2"',
+    'Type="Item Creation" Require="sumItemCreationFeats >= 2"',
   'Favored In House':
-    'Type=General Require="house != \'None\'","race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Orc|Human\'"',
+    'Type=General ' +
+    'Require="house != \'None\'",' +
+            '"race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Orc|Human\'"',
   'Flensing Strike':
     'Type=General Require="Weapon Focus (Kama)","Weapon Proficiency (Kama)"',
   'Gatekeeper Initiate':
@@ -243,14 +264,27 @@ Eberron.FEATS_ADDED = {
   'Great Bite':'Type=Shifter Require="baseAttack >= 6",features.Longtooth',
   'Great Rend':'Type=Shifter Require="baseAttack >= 4",features.Razorclaw',
   'Greater Dragonmark':
-    'Type=General Require="features.Least Dragonmark","features.Lesser Dragonmark","house != \'None\'","race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Orc|Human\'","CountSkillsGe12 >= 2"',
-  'Greater Powerful Charge':'Type=General Require="baseAttack >= 4","features.Powerful Charge","features.Small == 0"',
+    'Type=General ' +
+    'Require="features.Least Dragonmark",' +
+            '"features.Lesser Dragonmark",' +
+            '"house != \'None\'",' +
+            '"race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Orc|Human\'",' +
+            '"CountSkillsGe12 >= 2"',
+  'Greater Powerful Charge':
+    'Type=General ' +
+    'Require="baseAttack >= 4",' +
+            '"features.Powerful Charge",' +
+            '"features.Small == 0"',
   'Greater Shifter Defense':
-    'Type=Shifter Require="feaures.Shifter Defense","race == \'Shifter\'","SumShifterFeats >= 5"',
+    'Type=Shifter ' +
+    'Require="feaures.Shifter Defense",' +
+            '"race == \'Shifter\'","sumShifterFeats >= 5"',
   'Greensinger Initiate':
     'Type=General Require="features.Spontaneous Druid Spell"',
   'Haunting Melody':
-    'Type=General Require="features.Bardic Music","Sum \'^skills.Perform\' >= 9"',
+    'Type=General ' +
+    'Require="features.Bardic Music",' +
+            '"Sum \'^skills.Perform\' >= 9"',
   'Healing Factor':
     'Type=Shifter Require="constitution >= 13","race == \'Shifter\'"',
   'Heroic Spirit':'Type=General',
@@ -261,70 +295,107 @@ Eberron.FEATS_ADDED = {
   'Investigate':'Type=General',
   'Knight Training (Cleric)':'Type=General Imply="levels.Paladin > 0"',
   'Least Dragonmark':
-    'Type=General Require="house != \'None\'","race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Orc|Human\'"',
+    'Type=General ' +
+    'Require="house != \'None\'",' +
+            '"race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Orc|Human\'"',
   'Legendary Artisan':
-    'Type="Item Creation" Require="SumItemCreationFeats >= 2"',
+    'Type="Item Creation" Require="sumItemCreationFeats >= 2"',
   'Lesser Dragonmark':
-    'Type=General Require="house != \'None\'","race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Orc|Human\'","features.Least Dragonmark","CountSkillsGe9 >= 2"',
+    'Type=General ' +
+    'Require="house != \'None\'",' +
+            '"race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Orc|Human\'",' +
+            '"features.Least Dragonmark",' +
+            '"CountSkillsGe9 >= 2"',
   'Longstride Elite':'Type=Shifter Require=features.Longstride',
   'Mithral Body':'Type=Warforged Require="race == \'Warforged\'"',
   'Mithral Fluidity':
     'Type=Warforged Require="race == \'Warforged\'","feaures.Mithral Body"',
   'Monastic Training (Cleric)':'Type=General',
   'Music Of Growth':
-    'Type=General Require="features.Bardic Music","Sum \'^skills.Perform\' >= 12"',
+    'Type=General ' +
+    'Require="features.Bardic Music",' +
+            '"Sum \'^skills.Perform\' >= 12"',
   'Music Of Making':
-    'Type=General Require="features.Bardic Music","Sum \'^skills.Perform\' >= 9"',
+    'Type=General ' +
+    'Require="features.Bardic Music",' +
+            '"Sum \'^skills.Perform\' >= 9"',
   'Powerful Charge':
     'Type=General Require="baseAttack >= 1","features.Small == 0"',
   'Precise Swing':'Type=General Require="baseAttack >= 5"',
   'Pursue':'Type=General Require="features.Combat Reflexes"',
   'Raging Luck':'Type=General Require=features.Rage',
-  'Recognize Imposter':'Type=General Require="skills.Sense Motive >=3","skills.Spot >= 3"',
-  'Repel Aberration':'Type=General Require="features.Gatekeeper Initiate","levels.Druid >= 3"',
+  'Recognize Imposter':
+    'Type=General Require="skills.Sense Motive >=3","skills.Spot >= 3"',
+  'Repel Aberration':
+    'Type=General Require="features.Gatekeeper Initiate","levels.Druid >= 3"',
   'Research':'Type=General',
   'Right Of Counsel':'Type=General Require="race == \'Elf\'"',
-  'Serpent Strike':'Type=General Require="Weapon Focus (Longspear)","features.Flurry Of Blows","weaponProficiencyLevel >= 1" Imply="weapons.Longspear"',
+  'Serpent Strike':
+    'Type=General ' +
+    'Require="Weapon Focus (Longspear)",' +
+            '"features.Flurry Of Blows",' +
+            '"weaponProficiencyLevel >= 1" ' +
+    'Imply="weapons.Longspear"',
   'Shifter Defense':
-    'Type=Shifter Require="race == \'Shifter\'","SumShifterFeats >= 3"',
+    'Type=Shifter Require="race == \'Shifter\'","sumShifterFeats >= 3"',
   'Shifter Ferocity':
     'Type=Shifter Require="wisdom >= 13","race == \'Shifter\'"',
-  'Shifter Multiattack':'Type=Shifter Require="baseAttack >= 6","features.Longtooth||features.Razorclaw"',
+  'Shifter Multiattack':
+    'Type=Shifter ' +
+    'Require="baseAttack >= 6","features.Longtooth||features.Razorclaw"',
   'Silver Smite':
-    'Type=General Require="deity == \'The Silver Flame\'","features.Smite Evil"',
+    'Type=General ' +
+    'Require="deity == \'The Silver Flame\'","features.Smite Evil"',
   'Song Of The Heart':
-    'Type=General Require="features.Bardic Music","features.Inspire Competence","Sum \'^skills.Perform\' >= 6"',
+    'Type=General ' +
+    'Require="features.Bardic Music",' +
+            '"features.Inspire Competence",' +
+            '"Sum \'^skills.Perform\' >= 6"',
   'Soothe The Beast':
-    'Type=General Require="features.Bardic Music","Sum \^skills.Perform\' >= 6"',
+    'Type=General ' +
+    'Require="features.Bardic Music","Sum \^skills.Perform\' >= 6"',
   'Spontaneous Casting':'Type=General Require="casterLevel >= 5"',
   'Strong Mind':'Type=General Require="wisdom >= 11"',
   'Totem Companion':
-    'Type=General Require="Max \'^features.Beast Totem\' >= 1","features.Wild Empathy"',
+    'Type=General ' +
+    'Require="Max \'^features.Beast Totem\' >= 1","features.Wild Empathy"',
   'Undead Empathy':'Type=General Require="charisma >= 13"',
   'Urban Tracking':'Type=General',
   'Vermin Companion':
     'Type=General Require="alignment !~ \'Good\'","levels.Druid >= 3"',
   'Vermin Shape':
-    'Type=General Require="alignment !~ \'Good\'","features.Child Of Winter","levels.Druid >= 5"',
+    'Type=General ' +
+    'Require="alignment !~ \'Good\'",' +
+            '"features.Child Of Winter",' +
+            '"levels.Druid >= 5"',
   'Wand Mastery':
     'Type=General Require="casterLevel >= 9","features.Craft Wand"',
   'Warden Initiate':'Type=General Require="features.Spontaneous Druid Spell"',
   'Whirling Steel Strike':
-    'Type=General Require="features.Weapon Focus (Longsword)","features.Flurry Of Blows" Imply="weapons.Longsword"'
+    'Type=General ' +
+    'Require="features.Weapon Focus (Longsword)",' +
+            '"features.Flurry Of Blows" ' +
+    'Imply="weapons.Longsword"'
 };
 Eberron.FEATS = Object.assign({}, SRD35.FEATS, Eberron.FEATS_ADDED);
 Eberron.FEATURES_ADDED = {
+
   // Class
   'Artificer Knowledge':
-    'Section=skill Note="+%V DC 15 check to determine whether an item is magical"',
+    'Section=skill ' +
+    'Note="+%V DC 15 check to determine whether an item is magical"',
   'Artificer Skill Mastery':
-    'Section=skill Note="Take 10 on Spellcraft/Use Magic Device when distracted"',
+    'Section=skill ' +
+    'Note="Take 10 on Spellcraft/Use Magic Device when distracted"',
   'Artisan Bonus':
     'Section=skill Note="+2 Use Magic Device on items character can craft"',
   'Craft Homunculus':
     'Section=magic Note="Create homunculus"',
   'Craft Reserve':
     'Section=magic Note=%V',
+  'Disable Trap':
+    'Section=skill ' +
+    'Note="Use Search and Disable Device to find and remove DC 20+ traps"',
   'Item Creation':
     'Section=magic Note="+2 DC 20+caster level check to create magic items"',
   'Metamagic Spell Completion':
@@ -333,6 +404,7 @@ Eberron.FEATURES_ADDED = {
     'Section=magic Note="Apply metamagic feat to spell from wand"',
   'Retain Essence':
     'Section=magic Note="Drain magic item XP into craft reserve"',
+
   // Domain
   'Add Life':'Section=magic Note="Touched d6+%V temporary HP for %1 hr"',
   'Calming Influence':'Section=magic Note="<i>Calm Emotions</i> 1/dy"',
@@ -352,25 +424,30 @@ Eberron.FEATURES_ADDED = {
   'Focused Casting':
     'Section=magic Note="x1.5 chosen spell variable effects 1/dy"',
   'Iron Gut':'Section=save Note="Immune to ingested poison and disease"',
-  'Master Deathless':'Section=combat Note="Use Turn Undead to command deathless 1/dy"',
+  'Master Deathless':
+    'Section=combat Note="Use Turn Undead to command deathless 1/dy"',
   'Merchant':
-    'Section=skill Note="+10 Profession (earn a living)/Appraise is a class skill"',
+    'Section=skill ' +
+    'Note="+10 Profession (earn a living)/Appraise is a class skill"',
   'Meteorologist':
     'Section=skill Note="+2 Survival (weather)/Survival is a class skill"',
   'Touch Of Decay':
     'Section=magic Note="Touched d4 Con (living) or 2d6+%V HP (undead) 1/dy"',
   'Turn It On':'Section=ability Note="+4 charisma for 1 min 1/dy"',
   'Weak-Willed':'Section=save Note="-1 Will"',
+
   // Feat
   'Aberrant Dragonmark':'Section=magic Note="Cast chosen spell 1/dy"',
   'Action Boost':
-    'section=ability Note="Add d8 instead of d6 when using AP on attack, skill, ability, level or saving throw"',
+    'section=ability ' +
+    'Note="Add d8 instead of d6 when using AP on attack, skill, ability, level or saving throw"',
   'Action Surge':
     'Section=ability Note="Spend 2 AP to take extra move or standard action"',
   'Adamantine Body':
     'Section=ability,combat Note="Max 20 speed","+6 AC/DR 2/adamantine"',
   'Ashbound':
-    'Section=magic Note="Dbl <i>Summon Nature\'s Ally</i> duration, summoned creatures +3 attack"',
+    'Section=magic ' +
+    'Note="Dbl <i>Summon Nature\'s Ally</i> duration, summoned creatures +3 attack"',
   'Attune Magic Weapon':
     'Section=combat Note="+1 attack and damage w/magic weapons"',
   'Beast Shape':'Section=magic Note="Wild Shape into beast totem 1/dy"',
@@ -403,7 +480,9 @@ Eberron.FEATURES_ADDED = {
   'Dragon Totem (Silver)':'Section=save Note="Resistance 5 vs. cold"',
   'Dragon Totem (White)':'Section=save Note="Resistance 5 vs. cold"',
   'Ecclesiarch':
-    'Section=feature,skill Note="+2 Leadership","Gather Information is a class skill/Knowledge (Local) is a class skill"',
+    'Section=feature,skill ' +
+    'Note="+2 Leadership",' +
+         '"Gather Information is a class skill/Knowledge (Local) is a class skill"',
   'Education':
     'Section=skill Note="Knowledge are class skills/+2 any 2 Knowledge skills"',
   'Exceptional Artisan':
@@ -419,9 +498,13 @@ Eberron.FEATURES_ADDED = {
     'Section=feature Note="Acquire favors from house contacts"',
   'Finder':'Section=skill Note="+2 Search"',
   'Flensing Strike':
-    'Section=combat Note="Kama causes -1 pain penalty to foe attack, save, checks for 1 min (DC %V Fort neg)"',
+    'Section=combat ' +
+    'Note="Kama causes -1 pain penalty to foe attack, save, checks for 1 min (DC %V Fort neg)"',
   'Gatekeeper Initiate':
-    'Section=magic,save,skill Note="Access to additional spells","+2 vs. supernatural and aberrations","Knowledge (Planes) is a class skill"',
+    'Section=magic,save,skill ' +
+    'Note="Access to additional spells",' +
+         '"+2 vs. supernatural and aberrations",' +
+         '"Knowledge (Planes) is a class skill"',
   'Great Bite':'Section=combat Note="Fang Crit is x3"',
   'Great Rend':'Section=combat Note="+d4+%V damage on hit w/both claws"',
   'Greater Dragonmark':
@@ -430,7 +513,9 @@ Eberron.FEATURES_ADDED = {
     'Section=combat Note="Raise charge damage one size category to %V"',
   'Greater Shifter Defense':'Section=combat Note="+2 Shifter Defense DR"',
   'Greensinger Initiate':
-    'Section=magic,skill Note="Access to additional spells","Bluff is a class skill/Hide is a class skill/Perform is a class skill"',
+    'Section=magic,skill ' +
+    'Note="Access to additional spells",' +
+         '"Bluff is a class skill/Hide is a class skill/Perform is a class skill"',
   'Handler':'Section=skill Note="+2 Handle Animal"',
   'Haunting Melody':
     'Section=magic Note="Foe afraid for %1 rd (DC %V Will neg)"',
@@ -444,7 +529,8 @@ Eberron.FEATURES_ADDED = {
   'Improved Natural Attack':
     'Section=combat Note="Natural attack damage increases one size catagory"',
   'Investigate':
-    'Section=skill Note="Use Search to find and analyze clues, synergy with appropriate Knowledge"',
+    'Section=skill ' +
+    'Note="Use Search to find and analyze clues, synergy with appropriate Knowledge"',
   'Knight Training (Cleric)':
     'Section=ability Note="No restrictions on Paladin/Cleric advancement"',
   'Least Dragonmark':
@@ -457,13 +543,18 @@ Eberron.FEATURES_ADDED = {
   'Maker':'Section=skill Note="+2 All Craft"',
   'Mithral Body':'Section=combat Note="+3 AC"',
   'Mithral Fluidity':
-    'Section=combat,skill Note="Raise Mithral Body Reflex AC limit by 1","Reduce skill penalty by 1"',
+    'Section=combat,skill ' +
+    'Note="Raise Mithral Body Reflex AC limit by 1",' +
+         '"Reduce skill penalty by 1"',
   'Monastic Training (Cleric)':
     'Section=ability Note="No restrictions on Monk/Cleric level advancement"',
   'Music Of Growth':
-    'Section=magic Note="R30\' +4 Str and Con to animal and plant creatures during Bardic Music"',
+    'Section=magic ' +
+    'Note="R30\' +4 Str and Con to animal and plant creatures during Bardic Music"',
   'Music Of Making':
-    'Section=magic,skill Note="Dbl duration of conjuration spells involving Bardic Music","+4 Craft during Bardic Music"',
+    'Section=magic,skill ' +
+    'Note="Dbl duration of conjuration spells involving Bardic Music",' +
+         '"+4 Craft during Bardic Music"',
   'Powerful Charge':'Section=combat Note="+%V damage from successful charge"',
   'Precise Swing':
     'Section=combat Note="Melee attack ignores less-than-total cover"',
@@ -490,7 +581,8 @@ Eberron.FEATURES_ADDED = {
   'Song Of The Heart':'Section=magic Note="+1 Bardic Music effects"',
   'Soothe The Beast':'Section=skill Note="Perform to change animal reaction"',
   'Spontaneous Casting':
-    'Section=magic Note="Spend 2 AP to substitute any known spell for a prepared one"',
+    'Section=magic ' +
+    'Note="Spend 2 AP to substitute any known spell for a prepared one"',
   'Storm Walker':'Section=skill Note="+2 Balance"',
   'Strong Mind':'Section=save Note="+3 vs. psionics"',
   'Totem Companion':
@@ -505,17 +597,24 @@ Eberron.FEATURES_ADDED = {
   'Vermin Shape':'Section=magic Note="Wild Shape into vermin"',
   'Wand Mastery':'Section=magic Note="+2 spell DC and caster level w/wands"',
   'Warden Initiate':
-    'Section=combat,magic,skill Note="+2 AC (forests)","Access to additional spells","Climb is a class skill/Jump is a class skill"',
+    'Section=combat,magic,skill ' +
+    'Note="+2 AC (forests)",' +
+         '"Access to additional spells",' +
+         '"Climb is a class skill/Jump is a class skill"',
   'Warder':'Section=skill Note="+2 Search"',
   'Whirling Steel Strike':
     'Section=combat Note="Flurry Of Blows with longsword"',
+
   // Race
   'Beasthide':
-    'Section=ability,combat Note="+2 Con while shifting","+2 AC while shifting"',
+    'Section=ability,combat ' +
+    'Note="+2 Con while shifting",' +
+         '"+2 AC while shifting"',
   'Cliffwalk':'Section=ability Note="+2 Dex, %V climb speed while shifting"',
   'Composite Plating':'Section=combat Note="+2 AC/Cannot wear armor"',
   'Construct Immunity':
-    'Section=save Note="Immune to poison, sleep, paralysis, disease, nausea, fatigue, exhaustion, sickening, and energy drain"',
+    'Section=save ' +
+    'Note="Immune to poison, sleep, paralysis, disease, nausea, fatigue, exhaustion, sickening, and energy drain"',
   'Construct Vulnerability':
     'Section=save Note="Affected by effects that target wood or metal"',
   'Deceptive':'Section=skill Note="+2 Bluff/+2 Intimidate"',
@@ -524,16 +623,21 @@ Eberron.FEATURES_ADDED = {
   'Influential':'Section=skill Note="+2 Bluff/+2 Diplomacy/+2 Intimidate"',
   'Intuitive':'Section=skill Note="+2 Sense Motive"',
   'Light Fortification':
-    'Section=combat Note="25% change of negating critical hits and sneak attacks"',
+    'Section=combat ' +
+    'Note="25% change of negating critical hits and sneak attacks"',
   'Longstride':'Section=ability Note="+2 Dex, +10 Speed while shifting"',
   'Longtooth':
-    'Section=ability,combat Note="+2 Str while shifting","d6+%V bite while shiting"',
+    'Section=ability,combat ' +
+    'Note="+2 Str while shifting",' +
+         '"d6+%V bite while shiting"',
   'Mindlink':'Section=magic Note="<i>Mindlink</i> 1/dy"',
   'Minor Shape Change':'Section=magic Note="<i>Shape Change</i> body at will"',
   'Natural Psionic':'Section=magic Note="+1 PP/level"',
   'Natural Linguist':'Section=skill Note="Speak Language is a class skill"',
   'Razorclaw':
-    'Section=ability,combat Note="+2 Str while shifting","d4+%V claw attack while shifting"',
+    'Section=ability,combat ' +
+    'Note="+2 Str while shifting",' +
+         '"d4+%V claw attack while shifting"',
   'Resist Charm':'Section=save Note="+2 vs. charm effects"',
   'Resist Mental':'Section=save Note="+2 vs. mind-altering effects"',
   'Resist Sleep':'Section=save Note="+2 vs. <i>Sleep</i>"',
@@ -542,13 +646,19 @@ Eberron.FEATURES_ADDED = {
   'Shifting':'Section=feature Note="Use Shifter trait for %V rd %1/day"',
   'Slam Weapon':'Section=combat Note="d4 slam attack"',
   'Stable':
-    'Section=combat Note="May perform strenuous activity at 0 HP, no additional loss at negative HP"',
+    'Section=combat ' +
+    'Note="May perform strenuous activity at 0 HP, no additional loss at negative HP"',
   'Unhealing':
-    'Section=combat Note="Does not heal damage naturally, half effect from healing spells"',
+    'Section=combat ' +
+    'Note="Does not heal damage naturally, half effect from healing spells"',
   'Warforged Ability Adjustment':
     'Section=ability Note="+2 constitution/-2 wisdom/-2 charisma"',
   'Wildhunt':
-    'Section=ability,feature,skill Note="+2 Con while shifting","R30\' Detect creature presence, track by smell","+2 Survival"'
+    'Section=ability,feature,skill ' +
+    'Note="+2 Con while shifting",' +
+         '"R30\' Detect creature presence, track by smell",' +
+         '"+2 Survival"'
+
 };
 Eberron.FEATURES = Object.assign({}, SRD35.FEATURES, Eberron.FEATURES_ADDED);
 Eberron.HOUSES = {
@@ -1430,16 +1540,10 @@ Eberron.magicRules = function(rules, schools, spells) {
   // No changes needed to the rules defined by base method
 };
 
-/* Defines rules related to character feats, languages, and skills. */
+/* Defines rules related to character aptitudes. */
 Eberron.talentRules = function(rules, feats, features, languages, skills) {
   Eberron.baseRules.talentRules(rules, feats, features, languages, skills);
   // No changes needed to the rules defined by base method
-  for(var feat in feats) {
-    if(feats[feat].indexOf('Item Creation') >= 0)
-      rules.defineRule('SumItemCreationFeats', 'feats.' + feat, '+=', null);
-    if(feats[feat].indexOf('Shifter') >= 0)
-      rules.defineRule('SumShifterFeats', 'feats.' + feat, '+=', null);
-  }
   for(var skill in skills) {
     rules.defineRule
       ('CountSkillsGe9', 'skills.' + skill, '+=', 'source >= 9 ? 1 : null');
@@ -1650,23 +1754,23 @@ Eberron.armorRules = function(
 
 /*
  * Defines in #rules# the rules associated with class #name#, which has the list
- * of hard prerequisites #requires# and soft prerequisites #implies#. The class
- * grants #hitDie# (format [n]'d'n) additional hit points and #skillPoints#
- * additional skill points with each level advance. #attack# is one of '1',
- * '1/2', or '3/4', indicating the base attack progression for the class;
- * similarly, #saveFort#, #saveRef#, and #saveWill# are each one of '1/2' or
- * '1/3', indicating the saving throw progressions. #skills# indicate class
- * skills for the class; see skillRules for an alternate way these can be
- * defined. #features# and #selectables# list the fixed and selectable features
- * acquired as the character advances in class level, and #languages# list any
- * automatic languages for the class. #casterLevelArcane# and
- * #casterLevelDivine#, if specified, give the Javascript expression for
- * determining the caster level for the class; these can incorporate a class
- * level attribute (e.g., 'levels.Fighter') or the character level attribute
- * 'level'. #spellAbility#, if specified, contains the ability for computing
- * spell difficulty class for cast spells. #spellSlots# lists the number of
- * spells per level per day that the class can cast, and #spells# lists spells
- * defined by the class.
+ * of hard prerequisites #requires#. The class grants #hitDie# (format [n]'d'n)
+ * additional hit points and #skillPoints# additional skill points with each
+ * level advance. #attack# is one of '1', '1/2', or '3/4', indicating the base
+ * attack progression for the class; similarly, #saveFort#, #saveRef#, and
+ * #saveWill# are each one of '1/2' or '1/3', indicating the saving throw
+ * progressions. #skills# indicate class skills for the class; see skillRules
+ * for an alternate way these can be defined. #features# and #selectables# list
+ * the fixed and selectable features acquired as the character advances in
+ * class level, and #languages# lists any automatic languages for the class.
+ * #casterLevelArcane# and #casterLevelDivine#, if specified, give the
+ * Javascript expression for determining the caster level for the class; these
+ * can incorporate a class level attribute (e.g., 'levels.Cleric') or the
+ * character level attribute 'level'. #spellAbility#, if specified, names the
+ * ability for computing spell difficulty class. #spellSlots# lists the
+ * number of spells per level per day granted by the class, and #spells# lists
+ * spells defined by the class. #spellDict# is the dictionary of all spells,
+ * used to look up individual spell attributes.
  */
 Eberron.classRules = function(
   rules, name, requires, hitDie, attack, skillPoints, saveFort, saveRef,
@@ -1699,8 +1803,8 @@ Eberron.classRules = function(
 };
 
 /*
- * Defines in #rules# the rules associated with class #name# that are not
- * directly derived from the parmeters passed to classRules.
+ * Defines in #rules# the rules associated with class #name# that cannot be
+ * derived directly from the abilities passed to classRules.
  */
 Eberron.classRulesExtra = function(rules, name) {
   if(name == 'Artificer') {
@@ -1781,8 +1885,8 @@ Eberron.featRules = function(rules, name, requires, implies, types) {
 };
 
 /*
- * Defines in #rules# the rules associated with feat #name# that are not
- * directly derived from the parmeters passed to featRules.
+ * Defines in #rules# the rules associated with feat #name# that cannot be
+ * derived directly from the abilties passed to featRules.
  */
 Eberron.featRulesExtra = function(rules, name) {
 
@@ -1877,10 +1981,6 @@ Eberron.featRulesExtra = function(rules, name) {
  * the two must have the same number of elements.
  */
 Eberron.featureRules = function(rules, name, sections, notes) {
-  if(typeof sections == 'string')
-    sections = [sections];
-  if(typeof notes == 'string')
-    notes = [notes];
   if(Eberron.baseRules == window.Pathfinder) {
     for(var i = 0; i < sections.length; i++) {
       if(sections[i] != 'skill')
@@ -1903,7 +2003,14 @@ Eberron.featureRules = function(rules, name, sections, notes) {
   // No changes needed to the rules defined by base method
 };
 
-/* Defines rules related to Eberron house characteristics. */
+/*
+ * Defines rules related to Eberron house #name#. #dragonmark# is the
+ * dragonmark associated with the house. #features# lists the features acquired
+ * by members of the house and #spells# the list of spells granted by the
+ * dragonmark when the Least Dragonmark, Lesser Dragonmark, Greater Dragonmark
+ * feats and the Heir of Siberys prestige class are taken. #spellDict# is the
+ * dictionary of all spells, used to look up individual spell attributes.
+ */
 Eberron.houseRules = function(
   rules, name, dragonmark, features, spells, spellDict
 ) {
@@ -1916,6 +2023,14 @@ Eberron.houseRules = function(
     return;
   if(!dragonmark) {
     console.log('Empty dragonmark for house ' + name);
+    return;
+  }
+  if(!Array.isArray(features)) {
+    console.log('Bad features list "' + features + '" for house ' + name);
+    return;
+  }
+  if(!Array.isArray(spells)) {
+    console.log('Bad spells list "' + spells + '" for house ' + name);
     return;
   }
 
@@ -2010,8 +2125,8 @@ Eberron.pathRules = function(
 }
 
 /*
- * Defines in #rules# the rules associated with path #name# that are not
- * directly derived from the parmeters passed to pathRules.
+ * Defines in #rules# the rules associated with path #name# that cannot be
+ * derived directly from the abilities passed to pathRules.
  */
 Eberron.pathRulesExtra = function(rules, name) {
   if(name == 'Decay Domain') {
@@ -2032,10 +2147,11 @@ Eberron.pathRulesExtra = function(rules, name) {
 /*
  * Defines in #rules# the rules associated with race #name#, which has the list
  * of hard prerequisites #requires#. #features# and #selectables# list
- * associated features and #languages# the automatic languages. #spells# lists
+ * associated features and #languages# any automatic languages. #spells# lists
  * any natural spells, for which #spellAbility# is used to compute the save DC.
- * #spellDict# is the dictionary of all spells used to look up individual spell
- * attributes.
+ * #spellSlots# lists the number of spells per level per day granted by the
+ * race, and #spells# lists spells defined by the race. #spellDict# is the
+ * dictionary of all spells, used to look up individual spell attributes.
  */
 Eberron.raceRules = function(
   rules, name, requires, features, selectables, languages, spellAbility,
@@ -2048,8 +2164,8 @@ Eberron.raceRules = function(
 };
 
 /*
- * Defines in #rules# the rules associated with race #name# that are not
- * directly derived from the parmeters passed to raceRules.
+ * Defines in #rules# the rules associated with race #name# that cannot be
+ * derived directly from the abilities passed to raceRules.
  */
 Eberron.raceRulesExtra = function(rules, name) {
 
@@ -2081,7 +2197,10 @@ Eberron.raceRulesExtra = function(rules, name) {
 
 };
 
-/* Defines in #rules# the rules associated with magic school #name#. */
+/*
+ * Defines in #rules# the rules associated with magic school #name#, which
+ * grants the list of #features#.
+ */
 Eberron.schoolRules = function(rules, name, features) {
   Eberron.baseRules.schoolRules(rules, name, features);
   // No changes needed to the rules defined by base method
@@ -2090,8 +2209,8 @@ Eberron.schoolRules = function(rules, name, features) {
 /*
  * Defines in #rules# the rules associated with shield #name#, which adds #ac#
  * to the character's armor class, requires a #profLevel# proficiency level to
- * use effectively, imposes #skillPenalty# on specific skills
- * and yields a #spellFail# percent chance of arcane spell failure.
+ * use effectively, imposes #skillPenalty# on specific skills and yields a
+ * #spellFail# percent chance of arcane spell failure.
  */
 Eberron.shieldRules = function(
   rules, name, ac, profLevel, skillFail, spellFail
@@ -2103,12 +2222,12 @@ Eberron.shieldRules = function(
 
 /*
  * Defines in #rules# the rules associated with skill #name#, associated with
- * #ability# (one of 'strength', 'intelligence', etc.). #untrained#, if
- * specified is a boolean indicating whether or not the skill can be used
- * untrained; the default is true. #classes# lists the classes for which this
- * is a class skill; a value of "all" indicates that this is a class skill for
- * all classes. #synergies#, if specified, lists synergies to other skills and
- * abilities granted by high ranks in this skill.
+ * basic ability #ability#. #untrained#, if specified, is a boolean indicating
+ * whether or not the skill can be used untrained; the default is true.
+ * #classes# lists the classes for which this is a class skill; a value of
+ * "all" indicates that this is a class skill for all classes. #synergies#
+ * lists any synergies with other skills and abilities granted by high ranks in
+ * this skill.
  */
 Eberron.skillRules = function(
   rules, name, ability, untrained, classes, synergies
@@ -2121,7 +2240,7 @@ Eberron.skillRules = function(
 /*
  * Defines in #rules# the rules associated with spell #name#, which is from
  * magic school #school#. #casterGroup# and #level# are used to compute any
- * saving throw value required by the spell. #description# is a verbose
+ * saving throw value required by the spell. #description# is a concise
  * description of the spell's effects.
  */
 Eberron.spellRules = function(
@@ -2150,6 +2269,36 @@ Eberron.weaponRules = function(
   // No changes needed to the rules defined by base method
 };
 
+/*
+ * Returns the list of editing elements needed by #choiceRules# to add a #type#
+ * item to #rules#.
+ */
+Eberron.choiceEditorElements = function(rules, type) {
+  var result = [];
+  if(type == 'House')
+    result.push(
+      ['Dragonmark', 'Dragonmark', 'text', [20]],
+      ['Features', 'Features', 'text', [40]]
+      ['Spells', 'Spells', 'text', [80]]
+    );
+  else
+    result = Eberron.baseRules.choiceEditorElements(rules, type);
+  return result
+};
+
+/* Returns an ObjectViewer loaded with the default character sheet format. */
+Eberron.createViewers = function(rules, viewers) {
+  Eberron.baseRules.createViewers(rules, viewers);
+  // No changes needed to the return value of the base method
+};
+
+/* Sets #attributes#'s #attribute# attribute to a random value. */
+Eberron.randomizeOneAttribute = function(attributes, attribute) {
+  Eberron.baseRules.randomizeOneAttribute.apply(this, [attributes, attribute]);
+  // No changes needed to the return value of the base method
+};
+
+/* Returns HTML body content for user notes associated with this rule set. */
 Eberron.ruleNotes = function() {
   return '' +
     '<h2>Eberron Quilvyn Module Notes</h2>\n' +
@@ -2171,32 +2320,3 @@ Eberron.ruleNotes = function() {
     'None, currently\n' +
     '</p>\n';
 }
-
-/* Returns an ObjectViewer loaded with the default character sheet format. */
-Eberron.createViewers = function(rules, viewers) {
-  Eberron.baseRules.createViewers(rules, viewers);
-  // No changes needed to the return value of the base method
-};
-
-/*
- * Returns the list of editing elements needed by #choiceRules# to add a #type#
- * item to #rules#.
- */
-Eberron.choiceEditorElements = function(rules, type) {
-  var result = [];
-  if(type == 'House')
-    result.push(
-      ['Dragonmark', 'Dragonmark', 'text', [20]],
-      ['Features', 'Features', 'text', [40]]
-      ['Spells', 'Spells', 'text', [80]]
-    );
-  else
-    result = Eberron.baseRules.choiceEditorElements(rules, type);
-  return result
-};
-
-/* Sets #attributes#'s #attribute# attribute to a random value. */
-Eberron.randomizeOneAttribute = function(attributes, attribute) {
-  Eberron.baseRules.randomizeOneAttribute.apply(this, [attributes, attribute]);
-  // No changes needed to the return value of the base method
-};
