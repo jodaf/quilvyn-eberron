@@ -18,7 +18,7 @@ Place, Suite 330, Boston, MA 02111-1307 USA.
 /*jshint esversion: 6 */
 "use strict";
 
-var EBERRON_VERSION = '2.1.1.0';
+var EBERRON_VERSION = '2.1.1.1';
 
 /*
  * This module loads the rules from the Eberron campaign setting.  The Eberron
@@ -1424,8 +1424,6 @@ Eberron.CLASSES_ADDED = {
       'Appraise,Concentration,Craft,"Disable Device","Knowledge (Arcana)",' +
       '"Knowledge (Architecture)","Knowledge (Planes)","Open Lock",' +
       'Profession,Search,Spellcraft,"Use Magic Device" ' +
-    // TODO Artificer infusions are neither arcane nor divine, but they are casters
-    'CasterLevelArcane=levels.Artificer ' +
     'SpellAbility=intelligence ' +
     'SpellSlots=' +
       'A1:1=2;2=3;14=4,' +
@@ -1823,6 +1821,8 @@ Eberron.classRulesExtra = function(rules, name) {
        'levels.Artificer', '=', null,
        'intelligenceModifier', '+', null
     );
+    // Artificers are neither arcane nor divine, but they are casters
+    rules.defineRule('casterLevel', 'casterLevels.Artificer', '+=', null);
   } else if(Eberron.baseRules.classRulesExtra) {
     Eberron.baseRules.classRulesExtra(rules, name);
   }
