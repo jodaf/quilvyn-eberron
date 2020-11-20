@@ -213,7 +213,7 @@ EberronPrestige.FEATURES = {
   'Charge Bonus':'Section=combat Note="+%V attack when charging"',
   'Climb Speed':
     'Section=ability ' +
-    'Note="20\' climb speed (+10 for Cliffwalker) while shifting\"',
+    'Note="20\' climb speed (+10 for Cliffwalker) while shifting"',
   'Construct Perfection':
     'Section=combat Note="Immune nonlethal damage and critical hits"',
   'Contact':'Section=feature Note="Level 3 associate or informant"',
@@ -313,7 +313,7 @@ EberronPrestige.talentRules = function(rules, features) {
 EberronPrestige.classRulesExtra = function(rules, name) {
 
   var prefix =
-    name.substring(0,1).toLowerCase() + name.substring(1).replace(/ /g, '');
+    name.substring(0,1).toLowerCase() + name.substring(1).replaceAll(' ', '');
 
   if(name == 'Dragonmark Heir') {
 

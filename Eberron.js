@@ -18,7 +18,7 @@ Place, Suite 330, Boston, MA 02111-1307 USA.
 /*jshint esversion: 6 */
 "use strict";
 
-var EBERRON_VERSION = '2.1.1.1';
+var EBERRON_VERSION = '2.1.1.2';
 
 /*
  * This module loads the rules from the Eberron campaign setting.  The Eberron
@@ -353,7 +353,7 @@ Eberron.FEATS_ADDED = {
             '"Sum \'^skills.Perform\' >= 6"',
   'Soothe The Beast':
     'Type=General ' +
-    'Require="features.Bardic Music","Sum \^skills.Perform\' >= 6"',
+    'Require="features.Bardic Music","Sum \'^skills.Perform\' >= 6"',
   'Spontaneous Casting':'Type=General Require="casterLevel >= 5"',
   'Strong Mind':'Type=General Require="wisdom >= 11"',
   'Totem Companion':
@@ -1724,7 +1724,7 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
   if(type != 'Feature' && type != 'Path') {
     type = type == 'Class' ? 'levels' :
     type = type == 'Deity' ? 'deities' :
-    (type.substring(0,1).toLowerCase() + type.substring(1).replace(/ /g, '') + 's');
+    (type.substring(0,1).toLowerCase() + type.substring(1).replaceAll(' ', '') + 's');
     rules.addChoice(type, name, attrs);
   }
 };
@@ -1906,9 +1906,6 @@ Eberron.featRulesExtra = function(rules, name) {
       ('abilityNotes.cliffwalk', 'abilityNotes.cliffwalkElite', '+', '10');
   } else if(name == 'Extend Rage') {
     rules.defineRule('combatNotes.rage', 'combatNotes.extendRage', '+', '5');
-  } else if(name == 'Extra Music') {
-    rules.defineRule
-      ('featureNotes.bardicMusic', 'featureNotes.extraMusic', '+', '4');
   } else if(name == 'Extra Shifter Trait') {
     rules.defineRule('selectableFeatureCount.Shifter',
       'featureNotes.extraShifterTrait', '+', '1'
