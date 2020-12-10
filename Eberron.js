@@ -18,7 +18,7 @@ Place, Suite 330, Boston, MA 02111-1307 USA.
 /*jshint esversion: 6 */
 "use strict";
 
-var EBERRON_VERSION = '2.1.1.3';
+var EBERRON_VERSION = '2.1.1.4';
 
 /*
  * This module loads the rules from the Eberron campaign setting.  The Eberron
@@ -50,6 +50,7 @@ function Eberron() {
   rules.choiceRules = Eberron.choiceRules;
   rules.editorElements = SRD35.initialEditorElements();
   rules.getFormats = SRD35.getFormats;
+  rules.getPlugins = Eberron.getPlugins;
   rules.makeValid = SRD35.makeValid;
   rules.randomizeOneAttribute = Eberron.randomizeOneAttribute;
   Eberron.RANDOMIZABLE_ATTRIBUTES =
@@ -2157,3 +2158,8 @@ Eberron.ruleNotes = function() {
     'None, currently\n' +
     '</p>\n';
 }
+
+/* Returns an array of plugins upon which this one depends. */
+Eberron.getPlugins = function() {
+  return LastAge.basePlugin.rules.getPlugins().concat([LastAge.basePlugin]);
+};
