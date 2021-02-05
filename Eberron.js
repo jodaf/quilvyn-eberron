@@ -18,7 +18,7 @@ Place, Suite 330, Boston, MA 02111-1307 USA.
 /*jshint esversion: 6 */
 "use strict";
 
-var EBERRON_VERSION = '2.1.1.4';
+var EBERRON_VERSION = '2.2.1.0';
 
 /*
  * This module loads the rules from the Eberron campaign setting.  The Eberron
@@ -84,20 +84,19 @@ function Eberron() {
   Eberron.SKILLS = Object.assign({}, Eberron.basePlugin.SKILLS);
   Eberron.SPELLS =
     Object.assign({}, Eberron.basePlugin.SPELLS, Eberron.SPELLS_ADDED);
+  for(var s in Eberron.SPELLS_LEVELS) {
+    Eberron.SPELLS[s] =
+      Eberron.SPELLS[s].replace('Level=', 'Level=' + Eberron.SPELLS_LEVELS[s] + ',');
+  }
   Eberron.WEAPONS =
     Object.assign({}, Eberron.basePlugin.WEAPONS, Eberron.WEAPONS_ADDED);
   Eberron.CLASSES =
     Object.assign({}, Eberron.basePlugin.CLASSES, Eberron.CLASSES_ADDED);
-  for(var clas in Eberron.CLASS_SPELLS_ADDED) {
-    Eberron.CLASSES[clas] = Eberron.CLASSES[clas].replace('Spells=', 'Spells=' + Eberron.CLASS_SPELLS_ADDED[clas] + ',');
-  }
 
   Eberron.abilityRules(rules);
   Eberron.aideRules(rules, Eberron.ANIMAL_COMPANIONS, Eberron.FAMILIARS);
   Eberron.combatRules(rules, Eberron.ARMORS, Eberron.SHIELDS, Eberron.WEAPONS);
-  // Most spell definitions are handled by individual classes and domain.
-  // Schools must be defined before this can be done.
-  Eberron.magicRules(rules, Eberron.SCHOOLS, []);
+  Eberron.magicRules(rules, Eberron.SCHOOLS, Eberron.SPELLS);
   // Feats must be defined before classes
   Eberron.talentRules
     (rules, Eberron.FEATS, Eberron.FEATURES, Eberron.LANGUAGES, Eberron.SKILLS);
@@ -667,108 +666,43 @@ Eberron.HOUSES = {
     '',
   'Cannith':
     'Dragonmark=Making ' +
-    'Features=Maker ' +
-    'Spells=' +
-      '"Cannith1:Make Whole;Mending;Repair Light Damage",' +
-      '"Cannith2:Minor Creation;Repair Serious Damage",' +
-      '"Cannith3:Fabricate;Major Creation",' +
-      '"Cannith4:True Creation"',
+    'Features=Maker',
   'Deneith':
     'Dragonmark=Sentinel ' +
-    'Features=Sentinel ' +
-    'Spells=' +
-      '"Deneith1:Mage Armor;Protection From Arrows;Shield Of Faith;Shield Other",' +
-      '"Deneith2:Lesser Globe Of Invulnerability;Protection From Energy",' +
-      '"Deneith3:Globe Of Invulnerability",' +
-      '"Deneith4:Mind Blank"',
+    'Features=Sentinel',
   'Ghallanda':
     'Dragonmark=Hospitality ' +
-    'Features=Hospitaler ' +
-    'Spells=' +
-      '"Ghallanda1:Prestidigitation;Purify Food And Drink;Unseen Servant",' +
-      '"Ghallanda2:Create Food And Water;Secure Shelter",' +
-      '"Ghallanda3:Heroes\' Feast;Mage\'s Magnificent Mansion",' +
-      'Ghallanda4:Refuge',
+    'Features=Hospitaler',
   'Jorasco':
     'Dragonmark=Healing ' +
-    'Features=Healer ' +
-    'Spells=' +
-      '"Jorasco1:Cure Light Wounds;Lesser Restoration",' +
-      '"Jorasco2:Cure Serious Wounds;Neutralize Poison;Remove Disease;Restoration",' +
-      'Jorasco3:Heal,' +
-      '"Jorasco4:Mass Heal"',
+    'Features=Healer',
   'Kundarak':
     'Dragonmark=Warding ' +
-    'Features=Warder ' +
-    'Spells=' +
-      '"Kundarak1:Alarm;Arcane Lock;Fire Trap;Misdirection",' +
-      '"Kundarak2:Explosive Runes;Glyph Of Warding;Nondetection",' +
-      '"Kundarak3:Greater Glyph Of Warding;Guards And Wards;Mage\'s Faithful Hound",' +
-      '"Kundarak4:Prismatic Wall"',
+    'Features=Warder',
   'Lyrandar':
     'Dragonmark=Storm ' +
-    'Features="Storm Walker" ' +
-    'Spells=' +
-      '"Lyrandar1:Endure Elements;Fog Cloud;Gust Of Wind",' +
-      '"Lyrandar2:Sleet Storm;Wind Wall;Wind\'s Favor",' +
-      '"Lyrandar3:Control Weather;Control Winds",' +
-      '"Lyrandar4:Storm Of Vengeance"',
+    'Features="Storm Walker"',
   'Medani':
     'Dragonmark=Detection ' +
-    'Features=Detective ' +
-    'Spells=' +
-      '"Medani1:Detect Magic;Detect Poison",' +
-      '"Medani2:Detect Scrying;See Invisibility",' +
-      '"Medani3:True Seeing",' +
-      '"Medani4:Moment Of Prescience"',
+    'Features=Detective',
   'Orien':
     'Dragonmark=Passage ' +
-    'Features=Traveler ' +
-    'Spells=' +
-      '"Orien1:Dimension Leap;Expeditious Retreat;Mount",' +
-      '"Orien2:Dimension Door;Phantom Steed",' +
-      '"Orien3:Overland Flight;Teleport",' +
-      '"Orien4:Greater Teleport"',
+    'Features=Traveler',
   'Phiarlan':
     'Dragonmark=Shadow ' +
-    'Features=Shadower ' +
-    'Spells=' +
-      '"Phiarlan1:Darkness;Disguise Self;Minor Image",' +
-      '"Phiarlan2:Clairaudience/Clairvoyance;Scrying;Shadow Conjuration",' +
-      '"Phiarlan3:Mislead;Prying Eyes;Shadow Walk",' +
-      '"Phiarlan4:Greater Prying Eyes"',
+    'Features=Shadower',
   'Sivis':
     'Dragonmark=Scribing ' +
-    'Features=Scribe ' +
-    'Spells=' +
-      '"Sivis1:Arcane Mark;Comprehend Languages;Whispering Wind",' +
-      '"Sivis2:Illusory Script;Secret Page;Tongues",' +
-      'Sivis3:Sending,' +
-      '"Sivis4:Symbol Of Death"',
+    'Features=Scribe',
   'Tharashk':
     'Dragonmark=Finding ' +
-    'Features=Finder ' +
-    'Spells=' +
-      '"Tharashk1:Identify;Know Direction;Locate Object",' +
-      '"Tharashk2:Helping Hand;Locate Creature",' +
-      '"Tharashk3:Find The Path",' +
-      '"Tharashk4:Discern Location"',
+    'Features=Finder',
   'Thuranni':
     'Dragonmark=Shadow ' +
-    'Features=Shadower ' +
-    'Spells=' +
-      '"Thuranni1:Darkness;Disguise Self;Minor Image",' +
-      '"Thuranni2:Clairaudience/Clairvoyance;Scrying;Shadow Conjuration",' +
-      '"Thuranni3:Mislead;Prying Eyes;Shadow Walk",' +
-      '"Thuranni4:Greater Prying Eyes"',
+    'Features=Shadower',
   'Vadalis':
     'Dragonmark=Handling ' +
-    'Features=Handler ' +
-    'Spells=' +
-      '"Vadalis1:Calm Animals;Charm Animal;Speak With Animals",' +
-      '"Vadalis2:Dominate Animal;Greater Magic Fang",' +
-      '"Vadalis3:Animal Growth;Summon Nature\'s Ally V",' +
-      '"Vadalis4:Awaken;Summon Nature\'s Ally VI"'
+    'Features=Handler'
 };
 Eberron.LANGUAGES_ADDED = {
   'Argon':'',
@@ -788,258 +722,82 @@ Eberron.PATHS_ADDED = {
     'Group=Cleric ' +
     'Level=levels.Cleric ' +
     'Features=' +
-      '"1:Empowered Creation","1:Craft Master" ' +
-    'SpellAbility=wisdom ' +
-    'Spells=' +
-      '"Artifice1:Animate Rope",' +
-      '"Artifice2:Wood Shape",' +
-      '"Artifice3:Stone Shape",' +
-      '"Artifice4:Minor Creation",' +
-      'Artifice5:Fabricate,' +
-      '"Artifice6:Major Creation",' +
-      'Artifice7:Hardening,' +
-      '"Artifice8:True Creation",' +
-      '"Artifice9:Prismatic Sphere"',
+      '"1:Empowered Creation","1:Craft Master"',
   'Charm Domain':
     'Group=Cleric ' +
     'Level=levels.Cleric ' +
     'Features=' +
-      '"1:Turn It On" ' +
-    'SpellAbility=wisdom ' +
-    'Spells=' +
-      '"Charm1:Charm Person",' +
-      '"Charm2:Calm Emotions",' +
-      'Charm3:Suggestion,' +
-      'Charm4:Heroism,' +
-      '"Charm5:Charm Monster",' +
-      'Charm6:Geas/Quest,' +
-      'Charm7:Insanity,' +
-      'Charm8:Demand,' +
-      '"Charm9:Dominate Monster"',
+      '"1:Turn It On"',
   'Commerce Domain':
     'Group=Cleric ' +
     'Level=levels.Cleric ' +
     'Features=' +
-      '1:Merchant ' +
-    'SpellAbility=wisdom ' +
-    'Spells=' +
-      '"Commerce1:Comprehend Languages",' +
-      '"Commerce2:Zone Of Truth",' +
-      'Commerce3:Tongues,' +
-      'Commerce4:Glibness,' +
-      '"Commerce5:True Seeing",' +
-      '"Commerce6:Secret Chest",' +
-      'Commerce7:Refuge,' +
-      '"Commerce8:Analyze Dweomer",' +
-      '"Commerce9:Polymorph Any Object"',
+      '1:Merchant',
   'Community Domain':
     'Group=Cleric ' +
     'Level=levels.Cleric ' +
     'Features=' +
-      '"1:Calming Influence","1:Community Pillar" ' +
-    'SpellAbility=wisdom ' +
-    'Spells=' +
-      'Community1:Bless,' +
-      'Community2:Status,' +
-      'Community3:Prayer,' +
-      '"Community4:Greater Status",' +
-      '"Community5:Telepathic Bond",' +
-      '"Community6:Heroes\' Feast",' +
-      'Community7:Refuge,' +
-      'Community8:Sympathy,' +
-      '"Community9:Mass Heal"',
+      '"1:Calming Influence","1:Community Pillar"',
   'Deathless Domain':
     'Group=Cleric ' +
     'Level=levels.Cleric ' +
     'Features=' +
-      '"1:Master Deathless" ' +
-    'SpellAbility=wisdom ' +
-    'Spells=' +
-      '"Deathless1:Detect Undead",' +
-      'Deathless2:Consecrate,' +
-      '"Deathless3:Halt Deathless",' +
-      '"Deathless4:Spirit Steed",' +
-      'Deathless5:Hallow,' +
-      '"Deathless6:Create Deathless",' +
-      '"Deathless7:Create Greater Deathless",' +
-      '"Deathless8:Control Deathless",' +
-      '"Deathless9:Hero\'s Blade"',
+      '"1:Master Deathless"',
   'Decay Domain':
     'Group=Cleric ' +
     'Level=levels.Cleric ' +
     'Features=' +
-      '"1:Touch Of Decay" ' +
-    'SpellAbility=wisdom ' +
-    'Spells=' +
-      'Decay1:Doom,' +
-      '"Decay2:Ray Of Enfeeblement",' +
-      'Decay3:Contagion,' +
-      'Decay4:Enervation,' +
-      'Decay5:Blight,' +
-      '"Decay6:Antilife Shell",' +
-      '"Decay7:Withering Palm",' +
-      '"Decay8:Horrid Wilting",' +
-      '"Decay9:Energy Drain"',
+      '"1:Touch Of Decay"',
   'Dragon Below Domain':
     'Group=Cleric ' +
     'Level=levels.Cleric ' +
     'Features=' +
-      '"1:Augment Summoning" ' +
-    'SpellAbility=wisdom ' +
-    'Spells=' +
-      '"Dragon1:Cause Fear",' +
-      '"Dragon2:Death Knell",' +
-      '"Dragon3:Bestow Curse",' +
-      '"Dragon4:Lesser Planar Ally",' +
-      '"Dragon5:Slay Living",' +
-      '"Dragon6:Planar Ally",' +
-      'Dragon7:Blasphemy,' +
-      '"Dragon8:Greater Planar Ally",' +
-      'Dragon9:Gate',
+      '"1:Augment Summoning"',
   'Exorcism Domain':
     'Group=Cleric ' +
     'Level=levels.Cleric ' +
     'Features=' +
-      '1:Exorcise ' +
-    'SpellAbility=wisdom ' +
-    'Spells=' +
-      '"Exorcism1:Protection From Evil",' +
-      '"Exorcism2:Magic Circle Against Evil",' +
-      '"Exorcism3:Remove Curse",' +
-      'Exorcism4:Dismissal,' +
-      '"Exorcism5:Dispel Evil",' +
-      'Exorcism6:Banishment,' +
-      '"Exorcism7:Holy Word",' +
-      '"Exorcism8:Holy Aura",' +
-      'Exorcism9:Freedom',
+      '1:Exorcise',
   'Feast Domain':
     'Group=Cleric ' +
     'Level=levels.Cleric ' +
     'Features=' +
-      '"1:Iron Gut" ' +
-    'SpellAbility=wisdom ' +
-    'Spells=' +
-      'Feast1:Goodberry,' +
-      '"Feast2:Delay Poison",' +
-      '"Feast3:Create Food And Water",' +
-      '"Feast4:Neutralize Poison",' +
-      '"Feast5:Secure Shelter",' +
-      '"Feast6:Heroes\' Feast",' +
-      '"Feast7:Mage\'s Magnificent Mansion",' +
-      'Feast8:Detoxify,' +
-      '"Feast9:Feast Of Champions"',
+      '"1:Iron Gut"',
   'Life Domain':
     'Group=Cleric ' +
     'Level=levels.Cleric ' +
     'Features=' +
-      '"1:Add Life" ' +
-    'SpellAbility=wisdom ' +
-    'Spells=' +
-      '"Life1:Hide From Undead",' +
-      '"Life2:Lesser Restoration",' +
-      '"Life3:Plant Growth",' +
-      '"Life4:Death Ward",' +
-      '"Life5:Disrupting Weapon",' +
-      '"Life6:Animate Objects",' +
-      'Life7:Regenerate,' +
-      '"Life8:Animate Plants",' +
-      '"Life8:Mass Heal"',
+      '"1:Add Life"',
   'Madness Domain':
     'Group=Cleric ' +
     'Level=levels.Cleric ' +
     'Features=' +
-      '"1:Flash Of Understanding",1:Weak-Willed ' +
-    'SpellAbility=wisdom ' +
-    'Spells=' +
-      '"Madness1:Lesser Confusion",' +
-      '"Madness2:Touch Of Madness",' +
-      'Madness3:Rage,' +
-      'Madness4:Confusion,' +
-      '"Madness5:Bolts Of Bedevilment",' +
-      '"Madness6:Phantasmal Killer",' +
-      'Madness7:Insanity,' +
-      '"Madness8:Maddening Scream",' +
-      'Madness9:Weird',
+      '"1:Flash Of Understanding",1:Weak-Willed',
   'Meditation Domain':
     'Group=Cleric ' +
     'Level=levels.Cleric ' +
     'Features=' +
-      '"1:Focused Casting" ' +
-    'SpellAbility=wisdom ' +
-    'Spells=' +
-      '"Meditation1:Comprehend Languages",' +
-      '"Meditation2:Owl\'s Wisdom",' +
-      '"Meditation3:Locate Object",' +
-      'Meditation4:Tongues,' +
-      '"Meditation5:Spell Resistance",' +
-      '"Meditation6:Find The Path",' +
-      '"Meditation7:Spell Turning",' +
-      '"Meditation8:Mind Blank",' +
-      '"Meditation9:Astral Projection"',
+      '"1:Focused Casting"',
   'Necromancer Domain':
     'Group=Cleric ' +
     'Level=levels.Cleric ' +
     'Features=' +
-      '"1:Empowered Necromancy" ' +
-    'SpellAbility=wisdom ' +
-    'Spells=' +
-      '"Necromancer1:Ray Of Enfeeblement",' +
-      '"Necromancer2:Command Undead",' +
-      '"Necromancer3:Vampiric Touch",' +
-      'Necromancer4:Enervation,' +
-      '"Necromancer5:Waves Of Fatigue",' +
-      'Necromancer6:Eyebite,' +
-      '"Necromancer7:Control Undead",' +
-      '"Necromancer8:Horrid Wilting",' +
-      '"Necromancer9:Energy Drain"',
+      '"1:Empowered Necromancy"',
   'Passion Domain':
     'Group=Cleric ' +
     'Level=levels.Cleric ' +
     'Features=' +
-      '"1:Fit Of Passion" ' +
-    'SpellAbility=wisdom ' +
-    'Spells=' +
-      '"Passion1:Cause Fear",' +
-      '"Passion2:Hideous Laughter",' +
-      'Passion3:Confusion,' +
-      '"Passion4:Crushing Despair",' +
-      '"Passion5:Greater Command",' +
-      '"Passion6:Greater Heroism",' +
-      '"Passion7:Song Of Discord",' +
-      '"Passion8:Irresistible Dance",' +
-      '"Passion9:Dominate Monster"',
+      '"1:Fit Of Passion"',
   'Shadow Domain':
     'Group=Cleric ' +
     'Level=levels.Cleric ' +
     'Features=' +
-      '1:Blind-Fight ' +
-    'SpellAbility=wisdom ' +
-    'Spells=' +
-      '"Shadow1:Obscuring Mist",' +
-      'Shadow2:Darkness,' +
-      '"Shadow3:Deeper Darkness",' +
-      '"Shadow4:Shadow Conjuration",' +
-      '"Shadow5:Shadow Evocation",' +
-      '"Shadow6:Shadow Walk",' +
-      '"Shadow7:Greater Shadow Conjuration",' +
-      '"Shadow8:Greater Shadow Evocation",' +
-      'Shadow9:Shades',
+      '1:Blind-Fight',
   'Weather Domain':
     'Group=Cleric ' +
     'Level=levels.Cleric ' +
     'Features=' +
-      '1:Clear-Eyed,1:Meteorologist ' +
-    'SpellAbility=wisdom ' +
-    'Spells=' +
-      '"Weather1:Obscuring Mist",' +
-      '"Weather2:Fog Cloud",' +
-      '"Weather3:Call Lightning",' +
-      '"Weather4:Sleet Storm",' +
-      '"Weather5:Call Lightning Storm",' +
-      '"Weather6:Control Winds",' +
-      '"Weather7:Control Weather",' +
-      'Weather8:Whirlwind,' +
-      '"Weather9:Storm Of Vengeance"'
+      '1:Clear-Eyed,1:Meteorologist'
 };
 Eberron.PATHS = Object.assign({}, SRD35.PATHS, Eberron.PATHS_ADDED);
 Eberron.RACES_ADDED = {
@@ -1074,168 +832,428 @@ Eberron.SKILLS = Object.assign({}, SRD35.SKILLS);
 Eberron.SPELLS_ADDED = {
   'Armor Enhancement':
     'School=Transmutation ' +
+    'Level=A2 ' +
     'Description="Touched armor or shield +3, 35K GP enhancement for $L10 min"',
   'Bolts Of Bedevilment':
     'School=Enchantment ' +
+    'Level=Madness5 ' +
     'Description="R$RM\' 3 targets (1/rd) stunned for $L2 rd (Will neg)"',
   'Construct Energy Ward':
     'School=Abjuration ' +
+    'Level=A3 ' +
     'Description="Touched construct DR ${lvl>10?30:lvl>6?20:10} from chosen energy for $L10 min"',
   'Control Deathless':
     'School=Necromancy ' +
+    'Level=Deathless8 ' +
     'Description="R$RS\' Command $L2 HD deathless in 30\' area for $L min"',
   'Create Deathless':
     'School=Necromancy ' +
+    'Level=Deathless6 ' +
     'Description="R$RS\' Create deathless soldier"',
   'Create Greater Deathless':
     'School=Necromancy ' +
+    'Level=Deathless7 ' +
     'Description="R$RS\' Create undying councilor"',
   'Detect Aberration':
     'School=Divination ' +
+    'Level=D1 ' +
     'Description="R60\' cone info on aberrations for conc/$L min"',
   'Detoxify':
     'School=Conjuration ' +
+    'Level=Feast9 ' +
     'Description="R30\' Neutralize venom for $L10 min"',
   'Dimension Leap':
     'School=Conjuration ' +
+    'Level=Orien1 ' +
     'Description="Teleport self up to $L10\'"',
   'Disable Construct':
     'School=Transmutation ' +
+    'Level=A6 ' +
     'Description="Touched construct $L10 HP (Will half)"',
   'Energy Alteration':
     'School=Transmutation ' +
+    'Level=A1 ' +
     'Description="Touched affects different energy type for $L10 min"',
   'Enhancement Alteration':
     'School=Transmutation ' +
+    'Level=A1 ' +
     'Description="Touched shield or weapon enhancement applies to bash and defense for $L10 min"',
   'Feast Of Champions':
     'School=Conjuration ' +
+    'Level=C9,Feast9 ' +
     'Description="Hour-long feast cures conditions, 2d8+$L HP"',
   'Greater Armor Enhancement':
     'School=Transmutation ' +
+    'Level=A3 ' +
     'Description="Touched armor or shield +5, 100K GP enhancement for $L10 min"',
   'Greater Construct Energy Ward':
     'School=Abjuration ' +
-     'Description="Touched construct ignores up to $L12min120 HP from specified energy for $L10 min"',
+    'Level=A4 ' +
+    'Description="Touched construct ignores up to $L12min120 HP from specified energy for $L10 min"',
   'Greater Status':
     'School=Divination ' +
+    'Level=Community4 ' +
     'Description="Monitor condition and position of, cast L0-2 touch spell on $Ldiv3 touched allies for $L hr"',
   'Greater Weapon Augmentation':
     'School=Transmutation ' +
+    'Level=A6 ' +
     'Description="Touched weapon +5 and 200K GP enhancement for $L10 min"',
   'Halt Deathless':
     'School=Necromancy ' +
+    'Level=Deathless3 ' +
     'Description="R$RM\' 3 deathless in 30\' area immobilized for $L rd (Will neg)"',
   'Hardening':
     'School=Transmutation ' +
+    'Level=A6,Artifice7,W6 ' +
     'Description="Touched $L10\' cu item resists damage"',
   "Hero's Blade":
     'School=Necromancy ' +
+    'Level=Deathless9 ' +
     'Description="Touched blade good-aligned, dbl crit threat, +2d6 HP to evil (+2d8 outsider or undead), blind and deafen evil 1d4 rd on crit (Will neg) for $L min"',
   'Inflict Critical Damage':
     'School=Transmutation ' +
+    'Level=A4 ' +
     'Description="Touched construct 4d8+$Lmin20 HP"',
   'Inflict Light Damage':
     'School=Transmutation ' +
+    'Level=A1 ' +
     'Description="Touched construct 1d8+$Lmin5 HP"',
   'Inflict Moderate Damage':
     'School=Transmutation ' +
+    'Level=A2 ' +
     'Description="Touched construct 2d8+$Lmin10 HP"',
   'Inflict Serious Damage':
     'School=Transmutation ' +
+    'Level=A3 ' +
     'Description="Touched construct 3d8+$Lmin15 HP"',
   'Iron Construct':
     'School=Transmutation ' +
+    'Level=A4 ' +
     'Description="Touched construct DR 15/adamantine, half acid and fire damage, +4 Str, -4 Dex, x5 weigh for $L min"',
   'Item Alteration':
     'School=Transmutation ' +
+    'Level=A4 ' +
     'Description="Touched item grants bonus differently for $L10 min"',
   "Legion's Shield Of Faith":
     'School=Abjuration ' +
+    'Level=A4 ' +
     'Description="R$RM\' Allies in 20\' area +$Ldiv6plus2min5 AC for $L min"',
   'Lesser Armor Enhancement':
     'School=Transmutation ' +
+    'Level=A1 ' +
     'Description="Touched armor or shield +1 and 5K GP enhancement for $L10 min"',
   'Lesser Weapon Augmentation':
     'School=Transmutation ' +
+    'Level=A2 ' +
     'Description="Touched weapon +1 and 10K GP enhancement for $L10 min"',
   'Maddening Scream':
     'School=Enchantment ' +
+    'Level=Madness8,W8 ' +
     'Description="Touched acts madly for 1d4+1 rd"',
   'Magecraft':
     'School=Divination ' +
+    'Level=W1 ' +
     'Description="Self +5 same day Craft check"',
   'Metamagic Item':
     'School=Transmutation ' +
+    'Level=A3 ' +
     'Description="Imbue touched magic item w/metamagic property for $L rd"',
   "Nature's Wrath":
     'School=Evocation ' +
+    'Level=D4 ' +
     'Description="R$RM\' 20\' radius aberrations ${Lmin10}d6 HP and dazed 1 rd, other unnatural ${Ldiv2min5}d8 HP (Will half)"',
   'Personal Weapon Augmentation':
     'School=Transmutation ' +
+    'Level=A1 ' +
     'Description="Touched self weapon +1 and 10K GP enhancement for $L10 min"',
   'Power Surge':
     'School=Transmutation ' +
+    'Level=A3 ' +
     'Description="Touched gains $Ldiv5 charges for $L min"',
   'Repair Critical Damage':
     'School=Transmutation ' +
-     'Description="Touched construct repair 4d8+$Lmin20"',
+    'Level=A4,W4 ' +
+    'Description="Touched construct repair 4d8+$Lmin20"',
   'Repair Light Damage':
     'School=Transmutation ' +
+    'Level=A1,Cannith1,W1 ' +
     'Description="Touched construct repair 1d8+$Lmin5"',
   'Repair Moderate Damage':
     'School=Transmutation ' +
+    'Level=A2,W2 ' +
     'Description="Touched construct repair 2d8+$Lmin10"',
   'Repair Serious Damage':
     'School=Transmutation ' +
+    'Level=A3,Cannith2,W3 ' +
     'Description="Touched construct repair 3d8+$Lmin15"',
   'Resistance Item':
     'School=Abjuration ' +
+    'Level=A1 ' +
     'Description="Touched grants +$Ldiv4plus1 saves for $L10 min"',
   'Return To Nature':
     'School=Transmutation ' +
+    'Level=D7 ' +
     'Description="R$RS\' Target reduce Int, magic"',
   'Skill Enhancement':
     'School=Transmutation ' +
+    'Level=A1 ' +
     'Description="Touched grants +$Ldiv2plus2 specified skill checks for $L10 min"',
   'Spell Storing Item':
     'School=Transmutation ' +
+    'Level=A1 ' +
     'Description="Imbue touched item with spell up to $Ldiv2min4 level"',
   'Spirit Steed':
     'School=Necromancy ' +
+    'Level=Deathless4 ' +
     'Description="Touched animal speed +30/x6, no hustle damage for L$ hr"',
   'Stone Construct':
     'School=Transmutation ' +
+    'Level=A3 ' +
     'Description="Touched construct DR 10/adamantine for $L10min150 HP"',
   'Suppress Requirement':
     'School=Transmutation ' +
+    'Level=A3 ' +
     'Description="Remove usage requirement from touched magic item for $L10 min"',
   'Total Repair':
     'School=Transmutation ' +
+    'Level=A6 ' +
     'Description="Touched construct conditions removed, $L10min150 HP repaired"',
   'Touch Of Madness':
     'School=Enchantment ' +
+    'Level=Madness2 ' +
     'Description="Touched dazed for $L2 rd"',
   'Toughen Construct':
     'School=Transmutation ' +
+    'Level=A2 ' +
     'Description="Touched construct +$Ldiv3plus1max2min5 AC"',
   'True Creation':
     'School=Conjuration ' +
+    'Level=Artifice8,Cannith4 ' +
     'Description="Create permanent $L\' cu plant or mineral object"',
   'Weapon Augmentation':
     'School=Transmutation ' +
+    'Level=A4 ' +
     'Description="Touched weapon +3 and 70K GP enhancement for $L10 min"',
   "Wind's Favor":
     'School=Transmutation ' +
-    'Description="R$RM\' 10\'x10\'x$L20plus100\' 30 MPH wind for $L hr',
+    'Level=Lyrandar2 ' +
+    'Description="R$RM\' 10\'x10\'x$L20plus100\' 30 MPH wind for $L hr"',
   'Withering Palm':
     'School=Necromancy ' +
+    'Level=Decay7 ' +
     'Description="Touched loses $Ldiv2 Str and Con (Fort neg)"',
   'Zone Of Natural Purity':
     'School=Evocation ' +
+    'Level=D2 ' +
     'Description="R$RS\' fey and plants in 20\' radius +1 attack, damage, save, abberations -1, for $L2 hr"'
 };
 Eberron.SPELLS = Object.assign({}, SRD35.SPELLS, Eberron.SPELLS_ADDED);
+Eberron.SPELLS_LEVELS = {
+  'Alarm':'Kundarak1',
+  'Align Weapon':'A2',
+  'Analyze Dweomer':'Commerce8',
+  'Animal Growth':'Vadalis3',
+  'Animate Objects':'Life6',
+  'Animate Plants':'Life8',
+  'Animate Rope':'Artifice1',
+  'Antilife Shell':'Decay6',
+  'Arcane Lock':'Kundarak1',
+  'Arcane Mark':'Sivis1',
+  'Astral Projection':'Meditation9',
+  'Awaken':'Vadalis4',
+  'Banishment':'Exorcism6',
+  'Bear\'s Endurance':'A2',
+  'Bestow Curse':'Dragon3',
+  'Blade Barrier':'A6',
+  'Blasphemy':'Dragon7',
+  'Bless':'Community1',
+  'Blight':'Decay5',
+  'Bull\'s Strength':'A2',
+  'Call Lightning':'Weather3',
+  'Call Lightning Storm':'Weather5',
+  'Calm Animals':'Vadalis1',
+  'Calm Emotions':'Charm2',
+  'Cat\'s Grace':'A2',
+  'Cause Fear':'Dragon1,Passion1',
+  'Charm Animal':'Vadalis1',
+  'Charm Monster':'Charm5',
+  'Charm Person':'Charm1',
+  'Chill Metal':'A2',
+  'Clairaudience/Clairvoyance':'Phiarlan2,Thuranni2',
+  'Command Undead':'Necromancer2',
+  'Comprehend Languages':'Commerce1,Meditation1,Sivis1',
+  'Confusion':'Madness4,Passion3',
+  'Consecrate':'Deathless2',
+  'Contagion':'Decay3',
+  'Control Undead':'Necromancer7',
+  'Control Weather':'Lyrandar3,Weather7',
+  'Control Winds':'Lyrandar3,Weather6',
+  'Create Food And Water':'Feast3,Ghallanda2',
+  'Crushing Despair':'Passion4',
+  'Cure Light Wounds':'Jorasco1',
+  'Cure Serious Wounds':'Jorasco2',
+  'Darkness':'Phiarlan1,Shadow2,Thuranni1',
+  'Death Knell':'Dragon2',
+  'Death Ward':'Life4',
+  'Deeper Darkness':'Shadow3',
+  'Delay Poison':'Feast2',
+  'Demand':'Charm8',
+  'Detect Magic':'Medani1',
+  'Detect Poison':'Medani1',
+  'Detect Scrying':'Medani2',
+  'Detect Undead':'Deathless1',
+  'Dimension Door':'Orien2',
+  'Discern Location':'Tharashk4',
+  'Disguise Self':'Phiarlan1,Thuranni1',
+  'Dismissal':'Exorcism4',
+  'Dispel Evil':'Exorcism5',
+  'Disrupting Weapon':'A5,Life5',
+  'Dominate Animal':'Vadalis2',
+  'Dominate Monster':'Charm9,Passion9',
+  'Doom':'Decay1',
+  'Eagle\'s Splendor':'A2',
+  'Endure Elements':'Lyrandar1',
+  'Energy Drain':'Decay9,Necromancer9',
+  'Enervation':'Decay4,Necromancer4',
+  'Expeditious Retreat':'Orien1',
+  'Explosive Runes':'Kundarak2',
+  'Eyebite':'Necromancer6',
+  'Fabricate':'A5,Artifice5,Cannith3',
+  'Find The Path':'Meditation6,Tharashk3',
+  'Fire Trap':'Kundarak1',
+  'Fog Cloud':'Lyrandar1,Weather2',
+  'Fox\'s Cunning':'A2',
+  'Freedom':'Exorcism9',
+  'Gate':'Dragon9',
+  'Geas/Quest':'Charm6',
+  'Glibness':'Commerce4',
+  'Globe Of Invulnerability':'A6,Deneith3',
+  'Glyph Of Warding':'Kundarak2',
+  'Goodberry':'Feast1',
+  'Greater Command':'Passion5',
+  'Greater Glyph Of Warding':'Kundarak3',
+  'Greater Heroism':'Passion6',
+  'Greater Magic Fang':'Vadalis2',
+  'Greater Magic Weapon':'A3',
+  'Greater Planar Ally':'Dragon8',
+  'Greater Prying Eyes':'Phiarlan4,Thuranni4',
+  'Greater Shadow Conjuration':'Shadow7',
+  'Greater Shadow Evocation':'Shadow8',
+  'Greater Teleport':'Orien4',
+  'Guards And Wards':'Kundarak3',
+  'Gust Of Wind':'Lyrandar1',
+  'Hallow':'Deathless5',
+  'Heal':'Jorasco3',
+  'Heat Metal':'A2',
+  'Helping Hand':'Tharashk2',
+  'Heroes\' Feast':'Community6,Feast6,Ghallanda3',
+  'Heroism':'Charm4',
+  'Hide From Undead':'Life1',
+  'Hideous Laughter':'Passion2',
+  'Holy Aura':'Exorcism8',
+  'Holy Word':'Exorcism7',
+  'Horrid Wilting':'Decay8,Necromancer8',
+  'Identify':'A1,Tharashk1',
+  'Illusory Script':'Sivis2',
+  'Insanity':'Charm7,Madness7',
+  'Irresistible Dance':'Passion8',
+  'Know Direction':'Tharashk1',
+  'Lesser Confusion':'Madness1',
+  'Lesser Globe Of Invulnerability':'A4,Deneith2',
+  'Lesser Planar Ally':'Dragon4',
+  'Lesser Restoration':'Jorasco1,Life2',
+  'Light':'A1',
+  'Locate Creature':'Tharashk2',
+  'Locate Object':'Meditation3,Tharashk1',
+  'Mage Armor':'Deneith1',
+  'Mage\'s Faithful Hound':'Kundarak3',
+  'Mage\'s Magnificent Mansion':'Feast7,Ghallanda3',
+  'Magic Circle Against Evil':'Exorcism2',
+  'Magic Stone':'A1',
+  'Magic Vestment':'A1',
+  'Magic Weapon':'A1',
+  'Major Creation':'A5,Artifice6,Cannith3',
+  'Make Whole':'Cannith1',
+  'Mass Heal':'Community9,Life9,Jorasco4',
+  'Mending':'Cannith1',
+  'Mind Blank':'Deneith4,Meditation8',
+  'Minor Creation':'A4,Artifice4,Cannith2',
+  'Minor Image':'Phiarlan1,Thuranni1',
+  'Misdirection':'Kundarak1',
+  'Mislead':'Phiarlan3,Thuranni3',
+  'Moment Of Prescience':'Medani4',
+  'Mount':'Orien1',
+  'Move Earth':'A6',
+  'Neutralize Poison':'Feast4,Jorasco2',
+  'Nondetection':'Kundarak2',
+  'Obscuring Mist':'Shadow1,Weather1',
+  'Overland Flight':'Orien3',
+  'Owl\'s Wisdom':'A2,Meditation2',
+  'Phantasmal Killer':'Madness6',
+  'Phantom Steed':'Orien2',
+  'Planar Ally':'Dragon6',
+  'Plant Growth':'Life3',
+  'Polymorph Any Object':'Commerce9',
+  'Prayer':'Community3',
+  'Prestidigitation':'Ghallanda1',
+  'Prismatic Sphere':'Artifice9',
+  'Prismatic Wall':'Kundarak4',
+  'Protection From Arrows':'Deneith1',
+  'Protection From Energy':'Deneith2',
+  'Protection From Evil':'Exorcism1',
+  'Prying Eyes':'Phiarlan3,Thuranni3',
+  'Purify Food And Drink':'Ghallanda1',
+  'Rage':'Madness3',
+  'Ray Of Enfeeblement':'Decay2,Necromancer1',
+  'Refuge':'Commerce7,Community7,Ghallanda4',
+  'Regenerate':'Life7',
+  'Remove Curse':'Exorcism3',
+  'Remove Disease':'Jorasco2',
+  'Restoration':'Jorasco2',
+  'Rusting Grasp':'A4',
+  'Scrying':'Phiarlan2,Thuranni2',
+  'Secret Chest':'Commerce6',
+  'Secret Page':'Sivis2',
+  'Secure Shelter':'Feast5,Ghallanda2',
+  'See Invisibility':'Medani2',
+  'Sending':'Sivis3',
+  'Shades':'Shadow9',
+  'Shadow Conjuration':'Phiarlan2,Shadow4,Thuranni2',
+  'Shadow Evocation':'Shadow5',
+  'Shadow Walk':'Phiarlan3,Shadow6,Thuranni3',
+  'Shield Of Faith':'A1,Deneith1',
+  'Shield Other':'Deneith1',
+  'Slay Living':'Dragon5',
+  'Sleet Storm':'Lyrandar2,Weather4',
+  'Song Of Discord':'Passion7',
+  'Speak With Animals':'Vadalis1',
+  'Spell Resistance':'Meditation5',
+  'Spell Turning':'Meditation7',
+  'Status':'Community2',
+  'Stone Shape':'Artifice3',
+  'Storm Of Vengeance':'Lyrandar4,Weather9',
+  'Suggestion':'Charm3',
+  'Summon Nature\'s Ally V':'Vadalis3',
+  'Summon Nature\'s Ally VI':'Vadalis4',
+  'Symbol Of Death':'Sivis4',
+  'Sympathy':'Community8',
+  'Telepathic Bond':'Community5',
+  'Teleport':'Orien3',
+  'Tongues':'Commerce3,Meditation4,Sivis2',
+  'True Seeing':'Commerce5,Medani3',
+  'Unseen Servant':'Ghallanda1',
+  'Vampiric Touch':'Necromancer3',
+  'Wall Of Force':'A5',
+  'Wall Of Iron':'A6',
+  'Wall Of Stone':'A5',
+  'Waves Of Fatigue':'Necromancer5',
+  'Weird':'Madness9',
+  'Whirlwind':'Weather8',
+  'Whispering Wind':'Sivis1',
+  'Wind Wall':'Lyrandar2',
+  'Wood Shape':'Artifice2',
+  'Zone Of Truth':'Commerce2'
+};
 Eberron.WEAPONS_ADDED = {
   'Talenta Boomerang':'Level=3 Category=R Damage=d4 Range=30',
   'Talenta Sharrash':'Level=3 Category=2h Damage=d10 Crit=4 Threat=19',
@@ -1272,45 +1290,9 @@ Eberron.CLASSES_ADDED = {
       'A3:5=1;6=2;8=3;16=4,' +
       'A4:8=1;9=2;13=3;17=4,' +
       'A5:11=1;12=2;14=3;18=4,' +
-      'A6:14=1;15=2;17=3;19=4 ' +
-    'Spells=' +
-      '"A1:Energy Alteration;Enhancement Alteration;Identify;' +
-      'Inflict Light Damage;Lesser Armor Enhancement;Light;Magic Stone;' +
-      'Magic Vestment;Magic Weapon;Repair Light Damage;' +
-      'Personal Weapon Augmentation;Resistance Item;Shield Of Faith;' +
-      'Skill Enhancement;Spell Storing Item",' +
-      '"A2:Align Weapon;Armor Enhancement;Bear\'s Endurance;Bull\'s Strength;' +
-      'Cat\'s Grace;Chill Metal;Eagle\'s Splendor;Fox\'s Cunning;Heat Metal;' +
-      'Inflict Moderate Damage;Lesser Weapon Augmentation;Owl\'s Wisdom;' +
-      'Repair Moderate Damage;Toughen Construct",' +
-      '"A3:Construct Energy Ward;Greater Armor Enhancement;' +
-      'Greater Magic Weapon;Inflict Serious Damage;Metamagic Item;' +
-      'Power Surge;Repair Serious Damage;Stone Construct;' +
-      'Suppress Requirement",' +
-      '"A4:Greater Construct Energy Ward;Inflict Critical Damage;' +
-      'Item Alteration;Iron Construct;Legion\'s Shield Of Faith;' +
-      'Lesser Globe Of Invulnerability;Minor Creation;Repair Critical Damage;' +
-      'Rusting Grasp;Weapon Augmentation",' +
-      '"A5:Disrupting Weapon;Fabricate;Major Creation;Wall Of Force;' +
-      'Wall Of Stone",' +
-      '"A6:Blade Barrier;Disable Construct;Globe Of Invulnerability;' +
-      'Hardening;Move Earth;Total Repair;Wall Of Iron;Weapon Augmentation"'
-};
-Eberron.CLASS_SPELLS_ADDED = {
-  'Cleric':
-    '"C9:Feast Of Champions"',
-  'Druid':
-    '"D1:Detect Aberration","D2:Zone Of Natural Purity","D4:Nature\'s Wrath",' +
-    '"D7:Return To Nature"',
-  'Wizard':
-    '"W1:Magecraft;Repair Light Damage","W2:Repair Moderate Damage",' +
-    '"W3:Repair Serious Damage","W4:Repair Critical Damage",W6:Hardening,' +
-    '"W8:Maddening Scream"'
+      'A6:14=1;15=2;17=3;19=4'
 };
 Eberron.CLASSES = Object.assign({}, SRD35.CLASSES, Eberron.CLASSES_ADDED);
-for(var clas in Eberron.CLASS_SPELLS_ADDED) {
-  Eberron.CLASSES[clas] = Eberron.CLASSES[clas].replace('Spells=', 'Spells=' + Eberron.CLASS_SPELLS_ADDED[clas] + ',');
-}
 
 Eberron.artificerCraftReserves = [
   0, 20, 40, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 900, 1200, 1500,
@@ -1437,9 +1419,7 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
       QuilvynUtils.getAttrValue(attrs, 'CasterLevelArcane'),
       QuilvynUtils.getAttrValue(attrs, 'CasterLevelDivine'),
       QuilvynUtils.getAttrValue(attrs, 'SpellAbility'),
-      QuilvynUtils.getAttrValueArray(attrs, 'SpellSlots'),
-      QuilvynUtils.getAttrValueArray(attrs, 'Spells'),
-      Eberron.SPELLS
+      QuilvynUtils.getAttrValueArray(attrs, 'SpellSlots')
     );
     Eberron.classRulesExtra(rules, name);
   } else if(type == 'Deity')
@@ -1469,7 +1449,7 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
       QuilvynUtils.getAttrValueArray(attrs, 'Imply'),
       QuilvynUtils.getAttrValueArray(attrs, 'Type')
     );
-    Eberron.featRulesExtra(rules, name, Eberron.SPELLS);
+    Eberron.featRulesExtra(rules, name);
   } else if(type == 'Feature')
      Eberron.featureRules(rules, name,
       QuilvynUtils.getAttrValueArray(attrs, 'Section'),
@@ -1478,9 +1458,7 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
   else if(type == 'House')
     Eberron.houseRules(rules, name,
       QuilvynUtils.getAttrValue(attrs, 'Dragonmark'),
-      QuilvynUtils.getAttrValueArray(attrs, 'Features'),
-      QuilvynUtils.getAttrValueArray(attrs, 'Spells'),
-      Eberron.SPELLS
+      QuilvynUtils.getAttrValueArray(attrs, 'Features')
     );
   else if(type == 'Language')
     Eberron.languageRules(rules, name);
@@ -1491,9 +1469,7 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
       QuilvynUtils.getAttrValueArray(attrs, 'Features'),
       QuilvynUtils.getAttrValueArray(attrs, 'Selectables'),
       QuilvynUtils.getAttrValue(attrs, 'SpellAbility'),
-      QuilvynUtils.getAttrValueArray(attrs, 'SpellSlots'),
-      QuilvynUtils.getAttrValueArray(attrs, 'Spells'),
-      Eberron.SPELLS
+      QuilvynUtils.getAttrValueArray(attrs, 'SpellSlots')
     );
     Eberron.pathRulesExtra(rules, name);
   } else if(type == 'Race') {
@@ -1503,9 +1479,7 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
       QuilvynUtils.getAttrValueArray(attrs, 'Selectables'),
       QuilvynUtils.getAttrValueArray(attrs, 'Languages'),
       QuilvynUtils.getAttrValue(attrs, 'SpellAbility'),
-      QuilvynUtils.getAttrValueArray(attrs, 'SpellSlots'),
-      QuilvynUtils.getAttrValueArray(attrs, 'Spells'),
-      Eberron.SPELLS
+      QuilvynUtils.getAttrValueArray(attrs, 'SpellSlots')
     );
     Eberron.raceRulesExtra(rules, name);
   } else if(type == 'School') {
@@ -1531,14 +1505,27 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
     );
     if(Eberron.basePlugin.skillRulesExtra)
       Eberron.basePlugin.skillRulesExtra(rules, name);
-  } else if(type == 'Spell')
-    Eberron.spellRules(rules, name,
-      QuilvynUtils.getAttrValue(attrs, 'School'),
-      QuilvynUtils.getAttrValue(attrs, 'Group'),
-      QuilvynUtils.getAttrValue(attrs, 'Level'),
-      QuilvynUtils.getAttrValue(attrs, 'Description')
-    );
-  else if(type == 'Track')
+  } else if(type == 'Spell') {
+    var description = QuilvynUtils.getAttrValue(attrs, 'Description');
+    var groupLevels = QuilvynUtils.getAttrValueArray(attrs, 'Level');
+    var school = QuilvynUtils.getAttrValue(attrs, 'School');
+    var schoolAbbr = school.substring(0, 4);
+    for(var i = 0; i < groupLevels.length; i++) {
+      var matchInfo = groupLevels[i].match(/^(\D+)(\d+)$/);
+      if(!matchInfo) {
+        console.log('Bad level "' + groupLevels[i] + '" for spell ' + name);
+        continue;
+      }
+      var group = matchInfo[1];
+      var level = matchInfo[2] * 1;
+      var fullName = name + '(' + group + level + ' ' + schoolAbbr + ')';
+      // TODO indicate domain spells in attributes?
+      var domainSpell = Eberron.PATHS[group + ' Domain'] != null;
+      Eberron.spellRules
+        (rules, fullName, school, group, level, description, domainSpell);
+      rules.addChoice('spells', fullName, attrs);
+    }
+  } else if(type == 'Track')
     Pathfinder.trackRules(rules, name,
       QuilvynUtils.getAttrValueArray(attrs, 'Progression')
     );
@@ -1562,7 +1549,7 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
     console.log('Unknown choice type "' + type + '"');
     return;
   }
-  if(type != 'Feature' && type != 'Path') {
+  if(type != 'Feature' && type != 'Path' && type != 'Spell') {
     type = type == 'Class' ? 'levels' :
     type = type == 'Deity' ? 'deities' :
     (type.substring(0,1).toLowerCase() + type.substring(1).replaceAll(' ', '') + 's');
@@ -1605,16 +1592,14 @@ Eberron.armorRules = function(
  * #casterLevelArcane# and #casterLevelDivine#, if specified, give the
  * Javascript expression for determining the caster level for the class; these
  * can incorporate a class level attribute (e.g., 'levels.Cleric') or the
- * character level attribute 'level'. #spellAbility#, if specified, names the
- * ability for computing spell difficulty class. #spellSlots# lists the
- * number of spells per level per day granted by the class, and #spells# lists
- * spells defined by the class. #spellDict# is the dictionary of all spells,
- * used to look up individual spell attributes.
+ * character level attribute 'level'. If the class grants spell slots,
+ * #spellAbility# names the ability for computing spell difficulty class, and
+ * #spellSlots# lists the number of spells per level per day granted.
  */
 Eberron.classRules = function(
   rules, name, requires, hitDie, attack, skillPoints, saveFort, saveRef,
   saveWill, skills, features, selectables, languages, casterLevelArcane,
-  casterLevelDivine, spellAbility, spellSlots, spells, spellDict
+  casterLevelDivine, spellAbility, spellSlots
 ) {
   if(Eberron.basePlugin == window.Pathfinder) {
     for(var i = 0; i < requires.length; i++) {
@@ -1636,7 +1621,7 @@ Eberron.classRules = function(
   Eberron.basePlugin.classRules(
     rules, name, requires, hitDie, attack, skillPoints, saveFort, saveRef,
     saveWill, skills, features, selectables, languages, casterLevelArcane,
-    casterLevelDivine, spellAbility, spellSlots, spells, spellDict
+    casterLevelDivine, spellAbility, spellSlots
   );
   // No changes needed to the rules defined by base method
 };
@@ -1844,14 +1829,9 @@ Eberron.featureRules = function(rules, name, sections, notes) {
 /*
  * Defines rules related to Eberron house #name#. #dragonmark# is the
  * dragonmark associated with the house. #features# lists the features acquired
- * by members of the house and #spells# the list of spells granted by the
- * dragonmark when the Least Dragonmark, Lesser Dragonmark, Greater Dragonmark
- * feats and the Heir of Siberys prestige class are taken. #spellDict# is the
- * dictionary of all spells, used to look up individual spell attributes.
+ * by members of the house.
  */
-Eberron.houseRules = function(
-  rules, name, dragonmark, features, spells, spellDict
-) {
+Eberron.houseRules = function(rules, name, dragonmark, features) {
 
   if(!name) {
     console.log('Empty house name');
@@ -1865,10 +1845,6 @@ Eberron.houseRules = function(
   }
   if(!Array.isArray(features)) {
     console.log('Bad features list "' + features + '" for house ' + name);
-    return;
-  }
-  if(!Array.isArray(spells)) {
-    console.log('Bad spells list "' + spells + '" for house ' + name);
     return;
   }
 
@@ -1889,7 +1865,6 @@ Eberron.houseRules = function(
   );
 
   QuilvynRules.featureListRules(rules, features, name, houseLevel, false);
-  QuilvynRules.spellListRules(rules, spells, spellDict);
   rules.defineSheetElement(name + ' Features', 'Feats+', null, '; ');
   rules.defineChoice('extras', prefix + 'Features');
 
@@ -1937,24 +1912,24 @@ Eberron.languageRules = function(rules, name) {
 /*
  * Defines in #rules# the rules associated with path #name#, which is a
  * selection for characters belonging to #group# and tracks path level via
- * #levelAttr#. The path grants the features and spells listed in #features#
- * and #spells#. #spellAbility#, if specified, names the ability for computing
- * spell difficulty class. #spellDict# is the dictionary of all spells used to
- * look up individual spell attributes.
+ * #levelAttr#. The path grants the features listed in #features#. If the path
+ * grants spell slots, #spellAbility# names the ability for computing spell
+ * difficulty class, and #spellSlots# lists the number of spells per level per
+ * day granted.
  */
 Eberron.pathRules = function(
   rules, name, group, levelAttr, features, selectables, spellAbility,
-  spellSlots, spells, spellDict
+  spellSlots
 ) {
   if(Eberron.basePlugin == window.Pathfinder)
     Eberron.basePlugin.pathRules(
       rules, name, group, levelAttr, features, selectables, [], [],
-      spellAbility, spellSlots, spells, spellDict
+      spellAbility, spellSlots
     );
   else
     Eberron.basePlugin.pathRules(
       rules, name, group, levelAttr, features, selectables, spellAbility,
-      spellSlots, spells, spellDict
+      spellSlots
     );
   // No changes needed to the rules defined by base method
   if(name.match(/Domain$/))
@@ -1985,19 +1960,18 @@ Eberron.pathRulesExtra = function(rules, name) {
 /*
  * Defines in #rules# the rules associated with race #name#, which has the list
  * of hard prerequisites #requires#. #features# and #selectables# list
- * associated features and #languages# any automatic languages. #spells# lists
- * any natural spells, for which #spellAbility# is used to compute the save DC.
- * #spellSlots# lists the number of spells per level per day granted by the
- * race, and #spells# lists spells defined by the race. #spellDict# is the
- * dictionary of all spells, used to look up individual spell attributes.
+ * associated features and #languages# any automatic languages. If the race
+ * grants spell slots, #spellAbility# names the ability for computing spell
+ * difficulty class, and #spellSlots# lists the number of spells per level per
+ * day granted.
  */
 Eberron.raceRules = function(
   rules, name, requires, features, selectables, languages, spellAbility,
-  spells, spellSlots, spellDict
+  spellSlots
 ) {
   Eberron.basePlugin.raceRules
     (rules, name, requires, features, selectables, languages, spellAbility,
-     spells, spellSlots, spellDict);
+     spellSlots);
   // No changes needed to the rules defined by base method
 };
 
@@ -2082,10 +2056,10 @@ Eberron.skillRules = function(
  * description of the spell's effects.
  */
 Eberron.spellRules = function(
-  rules, name, school, casterGroup, level, description
+  rules, name, school, casterGroup, level, description, domainSpell
 ) {
   Eberron.basePlugin.spellRules
-    (rules, name, school, casterGroup, level, description);
+    (rules, name, school, casterGroup, level, description, domainSpell);
   // No changes needed to the rules defined by base method
 };
 

@@ -31,6 +31,7 @@ function EberronPrestige() {
     return;
   }
   EberronPrestige.identityRules(Eberron.rules, EberronPrestige.CLASSES);
+  EberronPrestige.magicRules(Eberron.rules, EberronPrestige.SPELLS);
   EberronPrestige.talentRules(Eberron.rules, EberronPrestige.FEATURES);
 }
 
@@ -141,11 +142,7 @@ EberronPrestige.CLASSES = {
     'SpellSlots=' +
       'MI2:1=1,' +
       'MI4:3=1,' +
-      'MI5:5=1 ' +
-    'Spells=' +
-      '"MI2:Zone Of Truth",' +
-      '"MI4:Discern Lies",' +
-      '"MI5:True Seeing"',
+      'MI5:5=1',
   'Warforged Juggernaut':
     'Require=' +
      '"baseAttack >= 5","features.Adamantine Body",' +
@@ -290,12 +287,25 @@ EberronPrestige.FEATURES = {
     'Note="+2 Con while shifting",' +
          '"d6+%V tusk attack (next size for Longtooth) while shifting"'
 };
+EberronPrestige.SPELLS = {
+  'Discern Lies':'Level=MI4',
+  'True Seeing':'Level=MI5',
+  'Zone Of Truth':'Level=MI2'
+};
 
 /* Defines rules related to basic character identity. */
 EberronPrestige.identityRules = function(rules, classes) {
   for(var clas in classes) {
     rules.choiceRules(rules, 'Class', clas, classes[clas]);
     EberronPrestige.classRulesExtra(rules, clas);
+  }
+};
+
+/* Defines rules related to magic use. */
+EberronPrestige.magicRules = function(rules, spells) {
+  QuilvynUtils.checkAttrTable(spells, ['School', 'Level', 'Description']);
+  for(var s in spells) {
+    rules.choiceRules(rules, 'Spell', s, Eberron.SPELLS[s] + ' ' + spells[s]);
   }
 };
 
