@@ -25,9 +25,8 @@ Place, Suite 330, Boston, MA 02111-1307 USA.
  * FEATURES) can be manipulated to modify the choices.
  */
 function EberronPrestige() {
-  if(window.SRD35 == null || window.Eberron == null) {
-    alert
-     ('The EberronPrestige module requires use of the SRD35 and Eberron modules');
+  if(window.Eberron == null) {
+    alert('The EberronPrestige module requires use of the Eberron module');
     return;
   }
   EberronPrestige.identityRules(Eberron.rules, EberronPrestige.CLASSES);
