@@ -59,6 +59,11 @@ function Eberron() {
   rules.defineChoice('random', Eberron.RANDOMIZABLE_ATTRIBUTES);
   rules.ruleNotes = Eberron.ruleNotes;
 
+  if(Eberron.basePlugin == window.Pathfinder) {
+    SRD35.ABBREVIATIONS['CMB'] = 'Combat Maneuver Bonus';
+    SRD35.ABBREVIATIONS['CMD'] = 'Combat Maneuver Defense';
+  }
+
   SRD35.createViewers(rules, SRD35.VIEWERS);
   rules.defineChoice('extras', 'feats', 'featCount', 'selectableFeatureCount');
   rules.defineChoice('preset', 'race', 'level', 'levels');
@@ -73,6 +78,7 @@ function Eberron() {
     Object.assign({}, Eberron.basePlugin.FEATS, Eberron.FEATS_ADDED);
   Eberron.FEATURES =
     Object.assign({}, Eberron.basePlugin.FEATURES, Eberron.FEATURES_ADDED);
+  Eberron.GOODIES = Object.assign({}, Eberron.basePlugin.GOODIES);
   Eberron.LANGUAGES =
     Object.assign({}, Eberron.basePlugin.LANGUAGES, Eberron.LANGUAGES_ADDED);
   Eberron.PATHS =
@@ -99,12 +105,12 @@ function Eberron() {
   Eberron.magicRules(rules, Eberron.SCHOOLS, Eberron.SPELLS);
   // Feats must be defined before classes
   Eberron.talentRules
-    (rules, Eberron.FEATS, Eberron.FEATURES, Eberron.LANGUAGES, Eberron.SKILLS);
+    (rules, Eberron.FEATS, Eberron.FEATURES, Eberron.GOODIES,
+     Eberron.LANGUAGES, Eberron.SKILLS);
   Eberron.identityRules(
     rules, Eberron.ALIGNMENTS, Eberron.CLASSES, Eberron.DEITIES,
     Eberron.HOUSES, Eberron.PATHS, Eberron.RACES
   );
-  Eberron.goodiesRules(rules);
 
   if(window.SRD35NPC != null) {
     SRD35NPC.identityRules(rules, SRD35NPC.CLASSES);
@@ -704,6 +710,7 @@ Eberron.HOUSES = {
     'Dragonmark=Handling ' +
     'Features=Handler'
 };
+Eberron.GOODIES = Object.assign({}, SRD35.GOODIES);
 Eberron.LANGUAGES_ADDED = {
   'Argon':'',
   'Daan':'',
@@ -1317,12 +1324,6 @@ Eberron.combatRules = function(rules, armors, shields, weapons) {
   // No changes needed to the rules defined by base method
 };
 
-/* Defines the rules related to goodies included in character notes. */
-Eberron.goodiesRules = function(rules) {
-  Eberron.basePlugin.goodiesRules(rules);
-  // No changes needed to the rules defined by base method
-};
-
 /* Defines rules related to basic character identity. */
 Eberron.identityRules = function(
   rules, alignments, classes, deities, houses, paths, races
@@ -1362,8 +1363,11 @@ Eberron.magicRules = function(rules, schools, spells) {
 };
 
 /* Defines rules related to character aptitudes. */
-Eberron.talentRules = function(rules, feats, features, languages, skills) {
-  Eberron.basePlugin.talentRules(rules, feats, features, languages, skills);
+Eberron.talentRules = function(
+  rules, feats, features, goodies, languages, skills
+) {
+  Eberron.basePlugin.talentRules
+    (rules, feats, features, goodies, languages, skills);
   // No changes needed to the rules defined by base method
   for(var skill in skills) {
     rules.defineRule
@@ -1452,6 +1456,15 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
     Eberron.featRulesExtra(rules, name);
   } else if(type == 'Feature')
      Eberron.featureRules(rules, name,
+      QuilvynUtils.getAttrValueArray(attrs, 'Section'),
+      QuilvynUtils.getAttrValueArray(attrs, 'Note')
+    );
+  else if(type == 'Goody')
+    Eberron.goodyRules(rules, name,
+      QuilvynUtils.getAttrValue(attrs, 'Pattern'),
+      QuilvynUtils.getAttrValue(attrs, 'Effect'),
+      QuilvynUtils.getAttrValue(attrs, 'Value'),
+      QuilvynUtils.getAttrValueArray(attrs, 'Attribute'),
       QuilvynUtils.getAttrValueArray(attrs, 'Section'),
       QuilvynUtils.getAttrValueArray(attrs, 'Note')
     );
@@ -1901,6 +1914,25 @@ Eberron.houseRules = function(rules, name, dragonmark, features) {
     'magicNotes.siberysMark', '=', '1'
   );
 
+};
+
+/*
+ * Defines in #rules# the rules associated with goody #name#, triggered by
+ * a starred line in the character notes that matches #pattern#. #effect#
+ * specifies the effect of the goody on each attribute in list #attributes#.
+ * This is one of "increment" (adds #value# to the attribute), "set" (replaces
+ * the value of the attribute by #value#), "lower" (decreases the value to
+ * #value#), or "raise" (increases the value to #value#). #value#, if null,
+ * defaults to 1; occurrences of $1, $2, ... in #value# reference capture
+ * groups in #pattern#. #sections# and #notes# list the note sections
+ * ("attribute", "combat", "companion", "feature", "magic", "save", or "skill")
+ * and formats that show the effects of the goody on the character sheet.
+ */
+Eberron.goodyRules = function(
+  rules, name, pattern, effect, value, attributes, sections, notes
+) {
+  QuilvynRules.goodyRules
+    (rules, name, pattern, effect, value, attributes, sections, notes);
 };
 
 /* Defines in #rules# the rules associated with language #name#. */
