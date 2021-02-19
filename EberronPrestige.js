@@ -22,7 +22,7 @@ Place, Suite 330, Boston, MA 02111-1307 USA.
  * This module loads the prestige class rules from the Eberron 3E rule book.
  * Member methods can be called independently in order to use a subset of the
  * rules. Similarly, the constant fields of LastAgePrestige (CLASSES,
- * FEATURES) can be manipulated to modify the choices.
+ * FEATURES, SPELLS) can be manipulated to modify the choices.
  */
 function EberronPrestige() {
   if(window.Eberron == null) {
@@ -40,7 +40,7 @@ EberronPrestige.CLASSES = {
       '"features.Favored In House","features.Least Dragonmark",' +
       '"house != \'None\'",' +
       '"race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Orc|Human\'",' +
-      '"CountSkillGe7 >= 2" ' +
+      '"countSkillGe7 >= 2" ' +
     'HitDie=d8 Attack=3/4 SkillPoints=4 Fortitude=1/2 Reflex=1/2 Will=1/2 ' +
     'Skills=' +
       'Appraise,Bluff,Diplomacy,"Gather Information",Intimidate,' +
@@ -120,7 +120,7 @@ EberronPrestige.CLASSES = {
       '"features.Aberrant Dragonmark == 0","features.Heroic Spirit",' +
       '"features.Least Dragonmark == 0",' +
       '"race =~ \'Dwarf|Elf|Gnome|Halfling|Half Orc|Human\'",' +
-      '"CountSkillGe15 >= 2" ' +
+      '"countSkillGe15 >= 2" ' +
     'HitDie=d6 Attack=1 SkillPoints=2 Fortitude=1/2 Reflex=1/2 Will=1/2 ' +
     'Features=' +
       '"1:Action Point Bonus","2:Siberys Mark",' +
@@ -157,7 +157,7 @@ EberronPrestige.CLASSES = {
       '"4:Death Immunity","5:Ability Immunity","5:Greater Powerful Charge"',
   'Weretouched Master':
     'Require=' +
-      '"baseAttack >= 4","CountShifterFeats >= 1","race == \'Shifter\'",' +
+      '"baseAttack >= 4","sumShifterFeats >= 1","race == \'Shifter\'",' +
       '"skills.Knowledge (Nature) >= 5","skills.Survival >= 8" ' +
     'HitDie=d8 Attack=3/4 SkillPoints=2 Fortitude=1/2 Reflex=1/2 Will=1/3 ' +
     'Skills=' +
@@ -172,7 +172,7 @@ EberronPrestige.CLASSES = {
       '"features.Boar ? 3:Fierce Will",' +
       '"features.Rat ? 3:Climb Speed",' +
       '"features.Tiger ? 3:Pounce",' +
-      '"features.Wolf ? 3:Trip,"' +
+      '"features.Wolf ? 3:Trip",' +
       '"features.Wolverine ? 3:Weretouched Rage",' +
       '"4:Frightful Shifting",' +
       '"features.Bear ? 5:Alternate Bear Form",' +
@@ -294,6 +294,8 @@ EberronPrestige.SPELLS = {
 
 /* Defines rules related to basic character identity. */
 EberronPrestige.identityRules = function(rules, classes) {
+  QuilvynUtils.checkAttrTable
+    (classes, ['Require', 'HitDie', 'Attack', 'SkillPoints', 'Fortitude', 'Reflex', 'Will', 'Skills', 'Features', 'Selectables', 'Languages', 'CasterLevelArcane', 'CasterLevelDivine', 'SpellAbility', 'SpellSlots']);
   for(var clas in classes) {
     rules.choiceRules(rules, 'Class', clas, classes[clas]);
     EberronPrestige.classRulesExtra(rules, clas);
@@ -310,6 +312,7 @@ EberronPrestige.magicRules = function(rules, spells) {
 
 /* Defines rules related to character aptitudes. */
 EberronPrestige.talentRules = function(rules, features) {
+  QuilvynUtils.checkAttrTable(features, ['Section', 'Note']);
   for(var feature in features) {
     rules.choiceRules(rules, 'Feature', feature, features[feature]);
   }
@@ -329,7 +332,7 @@ EberronPrestige.classRulesExtra = function(rules, name) {
     var allSkills = rules.getChoices('skills');
     for(var skill in allSkills) {
       rules.defineRule
-        ('CountSkillGe7', 'skills.' + skill, '+=', 'source >= 7 ? 1 : null');
+        ('countSkillGe7', 'skills.' + skill, '+=', 'source >= 7 ? 1 : null');
     }
     rules.defineRule
       ('skillNotes.houseStatus', 'levels.Dragonmark Heir', '=', null);
@@ -434,7 +437,7 @@ EberronPrestige.classRulesExtra = function(rules, name) {
     var allSkills = rules.getChoices('skills');
     for(var skill in allSkills) {
       rules.defineRule
-        ('CountSkillGe15', 'skills.' + skill, '+=', 'source >= 15 ? 1 : null');
+        ('countSkillGe15', 'skills.' + skill, '+=', 'source >= 15 ? 1 : null');
     }
     rules.defineRule('casterLevels.Dragonmark',
       'levels.Heir Of Siberys', '^=', 'source >= 2 ? 15 : null'
@@ -505,10 +508,6 @@ EberronPrestige.classRulesExtra = function(rules, name) {
   } else if(name == 'Weretouched Master') {
 
     var allFeats = rules.getChoices('feats');
-    for(var feat in allFeats) {
-      if(allFeats[feat].indexOf('Shifter') >= 0)
-        rules.defineRule('CountShifterFeats', 'feats.' + feat, '+=', '1');
-    }
     rules.defineRule('combatNotes.frightfulShifting', 'level', '=', null);
     rules.defineRule('combatNotes.frightfulShifting.1',
       'levels.Weretouched Master', '=', 'source + 10',

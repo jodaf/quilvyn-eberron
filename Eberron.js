@@ -26,7 +26,7 @@ var EBERRON_VERSION = '2.2.1.0';
  * of the rule book; raceRules for character races, magicRules for spells, etc.
  * These member methods can be called independently in order to use a subset of
  * the Eberron rules.  Similarly, the constant fields of Eberron (FEATS,
- * SKILLS, etc.) can be thinned to limit the user's choices.
+ * SKILLS, etc.) can be manipulated to modify the choices.
  */
 function Eberron() {
 
@@ -114,6 +114,7 @@ function Eberron() {
 
   if(window.SRD35NPC != null) {
     SRD35NPC.identityRules(rules, SRD35NPC.CLASSES);
+    SRD35NPC.magicRules(rules, SRD35NPC.SPELLS);
     SRD35NPC.talentRules(rules, SRD35NPC.FEATURES);
   }
 
@@ -189,7 +190,7 @@ Eberron.FEATS_ADDED = {
   'Beast Shape':
     'Type=General ' +
     'Require="Max \'^features.Beast Totem\' > 0",' +
-            '"levels.Druid >= 15"', // i.e., Wild Shape to huge creature
+            '"magicNotes.wildShape =~ \'huge\'"',
   'Beast Totem (Chimera)':'Type=General Require="features.Wild Empathy"',
   'Beast Totem (Digester)':'Type=General Require="features.Wild Empathy"',
   'Beast Totem (Displacer Beast)':
@@ -209,21 +210,20 @@ Eberron.FEATS_ADDED = {
     'Require="alignment !~ \'Good\'",' +
             '"features.Spontaneous Druid Spell"',
   'Cliffwalk Elite':'Type=Shifter Require=features.Cliffwalk',
-// Craft Construct from MM needed for Artificer class
-  'Craft Construct':
+  'Craft Construct':  // From MM, needed for Artificer class
     'Type="Item Creation" ' +
     'Require="features.Craft Magic Arms And Armor",' +
             '"features.Craft Wondrous Item"',
   'Double Steel Strike':
     'Type=General ' +
-    'Require="Weapon Proficiency (Two-Bladed Sword)",' +
-            '"features.Flurry Of Blows" ' +
+    'Require="features.Flurry Of Blows",' +
+            '"features.Weapon Proficiency (Two-Bladed Sword)" ' +
     'Imply="weapons.Two-Bladed Sword"',
   'Dragon Rage':
     'Type=General ' +
     'Require="Max \'^features.Dragon Totem\' > 0",' +
              'features.Rage,' +
-             'origin=Argonnessen',
+             '"origin == \'Argonnessen\'"',
   'Dragon Totem (Black)':
     'Type=General Require="baseAttack >= 1","origin =~ \'Argonnessen|Seren\'"',
   'Dragon Totem (Blue)':
@@ -254,7 +254,7 @@ Eberron.FEATS_ADDED = {
   'Extend Rage':'Type=General Require=features.Rage',
   'Extra Music':'Type=General Require="features.Bardic Music"',
   'Extra Rings':
-    'Type="Item Creation" Require="casterLevel >= 12","feaures.Forge Ring"',
+    'Type="Item Creation" Require="casterLevel >= 12","features.Forge Ring"',
   'Extra Shifter Trait':
     'Type=Shifter Require="race == \'Shifter\'","sumShifterFeats >= 3"',
   'Extraordinary Artisan':
@@ -264,7 +264,9 @@ Eberron.FEATS_ADDED = {
     'Require="house != \'None\'",' +
             '"race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Orc|Human\'"',
   'Flensing Strike':
-    'Type=General Require="Weapon Focus (Kama)","Weapon Proficiency (Kama)"',
+    'Type=General ' +
+    'Require="features.Weapon Focus (Kama)",' +
+            '"features.Weapon Proficiency (Kama)"',
   'Gatekeeper Initiate':
     'Type=General Require="features.Spontaneous Druid Spell"',
   'Great Bite':'Type=Shifter Require="baseAttack >= 6",features.Longtooth',
@@ -275,7 +277,7 @@ Eberron.FEATS_ADDED = {
             '"features.Lesser Dragonmark",' +
             '"house != \'None\'",' +
             '"race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Orc|Human\'",' +
-            '"CountSkillsGe12 >= 2"',
+            '"countSkillsGe12 >= 2"',
   'Greater Powerful Charge':
     'Type=General ' +
     'Require="baseAttack >= 4",' +
@@ -283,8 +285,9 @@ Eberron.FEATS_ADDED = {
             '"features.Small == 0"',
   'Greater Shifter Defense':
     'Type=Shifter ' +
-    'Require="feaures.Shifter Defense",' +
-            '"race == \'Shifter\'","sumShifterFeats >= 5"',
+    'Require="features.Shifter Defense",' +
+            '"race == \'Shifter\'",' +
+            '"sumShifterFeats >= 5"',
   'Greensinger Initiate':
     'Type=General Require="features.Spontaneous Druid Spell"',
   'Haunting Melody':
@@ -311,11 +314,11 @@ Eberron.FEATS_ADDED = {
     'Require="house != \'None\'",' +
             '"race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Orc|Human\'",' +
             '"features.Least Dragonmark",' +
-            '"CountSkillsGe9 >= 2"',
+            '"countSkillsGe9 >= 2"',
   'Longstride Elite':'Type=Shifter Require=features.Longstride',
   'Mithral Body':'Type=Warforged Require="race == \'Warforged\'"',
   'Mithral Fluidity':
-    'Type=Warforged Require="race == \'Warforged\'","feaures.Mithral Body"',
+    'Type=Warforged Require="race == \'Warforged\'","features.Mithral Body"',
   'Monastic Training (Cleric)':'Type=General',
   'Music Of Growth':
     'Type=General ' +
@@ -331,7 +334,7 @@ Eberron.FEATS_ADDED = {
   'Pursue':'Type=General Require="features.Combat Reflexes"',
   'Raging Luck':'Type=General Require=features.Rage',
   'Recognize Imposter':
-    'Type=General Require="skills.Sense Motive >=3","skills.Spot >= 3"',
+    'Type=General Require="skills.Sense Motive >= 3","skills.Spot >= 3"',
   'Repel Aberration':
     'Type=General Require="features.Gatekeeper Initiate","levels.Druid >= 3"',
   'Research':'Type=General',
@@ -1301,11 +1304,6 @@ Eberron.CLASSES_ADDED = {
 };
 Eberron.CLASSES = Object.assign({}, SRD35.CLASSES, Eberron.CLASSES_ADDED);
 
-Eberron.artificerCraftReserves = [
-  0, 20, 40, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 900, 1200, 1500,
-  2000, 2500, 3000, 4000, 5000
-];
-
 /* Defines the rules related to character abilities. */
 Eberron.abilityRules = function(rules) {
   Eberron.basePlugin.abilityRules(rules);
@@ -1371,9 +1369,9 @@ Eberron.talentRules = function(
   // No changes needed to the rules defined by base method
   for(var skill in skills) {
     rules.defineRule
-      ('CountSkillsGe9', 'skills.' + skill, '+=', 'source >= 9 ? 1 : null');
+      ('countSkillsGe9', 'skills.' + skill, '+=', 'source >= 9 ? 1 : null');
     rules.defineRule
-      ('CountSkillsGe12', 'skills.' + skill, '+=', 'source >= 12 ? 1 : null');
+      ('countSkillsGe12', 'skills.' + skill, '+=', 'source >= 12 ? 1 : null');
   }
 };
 
@@ -1396,8 +1394,8 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
       QuilvynUtils.getAttrValue(attrs, 'AC'),
       QuilvynUtils.getAttrValue(attrs, 'Attack'),
       QuilvynUtils.getAttrValueArray(attrs, 'Dam'),
-      QuilvynUtils.getAttrValue(attrs, 'Level'),
-      QuilvynUtils.getAttrValue(attrs, 'Size')
+      QuilvynUtils.getAttrValue(attrs, 'Size'),
+      QuilvynUtils.getAttrValue(attrs, 'Level')
     );
   else if(type == 'Armor')
     Eberron.armorRules(rules, name,
@@ -1444,8 +1442,8 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
       QuilvynUtils.getAttrValue(attrs, 'AC'),
       QuilvynUtils.getAttrValue(attrs, 'Attack'),
       QuilvynUtils.getAttrValueArray(attrs, 'Dam'),
-      QuilvynUtils.getAttrValue(attrs, 'Level'),
-      QuilvynUtils.getAttrValue(attrs, 'Size')
+      QuilvynUtils.getAttrValue(attrs, 'Size'),
+      QuilvynUtils.getAttrValue(attrs, 'Level')
     );
   else if(type == 'Feat') {
     Eberron.featRules(rules, name,
@@ -1654,7 +1652,7 @@ Eberron.classRulesExtra = function(rules, name) {
       'levels.Artificer', '=', 'Math.floor(source / 4)'
     );
     rules.defineRule('magicNotes.craftReserve',
-      'levels.Artificer', '=', 'Eberron.artificerCraftReserves[source]'
+      'levels.Artificer', '=', '[0, 20, 40, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 900, 1200, 1500, 2000, 2500, 3000, 4000, 5000][source]'
     );
     rules.defineRule('skillNotes.artificerKnowledge',
        'levels.Artificer', '=', null,
@@ -1675,10 +1673,12 @@ Eberron.classRulesExtra = function(rules, name) {
  * the character needs to have this animal as a companion.
  */
 Eberron.companionRules = function(
-  rules, name, str, dex, con, intel, wis, cha, hd, ac, attack, damage, level, size
+  rules, name, str, dex, con, intel, wis, cha, hd, ac, attack, damage, size,
+  level
 ) {
   Eberron.basePlugin.companionRules(
-    rules, name, str, dex, con, intel, wis, cha, hd, ac, attack, damage, size, level
+    rules, name, str, dex, con, intel, wis, cha, hd, ac, attack, damage, size,
+    level
   );
   // No changes needed to the rules defined by base method
 };
@@ -1701,10 +1701,13 @@ Eberron.deityRules = function(rules, name, alignment, domains, weapons) {
  * the character needs to have this animal as a familiar.
  */
 Eberron.familiarRules = function(
-  rules, name, str, dex, con, intel, wis, cha, hd, ac, attack, damage, level, size
+  rules, name, str, dex, con, intel, wis, cha, hd, ac, attack, damage, size,
+  level
 ) {
-  Eberron.basePlugin.familiarRules
-    (rules, name, str, dex, con, intel, wis, cha, hd, ac, attack, damage, size, level);
+  Eberron.basePlugin.familiarRules(
+    rules, name, str, dex, con, intel, wis, cha, hd, ac, attack, damage, size,
+    level
+  );
   // No changes needed to the rules defined by base method
 };
 
@@ -1714,13 +1717,8 @@ Eberron.familiarRules = function(
  * lists the categories of the feat.
  */
 Eberron.featRules = function(rules, name, requires, implies, types) {
-  if(name == 'Beast Shape' && Eberron.basePlugin == window.Pathfinder) {
-    // PF allows Wild Shape to Huge at level 8 instead of 15
-    for(var i = 0; i < requires.length; i++)
-      requires[i] = requires[i].replace(/Druid\s*>=\s*15/, 'Druid >= 8');
-  }
   Eberron.basePlugin.featRules(rules, name, requires, implies, types);
-  // No changes needed to the rules defined by SRD35 method
+  // No changes needed to the rules defined by base method
 };
 
 /*
@@ -1931,8 +1929,9 @@ Eberron.houseRules = function(rules, name, dragonmark, features) {
 Eberron.goodyRules = function(
   rules, name, pattern, effect, value, attributes, sections, notes
 ) {
-  QuilvynRules.goodyRules
+  Eberron.basePlugin.goodyRules
     (rules, name, pattern, effect, value, attributes, sections, notes);
+  // No changes needed to the rules defined by base method
 };
 
 /* Defines in #rules# the rules associated with language #name#. */
@@ -1963,7 +1962,7 @@ Eberron.pathRules = function(
       rules, name, group, levelAttr, features, selectables, spellAbility,
       spellSlots
     );
-  // No changes needed to the rules defined by base method
+  // Add new domains to Cleric selections
   if(name.match(/Domain$/))
     QuilvynRules.featureListRules
       (rules, ["deityDomains =~ '" + name.replace(' Domain', '') + "' ? 1:" + name], 'Cleric', 'levels.Cleric', true);
@@ -2061,7 +2060,7 @@ Eberron.shieldRules = function(
 ) {
   Eberron.basePlugin.shieldRules
     (rules, name, ac, profLevel, skillFail, spellFail);
-  // No changes needed to the rules defined by SRD35 method
+  // No changes needed to the rules defined by base method
 };
 
 /*
@@ -2145,23 +2144,11 @@ Eberron.randomizeOneAttribute = function(attributes, attribute) {
 /* Returns HTML body content for user notes associated with this rule set. */
 Eberron.ruleNotes = function() {
   return '' +
-    '<h2>Eberron Quilvyn Module Notes</h2>\n' +
-    'Eberron Quilvyn Module Version ' + EBERRON_VERSION + '\n' +
+    '<h2>Eberron Quilvyn Plugin Notes</h2>\n' +
+    'Eberron Quilvyn Plugin Version ' + EBERRON_VERSION + '\n' +
     '\n' +
-    '<h3>Usage Notes</h3>\n' +
     '<p>\n' +
-    '<ul>\n' +
-    '  <li>\n' +
-    '    Quilvyn uses wisdom, rather than charisma, when calculating the\n' +
-    '    spell difficulty class of Dragonmark spells drawn from the Cleric\n' +
-    '    spell list.\n' +
-    '  </li>\n' +
-    '</ul>\n' +
-    '</p>\n' +
-    '\n' +
-    '<h3>Limitations</h3>\n' +
-    '<p>\n' +
-    'None, currently\n' +
+    'There are no known bugs, limitations, or usage notes specific to the Eberron plugin\n' +
     '</p>\n';
 }
 
