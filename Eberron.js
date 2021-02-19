@@ -2141,6 +2141,11 @@ Eberron.randomizeOneAttribute = function(attributes, attribute) {
   // No changes needed to the return value of the base method
 };
 
+/* Returns an array of plugins upon which this one depends. */
+Eberron.getPlugins = function() {
+  return [Eberron.basePlugin].concat(Eberron.basePlugin.getPlugins());
+};
+
 /* Returns HTML body content for user notes associated with this rule set. */
 Eberron.ruleNotes = function() {
   return '' +
@@ -2151,8 +2156,3 @@ Eberron.ruleNotes = function() {
     'There are no known bugs, limitations, or usage notes specific to the Eberron plugin\n' +
     '</p>\n';
 }
-
-/* Returns an array of plugins upon which this one depends. */
-Eberron.getPlugins = function() {
-  return Eberron.basePlugin.rules.getPlugins().concat([Eberron.basePlugin]);
-};
