@@ -2143,7 +2143,7 @@ Eberron.randomizeOneAttribute = function(attributes, attribute) {
 
 /* Returns an array of plugins upon which this one depends. */
 Eberron.getPlugins = function() {
-  return [Eberron.basePlugin].concat(Eberron.basePlugin.getPlugins());
+  return [Eberron.basePlugin].concat(Eberron.basePlugin.rules.getPlugins());
 };
 
 /* Returns HTML body content for user notes associated with this rule set. */
