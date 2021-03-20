@@ -18,7 +18,7 @@ Place, Suite 330, Boston, MA 02111-1307 USA.
 /*jshint esversion: 6 */
 "use strict";
 
-var EBERRON_VERSION = '2.2.1.1';
+var EBERRON_VERSION = '2.2.1.2';
 
 /*
  * This module loads the rules from the Eberron campaign setting.  The Eberron
@@ -1512,7 +1512,7 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
       QuilvynUtils.getAttrValue(attrs, 'Ability'),
       untrained != 'n' && untrained != 'N',
       QuilvynUtils.getAttrValueArray(attrs, 'Class'),
-      QuilvynUtils.getAttrValueArray(attrs, 'Synergies')
+      QuilvynUtils.getAttrValueArray(attrs, 'Synergy')
     );
     if(Eberron.basePlugin.skillRulesExtra)
       Eberron.basePlugin.skillRulesExtra(rules, name);
