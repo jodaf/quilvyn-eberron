@@ -18,7 +18,7 @@ Place, Suite 330, Boston, MA 02111-1307 USA.
 /*jshint esversion: 6 */
 "use strict";
 
-var EBERRON_VERSION = '2.2.1.0';
+var EBERRON_VERSION = '2.2.1.1';
 
 /*
  * This module loads the rules from the Eberron campaign setting.  The Eberron
@@ -72,7 +72,7 @@ function Eberron() {
   Eberron.ANIMAL_COMPANIONS =
     Object.assign( {}, Eberron.basePlugin.ANIMAL_COMPANIONS);
   Eberron.ARMORS =
-    Object.assign({}, Eberron.basePlugin.ARMORS, Eberron.ARMORS_ADDDED);
+    Object.assign({}, Eberron.basePlugin.ARMORS, Eberron.ARMORS_ADDED);
   Eberron.FAMILIARS = Object.assign({}, Eberron.basePlugin.FAMILIARS);
   Eberron.FEATS =
     Object.assign({}, Eberron.basePlugin.FEATS, Eberron.FEATS_ADDED);
@@ -333,7 +333,7 @@ Eberron.FEATS_ADDED = {
   'Precise Swing':'Type=General Require="baseAttack >= 5"',
   'Pursue':'Type=General Require="features.Combat Reflexes"',
   'Raging Luck':'Type=General Require=features.Rage',
-  'Recognize Imposter':
+  'Recognize Impostor':
     'Type=General Require="skills.Sense Motive >= 3","skills.Spot >= 3"',
   'Repel Aberration':
     'Type=General Require="features.Gatekeeper Initiate","levels.Druid >= 3"',
@@ -477,7 +477,7 @@ Eberron.FEATURES_ADDED = {
   'Double Steel Strike':
     'Section=combat Note="Flurry Of Blows w/Two-Bladed Sword"',
   'Dragon Rage':
-    'Section=combat Note="+2 AC, +10 Dragon Totem resistence during Rage"',
+    'Section=combat Note="+2 AC, +10 Dragon Totem resistance during Rage"',
   'Dragon Totem (Black)':'Section=save Note="Resistance 5 vs. acid"',
   'Dragon Totem (Blue)':'Section=save Note="Resistance 5 vs. electricity"',
   'Dragon Totem (Brass)':'Section=save Note="Resistance 5 vs. fire"',
@@ -534,9 +534,9 @@ Eberron.FEATURES_ADDED = {
   'Hospitaler':'Section=skill Note="+2 Diplomacy"',
   'Improved Damage Reduction':'Section=combat Note="DR +1/adamantine"',
   'Improved Fortification':
-    'Section=combat Note="Immune sneak attac, critical hit, healing"',
+    'Section=combat Note="Immune sneak attack, critical hit, healing"',
   'Improved Natural Attack':
-    'Section=combat Note="Natural attack damage increases one size catagory"',
+    'Section=combat Note="Natural attack damage increases one size category"',
   'Investigate':
     'Section=skill ' +
     'Note="Use Search to find and analyze clues, synergy with appropriate Knowledge"',
@@ -570,7 +570,7 @@ Eberron.FEATURES_ADDED = {
   'Pursue':
     'Section=combat Note="Spend 1 AP to step into area vacated by opponent"',
   'Raging Luck':'Section=ability Note="Gain 1 AP during Rage"',
-  'Recognize Imposter':
+  'Recognize Impostor':
     'Section=skill Note="+4 Sense Motive vs. Bluff and Spot vs. Disguise"',
   'Repel Aberration':
     'Section=combat Note="Repel aberrations as cleric turns undead"',
@@ -638,7 +638,7 @@ Eberron.FEATURES_ADDED = {
   'Longtooth':
     'Section=ability,combat ' +
     'Note="+2 Str while shifting",' +
-         '"d6+%V bite while shiting"',
+         '"d6+%V bite while shifting"',
   'Mindlink':'Section=magic Note="<i>Mindlink</i> 1/dy"',
   'Minor Shape Change':'Section=magic Note="<i>Shape Change</i> body at will"',
   'Natural Psionic':'Section=magic Note="+1 PP/level"',
@@ -1723,7 +1723,7 @@ Eberron.featRules = function(rules, name, requires, implies, types) {
 
 /*
  * Defines in #rules# the rules associated with feat #name# that cannot be
- * derived directly from the abilties passed to featRules.
+ * derived directly from the abilities passed to featRules.
  */
 Eberron.featRulesExtra = function(rules, name) {
 

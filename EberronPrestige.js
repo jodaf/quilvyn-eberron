@@ -40,7 +40,7 @@ EberronPrestige.CLASSES = {
       '"features.Favored In House","features.Least Dragonmark",' +
       '"house != \'None\'",' +
       '"race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Orc|Human\'",' +
-      '"countSkillGe7 >= 2" ' +
+      '"countSkillsGe7 >= 2" ' +
     'HitDie=d8 Attack=3/4 SkillPoints=4 Fortitude=1/2 Reflex=1/2 Will=1/2 ' +
     'Skills=' +
       'Appraise,Bluff,Diplomacy,"Gather Information",Intimidate,' +
@@ -120,7 +120,7 @@ EberronPrestige.CLASSES = {
       '"features.Aberrant Dragonmark == 0","features.Heroic Spirit",' +
       '"features.Least Dragonmark == 0",' +
       '"race =~ \'Dwarf|Elf|Gnome|Halfling|Half Orc|Human\'",' +
-      '"countSkillGe15 >= 2" ' +
+      '"countSkillsGe15 >= 2" ' +
     'HitDie=d6 Attack=1 SkillPoints=2 Fortitude=1/2 Reflex=1/2 Will=1/2 ' +
     'Features=' +
       '"1:Action Point Bonus","2:Siberys Mark",' +
@@ -242,7 +242,7 @@ EberronPrestige.FEATURES = {
   'Improved Lesser Dragonmark':
     'Section=magic Note="2nd Lesser Dragonmark spell or +1/day"',
   'Improved Critical':'Section=feature Note="+1 Combat Feat"',
-  'Inqisitive Spells':'Section=magic Note="1/dy, spend 2 AP for 2nd"',
+  'Inquisitive Spells':'Section=magic Note="1/dy, spend 2 AP for 2nd"',
   'Iron Damage Reduction':'Section=combat Note="DR 3/cold iron"',
   'Metal Immunity':'Section=save Note="Immune to mind-altering effects"',
   'Pounce':'Section=combat Note="Full attack when charging"',
@@ -332,7 +332,7 @@ EberronPrestige.classRulesExtra = function(rules, name) {
     var allSkills = rules.getChoices('skills');
     for(var skill in allSkills) {
       rules.defineRule
-        ('countSkillGe7', 'skills.' + skill, '+=', 'source >= 7 ? 1 : null');
+        ('countSkillsGe7', 'skills.' + skill, '+=', 'source >= 7 ? 1 : null');
     }
     rules.defineRule
       ('skillNotes.houseStatus', 'levels.Dragonmark Heir', '=', null);
@@ -340,7 +340,7 @@ EberronPrestige.classRulesExtra = function(rules, name) {
   } else if(name == 'Eldeen Ranger') {
 
     rules.defineRule('combatNotes.favoredEnemy',
-      'levels.Eldeed Ranger', '+=', 'source >= 4 ? 1 : null'
+      'levels.Eldeen Ranger', '+=', 'source >= 4 ? 1 : null'
     );
     rules.defineRule
       ('combatNotes.smiteEvil', 'levels.Eldeen Ranger', '+=', '1');
@@ -437,7 +437,7 @@ EberronPrestige.classRulesExtra = function(rules, name) {
     var allSkills = rules.getChoices('skills');
     for(var skill in allSkills) {
       rules.defineRule
-        ('countSkillGe15', 'skills.' + skill, '+=', 'source >= 15 ? 1 : null');
+        ('countSkillsGe15', 'skills.' + skill, '+=', 'source >= 15 ? 1 : null');
     }
     rules.defineRule('casterLevels.Dragonmark',
       'levels.Heir Of Siberys', '^=', 'source >= 2 ? 15 : null'
@@ -461,7 +461,7 @@ EberronPrestige.classRulesExtra = function(rules, name) {
     for(var feat in
       {'Alertness':'', 'Deceitful':'', 'Heroic Spirit':'',
        'Improved Initiative':'', 'Iron Will':'', 'Negotiator':'',
-       'Persuasive':'', 'Recognize Imposter':'', 'Research':'', 'Toughness':'',
+       'Persuasive':'', 'Recognize Impostor':'', 'Research':'', 'Toughness':'',
        'Track':'', 'Urban Tracking':''}
     ) {
       if(feat in allFeats) {
