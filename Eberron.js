@@ -18,7 +18,7 @@ Place, Suite 330, Boston, MA 02111-1307 USA.
 /*jshint esversion: 6 */
 "use strict";
 
-var EBERRON_VERSION = '2.2.1.2';
+var EBERRON_VERSION = '2.2.1.3';
 
 /*
  * This module loads the rules from the Eberron campaign setting.  The Eberron
@@ -1280,7 +1280,7 @@ Eberron.CLASSES_ADDED = {
       '"Knowledge (Local)","Knowledge (Shadow)",Listen,"Move Silently",' +
       'Profession,Ride,"Sense Motive","Speak Language",Swim,Tumble ' +
     'Features=' +
-      '"1:Armor Proficiency (Light)","1:Shield Proficiency (Heavy)",' +
+      '"1:Armor Proficiency (Medium)","1:Shield Proficiency (Heavy)",' +
       '"1:Weapon Proficiency (Martial)",' +
       '"1:Artificer Knowledge","1:Artisan Bonus","1:Craft Reserve",' +
       '"1:Disable Trap","1:Item Creation","1:Scribe Scroll","2:Brew Potion",' +
