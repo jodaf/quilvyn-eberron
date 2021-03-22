@@ -18,7 +18,7 @@ Place, Suite 330, Boston, MA 02111-1307 USA.
 /*jshint esversion: 6 */
 "use strict";
 
-var EBERRON_VERSION = '2.2.1.3';
+var EBERRON_VERSION = '2.2.1.4';
 
 /*
  * This module loads the rules from the Eberron campaign setting.  The Eberron
@@ -820,7 +820,7 @@ Eberron.RACES_ADDED = {
     'Features=' +
       '1:Dreamless,1:Humanlike,1:Influential,1:Mindlink,"1:Natural Psionic",' +
       '"1:Resist Mental","1:Resist Possession" ' +
-    'Languages=Common,Quor',
+    'Languages=Common,Quori',
   'Shifter':
     'Features=' +
       '"1:Shifter Ability Adjustment",1:Shifting ' +
@@ -1291,7 +1291,7 @@ Eberron.CLASSES_ADDED = {
       '"13:Artificer Skill Mastery","14:Forge Ring" ' +
     'Skills=' +
       'Appraise,Concentration,Craft,"Disable Device","Knowledge (Arcana)",' +
-      '"Knowledge (Architecture)","Knowledge (Planes)","Open Lock",' +
+      '"Knowledge (Engineering)","Knowledge (Planes)","Open Lock",' +
       'Profession,Search,Spellcraft,"Use Magic Device" ' +
     'SpellAbility=intelligence ' +
     'SpellSlots=' +
