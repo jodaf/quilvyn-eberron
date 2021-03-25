@@ -18,7 +18,7 @@ Place, Suite 330, Boston, MA 02111-1307 USA.
 /*jshint esversion: 6 */
 "use strict";
 
-var EBERRON_VERSION = '2.2.1.4';
+var EBERRON_VERSION = '2.2.1.5';
 
 /*
  * This module loads the rules from the Eberron campaign setting.  The Eberron
@@ -675,42 +675,55 @@ Eberron.HOUSES = {
     '',
   'Cannith':
     'Dragonmark=Making ' +
+    'Race=Human ' +
     'Features=Maker',
   'Deneith':
     'Dragonmark=Sentinel ' +
+    'Race=Human ' +
     'Features=Sentinel',
   'Ghallanda':
     'Dragonmark=Hospitality ' +
+    'Race=Halfling ' +
     'Features=Hospitaler',
   'Jorasco':
     'Dragonmark=Healing ' +
+    'Race=Halfling ' +
     'Features=Healer',
   'Kundarak':
     'Dragonmark=Warding ' +
+    'Race=Dwarf ' +
     'Features=Warder',
   'Lyrandar':
     'Dragonmark=Storm ' +
+    'Race=Half-Elf ' +
     'Features="Storm Walker"',
   'Medani':
     'Dragonmark=Detection ' +
+    'Race=Half-Elf ' +
     'Features=Detective',
   'Orien':
     'Dragonmark=Passage ' +
+    'Race=Human ' +
     'Features=Traveler',
   'Phiarlan':
     'Dragonmark=Shadow ' +
+    'Race=Elf ' +
     'Features=Shadower',
   'Sivis':
     'Dragonmark=Scribing ' +
+    'Race=Gnome ' +
     'Features=Scribe',
   'Tharashk':
     'Dragonmark=Finding ' +
+    'Race=Half-Orc,Human ' +
     'Features=Finder',
   'Thuranni':
     'Dragonmark=Shadow ' +
+    'Race=Elf ' +
     'Features=Shadower',
   'Vadalis':
     'Dragonmark=Handling ' +
+    'Race=Human ' +
     'Features=Handler'
 };
 Eberron.GOODIES = Object.assign({}, SRD35.GOODIES);
@@ -1327,7 +1340,8 @@ Eberron.identityRules = function(
   rules, alignments, classes, deities, houses, paths, races
 ) {
 
-  QuilvynUtils.checkAttrTable(houses, ['Dragonmark', 'Features', 'Spells']);
+  QuilvynUtils.checkAttrTable
+    (houses, ['Dragonmark', 'Race', 'Features', 'Spells']);
 
   if(Eberron.basePlugin == window.Pathfinder)
     Pathfinder.identityRules(
@@ -1469,6 +1483,7 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
   else if(type == 'House')
     Eberron.houseRules(rules, name,
       QuilvynUtils.getAttrValue(attrs, 'Dragonmark'),
+      QuilvynUtils.getAttrValueArray(attrs, 'Race'),
       QuilvynUtils.getAttrValueArray(attrs, 'Features')
     );
   else if(type == 'Language')
@@ -1839,10 +1854,10 @@ Eberron.featureRules = function(rules, name, sections, notes) {
 
 /*
  * Defines rules related to Eberron house #name#. #dragonmark# is the
- * dragonmark associated with the house. #features# lists the features acquired
- * by members of the house.
+ * dragonmark associated with the house and #races# lists its races.
+ * #features# lists the features acquired by members of the house.
  */
-Eberron.houseRules = function(rules, name, dragonmark, features) {
+Eberron.houseRules = function(rules, name, dragonmark, races, features) {
 
   if(!name) {
     console.log('Empty house name');
@@ -1854,6 +1869,10 @@ Eberron.houseRules = function(rules, name, dragonmark, features) {
     console.log('Empty dragonmark for house ' + name);
     return;
   }
+  if(!Array.isArray(races)) {
+    console.log('Bad race list "' + races + '" for house ' + name);
+    return;
+  }
   if(!Array.isArray(features)) {
     console.log('Bad features list "' + features + '" for house ' + name);
     return;
@@ -1862,9 +1881,11 @@ Eberron.houseRules = function(rules, name, dragonmark, features) {
   if(rules.houseStats == null) {
     rules.houseStats = {
       dragonmark:{},
+      races:{},
     };
   }
   rules.houseStats.dragonmark[name] = dragonmark;
+  rules.houseStats.races[name] = races.join('|');
 
   var prefix =
     name.charAt(0).toLowerCase() + name.substring(1).replaceAll(' ', '');
@@ -1911,6 +1932,14 @@ Eberron.houseRules = function(rules, name, dragonmark, features) {
     'casterLevels.' + name, '?', null,
     'magicNotes.siberysMark', '=', '1'
   );
+  if(races.length == 1)
+    QuilvynRules.prerequisiteRules
+      (rules, 'validation', 'house' + name, houseLevel,
+       "race == '" + races[0] + "'");
+  else
+    QuilvynRules.prerequisiteRules
+      (rules, 'validation', 'house' + name, houseLevel,
+       "race =~ '" + races.join("|") + "'");
 
 };
 
@@ -2137,8 +2166,19 @@ Eberron.createViewers = function(rules, viewers) {
 
 /* Sets #attributes#'s #attribute# attribute to a random value. */
 Eberron.randomizeOneAttribute = function(attributes, attribute) {
-  Eberron.basePlugin.randomizeOneAttribute.apply(this, [attributes, attribute]);
-  // No changes needed to the return value of the base method
+  if(attribute == 'house') {
+    var allHouses = this.getChoices('houses');
+    var choices = ['None'];
+    var race = attributes.race;
+    for(var house in allHouses) {
+      if(allHouses[house].match(race))
+        choices.push(house);
+    }
+    attributes.house = choices[QuilvynUtils.random(0, choices.length - 1)];
+  } else {
+    Eberron.basePlugin.randomizeOneAttribute.apply
+      (this, [attributes, attribute]);
+  }
 };
 
 /* Returns an array of plugins upon which this one depends. */
