@@ -1099,8 +1099,8 @@ Eberron.SPELLS_LEVELS = {
   'Cat\'s Grace':'A2',
   'Cause Fear':'Dragon1,Passion1',
   'Charm Animal':'Vadalis1',
-  'Charm Monster':'Charm5',
-  'Charm Person':'Charm1',
+  'Charm Monster':'Charm5,Greensinger4',
+  'Charm Person':'Charm1,Greensinger1',
   'Chill Metal':'A2',
   'Clairaudience/Clairvoyance':'Phiarlan2,Thuranni2',
   'Command Undead':'Necromancer2',
@@ -1116,6 +1116,7 @@ Eberron.SPELLS_LEVELS = {
   'Cure Light Wounds':'Jorasco1',
   'Cure Serious Wounds':'Jorasco2',
   'Darkness':'Phiarlan1,Shadow2,Thuranni1',
+  'Daze Monster':'Greensinger2',
   'Death Knell':'Dragon2',
   'Death Ward':'Life4',
   'Deeper Darkness':'Shadow3',
@@ -1133,7 +1134,7 @@ Eberron.SPELLS_LEVELS = {
   'Disguise Self':'Phiarlan1,Thuranni1',
   'Dismissal':'Exorcism4',
   'Dispel Evil':'Exorcism5',
-  'Displacement':'Warden3',
+  'Displacement':'Greensinger3,Warden3',
   'Disrupting Weapon':'A5,Life5',
   'Dominate Animal':'Vadalis2',
   'Dominate Monster':'Charm9,Passion9',
@@ -1142,6 +1143,8 @@ Eberron.SPELLS_LEVELS = {
   'Endure Elements':'Lyrandar1',
   'Energy Drain':'Decay9,Necromancer9',
   'Enervation':'Decay4,Necromancer4',
+  'Ethereal Jaunt':'Greensinger7',
+  'Etherealness':'Greensinger9',
   'Expeditious Retreat':'Orien1',
   'Explosive Runes':'Kundarak2',
   'Eyebite':'Necromancer6',
@@ -1177,7 +1180,7 @@ Eberron.SPELLS_LEVELS = {
   'Heroism':'Charm4',
   'Hide From Undead':'Life1',
   'Hideous Laughter':'Passion2',
-  'Hold Monster':'Warden5',
+  'Hold Monster':'Greensinger5,Warden5',
   'Holy Aura':'Exorcism8',
   'Holy Word':'Exorcism7',
   'Horrid Wilting':'Decay8,Necromancer8',
@@ -1203,6 +1206,8 @@ Eberron.SPELLS_LEVELS = {
   'Magic Weapon':'A1',
   'Major Creation':'A5,Artifice6,Cannith3',
   'Make Whole':'Cannith1',
+  "Mass Cat's Grace":'Greensinger6',
+  'Mass Charm Monster':'Greensinger8',
   'Mass Heal':'Community9,Life9,Jorasco4',
   'Mass Hold Monster':'Warden9',
   'Mending':'Cannith1',
@@ -1801,6 +1806,15 @@ Eberron.featRulesExtra = function(rules, name) {
   } else if(name == 'Greater Shifter Defense') {
     rules.defineRule('combatNotes.shifterDefense',
       'combatNotes.greaterShifterDefense', '+', '2'
+    );
+  } else if(name == 'Greensinger Initiate') {
+    rules.defineRule('casterLevels.Greensinger',
+      'features.Greensinger Initiate', '?', null,
+      'casterLevels.D', '=', null
+    );
+    rules.defineRule('spellDifficultyClass.Greensinger',
+      'features.Greensinger Initiate', '?', null,
+      'spellDifficultyClass.D', '=', null
     );
   } else if(name == 'Haunting Melody') {
     rules.defineRule('magicNotes.hauntingMelody',
