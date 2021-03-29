@@ -18,7 +18,7 @@ Place, Suite 330, Boston, MA 02111-1307 USA.
 /*jshint esversion: 6 */
 "use strict";
 
-var EBERRON_VERSION = '2.2.1.5';
+var EBERRON_VERSION = '2.2.1.6';
 
 /*
  * This module loads the rules from the Eberron campaign setting.  The Eberron
@@ -983,7 +983,7 @@ Eberron.SPELLS_ADDED = {
     'Description="Imbue touched magic item w/metamagic property for $L rd"',
   "Nature's Wrath":
     'School=Evocation ' +
-    'Level=D4 ' +
+    'Level=Gatekeeper4 ' +
     'Description="R$RM\' 20\' radius aberrations ${Lmin10}d6 HP and dazed 1 rd, other unnatural ${Ldiv2min5}d8 HP (Will half)"',
   'Personal Weapon Augmentation':
     'School=Transmutation ' +
@@ -1015,7 +1015,7 @@ Eberron.SPELLS_ADDED = {
     'Description="Touched grants +$Ldiv4plus1 saves for $L10 min"',
   'Return To Nature':
     'School=Transmutation ' +
-    'Level=D7 ' +
+    'Level=Gatekeeper7 ' +
     'Description="R$RS\' Target reduce Int, magic"',
   'Skill Enhancement':
     'School=Transmutation ' +
@@ -1067,7 +1067,7 @@ Eberron.SPELLS_ADDED = {
     'Description="Touched loses $Ldiv2 Str and Con (Fort neg)"',
   'Zone Of Natural Purity':
     'School=Evocation ' +
-    'Level=D2 ' +
+    'Level=Gatekeeper2 ' +
     'Description="R$RS\' fey and plants in 20\' radius +1 attack, damage, save, abberations -1, for $L2 hr"'
 };
 Eberron.SPELLS = Object.assign({}, SRD35.SPELLS, Eberron.SPELLS_ADDED);
@@ -1084,7 +1084,7 @@ Eberron.SPELLS_LEVELS = {
   'Arcane Mark':'Sivis1',
   'Astral Projection':'Meditation9',
   'Awaken':'Vadalis4',
-  'Banishment':'Exorcism6',
+  'Banishment':'Exorcism6,Gatekeeper5,Warden7',
   'Bear\'s Endurance':'A2',
   'Bestow Curse':'Dragon3',
   'Blade Barrier':'A6',
@@ -1124,12 +1124,16 @@ Eberron.SPELLS_LEVELS = {
   'Detect Magic':'Medani1',
   'Detect Poison':'Medani1',
   'Detect Scrying':'Medani2',
+  'Detect Thoughts':'Warden2',
   'Detect Undead':'Deathless1',
   'Dimension Door':'Orien2',
+  'Dimensional Anchor':'Gatekeeper3',
+  'Dimensional Lock':'Gatekeeper6',
   'Discern Location':'Tharashk4',
   'Disguise Self':'Phiarlan1,Thuranni1',
   'Dismissal':'Exorcism4',
   'Dispel Evil':'Exorcism5',
+  'Displacement':'Warden3',
   'Disrupting Weapon':'A5,Life5',
   'Dominate Animal':'Vadalis2',
   'Dominate Monster':'Charm9,Passion9',
@@ -1173,10 +1177,12 @@ Eberron.SPELLS_LEVELS = {
   'Heroism':'Charm4',
   'Hide From Undead':'Life1',
   'Hideous Laughter':'Passion2',
+  'Hold Monster':'Warden5',
   'Holy Aura':'Exorcism8',
   'Holy Word':'Exorcism7',
   'Horrid Wilting':'Decay8,Necromancer8',
   'Identify':'A1,Tharashk1',
+  'Imprisonment':'Gatekeeper9',
   'Illusory Script':'Sivis2',
   'Insanity':'Charm7,Madness7',
   'Irresistible Dance':'Passion8',
@@ -1186,7 +1192,7 @@ Eberron.SPELLS_LEVELS = {
   'Lesser Planar Ally':'Dragon4',
   'Lesser Restoration':'Jorasco1,Life2',
   'Light':'A1',
-  'Locate Creature':'Tharashk2',
+  'Locate Creature':'Tharashk2,Warden4',
   'Locate Object':'Meditation3,Tharashk1',
   'Mage Armor':'Deneith1',
   'Mage\'s Faithful Hound':'Kundarak3',
@@ -1198,8 +1204,9 @@ Eberron.SPELLS_LEVELS = {
   'Major Creation':'A5,Artifice6,Cannith3',
   'Make Whole':'Cannith1',
   'Mass Heal':'Community9,Life9,Jorasco4',
+  'Mass Hold Monster':'Warden9',
   'Mending':'Cannith1',
-  'Mind Blank':'Deneith4,Meditation8',
+  'Mind Blank':'Deneith4,Gatekeeper8,Meditation8',
   'Minor Creation':'A4,Artifice4,Cannith2',
   'Minor Image':'Phiarlan1,Thuranni1',
   'Misdirection':'Kundarak1',
@@ -1223,7 +1230,7 @@ Eberron.SPELLS_LEVELS = {
   'Prismatic Wall':'Kundarak4',
   'Protection From Arrows':'Deneith1',
   'Protection From Energy':'Deneith2',
-  'Protection From Evil':'Exorcism1',
+  'Protection From Evil':'Exorcism1,Gatekeeper1,Warden1',
   'Prying Eyes':'Phiarlan3,Thuranni3',
   'Purify Food And Drink':'Ghallanda1',
   'Rage':'Madness3',
@@ -1232,8 +1239,10 @@ Eberron.SPELLS_LEVELS = {
   'Regenerate':'Life7',
   'Remove Curse':'Exorcism3',
   'Remove Disease':'Jorasco2',
+  'Repulsion':'Warden6',
   'Restoration':'Jorasco2',
   'Rusting Grasp':'A4',
+  'Screen':'Warden8',
   'Scrying':'Phiarlan2,Thuranni2',
   'Secret Chest':'Commerce6',
   'Secret Page':'Sivis2',
@@ -1767,6 +1776,15 @@ Eberron.featRulesExtra = function(rules, name) {
       'level', '=', '10 + Math.floor(source / 2)',
       'wisdomModifier', '+', null
     );
+  } else if(name == 'Gatekeeper Initiate') {
+    rules.defineRule('casterLevels.Gatekeeper',
+      'features.Gatekeeper Initiate', '?', null,
+      'casterLevels.D', '=', null
+    );
+    rules.defineRule('spellDifficultyClass.Gatekeeper',
+      'features.Gatekeeper Initiate', '?', null,
+      'spellDifficultyClass.D', '=', null
+    );
   } else if(name == 'Great Rend') {
     rules.defineRule('combatNotes.greatRend',
       'level', '=', 'Math.floor(source / 4)',
@@ -1818,6 +1836,15 @@ Eberron.featRulesExtra = function(rules, name) {
     );
   } else if(name == 'Shifter Defense') {
     rules.defineRule('combatNotes.shifterDefense', '', '=', '2');
+  } else if(name == 'Warden Initiate') {
+    rules.defineRule('casterLevels.Warden',
+      'features.Warden Initiate', '?', null,
+      'casterLevels.D', '=', null
+    );
+    rules.defineRule('spellDifficultyClass.Warden',
+      'features.Warden Initiate', '?', null,
+      'spellDifficultyClass.D', '=', null
+    );
   } else if (Eberron.basePlugin.featRulesExtra) {
     Eberron.basePlugin.featRulesExtra(rules, name);
   }
