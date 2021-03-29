@@ -2104,6 +2104,10 @@ Eberron.raceRulesExtra = function(rules, name) {
     rules.defineRule('magicNotes.arcaneSpellFailure',
       'combatNotes.compositePlating', '+=', '5'
     );
+    rules.defineRule('negateLanguageBonus',
+      'intelligenceModifier', '=', '-Math.max(source, 0)'
+    );
+    rules.defineRule('languageCount', 'negateLanguageBonus', '+', null);
   } else if(Eberron.basePlugin.raceRulesExtra) {
     Eberron.basePlugin.raceRulesExtra(rules, name);
   }
