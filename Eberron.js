@@ -18,7 +18,7 @@ Place, Suite 330, Boston, MA 02111-1307 USA.
 /*jshint esversion: 6 */
 "use strict";
 
-var EBERRON_VERSION = '2.2.1.6';
+var EBERRON_VERSION = '2.2.1.7';
 
 /*
  * This module loads the rules from the Eberron campaign setting.  The Eberron
@@ -182,7 +182,10 @@ Eberron.FEATS_ADDED = {
             '"race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Orc|Human\'"',
   'Action Boost':'Type=General',
   'Action Surge':'Type=General Require="baseAttack >= 3"',
-  'Adamantine Body':'Type=Warforged Require="race == \'Warforged\'"',
+  'Adamantine Body':
+    'Type=General ' +
+    'Require="race == \'Warforged\'" ' +
+    'Imply="features.Mithral Body == 0","levels.Druid == 0"',
   'Ashbound':'Type=General Require="features.Spontaneous Druid Spell"',
   'Attune Magic Weapon':
     'Type="Item Creation" ' +
@@ -200,7 +203,7 @@ Eberron.FEATS_ADDED = {
   'Beast Totem (Unicorn)':'Type=General Require="features.Wild Empathy"',
   'Beast Totem (Winter Wolf)':'Type=General Require="features.Wild Empathy"',
   'Beast Totem (Yrthak)':'Type=General Require="features.Wild Empathy"',
-  'Beasthide Elite':'Type=Shifter Require=features.Beasthide',
+  'Beasthide Elite':'Type=General Require=features.Beasthide',
   'Bind Elemental':
     'Type="Item Creation" ' +
     'Require="casterLevel >= 9",' +
@@ -209,7 +212,7 @@ Eberron.FEATS_ADDED = {
     'Type=General ' +
     'Require="alignment !~ \'Good\'",' +
             '"features.Spontaneous Druid Spell"',
-  'Cliffwalk Elite':'Type=Shifter Require=features.Cliffwalk',
+  'Cliffwalk Elite':'Type=General Require=features.Cliffwalk',
   'Craft Construct':  // From MM, needed for Artificer class
     'Type="Item Creation" ' +
     'Require="features.Craft Magic Arms And Armor",' +
@@ -256,7 +259,7 @@ Eberron.FEATS_ADDED = {
   'Extra Rings':
     'Type="Item Creation" Require="casterLevel >= 12","features.Forge Ring"',
   'Extra Shifter Trait':
-    'Type=Shifter Require="race == \'Shifter\'","sumShifterFeats >= 3"',
+    'Type=General Require="race == \'Shifter\'","sumShifterFeats >= 3"',
   'Extraordinary Artisan':
     'Type="Item Creation" Require="sumItemCreationFeats >= 2"',
   'Favored In House':
@@ -269,8 +272,8 @@ Eberron.FEATS_ADDED = {
             '"features.Weapon Proficiency (Kama)"',
   'Gatekeeper Initiate':
     'Type=General Require="features.Spontaneous Druid Spell"',
-  'Great Bite':'Type=Shifter Require="baseAttack >= 6",features.Longtooth',
-  'Great Rend':'Type=Shifter Require="baseAttack >= 4",features.Razorclaw',
+  'Great Bite':'Type=General Require="baseAttack >= 6",features.Longtooth',
+  'Great Rend':'Type=General Require="baseAttack >= 4",features.Razorclaw',
   'Greater Dragonmark':
     'Type=General ' +
     'Require="features.Least Dragonmark",' +
@@ -284,7 +287,7 @@ Eberron.FEATS_ADDED = {
             '"features.Powerful Charge",' +
             '"features.Small == 0"',
   'Greater Shifter Defense':
-    'Type=Shifter ' +
+    'Type=General ' +
     'Require="features.Shifter Defense",' +
             '"race == \'Shifter\'",' +
             '"sumShifterFeats >= 5"',
@@ -295,11 +298,11 @@ Eberron.FEATS_ADDED = {
     'Require="features.Bardic Music",' +
             '"Sum \'^skills.Perform\' >= 9"',
   'Healing Factor':
-    'Type=Shifter Require="constitution >= 13","race == \'Shifter\'"',
+    'Type=General Require="constitution >= 13","race == \'Shifter\'"',
   'Heroic Spirit':'Type=General',
-  'Improved Damage Reduction':'Type=Warforged Require="race == \'Warforged\'"',
+  'Improved Damage Reduction':'Type=General Require="race == \'Warforged\'"',
   'Improved Fortification':
-    'Type=Warforged Require="baseAttack >= 6","race == \'Warforged\'"',
+    'Type=General Require="baseAttack >= 6","race == \'Warforged\'"',
   'Improved Natural Attack':'Type=General Require="baseAttack >= 4"',
   'Investigate':'Type=General',
   'Knight Training (Cleric)':'Type=General Imply="levels.Paladin > 0"',
@@ -315,10 +318,13 @@ Eberron.FEATS_ADDED = {
             '"race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Orc|Human\'",' +
             '"features.Least Dragonmark",' +
             '"countSkillsGe9 >= 2"',
-  'Longstride Elite':'Type=Shifter Require=features.Longstride',
-  'Mithral Body':'Type=Warforged Require="race == \'Warforged\'"',
+  'Longstride Elite':'Type=General Require=features.Longstride',
+  'Mithral Body':
+    'Type=General ' +
+    'Require="race == \'Warforged\'" ' +
+    'Imply="features.Adamantine Body == 0","levels.Druid == 0"',
   'Mithral Fluidity':
-    'Type=Warforged Require="race == \'Warforged\'","features.Mithral Body"',
+    'Type=General Require="race == \'Warforged\'","features.Mithral Body"',
   'Monastic Training (Cleric)':'Type=General',
   'Music Of Growth':
     'Type=General ' +
@@ -346,11 +352,11 @@ Eberron.FEATS_ADDED = {
             '"weaponProficiencyLevel >= 1" ' +
     'Imply="weapons.Longspear"',
   'Shifter Defense':
-    'Type=Shifter Require="race == \'Shifter\'","sumShifterFeats >= 3"',
+    'Type=General Require="race == \'Shifter\'","sumShifterFeats >= 3"',
   'Shifter Ferocity':
-    'Type=Shifter Require="wisdom >= 13","race == \'Shifter\'"',
+    'Type=General Require="wisdom >= 13","race == \'Shifter\'"',
   'Shifter Multiattack':
-    'Type=Shifter ' +
+    'Type=General ' +
     'Require="baseAttack >= 6","features.Longtooth||features.Razorclaw"',
   'Silver Smite':
     'Type=General ' +
