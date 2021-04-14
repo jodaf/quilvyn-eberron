@@ -727,7 +727,8 @@ Eberron.FEATURES_ADDED = {
     'Section=magic Note="2nd Least Dragonmark spell or +1/day"',
   'Improved Lesser Dragonmark':
     'Section=magic Note="2nd Lesser Dragonmark spell or +1/day"',
-  'Improved Critical':'Section=feature Note="+1 Combat Feat"',
+  'Improved Critical':
+    'Section=feature Note="Improved Critical feat for choice of weapon"',
   'Inquisitive Spells':'Section=magic Note="1/dy, spend 2 AP for 2nd"',
   'Iron Damage Reduction':'Section=combat Note="DR 3/cold iron"',
   'Metal Immunity':'Section=save Note="Immune to mind-altering effects"',
@@ -1984,6 +1985,8 @@ Eberron.classRulesExtra = function(rules, name) {
       'features.Smite Evil', '?', null,
       'levels.Eldeen Ranger', '=', null
     );
+    rules.defineRule
+      ('featCount.Fighter', 'featureNotes.improvedCritical', '+=', '1');
     rules.defineRule('saveNotes.unearthlyGrace', 'charismaModifier', '=', null);
     rules.defineRule('selectableFeatureCount.Eldeen Ranger',
       'levels.Eldeen Ranger', '=', '1'
