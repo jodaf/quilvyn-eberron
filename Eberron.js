@@ -18,7 +18,7 @@ Place, Suite 330, Boston, MA 02111-1307 USA.
 /*jshint esversion: 6 */
 "use strict";
 
-var EBERRON_VERSION = '2.2.2.0';
+var EBERRON_VERSION = '2.2.2.1';
 
 /*
  * This module loads the rules from the Eberron campaign setting.  The Eberron
@@ -1923,7 +1923,14 @@ Eberron.classRules = function(
     saveWill, skills, features, selectables, languages, casterLevelArcane,
     casterLevelDivine, spellAbility, spellSlots
   );
-  // No changes needed to the rules defined by base method
+  if(name == 'Druid') {
+    // Expand Druid's armor choices to include Darkleaf and Leafweave
+    QuilvynRules.prerequisiteRules
+      (rules, 'validation', 'druidClass', 'levels.Druid',
+       ["alignment =~ 'Neutral'",
+        "armor =~ 'None|Hide|^Leather|Padded|Darkleaf|Leafweave'",
+        'shield =~ "None|Wooden"']);
+  }
 };
 
 /*
