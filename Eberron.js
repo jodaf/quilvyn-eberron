@@ -18,7 +18,7 @@ Place, Suite 330, Boston, MA 02111-1307 USA.
 /*jshint esversion: 6 */
 "use strict";
 
-var EBERRON_VERSION = '2.2.2.1';
+var EBERRON_VERSION = '2.2.2.2';
 
 /*
  * This module loads the rules from the Eberron campaign setting.  The Eberron
@@ -66,7 +66,9 @@ function Eberron() {
 
   SRD35.createViewers(rules, SRD35.VIEWERS);
   rules.defineChoice('extras', 'feats', 'featCount', 'selectableFeatureCount');
-  rules.defineChoice('preset', 'race', 'levels', 'npc', 'prestige');
+  rules.defineChoice('preset',
+    'race:Race,select-one,races', 'levels:Class Levels,bag,levels',
+    'prestige:Prestige Levels,bag,prestiges', 'npc:NPC Levels,bag,npcs');
 
   Eberron.ALIGNMENTS = Object.assign({}, Eberron.basePlugin.ALIGNMENTS);
   Eberron.ANIMAL_COMPANIONS =
