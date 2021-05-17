@@ -18,7 +18,7 @@ Place, Suite 330, Boston, MA 02111-1307 USA.
 /*jshint esversion: 6 */
 "use strict";
 
-var EBERRON_VERSION = '2.2.2.2';
+var EBERRON_VERSION = '2.2.2.3';
 
 /*
  * This module loads the rules from the Eberron campaign setting.  The Eberron
@@ -1641,7 +1641,7 @@ Eberron.identityRules = function(
   rules.defineSheetElement('Action Points', 'Heroics/');
   rules.defineSheetElement('Action Dice', 'Heroics/');
   rules.defineEditorElement
-    ('house', 'House', 'select-one', 'houses', 'experience');
+    ('house', 'House', 'select-one', 'houses', 'alignment');
 
 };
 
