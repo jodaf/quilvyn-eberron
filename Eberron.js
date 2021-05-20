@@ -18,7 +18,7 @@ Place, Suite 330, Boston, MA 02111-1307 USA.
 /*jshint esversion: 6 */
 "use strict";
 
-var EBERRON_VERSION = '2.2.2.3';
+var EBERRON_VERSION = '2.2.2.4';
 
 /*
  * This module loads the rules from the Eberron campaign setting.  The Eberron
@@ -26,18 +26,20 @@ var EBERRON_VERSION = '2.2.2.3';
  * of the rule book; raceRules for character races, magicRules for spells, etc.
  * These member methods can be called independently in order to use a subset of
  * the Eberron rules.  Similarly, the constant fields of Eberron (FEATS,
- * SKILLS, etc.) can be manipulated to modify the choices.
+ * SKILLS, etc.) can be manipulated to modify the choices. If #baseRules#
+ * contains "Pathfinder", the Pathfinder plugin is used as the basis for the
+ * Eberron rule set; otherwise, the SRD35 plugin is used.
  */
-function Eberron() {
+function Eberron(baseRules) {
 
   if(window.SRD35 == null) {
     alert('The Eberron module requires use of the SRD35 module');
     return;
   }
 
-  if(window.Pathfinder == null || Pathfinder.SRD35_SKILL_MAP == null) {
-    Eberron.USE_PATHFINDER = false;
-  }
+  Eberron.USE_PATHFINDER =
+    window.Pathfinder != null && Pathfinder.SRD35_SKILL_MAP &&
+    baseRules != null && baseRules.includes('Pathfinder');
   Eberron.basePlugin = Eberron.USE_PATHFINDER ? Pathfinder : SRD35;
 
   var rules = new QuilvynRules
