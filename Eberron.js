@@ -18,8 +18,6 @@ Place, Suite 330, Boston, MA 02111-1307 USA.
 /*jshint esversion: 6 */
 "use strict";
 
-var EBERRON_VERSION = '2.2.2.4';
-
 /*
  * This module loads the rules from the Eberron campaign setting.  The Eberron
  * function contains methods that load rules for particular parts/chapters
@@ -43,7 +41,7 @@ function Eberron(baseRules) {
   Eberron.basePlugin = Eberron.USE_PATHFINDER ? Pathfinder : SRD35;
 
   var rules = new QuilvynRules
-    ('Eberron' + (Eberron.USE_PATHFINDER ? ' - PF' : ''), EBERRON_VERSION);
+    ('Eberron' + (Eberron.USE_PATHFINDER ? ' - PF' : ''), Eberron.VERSION);
   Eberron.rules = rules;
 
   Eberron.CHOICES = Eberron.basePlugin.CHOICES.concat(Eberron.CHOICES_ADDED);
@@ -121,6 +119,8 @@ function Eberron(baseRules) {
   Quilvyn.addRuleSet(rules);
 
 }
+
+Eberron.VERSION = '2.2.2.4';
 
 // Eberron uses SRD35 as its default base ruleset. If USE_PATHFINDER is true,
 // the Eberron function will instead use rules taken from the Pathfinder plugin.
@@ -2715,14 +2715,14 @@ Eberron.randomizeOneAttribute = function(attributes, attribute) {
 
 /* Returns an array of plugins upon which this one depends. */
 Eberron.getPlugins = function() {
-  return [Eberron.basePlugin].concat(Eberron.basePlugin.rules.getPlugins());
+  return [Eberron.basePlugin].concat(Eberron.basePlugin.getPlugins());
 };
 
 /* Returns HTML body content for user notes associated with this rule set. */
 Eberron.ruleNotes = function() {
   return '' +
     '<h2>Eberron Quilvyn Plugin Notes</h2>\n' +
-    'Eberron Quilvyn Plugin Version ' + EBERRON_VERSION + '\n' +
+    'Eberron Quilvyn Plugin Version ' + Eberron.VERSION + '\n' +
     '\n' +
     '<p>\n' +
     'There are no known bugs, limitations, or usage notes specific to the Eberron plugin\n' +
