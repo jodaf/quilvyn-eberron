@@ -1814,7 +1814,7 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
     var description = QuilvynUtils.getAttrValue(attrs, 'Description');
     var groupLevels = QuilvynUtils.getAttrValueArray(attrs, 'Level');
     var school = QuilvynUtils.getAttrValue(attrs, 'School');
-    var schoolAbbr = school.substring(0, 4);
+    var schoolAbbr = (school || 'Universal').substring(0, 4);
     for(var i = 0; i < groupLevels.length; i++) {
       var matchInfo = groupLevels[i].match(/^(\D+)(\d+)$/);
       if(!matchInfo) {
