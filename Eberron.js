@@ -120,7 +120,7 @@ function Eberron(baseRules) {
 
 }
 
-Eberron.VERSION = '2.2.2.4';
+Eberron.VERSION = '2.2.2.5';
 
 // Eberron uses SRD35 as its default base ruleset. If USE_PATHFINDER is true,
 // the Eberron function will instead use rules taken from the Pathfinder plugin.
@@ -2097,12 +2097,16 @@ Eberron.classRulesExtra = function(rules, name) {
   } else if(name == 'Master Inquisitive') {
 
     var allFeats = rules.getChoices('feats');
-    for(var feat in
+    var miFeats = 
       {'Alertness':'', 'Deceitful':'', 'Heroic Spirit':'',
-       'Improved Initiative':'', 'Iron Will':'', 'Negotiator':'',
-       'Persuasive':'', 'Recognize Impostor':'', 'Research':'', 'Toughness':'',
-       'Track':'', 'Urban Tracking':''}
-    ) {
+       'Improved Initiative':'', 'Iron Will':'', 'Persuasive':'',
+       'Recognize Impostor':'', 'Research':'', 'Toughness':'',
+       'Urban Tracking':''};
+    if(!Eberron.USE_PATHFINDER) {
+      // Pathfinder doesn't define these feats
+      miFeats['Negotiator'] = miFeats['Track'] = '';
+    }
+    for(var feat in miFeats) {
       if(feat in allFeats) {
         allFeats[feat] =
           allFeats[feat].replace('Type=', 'Type="Master Inquisitive",');
