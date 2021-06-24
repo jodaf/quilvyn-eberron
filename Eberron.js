@@ -717,7 +717,7 @@ Eberron.FEATURES_ADDED = {
     'Section=combat Note="Stun or banish Outsiders w/turning check"',
   'Frightful Shifting':
     'Section=combat ' +
-    'Note="R30\' Foes lt %V hit dice shaken for 5d6 rounds (DC %1 Will neg)"',
+    'Note="R30\' Foes w/fewer than %V hit dice shaken for 5d6 rounds (DC %1 Will neg)"',
   'Hated Foe':
     'Section=combat Note="Spend 1 AP for double damage against favored enemy"',
   'Healing Immunity':'Section=save Note="No effect from healing spells"',
