@@ -120,7 +120,7 @@ function Eberron(baseRules) {
 
 }
 
-Eberron.VERSION = '2.2.2.5';
+Eberron.VERSION = '2.2.2.6';
 
 // Eberron uses SRD35 as its default base ruleset. If USE_PATHFINDER is true,
 // the Eberron function will instead use rules taken from the Pathfinder plugin.
@@ -705,6 +705,9 @@ Eberron.FEATURES_ADDED = {
   'Contact':'Section=feature Note="Level 3 associate or informant"',
   'Death Immunity':'Section=save Note="Immune to death and necromancy effects"',
   'Detect Thoughts':'Section=magic Note="<i>Detect Thoughts</i> at will"',
+  'Discern Lies':
+    'Section=magic ' +
+    'Note="R%1\' Reveals lies from %V creatures for %V rd or conc (DC %2 Will neg) 1/dy, 2 AP for 2/dy"',
   'Dodge Bonus':'Section=combat Note="+%V AC when unencumbered"',
   'Expert Bull Rush':'Section=combat Note="+%V bull rush and door breakage"',
   'Extended Charge':'Section=ability Note="+5 speed when charging"',
@@ -733,7 +736,6 @@ Eberron.FEATURES_ADDED = {
     'Section=magic Note="2nd Lesser Dragonmark spell or +1/day"',
   'Improved Critical':
     'Section=feature Note="Improved Critical feat for choice of weapon"',
-  'Inquisitive Spells':'Section=magic Note="1/dy, spend 2 AP for 2nd"',
   'Iron Damage Reduction':'Section=combat Note="DR 3/cold iron"',
   'Metal Immunity':'Section=save Note="Immune to mind-altering effects"',
   'Pounce':'Section=combat Note="Full attack when charging"',
@@ -754,6 +756,9 @@ Eberron.FEATURES_ADDED = {
   'Superior Bull Rush':'Section=combat Note="+%V+%1 damage from bull rush"',
   'Touch Of Contagion':'Section=magic Note="<i>Contagion</i> 3/day"',
   'Trip':'Section=combat Note="Trip w/out AOO after bite hit"',
+  'True Seeing':
+    'Section=magic ' +
+    'Note="See through 120\' darkness, illusion, and invisible for %V min 1/dy, 2 AP for 2/dy"',
   'Unearthly Grace':'Section=save Note="+%V Fortitude/+%V Reflex/+%V Will"',
   'Warding Flame':
     'Section=combat ' +
@@ -775,7 +780,10 @@ Eberron.FEATURES_ADDED = {
   'Weretouched Tusks':
     'Section=ability,combat ' +
     'Note="+2 Con while shifting",' +
-         '"d6+%V tusk attack (next size for Longtooth) while shifting"'
+         '"d6+%V tusk attack (next size for Longtooth) while shifting"',
+  'Zone Of Truth':
+    'Section=magic ' +
+    'Note="R%1\' Creatures w/in 20\' radius cannot lie for %V min (DC %2 Will neg) 1/dy, 2 AP for 2/dy"'
 
 };
 Eberron.FEATURES = Object.assign({}, SRD35.FEATURES, Eberron.FEATURES_ADDED);
@@ -1239,7 +1247,6 @@ Eberron.SPELLS_LEVELS = {
   'Dimension Door':'Orien2',
   'Dimensional Anchor':'Gatekeeper3',
   'Dimensional Lock':'Gatekeeper6',
-  'Discern Lies':'Inquisitive4',
   'Discern Location':'Tharashk4',
   'Disguise Self':'Phiarlan1,Thuranni1',
   'Dismissal':'Exorcism4',
@@ -1387,7 +1394,7 @@ Eberron.SPELLS_LEVELS = {
   'Telepathic Bond':'Community5',
   'Teleport':'Orien3',
   'Tongues':'Commerce3,Meditation4,Sivis2',
-  'True Seeing':'Commerce5,Medani3,Inquisitive5',
+  'True Seeing':'Commerce5,Medani3',
   'Unseen Servant':'Ghallanda1',
   'Vampiric Touch':'Necromancer3',
   'Wall Of Force':'A5',
@@ -1399,7 +1406,7 @@ Eberron.SPELLS_LEVELS = {
   'Whispering Wind':'Sivis1',
   'Wind Wall':'Lyrandar2',
   'Wood Shape':'Artifice2',
-  'Zone Of Truth':'Commerce2,Inquisitive2'
+  'Zone Of Truth':'Commerce2'
 };
 Eberron.WEAPONS_ADDED = {
   'Talenta Boomerang':'Level=3 Category=R Damage=d4 Range=30',
@@ -1541,13 +1548,8 @@ Eberron.PRESTIGE_CLASSES = {
       'Bluff,"Decipher Script","Gather Information","Knowledge (Local)",' +
       'Listen,Search,"Sense Motive",Spot ' +
     'Features=' +
-      '"1:Inquisitive Spells",2:Contact,"4:Improved Contact" ' +
-    'CasterLevelDivine="levels.Master Inquisitive" ' +
-    'SpellAbility=intelligence ' +
-    'SpellSlots=' +
-      'Inquisitive2:1=1,' +
-      'Inquisitive4:3=1,' +
-      'Inquisitive5:5=1',
+      '"1:Zone Of Truth",2:Contact,"3:Discern Lies","4:Improved Contact",' +
+      '"5:True Seeing"',
   'Warforged Juggernaut':
     'Require=' +
      '"baseAttack >= 5","features.Adamantine Body",' +
@@ -2117,6 +2119,26 @@ Eberron.classRulesExtra = function(rules, name) {
     rules.defineRule('featCount.Master Inquisitive',
       'levels.Master Inquisitive', '=',
       'source < 2 ? null : Math.floor(source / 2)'
+    );
+    rules.defineRule
+      ('magicNotes.discernLies', 'levels.Master Inquisitive', '=', null);
+    rules.defineRule('magicNotes.discernLies.1',
+      'levels.Master Inquisitive', '=', 'source>=3 ? Math.floor(source / 2) * 5 + 25 : null'
+    );
+    rules.defineRule('magicNotes.discernLies.2',
+      'levels.Master Inquisitive', '?', 'source >= 3',
+      'wisdomModifier', '=', '14 + source'
+    );
+    rules.defineRule
+      ('magicNotes.trueSeeing', 'levels.Master Inquisitive', '=', null);
+    rules.defineRule
+      ('magicNotes.zoneOfTruth', 'levels.Master Inquisitive', '=', null);
+    rules.defineRule('magicNotes.zoneOfTruth.1',
+      'levels.Master Inquisitive', '=', 'Math.floor(source / 2) * 5 + 25'
+    );
+    rules.defineRule('magicNotes.zoneOfTruth.2',
+      'levels.Master Inquisitive', '?', null,
+      'wisdomModifier', '=', '12 + source'
     );
 
   } else if(name == 'Warforged Juggernaut') {
