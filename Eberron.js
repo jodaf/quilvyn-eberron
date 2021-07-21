@@ -120,7 +120,7 @@ function Eberron(baseRules) {
 
 }
 
-Eberron.VERSION = '2.2.2.6';
+Eberron.VERSION = '2.2.2.7';
 
 // Eberron uses SRD35 as its default base ruleset. If USE_PATHFINDER is true,
 // the Eberron function will instead use rules taken from the Pathfinder plugin.
@@ -401,7 +401,7 @@ Eberron.FEATURES_ADDED = {
     'Note="+%V DC 15 check to determine whether an item is magical"',
   'Artificer Skill Mastery':
     'Section=skill ' +
-    'Note="Take 10 on Spellcraft/Use Magic Device when distracted"',
+    'Note="Take 10 on Spellcraft or Use Magic Device when distracted"',
   'Artisan Bonus':
     'Section=skill Note="+2 Use Magic Device on items character can craft"',
   'Craft Homunculus':
@@ -414,7 +414,8 @@ Eberron.FEATURES_ADDED = {
   'Item Creation':
     'Section=magic Note="+2 DC 20+caster level check to create magic items"',
   'Metamagic Spell Completion':
-    'Section=magic Note="Apply metamagic feat to spell from scroll"',
+    'Section=skill ' +
+    'Note="DC 20 + 3x modified spell level Use Magic Device to apply metamagic feat to spell from scroll %V/dy"',
   'Metamagic Spell Trigger':
     'Section=magic Note="Apply metamagic feat to spell from wand"',
   'Retain Essence':
@@ -499,7 +500,8 @@ Eberron.FEATURES_ADDED = {
     'Note="+2 Leadership",' +
          '"Gather Information is a class skill/Knowledge (Local) is a class skill"',
   'Education':
-    'Section=skill Note="Knowledge are class skills/+2 any 2 Knowledge skills"',
+    'Section=skill ' +
+    'Note="All Knowledge is a class skill/+2 any 2 Knowledge skills"',
   'Exceptional Artisan':
     'Section=magic Note="Reduce item creation base time by 25%"',
   'Extend Rage':'Section=combat Note="Add 5 rd to Rage duration"',
@@ -547,7 +549,8 @@ Eberron.FEATURES_ADDED = {
     'Section=skill ' +
     'Note="Use Search to find and analyze clues, synergy with appropriate Knowledge"',
   'Knight Training (Cleric)':
-    'Section=ability Note="No restrictions on Paladin/Cleric advancement"',
+    'Section=ability ' +
+    'Note="No restrictions on Paladin and Cleric level advancement"',
   'Least Dragonmark':
     'Section=magic Note="Choice of house dragonmark spell 1/dy"',
   'Legendary Artisan':
@@ -562,7 +565,8 @@ Eberron.FEATURES_ADDED = {
     'Note="Raise Mithral Body Reflex AC limit by 1",' +
          '"Reduce skill penalty by 1"',
   'Monastic Training (Cleric)':
-    'Section=ability Note="No restrictions on Monk/Cleric level advancement"',
+    'Section=ability ' +
+    'Note="No restrictions on Monk and Cleric level advancement"',
   'Music Of Growth':
     'Section=magic ' +
     'Note="R30\' +4 Str and Con to animal and plant creatures during Bardic Music"',
@@ -623,9 +627,10 @@ Eberron.FEATURES_ADDED = {
   // Race
   'Beasthide':
     'Section=ability,combat ' +
-    'Note="+2 Con while shifting",' +
+    'Note="+2 Constitution while shifting",' +
          '"+2 AC while shifting"',
-  'Cliffwalk':'Section=ability Note="+2 Dex, %V climb speed while shifting"',
+  'Cliffwalk':
+    'Section=ability Note="+2 Dexterity, %V climb speed while shifting"',
   'Composite Plating':'Section=combat Note="+2 AC/Cannot wear armor"',
   'Construct Immunity':
     'Section=save ' +
@@ -633,31 +638,32 @@ Eberron.FEATURES_ADDED = {
   'Construct Vulnerability':
     'Section=save Note="Affected by effects that target wood or metal"',
   'Deceptive':'Section=skill Note="+2 Bluff/+2 Intimidate"',
-  'Dreamless':'Section=save Note="Immune <i>Dream</i>, <i>Sleep</i>"',
+  'Dreamless':'Section=save Note="Immune <i>Dream</i>, <i>Nightmare</i>"',
   'Humanlike':'Section=skill Note="+2 Disguise (human)"',
   'Influential':'Section=skill Note="+2 Bluff/+2 Diplomacy/+2 Intimidate"',
   'Intuitive':'Section=skill Note="+2 Sense Motive"',
   'Light Fortification':
     'Section=combat ' +
     'Note="25% change of negating critical hits and sneak attacks"',
-  'Longstride':'Section=ability Note="+2 Dex, +10 Speed while shifting"',
+  'Longstride':'Section=ability Note="+2 Dexterity, +10 Speed while shifting"',
   'Longtooth':
     'Section=ability,combat ' +
-    'Note="+2 Str while shifting",' +
-         '"d6+%V bite while shifting"',
-  'Mindlink':'Section=magic Note="<i>Mindlink</i> 1/dy"',
+    'Note="+2 Strength while shifting",' +
+         '"d6+%1 bite while shifting"',
+  'Mindlink':
+    'Section=magic Note="R30\' Telepathy with willing target for %V rd 1/dy"',
   'Minor Shape Change':'Section=magic Note="<i>Shape Change</i> body at will"',
   'Natural Psionic':'Section=magic Note="+1 PP/level"',
   'Natural Linguist':'Section=skill Note="Speak Language is a class skill"',
   'Razorclaw':
     'Section=ability,combat ' +
-    'Note="+2 Str while shifting",' +
-         '"d4+%V claw attack while shifting"',
+    'Note="+2 Strength while shifting",' +
+         '"d4+%1 claw attack while shifting"',
   'Resist Charm':'Section=save Note="+2 vs. charm effects"',
   'Resist Mental':'Section=save Note="+2 vs. mind-altering effects"',
   'Resist Sleep':'Section=save Note="+2 vs. <i>Sleep</i>"',
   'Shifter Ability Adjustment':
-    'Section=ability Note="+2 dexterity/-2 intelligence/-2 charisma"',
+    'Section=ability Note="+2 Dexterity/-2 Intelligence/-2 Charisma"',
   'Shifting':'Section=feature Note="Use Shifter trait for %V rd %1/day"',
   'Slam Weapon':'Section=combat Note="d4 slam attack"',
   'Stable':
@@ -667,10 +673,10 @@ Eberron.FEATURES_ADDED = {
     'Section=combat ' +
     'Note="Does not heal damage naturally, half effect from healing spells"',
   'Warforged Ability Adjustment':
-    'Section=ability Note="+2 constitution/-2 wisdom/-2 charisma"',
+    'Section=ability Note="+2 Constitution/-2 Wisdom/-2 Charisma"',
   'Wildhunt':
     'Section=ability,feature,skill ' +
-    'Note="+2 Con while shifting",' +
+    'Note="+2 Constitution while shifting",' +
          '"R30\' Detect creature presence, track by smell",' +
          '"+2 Survival"',
 
@@ -693,9 +699,10 @@ Eberron.FEATURES_ADDED = {
   'Alternate Wolverine Form':
     'Section=ability ' +
     'Note="Shift to animal (+4 Str/+4 Dex/+8 Con) or bipedal hybrid"',
+  'Animalistic Heritage':'Section=skill Note="+2 Balance/+2 Climb/+2 Jump"',
   'Armor Spikes':'Section=combat Note="Grapple attack for %V damage"',
   'Caster Level Bonus':
-    'Section=magic Note="+%V base class level for spells known/per day"',
+    'Section=magic Note="+%V base class level for spells known and spells/dy"',
   'Charge Bonus':'Section=combat Note="+%V attack when charging"',
   'Climb Speed':
     'Section=ability ' +
@@ -769,17 +776,17 @@ Eberron.FEATURES_ADDED = {
     'Section=combat Note="+%Vd6 flame damage w/sacred weapon"',
   'Weretouched Claws':
     'Section=ability,combat ' +
-    'Note="+2 Str while shifting",' +
+    'Note="+2 Strength while shifting",' +
          '"d4+%V claw attack (next size for Razorclaw) while shifting"',
   'Weretouched Fangs':
     'Section=ability,combat ' +
-    'Note="+2 Dex while shifting",' +
+    'Note="+2 Dexterity while shifting",' +
          '"d6+%V fang attack (next size for Longtooth) while shifting"',
   'Weretouched Rage':
     'Section=combat Note="+2 Str, +2 Con, -2 AC for 1 rd after taking damage"',
   'Weretouched Tusks':
     'Section=ability,combat ' +
-    'Note="+2 Con while shifting",' +
+    'Note="+2 Constitution while shifting",' +
          '"d6+%V tusk attack (next size for Longtooth) while shifting"',
   'Zone Of Truth':
     'Section=magic ' +
@@ -953,7 +960,8 @@ Eberron.RACES_ADDED = {
     'Languages=Common,Quori',
   'Shifter':
     'Features=' +
-      '"1:Shifter Ability Adjustment",1:Shifting ' +
+      '"Animalistic Heritage","1:Shifter Ability Adjustment",' +
+      '"1:Low-Light Vision",1:Shifting ' +
     'Selectables=' +
       '1:Beasthide,1:Longtooth,1:Cliffwalk,1:Razorclaw,1:Longstride,' +
       '1:Wildhunt ' +
@@ -1424,8 +1432,8 @@ Eberron.CLASSES_ADDED = {
       '"Knowledge (Local)","Knowledge (Shadow)",Listen,"Move Silently",' +
       'Profession,Ride,"Sense Motive","Speak Language",Swim,Tumble ' +
     'Features=' +
-      '"1:Armor Proficiency (Medium)","1:Shield Proficiency (Heavy)",' +
-      '"1:Weapon Proficiency (Martial)",' +
+      '"1:Armor Proficiency (Medium)","1:Shield Proficiency",' +
+      '"1:Weapon Proficiency (Simple)",' +
       '"1:Artificer Knowledge","1:Artisan Bonus","1:Craft Reserve",' +
       '"1:Disable Trap","1:Item Creation","1:Scribe Scroll","2:Brew Potion",' +
       '"3:Craft Wondrous Item","4:Craft Homunculus",' +
@@ -1962,6 +1970,9 @@ Eberron.classRulesExtra = function(rules, name) {
     rules.defineRule('skillNotes.artificerKnowledge',
        'levels.Artificer', '=', null,
        'intelligenceModifier', '+', null
+    );
+    rules.defineRule('skillNotes.metamagicSpellCompletion',
+      'intelligenceModifier', '=', '3 + source'
     );
     // Artificers are neither arcane nor divine, but they are casters
     rules.defineRule('casterLevel', 'casterLevels.Artificer', '+=', null);
@@ -2595,13 +2606,20 @@ Eberron.raceRules = function(
  */
 Eberron.raceRulesExtra = function(rules, name) {
 
-  if(name == 'Shifter') {
+  if(name == 'Kalashtar') {
+    rules.defineRule('magicNotes.mindlink',
+      'kalashtarLevel', '=', 'Math.max(Math.floor(source / 2), 1)'
+    );
+    rules.defineRule('saveNotes.resistPossession', 'kalashtarLevel', '+=', '2');
+  } else if(name == 'Shifter') {
     rules.defineRule('abilityNotes.cliffwalk', '', '=', '20');
-    rules.defineRule('combatNotes.longtooth',
+    rules.defineRule('combatNotes.longtooth.1',
+      'features.Longtooth', '?', null,
       'level', '=', 'Math.floor(source / 4)',
       'strengthModifier', '+', null
     );
-    rules.defineRule('combatNotes.razorclaw',
+    rules.defineRule('combatNotes.razorclaw.1',
+      'features.Razorclaw', '?', null,
       'level', '=', 'Math.floor(source / 4)',
       'strengthModifier', '+', null
     );
