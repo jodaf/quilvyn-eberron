@@ -203,7 +203,7 @@ Eberron.FEATS_ADDED = {
   'Beast Totem (Unicorn)':'Type=General Require="features.Wild Empathy"',
   'Beast Totem (Winter Wolf)':'Type=General Require="features.Wild Empathy"',
   'Beast Totem (Yrthak)':'Type=General Require="features.Wild Empathy"',
-  'Beasthide Elite':'Type=General Require=features.Beasthide',
+  'Beasthide Elite':'Type=General,Shifter Require=features.Beasthide',
   'Bind Elemental':
     'Type="Item Creation" ' +
     'Require="casterLevel >= 9",' +
@@ -212,7 +212,7 @@ Eberron.FEATS_ADDED = {
     'Type=General ' +
     'Require="alignment !~ \'Good\'",' +
             '"features.Spontaneous Druid Spell"',
-  'Cliffwalk Elite':'Type=General Require=features.Cliffwalk',
+  'Cliffwalk Elite':'Type=General,Shifter Require=features.Cliffwalk',
   'Craft Construct':  // From MM, needed for Artificer class
     'Type="Item Creation" ' +
     'Require="features.Craft Magic Arms And Armor",' +
@@ -259,7 +259,7 @@ Eberron.FEATS_ADDED = {
   'Extra Rings':
     'Type="Item Creation" Require="casterLevel >= 12","features.Forge Ring"',
   'Extra Shifter Trait':
-    'Type=General Require="race == \'Shifter\'","sumShifterFeats >= 3"',
+    'Type=General,Shifter Require="race == \'Shifter\'","sumShifterFeats >= 3"',
   'Extraordinary Artisan':
     'Type="Item Creation" Require="sumItemCreationFeats >= 2"',
   'Favored In House':
@@ -272,8 +272,10 @@ Eberron.FEATS_ADDED = {
             '"features.Weapon Proficiency (Kama)"',
   'Gatekeeper Initiate':
     'Type=General Require="features.Spontaneous Druid Spell"',
-  'Great Bite':'Type=General Require="baseAttack >= 6",features.Longtooth',
-  'Great Rend':'Type=General Require="baseAttack >= 4",features.Razorclaw',
+  'Great Bite':
+    'Type=General,Shifter Require="baseAttack >= 6",features.Longtooth',
+  'Great Rend':
+    'Type=General,Shifter Require="baseAttack >= 4",features.Razorclaw',
   'Greater Dragonmark':
     'Type=General ' +
     'Require="features.Least Dragonmark",' +
@@ -287,7 +289,7 @@ Eberron.FEATS_ADDED = {
             '"features.Powerful Charge",' +
             '"features.Small == 0"',
   'Greater Shifter Defense':
-    'Type=General ' +
+    'Type=General,Shifter ' +
     'Require="features.Shifter Defense",' +
             '"race == \'Shifter\'",' +
             '"sumShifterFeats >= 5"',
@@ -298,14 +300,14 @@ Eberron.FEATS_ADDED = {
     'Require="features.Bardic Music",' +
             '"Sum \'^skills.Perform\' >= 9"',
   'Healing Factor':
-    'Type=General Require="constitution >= 13","race == \'Shifter\'"',
+    'Type=General,Shifter Require="constitution >= 13","race == \'Shifter\'"',
   'Heroic Spirit':'Type=General',
   'Improved Damage Reduction':'Type=General Require="race == \'Warforged\'"',
   'Improved Fortification':
     'Type=General Require="baseAttack >= 6","race == \'Warforged\'"',
   'Improved Natural Attack':'Type=General Require="baseAttack >= 4"',
   'Investigate':'Type=General',
-  'Knight Training (Cleric)':'Type=General Imply="levels.Paladin > 0"',
+  'Knight Training':'Type=General Imply="levels.Paladin > 0"',
   'Least Dragonmark':
     'Type=General ' +
     'Require="house != \'None\'",' +
@@ -318,14 +320,14 @@ Eberron.FEATS_ADDED = {
             '"race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Orc|Human\'",' +
             '"features.Least Dragonmark",' +
             '"countSkillsGe9 >= 2"',
-  'Longstride Elite':'Type=General Require=features.Longstride',
+  'Longstride Elite':'Type=General,Shifter Require=features.Longstride',
   'Mithral Body':
     'Type=General ' +
     'Require="race == \'Warforged\'" ' +
     'Imply="features.Adamantine Body == 0","levels.Druid == 0"',
   'Mithral Fluidity':
     'Type=General Require="race == \'Warforged\'","features.Mithral Body"',
-  'Monastic Training (Cleric)':'Type=General',
+  'Monastic Training':'Type=General Imply="levels.Monk > 0"',
   'Music Of Growth':
     'Type=General ' +
     'Require="features.Bardic Music",' +
@@ -347,16 +349,16 @@ Eberron.FEATS_ADDED = {
   'Right Of Counsel':'Type=General Require="race == \'Elf\'"',
   'Serpent Strike':
     'Type=General ' +
-    'Require="Weapon Focus (Longspear)",' +
+    'Require="features.Weapon Focus (Longspear)",' +
             '"features.Flurry Of Blows",' +
             '"weaponProficiencyLevel >= 1" ' +
     'Imply="weapons.Longspear"',
   'Shifter Defense':
-    'Type=General Require="race == \'Shifter\'","sumShifterFeats >= 3"',
+    'Type=General,Shifter Require="race == \'Shifter\'","sumShifterFeats >= 3"',
   'Shifter Ferocity':
-    'Type=General Require="wisdom >= 13","race == \'Shifter\'"',
+    'Type=General,Shifter Require="wisdom >= 13","race == \'Shifter\'"',
   'Shifter Multiattack':
-    'Type=General ' +
+    'Type=General,Shifter ' +
     'Require="baseAttack >= 6","features.Longtooth||features.Razorclaw"',
   'Silver Smite':
     'Type=General ' +
@@ -458,7 +460,7 @@ Eberron.FEATURES_ADDED = {
     'section=ability ' +
     'Note="Add d8 instead of d6 when using AP on attack, skill, ability, level or saving throw"',
   'Action Surge':
-    'Section=ability Note="Spend 2 AP to take extra move or standard action"',
+    'Section=combat Note="Spend 2 AP to take extra move or standard action"',
   'Adamantine Body':
     'Section=ability,combat Note="Max 20 speed","+6 AC/DR 2/adamantine"',
   'Ashbound':
@@ -475,10 +477,12 @@ Eberron.FEATURES_ADDED = {
   'Beast Totem (Unicorn)':'Section=save Note="+4 vs. poison"',
   'Beast Totem (Winter Wolf)':'Section=save Note="+4 vs. cold"',
   'Beast Totem (Yrthak)':'Section=save Note="+4 vs. sonic"',
-  'Beasthide Elite':'Section=combat Note="+2 AC while shifting"',
-  'Bind Elemental':'Section=magic Note="Bind elementals to magical objects"',
-  'Child Of Winter':'Section=magic Note="Use animal Druid spells on vermin"',
-  'Cliffwalker Elite':'Section=ability Note="+10 climb speed while shifting"',
+  'Beasthide Elite':'Section=combat Note="+2 Beasthide AC"',
+  'Bind Elemental':
+    'Section=magic Note="Incorporate elementals into wondrous items"',
+  'Child Of Winter':
+    'Section=magic Note="Use animal Druid spells on vermin, summon vermin"',
+  'Cliffwalk Elite':'Section=ability Note="+10 Cliffwalk climb speed"',
   'Craft Construct':'Section=magic Note="Create enchanted construct"',
   'Detective':'Section=skill Note="+2 Spot"',
   'Double Steel Strike':
@@ -505,18 +509,19 @@ Eberron.FEATURES_ADDED = {
   'Exceptional Artisan':
     'Section=magic Note="Reduce item creation base time by 25%"',
   'Extend Rage':'Section=combat Note="Add 5 rd to Rage duration"',
-  'Extra Music':'Section=feature Note="Bardic Music 4 extra times/dy"',
+  'Extra Music':'Section=feature Note="Bardic Music %V extra times/dy"',
   'Extra Rings':'Section=magic Note="Wear up to 4 magic rings at once"',
   'Extra Shifter Trait':
     'Section=feature Note="Extra Shifter trait w/out ability bonus"',
   'Extraordinary Artisan':
     'Section=magic Note="Reduce item creation base price by 25%"',
   'Favored In House':
-    'Section=feature Note="Acquire favors from house contacts"',
+    'Section=feature ' +
+    'Note="+%V roll to acquire favors from house contacts %1/wk"',
   'Finder':'Section=skill Note="+2 Search"',
   'Flensing Strike':
     'Section=combat ' +
-    'Note="Kama causes -1 pain penalty to foe attack, save, checks for 1 min (DC %V Fort neg)"',
+    'Note="Kama causes -4 pain penalty to foe attack, save, checks for 1 min (DC %V Fort neg)"',
   'Gatekeeper Initiate':
     'Section=magic,save,skill ' +
     'Note="Access to additional spells",' +
@@ -535,10 +540,10 @@ Eberron.FEATURES_ADDED = {
          '"Bluff is a class skill/Hide is a class skill/Perform is a class skill"',
   'Handler':'Section=skill Note="+2 Handle Animal"',
   'Haunting Melody':
-    'Section=magic Note="Foe afraid for %1 rd (DC %V Will neg)"',
+    'Section=magic Note="R30\' Foes afraid for %1 rd (DC %V Will neg)"',
   'Healer':'Section=skill Note="+2 Heal"',
   'Healing Factor':'Section=combat Note="Heal %V points when shifting ends"',
-  'Heroic Spirit':'Section=ability Note="+3 AP"',
+  'Heroic Spirit':'Section=ability Note="+%V AP"',
   'Hospitaler':'Section=skill Note="+2 Diplomacy"',
   'Improved Damage Reduction':'Section=combat Note="DR +1/adamantine"',
   'Improved Fortification':
@@ -548,25 +553,25 @@ Eberron.FEATURES_ADDED = {
   'Investigate':
     'Section=skill ' +
     'Note="Use Search to find and analyze clues, synergy with appropriate Knowledge"',
-  'Knight Training (Cleric)':
+  'Knight Training':
     'Section=ability ' +
-    'Note="No restrictions on Paladin and Cleric level advancement"',
+    'Note="No restrictions on combining Paladin and chosen class levels"',
   'Least Dragonmark':
     'Section=magic Note="Choice of house dragonmark spell 1/dy"',
   'Legendary Artisan':
     'Section=magic Note="Reduce item creation XP price by 25%"',
   'Lesser Dragonmark':
     'Section=magic Note="Choice of house dragonmark spell 1/dy"',
-  'Longstride Elite':'Section=ability Note="+10 Speed while shifting"',
+  'Longstride Elite':'Section=ability Note="+10 Longstride Speed"',
   'Maker':'Section=skill Note="+2 All Craft"',
   'Mithral Body':'Section=combat Note="+3 AC"',
   'Mithral Fluidity':
     'Section=combat,skill ' +
-    'Note="Raise Mithral Body Reflex AC limit by 1",' +
+    'Note="Raise Mithral Body dexterity AC limit by 1",' +
          '"Reduce skill penalty by 1"',
-  'Monastic Training (Cleric)':
+  'Monastic Training':
     'Section=ability ' +
-    'Note="No restrictions on Monk and Cleric level advancement"',
+    'Note="No restrictions on combining Monk and chosen class levels"',
   'Music Of Growth':
     'Section=magic ' +
     'Note="R30\' +4 Str and Con to animal and plant creatures during Bardic Music"',
@@ -583,7 +588,7 @@ Eberron.FEATURES_ADDED = {
   'Recognize Impostor':
     'Section=skill Note="+4 Sense Motive vs. Bluff and Spot vs. Disguise"',
   'Repel Aberration':
-    'Section=combat Note="Repel aberrations as cleric turns undead"',
+    'Section=combat Note="Repel aberrations as level %V cleric turns undead"',
   'Research':'Section=skill Note="Use Knowledge skill on library and records"',
   'Right Of Counsel':
     'Section=feature Note="Seek advice from deathless ancestor"',
@@ -598,17 +603,19 @@ Eberron.FEATURES_ADDED = {
     'Section=combat Note="Reduce additional natural attack penalty to -2"',
   'Silver Smite':'Section=combat Note="Smite Evil +d6"',
   'Song Of The Heart':'Section=magic Note="+1 Bardic Music effects"',
-  'Soothe The Beast':'Section=skill Note="Perform to change animal reaction"',
+  'Soothe The Beast':
+    'Section=skill Note="R30\' Perform to change animal reaction"',
   'Spontaneous Casting':
     'Section=magic ' +
     'Note="Spend 2 AP to substitute any known spell for a prepared one"',
   'Storm Walker':'Section=skill Note="+2 Balance"',
-  'Strong Mind':'Section=save Note="+3 vs. psionics"',
+  'Strong Mind':'Section=save Note="+3 vs. psionics and mind attacks"',
   'Totem Companion':
     'Section=companion Note="Totem magical beast as animal companion"',
   'Traveler':'Section=skill Note="+2 Survival"',
   'Undead Empathy':
-    'Section=skill Note="+4 Diplomacy to influence undead reaction"',
+    'Section=skill ' +
+    'Note="+4 Diplomacy to influence intelligent undead reaction, use Diplomacy w/mindless undead"',
   'Urban Tracking':
     'Section=skill Note="Gather Information to trace person w/in communities"',
   'Vermin Companion':
@@ -628,7 +635,7 @@ Eberron.FEATURES_ADDED = {
   'Beasthide':
     'Section=ability,combat ' +
     'Note="+2 Constitution while shifting",' +
-         '"+2 AC while shifting"',
+         '"+%V AC while shifting"',
   'Cliffwalk':
     'Section=ability Note="+2 Dexterity, %V climb speed while shifting"',
   'Composite Plating':'Section=combat Note="+2 AC/Cannot wear armor"',
@@ -645,7 +652,7 @@ Eberron.FEATURES_ADDED = {
   'Light Fortification':
     'Section=combat ' +
     'Note="25% change of negating critical hits and sneak attacks"',
-  'Longstride':'Section=ability Note="+2 Dexterity, +10 Speed while shifting"',
+  'Longstride':'Section=ability Note="+2 Dexterity, +%V Speed while shifting"',
   'Longtooth':
     'Section=ability,combat ' +
     'Note="+2 Strength while shifting",' +
@@ -2291,14 +2298,30 @@ Eberron.featRulesExtra = function(rules, name) {
       'features.Adamantine Body', '=', '5'
     );
     rules.defineRule('speed', 'abilityNotes.adamantineBody', 'v', '20');
+  } else if(name == 'Beasthide Elite') {
+    rules.defineRule
+      ('combatNotes.beasthide', 'combatNotes.beasthideElite', '+', '2');
   } else if(name == 'Cliffwalk Elite') {
     rules.defineRule
       ('abilityNotes.cliffwalk', 'abilityNotes.cliffwalkElite', '+', '10');
+  } else if(name == 'Extra Music') {
+    rules.defineRule
+      ('featureNotes.extraMusic', 'feats.Extra Music', '=', '4 * source');
+    rules.defineRule
+      ('featureNotes.bardicMusic', 'featureNotes.extraMusic', '+', null);
   } else if(name == 'Extend Rage') {
     rules.defineRule('combatNotes.rage', 'combatNotes.extendRage', '+', '5');
   } else if(name == 'Extra Shifter Trait') {
     rules.defineRule('selectableFeatureCount.Shifter',
       'featureNotes.extraShifterTrait', '+', '1'
+    );
+  } else if(name == 'Favored In House') {
+    rules.defineRule('featureNotes.favoredInHouse',
+      'level', '=', 'source>=16 ? 5 : source>=12 ? 4 : source>=7 ? 3 : source>=3 ? 2 : 1'
+    );
+    rules.defineRule('featureNotes.favoredInHouse.1',
+      'features.Favored In House', '?', null,
+      'level', '=', 'Math.max(Math.floor(source / 2), 1)'
     );
   } else if(name == 'Flensing Strike') {
     rules.defineRule('combatNotes.flensingStrike',
@@ -2350,6 +2373,11 @@ Eberron.featRulesExtra = function(rules, name) {
     );
   } else if(name == 'Healing Factor') {
     rules.defineRule('combatNotes.healingFactor', 'level', '=', null);
+  } else if(name == 'Heroic Spirit') {
+    rules.defineRule('abilityNotes.heroicSpirit', 'level', '=', '3 * source');
+  } else if(name == 'Longstride Elite') {
+    rules.defineRule
+      ('abilityNotes.longstride', 'abilityNotes.longstrideElite', '+', '10');
   } else if(name == 'Mithral Body') {
     rules.defineRule('combatNotes.dexterityArmorClassAdjustment',
       'mithralBodyDexACCap', 'v', null
@@ -2372,6 +2400,9 @@ Eberron.featRulesExtra = function(rules, name) {
       '', '=', '"d8"',
       'features.Large', '=', '"2d6"'
     );
+  } else if(name == 'Repel Aberration') {
+    rules.defineRule('combatNotes.repelAberration', 'levels.Druid', '=', null);
+    rules.defineRule('turingLevel', 'combatNotes.repelAberration', '^=', null);
   } else if(name == 'Shifter Defense') {
     rules.defineRule('combatNotes.shifterDefense', '', '=', '2');
   } else if(name == 'Warden Initiate') {
@@ -2613,6 +2644,8 @@ Eberron.raceRulesExtra = function(rules, name) {
     rules.defineRule('saveNotes.resistPossession', 'kalashtarLevel', '+=', '2');
   } else if(name == 'Shifter') {
     rules.defineRule('abilityNotes.cliffwalk', '', '=', '20');
+    rules.defineRule('abilityNotes.longstride', '', '=', '10');
+    rules.defineRule('combatNotes.beasthide', '', '=', '2');
     rules.defineRule('combatNotes.longtooth.1',
       'features.Longtooth', '?', null,
       'level', '=', 'Math.floor(source / 4)',
