@@ -486,7 +486,7 @@ Eberron.FEATURES_ADDED = {
   'Craft Construct':'Section=magic Note="Create enchanted construct"',
   'Detective':'Section=skill Note="+2 Spot"',
   'Double Steel Strike':
-    'Section=combat Note="Flurry Of Blows w/Two-Bladed Sword"',
+    'Section=combat Note="Flurry Of Blows w/two-bladed sword"',
   'Dragon Rage':
     'Section=combat Note="+2 AC, +10 Dragon Totem resistance during Rage"',
   'Dragon Totem (Black)':'Section=save Note="Resistance 5 vs. acid"',
@@ -505,7 +505,7 @@ Eberron.FEATURES_ADDED = {
          '"Gather Information is a class skill/Knowledge (Local) is a class skill"',
   'Education':
     'Section=skill ' +
-    'Note="All Knowledge is a class skill/+2 any 2 Knowledge skills"',
+    'Note="All Knowledge is a class skill/+1 any 2 Knowledge skills"',
   'Exceptional Artisan':
     'Section=magic Note="Reduce item creation base time by 25%"',
   'Extend Rage':'Section=combat Note="Add 5 rd to Rage duration"',
@@ -527,12 +527,13 @@ Eberron.FEATURES_ADDED = {
     'Note="Access to additional spells",' +
          '"+2 vs. supernatural and aberrations",' +
          '"Knowledge (Planes) is a class skill"',
-  'Great Bite':'Section=combat Note="Fang Crit is x3"',
+  'Great Bite':'Section=combat Note="Fangs Crit is x3"',
   'Great Rend':'Section=combat Note="+d4+%V damage on hit w/both claws"',
   'Greater Dragonmark':
-    'Section=magic Note="Choice of house dragonmark spell 1/dy"',
+    'Section=magic Note="Choice of %V3 dragonmark spell 1/dy"',
   'Greater Powerful Charge':
-    'Section=combat Note="Raise charge damage one size category to %V"',
+    'Section=combat ' +
+    'Note="Raise Powerful Charge damage one size category to %V"',
   'Greater Shifter Defense':'Section=combat Note="+2 Shifter Defense DR"',
   'Greensinger Initiate':
     'Section=magic,skill ' +
@@ -540,7 +541,7 @@ Eberron.FEATURES_ADDED = {
          '"Bluff is a class skill/Hide is a class skill/Perform is a class skill"',
   'Handler':'Section=skill Note="+2 Handle Animal"',
   'Haunting Melody':
-    'Section=magic Note="R30\' Foes afraid for %1 rd (DC %V Will neg)"',
+    'Section=magic Note="R30\' Foes shaken for %1 rd (DC %V Will neg)"',
   'Healer':'Section=skill Note="+2 Heal"',
   'Healing Factor':'Section=combat Note="Heal %V points when shifting ends"',
   'Heroic Spirit':'Section=ability Note="+%V AP"',
@@ -557,11 +558,11 @@ Eberron.FEATURES_ADDED = {
     'Section=ability ' +
     'Note="No restrictions on combining Paladin and chosen class levels"',
   'Least Dragonmark':
-    'Section=magic Note="Choice of house dragonmark spell 1/dy"',
+    'Section=magic Note="Choice of %V1 dragonmark spell 1/dy"',
   'Legendary Artisan':
     'Section=magic Note="Reduce item creation XP price by 25%"',
   'Lesser Dragonmark':
-    'Section=magic Note="Choice of house dragonmark spell 1/dy"',
+    'Section=magic Note="Choice of %V2 dragonmark spell 1/dy"',
   'Longstride Elite':'Section=ability Note="+10 Longstride Speed"',
   'Maker':'Section=skill Note="+2 All Craft"',
   'Mithral Body':'Section=combat Note="+3 AC"',
@@ -588,7 +589,8 @@ Eberron.FEATURES_ADDED = {
   'Recognize Impostor':
     'Section=skill Note="+4 Sense Motive vs. Bluff and Spot vs. Disguise"',
   'Repel Aberration':
-    'Section=combat Note="Repel aberrations as level %V cleric turns undead"',
+    'Section=combat ' +
+    'Note="Hold at bay 2d6+%1 HD of aberrations of up to (d20+%2)/3 HD %3/dy"',
   'Research':'Section=skill Note="Use Knowledge skill on library and records"',
   'Right Of Counsel':
     'Section=feature Note="Seek advice from deathless ancestor"',
@@ -611,7 +613,7 @@ Eberron.FEATURES_ADDED = {
   'Storm Walker':'Section=skill Note="+2 Balance"',
   'Strong Mind':'Section=save Note="+3 vs. psionics and mind attacks"',
   'Totem Companion':
-    'Section=companion Note="Totem magical beast as animal companion"',
+    'Section=companion Note="Beast Totem magical beast as animal companion"',
   'Traveler':'Section=skill Note="+2 Survival"',
   'Undead Empathy':
     'Section=skill ' +
@@ -628,8 +630,7 @@ Eberron.FEATURES_ADDED = {
          '"Access to additional spells",' +
          '"Climb is a class skill/Jump is a class skill"',
   'Warder':'Section=skill Note="+2 Search"',
-  'Whirling Steel Strike':
-    'Section=combat Note="Flurry Of Blows with longsword"',
+  'Whirling Steel Strike':'Section=combat Note="Flurry Of Blows w/longsword"',
 
   // Race
   'Beasthide':
@@ -639,11 +640,6 @@ Eberron.FEATURES_ADDED = {
   'Cliffwalk':
     'Section=ability Note="+2 Dexterity, %V climb speed while shifting"',
   'Composite Plating':'Section=combat Note="+2 AC/Cannot wear armor"',
-  'Construct Immunity':
-    'Section=save ' +
-    'Note="Immune to poison, sleep, paralysis, disease, nausea, fatigue, exhaustion, sickening, and energy drain"',
-  'Construct Vulnerability':
-    'Section=save Note="Affected by effects that target wood or metal"',
   'Deceptive':'Section=skill Note="+2 Bluff/+2 Intimidate"',
   'Dreamless':'Section=save Note="Immune <i>Dream</i>, <i>Nightmare</i>"',
   'Humanlike':'Section=skill Note="+2 Disguise (human)"',
@@ -656,7 +652,7 @@ Eberron.FEATURES_ADDED = {
   'Longtooth':
     'Section=ability,combat ' +
     'Note="+2 Strength while shifting",' +
-         '"d6+%1 bite while shifting"',
+         '"Can attack w/fangs while shifting"',
   'Mindlink':
     'Section=magic Note="R30\' Telepathy with willing target for %V rd 1/dy"',
   'Minor Shape Change':'Section=magic Note="<i>Shape Change</i> body at will"',
@@ -665,14 +661,14 @@ Eberron.FEATURES_ADDED = {
   'Razorclaw':
     'Section=ability,combat ' +
     'Note="+2 Strength while shifting",' +
-         '"d4+%1 claw attack while shifting"',
+         '"Can attack w/claws while shifting"',
   'Resist Charm':'Section=save Note="+2 vs. charm effects"',
   'Resist Mental':'Section=save Note="+2 vs. mind-altering effects"',
   'Resist Sleep':'Section=save Note="+2 vs. <i>Sleep</i>"',
   'Shifter Ability Adjustment':
     'Section=ability Note="+2 Dexterity/-2 Intelligence/-2 Charisma"',
   'Shifting':'Section=feature Note="Use Shifter trait for %V rd %1/day"',
-  'Slam Weapon':'Section=combat Note="d4 slam attack"',
+  'Slam Weapon':'Section=combat Note="Can attack w/slam"',
   'Stable':
     'Section=combat ' +
     'Note="May perform strenuous activity at 0 HP, no additional loss at negative HP"',
@@ -681,6 +677,11 @@ Eberron.FEATURES_ADDED = {
     'Note="Does not heal damage naturally, half effect from healing spells"',
   'Warforged Ability Adjustment':
     'Section=ability Note="+2 Constitution/-2 Wisdom/-2 Charisma"',
+  'Warforged Immunity':
+    'Section=save ' +
+    'Note="Immune to poison, sleep, paralysis, disease, nausea, fatigue, exhaustion, sickening, and energy drain"',
+  'Warforged Vulnerability':
+    'Section=save Note="Affected by effects that target wood or metal"',
   'Wildhunt':
     'Section=ability,feature,skill ' +
     'Note="+2 Constitution while shifting",' +
@@ -784,11 +785,11 @@ Eberron.FEATURES_ADDED = {
   'Weretouched Claws':
     'Section=ability,combat ' +
     'Note="+2 Strength while shifting",' +
-         '"d4+%V claw attack (next size for Razorclaw) while shifting"',
+         '"d4+%V claws attack (next size for Razorclaw) while shifting"',
   'Weretouched Fangs':
     'Section=ability,combat ' +
     'Note="+2 Dexterity while shifting",' +
-         '"d6+%V fang attack (next size for Longtooth) while shifting"',
+         '"d6+%V fangs attack (next size for Longtooth) while shifting"',
   'Weretouched Rage':
     'Section=combat Note="+2 Str, +2 Con, -2 AC for 1 rd after taking damage"',
   'Weretouched Tusks':
@@ -975,9 +976,9 @@ Eberron.RACES_ADDED = {
     'Languages=Common',
   'Warforged':
     'Features=' +
-      '"1:Composite Plating","1:Construct Immunity",' +
-      '"1:Construct Vulnerability","1:Light Fortification","1:Slam Weapon",' +
-      '1:Stable,1:Unhealing,"1:Warforged Ability Adjustment" ' +
+      '"1:Composite Plating","1:Light Fortification","1:Slam Weapon",' +
+      '1:Stable,1:Unhealing,"1:Warforged Ability Adjustment",' +
+      '"1:Warforged Immunity","1:Warforged Vulnerability" ' +
     'Languages=Common'
 };
 Eberron.RACES = Object.assign({}, SRD35.RACES, Eberron.RACES_ADDED);
@@ -2307,8 +2308,11 @@ Eberron.featRulesExtra = function(rules, name) {
   } else if(name == 'Extra Music') {
     rules.defineRule
       ('featureNotes.extraMusic', 'feats.Extra Music', '=', '4 * source');
-    rules.defineRule
-      ('featureNotes.bardicMusic', 'featureNotes.extraMusic', '+', null);
+    rules.defineRule(
+      Eberron.USE_PATHFINDER ?
+        'featureNotes.bardicPerformance' : 'featureNotes.bardicMusic',
+      'featureNotes.extraMusic', '+', null
+    );
   } else if(name == 'Extend Rage') {
     rules.defineRule('combatNotes.rage', 'combatNotes.extendRage', '+', '5');
   } else if(name == 'Extra Shifter Trait') {
@@ -2342,6 +2346,8 @@ Eberron.featRulesExtra = function(rules, name) {
       'level', '=', 'Math.floor(source / 4)',
       'strengthModifier', '+', 'Math.floor(source / 2)'
     );
+  } else if(name == 'Greater Dragonmark') {
+    rules.defineRule('magicNotes.greaterDragonmark', 'house', '=', null);
   } else if(name == 'Greater Powerful Charge') {
     rules.defineRule('combatNotes.greaterPowerfulCharge',
       '', '=', '"2d6"',
@@ -2375,6 +2381,10 @@ Eberron.featRulesExtra = function(rules, name) {
     rules.defineRule('combatNotes.healingFactor', 'level', '=', null);
   } else if(name == 'Heroic Spirit') {
     rules.defineRule('abilityNotes.heroicSpirit', 'level', '=', '3 * source');
+  } else if(name == 'Least Dragonmark') {
+    rules.defineRule('magicNotes.leastDragonmark', 'house', '=', null);
+  } else if(name == 'Lesser Dragonmark') {
+    rules.defineRule('magicNotes.lesserDragonmark', 'house', '=', null);
   } else if(name == 'Longstride Elite') {
     rules.defineRule
       ('abilityNotes.longstride', 'abilityNotes.longstrideElite', '+', '10');
@@ -2401,8 +2411,24 @@ Eberron.featRulesExtra = function(rules, name) {
       'features.Large', '=', '"2d6"'
     );
   } else if(name == 'Repel Aberration') {
-    rules.defineRule('combatNotes.repelAberration', 'levels.Druid', '=', null);
-    rules.defineRule('turingLevel', 'combatNotes.repelAberration', '^=', null);
+    rules.defineRule('combatNotes.repelAberration.1',
+      'features.Repel Aberration', '?', null,
+      'levels.Druid', '=', null,
+      'combatNotes.charismaTurningAdjustment', '+', null
+    );
+    rules.defineRule('combatNotes.repelAberration.2',
+      'features.Repel Aberration', '?', null,
+      'levels.Druid', '=', 'source * 3 - 10',
+      'combatNotes.charismaTurningAdjustment', '+', null
+    );
+    rules.defineRule('combatNotes.repelAberration.3',
+      'features.Repel Aberration', '?', null,
+      'levels.Druid', '=', '3',
+      'combatNotes.charismaTurningAdjustment', '+', null,
+      'combatNotes.extraTurning', '+', null
+    );
+    // Set turning level to suppress errors on, e.g., Extra Turning feat
+    rules.defineRule('turningLevel', 'combatNotes.repelAberration', '=', '1');
   } else if(name == 'Shifter Defense') {
     rules.defineRule('combatNotes.shifterDefense', '', '=', '2');
   } else if(name == 'Warden Initiate') {
@@ -2646,21 +2672,24 @@ Eberron.raceRulesExtra = function(rules, name) {
     rules.defineRule('abilityNotes.cliffwalk', '', '=', '20');
     rules.defineRule('abilityNotes.longstride', '', '=', '10');
     rules.defineRule('combatNotes.beasthide', '', '=', '2');
-    rules.defineRule('combatNotes.longtooth.1',
-      'features.Longtooth', '?', null,
-      'level', '=', 'Math.floor(source / 4)',
-      'strengthModifier', '+', null
+    rules.defineRule('featureNotes.shifting',
+      'constitutionModifier', '=', '3 + source',
+      'sumShifterFeats', '+', null
     );
-    rules.defineRule('combatNotes.razorclaw.1',
-      'features.Razorclaw', '?', null,
-      'level', '=', 'Math.floor(source / 4)',
-      'strengthModifier', '+', null
-    );
-    rules.defineRule
-      ('featureNotes.shifting', 'constitutionModifier', '=', '3 + source');
     rules.defineRule('featureNotes.shifting.1', '', '=', '1');
     rules.defineRule('selectableFeatureCount.Shifter',
       'race', '=', 'source == "Shifter" ? 1 : null'
+    );
+    Eberron.weaponRules(rules, 'Claws', 0, 'Un', 'd4', 20, 2, null);
+    Eberron.weaponRules(rules, 'Fangs', 0, 'Un', 'd6', 20, 2, null);
+    rules.defineRule('weapons.Claws', 'combatNotes.razorclaw', '=', '1');
+    rules.defineRule('weapons.Fangs', 'combatNotes.longtooth', '=', '1');
+    // Extra +1 on claws + fangs damage accounts for +2 strength while shifting
+    rules.defineRule('clawsDamageModifier',
+      'shifterLevels', '+', 'Math.floor(source / 4) + 1'
+    );
+    rules.defineRule('fangsDamageModifier',
+      'shifterLevels', '+', 'Math.floor(source / 4) + 1'
     );
   } else if(name == 'Warforged') {
     rules.defineRule
@@ -2672,6 +2701,8 @@ Eberron.raceRulesExtra = function(rules, name) {
       'intelligenceModifier', '=', '-Math.max(source, 0)'
     );
     rules.defineRule('languageCount', 'negateLanguageBonus', '+', null);
+    Eberron.weaponRules(rules, 'Slam', 0, 'Un', 'd4', 20, 2, null);
+    rules.defineRule('weapons.Slam', 'combatNotes.slamWeapon', '=', '1');
   } else if(Eberron.basePlugin.raceRulesExtra) {
     Eberron.basePlugin.raceRulesExtra(rules, name);
   }
