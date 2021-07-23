@@ -32,23 +32,24 @@ var computed = {
   "classSkills.Craft (Alchemy)":1, "classSkills.Craft (Armor)":1, "classSkills.Craft (Bows)":1, 
   "classSkills.Craft (Traps)":1, "classSkills.Craft (Weapons)":1, "classSkills.Handle Animal":1, 
   "classSkills.Intimidate":1, "classSkills.Jump":1, "classSkills.Ride":1, "classSkills.Swim":1, 
-  "classWillBonus":2, "combatNotes.beasthide":4, "combatNotes.beasthideElite":1, 
+  "classWillBonus":2, "clawsAttackModifier":9, "clawsDamageDice":"d4", "clawsDamageModifier":2, 
+  "clawsThreatRange":1, "combatNotes.beasthide":4, "combatNotes.beasthideElite":1, 
   "combatNotes.constitutionHitPointsAdjustment":14, "combatNotes.dexterityArmorClassAdjustment":1, 
   "combatNotes.dexterityAttackAdjustment":1, "combatNotes.greatBite":1, "combatNotes.greatRend":2, 
   "combatNotes.greaterShifterDefense":1, "combatNotes.healingFactor":7, "combatNotes.improvedNaturalAttack":1, 
-  "combatNotes.longtooth":1, "combatNotes.longtooth.1":3, "combatNotes.razorclaw":1, 
-  "combatNotes.razorclaw.1":3, "combatNotes.shifterDefense":4, "combatNotes.shifterFerocity":1, 
-  "combatNotes.shifterMultiattack":1, "combatNotes.strengthAttackAdjustment":2, 
-  "combatNotes.strengthDamageAdjustment":2, "combatNotes.two-handedWeaponWithBucklerPenalty":-1, "constitution":14, 
-  "constitution.1":2, "constitutionModifier":2, "deity":"The Keeper", "deityAlignment":"NE", 
-  "deityDomains":"Death/Decay/Evil", "deityFavoredWeapons":"Scythe", "dexterity":13, "dexterity.1":1, 
-  "dexterityModifier":1, "experience":23371, "experienceNeeded":28000, "featCount.Fighter":4, 
-  "featCount.General":3, "feats.Beasthide Elite":1, "feats.Cliffwalk Elite":1, 
-  "feats.Extra Shifter Trait":1, "feats.Great Bite":1, "feats.Great Rend":1, 
+  "combatNotes.longtooth":1, "combatNotes.razorclaw":1, "combatNotes.shifterDefense":4, 
+  "combatNotes.shifterFerocity":1, "combatNotes.shifterMultiattack":1, 
+  "combatNotes.strengthAttackAdjustment":2, "combatNotes.strengthDamageAdjustment":2, 
+  "combatNotes.two-handedWeaponWithBucklerPenalty":-1, "constitution":14, "constitution.1":2, "constitutionModifier":2, 
+  "deity":"The Keeper", "deityAlignment":"NE", "deityDomains":"Death/Decay/Evil", 
+  "deityFavoredWeapons":"Scythe", "dexterity":13, "dexterity.1":1, "dexterityModifier":1, "experience":23371, 
+  "experienceNeeded":28000, "fangsAttackModifier":9, "fangsDamageDice":"d6", "fangsDamageModifier":2, 
+  "fangsThreatRange":1, "featCount.Fighter":4, "featCount.General":3, "feats.Beasthide Elite":1, 
+  "feats.Cliffwalk Elite":1, "feats.Extra Shifter Trait":1, "feats.Great Bite":1, "feats.Great Rend":1, 
   "feats.Greater Shifter Defense":1, "feats.Healing Factor":1, "feats.Improved Natural Attack":1, 
   "feats.Longstride Elite":1, "feats.Shifter Defense":1, "feats.Shifter Ferocity":1, 
   "feats.Shifter Multiattack":1, "featureNotes.extraShifterTrait":1, "featureNotes.low-LightVision":1, 
-  "featureNotes.shifting":5, "featureNotes.shifting.1":1, "features.Animalistic Heritage":1, 
+  "featureNotes.shifting":16, "featureNotes.shifting.1":1, "features.Animalistic Heritage":1, 
   "features.Armor Proficiency (Heavy)":1, "features.Beasthide":1, "features.Beasthide Elite":1, 
   "features.Cliffwalk":1, "features.Cliffwalk Elite":1, "features.Extra Shifter Trait":1, 
   "features.Great Bite":1, "features.Great Rend":1, "features.Greater Shifter Defense":1, 
@@ -118,14 +119,18 @@ var computed = {
   "validationNotes.skillAllocation.2":10, "validationNotes.skillMaximum":0, "validationNotes.two-handedWeapon":0, 
   "warhammerAttackModifier":9, "warhammerDamageDice":"d8", "warhammerDamageModifier":2, 
   "warhammerThreatRange":1, "weaponProficiency":"Martial", "weaponProficiencyLevel":2, 
+  "weaponProficiencyLevelShortfall.Claws":-2, "weaponProficiencyLevelShortfall.Fangs":-2, 
   "weaponProficiencyLevelShortfall.Greatclub":0, "weaponProficiencyLevelShortfall.Lance":0, 
-  "weaponProficiencyLevelShortfall.Unarmed":-2, "weaponProficiencyLevelShortfall.Warhammer":0, "weapons.Greatclub":1, 
-  "weapons.Greatclub.1":"+8", "weapons.Greatclub.2":"d10", "weapons.Greatclub.3":"+2", 
-  "weapons.Greatclub.4":20, "weapons.Lance":1, "weapons.Lance.1":"+8", "weapons.Lance.2":"d8", 
-  "weapons.Lance.3":"+2", "weapons.Lance.4":20, "weapons.Unarmed":1, "weapons.Unarmed.1":"+9", 
-  "weapons.Unarmed.2":"d3", "weapons.Unarmed.3":"+2", "weapons.Unarmed.4":20, "weapons.Warhammer":1, 
-  "weapons.Warhammer.1":"+9", "weapons.Warhammer.2":"d8", "weapons.Warhammer.3":"+2", 
-  "weapons.Warhammer.4":20, "wisdom":13, "wisdom.1":1, "wisdomModifier":1
+  "weaponProficiencyLevelShortfall.Unarmed":-2, "weaponProficiencyLevelShortfall.Warhammer":0, "weapons.Claws":1, 
+  "weapons.Claws.1":"+9", "weapons.Claws.2":"d4", "weapons.Claws.3":"+2", "weapons.Claws.4":20, 
+  "weapons.Fangs":1, "weapons.Fangs.1":"+9", "weapons.Fangs.2":"d6", "weapons.Fangs.3":"+2", 
+  "weapons.Fangs.4":20, "weapons.Greatclub":1, "weapons.Greatclub.1":"+8", 
+  "weapons.Greatclub.2":"d10", "weapons.Greatclub.3":"+2", "weapons.Greatclub.4":20, "weapons.Lance":1, 
+  "weapons.Lance.1":"+8", "weapons.Lance.2":"d8", "weapons.Lance.3":"+2", "weapons.Lance.4":20, 
+  "weapons.Unarmed":1, "weapons.Unarmed.1":"+9", "weapons.Unarmed.2":"d3", 
+  "weapons.Unarmed.3":"+2", "weapons.Unarmed.4":20, "weapons.Warhammer":1, "weapons.Warhammer.1":"+9", 
+  "weapons.Warhammer.2":"d8", "weapons.Warhammer.3":"+2", "weapons.Warhammer.4":20, "wisdom":13, 
+  "wisdom.1":1, "wisdomModifier":1
 };
   </script>
 </head>
@@ -218,7 +223,7 @@ var computed = {
       </tr><tr align="center">
         <td>Low-Light Vision: x2 normal distance in poor light</td>
       </tr><tr align="center">
-        <td>Shifting: Use Shifter trait for 5 rd 1/day</td>
+        <td>Shifting: Use Shifter trait for 16 rd 1/day</td>
       </tr></table>
 </td>
     </tr></table>
@@ -287,7 +292,7 @@ var computed = {
       <tr align="center">
         <td><b>Armor</b>: Studded Leather</td>
         <td><b>Shield</b>: Buckler</td>
-        <td><b>Weapons</b>: Greatclub: 1 (+8 d10+2 x2@20); Lance: 1 (+8 d8+2 x3@20); Unarmed: 1 (+9 d3+2 x2@20); Warhammer: 1 (+9 d8+2 x3@20)</td>
+        <td><b>Weapons</b>: Claws: 1 (+9 d4+2 x2@20); Fangs: 1 (+9 d6+2 x2@20); Greatclub: 1 (+8 d10+2 x2@20); Lance: 1 (+8 d8+2 x3@20); Unarmed: 1 (+9 d3+2 x2@20); Warhammer: 1 (+9 d8+2 x3@20)</td>
       </tr></table>
 </td>
     </tr><tr align="center">
@@ -303,6 +308,10 @@ var computed = {
       </tr><tr align="center">
         <td><i>Greater Shifter Defense: +2 Shifter Defense DR</i></td>
       </tr><tr align="center">
+        <td><i>Longtooth: Can attack w/fangs while shifting</i></td>
+      </tr><tr align="center">
+        <td><i>Razorclaw: Can attack w/claws while shifting</i></td>
+      </tr><tr align="center">
         <td><i>Strength Attack Adjustment: +2</i></td>
       </tr><tr align="center">
         <td><i>Strength Damage Adjustment: +2</i></td>
@@ -311,17 +320,13 @@ var computed = {
       </tr><tr align="center">
         <td>Beasthide: +4 AC while shifting</td>
       </tr><tr align="center">
-        <td>Great Bite: Fang Crit is x3</td>
+        <td>Great Bite: Fangs Crit is x3</td>
       </tr><tr align="center">
         <td>Great Rend: +d4+2 damage on hit w/both claws</td>
       </tr><tr align="center">
         <td>Healing Factor: Heal 7 points when shifting ends</td>
       </tr><tr align="center">
         <td>Improved Natural Attack: Natural attack damage increases one size category</td>
-      </tr><tr align="center">
-        <td>Longtooth: d6+3 bite while shifting</td>
-      </tr><tr align="center">
-        <td>Razorclaw: d4+3 claw attack while shifting</td>
       </tr><tr align="center">
         <td>Shifter Defense: DR 4/silver</td>
       </tr><tr align="center">
