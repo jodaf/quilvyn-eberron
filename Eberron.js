@@ -179,7 +179,7 @@ Eberron.FEATS_ADDED = {
   'Aberrant Dragonmark':
     'Type=General ' +
     'Require="feats.Least Dragonmark == 0",' +
-            '"race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Orc|Human\'"',
+            '"race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Elf|Half-Orc|Human\'"',
   'Action Boost':'Type=General',
   'Action Surge':'Type=General Require="baseAttack >= 3"',
   'Adamantine Body':
@@ -265,7 +265,7 @@ Eberron.FEATS_ADDED = {
   'Favored In House':
     'Type=General ' +
     'Require="house != \'None\'",' +
-            '"race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Orc|Human\'"',
+            '"race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Elf|Half-Orc|Human\'"',
   'Flensing Strike':
     'Type=General ' +
     'Require="features.Weapon Focus (Kama)",' +
@@ -281,7 +281,7 @@ Eberron.FEATS_ADDED = {
     'Require="features.Least Dragonmark",' +
             '"features.Lesser Dragonmark",' +
             '"house != \'None\'",' +
-            '"race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Orc|Human\'",' +
+            '"race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Elf|Half-Orc|Human\'",' +
             '"countSkillsGe12 >= 2"',
   'Greater Powerful Charge':
     'Type=General ' +
@@ -311,13 +311,13 @@ Eberron.FEATS_ADDED = {
   'Least Dragonmark':
     'Type=General ' +
     'Require="house != \'None\'",' +
-            '"race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Orc|Human\'"',
+            '"race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Elf|Half-Orc|Human\'"',
   'Legendary Artisan':
     'Type="Item Creation" Require="sumItemCreationFeats >= 2"',
   'Lesser Dragonmark':
     'Type=General ' +
     'Require="house != \'None\'",' +
-            '"race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Orc|Human\'",' +
+            '"race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Elf|Half-Orc|Human\'",' +
             '"features.Least Dragonmark",' +
             '"countSkillsGe9 >= 2"',
   'Longstride Elite':'Type=General,Shifter Require=features.Longstride',
@@ -564,7 +564,7 @@ Eberron.FEATURES_ADDED = {
   'Lesser Dragonmark':
     'Section=magic Note="Choice of %V2 dragonmark spell 1/dy"',
   'Longstride Elite':'Section=ability Note="+10 Longstride Speed"',
-  'Maker':'Section=skill Note="+2 All Craft"',
+  'Maker':'Section=skill Note="+2 all Craft"',
   'Mithral Body':'Section=combat Note="+3 AC"',
   'Mithral Fluidity':
     'Section=combat,skill ' +
@@ -1468,7 +1468,7 @@ Eberron.PRESTIGE_CLASSES = {
     'Require=' +
       '"features.Favored In House","features.Least Dragonmark",' +
       '"house != \'None\'",' +
-      '"race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Orc|Human\'",' +
+      '"race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Elf|Half-Orc|Human\'",' +
       '"countSkillsGe7 >= 2" ' +
     'HitDie=d8 Attack=3/4 SkillPoints=4 Fortitude=1/2 Reflex=1/2 Will=1/2 ' +
     'Skills=' +
@@ -2562,6 +2562,12 @@ Eberron.houseRules = function(rules, name, dragonmark, races, features) {
     QuilvynRules.prerequisiteRules
       (rules, 'validation', 'house' + name, houseLevel,
        "race =~ '" + races.join("|") + "'");
+  if(name == 'Cannith') {
+    for(var s in rules.getChoices('skills')) {
+      if(s.startsWith('Craft '))
+        rules.defineRule('skillModifier.' + s, 'skillNotes.maker', '+', '2');
+    }
+  }
 
 };
 
