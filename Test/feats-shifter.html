@@ -10,15 +10,16 @@ var attributes = {
   "alignment":"Chaotic Neutral", "armor":"Studded Leather", "charisma":13, "constitution":14, 
   "deity":"The Keeper", "dexterity":11, "experience":23371, "feats.Beasthide Elite":1, 
   "feats.Cliffwalk Elite":1, "feats.Extra Shifter Trait":1, "feats.Great Bite":1, "feats.Great Rend":1, 
-  "feats.Greater Shifter Defense":1, "feats.Healing Factor":1, "feats.Improved Natural Attack":1, 
-  "feats.Longstride Elite":1, "feats.Shifter Defense":1, "feats.Shifter Ferocity":1, 
-  "feats.Shifter Multiattack":1, "gender":"Female", "hitPoints":40, "house":"None", "intelligence":10, 
-  "levels.Fighter":7, "name":"Feats-Shifter", "race":"Shifter", 
-  "selectableFeatures.Shifter - Beasthide":1, "selectableFeatures.Shifter - Cliffwalk":1, 
-  "selectableFeatures.Shifter - Longstride":1, "selectableFeatures.Shifter - Longtooth":1, 
-  "selectableFeatures.Shifter - Razorclaw":1, "shield":"Buckler", "skills.Climb":5, "skills.Gather Information":2, 
-  "skills.Knowledge (Planes)":2, "skills.Survival":1, "strength":14, "weapons.Greatclub":1, 
-  "weapons.Lance":1, "weapons.Warhammer":1, "wisdom":13
+  "feats.Greater Shifter Defense":1, "feats.Healing Factor":1, "feats.Improved Natural Attack (Claws)":1, 
+  "feats.Improved Natural Attack (Fangs)":1, "feats.Longstride Elite":1, "feats.Shifter Defense":1, 
+  "feats.Shifter Ferocity":1, "feats.Shifter Multiattack":1, "gender":"Female", "hitPoints":40, 
+  "house":"None", "intelligence":10, "levels.Fighter":7, "name":"Feats-Shifter", 
+  "race":"Shifter", "selectableFeatures.Shifter - Beasthide":1, 
+  "selectableFeatures.Shifter - Cliffwalk":1, "selectableFeatures.Shifter - Longstride":1, 
+  "selectableFeatures.Shifter - Longtooth":1, "selectableFeatures.Shifter - Razorclaw":1, "shield":"Buckler", 
+  "skills.Climb":5, "skills.Gather Information":2, "skills.Knowledge (Planes)":2, 
+  "skills.Survival":1, "strength":14, "weapons.Greatclub":1, "weapons.Lance":1, 
+  "weapons.Warhammer":1, "wisdom":13
 };
   </script>
 </head>
@@ -99,7 +100,7 @@ var attributes = {
     </tr><tr align="center">
       <td>      <table id="FeatLists" width="100%">
       <tr align="center">
-        <td><b>Feats</b>: Beasthide Elite; Cliffwalk Elite; Extra Shifter Trait; Great Bite; Great Rend; Greater Shifter Defense; Healing Factor; Improved Natural Attack; Longstride Elite; Shifter Defense; Shifter Ferocity; Shifter Multiattack</td>
+        <td><b>Feats</b>: Beasthide Elite; Cliffwalk Elite; Extra Shifter Trait; Great Bite; Great Rend; Greater Shifter Defense; Healing Factor; Improved Natural Attack (Claws); Improved Natural Attack (Fangs); Longstride Elite; Shifter Defense; Shifter Ferocity; Shifter Multiattack</td>
         <td><b>Shifter Features</b>: Animalistic Heritage; Beasthide; Cliffwalk; Longstride; Longtooth; Low-Light Vision; Razorclaw; Shifter Ability Adjustment; Shifting</td>
         <td><b>Fighter Features</b>: Armor Proficiency (Heavy); Shield Proficiency; Tower Shield Proficiency; Weapon Proficiency (Martial)</td>
       </tr></table>
@@ -180,7 +181,7 @@ var attributes = {
       <tr align="center">
         <td><b>Armor</b>: Studded Leather</td>
         <td><b>Shield</b>: Buckler</td>
-        <td><b>Weapons</b>: Claws: 1 (+9 d4+2 x2@20); Fangs: 1 (+9 d6+2 x2@20); Greatclub: 1 (+8 d10+2 x2@20); Lance: 1 (+8 d8+2 x3@20); Unarmed: 1 (+9 d3+2 x2@20); Warhammer: 1 (+9 d8+2 x3@20)</td>
+        <td><b>Weapons</b>: Claws: 1 (+9 d6+2 x2@20); Fangs: 1 (+9 d8+2 x2@20); Greatclub: 1 (+8 d10+2 x2@20); Lance: 1 (+8 d8+2 x3@20); Unarmed: 1 (+9 d3+2 x2@20); Warhammer: 1 (+9 d8+2 x3@20)</td>
       </tr></table>
 </td>
     </tr><tr align="center">
@@ -195,6 +196,10 @@ var attributes = {
         <td><i>Dexterity Attack Adjustment: +1</i></td>
       </tr><tr align="center">
         <td><i>Greater Shifter Defense: +2 Shifter Defense DR</i></td>
+      </tr><tr align="center">
+        <td><i>Improved Natural Attack (Claws): Claw damage increases one size category</i></td>
+      </tr><tr align="center">
+        <td><i>Improved Natural Attack (Fangs): Fangs damage increases one size category</i></td>
       </tr><tr align="center">
         <td><i>Longtooth: Can attack w/fangs while shifting</i></td>
       </tr><tr align="center">
@@ -213,8 +218,6 @@ var attributes = {
         <td>Great Rend: +d4+2 damage on hit w/both claws</td>
       </tr><tr align="center">
         <td>Healing Factor: Heal 7 points when shifting ends</td>
-      </tr><tr align="center">
-        <td>Improved Natural Attack: Natural attack damage increases one size category</td>
       </tr><tr align="center">
         <td>Shifter Defense: DR 4/silver</td>
       </tr><tr align="center">
