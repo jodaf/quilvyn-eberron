@@ -120,7 +120,7 @@ function Eberron(baseRules) {
 
 }
 
-Eberron.VERSION = '2.2.2.7';
+Eberron.VERSION = '2.2.2.8';
 
 // Eberron uses SRD35 as its default base ruleset. If USE_PATHFINDER is true,
 // the Eberron function will instead use rules taken from the Pathfinder plugin.
@@ -305,7 +305,8 @@ Eberron.FEATS_ADDED = {
   'Improved Damage Reduction':'Type=General Require="race == \'Warforged\'"',
   'Improved Fortification':
     'Type=General Require="baseAttack >= 6","race == \'Warforged\'"',
-  'Improved Natural Attack':'Type=General Require="baseAttack >= 4"',
+  'Improved Natural Attack (Claws)':'Type=General Require="baseAttack >= 4"',
+  'Improved Natural Attack (Fangs)':'Type=General Require="baseAttack >= 4"',
   'Investigate':'Type=General',
   'Knight Training':'Type=General Imply="levels.Paladin > 0"',
   'Least Dragonmark':
@@ -530,7 +531,7 @@ Eberron.FEATURES_ADDED = {
   'Great Bite':'Section=combat Note="Fangs Crit is x3"',
   'Great Rend':'Section=combat Note="+d4+%V damage on hit w/both claws"',
   'Greater Dragonmark':
-    'Section=magic Note="Choice of %V3 dragonmark spell 1/dy"',
+    'Section=magic Note="Choice of %{house}3 dragonmark spell 1/dy"',
   'Greater Powerful Charge':
     'Section=combat ' +
     'Note="Raise Powerful Charge damage one size category to %V"',
@@ -549,8 +550,10 @@ Eberron.FEATURES_ADDED = {
   'Improved Damage Reduction':'Section=combat Note="DR +1/adamantine"',
   'Improved Fortification':
     'Section=combat Note="Immune sneak attack, critical hit, healing"',
-  'Improved Natural Attack':
-    'Section=combat Note="Natural attack damage increases one size category"',
+  'Improved Natural Attack (Claws)':
+    'Section=combat Note="Claw damage increases one size category"',
+  'Improved Natural Attack (Fangs)':
+    'Section=combat Note="Fangs damage increases one size category"',
   'Investigate':
     'Section=skill ' +
     'Note="Use Search to find and analyze clues, synergy with appropriate Knowledge"',
@@ -558,11 +561,11 @@ Eberron.FEATURES_ADDED = {
     'Section=ability ' +
     'Note="No restrictions on combining Paladin and chosen class levels"',
   'Least Dragonmark':
-    'Section=magic Note="Choice of %V1 dragonmark spell 1/dy"',
+    'Section=magic Note="Choice of %{house}1 dragonmark spell 1/dy"',
   'Legendary Artisan':
     'Section=magic Note="Reduce item creation XP price by 25%"',
   'Lesser Dragonmark':
-    'Section=magic Note="Choice of %V2 dragonmark spell 1/dy"',
+    'Section=magic Note="Choice of %{house}2 dragonmark spell 1/dy"',
   'Longstride Elite':'Section=ability Note="+10 Longstride Speed"',
   'Maker':'Section=skill Note="+2 all Craft"',
   'Mithral Body':'Section=combat Note="+3 AC"',
@@ -689,36 +692,48 @@ Eberron.FEATURES_ADDED = {
          '"+2 Survival"',
 
   // Prestige classes
-  'Ability Immunity':'Section=save Note="Immune to ability damage and drain"',
-  'Action Point Bonus':'Section=ability Note="+2 AP"',
-  'Alternate Bear Form':
+  'Additional Action Points':'Section=ability Note="+2 AP"',
+  'Alternate Form (Bear)':
     'Section=ability ' +
-    'Note="Shift to animal (+16 Str/+2 Dex/+8 Con) or bipedal hybrid"',
-  'Alternate Boar Form':
-    'Section=ability Note="Shift to animal (+4 Str/+6 Con) or bipedal hybrid"',
-  'Alternate Rat Form':
-    'Section=ability Note="Shift to animal (+6 Dex/+2 Con) or bipedal hybrid"',
-  'Alternate Tiger Form':
+    'Note="Shift to animal (+16 Str, +2 Dex, +8 Con) or bipedal hybrid"',
+  'Alternate Form (Boar)':
+    'Section=ability Note="Shift to animal (+4 Str, +6 Con) or bipedal hybrid"',
+  'Alternate Form (Rat)':
+    'Section=ability Note="Shift to animal (+6 Dex, +2 Con) or bipedal hybrid"',
+  'Alternate Form (Tiger)':
     'Section=ability ' +
-    'Note="Shift to animal (+12 Str/+4 Dex/+6 Con) or bipedal hybrid"',
-  'Alternate Wolf Form':
+    'Note="Shift to animal (+12 Str, +4 Dex, +6 Con) or bipedal hybrid"',
+  'Alternate Form (Wolf)':
     'Section=ability ' +
-    'Note="Shift to animal (+2 Str/+4 Dex/+4 Con) or bipedal hybrid"',
-  'Alternate Wolverine Form':
+    'Note="Shift to animal (+2 Str, +4 Dex, +4 Con) or bipedal hybrid"',
+  'Alternate Form (Wolverine)':
     'Section=ability ' +
-    'Note="Shift to animal (+4 Str/+4 Dex/+8 Con) or bipedal hybrid"',
+    'Note="Shift to animal (+4 Str, +4 Dex, +8 Con) or bipedal hybrid"',
   'Animalistic Heritage':'Section=skill Note="+2 Balance/+2 Climb/+2 Jump"',
   'Armor Spikes':'Section=combat Note="Grapple attack for %V damage"',
+  'Bear':
+    'Section=ability,combat ' +
+    'Note="+2 Strength while shifting",' +
+         '"Can attack w/claws while shifting"',
+  'Boar':
+    'Section=ability,combat ' +
+    'Note="+2 Constitution while shifting",' +
+         '"Can attack w/tusks (fangs) while shifting"',
   'Caster Level Bonus':
     'Section=magic Note="+%V base class level for spells known and spells/dy"',
   'Charge Bonus':'Section=combat Note="+%V attack when charging"',
   'Climb Speed':
     'Section=ability ' +
-    'Note="20\' climb speed (+10 for Cliffwalker) while shifting"',
-  'Construct Perfection':
+    'Note="20\' climb speed (+10 for Cliffwalk) while shifting"',
+  'Construct Perfection I':
     'Section=combat Note="Immune nonlethal damage and critical hits"',
-  'Contact':'Section=feature Note="Level 3 associate or informant"',
-  'Death Immunity':'Section=save Note="Immune to death and necromancy effects"',
+  'Construct Perfection II':'Section=save Note="Immune to mental effects"',
+  'Construct Perfection III':
+    'Section=save Note="Immune to death and necromancy effects"',
+  'Construct Perfection IV':
+    'Section=save Note="Immune to ability damage and drain"',
+  'Contact':'Section=feature Note="Level 3%1 associate or informant"',
+  'Damage Reduction (Iron)':'Section=combat Note="DR 3/cold iron"',
   'Detect Thoughts':'Section=magic Note="<i>Detect Thoughts</i> at will"',
   'Discern Lies':
     'Section=magic ' +
@@ -737,29 +752,32 @@ Eberron.FEATURES_ADDED = {
     'Section=combat ' +
     'Note="R30\' Foes w/fewer than %V hit dice shaken for 5d6 rounds (DC %1 Will neg)"',
   'Hated Foe':
-    'Section=combat Note="Spend 1 AP for double damage against favored enemy"',
+    'Section=combat Note="Spend 1 AP for dbl damage against favored enemy"',
   'Healing Immunity':'Section=save Note="No effect from healing spells"',
   'House Status':
     'Section=skill Note="+%V charisma-based skills w/house members"',
-  'Improved Contact':'Section=feature Note="Level 6 associate or informant"',
   'Improved Grab':'Section=combat Note="Grapple w/out AOO after claw hit"',
   'Improved Greater Dragonmark':
-    'Section=magic Note="2nd Greater Dragonmark spell or +1/day"',
+    'Section=magic Note="2nd %{house}3 spell or +1/day"',
   'Improved Least Dragonmark':
-    'Section=magic Note="2nd Least Dragonmark spell or +1/day"',
+    'Section=magic Note="2nd %{house}1 spell or +1/day"',
   'Improved Lesser Dragonmark':
-    'Section=magic Note="2nd Lesser Dragonmark spell or +1/day"',
+    'Section=magic Note="2nd %{house}2 spell or +1/day"',
   'Improved Critical':
-    'Section=feature Note="Improved Critical feat for choice of weapon"',
-  'Iron Damage Reduction':'Section=combat Note="DR 3/cold iron"',
+    'Section=feature Note="Improved Critical feat for choice of ranged weapon"',
   'Metal Immunity':'Section=save Note="Immune to mind-altering effects"',
   'Pounce':'Section=combat Note="Full attack when charging"',
+  'Rat':
+    'Section=ability,combat ' +
+    'Note="+2 Dexterity while shifting",' +
+         '"Can attack w/fangs while shifting"',
   'Reserved':
     'Section=skill ' +
     'Note="-%V Bluff/-%V Diplomacy/-%V Gather Information/-%V Sense Motive"',
-  'Resist Aberrations':'Section=save Note="+2 vs. aberration abilities"',
-  'Resist Corruption':
+  'Resist Corruption (Children Of Winter)':
     'Section=save Note="Immune disease, +2 vs. mind-altering"',
+  'Resist Corruption (Gatekeepers)':
+    'Section=save Note="+2 vs. aberration abilities"',
   'Resist Possession':'Section=save Note="+%V vs. possession"',
   'Resist The Arcane':'Section=save Note="+2 vs. arcane spells"',
   'Resist Unnatural':
@@ -769,6 +787,10 @@ Eberron.FEATURES_ADDED = {
   'Silver Exorcism':'Section=combat Note="+2 exorcism checks"',
   'Spell Resistance':'Section=save Note="DC 20 spell resistance"',
   'Superior Bull Rush':'Section=combat Note="+%V+%1 damage from bull rush"',
+  'Tiger':
+    'Section=ability,combat ' +
+    'Note="+2 Strength while shifting",' +
+         '"Can attack w/claws while shifting"',
   'Touch Of Contagion':'Section=magic Note="<i>Contagion</i> 3/day"',
   'Trip':'Section=combat Note="Trip w/out AOO after bite hit"',
   'True Seeing':
@@ -776,26 +798,32 @@ Eberron.FEATURES_ADDED = {
     'Note="See through 120\' darkness, illusion, and invisible for %V min 1/dy, 2 AP for 2/dy"',
   'Unearthly Grace':'Section=save Note="+%V Fortitude/+%V Reflex/+%V Will"',
   'Warding Flame':
-    'Section=combat ' +
-    'Note="Warding glow for +2 AC, struck evil foe  blinded (DC %V Fort neg)"',
+    'Section=combat,feature,save ' +
+    'Note=' +
+      '"Warding glow for +2 AC, struck evil foe  blinded (DC %V Fort neg)",' +
+      '"60\' light",' +
+      '"Resistance 25 to evil spells and evil casters"',
+  'Weapon Of Flame':
+    'Section=combat Note="+%Vd6 flame damage w/exorcist weapon"',
+  'Weapon Of Good':
+    'Section=combat Note="Exorcist weapon treated as good-aligned"',
+  'Weapon Of Law':'Section=combat Note="Exorcist weapon treated as lawful"',
+  'Weapon Of Sacred Flame':
+     'Section=combat Note="Exorcist weapon does additional 1d6 flame damage"',
+  'Weapon Of Silver':'Section=combat Note="Exorcist weapon treated as silver"',
   'Weapon Of The Exorcist':
-    'Section=combat Note="+1 damage w/sacred weapon treated as %V"',
-  'Weapon Of The Flame':
-    'Section=combat Note="+%Vd6 flame damage w/sacred weapon"',
-  'Weretouched Claws':
-    'Section=ability,combat ' +
-    'Note="+2 Strength while shifting",' +
-         '"d4+%V claws attack (next size for Razorclaw) while shifting"',
-  'Weretouched Fangs':
+    'Section=combat Note="+1 damage w/weapon treated as magic%1%2%3"',
+  'Weretouched Rage':
+    'Section=combat ' +
+    'Note="+2 Str, +2 Con, -2 AC after taking damage until self or foe dead"',
+  'Wolf':
     'Section=ability,combat ' +
     'Note="+2 Dexterity while shifting",' +
-         '"d6+%V fangs attack (next size for Longtooth) while shifting"',
-  'Weretouched Rage':
-    'Section=combat Note="+2 Str, +2 Con, -2 AC for 1 rd after taking damage"',
-  'Weretouched Tusks':
+         '"Can attack w/fangs while shifting"',
+  'Wolverine':
     'Section=ability,combat ' +
     'Note="+2 Constitution while shifting",' +
-         '"d6+%V tusk attack (next size for Longtooth) while shifting"',
+         '"Can attack w/fangs while shifting"',
   'Zone Of Truth':
     'Section=magic ' +
     'Note="R%1\' Creatures w/in 20\' radius cannot lie for %V min (DC %2 Will neg) 1/dy, 2 AP for 2/dy"'
@@ -1476,7 +1504,7 @@ Eberron.PRESTIGE_CLASSES = {
       '"Knowledge (Arcana)","Knowledge (Nobility)",Perform,Ride,' +
       '"Sense Motive","Speak Language",Spellcraft ' +
     'Features=' +
-      '"1:House Status","1:Lesser Dragonmark","2:Action Point Bonus",' +
+      '"1:House Status","1:Lesser Dragonmark","2:Additional Action Points",' +
       '"2:Improved Least Dragonmark","3:Improved Lesser Dragonmark",' +
       '"4:Greater Dragonmark","5:Improved Greater Dragonmark"',
   'Eldeen Ranger':
@@ -1490,16 +1518,16 @@ Eberron.PRESTIGE_CLASSES = {
       '"Knowledge (Nature)",Listen,"Move Silently",Profession,Ride,Search,' +
       'Spot,Survival,Swim,"Use Rope" ' +
     'Features=' +
-      '"1:Armor Proficiency (Light)","1:Shield Proficiency (Heavy)",' +
+      '"1:Armor Proficiency (Light)","1:Shield Proficiency",' +
       '"1:Weapon Proficiency (Martial)",' +
       '"features.Ashbound ? 1:Resist The Arcane",' +
       '"features.Children Of Winter ? 1:Resist Poison",' +
-      '"features.Gatekeepers ? 1:Resist Aberrations",' +
+      '"features.Gatekeepers ? 1:Resist Corruption (Gatekeepers)",' +
       '"features.Greensingers ? 1:Resist Nature\'s Lure",' +
       '"features.Wardens Of The Wood ? 1:Nature Sense",' +
       '"2:Hated Foe",' +
       '"features.Ashbound ? 3:Ferocity",' +
-      '"features.Children Of Winter ? 3:Resist Corruption",' +
+      '"features.Children Of Winter ? 3:Resist Corruption (Children Of Winter)",' +
       '"features.Gatekeepers ? 3:Darkvision",' +
       '"features.Greensingers ? 3:Unearthly Grace",' +
       '"features.Wardens Of The Wood ? 3:Improved Critical",' +
@@ -1507,7 +1535,7 @@ Eberron.PRESTIGE_CLASSES = {
       '"features.Ashbound ? 5:Spell Resistance",' +
       '"features.Children Of Winter ? 5:Touch Of Contagion",' +
       '"features.Gatekeepers ? 5:Slippery Mind",' +
-      '"features.Greensingers ? 5:Damage Reduction",' +
+      '"features.Greensingers ? 5:Damage Reduction (Iron)",' +
       '"features.Wardens Of The Wood ? 5:Smite Evil" ' +
     'Selectables=' +
       '1:Ashbound,' +
@@ -1527,10 +1555,11 @@ Eberron.PRESTIGE_CLASSES = {
       'Spellcraft ' +
     'Features=' +
       '"1:Flame Of Censure","1:Weapon Of The Exorcist",' +
-      '"2:Caster Level Bonus",3:Darkvision,"3:Resist Charm",' +
-      '"3:Resist Possession","3:Resist Unnatural","3:Smite Evil",' +
-      '"4:Detect Thoughts","5:Silver Exorcism","6:Weapon Of Flame",' +
-      '"10:Warding Flame"',
+      '"2:Caster Level Bonus","2:Weapon Of Silver",3:Darkvision,' +
+      '"3:Resist Charm","3:Resist Possession","3:Resist Unnatural",' +
+      '"3:Smite Evil","4:Detect Thoughts","4:Weapon Of Good",' +
+      '"5:Silver Exorcism","6:Weapon Of Flame","8:Weapon Of Law",' +
+      '"9:Weapon Of Sacred Flame","10:Warding Flame"',
   'Extreme Explorer':
     'Require=' +
       '"baseAttack >= 4","features.Action Boost",' +
@@ -1542,7 +1571,7 @@ Eberron.PRESTIGE_CLASSES = {
       '"Knowledge (History)",Listen,"Open Lock",Ride,Search,"Speak Language",' +
       'Survival,Swim,Tumble,"Use Magic Device","Use Rope" ' +
     'Features=' +
-      '"1:Action Point Bonus","1:Trap Sense","2:Dodge Bonus",2:Evasion,' +
+      '"1:Additional Action Points","1:Trap Sense","2:Dodge Bonus",2:Evasion,' +
       '"2:Extreme Hustle","4:Extreme Action"',
   'Heir Of Siberys':
     'Require=' +
@@ -1552,7 +1581,7 @@ Eberron.PRESTIGE_CLASSES = {
       '"countSkillsGe15 >= 2" ' +
     'HitDie=d6 Attack=1 SkillPoints=2 Fortitude=1/2 Reflex=1/2 Will=1/2 ' +
     'Features=' +
-      '"1:Action Point Bonus","2:Siberys Mark",' +
+      '"1:Additional Action Points","2:Siberys Mark",' +
       '"casterLevel ? 2:Caster Level Bonus",' +
       '"casterLevel == 0 ? 2:Feat Bonus"',
   'Master Inquisitive':
@@ -1564,8 +1593,7 @@ Eberron.PRESTIGE_CLASSES = {
       'Bluff,"Decipher Script","Gather Information","Knowledge (Local)",' +
       'Listen,Search,"Sense Motive",Spot ' +
     'Features=' +
-      '"1:Zone Of Truth",2:Contact,"3:Discern Lies","4:Improved Contact",' +
-      '"5:True Seeing"',
+      '"1:Zone Of Truth",2:Contact,"3:Discern Lies","5:True Seeing"',
   'Warforged Juggernaut':
     'Require=' +
      '"baseAttack >= 5","features.Adamantine Body",' +
@@ -1576,9 +1604,10 @@ Eberron.PRESTIGE_CLASSES = {
       'Climb,Craft,Intimidate,Jump,Survival,Swim ' +
     'Features=' +
       '"1:Armor Spikes","1:Expert Bull Rush","1:Powerful Charge",1:Reserved,' +
-      '"2:Charge Bonus","2:Construct Perfection","2:Extended Charge",' +
-      '"3:Healing Immunity","3:Mental Immunity","3:Superior Bull Rush",' +
-      '"4:Death Immunity","5:Ability Immunity","5:Greater Powerful Charge"',
+      '"2:Charge Bonus","2:Construct Perfection I","2:Extended Charge",' +
+      '"3:Healing Immunity","3:Construct Perfection II",' +
+      '"3:Superior Bull Rush","4:Construct Perfection III",' +
+      '"5:Construct Perfection IV","5:Greater Powerful Charge"',
   'Weretouched Master':
     'Require=' +
       '"baseAttack >= 4","sumShifterFeats >= 1","race == \'Shifter\'",' +
@@ -1588,9 +1617,6 @@ Eberron.PRESTIGE_CLASSES = {
       'Balance,Climb,"Handle Animal",Hide,Intimidate,Jump,' +
       '"Knowledge (Nature)",Listen,"Move Silently",Spot,Survival,Swim ' +
     'Features=' +
-      '"features.Bear || features.Tiger ? 1:Weretouched Claws",' +
-      '"features.Boar || features.Wolverine ? 1:Weretouched Tusks",' +
-      '"features.Rat || features.Wolf ? 1:Weretouched Fangs",' +
       '"2:Wild Empathy",' +
       '"features.Bear ? 3:Improved Grab",' +
       '"features.Boar ? 3:Fierce Will",' +
@@ -1599,12 +1625,12 @@ Eberron.PRESTIGE_CLASSES = {
       '"features.Wolf ? 3:Trip",' +
       '"features.Wolverine ? 3:Weretouched Rage",' +
       '"4:Frightful Shifting",' +
-      '"features.Bear ? 5:Alternate Bear Form",' +
-      '"features.Boar ? 5:Alternate Boar Form",' +
-      '"features.Rat ? 5:Alternate Rat Form",' +
-      '"features.Tiger ? 5:Alternate Tiger Form",' +
-      '"features.Wolf ? 5:Alternate Wolf Form",' +
-      '"features.Wolverine ? 5:Alternate Wolverine Form" ' +
+      '"features.Bear ? 5:Alternate Form (Bear)",' +
+      '"features.Boar ? 5:Alternate Form (Boar)",' +
+      '"features.Rat ? 5:Alternate Form (Rat)",' +
+      '"features.Tiger ? 5:Alternate Form (Tiger)",' +
+      '"features.Wolf ? 5:Alternate Form (Wolf)",' +
+      '"features.Wolverine ? 5:Alternate Form (Wolverine)" ' +
     'Selectables=' +
       '1:Bear,1:Boar,1:Rat,1:Tiger,1:Wolf,1:Wolverine'
 };
@@ -2001,14 +2027,14 @@ Eberron.classRulesExtra = function(rules, name) {
       'levels.Eldeen Ranger', '+=', 'source >= 4 ? 1 : null'
     );
     rules.defineRule
-      ('combatNotes.smiteEvil', 'levels.Eldeen Ranger', '+=', '1');
+      ('combatNotes.smiteEvil', 'eldeenRangerFeatures.Smite Evil', '+=', '1');
     rules.defineRule('combatNotes.smiteEvil.1',
       'features.Smite Evil', '?', null,
-      'charismaModifier', '=', null
+      'charismaModifier', '=', 'Math.max(source, 0)'
     );
     rules.defineRule('combatNotes.smiteEvil.2',
       'features.Smite Evil', '?', null,
-      'levels.Eldeen Ranger', '=', null
+      'levels.Eldeen Ranger', '+=', null
     );
     rules.defineRule
       ('featCount.Fighter', 'featureNotes.improvedCritical', '+=', '1');
@@ -2023,30 +2049,37 @@ Eberron.classRulesExtra = function(rules, name) {
   } else if(name == 'Exorcist Of The Silver Flame') {
 
     rules.defineRule('combatNotes.smiteEvil',
-      'levels.Exorcist Of The Silver Flame', '+=',
-      'source >= 7 ? 2 : source >= 3 ? 1 : null'
+      'levels.Exorcist Of The Silver Flame', '+=', 'source>=7 ? 2 : source>=3 ? 1 : null'
     );
     rules.defineRule('combatNotes.smiteEvil.1',
       'features.Smite Evil', '?', null,
-      'charismaModifier', '=', null
+      'charismaModifier', '=', 'Math.max(source, 0)'
     );
     rules.defineRule('combatNotes.smiteEvil.2',
       'features.Smite Evil', '?', null,
-      'levels.Exorcist Of The Silver Flame', '=', 'source>=3 ? source : null'
+      'levels.Exorcist Of The Silver Flame', '+=', null
     );
     rules.defineRule('combatNotes.wardingFlame',
       'charismaModifier', '=', '20 + source'
     );
     rules.defineRule('combatNotes.weaponOfFlame',
-      'levels.Exorcist Of The Silver Flame', '=',
-      'source >= 9 ? 2 : source >= 6 ? 1 : null'
+      '', '=', '1',
+      'combatNotes.weaponOfSacredFlame', '+', '1'
     );
-    rules.defineRule('combatNotes.weaponOfTheExorcist',
-      'levels.Exorcist Of The Silver Flame', '=',
-      '["magic"]' +
-      '.concat(source >= 2 ? ["silver"] : [])' +
-      '.concat(source >= 4 ? ["good"] : [])' +
-      '.concat(source >= 8 ? ["lawful"] : []).sort().join("/")'
+    rules.defineRule('combatNotes.weaponOfTheExorcist.1',
+      'features.Weapon Of The Exorcist', '?', null,
+      '', '=', '""',
+      'combatNotes.weaponOfSilver', '=', '", silver"'
+    );
+    rules.defineRule('combatNotes.weaponOfTheExorcist.2',
+      'features.Weapon Of The Exorcist', '?', null,
+      '', '=', '""',
+      'combatNotes.weaponOfGood', '=', '", good"'
+    );
+    rules.defineRule('combatNotes.weaponOfTheExorcist.3',
+      'features.Weapon Of The Exorcist', '?', null,
+      '', '=', '""',
+      'combatNotes.weaponOfLaw', '=', '", lawful"'
     );
     rules.defineRule('magicNotes.casterLevelBonus',
       'levels.Exorcist Of The Silver Flame', '+=', 'Math.floor(source*2/3)'
@@ -2069,8 +2102,14 @@ Eberron.classRulesExtra = function(rules, name) {
         console.log('Missing Extreme Explorer feat "' + feat + '"');
       }
     }
+    // Arrange for dodge bonus note to show even when wearning non-light armor
+    rules.defineRule('armorClass', 'combatNotes.dodgeBonus.1', '+', null);
     rules.defineRule('combatNotes.dodgeBonus',
       'levels.Extreme Explorer', '+=', 'Math.floor(source / 2)'
+    );
+    rules.defineRule('combatNotes.dodgeBonus.1',
+      'armorWeight', '?', 'source <= 1',
+      'combatNotes.dodgeBonus', '=', null
     );
     rules.defineRule('featCount.Extreme Explorer',
       'levels.Extreme Explorer', '=',
@@ -2111,9 +2150,6 @@ Eberron.classRulesExtra = function(rules, name) {
       'features.Siberys Mark', '?', null,
       'levels.Heir Of Siberys', '=', 'source >= 3 ? 2 : 1'
     );
-    rules.defineRule('spellSlots.Dragonmark4',
-      'levels.Heir Of Siberys', '=', 'source >= 2 ? 1 : null'
-    );
 
   } else if(name == 'Master Inquisitive') {
 
@@ -2138,6 +2174,9 @@ Eberron.classRulesExtra = function(rules, name) {
     rules.defineRule('featCount.Master Inquisitive',
       'levels.Master Inquisitive', '=',
       'source < 2 ? null : Math.floor(source / 2)'
+    );
+    rules.defineRule('featureNotes.contact.1',
+      'levels.Master Inquisitive', '=', 'source>=4 ? " and level 6" : ""'
     );
     rules.defineRule
       ('magicNotes.discernLies', 'levels.Master Inquisitive', '=', null);
@@ -2197,14 +2236,15 @@ Eberron.classRulesExtra = function(rules, name) {
       'levels.Weretouched Master', '=', 'source + 10',
       'charismaModifier', '+', null
     );
-    rules.defineRule('combatNotes.weretouchedClaws',
-      'level', '=', 'Math.floor(source / 4)'
+    rules.defineRule('clawsDamageProgression',
+      'combatNotes.bear', '+=', '1',
+      'combatNotes.tiger', '+=', '1'
     );
-    rules.defineRule('combatNotes.weretouchedFangs',
-      'level', '=', 'Math.floor(source / 4)'
-    );
-    rules.defineRule('combatNotes.weretouchedTusks',
-      'level', '=', 'Math.floor(source / 4)'
+    rules.defineRule('fangsDamageProgression',
+      'combatNotes.boar', '+=', '1',
+      'combatNotes.rat', '+=', '1',
+      'combatNotes.wolf', '+=', '1',
+      'combatNotes.wolverine', '+=', '1'
     );
     rules.defineRule('featCount.Shifter',
       'levels.Weretouched Master', '+=',
@@ -2216,6 +2256,16 @@ Eberron.classRulesExtra = function(rules, name) {
     rules.defineRule('skillNotes.wildEmpathy',
       'levels.Weretouched Master', '+=', null,
       'charismaModifier', '+', null
+    );
+    rules.defineRule('weapons.Claws',
+      'combatNotes.bear', '=', '1',
+      'combatNotes.tiger', '=', '1',
+    );
+    rules.defineRule('weapons.Fangs',
+      'combatNotes.boar', '=', '1',
+      'combatNotes.rat', '=', '1',
+      'combatNotes.wolf', '=', '1',
+      'combatNotes.wolverine', '=', '1'
     );
 
   } else if(Eberron.basePlugin.classRulesExtra) {
@@ -2346,8 +2396,6 @@ Eberron.featRulesExtra = function(rules, name) {
       'level', '=', 'Math.floor(source / 4)',
       'strengthModifier', '+', 'Math.floor(source / 2)'
     );
-  } else if(name == 'Greater Dragonmark') {
-    rules.defineRule('magicNotes.greaterDragonmark', 'house', '=', null);
   } else if(name == 'Greater Powerful Charge') {
     rules.defineRule('combatNotes.greaterPowerfulCharge',
       '', '=', '"2d6"',
@@ -2381,10 +2429,14 @@ Eberron.featRulesExtra = function(rules, name) {
     rules.defineRule('combatNotes.healingFactor', 'level', '=', null);
   } else if(name == 'Heroic Spirit') {
     rules.defineRule('abilityNotes.heroicSpirit', 'level', '=', '3 * source');
-  } else if(name == 'Least Dragonmark') {
-    rules.defineRule('magicNotes.leastDragonmark', 'house', '=', null);
-  } else if(name == 'Lesser Dragonmark') {
-    rules.defineRule('magicNotes.lesserDragonmark', 'house', '=', null);
+  } else if(name == 'Improved Natural Attack (Claws)') {
+    rules.defineRule('clawsDamageProgression',
+      'combatNotes.improvedNaturalAttack(Claws)', '+', '1'
+    );
+  } else if(name == 'Improved Natural Attack (Fangs)') {
+    rules.defineRule('fangsDamageProgression',
+      'combatNotes.improvedNaturalAttack(Fangs)', '+', '1'
+    );
   } else if(name == 'Longstride Elite') {
     rules.defineRule
       ('abilityNotes.longstride', 'abilityNotes.longstrideElite', '+', '10');
@@ -2540,15 +2592,18 @@ Eberron.houseRules = function(rules, name, dragonmark, races, features) {
   );
   rules.defineRule('spellSlots.' + name + '1',
     'casterLevels.' + name, '?', null,
-    'magicNotes.leastDragonmark', '=', '1'
+    'magicNotes.leastDragonmark', '=', '1',
+    'magicNotes.improvedLeastDragonmark', '+', '1'
   );
   rules.defineRule('spellSlots.' + name + '2',
     'casterLevels.' + name, '?', null,
-    'magicNotes.lesserDragonmark', '=', '1'
+    'magicNotes.lesserDragonmark', '=', '1',
+    'magicNotes.improvedLesserDragonmark', '+', '1'
   );
   rules.defineRule('spellSlots.' + name + '3',
     'casterLevels.' + name, '?', null,
-    'magicNotes.greaterDragonmark', '=', '1'
+    'magicNotes.greaterDragonmark', '=', '1',
+    'magicNotes.improvedGreaterDragonmark', '+', '1'
   );
   rules.defineRule('spellSlots.' + name + '4',
     'casterLevels.' + name, '?', null,
@@ -2688,6 +2743,20 @@ Eberron.raceRulesExtra = function(rules, name) {
     );
     Eberron.weaponRules(rules, 'Claws', 0, 'Un', 'd4', 20, 2, null);
     Eberron.weaponRules(rules, 'Fangs', 0, 'Un', 'd6', 20, 2, null);
+    rules.defineRule('clawsDamageProgression',
+      'combatNotes.razorclaw', '+=', '1',
+      'features.Large', '+', '1'
+    );
+    rules.defineRule('clawsDamageDice',
+      'clawsDamageProgression', '=', '["d3", "d4", "d6", "d8", "2d6", "3d6", "4d6", "6d6", "8d6", "12d6"][source]'
+    );
+    rules.defineRule('fangsDamageProgression',
+      'combatNotes.longtooth', '+=', '1',
+      'features.Large', '+', '1'
+    );
+    rules.defineRule('fangsDamageDice',
+      'fangsDamageProgression', '=', '["d4", "d6", "d8", "2d6", "3d6", "4d6", "6d6", "8d6", "12d6"][source]'
+    );
     rules.defineRule('weapons.Claws', 'combatNotes.razorclaw', '=', '1');
     rules.defineRule('weapons.Fangs', 'combatNotes.longtooth', '=', '1');
     // Extra +1 on claws + fangs damage accounts for +2 strength while shifting
