@@ -305,8 +305,10 @@ Eberron.FEATS_ADDED = {
   'Improved Damage Reduction':'Type=General Require="race == \'Warforged\'"',
   'Improved Fortification':
     'Type=General Require="baseAttack >= 6","race == \'Warforged\'"',
-  'Improved Natural Attack (Claws)':'Type=General Require="baseAttack >= 4"',
-  'Improved Natural Attack (Fangs)':'Type=General Require="baseAttack >= 4"',
+  'Improved Natural Attack (Claws)':
+    'Type=General Require="baseAttack >= 4","weapons.Claws"',
+  'Improved Natural Attack (Fangs)':
+    'Type=General Require="baseAttack >= 4","weapons.Fangs||weapons.Tusks"',
   'Investigate':'Type=General',
   'Knight Training':'Type=General Imply="levels.Paladin > 0"',
   'Least Dragonmark':
@@ -426,10 +428,14 @@ Eberron.FEATURES_ADDED = {
 
   // Domain
   'Add Life':'Section=magic Note="Touched d6+%V temporary HP for %1 hr"',
+  'All-Weather':
+    'Section=skill Note="+2 Survival (weather)/Survival is a class skill"',
   'Calming Influence':'Section=magic Note="<i>Calm Emotions</i> 1/dy"',
+  'Clarity Of True Madness':
+    'Section=feature Note="+%V Wis skill check or Will save 1/dy"',
   'Clear-Eyed':'Section=feature Note="Vision unobstructed by weather"',
   'Community Pillar':'Section=skill Note="+2 Diplomacy"',
-  'Craft Master':'Section=skill Note="+4 Craft"',
+  'Craft Master':'Section=skill Note="+4 all Craft"',
   'Empowered Creation':
     'Section=magic Note="+1 caster level for Item Creation spells"',
   'Empowered Necromancy':
@@ -437,19 +443,15 @@ Eberron.FEATURES_ADDED = {
   'Exorcise':
     'Section=combat Note="Turn Undead check to exorcise spirit"',
   'Fit Of Passion':
-    'Section=combat Note="+4 Str, +4 Con, +2 Will save, -2 AC for %V rd 1/dy"',
-  'Flash Of Understanding':
-    'Section=feature Note="+%V Wis skill check or Will save 1/dy"',
+    'Section=combat Note="+4 Str, +4 Con, +2 Will save, -2 AC for %V rd/dy"',
   'Focused Casting':
     'Section=magic Note="x1.5 chosen spell variable effects 1/dy"',
   'Iron Gut':'Section=save Note="Immune to ingested poison and disease"',
-  'Master Deathless':
-    'Section=combat Note="Use Turn Undead to command deathless 1/dy"',
   'Merchant':
     'Section=skill ' +
     'Note="+10 Profession (earn a living)/Appraise is a class skill"',
-  'Meteorologist':
-    'Section=skill Note="+2 Survival (weather)/Survival is a class skill"',
+  'Rebuke Deathless':
+    'Section=combat Note="Use Turn Undead to rebuke deathless 1/dy"',
   'Touch Of Decay':
     'Section=magic Note="Touched d4 Con (living) or 2d6+%V HP (undead) 1/dy"',
   'Turn It On':'Section=ability Note="+4 charisma for 1 min 1/dy"',
@@ -925,7 +927,7 @@ Eberron.PATHS_ADDED = {
     'Group=Cleric ' +
     'Level=levels.Cleric ' +
     'Features=' +
-      '"1:Master Deathless"',
+      '"1:Rebuke Deathless"',
   'Decay Domain':
     'Group=Cleric ' +
     'Level=levels.Cleric ' +
@@ -955,7 +957,7 @@ Eberron.PATHS_ADDED = {
     'Group=Cleric ' +
     'Level=levels.Cleric ' +
     'Features=' +
-      '"1:Flash Of Understanding",1:Weak-Willed',
+      '"1:Clarity Of True Madness",1:Weak-Willed',
   'Meditation Domain':
     'Group=Cleric ' +
     'Level=levels.Cleric ' +
@@ -980,7 +982,7 @@ Eberron.PATHS_ADDED = {
     'Group=Cleric ' +
     'Level=levels.Cleric ' +
     'Features=' +
-      '1:Clear-Eyed,1:Meteorologist'
+      '1:All-Weather,1:Clear-Eyed'
 };
 Eberron.PATHS = Object.assign({}, SRD35.PATHS, Eberron.PATHS_ADDED);
 Eberron.RACES_ADDED = {
@@ -1028,7 +1030,7 @@ Eberron.SPELLS_ADDED = {
     'Description="Touched construct DR ${lvl>10?30:lvl>6?20:10} from chosen energy for $L10 min"',
   'Control Deathless':
     'School=Necromancy ' +
-    'Level=Deathless8 ' +
+    'Level=Deathless7 ' +
     'Description="R$RS\' Command $L2 HD deathless in 30\' area for $L min"',
   'Create Deathless':
     'School=Necromancy ' +
@@ -1036,7 +1038,7 @@ Eberron.SPELLS_ADDED = {
     'Description="R$RS\' Create deathless soldier"',
   'Create Greater Deathless':
     'School=Necromancy ' +
-    'Level=Deathless7 ' +
+    'Level=Deathless8 ' +
     'Description="R$RS\' Create undying councilor"',
   'Detect Aberration':
     'School=Divination ' +
@@ -1044,7 +1046,7 @@ Eberron.SPELLS_ADDED = {
     'Description="R60\' cone info on aberrations for conc/$L min"',
   'Detoxify':
     'School=Conjuration ' +
-    'Level=Feast9 ' +
+    'Level=Feast8 ' +
     'Description="R30\' Neutralize venom for $L10 min"',
   'Dimension Leap':
     'School=Conjuration ' +
@@ -1580,6 +1582,7 @@ Eberron.PRESTIGE_CLASSES = {
       '"race =~ \'Dwarf|Elf|Gnome|Halfling|Half Orc|Human\'",' +
       '"countSkillsGe15 >= 2" ' +
     'HitDie=d6 Attack=3/4 SkillPoints=2 Fortitude=1/2 Reflex=1/2 Will=1/2 ' +
+    // Note: Heir Of Siberys grants no additional class skills
     'Features=' +
       '"1:Additional Action Points","2:Siberys Mark",' +
       '"casterLevel ? 2:Caster Level Bonus",' +
@@ -1869,7 +1872,8 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
       var level = matchInfo[2] * 1;
       var fullName = name + '(' + group + level + ' ' + schoolAbbr + ')';
       // TODO indicate domain spells in attributes?
-      var domainSpell = Eberron.PATHS[group + ' Domain'] != null;
+      var domainSpell =
+        Eberron.PATHS[group + ' Domain'] != null || group == 'Dragon';
       Eberron.spellRules
         (rules, fullName, school, group, level, description, domainSpell);
       rules.addChoice('spells', fullName, attrs);
@@ -2678,21 +2682,28 @@ Eberron.pathRules = function(
   if(name.match(/Domain$/))
     QuilvynRules.featureListRules
       (rules, ["deityDomains =~ '" + name.replace(' Domain', '') + "' ? 1:" + name], 'Cleric', 'levels.Cleric', true);
-}
+};
 
 /*
  * Defines in #rules# the rules associated with path #name# that cannot be
  * derived directly from the abilities passed to pathRules.
  */
 Eberron.pathRulesExtra = function(rules, name) {
-  if(name == 'Decay Domain') {
+  if(name == 'Artifice Domain') {
+    for(var s in rules.getChoices('skills')) {
+      if(s.startsWith('Craft '))
+        rules.defineRule
+          ('skillModifier.' + s, 'skillNotes.craftMaster', '+', '4');
+    }
+  } else if(name == 'Decay Domain') {
     rules.defineRule('magicNotes.touchOfDecay', 'levels.Cleric', '=', null);
   } else if(name == 'Life Domain') {
     rules.defineRule('magicNotes.addLife', 'levels.Cleric', '=', null);
     rules.defineRule('magicNotes.addLife.1', 'levels.Cleric', '=', null);
   } else if(name == 'Madness Domain') {
-    rules.defineRule
-      ('featureNotes.flashOfUnderstanding', 'levels.Cleric', '=', null);
+    rules.defineRule('featureNotes.clarityOfTrueMadness',
+      'levels.Cleric', '=', 'Math.floor(source / 2)'
+    );
   } else if(name == 'Passion Domain') {
     rules.defineRule('combatNotes.fitOfPassion', 'levels.Cleric', '=', null);
   } else if(Eberron.basePlugin.pathRulesExtra) {
@@ -2910,4 +2921,4 @@ Eberron.ruleNotes = function() {
     '<p>\n' +
     'There are no known bugs, limitations, or usage notes specific to the Eberron plugin\n' +
     '</p>\n';
-}
+};
