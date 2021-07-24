@@ -1579,7 +1579,7 @@ Eberron.PRESTIGE_CLASSES = {
       '"features.Least Dragonmark == 0",' +
       '"race =~ \'Dwarf|Elf|Gnome|Halfling|Half Orc|Human\'",' +
       '"countSkillsGe15 >= 2" ' +
-    'HitDie=d6 Attack=1 SkillPoints=2 Fortitude=1/2 Reflex=1/2 Will=1/2 ' +
+    'HitDie=d6 Attack=3/4 SkillPoints=2 Fortitude=1/2 Reflex=1/2 Will=1/2 ' +
     'Features=' +
       '"1:Additional Action Points","2:Siberys Mark",' +
       '"casterLevel ? 2:Caster Level Bonus",' +
