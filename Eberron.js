@@ -41,7 +41,7 @@ function Eberron(baseRules) {
   Eberron.basePlugin = Eberron.USE_PATHFINDER ? Pathfinder : SRD35;
 
   var rules = new QuilvynRules
-    ('Eberron' + (Eberron.USE_PATHFINDER ? ' - PF' : ''), Eberron.VERSION);
+    ('Eberron - ' + (Eberron.USE_PATHFINDER ? 'PF' : 'SRD'), Eberron.VERSION);
   Eberron.rules = rules;
 
   Eberron.CHOICES = Eberron.basePlugin.CHOICES.concat(Eberron.CHOICES_ADDED);
