@@ -40,8 +40,10 @@ function Eberron(baseRules) {
     baseRules != null && baseRules.includes('Pathfinder');
   Eberron.basePlugin = Eberron.USE_PATHFINDER ? Pathfinder : SRD35;
 
-  var rules = new QuilvynRules
-    ('Eberron - ' + (Eberron.USE_PATHFINDER ? 'PF' : 'SRD'), Eberron.VERSION);
+  var rules = new QuilvynRules(
+    'Eberron - ' + (Eberron.USE_PATHFINDER ? 'Pathfinder 1E' : 'D&D v3.5'),
+    Eberron.VERSION
+  );
   Eberron.rules = rules;
 
   Eberron.CHOICES = Eberron.basePlugin.CHOICES.concat(Eberron.CHOICES_ADDED);
@@ -90,11 +92,22 @@ function Eberron(baseRules) {
   Eberron.SCHOOLS = Object.assign({}, Eberron.basePlugin.SCHOOLS);
   Eberron.SHIELDS = Object.assign({}, Eberron.basePlugin.SHIELDS);
   Eberron.SKILLS = Object.assign({}, Eberron.basePlugin.SKILLS);
-  Eberron.SPELLS =
-    Object.assign({}, Eberron.basePlugin.SPELLS, Eberron.SPELLS_ADDED);
+  Eberron.SPELLS = Object.assign
+    ({}, Eberron.USE_PATHFINDER ? Pathfinder.SPELLS :
+         window.PHB35 != null ? PHB35.SPELLS : SRD35.SPELLS,
+     Eberron.SPELLS_ADDED);
   for(var s in Eberron.SPELLS_LEVELS) {
+    var levels = Eberron.SPELLS_LEVELS[s];
+    if(!(s in Eberron.SPELLS)) {
+      if(window.PHB35 && PHB35.SPELL_RENAMES && s in PHB35.SPELL_RENAMES) {
+        s = PHB35.SPELL_RENAMES[s];
+      } else {
+        console.log('Missing spell "' + s + '"');
+        continue;
+      }
+    }
     Eberron.SPELLS[s] =
-      Eberron.SPELLS[s].replace('Level=', 'Level=' + Eberron.SPELLS_LEVELS[s] + ',');
+      Eberron.SPELLS[s].replace('Level=', 'Level=' + levels + ',');
   }
   Eberron.WEAPONS =
     Object.assign({}, Eberron.basePlugin.WEAPONS, Eberron.WEAPONS_ADDED);
@@ -120,9 +133,9 @@ function Eberron(baseRules) {
 
 }
 
-Eberron.VERSION = '2.2.2.8';
+Eberron.VERSION = '2.2.2.10';
 
-// Eberron uses SRD35 as its default base ruleset. If USE_PATHFINDER is true,
+// Eberron uses PHB35 as its default base ruleset. If USE_PATHFINDER is true,
 // the Eberron function will instead use rules taken from the Pathfinder plugin.
 Eberron.USE_PATHFINDER = false;
 
@@ -1233,7 +1246,9 @@ Eberron.SPELLS_ADDED = {
     'Level=Gatekeeper2 ' +
     'Description="R$RS\' fey and plants in 20\' radius +1 attack, damage, save, abberations -1, for $L2 hr"'
 };
-Eberron.SPELLS = Object.assign({}, SRD35.SPELLS, Eberron.SPELLS_ADDED);
+Eberron.SPELLS = Object.assign(
+  {}, window.PHB35 != null ? PHB35.SPELLS : SRD35.SPELLS, Eberron.SPELLS_ADDED
+);
 Eberron.SPELLS_LEVELS = {
   'Alarm':'Kundarak1',
   'Align Weapon':'A2',
@@ -1248,18 +1263,18 @@ Eberron.SPELLS_LEVELS = {
   'Astral Projection':'Meditation9',
   'Awaken':'Vadalis4',
   'Banishment':'Exorcism6,Gatekeeper5,Warden7',
-  'Bear\'s Endurance':'A2',
+  "Bear's Endurance":'A2',
   'Bestow Curse':'Dragon3',
   'Blade Barrier':'A6',
   'Blasphemy':'Dragon7',
   'Bless':'Community1',
   'Blight':'Decay5',
-  'Bull\'s Strength':'A2',
+  "Bull's Strength":'A2',
   'Call Lightning':'Weather3',
   'Call Lightning Storm':'Weather5',
   'Calm Animals':'Vadalis1',
   'Calm Emotions':'Charm2',
-  'Cat\'s Grace':'A2',
+  "Cat's Grace":'A2',
   'Cause Fear':'Dragon1,Passion1',
   'Charm Animal':'Vadalis1',
   'Charm Monster':'Charm5,Greensinger4',
@@ -1302,7 +1317,7 @@ Eberron.SPELLS_LEVELS = {
   'Dominate Animal':'Vadalis2',
   'Dominate Monster':'Charm9,Passion9',
   'Doom':'Decay1',
-  'Eagle\'s Splendor':'A2',
+  "Eagle's Splendor":'A2',
   'Endure Elements':'Lyrandar1',
   'Energy Drain':'Decay9,Necromancer9',
   'Enervation':'Decay4,Necromancer4',
@@ -1315,7 +1330,7 @@ Eberron.SPELLS_LEVELS = {
   'Find The Path':'Meditation6,Tharashk3',
   'Fire Trap':'Kundarak1',
   'Fog Cloud':'Lyrandar1,Weather2',
-  'Fox\'s Cunning':'A2',
+  "Fox's Cunning":'A2',
   'Freedom':'Exorcism9',
   'Gate':'Dragon9',
   'Geas/Quest':'Charm6',
@@ -1339,7 +1354,7 @@ Eberron.SPELLS_LEVELS = {
   'Heal':'Jorasco3',
   'Heat Metal':'A2',
   'Helping Hand':'Tharashk2',
-  'Heroes\' Feast':'Community6,Feast6,Ghallanda3',
+  "Heroes' Feast":'Community6,Feast6,Ghallanda3',
   'Heroism':'Charm4',
   'Hide From Undead':'Life1',
   'Hideous Laughter':'Passion2',
@@ -1361,8 +1376,8 @@ Eberron.SPELLS_LEVELS = {
   'Locate Creature':'Tharashk2,Warden4',
   'Locate Object':'Meditation3,Tharashk1',
   'Mage Armor':'Deneith1',
-  'Mage\'s Faithful Hound':'Kundarak3',
-  'Mage\'s Magnificent Mansion':'Feast7,Ghallanda3',
+  "Mage's Faithful Hound":'Kundarak3',
+  "Mage's Magnificent Mansion":'Feast7,Ghallanda3',
   'Magic Circle Against Evil':'Exorcism2',
   'Magic Stone':'A1',
   'Magic Vestment':'A1',
@@ -1386,7 +1401,7 @@ Eberron.SPELLS_LEVELS = {
   'Nondetection':'Kundarak2',
   'Obscuring Mist':'Shadow1,Weather1',
   'Overland Flight':'Orien3',
-  'Owl\'s Wisdom':'A2,Meditation2',
+  "Owl's Wisdom":'A2,Meditation2',
   'Phantasmal Killer':'Madness6',
   'Phantom Steed':'Orien2',
   'Planar Ally':'Dragon6',
@@ -1412,8 +1427,8 @@ Eberron.SPELLS_LEVELS = {
   'Rusting Grasp':'A4',
   'Screen':'Warden8',
   'Scrying':'Phiarlan2,Thuranni2',
-  'Secret Chest':'Commerce6',
   'Secret Page':'Sivis2',
+  'Secret Chest':'Commerce6',
   'Secure Shelter':'Feast5,Ghallanda2',
   'See Invisibility':'Medani2',
   'Sending':'Sivis3',
@@ -1433,8 +1448,8 @@ Eberron.SPELLS_LEVELS = {
   'Stone Shape':'Artifice3',
   'Storm Of Vengeance':'Lyrandar4,Weather9',
   'Suggestion':'Charm3',
-  'Summon Nature\'s Ally V':'Vadalis3',
-  'Summon Nature\'s Ally VI':'Vadalis4',
+  "Summon Nature's Ally V":'Vadalis3',
+  "Summon Nature's Ally VI":'Vadalis4',
   'Symbol Of Death':'Sivis4',
   'Sympathy':'Community8',
   'Telepathic Bond':'Community5',
@@ -1454,6 +1469,19 @@ Eberron.SPELLS_LEVELS = {
   'Wood Shape':'Artifice2',
   'Zone Of Truth':'Commerce2'
 };
+for(var s in Eberron.SPELLS_LEVELS) {
+  var levels = Eberron.SPELLS_LEVELS[s];
+  if(!(s in Eberron.SPELLS)) {
+    if(window.PHB35 && PHB35.SPELL_RENAMES && s in PHB35.SPELL_RENAMES) {
+      s = PHB35.SPELL_RENAMES[s];
+    } else {
+      console.log('Missing spell "' + s + '"');
+      continue;
+    }
+  }
+  Eberron.SPELLS[s] =
+    Eberron.SPELLS[s].replace('Level=', 'Level=' + levels + ',');
+}
 Eberron.WEAPONS_ADDED = {
   'Talenta Boomerang':'Level=3 Category=R Damage=d4 Range=30',
   'Talenta Sharrash':'Level=3 Category=2h Damage=d10 Crit=4 Threat=19',
