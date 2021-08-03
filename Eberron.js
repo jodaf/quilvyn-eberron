@@ -38,15 +38,15 @@ function Eberron(baseRules) {
   Eberron.USE_PATHFINDER =
     window.Pathfinder != null && Pathfinder.SRD35_SKILL_MAP &&
     baseRules != null && baseRules.includes('Pathfinder');
-  Eberron.basePlugin = Eberron.USE_PATHFINDER ? Pathfinder : SRD35;
 
   var rules = new QuilvynRules(
     'Eberron - ' + (Eberron.USE_PATHFINDER ? 'Pathfinder 1E' : 'D&D v3.5'),
     Eberron.VERSION
   );
+  rules.basePlugin = Eberron.USE_PATHFINDER ? Pathfinder : SRD35;
   Eberron.rules = rules;
 
-  Eberron.CHOICES = Eberron.basePlugin.CHOICES.concat(Eberron.CHOICES_ADDED);
+  Eberron.CHOICES = rules.basePlugin.CHOICES.concat(Eberron.CHOICES_ADDED);
   rules.defineChoice('choices', Eberron.CHOICES);
   rules.choiceEditorElements = Eberron.choiceEditorElements;
   rules.choiceRules = Eberron.choiceRules;
@@ -56,12 +56,12 @@ function Eberron(baseRules) {
   rules.makeValid = SRD35.makeValid;
   rules.randomizeOneAttribute = Eberron.randomizeOneAttribute;
   Eberron.RANDOMIZABLE_ATTRIBUTES =
-    Eberron.basePlugin.RANDOMIZABLE_ATTRIBUTES.concat
+    rules.basePlugin.RANDOMIZABLE_ATTRIBUTES.concat
     (Eberron.RANDOMIZABLE_ATTRIBUTES_ADDED);
   rules.defineChoice('random', Eberron.RANDOMIZABLE_ATTRIBUTES);
   rules.ruleNotes = Eberron.ruleNotes;
 
-  if(Eberron.basePlugin == window.Pathfinder) {
+  if(rules.basePlugin == window.Pathfinder) {
     SRD35.ABBREVIATIONS['CMB'] = 'Combat Maneuver Bonus';
     SRD35.ABBREVIATIONS['CMD'] = 'Combat Maneuver Defense';
   }
@@ -72,26 +72,26 @@ function Eberron(baseRules) {
     'race:Race,select-one,races', 'levels:Class Levels,bag,levels',
     'prestige:Prestige Levels,bag,prestiges', 'npc:NPC Levels,bag,npcs');
 
-  Eberron.ALIGNMENTS = Object.assign({}, Eberron.basePlugin.ALIGNMENTS);
+  Eberron.ALIGNMENTS = Object.assign({}, rules.basePlugin.ALIGNMENTS);
   Eberron.ANIMAL_COMPANIONS =
-    Object.assign( {}, Eberron.basePlugin.ANIMAL_COMPANIONS);
+    Object.assign( {}, rules.basePlugin.ANIMAL_COMPANIONS);
   Eberron.ARMORS =
-    Object.assign({}, Eberron.basePlugin.ARMORS, Eberron.ARMORS_ADDED);
-  Eberron.FAMILIARS = Object.assign({}, Eberron.basePlugin.FAMILIARS);
+    Object.assign({}, rules.basePlugin.ARMORS, Eberron.ARMORS_ADDED);
+  Eberron.FAMILIARS = Object.assign({}, rules.basePlugin.FAMILIARS);
   Eberron.FEATS =
-    Object.assign({}, Eberron.basePlugin.FEATS, Eberron.FEATS_ADDED);
+    Object.assign({}, rules.basePlugin.FEATS, Eberron.FEATS_ADDED);
   Eberron.FEATURES =
-    Object.assign({}, Eberron.basePlugin.FEATURES, Eberron.FEATURES_ADDED);
-  Eberron.GOODIES = Object.assign({}, Eberron.basePlugin.GOODIES);
+    Object.assign({}, rules.basePlugin.FEATURES, Eberron.FEATURES_ADDED);
+  Eberron.GOODIES = Object.assign({}, rules.basePlugin.GOODIES);
   Eberron.LANGUAGES =
-    Object.assign({}, Eberron.basePlugin.LANGUAGES, Eberron.LANGUAGES_ADDED);
+    Object.assign({}, rules.basePlugin.LANGUAGES, Eberron.LANGUAGES_ADDED);
   Eberron.PATHS =
-    Object.assign({}, Eberron.basePlugin.PATHS, Eberron.PATHS_ADDED);
+    Object.assign({}, rules.basePlugin.PATHS, Eberron.PATHS_ADDED);
   Eberron.RACES =
-    Object.assign({}, Eberron.basePlugin.RACES, Eberron.RACES_ADDED);
-  Eberron.SCHOOLS = Object.assign({}, Eberron.basePlugin.SCHOOLS);
-  Eberron.SHIELDS = Object.assign({}, Eberron.basePlugin.SHIELDS);
-  Eberron.SKILLS = Object.assign({}, Eberron.basePlugin.SKILLS);
+    Object.assign({}, rules.basePlugin.RACES, Eberron.RACES_ADDED);
+  Eberron.SCHOOLS = Object.assign({}, rules.basePlugin.SCHOOLS);
+  Eberron.SHIELDS = Object.assign({}, rules.basePlugin.SHIELDS);
+  Eberron.SKILLS = Object.assign({}, rules.basePlugin.SKILLS);
   Eberron.SPELLS = Object.assign
     ({}, Eberron.USE_PATHFINDER ? Pathfinder.SPELLS :
          window.PHB35 != null ? PHB35.SPELLS : SRD35.SPELLS,
@@ -110,10 +110,10 @@ function Eberron(baseRules) {
       Eberron.SPELLS[s].replace('Level=', 'Level=' + levels + ',');
   }
   Eberron.WEAPONS =
-    Object.assign({}, Eberron.basePlugin.WEAPONS, Eberron.WEAPONS_ADDED);
+    Object.assign({}, rules.basePlugin.WEAPONS, Eberron.WEAPONS_ADDED);
   Eberron.CLASSES =
-    Object.assign({}, Eberron.basePlugin.CLASSES, Eberron.CLASSES_ADDED);
-  Eberron.NPC_CLASSES = Object.assign({}, Eberron.basePlugin.NPC_CLASSES);
+    Object.assign({}, rules.basePlugin.CLASSES, Eberron.CLASSES_ADDED);
+  Eberron.NPC_CLASSES = Object.assign({}, rules.basePlugin.NPC_CLASSES);
 
   Eberron.abilityRules(rules);
   Eberron.aideRules(rules, Eberron.ANIMAL_COMPANIONS, Eberron.FAMILIARS);
@@ -133,7 +133,7 @@ function Eberron(baseRules) {
 
 }
 
-Eberron.VERSION = '2.2.2.10';
+Eberron.VERSION = '2.2.2.11';
 
 // Eberron uses PHB35 as its default base ruleset. If USE_PATHFINDER is true,
 // the Eberron function will instead use rules taken from the Pathfinder plugin.
@@ -1669,19 +1669,19 @@ Eberron.NPC_CLASSES = Object.assign({}, SRD35.NPC_CLASSES);
 
 /* Defines the rules related to character abilities. */
 Eberron.abilityRules = function(rules) {
-  Eberron.basePlugin.abilityRules(rules);
+  rules.basePlugin.abilityRules(rules);
   // No changes needed to the rules defined by base method
 };
 
 /* Defines rules related to animal companions and familiars. */
 Eberron.aideRules = function(rules, companions, familiars) {
-  Eberron.basePlugin.aideRules(rules, companions, familiars);
+  rules.basePlugin.aideRules(rules, companions, familiars);
   // No changes needed to the rules defined by base method
 };
 
 /* Defines rules related to combat. */
 Eberron.combatRules = function(rules, armors, shields, weapons) {
-  Eberron.basePlugin.combatRules(rules, armors, shields, weapons);
+  rules.basePlugin.combatRules(rules, armors, shields, weapons);
   // No changes needed to the rules defined by base method
 };
 
@@ -1694,7 +1694,7 @@ Eberron.identityRules = function(
   QuilvynUtils.checkAttrTable
     (houses, ['Dragonmark', 'Race', 'Features', 'Spells']);
 
-  if(Eberron.basePlugin == window.Pathfinder)
+  if(rules.basePlugin == window.Pathfinder)
     Pathfinder.identityRules(
       rules, alignments, classes, deities, {}, paths, races, Pathfinder.TRACKS,
       Pathfinder.TRAITS, Eberron.PRESTIGE_CLASSES, Eberron.NPC_CLASSES
@@ -1724,7 +1724,7 @@ Eberron.identityRules = function(
 
 /* Defines rules related to magic use. */
 Eberron.magicRules = function(rules, schools, spells) {
-  Eberron.basePlugin.magicRules(rules, schools, spells);
+  rules.basePlugin.magicRules(rules, schools, spells);
   // No changes needed to the rules defined by base method
 };
 
@@ -1732,7 +1732,7 @@ Eberron.magicRules = function(rules, schools, spells) {
 Eberron.talentRules = function(
   rules, feats, features, goodies, languages, skills
 ) {
-  Eberron.basePlugin.talentRules
+  rules.basePlugin.talentRules
     (rules, feats, features, goodies, languages, skills);
   // No changes needed to the rules defined by base method
   for(var skill in skills) {
@@ -1866,8 +1866,8 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
     Eberron.schoolRules(rules, name,
       QuilvynUtils.getAttrValueArray(attrs, 'Features')
     );
-    if(Eberron.basePlugin.schoolRulesExtra)
-      Eberron.basePlugin.schoolRulesExtra(rules, name);
+    if(rules.basePlugin.schoolRulesExtra)
+      rules.basePlugin.schoolRulesExtra(rules, name);
   } else if(type == 'Shield')
     Eberron.shieldRules(rules, name,
       QuilvynUtils.getAttrValue(attrs, 'AC'),
@@ -1883,8 +1883,8 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
       QuilvynUtils.getAttrValueArray(attrs, 'Class'),
       QuilvynUtils.getAttrValueArray(attrs, 'Synergy')
     );
-    if(Eberron.basePlugin.skillRulesExtra)
-      Eberron.basePlugin.skillRulesExtra(rules, name);
+    if(rules.basePlugin.skillRulesExtra)
+      rules.basePlugin.skillRulesExtra(rules, name);
   } else if(type == 'Spell') {
     var description = QuilvynUtils.getAttrValue(attrs, 'Description');
     var groupLevels = QuilvynUtils.getAttrValueArray(attrs, 'Level');
@@ -1940,7 +1940,7 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
 
 /* Defines in #rules# the rules associated with alignment #name#. */
 Eberron.alignmentRules = function(rules, name) {
-  Eberron.basePlugin.alignmentRules(rules, name);
+  rules.basePlugin.alignmentRules(rules, name);
   // No changes needed to the rules defined by base method
 };
 
@@ -1954,7 +1954,7 @@ Eberron.alignmentRules = function(rules, name) {
 Eberron.armorRules = function(
   rules, name, ac, weight, maxDex, skillPenalty, spellFail
 ) {
-  Eberron.basePlugin.armorRules
+  rules.basePlugin.armorRules
     (rules, name, ac, weight, maxDex, skillPenalty, spellFail);
   // No changes needed to the rules defined by base method
 };
@@ -1982,7 +1982,7 @@ Eberron.classRules = function(
   saveWill, skills, features, selectables, languages, casterLevelArcane,
   casterLevelDivine, spellAbility, spellSlots
 ) {
-  if(Eberron.basePlugin == window.Pathfinder) {
+  if(rules.basePlugin == window.Pathfinder) {
     for(var i = 0; i < requires.length; i++) {
       for(var skill in Pathfinder.SRD35_SKILL_MAP) {
         requires[i] =
@@ -1999,7 +1999,7 @@ Eberron.classRules = function(
         skills[i] = Pathfinder.SRD35_SKILL_MAP[skill];
     }
   }
-  Eberron.basePlugin.classRules(
+  rules.basePlugin.classRules(
     rules, name, requires, hitDie, attack, skillPoints, saveFort, saveRef,
     saveWill, skills, features, selectables, languages, casterLevelArcane,
     casterLevelDivine, spellAbility, spellSlots
@@ -2300,9 +2300,9 @@ Eberron.classRulesExtra = function(rules, name) {
       'combatNotes.wolverine', '=', '1'
     );
 
-  } else if(Eberron.basePlugin.classRulesExtra) {
+  } else if(rules.basePlugin.classRulesExtra) {
 
-    Eberron.basePlugin.classRulesExtra(rules, name);
+    rules.basePlugin.classRulesExtra(rules, name);
 
   }
 
@@ -2319,7 +2319,7 @@ Eberron.companionRules = function(
   rules, name, str, dex, con, intel, wis, cha, hd, ac, attack, damage, size,
   level
 ) {
-  Eberron.basePlugin.companionRules(
+  rules.basePlugin.companionRules(
     rules, name, str, dex, con, intel, wis, cha, hd, ac, attack, damage, size,
     level
   );
@@ -2332,7 +2332,7 @@ Eberron.companionRules = function(
  * domains and favored weapons.
  */
 Eberron.deityRules = function(rules, name, alignment, domains, weapons) {
-  Eberron.basePlugin.deityRules(rules, name, alignment, domains, weapons);
+  rules.basePlugin.deityRules(rules, name, alignment, domains, weapons);
   // No changes needed to the rules defined by base method
 };
 
@@ -2347,7 +2347,7 @@ Eberron.familiarRules = function(
   rules, name, str, dex, con, intel, wis, cha, hd, ac, attack, damage, size,
   level
 ) {
-  Eberron.basePlugin.familiarRules(
+  rules.basePlugin.familiarRules(
     rules, name, str, dex, con, intel, wis, cha, hd, ac, attack, damage, size,
     level
   );
@@ -2360,7 +2360,7 @@ Eberron.familiarRules = function(
  * lists the categories of the feat.
  */
 Eberron.featRules = function(rules, name, requires, implies, types) {
-  Eberron.basePlugin.featRules(rules, name, requires, implies, types);
+  rules.basePlugin.featRules(rules, name, requires, implies, types);
   // No changes needed to the rules defined by base method
 };
 
@@ -2524,8 +2524,8 @@ Eberron.featRulesExtra = function(rules, name) {
       'features.Warden Initiate', '?', null,
       'spellDifficultyClass.D', '=', null
     );
-  } else if (Eberron.basePlugin.featRulesExtra) {
-    Eberron.basePlugin.featRulesExtra(rules, name);
+  } else if (rules.basePlugin.featRulesExtra) {
+    rules.basePlugin.featRulesExtra(rules, name);
   }
 
 };
@@ -2536,7 +2536,7 @@ Eberron.featRulesExtra = function(rules, name) {
  * the two must have the same number of elements.
  */
 Eberron.featureRules = function(rules, name, sections, notes) {
-  if(Eberron.basePlugin == window.Pathfinder) {
+  if(rules.basePlugin == window.Pathfinder) {
     for(var i = 0; i < sections.length; i++) {
       if(sections[i] != 'skill')
         continue;
@@ -2554,7 +2554,7 @@ Eberron.featureRules = function(rules, name, sections, notes) {
       notes[i] = note;
     }
   }
-  Eberron.basePlugin.featureRules(rules, name, sections, notes);
+  rules.basePlugin.featureRules(rules, name, sections, notes);
   // No changes needed to the rules defined by base method
 };
 
@@ -2673,14 +2673,14 @@ Eberron.houseRules = function(rules, name, dragonmark, races, features) {
 Eberron.goodyRules = function(
   rules, name, pattern, effect, value, attributes, sections, notes
 ) {
-  Eberron.basePlugin.goodyRules
+  rules.basePlugin.goodyRules
     (rules, name, pattern, effect, value, attributes, sections, notes);
   // No changes needed to the rules defined by base method
 };
 
 /* Defines in #rules# the rules associated with language #name#. */
 Eberron.languageRules = function(rules, name) {
-  Eberron.basePlugin.languageRules(rules, name);
+  rules.basePlugin.languageRules(rules, name);
   // No changes needed to the rules defined by base method
 };
 
@@ -2696,13 +2696,13 @@ Eberron.pathRules = function(
   rules, name, group, levelAttr, features, selectables, spellAbility,
   spellSlots
 ) {
-  if(Eberron.basePlugin == window.Pathfinder)
-    Eberron.basePlugin.pathRules(
+  if(rules.basePlugin == window.Pathfinder)
+    rules.basePlugin.pathRules(
       rules, name, group, levelAttr, features, selectables, [], [],
       spellAbility, spellSlots
     );
   else
-    Eberron.basePlugin.pathRules(
+    rules.basePlugin.pathRules(
       rules, name, group, levelAttr, features, selectables, spellAbility,
       spellSlots
     );
@@ -2734,8 +2734,8 @@ Eberron.pathRulesExtra = function(rules, name) {
     );
   } else if(name == 'Passion Domain') {
     rules.defineRule('combatNotes.fitOfPassion', 'levels.Cleric', '=', null);
-  } else if(Eberron.basePlugin.pathRulesExtra) {
-    Eberron.basePlugin.pathRulesExtra(rules, name);
+  } else if(rules.basePlugin.pathRulesExtra) {
+    rules.basePlugin.pathRulesExtra(rules, name);
   }
 };
 
@@ -2751,7 +2751,7 @@ Eberron.raceRules = function(
   rules, name, requires, features, selectables, languages, spellAbility,
   spellSlots
 ) {
-  Eberron.basePlugin.raceRules
+  rules.basePlugin.raceRules
     (rules, name, requires, features, selectables, languages, spellAbility,
      spellSlots);
   // No changes needed to the rules defined by base method
@@ -2817,8 +2817,8 @@ Eberron.raceRulesExtra = function(rules, name) {
     rules.defineRule('languageCount', 'negateLanguageBonus', '+', null);
     Eberron.weaponRules(rules, 'Slam', 0, 'Un', 'd4', 20, 2, null);
     rules.defineRule('weapons.Slam', 'combatNotes.slamWeapon', '=', '1');
-  } else if(Eberron.basePlugin.raceRulesExtra) {
-    Eberron.basePlugin.raceRulesExtra(rules, name);
+  } else if(rules.basePlugin.raceRulesExtra) {
+    rules.basePlugin.raceRulesExtra(rules, name);
   }
 
 };
@@ -2828,7 +2828,7 @@ Eberron.raceRulesExtra = function(rules, name) {
  * grants the list of #features#.
  */
 Eberron.schoolRules = function(rules, name, features) {
-  Eberron.basePlugin.schoolRules(rules, name, features);
+  rules.basePlugin.schoolRules(rules, name, features);
   // No changes needed to the rules defined by base method
 };
 
@@ -2841,7 +2841,7 @@ Eberron.schoolRules = function(rules, name, features) {
 Eberron.shieldRules = function(
   rules, name, ac, profLevel, skillFail, spellFail
 ) {
-  Eberron.basePlugin.shieldRules
+  rules.basePlugin.shieldRules
     (rules, name, ac, profLevel, skillFail, spellFail);
   // No changes needed to the rules defined by base method
 };
@@ -2858,7 +2858,7 @@ Eberron.shieldRules = function(
 Eberron.skillRules = function(
   rules, name, ability, untrained, classes, synergies
 ) {
-  Eberron.basePlugin.skillRules
+  rules.basePlugin.skillRules
     (rules, name, ability, untrained, classes, synergies);
   // No changes needed to the rules defined by base method
 };
@@ -2872,7 +2872,7 @@ Eberron.skillRules = function(
 Eberron.spellRules = function(
   rules, name, school, casterGroup, level, description, domainSpell
 ) {
-  Eberron.basePlugin.spellRules
+  rules.basePlugin.spellRules
     (rules, name, school, casterGroup, level, description, domainSpell);
   // No changes needed to the rules defined by base method
 };
@@ -2889,7 +2889,7 @@ Eberron.spellRules = function(
 Eberron.weaponRules = function(
   rules, name, profLevel, category, damage, threat, critMultiplier, range
 ) {
-  Eberron.basePlugin.weaponRules(
+  rules.basePlugin.weaponRules(
     rules, name, profLevel, category, damage, threat, critMultiplier, range
   );
   // No changes needed to the rules defined by base method
@@ -2908,13 +2908,13 @@ Eberron.choiceEditorElements = function(rules, type) {
       ['Spells', 'Spells', 'text', [80]]
     );
   else
-    result = Eberron.basePlugin.choiceEditorElements(rules, type);
+    result = rules.basePlugin.choiceEditorElements(rules, type);
   return result
 };
 
 /* Returns an ObjectViewer loaded with the default character sheet format. */
 Eberron.createViewers = function(rules, viewers) {
-  Eberron.basePlugin.createViewers(rules, viewers);
+  rules.basePlugin.createViewers(rules, viewers);
   // No changes needed to the return value of the base method
 };
 
@@ -2930,14 +2930,13 @@ Eberron.randomizeOneAttribute = function(attributes, attribute) {
     }
     attributes.house = choices[QuilvynUtils.random(0, choices.length - 1)];
   } else {
-    Eberron.basePlugin.randomizeOneAttribute.apply
-      (this, [attributes, attribute]);
+    this.basePlugin.randomizeOneAttribute.apply(this, [attributes, attribute]);
   }
 };
 
 /* Returns an array of plugins upon which this one depends. */
 Eberron.getPlugins = function() {
-  return [Eberron.basePlugin].concat(Eberron.basePlugin.getPlugins());
+  return [this.basePlugin].concat(this.basePlugin.getPlugins());
 };
 
 /* Returns HTML body content for user notes associated with this rule set. */
