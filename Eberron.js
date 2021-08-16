@@ -2944,7 +2944,20 @@ Eberron.ruleNotes = function() {
   return '' +
     '<h2>Eberron Quilvyn Plugin Notes</h2>\n' +
     'Eberron Quilvyn Plugin Version ' + Eberron.VERSION + '\n' +
-    '\n' +
+    '<p>\n' +
+    'Quilvyn\'s Eberron rule set is unofficial Fan Content permitted under ' +
+    'Wizards of the Coast\'s ' +
+    '<a href="https://company.wizards.com/en/legal/fancontentpolicy">Fan Content Policy</a>.\n' +
+    '</p><p>\n' +
+    'Quilvyn is not approved or endorsed by Wizards of the Coast. Portions ' +
+    'of the materials used are property of Wizards of the Coast. ©Wizards of ' +
+    'the Coast LLC.\n' +
+    '</p><p>\n' +
+    'Dungeons & Dragons Eberron Campaign Setting © 2004 Wizards of ' +
+    'the Coast, Inc.\n' +
+    '</p><p>\n' +
+    'Dungeons & Dragons Player\'s Handbook v3.5 © 2003 Wizards of the Coast, ' +
+    'Inc.\n' +
     '<p>\n' +
     'There are no known bugs, limitations, or usage notes specific to the Eberron plugin\n' +
     '</p>\n';

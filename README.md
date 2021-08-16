@@ -11,11 +11,23 @@ quilvyn-core package.
 
 ### Installation
 
-To use quilvyn-eberron, unbundle the release package into a plugins/
-subdirectory within the Quilvyn installation directory, then add or uncomment
-the 'plugins/Eberron.js' entry in the PLUGINS definition in quilvyn.html.
+To use quilvyn-eberron, unbundle the release package into the plugins/
+subdirectory within the Quilvyn installation directory, then append the
+following lines to the file plugins/plugins.js:
+
+    RULESETS['Eberron Campaign Setting using D&D v3.5 rules'] = {
+      url:'plugins/Eberron.js',
+      group:'v3.5',
+      require:'D&D v3.5'
+    };
 
 ### Usage
 
 Once the Eberron plugin is installed as described above, start Quilvyn and
-choose Eberron from the Rules menu in the editor window.
+choose 'D&D v3.5' from the rule sets menu in the initial window.
+
+### Usage
+
+Once the quilvyn-phb35 package is installed as described above, start Quilvyn
+and choose 'Eberron Campaign Setting using D&D v3.5 rules' from the rule sets
+menu in the initial window.
