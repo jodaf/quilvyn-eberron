@@ -24,5 +24,4 @@ following lines to the file plugins/plugins.js:
 ### Usage
 
 Once the quilvyn-eberron package is installed as described above, start Quilvyn
-and choose 'Eberron Campaign Setting using D&D v3.5 rules' from the rule sets
-menu in the initial window.
+and choose 'Eberron - D&D v3.5' from the rule sets menu in the initial window.
