@@ -6,8 +6,8 @@ the Eberron campaign setting, applying the rules of the
 
 ### Requirements
 
-quilvyn-eberron relies on the core and srd35 modules installed by the
-quilvyn-core package.
+quilvyn-eberron relies on PHB module installed by the quilvyn-phb35 package
+and the core and srd35 modules installed by the quilvyn-core package.
 
 ### Installation
 
