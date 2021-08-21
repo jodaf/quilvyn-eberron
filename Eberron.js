@@ -1475,7 +1475,9 @@ for(var s in Eberron.SPELLS_LEVELS) {
     if(window.PHB35 && PHB35.SPELL_RENAMES && s in PHB35.SPELL_RENAMES) {
       s = PHB35.SPELL_RENAMES[s];
     } else {
-      console.log('Missing spell "' + s + '"');
+      // We might be loading before PHB35 has completed. There will be another
+      // chance to pick this up during Eberron() initialization.
+      // console.log('Missing spell "' + s + '"');
       continue;
     }
   }
