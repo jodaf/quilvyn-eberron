@@ -505,16 +505,16 @@ Eberron.FEATURES_ADDED = {
     'Section=combat Note="Flurry Of Blows w/two-bladed sword"',
   'Dragon Rage':
     'Section=combat Note="+2 AC, +10 Dragon Totem resistance during Rage"',
-  'Dragon Totem (Black)':'Section=save Note="Resistance 5 vs. acid"',
-  'Dragon Totem (Blue)':'Section=save Note="Resistance 5 vs. electricity"',
-  'Dragon Totem (Brass)':'Section=save Note="Resistance 5 vs. fire"',
-  'Dragon Totem (Bronze)':'Section=save Note="Resistance 5 vs. electricity"',
-  'Dragon Totem (Copper)':'Section=save Note="Resistance 5 vs. acid"',
-  'Dragon Totem (Gold)':'Section=save Note="Resistance 5 vs. fire"',
-  'Dragon Totem (Green)':'Section=save Note="Resistance 5 vs. acid"',
-  'Dragon Totem (Red)':'Section=save Note="Resistance 5 vs. fire"',
-  'Dragon Totem (Silver)':'Section=save Note="Resistance 5 vs. cold"',
-  'Dragon Totem (White)':'Section=save Note="Resistance 5 vs. cold"',
+  'Dragon Totem (Black)':'Section=save Note="Resistance to acid 5"',
+  'Dragon Totem (Blue)':'Section=save Note="Resistance to electricity 5"',
+  'Dragon Totem (Brass)':'Section=save Note="Resistance to fire 5"',
+  'Dragon Totem (Bronze)':'Section=save Note="Resistance to electricity 5"',
+  'Dragon Totem (Copper)':'Section=save Note="Resistance to acid 5"',
+  'Dragon Totem (Gold)':'Section=save Note="Resistance to fire 5"',
+  'Dragon Totem (Green)':'Section=save Note="Resistance to acid 5"',
+  'Dragon Totem (Red)':'Section=save Note="Resistance to fire 5"',
+  'Dragon Totem (Silver)':'Section=save Note="Resistance to cold 5"',
+  'Dragon Totem (White)':'Section=save Note="Resistance to cold 5"',
   'Ecclesiarch':
     'Section=feature,skill ' +
     'Note="+2 Leadership",' +
@@ -550,7 +550,7 @@ Eberron.FEATURES_ADDED = {
   'Greater Powerful Charge':
     'Section=combat ' +
     'Note="Raise Powerful Charge damage one size category to %V"',
-  'Greater Shifter Defense':'Section=combat Note="+2 Shifter Defense DR"',
+  'Greater Shifter Defense':'Section=combat Note="+2 DR/silver"',
   'Greensinger Initiate':
     'Section=magic,skill ' +
     'Note="Access to additional spells",' +
@@ -614,7 +614,7 @@ Eberron.FEATURES_ADDED = {
     'Section=feature Note="Seek advice from deathless ancestor"',
   'Scribe':'Section=skill Note="+2 Decipher Script"',
   'Shadower':'Section=skill Note="+2 Gather Information"',
-  'Shifter Defense':'Section=combat Note="DR %V/silver"',
+  'Shifter Defense':'Section=combat Note="DR 2/silver"',
   'Shifter Ferocity':
     'Section=combat Note="Continue fighting below 0 HP while shifting"',
   'Sentinel':'Section=skill Note="+2 Sense Motive"',
@@ -748,7 +748,6 @@ Eberron.FEATURES_ADDED = {
   'Construct Perfection IV':
     'Section=save Note="Immune to ability damage and drain"',
   'Contact':'Section=feature Note="Level 3%1 associate or informant"',
-  'Damage Reduction (Iron)':'Section=combat Note="DR 3/cold iron"',
   'Detect Thoughts':'Section=magic Note="<i>Detect Thoughts</i> at will"',
   'Discern Lies':
     'Section=magic ' +
@@ -766,6 +765,7 @@ Eberron.FEATURES_ADDED = {
   'Frightful Shifting':
     'Section=combat ' +
     'Note="R30\' Foes w/fewer than %V hit dice shaken for 5d6 rounds (DC %1 Will neg)"',
+  'Greensinger Damage Reduction':'Section=combat Note="DR 3/cold iron"',
   'Hated Foe':
     'Section=combat Note="Spend 1 AP for dbl damage against favored enemy"',
   'Healing Immunity':'Section=save Note="No effect from healing spells"',
@@ -800,7 +800,7 @@ Eberron.FEATURES_ADDED = {
   'Siberys Mark':
     'Section=magic Note="Choice of house dragonmark spell 1/dy"',
   'Silver Exorcism':'Section=combat Note="+2 exorcism checks"',
-  'Spell Resistance':'Section=save Note="DC 20 spell resistance"',
+  'Spell Resistance':'Section=save Note="Spell resistance 20"',
   'Superior Bull Rush':'Section=combat Note="+%V+%1 damage from bull rush"',
   'Tiger':
     'Section=ability,combat ' +
@@ -817,7 +817,7 @@ Eberron.FEATURES_ADDED = {
     'Note=' +
       '"Warding glow for +2 AC, struck evil foe  blinded (DC %V Fort neg)",' +
       '"60\' light",' +
-      '"Resistance 25 to evil spells and evil casters"',
+      '"Spell resistance 25 to evil spells and evil casters"',
   'Weapon Of Flame':
     'Section=combat Note="+%Vd6 flame damage w/exorcist weapon"',
   'Weapon Of Good':
@@ -1040,7 +1040,7 @@ Eberron.SPELLS_ADDED = {
   'Construct Energy Ward':
     'School=Abjuration ' +
     'Level=A3 ' +
-    'Description="Touched construct DR ${lvl>10?30:lvl>6?20:10} from chosen energy for $L10 min"',
+    'Description="Touched resistance ${lvl>10?30:lvl>6?20:10} to chosen energy for $L10 min"',
   'Control Deathless':
     'School=Necromancy ' +
     'Level=Deathless7 ' +
@@ -1567,7 +1567,7 @@ Eberron.PRESTIGE_CLASSES = {
       '"features.Ashbound ? 5:Spell Resistance",' +
       '"features.Children Of Winter ? 5:Touch Of Contagion",' +
       '"features.Gatekeepers ? 5:Slippery Mind",' +
-      '"features.Greensingers ? 5:Damage Reduction (Iron)",' +
+      '"features.Greensingers ? 5:Greensinger Damage Reduction",' +
       '"features.Wardens Of The Wood ? 5:Smite Evil" ' +
     'Selectables=' +
       '1:Ashbound,' +
@@ -2070,6 +2070,9 @@ Eberron.classRulesExtra = function(rules, name) {
       'features.Smite Evil', '?', null,
       'levels.Eldeen Ranger', '+=', null
     );
+    rules.defineRule('damageReduction.Cold Iron',
+      'combatNotes.greensingerDamageReduction', '^=', '3'
+    );
     rules.defineRule
       ('featCount.Fighter', 'featureNotes.improvedCritical', '+=', '1');
     rules.defineRule('saveNotes.unearthlyGrace', 'charismaModifier', '=', null);
@@ -2079,6 +2082,8 @@ Eberron.classRulesExtra = function(rules, name) {
     rules.defineRule('skillNotes.favoredEnemy',
       'levels.' + name, '+=', 'source >= 4 ? 1 : null'
     );
+    rules.defineRule
+      ('spellResistance', 'saveNotes.spellResistance', '^=', '20');
 
   } else if(name == 'Exorcist Of The Silver Flame') {
 
@@ -2372,10 +2377,14 @@ Eberron.featRules = function(rules, name, requires, implies, types) {
  */
 Eberron.featRulesExtra = function(rules, name) {
 
+  var matchInfo;
+
   if(name == 'Adamantine Body') {
     rules.defineRule('combatNotes.dexterityArmorClassAdjustment',
       'features.Adamantine Body', 'v', '1'
     );
+    rules.defineRule
+     ('damageReduction.Adamantine', 'combatNotes.adamantineBody', '^=', '2');
     rules.defineRule('magicNotes.arcaneSpellFailure',
       'features.Adamantine Body', '^', '35'
     );
@@ -2389,6 +2398,14 @@ Eberron.featRulesExtra = function(rules, name) {
   } else if(name == 'Cliffwalk Elite') {
     rules.defineRule
       ('abilityNotes.cliffwalk', 'abilityNotes.cliffwalkElite', '+', '10');
+  } else if((matchInfo = name.match(/Dragon Totem \((.*)\)/)) != null) {
+    var resistance =
+      'BlackCopperGreen'.includes(matchInfo[1]) ? 'Acid' :
+      'BlueBronze'.includes(matchInfo[1]) ? 'Electricity' :
+      'BrassGoldRed'.includes(matchInfo[1]) ? 'Fire' : 'Cold';
+    rules.defineRule('energyResistance.' + resistance,
+      'saveNotes.dragonTotem(' + matchInfo[1] + ')', '^=', '5'
+    );
   } else if(name == 'Extra Music') {
     rules.defineRule
       ('featureNotes.extraMusic', 'feats.Extra Music', '=', '4 * source');
@@ -2439,9 +2456,8 @@ Eberron.featRulesExtra = function(rules, name) {
       'combatNotes.greaterPowerfulCharge', '=', null
     );
   } else if(name == 'Greater Shifter Defense') {
-    rules.defineRule('combatNotes.shifterDefense',
-      'combatNotes.greaterShifterDefense', '+', '2'
-    );
+    rules.defineRule
+      ('damageReduction.Silver', 'combatNotes.greaterShifterDefense', '+', '2');
   } else if(name == 'Greensinger Initiate') {
     rules.defineRule('casterLevels.Greensinger',
       'features.Greensinger Initiate', '?', null,
@@ -2463,6 +2479,10 @@ Eberron.featRulesExtra = function(rules, name) {
     rules.defineRule('combatNotes.healingFactor', 'level', '=', null);
   } else if(name == 'Heroic Spirit') {
     rules.defineRule('abilityNotes.heroicSpirit', 'level', '=', '3 * source');
+  } else if(name == 'Improved Damage Reduction') {
+    rules.defineRule('damageReduction.Adamantine',
+      'combatNotes.improvedDamageReduction', '+=', '1'
+    );
   } else if(name == 'Improved Natural Attack (Claws)') {
     rules.defineRule('clawsDamageProgression',
       'combatNotes.improvedNaturalAttack(Claws)', '+', '1'
@@ -2516,7 +2536,8 @@ Eberron.featRulesExtra = function(rules, name) {
     // Set turning level to suppress errors on, e.g., Extra Turning feat
     rules.defineRule('turningLevel', 'combatNotes.repelAberration', '=', '1');
   } else if(name == 'Shifter Defense') {
-    rules.defineRule('combatNotes.shifterDefense', '', '=', '2');
+    rules.defineRule
+      ('damageReduction.Silver', 'combatNotes.shifterDefense', '^=', '2');
   } else if(name == 'Warden Initiate') {
     rules.defineRule('casterLevels.Warden',
       'features.Warden Initiate', '?', null,
