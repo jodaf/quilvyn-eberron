@@ -505,16 +505,16 @@ Eberron.FEATURES_ADDED = {
     'Section=combat Note="Flurry Of Blows w/two-bladed sword"',
   'Dragon Rage':
     'Section=combat Note="+2 AC, +10 Dragon Totem resistance during Rage"',
-  'Dragon Totem (Black)':'Section=save Note="Resistance to acid 5"',
-  'Dragon Totem (Blue)':'Section=save Note="Resistance to electricity 5"',
-  'Dragon Totem (Brass)':'Section=save Note="Resistance to fire 5"',
-  'Dragon Totem (Bronze)':'Section=save Note="Resistance to electricity 5"',
-  'Dragon Totem (Copper)':'Section=save Note="Resistance to acid 5"',
-  'Dragon Totem (Gold)':'Section=save Note="Resistance to fire 5"',
-  'Dragon Totem (Green)':'Section=save Note="Resistance to acid 5"',
-  'Dragon Totem (Red)':'Section=save Note="Resistance to fire 5"',
-  'Dragon Totem (Silver)':'Section=save Note="Resistance to cold 5"',
-  'Dragon Totem (White)':'Section=save Note="Resistance to cold 5"',
+  'Dragon Totem (Black)':'Section=save Note="Resistance 5 to acid"',
+  'Dragon Totem (Blue)':'Section=save Note="Resistance 5 to electricity"',
+  'Dragon Totem (Brass)':'Section=save Note="Resistance 5 to fire"',
+  'Dragon Totem (Bronze)':'Section=save Note="Resistance 5 to electricity"',
+  'Dragon Totem (Copper)':'Section=save Note="Resistance 5 to acid"',
+  'Dragon Totem (Gold)':'Section=save Note="Resistance 5 to fire"',
+  'Dragon Totem (Green)':'Section=save Note="Resistance 5 to acid"',
+  'Dragon Totem (Red)':'Section=save Note="Resistance 5 to fire"',
+  'Dragon Totem (Silver)':'Section=save Note="Resistance 5 to cold"',
+  'Dragon Totem (White)':'Section=save Note="Resistance 5 to cold"',
   'Ecclesiarch':
     'Section=feature,skill ' +
     'Note="+2 Leadership",' +
@@ -1088,7 +1088,7 @@ Eberron.SPELLS_ADDED = {
   'Greater Construct Energy Ward':
     'School=Abjuration ' +
     'Level=A4 ' +
-    'Description="Touched construct ignores up to $L12min120 HP from specified energy for $L10 min"',
+    'Description="Touched construct resistance $L12min120 to specified energy for $L10 min"',
   'Greater Status':
     'School=Divination ' +
     'Level=Community4 ' +
@@ -2399,11 +2399,11 @@ Eberron.featRulesExtra = function(rules, name) {
     rules.defineRule
       ('abilityNotes.cliffwalk', 'abilityNotes.cliffwalkElite', '+', '10');
   } else if((matchInfo = name.match(/Dragon Totem \((.*)\)/)) != null) {
-    var resistance =
+    var energy =
       'BlackCopperGreen'.includes(matchInfo[1]) ? 'Acid' :
       'BlueBronze'.includes(matchInfo[1]) ? 'Electricity' :
       'BrassGoldRed'.includes(matchInfo[1]) ? 'Fire' : 'Cold';
-    rules.defineRule('energyResistance.' + resistance,
+    rules.defineRule('resistance.' + energy,
       'saveNotes.dragonTotem(' + matchInfo[1] + ')', '^=', '5'
     );
   } else if(name == 'Extra Music') {
