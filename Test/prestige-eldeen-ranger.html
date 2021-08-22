@@ -84,7 +84,7 @@ var attributes = {
       <tr style="text-align:center">
         <td><b>Feats</b>: Agile; Athletic; Beast Totem (Yrthak); Combat Casting; Combat Reflexes; Toughness</td>
         <td><b>Human Features</b>: Human Feat Bonus; Human Skill Bonus</td>
-        <td><b>Eldeen Ranger Features</b>: Armor Proficiency (Light); Ashbound; Children Of Winter; Damage Reduction (Iron); Darkvision; Favored Enemy; Ferocity; Gatekeepers; Greensingers; Hated Foe; Improved Critical; Nature Sense; Resist Corruption (Children Of Winter); Resist Corruption (Gatekeepers); Resist Nature's Lure; Resist Poison; Resist The Arcane; Shield Proficiency; Slippery Mind; Smite Evil; Spell Resistance; Touch Of Contagion; Unearthly Grace; Wardens Of The Wood; Weapon Proficiency (Martial)</td>
+        <td><b>Eldeen Ranger Features</b>: Armor Proficiency (Light); Ashbound; Children Of Winter; Darkvision; Favored Enemy; Ferocity; Gatekeepers; Greensinger Damage Reduction; Greensingers; Hated Foe; Improved Critical; Nature Sense; Resist Corruption (Children Of Winter); Resist Corruption (Gatekeepers); Resist Nature's Lure; Resist Poison; Resist The Arcane; Shield Proficiency; Slippery Mind; Smite Evil; Spell Resistance; Touch Of Contagion; Unearthly Grace; Wardens Of The Wood; Weapon Proficiency (Martial)</td>
         <td><b>Ranger Features</b>: Animal Companion; Armor Proficiency (Light); Combat Style (Archery); Endurance; Favored Enemy; Rapid Shot; Shield Proficiency; Track; Weapon Proficiency (Martial); Wild Empathy</td>
       </tr></table>
 </td>
@@ -197,6 +197,7 @@ var attributes = {
         <td><b>Hit Points</b>: 62</td>
         <td><b>Initiative</b>: 3</td>
         <td><b>Armor Class</b>: 18</td>
+        <td><b>Damage Reduction</b>: 3/Cold Iron</td>
         <td><b>Attacks Per Round</b>: 2</td>
         <td><b>Base/Melee/Ranged Attack</b>: 10/11/13</td>
       </tr></table>
@@ -226,6 +227,8 @@ var attributes = {
       </tr><tr style="text-align:center">
         <td><i>Dexterity Attack Adjustment: +3</i></td>
       </tr><tr style="text-align:center">
+        <td><i>Greensinger Damage Reduction: DR 3/cold iron</i></td>
+      </tr><tr style="text-align:center">
         <td><i>Strength Attack Adjustment: +1</i></td>
       </tr><tr style="text-align:center">
         <td><i>Strength Damage Adjustment: +1</i></td>
@@ -235,8 +238,6 @@ var attributes = {
         <td><i>Two-handed Weapon With Buckler Penalty: -1 attack and AC</i></td>
       </tr><tr style="text-align:center">
         <td>Combat Reflexes: Flatfooted AOO, 4 AOO/rd</td>
-      </tr><tr style="text-align:center">
-        <td>Damage Reduction (Iron): DR 3/cold iron</td>
       </tr><tr style="text-align:center">
         <td>Favored Enemy: +2 or more damage vs. 3 chosen creature type</td>
       </tr><tr style="text-align:center">
@@ -250,13 +251,20 @@ var attributes = {
       </tr></table>
 </td>
     </tr><tr style="text-align:center">
-      <td><b>Save</b>: Fortitude: 10; Reflex: 12; Will: 2</td>
+      <td>      <table id="SavesAndResistance" style="width:100%">
+      <tr style="text-align:center">
+        <td><b>Save</b>: Fortitude: 10; Reflex: 12; Will: 2</td>
+        <td><b>Spell Resistance</b>: 20</td>
+      </tr></table>
+</td>
     </tr><tr style="text-align:center">
       <td><b>Save Notes</b>:       <table id="SaveNotes" style="width:100%">
       <tr style="text-align:center">
         <td><i>Constitution Fortitude Adjustment: +1</i></td>
       </tr><tr style="text-align:center">
         <td><i>Dexterity Reflex Adjustment: +3</i></td>
+      </tr><tr style="text-align:center">
+        <td><i>Spell Resistance: Spell resistance 20</i></td>
       </tr><tr style="text-align:center">
         <td><i>Unearthly Grace: +1 Fortitude/+1 Reflex/+1 Will</i></td>
       </tr><tr style="text-align:center">
@@ -277,8 +285,6 @@ var attributes = {
         <td>Resist The Arcane: +2 vs. arcane spells</td>
       </tr><tr style="text-align:center">
         <td>Slippery Mind: Second save vs. enchantment</td>
-      </tr><tr style="text-align:center">
-        <td>Spell Resistance: DC 20 spell resistance</td>
       </tr></table>
 </td>
     </tr></table>
