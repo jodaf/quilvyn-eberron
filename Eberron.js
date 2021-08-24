@@ -1685,6 +1685,11 @@ Eberron.aideRules = function(rules, companions, familiars) {
 Eberron.combatRules = function(rules, armors, shields, weapons) {
   rules.basePlugin.combatRules(rules, armors, shields, weapons);
   // No changes needed to the rules defined by base method
+  rules.defineChoice('notes',
+    'damageReduction.Adamantine:%V/%N',
+    'damageReduction.Cold Iron:%V/%N',
+    'damageReduction.Silver:%V/%N'
+  );
 };
 
 /* Defines rules related to basic character identity. */
