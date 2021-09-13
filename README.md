@@ -16,7 +16,7 @@ subdirectory within the Quilvyn installation directory, then append the
 following lines to the file plugins/plugins.js:
 
     RULESETS['Eberron Campaign Setting using D&D v3.5 rules'] = {
-      url:'Eberron.js',
+      url:'plugins/Eberron.js',
       group:'v3.5',
       require:'D&D v3.5'
     };
