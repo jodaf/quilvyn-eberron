@@ -133,7 +133,7 @@ function Eberron(baseRules) {
 
 }
 
-Eberron.VERSION = '2.2.2.11';
+Eberron.VERSION = '2.3.1.0';
 
 // Eberron uses PHB35 as its default base ruleset. If USE_PATHFINDER is true,
 // the Eberron function will instead use rules taken from the Pathfinder plugin.
@@ -155,38 +155,6 @@ Eberron.ARMORS_ADDED = {
   'Leafweave':'AC=2 Weight=1 Dex=7 Skill=0 Spell=5'
 };
 Eberron.ARMORS = Object.assign({}, SRD35.ARMORS, Eberron.ARMORS_ADDED);
-Eberron.DEITIES = {
-  'None':'',
-  'Arawai':'Alignment=NG Weapon=Morningstar Domain=Good,Life,Plant,Weather',
-  'Aureon':'Alignment=LN Weapon=Quarterstaff Domain=Knowledge,Law,Magic',
-  'Balinor':'Alignment=N Weapon=Battleaxe Domain=Air,Animal,Earth',
-  'Boldrei':'Alignment=LG Weapon=Spear Domain=Community,Good,Law,Protection',
-  'Dol Arrah':'Alignment=LG Weapon=Halberd Domain=Good,Law,Sun,War',
-  'Dol Dorn':'Alignment=CG Weapon=Longsword Domain=Chaos,Good,Strength,War',
-  'Kol Korran':
-    'Alignment=N Weapon="Heavy Mace","Light Mace" Domain=Charm,Commerce,Travel',
-  'Olladra':'Alignment=NG Weapon=Sickle Domain=Feast,Good,Healing,Luck',
-  'Onatar':'Alignment=NG Weapon=Warhammer Domain=Artifice,Fire,Good',
-  'The Blood Of Vol':
-    'Alignment=LE Weapon=Dagger Domain=Death,Evil,Law,Necromancer',
-  'The Cults Of The Dragon Below':
-    'Alignment=LN Weapon="Heavy Pick" Domain="Dragon Below",Earth,Evil,Madness',
-  'The Devourer':
-    'Alignment=NE Weapon=Trident Domain=Destruction,Evil,Water,Weather',
-  'The Fury':'Alignment=NE Weapon=Rapier Domain=Evil,Madness,Passion',
-  'The Keeper':'Alignment=NE Weapon=Scythe Domain=Death,Decay,Evil',
-  'The Mockery':'Alignment=NE Weapon=Kama Domain=Destruction,Evil,Trickery,War',
-  'The Path Of Light':
-    'Alignment=LN Weapon=Unarmed Domain=Law,Meditation,Protection',
-  'The Shadow':
-    'Alignment=CE Weapon=Quarterstaff Domain=Chaos,Evil,Magic,Shadow',
-  'The Silver Flame':
-    'Alignment=LG Weapon=Longbow Domain=Exorcism,Good,Law,Protection',
-  'The Traveler':
-    'Alignment=CN Weapon=Scimitar Domain=Artifice,Chaos,Travel,Trickery',
-  'The Undying Court':
-    'Alignment=NG Weapon=Scimitar Domain=Deathless,Good,Protection'
-};
 Eberron.FAMILIARS = Object.assign({}, SRD35.FAMILIARS);
 Eberron.FEATS_ADDED = {
   'Aberrant Dragonmark':
@@ -414,6 +382,7 @@ Eberron.FEATS = Object.assign({}, SRD35.FEATS, Eberron.FEATS_ADDED);
 Eberron.FEATURES_ADDED = {
 
   // Class
+  'Artificer Feat Bonus':'Section=feature Note="%V Artificer feats"',
   'Artificer Knowledge':
     'Section=skill ' +
     'Note="+%V DC 15 check to determine whether an item is magical"',
@@ -423,7 +392,7 @@ Eberron.FEATURES_ADDED = {
   'Artisan Bonus':
     'Section=skill Note="+2 Use Magic Device on items character can craft"',
   'Craft Homunculus':
-    'Section=magic Note="Create homunculus"',
+    'Section=magic Note="Create small homunculus w/up to %{level-2} HD"',
   'Craft Reserve':
     'Section=magic Note=%V',
   'Disable Trap':
@@ -440,45 +409,47 @@ Eberron.FEATURES_ADDED = {
     'Section=magic Note="Drain magic item XP into craft reserve"',
 
   // Domain
-  'Add Life':'Section=magic Note="Touched d6+%V temporary HP for %1 hr"',
+  'Add Life':'Section=magic Note="Touched 1d6+%V temporary HP for %1 hr"',
   'All-Weather':
-    'Section=skill Note="+2 Survival (weather)/Survival is a class skill"',
-  'Calming Influence':'Section=magic Note="<i>Calm Emotions</i> 1/dy"',
+    'Section=feature,skill ' +
+    'Note="Vision unobstructed by weather",' +
+         '"+2 Survival (weather)/Survival is a class skill"',
+  'Artifice Master':'Section=skill Note="+4 all Craft"',
   'Clarity Of True Madness':
     'Section=feature Note="+%V Wis skill check or Will save 1/dy"',
-  'Clear-Eyed':'Section=feature Note="Vision unobstructed by weather"',
-  'Community Pillar':'Section=skill Note="+2 Diplomacy"',
-  'Craft Master':'Section=skill Note="+4 all Craft"',
+  'Commercial':
+    'Section=skill ' +
+    'Note="+10 Profession (earn a living)/Appraise is a class skill"',
+  'Community Pillar':
+    'Section=magic,skill '  +
+    'Note="<i>Calm Emotions</i> 1/dy","+2 Diplomacy"',
   'Empowered Creation':
     'Section=magic Note="+1 caster level for Item Creation spells"',
   'Empowered Necromancy':
     'Section=magic Note="+1 caster level necromancy spells"',
   'Exorcise':
     'Section=combat Note="Turn Undead check to exorcise spirit"',
+  'Feast Gut':'Section=save Note="Immune to ingested poison and disease"',
   'Fit Of Passion':
     'Section=combat Note="+4 Str, +4 Con, +2 Will save, -2 AC for %V rd/dy"',
-  'Focused Casting':
+  'Madness-Weakened':'Section=save Note="-1 Will"',
+  'Meditative Casting':
     'Section=magic Note="x1.5 chosen spell variable effects 1/dy"',
-  'Iron Gut':'Section=save Note="Immune to ingested poison and disease"',
-  'Merchant':
-    'Section=skill ' +
-    'Note="+10 Profession (earn a living)/Appraise is a class skill"',
   'Rebuke Deathless':
     'Section=combat Note="Use Turn Undead to rebuke deathless 1/dy"',
   'Touch Of Decay':
-    'Section=magic Note="Touched d4 Con (living) or 2d6+%V HP (undead) 1/dy"',
-  'Turn It On':'Section=ability Note="+4 charisma for 1 min 1/dy"',
-  'Weak-Willed':'Section=save Note="-1 Will"',
+    'Section=magic Note="Touched 1d4 Con (living) or 2d6+%V HP (undead) 1/dy"',
+  'Turn On The Charm':'Section=ability Note="+4 charisma for 1 min 1/dy"',
 
   // Feat
   'Aberrant Dragonmark':'Section=magic Note="Cast chosen spell 1/dy"',
   'Action Boost':
     'section=ability ' +
-    'Note="Add d8 instead of d6 when using AP on attack, skill, ability, level or saving throw"',
+    'Note="Add 1d8 instead of 1d6 when using AP on attack, skill, ability, level or saving throw"',
   'Action Surge':
     'Section=combat Note="Spend 2 AP to take extra move or standard action"',
   'Adamantine Body':
-    'Section=ability,combat Note="Max 20 speed","+6 AC/DR 2/adamantine"',
+    'Section=ability,combat Note="Max 20\' speed","+6 AC/DR 2/adamantine"',
   'Ashbound':
     'Section=magic ' +
     'Note="Dbl <i>Summon Nature\'s Ally</i> duration, summoned creatures +3 attack"',
@@ -498,13 +469,14 @@ Eberron.FEATURES_ADDED = {
     'Section=magic Note="Incorporate elementals into wondrous items"',
   'Child Of Winter':
     'Section=magic Note="Use animal Druid spells on vermin, summon vermin"',
-  'Cliffwalk Elite':'Section=ability Note="+10 Cliffwalk climb speed"',
+  'Cliffwalk Elite':'Section=ability Note="+10\' Cliffwalk climb speed"',
   'Craft Construct':'Section=magic Note="Create enchanted construct"',
   'Detective':'Section=skill Note="+2 Spot"',
   'Double Steel Strike':
     'Section=combat Note="Flurry Of Blows w/two-bladed sword"',
   'Dragon Rage':
-    'Section=combat Note="+2 AC, +10 Dragon Totem resistance during Rage"',
+    'Section=combat,save ' +
+    'Note="+2 AC during Rage","+10 %V resistance during Rage"',
   'Dragon Totem (Black)':'Section=save Note="Resistance 5 to acid"',
   'Dragon Totem (Blue)':'Section=save Note="Resistance 5 to electricity"',
   'Dragon Totem (Brass)':'Section=save Note="Resistance 5 to fire"',
@@ -544,13 +516,13 @@ Eberron.FEATURES_ADDED = {
          '"+2 vs. supernatural and aberrations",' +
          '"Knowledge (Planes) is a class skill"',
   'Great Bite':'Section=combat Note="Fangs Crit is x3"',
-  'Great Rend':'Section=combat Note="+d4+%V damage on hit w/both claws"',
+  'Great Rend':'Section=combat Note="+1d4+%V damage on hit w/both claws"',
   'Greater Dragonmark':
-    'Section=magic Note="Choice of %{house}3 dragonmark spell 1/dy"',
+    'Section=magic Note="Choice of level 3 dragonmark spell 1/dy"',
   'Greater Powerful Charge':
     'Section=combat ' +
     'Note="Raise Powerful Charge damage one size category to %V"',
-  'Greater Shifter Defense':'Section=combat Note="+2 DR/silver"',
+  'Greater Shifter Defense':'Section=combat Note="+2 DR/silver while shifting"',
   'Greensinger Initiate':
     'Section=magic,skill ' +
     'Note="Access to additional spells",' +
@@ -576,12 +548,12 @@ Eberron.FEATURES_ADDED = {
     'Section=ability ' +
     'Note="No restrictions on combining Paladin and chosen class levels"',
   'Least Dragonmark':
-    'Section=magic Note="Choice of %{house}1 dragonmark spell 1/dy"',
+    'Section=magic Note="Choice of level 1 dragonmark spell 1/dy"',
   'Legendary Artisan':
     'Section=magic Note="Reduce item creation XP price by 25%"',
   'Lesser Dragonmark':
-    'Section=magic Note="Choice of %{house}2 dragonmark spell 1/dy"',
-  'Longstride Elite':'Section=ability Note="+10 Longstride Speed"',
+    'Section=magic Note="Choice of level 2 dragonmark spell 1/dy"',
+  'Longstride Elite':'Section=ability Note="+10\' Longstride Speed"',
   'Maker':'Section=skill Note="+2 all Craft"',
   'Mithral Body':'Section=combat Note="+3 AC"',
   'Mithral Fluidity':
@@ -608,23 +580,24 @@ Eberron.FEATURES_ADDED = {
     'Section=skill Note="+4 Sense Motive vs. Bluff and Spot vs. Disguise"',
   'Repel Aberration':
     'Section=combat ' +
-    'Note="Hold at bay 2d6+%1 HD of aberrations of up to (d20+%2)/3 HD %3/dy"',
+    'Note="R60\' Hold at bay 2d6+%1 HD of aberrations of up to (d20+%2)/3 HD %3/dy"',
   'Research':'Section=skill Note="Use Knowledge skill on library and records"',
   'Right Of Counsel':
     'Section=feature Note="Seek advice from deathless ancestor"',
   'Scribe':'Section=skill Note="+2 Decipher Script"',
   'Shadower':'Section=skill Note="+2 Gather Information"',
-  'Shifter Defense':'Section=combat Note="DR 2/silver"',
+  'Shifter Defense':'Section=combat Note="DR 2/silver while shifting"',
   'Shifter Ferocity':
     'Section=combat Note="Continue fighting below 0 HP while shifting"',
   'Sentinel':'Section=skill Note="+2 Sense Motive"',
   'Serpent Strike':'Section=combat Note="Flurry Of Blows w/longspear"',
   'Shifter Multiattack':
-    'Section=combat Note="Reduce additional natural attack penalty to -2"',
-  'Silver Smite':'Section=combat Note="Smite Evil +d6"',
+    'Section=combat Note="Reduce penalty for additional natural attack to -2"',
+  'Silver Smite':'Section=combat Note="Smite Evil +1d6"',
   'Song Of The Heart':'Section=magic Note="+1 Bardic Music effects"',
   'Soothe The Beast':
-    'Section=skill Note="R30\' Perform to change animal reaction"',
+    'Section=skill ' +
+    'Note="R30\' Perform check during Bardic Music to change animal reaction"',
   'Spontaneous Casting':
     'Section=magic ' +
     'Note="Spend 2 AP to substitute any known spell for a prepared one"',
@@ -656,7 +629,7 @@ Eberron.FEATURES_ADDED = {
     'Note="+2 Constitution while shifting",' +
          '"+%V AC while shifting"',
   'Cliffwalk':
-    'Section=ability Note="+2 Dexterity, %V climb speed while shifting"',
+    'Section=ability Note="+2 Dexterity, %V\' climb speed while shifting"',
   'Composite Plating':'Section=combat Note="+2 AC/Cannot wear armor"',
   'Deceptive':'Section=skill Note="+2 Bluff/+2 Intimidate"',
   'Dreamless':'Section=save Note="Immune <i>Dream</i>, <i>Nightmare</i>"',
@@ -666,14 +639,16 @@ Eberron.FEATURES_ADDED = {
   'Light Fortification':
     'Section=combat ' +
     'Note="25% change of negating critical hits and sneak attacks"',
-  'Longstride':'Section=ability Note="+2 Dexterity, +%V Speed while shifting"',
+  'Longstride':
+    'Section=ability Note="+2 Dexterity, +%V\' Speed while shifting"',
   'Longtooth':
     'Section=ability,combat ' +
     'Note="+2 Strength while shifting",' +
          '"Can attack w/fangs while shifting"',
+  'Mechanized':'Section=feature Note="No need to breathe, eat, or sleep"',
   'Mindlink':
     'Section=magic Note="R30\' Telepathy with willing target for %V rd 1/dy"',
-  'Minor Shape Change':'Section=magic Note="<i>Shape Change</i> body at will"',
+  'Minor Shape Change':'Section=magic Note="<i>Disguise Self</i> body at will"',
   'Natural Psionic':'Section=magic Note="+1 PP/level"',
   'Natural Linguist':'Section=skill Note="Speak Language is a class skill"',
   'Razorclaw':
@@ -682,10 +657,10 @@ Eberron.FEATURES_ADDED = {
          '"Can attack w/claws while shifting"',
   'Resist Charm':'Section=save Note="+2 vs. charm effects"',
   'Resist Mental':'Section=save Note="+2 vs. mind-altering effects"',
-  'Resist Sleep':'Section=save Note="+2 vs. <i>Sleep</i>"',
+  'Resist Sleep':'Section=save Note="+2 vs. sleep effects"',
   'Shifter Ability Adjustment':
     'Section=ability Note="+2 Dexterity/-2 Intelligence/-2 Charisma"',
-  'Shifting':'Section=feature Note="Use Shifter trait for %V rd %1/day"',
+  'Shifting':'Section=feature Note="Use Shifter trait for %V rd %1/dy"',
   'Slam Weapon':'Section=combat Note="Can attack w/slam"',
   'Stable':
     'Section=combat ' +
@@ -738,8 +713,9 @@ Eberron.FEATURES_ADDED = {
     'Section=magic Note="+%V base class level for spells known and spells/dy"',
   'Charge Bonus':'Section=combat Note="+%V attack when charging"',
   'Climb Speed':
-    'Section=ability ' +
-    'Note="20\' climb speed (+10 for Cliffwalk) while shifting"',
+    'Section=ability,skill ' +
+    'Note="20\' climb speed (+10 for Cliffwalk) while shifting",' +
+         '"+%V Climb"',
   'Construct Perfection I':
     'Section=combat Note="Immune nonlethal damage and critical hits"',
   'Construct Perfection II':'Section=save Note="Immune to mental effects"',
@@ -751,35 +727,41 @@ Eberron.FEATURES_ADDED = {
   'Detect Thoughts':'Section=magic Note="<i>Detect Thoughts</i> at will"',
   'Discern Lies':
     'Section=magic ' +
-    'Note="R%1\' Reveals lies from %V creatures for %V rd or conc (DC %2 Will neg) 1/dy, 2 AP for 2/dy"',
+    'Note="R%1\' Reveals lies from %V creatures in 15\' radius for conc or %V rd (DC %2 Will neg) 1/dy, 2 AP for 2/dy"',
   'Dodge Bonus':'Section=combat Note="+%V AC when unencumbered"',
   'Expert Bull Rush':'Section=combat Note="+%V bull rush and door breakage"',
   'Extended Charge':'Section=ability Note="+5 speed when charging"',
   'Extreme Action':
     'Section=ability Note="Retain AP on successful AP roll of 8"',
+  'Extreme Explorer Feat Bonus':
+    'Section=feature Note="%V Extreme Explorer feats"',
   'Extreme Hustle':'Section=combat Note="Spend 1 AP to gain a move action"',
   'Ferocity':'Section=combat Note="Continue fighting below 0 HP"',
   'Fierce Will':'Section=save Note="+4 Will while shifting"',
   'Flame Of Censure':
-    'Section=combat Note="Stun or banish Outsiders w/turning check"',
+    'Section=combat Note="Stun or banish evil Outsiders w/turning check"',
   'Frightful Shifting':
     'Section=combat ' +
-    'Note="R30\' Foes w/fewer than %V hit dice shaken for 5d6 rounds (DC %1 Will neg)"',
+    'Note="R30\' Foes up to %V HD shaken for 5d6 rounds (DC %1 Will neg)"',
   'Greensinger Damage Reduction':'Section=combat Note="DR 3/cold iron"',
   'Hated Foe':
     'Section=combat Note="Spend 1 AP for dbl damage against favored enemy"',
+  'Heir Of Siberys Feat Bonus':'Section=feature Note="1 Heir Of Siberys feat"',
   'Healing Immunity':'Section=save Note="No effect from healing spells"',
   'House Status':
     'Section=skill Note="+%V charisma-based skills w/house members"',
   'Improved Grab':'Section=combat Note="Grapple w/out AOO after claw hit"',
   'Improved Greater Dragonmark':
-    'Section=magic Note="2nd %{house}3 spell or +1/day"',
+    'Section=magic Note="2nd level 3 dragonmark spell or +1/dy"',
   'Improved Least Dragonmark':
-    'Section=magic Note="2nd %{house}1 spell or +1/day"',
+    'Section=magic Note="2nd level 1 dragonmark spell or +1/dy"',
   'Improved Lesser Dragonmark':
-    'Section=magic Note="2nd %{house}2 spell or +1/day"',
+    'Section=magic Note="2nd level 2 dragonmark spell or +1/dy"',
   'Improved Critical':
     'Section=feature Note="Improved Critical feat for choice of ranged weapon"',
+  'Improved Siberys Mark':'Section=magic Note="Use dragonmark spell 2/dy"',
+  'Master Inquisitive Feat Bonus':
+    'Section=feature Note="%V Master Inquisitive feats"',
   'Metal Immunity':'Section=save Note="Immune to mind-altering effects"',
   'Pounce':'Section=combat Note="Full attack when charging"',
   'Rat':
@@ -796,9 +778,11 @@ Eberron.FEATURES_ADDED = {
   'Resist Possession':'Section=save Note="+%V vs. possession"',
   'Resist The Arcane':'Section=save Note="+2 vs. arcane spells"',
   'Resist Unnatural':
-    'Section=save Note="+2 vs. effects of outsiders and undead"',
+    'Section=save Note="+2 vs. effects of evil outsiders and undead"',
+  'Scent':
+    'Section=feature Note="R30\' Detect creatures\' presence, track by smell"',
   'Siberys Mark':
-    'Section=magic Note="Choice of house dragonmark spell 1/dy"',
+    'Section=magic Note="Choice of house dragonmark spell %1/dy"',
   'Silver Exorcism':'Section=combat Note="+2 exorcism checks"',
   'Spell Resistance':'Section=save Note="Spell resistance 20"',
   'Superior Bull Rush':'Section=combat Note="+%V+%1 damage from bull rush"',
@@ -806,18 +790,18 @@ Eberron.FEATURES_ADDED = {
     'Section=ability,combat ' +
     'Note="+2 Strength while shifting",' +
          '"Can attack w/claws while shifting"',
-  'Touch Of Contagion':'Section=magic Note="<i>Contagion</i> 3/day"',
+  'Touch Of Contagion':'Section=magic Note="<i>Contagion</i> 3/dy"',
   'Trip':'Section=combat Note="Trip w/out AOO after bite hit"',
   'True Seeing':
     'Section=magic ' +
-    'Note="See through 120\' darkness, illusion, and invisible for %V min 1/dy, 2 AP for 2/dy"',
+    'Note="Self see through 120\' darkness, illusion, and invisible for %V min 1/dy, 2 AP for 2/dy"',
   'Unearthly Grace':'Section=save Note="+%V Fortitude/+%V Reflex/+%V Will"',
   'Warding Flame':
     'Section=combat,feature,save ' +
     'Note=' +
-      '"Warding glow for +2 AC, struck evil foe  blinded (DC %V Fort neg)",' +
+      '"Warding glow for +2 AC, evil foes that strike self blinded (DC %V Fort neg)",' +
       '"60\' light",' +
-      '"Spell resistance 25 to evil spells and evil casters"',
+      '"Spell Resistance 25 (evil casters and spells)"',
   'Weapon Of Flame':
     'Section=combat Note="+%Vd6 flame damage w/exorcist weapon"',
   'Weapon Of Good':
@@ -828,6 +812,7 @@ Eberron.FEATURES_ADDED = {
   'Weapon Of Silver':'Section=combat Note="Exorcist weapon treated as silver"',
   'Weapon Of The Exorcist':
     'Section=combat Note="+1 damage w/weapon treated as magic%1%2%3"',
+  'Weretouched Feat Bonus':'Section=feature Note="%V Shifter feats"',
   'Weretouched Rage':
     'Section=combat ' +
     'Note="+2 Str, +2 Con, -2 AC after taking damage until self or foe dead"',
@@ -920,22 +905,22 @@ Eberron.PATHS_ADDED = {
     'Group=Cleric ' +
     'Level=levels.Cleric ' +
     'Features=' +
-      '"1:Empowered Creation","1:Craft Master"',
+      '"1:Artifice Master","1:Empowered Creation"',
   'Charm Domain':
     'Group=Cleric ' +
     'Level=levels.Cleric ' +
     'Features=' +
-      '"1:Turn It On"',
+      '"1:Turn On The Charm"',
   'Commerce Domain':
     'Group=Cleric ' +
     'Level=levels.Cleric ' +
     'Features=' +
-      '1:Merchant',
+      '1:Commercial',
   'Community Domain':
     'Group=Cleric ' +
     'Level=levels.Cleric ' +
     'Features=' +
-      '"1:Calming Influence","1:Community Pillar"',
+      '"1:Community Pillar"',
   'Deathless Domain':
     'Group=Cleric ' +
     'Level=levels.Cleric ' +
@@ -960,7 +945,7 @@ Eberron.PATHS_ADDED = {
     'Group=Cleric ' +
     'Level=levels.Cleric ' +
     'Features=' +
-      '"1:Iron Gut"',
+      '"1:Feast Gut"',
   'Life Domain':
     'Group=Cleric ' +
     'Level=levels.Cleric ' +
@@ -970,12 +955,12 @@ Eberron.PATHS_ADDED = {
     'Group=Cleric ' +
     'Level=levels.Cleric ' +
     'Features=' +
-      '"1:Clarity Of True Madness",1:Weak-Willed',
+      '"1:Clarity Of True Madness","1:Madness-Weakened"',
   'Meditation Domain':
     'Group=Cleric ' +
     'Level=levels.Cleric ' +
     'Features=' +
-      '"1:Focused Casting"',
+      '"1:Meditative Casting"',
   'Necromancer Domain':
     'Group=Cleric ' +
     'Level=levels.Cleric ' +
@@ -995,7 +980,7 @@ Eberron.PATHS_ADDED = {
     'Group=Cleric ' +
     'Level=levels.Cleric ' +
     'Features=' +
-      '1:All-Weather,1:Clear-Eyed'
+      '1:All-Weather,1:Weather-Wise'
 };
 Eberron.PATHS = Object.assign({}, SRD35.PATHS, Eberron.PATHS_ADDED);
 Eberron.RACES_ADDED = {
@@ -1019,8 +1004,8 @@ Eberron.RACES_ADDED = {
     'Languages=Common',
   'Warforged':
     'Features=' +
-      '"1:Composite Plating","1:Light Fortification","1:Slam Weapon",' +
-      '1:Stable,1:Unhealing,"1:Warforged Ability Adjustment",' +
+      '"1:Composite Plating","1:Light Fortification",1:Mechanized,' +
+      '"1:Slam Weapon",1:Stable,1:Unhealing,"1:Warforged Ability Adjustment",' +
       '"1:Warforged Immunity","1:Warforged Vulnerability" ' +
     'Languages=Common'
 };
@@ -1032,19 +1017,19 @@ Eberron.SPELLS_ADDED = {
   'Armor Enhancement':
     'School=Transmutation ' +
     'Level=A2 ' +
-    'Description="Touched armor or shield +3, 35K GP enhancement for $L10 min"',
+    'Description="Touched armor or shield +3 or 35K GP enhancement for $L10 min"',
   'Bolts Of Bedevilment':
     'School=Enchantment ' +
     'Level=Madness5 ' +
-    'Description="R$RM\' 3 targets (1/rd) stunned for $L2 rd (Will neg)"',
+    'Description="R$RM\' 3 targets (1/rd) dazed for $L2 rd (Will neg)"',
   'Construct Energy Ward':
     'School=Abjuration ' +
     'Level=A3 ' +
-    'Description="Touched resistance ${lvl>10?30:lvl>6?20:10} to chosen energy for $L10 min"',
+    'Description="Touched construct resistance ${lvl>10?30:lvl>6?20:10} to chosen energy for $L10 min"',
   'Control Deathless':
     'School=Necromancy ' +
     'Level=Deathless7 ' +
-    'Description="R$RS\' Command $L2 HD deathless in 30\' area for $L min"',
+    'Description="R$RS\' Command $L2 HD deathless in 15\' radius for $L min (Will neg)"',
   'Create Deathless':
     'School=Necromancy ' +
     'Level=Deathless6 ' +
@@ -1052,15 +1037,15 @@ Eberron.SPELLS_ADDED = {
   'Create Greater Deathless':
     'School=Necromancy ' +
     'Level=Deathless8 ' +
-    'Description="R$RS\' Create undying councilor"',
+    'Description="R$RS\' Create deathless councilor"',
   'Detect Aberration':
     'School=Divination ' +
     'Level=D1 ' +
-    'Description="R60\' cone info on aberrations for conc/$L min"',
+    'Description="R60\' cone info on aberrations for conc or $L min"',
   'Detoxify':
     'School=Conjuration ' +
     'Level=Feast8 ' +
-    'Description="R30\' Neutralize venom for $L10 min"',
+    'Description="R30\' Neutralize venom, creatures for $L10 min (Will neg)"',
   'Dimension Leap':
     'School=Conjuration ' +
     'Level=Orien1 ' +
@@ -1072,43 +1057,43 @@ Eberron.SPELLS_ADDED = {
   'Energy Alteration':
     'School=Transmutation ' +
     'Level=A1 ' +
-    'Description="Touched affects different energy type for $L10 min"',
+    'Description="Touched magic item uses and effects chosen energy type for $L10 min"',
   'Enhancement Alteration':
     'School=Transmutation ' +
     'Level=A1 ' +
-    'Description="Touched shield or weapon enhancement applies to bash and defense for $L10 min"',
+    'Description="Touched shield or weapon enhancement shifts to attack or defense for $L10 min"',
   'Feast Of Champions':
     'School=Conjuration ' +
     'Level=C9,Feast9 ' +
-    'Description="Hour-long feast cures conditions, 2d8+$L HP"',
+    'Description="R$RS\' Food for $L creatures cures disease, sickness, exhaustion, and 2d8+$L HP, grants poison and fear immunity, 1d8+$Ldiv2min10 temporary HP", and +1 attack, skill, ability, and saves for 12 hr',
   'Greater Armor Enhancement':
     'School=Transmutation ' +
     'Level=A3 ' +
-    'Description="Touched armor or shield +5, 100K GP enhancement for $L10 min"',
+    'Description="Touched armor or shield +5 or 100K GP enhancement for $L10 min"',
   'Greater Construct Energy Ward':
     'School=Abjuration ' +
     'Level=A4 ' +
-    'Description="Touched construct resistance $L12min120 to specified energy for $L10 min"',
+    'Description="Touched construct resistance $L12min120 to chosen energy for $L10 min"',
   'Greater Status':
     'School=Divination ' +
     'Level=Community4 ' +
-    'Description="Monitor condition and position of, cast L0-2 touch spell on $Ldiv3 touched allies for $L hr"',
+    'Description="Monitor condition and position of and remotely cast level 0-2 touch spell on $Ldiv3 touched allies for $L hr"',
   'Greater Weapon Augmentation':
     'School=Transmutation ' +
     'Level=A6 ' +
-    'Description="Touched weapon +5 and 200K GP enhancement for $L10 min"',
+    'Description="Touched weapon +5 or 200K GP enhancement for $L10 min"',
   'Halt Deathless':
     'School=Necromancy ' +
     'Level=Deathless3 ' +
-    'Description="R$RM\' 3 deathless in 30\' area immobilized for $L rd (Will neg)"',
+    'Description="R$RM\' 3 deathless in 15\' radius immobilized for $L rd (Will neg)"',
   'Hardening':
     'School=Transmutation ' +
     'Level=A6,Artifice7,W6 ' +
-    'Description="Touched $L10\' cu item resists damage"',
+    'Description="Touched $L 10\' cu item ($L\' cu metal or mineral) resists damage"',
   "Hero's Blade":
     'School=Necromancy ' +
     'Level=Deathless9 ' +
-    'Description="Touched blade good-aligned, dbl crit threat, +2d6 HP to evil (+2d8 outsider or undead), blind and deafen evil 1d4 rd on crit (Will neg) for $L min"',
+    'Description="Touched blade good-aligned, dbl crit threat, +2d6 HP (+2d10 crit) to evil, +2d8 (+2d12 crit) to evil outsider or undead, crit blinds and deafens evil for 1d4 rd (Will neg), crit banishes evil outsider (Will neg) for $L min"',
   'Inflict Critical Damage':
     'School=Transmutation ' +
     'Level=A4 ' +
@@ -1132,27 +1117,27 @@ Eberron.SPELLS_ADDED = {
   'Item Alteration':
     'School=Transmutation ' +
     'Level=A4 ' +
-    'Description="Touched item grants bonus differently for $L10 min"',
+    'Description="Touched magic item grants bonus differently for $L10 min (Will neg)"',
   "Legion's Shield Of Faith":
     'School=Abjuration ' +
     'Level=A4 ' +
-    'Description="R$RM\' Allies in 20\' area +$Ldiv6plus2min5 AC for $L min"',
+    'Description="R$RM\' Allies in 20\' radius +$Ldiv6plus2min5 AC for $L min"',
   'Lesser Armor Enhancement':
     'School=Transmutation ' +
     'Level=A1 ' +
-    'Description="Touched armor or shield +1 and 5K GP enhancement for $L10 min"',
+    'Description="Touched armor or shield +1 or 5K GP enhancement for $L10 min"',
   'Lesser Weapon Augmentation':
     'School=Transmutation ' +
     'Level=A2 ' +
-    'Description="Touched weapon +1 and 10K GP enhancement for $L10 min"',
+    'Description="Touched weapon +1 or 10K GP enhancement for $L10 min"',
   'Maddening Scream':
     'School=Enchantment ' +
     'Level=Madness8,W8 ' +
-    'Description="Touched acts madly for 1d4+1 rd"',
+    'Description="Touched acts madly (-4 AC, Ref save requires nat 20) for 1d4+1 rd"',
   'Magecraft':
     'School=Divination ' +
     'Level=W1 ' +
-    'Description="Self +5 same day Craft check"',
+    'Description="Self +5 same-day Craft check"',
   'Metamagic Item':
     'School=Transmutation ' +
     'Level=A3 ' +
@@ -1160,31 +1145,31 @@ Eberron.SPELLS_ADDED = {
   "Nature's Wrath":
     'School=Evocation ' +
     'Level=Gatekeeper4 ' +
-    'Description="R$RM\' 20\' radius aberrations ${Lmin10}d6 HP and dazed 1 rd, other unnatural ${Ldiv2min5}d8 HP (Will half)"',
+    'Description="R$RM\' Aberrations in 20\' radius ${Lmin10}d6 HP and dazed 1 rd, other unnatural ${Ldiv2min5}d8 HP (Will half)"',
   'Personal Weapon Augmentation':
     'School=Transmutation ' +
     'Level=A1 ' +
-    'Description="Touched self weapon +1 and 10K GP enhancement for $L10 min"',
+    'Description="Touched self weapon +1 or 10K GP enhancement for $L10 min"',
   'Power Surge':
     'School=Transmutation ' +
     'Level=A3 ' +
-    'Description="Touched gains $Ldiv5 charges for $L min"',
+    'Description="Touched magic item gains $Ldiv5 charges for $L min"',
   'Repair Critical Damage':
     'School=Transmutation ' +
     'Level=A4,W4 ' +
-    'Description="Touched construct repair 4d8+$Lmin20"',
+    'Description="Touched construct regain 4d8+$Lmin20"',
   'Repair Light Damage':
     'School=Transmutation ' +
     'Level=A1,Cannith1,W1 ' +
-    'Description="Touched construct repair 1d8+$Lmin5"',
+    'Description="Touched construct regain 1d8+$Lmin5"',
   'Repair Moderate Damage':
     'School=Transmutation ' +
     'Level=A2,W2 ' +
-    'Description="Touched construct repair 2d8+$Lmin10"',
+    'Description="Touched construct regain 2d8+$Lmin10"',
   'Repair Serious Damage':
     'School=Transmutation ' +
     'Level=A3,Cannith2,W3 ' +
-    'Description="Touched construct repair 3d8+$Lmin15"',
+    'Description="Touched construct regain 3d8+$Lmin15"',
   'Resistance Item':
     'School=Abjuration ' +
     'Level=A1 ' +
@@ -1192,7 +1177,7 @@ Eberron.SPELLS_ADDED = {
   'Return To Nature':
     'School=Transmutation ' +
     'Level=Gatekeeper7 ' +
-    'Description="R$RS\' Target reduce Int, magic"',
+    'Description="R$RS\' Target arcane spellcaster 1d4 negative levels, giant <i>Reduce Person</i> (Fort neg), magical beasts/outsiders/aberrations 1d6 Int/${Ldiv2min10} HP/$L6 HP and 1d4/2d4/all supernatural abilities for 1 dy (Fort half, no ability loss)"',
   'Skill Enhancement':
     'School=Transmutation ' +
     'Level=A1 ' +
@@ -1200,15 +1185,15 @@ Eberron.SPELLS_ADDED = {
   'Spell Storing Item':
     'School=Transmutation ' +
     'Level=A1 ' +
-    'Description="Imbue touched item with spell up to $Ldiv2min4 level"',
+    'Description="Use Magic Device to imbue touched item with spell up to level $Ldiv2min4 level for $L hr"',
   'Spirit Steed':
     'School=Necromancy ' +
     'Level=Deathless4 ' +
-    'Description="Touched animal speed +30/x6, no hustle damage for L$ hr"',
+    'Description="Touched animal speed +30\', increased run, no hustle damage for $L hr"',
   'Stone Construct':
     'School=Transmutation ' +
     'Level=A3 ' +
-    'Description="Touched construct DR 10/adamantine for $L10min150 HP"',
+    'Description="Touched construct DR 10/adamantine for $L10min150 HP or $L10 min"',
   'Suppress Requirement':
     'School=Transmutation ' +
     'Level=A3 ' +
@@ -1224,7 +1209,7 @@ Eberron.SPELLS_ADDED = {
   'Toughen Construct':
     'School=Transmutation ' +
     'Level=A2 ' +
-    'Description="Touched construct +$Ldiv3plus1max2min5 AC"',
+    'Description="Touched construct +$Ldiv3plus1max2min5 AC for $L10 min"',
   'True Creation':
     'School=Conjuration ' +
     'Level=Artifice8,Cannith4 ' +
@@ -1232,7 +1217,7 @@ Eberron.SPELLS_ADDED = {
   'Weapon Augmentation':
     'School=Transmutation ' +
     'Level=A4 ' +
-    'Description="Touched weapon +3 and 70K GP enhancement for $L10 min"',
+    'Description="Touched weapon +3 or 70K GP enhancement for $L10 min"',
   "Wind's Favor":
     'School=Transmutation ' +
     'Level=Lyrandar2 ' +
@@ -1244,7 +1229,7 @@ Eberron.SPELLS_ADDED = {
   'Zone Of Natural Purity':
     'School=Evocation ' +
     'Level=Gatekeeper2 ' +
-    'Description="R$RS\' fey and plants in 20\' radius +1 attack, damage, save, abberations -1, for $L2 hr"'
+    'Description="R$RS\' fey and plants in 20\' radius +1 attack, damage, and save, abberations -1, for $L2 hr"'
 };
 Eberron.SPELLS = Object.assign(
   {}, window.PHB35 != null ? PHB35.SPELLS : SRD35.SPELLS, Eberron.SPELLS_ADDED
@@ -1488,7 +1473,7 @@ Eberron.WEAPONS_ADDED = {
   'Talenta Boomerang':'Level=3 Category=R Damage=d4 Range=30',
   'Talenta Sharrash':'Level=3 Category=2h Damage=d10 Crit=4 Threat=19',
   'Talenta Tangat':'Level=3 Category=2h Damage=d10 Threat=18',
-  'Valenar Double Scimitar':'Level=3 Category=2h Damage=d6,d6 Threat=18',
+  'Valenar Double Scimitar':'Level=3 Category=2h Damage=d6/d6 Threat=18',
   "Xen'drik Boomerang":'Level=3 Category=R Damage=d6 Range=20'
 };
 Eberron.WEAPONS = Object.assign({}, SRD35.WEAPONS, Eberron.WEAPONS_ADDED);
@@ -1504,7 +1489,7 @@ Eberron.CLASSES_ADDED = {
       '"1:Weapon Proficiency (Simple)",' +
       '"1:Artificer Knowledge","1:Artisan Bonus","1:Craft Reserve",' +
       '"1:Disable Trap","1:Item Creation","1:Scribe Scroll","2:Brew Potion",' +
-      '"3:Craft Wondrous Item","4:Craft Homunculus",' +
+      '"3:Craft Wondrous Item","4:Artificer Feat Bonus","4:Craft Homunculus",' +
       '"5:Craft Magic Arms And Armor","5:Retain Essence",' +
       '"6:Metamagic Spell Trigger","7:Craft Wand","9:Craft Rod",' +
       '"11:Metamagic Spell Completion","12:Craft Staff",' +
@@ -1604,7 +1589,7 @@ Eberron.PRESTIGE_CLASSES = {
       'Survival,Swim,Tumble,"Use Magic Device","Use Rope" ' +
     'Features=' +
       '"1:Additional Action Points","1:Trap Sense","2:Dodge Bonus",2:Evasion,' +
-      '"2:Extreme Hustle","4:Extreme Action"',
+      '"2:Extreme Hustle","3:Extreme Explorer Feat Bonus","4:Extreme Action"',
   'Heir Of Siberys':
     'Require=' +
       '"features.Aberrant Dragonmark == 0","features.Heroic Spirit",' +
@@ -1614,7 +1599,8 @@ Eberron.PRESTIGE_CLASSES = {
     'HitDie=d6 Attack=3/4 SkillPoints=2 Fortitude=1/2 Reflex=1/2 Will=1/2 ' +
     // Note: Heir Of Siberys grants no additional class skills
     'Features=' +
-      '"1:Additional Action Points","2:Siberys Mark",' +
+      '"1:Additional Action Points","1:Heir Of Siberys Feat Bonus",' +
+      '"2:Siberys Mark","3:Improved Siberys Mark",' +
       '"casterLevel ? 2:Caster Level Bonus",' +
       '"casterLevel == 0 ? 2:Feat Bonus"',
   'Master Inquisitive':
@@ -1626,7 +1612,8 @@ Eberron.PRESTIGE_CLASSES = {
       'Bluff,"Decipher Script","Gather Information","Knowledge (Local)",' +
       'Listen,Search,"Sense Motive",Spot ' +
     'Features=' +
-      '"1:Zone Of Truth",2:Contact,"3:Discern Lies","5:True Seeing"',
+      '"1:Zone Of Truth",2:Contact,"2:Master Inquisitive Feat Bonus",' +
+      '"3:Discern Lies","5:True Seeing"',
   'Warforged Juggernaut':
     'Require=' +
      '"baseAttack >= 5","features.Adamantine Body",' +
@@ -1650,7 +1637,7 @@ Eberron.PRESTIGE_CLASSES = {
       'Balance,Climb,"Handle Animal",Hide,Intimidate,Jump,' +
       '"Knowledge (Nature)",Listen,"Move Silently",Spot,Survival,Swim ' +
     'Features=' +
-      '"2:Wild Empathy",' +
+      '"2:Weretouched Feat Bonus","2:Wild Empathy",3:Scent,' +
       '"features.Bear ? 3:Improved Grab",' +
       '"features.Boar ? 3:Fierce Will",' +
       '"features.Rat ? 3:Climb Speed",' +
@@ -1668,6 +1655,38 @@ Eberron.PRESTIGE_CLASSES = {
       '1:Bear,1:Boar,1:Rat,1:Tiger,1:Wolf,1:Wolverine'
 };
 Eberron.NPC_CLASSES = Object.assign({}, SRD35.NPC_CLASSES);
+Eberron.DEITIES = {
+  'None':'Domain=' + QuilvynUtils.getKeys(Eberron.PATHS).filter(x => x.match(/Domain$/)).map(x => '"' + x.replace(' Domain', '') + '"').join(','),
+  'Arawai':'Alignment=NG Weapon=Morningstar Domain=Good,Life,Plant,Weather',
+  'Aureon':'Alignment=LN Weapon=Quarterstaff Domain=Knowledge,Law,Magic',
+  'Balinor':'Alignment=N Weapon=Battleaxe Domain=Air,Animal,Earth',
+  'Boldrei':'Alignment=LG Weapon=Spear Domain=Community,Good,Law,Protection',
+  'Dol Arrah':'Alignment=LG Weapon=Halberd Domain=Good,Law,Sun,War',
+  'Dol Dorn':'Alignment=CG Weapon=Longsword Domain=Chaos,Good,Strength,War',
+  'Kol Korran':
+    'Alignment=N Weapon="Heavy Mace","Light Mace" Domain=Charm,Commerce,Travel',
+  'Olladra':'Alignment=NG Weapon=Sickle Domain=Feast,Good,Healing,Luck',
+  'Onatar':'Alignment=NG Weapon=Warhammer Domain=Artifice,Fire,Good',
+  'The Blood Of Vol':
+    'Alignment=LE Weapon=Dagger Domain=Death,Evil,Law,Necromancer',
+  'The Cults Of The Dragon Below':
+    'Alignment=LN Weapon="Heavy Pick" Domain="Dragon Below",Earth,Evil,Madness',
+  'The Devourer':
+    'Alignment=NE Weapon=Trident Domain=Destruction,Evil,Water,Weather',
+  'The Fury':'Alignment=NE Weapon=Rapier Domain=Evil,Madness,Passion',
+  'The Keeper':'Alignment=NE Weapon=Scythe Domain=Death,Decay,Evil',
+  'The Mockery':'Alignment=NE Weapon=Kama Domain=Destruction,Evil,Trickery,War',
+  'The Path Of Light':
+    'Alignment=LN Weapon=Unarmed Domain=Law,Meditation,Protection',
+  'The Shadow':
+    'Alignment=CE Weapon=Quarterstaff Domain=Chaos,Evil,Magic,Shadow',
+  'The Silver Flame':
+    'Alignment=LG Weapon=Longbow Domain=Exorcism,Good,Law,Protection',
+  'The Traveler':
+    'Alignment=CN Weapon=Scimitar Domain=Artifice,Chaos,Travel,Trickery',
+  'The Undying Court':
+    'Alignment=NG Weapon=Scimitar Domain=Deathless,Good,Protection'
+};
 
 /* Defines the rules related to character abilities. */
 Eberron.abilityRules = function(rules) {
@@ -2034,7 +2053,9 @@ Eberron.classRulesExtra = function(rules, name) {
       if(feat == 'Wand Mastery' || allFeats[feat].indexOf('Item Creation') >= 0)
         allFeats[feat] = allFeats[feat].replace('Type=', 'Type=Artificer,');
     }
-    rules.defineRule('featCount.Artificer',
+    rules.defineRule
+      ('featCount.Artificer', 'featureNotes.artificerFeatBonus', '=', null);
+    rules.defineRule('featureNotes.artificerFeatBonus',
       'levels.Artificer', '=', 'Math.floor(source / 4)'
     );
     rules.defineRule('magicNotes.craftReserve',
@@ -2156,8 +2177,10 @@ Eberron.classRulesExtra = function(rules, name) {
       'combatNotes.dodgeBonus', '=', null
     );
     rules.defineRule('featCount.Extreme Explorer',
-      'levels.Extreme Explorer', '=',
-      'source < 3 ? null : Math.floor((source - 1) / 2)'
+      'featureNotes.extremeExplorerFeatBonus', '+=', null
+    );
+    rules.defineRule('featureNotes.extremeExplorerFeatBonus',
+      'levels.Extreme Explorer', '=', 'Math.floor((source - 1) / 2)'
     );
     rules.defineRule('saveNotes.trapSense',
       'levels.Extreme Explorer', '+=', 'Math.floor((source + 1) / 2)'
@@ -2185,14 +2208,15 @@ Eberron.classRulesExtra = function(rules, name) {
     rules.defineRule('casterLevels.Dragonmark',
       'levels.Heir Of Siberys', '^=', 'source >= 2 ? 15 : null'
     );
-    rules.defineRule
-      ('featCount.Heir Of Siberys', 'levels.Heir Of Siberys', '=', '1');
+    rules.defineRule('featCount.Heir Of Siberys',
+      'featureNotes.heirOfSiberysFeatBonus', '=', '1'
+    );
     rules.defineRule('magicNotes.casterLevelBonus',
       'levels.Heir Of Siberys', '+=', 'source - 1'
     );
     rules.defineRule('magicNotes.siberysMark.1',
-      'features.Siberys Mark', '?', null,
-      'levels.Heir Of Siberys', '=', 'source >= 3 ? 2 : 1'
+      'features.Siberys Mark', '=', '1',
+      'magicNotes.improvedSiberysMark', '+', '1'
     );
 
   } else if(name == 'Master Inquisitive') {
@@ -2216,8 +2240,10 @@ Eberron.classRulesExtra = function(rules, name) {
       }
     }
     rules.defineRule('featCount.Master Inquisitive',
-      'levels.Master Inquisitive', '=',
-      'source < 2 ? null : Math.floor(source / 2)'
+      'featureNotes.masterInquisitiveFeatBonus', '+=', null
+    );
+    rules.defineRule('featureNotes.masterInquisitiveFeatBonus',
+      'levels.Master Inquisitive', '=', 'Math.floor(source / 2)'
     );
     rules.defineRule('featureNotes.contact.1',
       'levels.Master Inquisitive', '=', 'source>=4 ? " and level 6" : ""'
@@ -2259,8 +2285,9 @@ Eberron.classRulesExtra = function(rules, name) {
       'features.Large', '=', '"3d6"'
     );
     rules.defineRule('combatNotes.powerfulCharge',
-      '', '=', '"d8"',
-      'features.Large', '=', '"2d6"'
+      '', '=', '"1d8"',
+      'features.Large', '=', '"2d6"',
+      'combatNotes.greaterPowerfulCharge', '=', null
     );
     rules.defineRule('combatNotes.superiorBullRush',
       'levels.Warforged Juggernaut', '=', 'source >= 4 ? "1d8" : "1d6"'
@@ -2275,7 +2302,8 @@ Eberron.classRulesExtra = function(rules, name) {
   } else if(name == 'Weretouched Master') {
 
     var allFeats = rules.getChoices('feats');
-    rules.defineRule('combatNotes.frightfulShifting', 'level', '=', null);
+    rules.defineRule
+      ('combatNotes.frightfulShifting', 'level', '=', 'source - 1');
     rules.defineRule('combatNotes.frightfulShifting.1',
       'levels.Weretouched Master', '=', 'source + 10',
       'charismaModifier', '+', null
@@ -2290,12 +2318,18 @@ Eberron.classRulesExtra = function(rules, name) {
       'combatNotes.wolf', '+=', '1',
       'combatNotes.wolverine', '+=', '1'
     );
-    rules.defineRule('featCount.Shifter',
-      'levels.Weretouched Master', '+=',
-      'source < 2 ? null : Math.floor(source / 2)'
+    rules.defineRule
+      ('featCount.Shifter', 'featureNotes.weretouchedFeatBonus', '=', null);
+    rules.defineRule('featureNotes.weretouchedFeatBonus',
+      'levels.Weretouched Master', '+=', 'Math.floor(source / 2)'
     );
     rules.defineRule('selectableFeatureCount.Weretouched Master',
       'levels.Weretouched Master', '=', '1'
+    );
+    rules.defineRule('skillNotes.climbSpeed',
+      'dexterityModifier', '=', null,
+      'strengthModifier', '+', '-source',
+      '', '^', '0'
     );
     rules.defineRule('skillNotes.wildEmpathy',
       'levels.Weretouched Master', '+=', null,
@@ -2411,6 +2445,17 @@ Eberron.featRulesExtra = function(rules, name) {
     rules.defineRule('resistance.' + energy,
       'saveNotes.dragonTotem(' + matchInfo[1] + ')', '^=', '5'
     );
+  } else if(name == 'Dragon Rage') {
+    rules.defineRule(
+      'saveNotes.dragonRage', '', '=', '"fire"',
+      'saveNotes.dragonTotem(Black)', '=', '"acid"',
+      'saveNotes.dragonTotem(Blue)', '=', '"electricity"',
+      'saveNotes.dragonTotem(Bronze)', '=', '"electricity"',
+      'saveNotes.dragonTotem(Copper)', '=', '"acid"',
+      'saveNotes.dragonTotem(Green)', '=', '"acid"',
+      'saveNotes.dragonTotem(Silver)', '=', '"cold"',
+      'saveNotes.dragonTotem(White)', '=', '"cold"'
+    )
   } else if(name == 'Extra Music') {
     rules.defineRule
       ('featureNotes.extraMusic', 'feats.Extra Music', '=', '4 * source');
@@ -2456,9 +2501,6 @@ Eberron.featRulesExtra = function(rules, name) {
     rules.defineRule('combatNotes.greaterPowerfulCharge',
       '', '=', '"2d6"',
       'features.Large', '=', '"3d6"'
-    );
-    rules.defineRule('combatNotes.powerfulCharge',
-      'combatNotes.greaterPowerfulCharge', '=', null
     );
   } else if(name == 'Greater Shifter Defense') {
     rules.defineRule
@@ -2518,8 +2560,9 @@ Eberron.featRulesExtra = function(rules, name) {
     );
   } else if(name == 'Powerful Charge') {
     rules.defineRule('combatNotes.powerfulCharge',
-      '', '=', '"d8"',
-      'features.Large', '=', '"2d6"'
+      '', '=', '"1d8"',
+      'features.Large', '=', '"2d6"',
+      'combatNotes.greaterPowerfulCharge', '=', null
     );
   } else if(name == 'Repel Aberration') {
     rules.defineRule('combatNotes.repelAberration.1',
@@ -2749,7 +2792,7 @@ Eberron.pathRulesExtra = function(rules, name) {
     for(var s in rules.getChoices('skills')) {
       if(s.startsWith('Craft '))
         rules.defineRule
-          ('skillModifier.' + s, 'skillNotes.craftMaster', '+', '4');
+          ('skillModifier.' + s, 'skillNotes.artificeMaster', '+', '4');
     }
   } else if(name == 'Decay Domain') {
     rules.defineRule('magicNotes.touchOfDecay', 'levels.Cleric', '=', null);
