@@ -1065,7 +1065,7 @@ Eberron.SPELLS_ADDED = {
   'Feast Of Champions':
     'School=Conjuration ' +
     'Level=C9,Feast9 ' +
-    'Description="R$RS\' Food for $L creatures cures disease, sickness, exhaustion, and 2d8+$L HP, grants poison and fear immunity, 1d8+$Ldiv2min10 temporary HP", and +1 attack, skill, ability, and saves for 12 hr',
+    'Description="R$RS\' Food for $L creatures cures disease, sickness, exhaustion, and 2d8+$L HP, grants poison and fear immunity, 1d8+$Ldiv2min10 temporary HP, and +1 attack, skill, ability, and saves for 12 hr"',
   'Greater Armor Enhancement':
     'School=Transmutation ' +
     'Level=A3 ' +
