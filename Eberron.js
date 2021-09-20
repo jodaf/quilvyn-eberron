@@ -1017,19 +1017,19 @@ Eberron.SPELLS_ADDED = {
   'Armor Enhancement':
     'School=Transmutation ' +
     'Level=A2 ' +
-    'Description="Touched armor or shield +3 or 35K GP enhancement for $L10 min"',
+    'Description="Touched armor or shield gains +3 or 35K GP enhancement for $L10 min"',
   'Bolts Of Bedevilment':
     'School=Enchantment ' +
     'Level=Madness5 ' +
-    'Description="R$RM\' 3 targets (1/rd) dazed for $L2 rd (Will neg)"',
+    'Description="R$RM\' 3 targets (1/rd) become dazed for $L2 rd (Will neg)"',
   'Construct Energy Ward':
     'School=Abjuration ' +
     'Level=A3 ' +
-    'Description="Touched construct resistance ${lvl>10?30:lvl>6?20:10} to chosen energy for $L10 min"',
+    'Description="Touched construct gains resistance ${lvl>10?30:lvl>6?20:10} to chosen energy for $L10 min"',
   'Control Deathless':
     'School=Necromancy ' +
     'Level=Deathless7 ' +
-    'Description="R$RS\' Command $L2 HD deathless in 15\' radius for $L min (Will neg)"',
+    'Description="R$RS\' $L2 HD deathless in 15\' radius obey self commands for $L min (Will neg)"',
   'Create Deathless':
     'School=Necromancy ' +
     'Level=Deathless6 ' +
@@ -1041,23 +1041,23 @@ Eberron.SPELLS_ADDED = {
   'Detect Aberration':
     'School=Divination ' +
     'Level=D1 ' +
-    'Description="R60\' cone info on aberrations for conc or $L min"',
+    'Description="R60\' cone gives self info on aberrations for conc or $L min"',
   'Detoxify':
     'School=Conjuration ' +
     'Level=Feast8 ' +
-    'Description="R30\' Neutralize venom, creatures for $L10 min (Will neg)"',
+    'Description="R30\' Neutralizes venom, creatures for $L10 min (Will neg)"',
   'Dimension Leap':
     'School=Conjuration ' +
     'Level=Orien1 ' +
-    'Description="Teleport self up to $L10\'"',
+    'Description="Self teleports up to $L10\'"',
   'Disable Construct':
     'School=Transmutation ' +
     'Level=A6 ' +
-    'Description="Touched construct $L10 HP (Will half)"',
+    'Description="Touched construct suffers $L10 HP (Will half)"',
   'Energy Alteration':
     'School=Transmutation ' +
     'Level=A1 ' +
-    'Description="Touched magic item uses and effects chosen energy type for $L10 min"',
+    'Description="Touched magic item uses and affects chosen energy type for $L10 min"',
   'Enhancement Alteration':
     'School=Transmutation ' +
     'Level=A1 ' +
@@ -1065,27 +1065,27 @@ Eberron.SPELLS_ADDED = {
   'Feast Of Champions':
     'School=Conjuration ' +
     'Level=C9,Feast9 ' +
-    'Description="R$RS\' Food for $L creatures cures disease, sickness, exhaustion, and 2d8+$L HP, grants poison and fear immunity, 1d8+$Ldiv2min10 temporary HP, and +1 attack, skill, ability, and saves for 12 hr"',
+    'Description="R$RS\' Food for $L creatures cures disease, sickness, exhaustion, and 2d8+$L HP, gives 1d8+$Ldiv2min10 temporary HP, +1 attack, skill, ability, and saves, and immunity to poison and fear for 12 hr"',
   'Greater Armor Enhancement':
     'School=Transmutation ' +
     'Level=A3 ' +
-    'Description="Touched armor or shield +5 or 100K GP enhancement for $L10 min"',
+    'Description="Touched armor or shield gains +5 or 100K GP enhancement for $L10 min"',
   'Greater Construct Energy Ward':
     'School=Abjuration ' +
     'Level=A4 ' +
-    'Description="Touched construct resistance $L12min120 to chosen energy for $L10 min"',
+    'Description="Touched construct gains resistance $L12min120 to chosen energy for $L10 min"',
   'Greater Status':
     'School=Divination ' +
     'Level=Community4 ' +
-    'Description="Monitor condition and position of and remotely cast level 0-2 touch spell on $Ldiv3 touched allies for $L hr"',
+    'Description="Self monitors condition and position of and remotely casts level 0-2 touch spells on $Ldiv3 touched allies for $L hr"',
   'Greater Weapon Augmentation':
     'School=Transmutation ' +
     'Level=A6 ' +
-    'Description="Touched weapon +5 or 200K GP enhancement for $L10 min"',
+    'Description="Touched weapon gains +5 or 200K GP enhancement for $L10 min"',
   'Halt Deathless':
     'School=Necromancy ' +
     'Level=Deathless3 ' +
-    'Description="R$RM\' 3 deathless in 15\' radius immobilized for $L rd (Will neg)"',
+    'Description="R$RM\' Immobilizes 3 deathless in 15\' radius for $L rd (Will neg)"',
   'Hardening':
     'School=Transmutation ' +
     'Level=A6,Artifice7,W6 ' +
@@ -1093,27 +1093,27 @@ Eberron.SPELLS_ADDED = {
   "Hero's Blade":
     'School=Necromancy ' +
     'Level=Deathless9 ' +
-    'Description="Touched blade good-aligned, dbl crit threat, +2d6 HP (+2d10 crit) to evil, +2d8 (+2d12 crit) to evil outsider or undead, crit blinds and deafens evil for 1d4 rd (Will neg), crit banishes evil outsider (Will neg) for $L min"',
+    'Description="Touched blade becomes good-aligned, inflicts +2d6 HP (+2d10 HP crit) on evil, +2d8 HP (+2d12 HP crit) on evil outsider or undead, crit threat dbl, crit blinds and deafens evil for 1d4 rd (Will neg) and banishes evil outsider (Will neg) for $L min"',
   'Inflict Critical Damage':
     'School=Transmutation ' +
     'Level=A4 ' +
-    'Description="Touched construct 4d8+$Lmin20 HP"',
+    'Description="Touched construct suffers 4d8+$Lmin20 HP"',
   'Inflict Light Damage':
     'School=Transmutation ' +
     'Level=A1 ' +
-    'Description="Touched construct 1d8+$Lmin5 HP"',
+    'Description="Touched construct suffers 1d8+$Lmin5 HP"',
   'Inflict Moderate Damage':
     'School=Transmutation ' +
     'Level=A2 ' +
-    'Description="Touched construct 2d8+$Lmin10 HP"',
+    'Description="Touched construct suffers 2d8+$Lmin10 HP"',
   'Inflict Serious Damage':
     'School=Transmutation ' +
     'Level=A3 ' +
-    'Description="Touched construct 3d8+$Lmin15 HP"',
+    'Description="Touched construct suffers 3d8+$Lmin15 HP"',
   'Iron Construct':
     'School=Transmutation ' +
     'Level=A4 ' +
-    'Description="Touched construct DR 15/adamantine, half acid and fire damage, +4 Str, -4 Dex, x5 weigh for $L min"',
+    'Description="Touched construct gains DR 15/adamantine, +4 Strength, -4 Dexterity, x5 weight, takes half damage from acid and fire for $L min"',
   'Item Alteration':
     'School=Transmutation ' +
     'Level=A4 ' +
@@ -1121,15 +1121,15 @@ Eberron.SPELLS_ADDED = {
   "Legion's Shield Of Faith":
     'School=Abjuration ' +
     'Level=A4 ' +
-    'Description="R$RM\' Allies in 20\' radius +$Ldiv6plus2min5 AC for $L min"',
+    'Description="R$RM\' Allies in 20\' radius gain +$Ldiv6plus2min5 AC for $L min"',
   'Lesser Armor Enhancement':
     'School=Transmutation ' +
     'Level=A1 ' +
-    'Description="Touched armor or shield +1 or 5K GP enhancement for $L10 min"',
+    'Description="Touched armor or shield gains +1 or 5K GP enhancement for $L10 min"',
   'Lesser Weapon Augmentation':
     'School=Transmutation ' +
     'Level=A2 ' +
-    'Description="Touched weapon +1 or 10K GP enhancement for $L10 min"',
+    'Description="Touched weapon gains +1 or 10K GP enhancement for $L10 min"',
   'Maddening Scream':
     'School=Enchantment ' +
     'Level=Madness8,W8 ' +
@@ -1137,19 +1137,19 @@ Eberron.SPELLS_ADDED = {
   'Magecraft':
     'School=Divination ' +
     'Level=W1 ' +
-    'Description="Self +5 same-day Craft check"',
+    'Description="Self gains +5 same-day Craft check"',
   'Metamagic Item':
     'School=Transmutation ' +
     'Level=A3 ' +
-    'Description="Imbue touched magic item w/metamagic property for $L rd"',
+    'Description="Imbues touched magic item w/metamagic property for $L rd"',
   "Nature's Wrath":
     'School=Evocation ' +
     'Level=Gatekeeper4 ' +
-    'Description="R$RM\' Aberrations in 20\' radius ${Lmin10}d6 HP and dazed 1 rd, other unnatural ${Ldiv2min5}d8 HP (Will half)"',
+    'Description="R$RM\' Aberrations in 20\' radius suffer ${Lmin10}d6 HP and dazed 1 rd, other unnatural suffer ${Ldiv2min5}d8 HP (Will half)"',
   'Personal Weapon Augmentation':
     'School=Transmutation ' +
     'Level=A1 ' +
-    'Description="Touched self weapon +1 or 10K GP enhancement for $L10 min"',
+    'Description="Touched self weapon gains +1 or 10K GP enhancement for $L10 min"',
   'Power Surge':
     'School=Transmutation ' +
     'Level=A3 ' +
@@ -1157,51 +1157,51 @@ Eberron.SPELLS_ADDED = {
   'Repair Critical Damage':
     'School=Transmutation ' +
     'Level=A4,W4 ' +
-    'Description="Touched construct regain 4d8+$Lmin20"',
+    'Description="Touched construct heals 4d8+$Lmin20"',
   'Repair Light Damage':
     'School=Transmutation ' +
     'Level=A1,Cannith1,W1 ' +
-    'Description="Touched construct regain 1d8+$Lmin5"',
+    'Description="Touched construct heals 1d8+$Lmin5"',
   'Repair Moderate Damage':
     'School=Transmutation ' +
     'Level=A2,W2 ' +
-    'Description="Touched construct regain 2d8+$Lmin10"',
+    'Description="Touched construct heals 2d8+$Lmin10"',
   'Repair Serious Damage':
     'School=Transmutation ' +
     'Level=A3,Cannith2,W3 ' +
-    'Description="Touched construct regain 3d8+$Lmin15"',
+    'Description="Touched construct heals 3d8+$Lmin15"',
   'Resistance Item':
     'School=Abjuration ' +
     'Level=A1 ' +
-    'Description="Touched grants +$Ldiv4plus1 saves for $L10 min"',
+    'Description="Touched gives +$Ldiv4plus1 saves for $L10 min"',
   'Return To Nature':
     'School=Transmutation ' +
     'Level=Gatekeeper7 ' +
-    'Description="R$RS\' Target arcane spellcaster 1d4 negative levels, giant <i>Reduce Person</i> (Fort neg), magical beasts/outsiders/aberrations 1d6 Int/${Ldiv2min10} HP/$L6 HP and 1d4/2d4/all supernatural abilities for 1 dy (Fort half, no ability loss)"',
+    'Description="R$RS\' Target arcane spellcaster suffers 1d4 negative levels, giant <i>Reduce Person</i> (Fort neg), magical beasts/outsiders/aberrations suffers -1d6 Intelligence/${Ldiv2min10} HP/$L6 HP and -1d4/-2d4/all supernatural abilities for 1 dy (Fort half, no ability loss)"',
   'Skill Enhancement':
     'School=Transmutation ' +
     'Level=A1 ' +
-    'Description="Touched grants +$Ldiv2plus2 specified skill checks for $L10 min"',
+    'Description="Touched gains +$Ldiv2plus2 specified skill checks for $L10 min"',
   'Spell Storing Item':
     'School=Transmutation ' +
     'Level=A1 ' +
-    'Description="Use Magic Device to imbue touched item with spell up to level $Ldiv2min4 level for $L hr"',
+    'Description="Self successful Use Magic Device check imbues touched item with spell up to level $Ldiv2min4 for $L hr"',
   'Spirit Steed':
     'School=Necromancy ' +
     'Level=Deathless4 ' +
-    'Description="Touched animal speed +30\', increased run, no hustle damage for $L hr"',
+    'Description="Touched animal gains +30\' Speed, increased run, and no hustle damage for $L hr"',
   'Stone Construct':
     'School=Transmutation ' +
     'Level=A3 ' +
-    'Description="Touched construct DR 10/adamantine for $L10min150 HP or $L10 min"',
+    'Description="Touched construct gains DR 10/adamantine for $L10min150 HP or $L10 min"',
   'Suppress Requirement':
     'School=Transmutation ' +
     'Level=A3 ' +
-    'Description="Remove usage requirement from touched magic item for $L10 min"',
+    'Description="Removes usage requirement from touched magic item for $L10 min"',
   'Total Repair':
     'School=Transmutation ' +
     'Level=A6 ' +
-    'Description="Touched construct conditions removed, $L10min150 HP repaired"',
+    'Description="Touched construct gains $L10min150 HP, conditions removed"',
   'Touch Of Madness':
     'School=Enchantment ' +
     'Level=Madness2 ' +
@@ -1209,27 +1209,27 @@ Eberron.SPELLS_ADDED = {
   'Toughen Construct':
     'School=Transmutation ' +
     'Level=A2 ' +
-    'Description="Touched construct +$Ldiv3plus1max2min5 AC for $L10 min"',
+    'Description="Touched construct gains +$Ldiv3plus1max2min5 AC for $L10 min"',
   'True Creation':
     'School=Conjuration ' +
     'Level=Artifice8,Cannith4 ' +
-    'Description="Create permanent $L\' cu plant or mineral object"',
+    'Description="Creates permanent $L\' cu plant or mineral object"',
   'Weapon Augmentation':
     'School=Transmutation ' +
     'Level=A4 ' +
-    'Description="Touched weapon +3 or 70K GP enhancement for $L10 min"',
+    'Description="Touched weapon gains +3 or 70K GP enhancement for $L10 min"',
   "Wind's Favor":
     'School=Transmutation ' +
     'Level=Lyrandar2 ' +
-    'Description="R$RM\' 10\'x10\'x$L20plus100\' 30 MPH wind for $L hr"',
+    'Description="R$RM\' Creates 10\'x10\'x$L20plus100\' 30 MPH wind for $L hr"',
   'Withering Palm':
     'School=Necromancy ' +
     'Level=Decay7 ' +
-    'Description="Touched loses $Ldiv2 Str and Con (Fort neg)"',
+    'Description="Touched suffers -$Ldiv2 Strength and Constitution (Fort neg)"',
   'Zone Of Natural Purity':
     'School=Evocation ' +
     'Level=Gatekeeper2 ' +
-    'Description="R$RS\' fey and plants in 20\' radius +1 attack, damage, and save, abberations -1, for $L2 hr"'
+    'Description="R$RS\' Fey and plants in 20\' radius gain +1 attack, damage, and save, abberations suffer -1, for $L2 hr"'
 };
 Eberron.SPELLS = Object.assign(
   {}, window.PHB35 != null ? PHB35.SPELLS : SRD35.SPELLS, Eberron.SPELLS_ADDED
@@ -2167,7 +2167,7 @@ Eberron.classRulesExtra = function(rules, name) {
         console.log('Missing Extreme Explorer feat "' + feat + '"');
       }
     }
-    // Arrange for dodge bonus note to show even when wearning non-light armor
+    // Arrange for dodge bonus note to show even when wearing non-light armor
     rules.defineRule('armorClass', 'combatNotes.dodgeBonus.1', '+', null);
     rules.defineRule('combatNotes.dodgeBonus',
       'levels.Extreme Explorer', '+=', 'Math.floor(source / 2)'

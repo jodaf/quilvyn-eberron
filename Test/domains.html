@@ -346,7 +346,7 @@ var attributes = {
     </tr><tr style="text-align:left">
       <td>Animate Plants (Life8 Tran): R50' 3 plants attack foes for 10 rd or entwine for 10 hr</td>
     </tr><tr style="text-align:left">
-      <td>Animate Rope (Artifice1 Tran): R200' 100' rope obeys commands for 10 rd</td>
+      <td>Animate Rope (Artifice1 Tran): R200' 100' rope obeys self for 10 rd</td>
     </tr><tr style="text-align:left">
       <td>Antilife Shell (Decay6 Abju): 10' radius bars living for 100 min</td>
     </tr><tr style="text-align:left">
@@ -354,31 +354,31 @@ var attributes = {
     </tr><tr style="text-align:left">
       <td>Banishment (Exorcism6 Abju): R50' 20 HD extraplanar creatures in 15' radius banished from plane (DC 19 Will neg)</td>
     </tr><tr style="text-align:left">
-      <td>Bestow Curse (Dragon3 Necr): Touched permanent -6 ability, -4 attack, saves, and checks, or 50% chance/rd of losing action (DC 16 Will neg)</td>
+      <td>Bestow Curse (Dragon3 Necr): Touched permanently suffers self choice of -6 ability, -4 attack, saves, and checks, or 50% chance/rd of losing action (DC 16 Will neg)</td>
     </tr><tr style="text-align:left">
-      <td>Blasphemy (Dragon7 Evoc): Nonevil creatures in 40' radius with equal/-1/-5/-10 HD dazed for 1 rd/-2d6 Str for 2d4 rd/paralyzed for 1d10 min/killed and banished (DC 20 Will -4 neg)</td>
+      <td>Blasphemy (Dragon7 Evoc): Nonevil creatures in 40' radius with equal/-1/-5/-10 HD dazed for 1 rd/suffer -2d6 Strength for 2d4 rd/paralyzed for 1d10 min/killed and banished (DC 20 Will -4 neg)</td>
     </tr><tr style="text-align:left">
-      <td>Bless (Community1 Ench): Allies in 50' radius +1 attack and fear saves for 10 min</td>
+      <td>Bless (Community1 Ench): Allies in 50' radius gain +1 attack and fear saves for 10 min</td>
     </tr><tr style="text-align:left">
-      <td>Blight (Decay5 Necr): Touched plant 10d6 HP (DC 18 Fort half)</td>
+      <td>Blight (Decay5 Necr): Touched plant suffers 10d6 HP (DC 18 Fort half)</td>
     </tr><tr style="text-align:left">
-      <td>Bolts Of Bedevilment (Madness5 Ench): R200' 3 targets (1/rd) dazed for 20 rd (DC 18 Will neg)</td>
+      <td>Bolts Of Bedevilment (Madness5 Ench): R200' 3 targets (1/rd) become dazed for 20 rd (DC 18 Will neg)</td>
     </tr><tr style="text-align:left">
-      <td>Call Lightning (Weather3 Evoc): R200' 10 bolts 3d6 HP (DC 16 Ref half), 1/rd for 10 min</td>
+      <td>Call Lightning (Weather3 Evoc): R200' 1 bolt/rd inflicts 3d6 HP (DC 16 Ref half) for 10 min or 10 bolts</td>
     </tr><tr style="text-align:left">
-      <td>Call Lightning Storm (Weather5 Evoc): R800' 10 bolts 5d6 HP (DC 18 Ref half), 1/rd for 10 min</td>
+      <td>Call Lightning Storm (Weather5 Evoc): R800' 1 bolt/rd inflicts 5d6 HP (DC 18 Ref half) for 10 min or 10 bolts</td>
     </tr><tr style="text-align:left">
       <td>Calm Emotions (Charm2 Ench): R200' Creatures in 20' radius pacified for conc or 10 rd (DC 15 Will neg)</td>
     </tr><tr style="text-align:left">
-      <td>Cause Fear (Dragon1 Necr): R50' Target w/up to 5 HD flee for 1d4 rd (DC 14 Will shaken for 1 rd)</td>
+      <td>Cause Fear (Dragon1 Necr): R50' Target w/up to 5 HD flees for 1d4 rd (DC 14 Will shaken for 1 rd)</td>
     </tr><tr style="text-align:left">
-      <td>Cause Fear (Passion1 Necr): R50' Target w/up to 5 HD flee for 1d4 rd (DC 14 Will shaken for 1 rd)</td>
+      <td>Cause Fear (Passion1 Necr): R50' Target w/up to 5 HD flees for 1d4 rd (DC 14 Will shaken for 1 rd)</td>
     </tr><tr style="text-align:left">
-      <td>Charm Monster (Charm5 Ench): R50' Target treats you as trusted friend for 10 dy (DC 18 Will neg)</td>
+      <td>Charm Monster (Charm5 Ench): R50' Target treats self as trusted friend for 10 dy (DC 18 Will neg)</td>
     </tr><tr style="text-align:left">
-      <td>Charm Person (Charm1 Ench): R50' Target treats you as trusted friend for 10 hr (DC 14 Will neg)</td>
+      <td>Charm Person (Charm1 Ench): R50' Target treats self as trusted friend for 10 hr (DC 14 Will neg)</td>
     </tr><tr style="text-align:left">
-      <td>Command Undead (Necromancer2 Necr): R50' Undead target obeys for 10 dy (DC 15 Will neg)</td>
+      <td>Command Undead (Necromancer2 Necr): R50' Undead target obeys self for 10 dy (DC 15 Will neg)</td>
     </tr><tr style="text-align:left">
       <td>Comprehend Languages (Commerce1 Divi): Self understands all languages for 100 min</td>
     </tr><tr style="text-align:left">
@@ -388,69 +388,69 @@ var attributes = {
     </tr><tr style="text-align:left">
       <td>Confusion (Passion3 Ench): R200' Creatures in 15' radius randomly 10% attack caster/10% act normal/30% babble/20% flee/30% attack nearest for 10 rd (DC 16 Will neg)</td>
     </tr><tr style="text-align:left">
-      <td>Consecrate (Deathless2 Evoc): R50' 20' radius gives +3 turn undead, undead -1 attack, damage, saves for 20 hr</td>
+      <td>Consecrate (Deathless2 Evoc): R50' 20' radius gives +3 turn undead, undead suffer -1 attack, damage, and saves for 20 hr</td>
     </tr><tr style="text-align:left">
-      <td>Contagion (Decay3 Necr): Touched diseased (DC 16 Fort neg)</td>
+      <td>Contagion (Decay3 Necr): Touched contracts random disease (DC 16 Fort neg)</td>
     </tr><tr style="text-align:left">
-      <td>Control Deathless (Deathless7 Necr): R50' Command 20 HD deathless in 15' radius for 10 min (DC 20 Will neg)</td>
+      <td>Control Deathless (Deathless7 Necr): R50' 20 HD deathless in 15' radius obey self commands for 10 min (DC 20 Will neg)</td>
     </tr><tr style="text-align:left">
-      <td>Control Undead (Necromancer7 Necr): R50' 20 HD undead in 15' radius obey for 10 min (DC 20 Will neg)</td>
+      <td>Control Undead (Necromancer7 Necr): R50' 20 HD undead in 15' radius obey self for 10 min (DC 20 Will neg)</td>
     </tr><tr style="text-align:left">
-      <td>Control Weather (Weather7 Tran): Create seasonal weather in 2 mile radius for 4d12 hr</td>
+      <td>Control Weather (Weather7 Tran): Modifies seasonal weather in 2 mile radius for 4d12 hr</td>
     </tr><tr style="text-align:left">
       <td>Control Winds (Weather6 Tran): R400' Changes wind direction and speed 3 levels in 400'x40' cylinder for 100 min</td>
     </tr><tr style="text-align:left">
       <td>Create Deathless (Deathless6 Necr): R50' Create deathless soldier</td>
     </tr><tr style="text-align:left">
-      <td>Create Food And Water (Feast3 Conj): R50' Daily food and water for 30 humans or 10 horses</td>
+      <td>Create Food And Water (Feast3 Conj): R50' Creates daily food and water for 30 humans or 10 horses</td>
     </tr><tr style="text-align:left">
       <td>Create Greater Deathless (Deathless8 Necr): R50' Create deathless councilor</td>
     </tr><tr style="text-align:left">
-      <td>Crushing Despair (Passion4 Ench): R30' cone -2 attack, damage, saves, checks for 10 min (DC 17 Will neg)</td>
+      <td>Crushing Despair (Passion4 Ench): R30' cone imposes -2 attack, damage, saves, and checks for 10 min (DC 17 Will neg)</td>
     </tr><tr style="text-align:left">
       <td>Darkness (Shadow2 Evoc): Touched radiates dim light in 20' radius for 100 min</td>
     </tr><tr style="text-align:left">
-      <td>Death Knell (Dragon2 Necr): Touched w/negative HP dies, self gain 1d8 HP, +2 Str, +1 caster level for 10*target HD min (DC 15 Will neg)</td>
+      <td>Death Knell (Dragon2 Necr): Touched w/negative HP dies, self gains 1d8 temporary HP, +2 Strength, and +1 caster level for 10*target HD min (DC 15 Will neg)</td>
     </tr><tr style="text-align:left">
-      <td>Death Ward (Life4 Necr): Touched immune death spells, death effects, energy drain, and negative energy effects for 10 min</td>
+      <td>Death Ward (Life4 Necr): Touched becomes immune to death spells, death effects, energy drain, and negative energy effects for 10 min</td>
     </tr><tr style="text-align:left">
       <td>Deeper Darkness (Shadow3 Evoc): Touched radiates dim light in 60' radius for 10 dy</td>
     </tr><tr style="text-align:left">
       <td>Delay Poison (Feast2 Conj): Touched immune to poison for 10 hr</td>
     </tr><tr style="text-align:left">
-      <td>Demand (Charm8 Ench): 25-word message to target, carry out suggestion (DC 21 Will neg)</td>
+      <td>Demand (Charm8 Ench): Self sends 25-word message to target w/<i>Suggestion</i> (DC 21 Will neg)</td>
     </tr><tr style="text-align:left">
-      <td>Detect Undead (Deathless1 Divi): R60' cone info on undead auras for conc or 10 min</td>
+      <td>Detect Undead (Deathless1 Divi): R60' cone gives self info on undead auras for conc or 10 min</td>
     </tr><tr style="text-align:left">
-      <td>Detoxify (Feast8 Conj): R30' Neutralize venom, creatures for 100 min (DC 21 Will neg)</td>
+      <td>Detoxify (Feast8 Conj): R30' Neutralizes venom, creatures for 100 min (DC 21 Will neg)</td>
     </tr><tr style="text-align:left">
       <td>Dismissal (Exorcism4 Abju): R50' Target returned to native plane (DC 17 Will + 10 - target HD neg)</td>
     </tr><tr style="text-align:left">
-      <td>Dispel Evil (Exorcism5 Abju): Self +4 AC vs. evil, touch to dismiss evil creature (DC 18 Will neg) or spell</td>
+      <td>Dispel Evil (Exorcism5 Abju): Self gains +4 AC vs. evil and dismisses evil creature via touch (DC 18 Will neg) or spell</td>
     </tr><tr style="text-align:left">
       <td>Disrupting Weapon (Life5 Tran): Hit w/touched weapon destroys undead up to 10 HD for 10 rd (DC 18 Will neg)</td>
     </tr><tr style="text-align:left">
-      <td>Dominate Monster (Charm9 Ench): R50' Target obey thoughts for 10 dy (DC 22 Will neg)</td>
+      <td>Dominate Monster (Charm9 Ench): R50' Target obeys self thoughts for 10 dy (DC 22 Will neg)</td>
     </tr><tr style="text-align:left">
-      <td>Dominate Monster (Passion9 Ench): R50' Target obey thoughts for 10 dy (DC 22 Will neg)</td>
+      <td>Dominate Monster (Passion9 Ench): R50' Target obeys self thoughts for 10 dy (DC 22 Will neg)</td>
     </tr><tr style="text-align:left">
-      <td>Doom (Decay1 Necr): R200' Target shaken (-2 attack, damage, saves, checks) for 10 min (DC 14 Will neg)</td>
+      <td>Doom (Decay1 Necr): R200' Target shaken (-2 attack, damage, saves, and checks) for 10 min (DC 14 Will neg)</td>
     </tr><tr style="text-align:left">
-      <td>Energy Drain (Decay9 Necr): R50' Ranged touch 2d4 negative levels (Fort/level after 1 dy neg, permanent otherwise) (undead +2d4x5 HP for 1 hr)</td>
+      <td>Energy Drain (Decay9 Necr): R50' Ranged touch inflicts 2d4 negative levels (Fort/level after 1 dy neg, permanent otherwise) (undead gains 2d4x5 HP for 1 hr)</td>
     </tr><tr style="text-align:left">
-      <td>Energy Drain (Necromancer9 Necr): R50' Ranged touch 2d4 negative levels (Fort/level after 1 dy neg, permanent otherwise) (undead +2d4x5 HP for 1 hr)</td>
+      <td>Energy Drain (Necromancer9 Necr): R50' Ranged touch inflicts 2d4 negative levels (Fort/level after 1 dy neg, permanent otherwise) (undead gains 2d4x5 HP for 1 hr)</td>
     </tr><tr style="text-align:left">
-      <td>Enervation (Decay4 Necr): R50' Ranged touch 1d4 negative levels for 10 hr (undead +1d4x5 HP for 1 hr)</td>
+      <td>Enervation (Decay4 Necr): R50' Ranged touch inflicts 1d4 negative levels for 10 hr (undead gains 1d4x5 HP for 1 hr)</td>
     </tr><tr style="text-align:left">
-      <td>Enervation (Necromancer4 Necr): R50' Ranged touch 1d4 negative levels for 10 hr (undead +1d4x5 HP for 1 hr)</td>
+      <td>Enervation (Necromancer4 Necr): R50' Ranged touch inflicts 1d4 negative levels for 10 hr (undead gains 1d4x5 HP for 1 hr)</td>
     </tr><tr style="text-align:left">
       <td>Eyebite (Necromancer6 Necr): R50' 1 target/rd with 1/5/10 HD comatose 100 min/panicked for 1d4 rd and shaken for 100 min/sickened for 100 min for 3 rd (DC 19 Fort neg)</td>
     </tr><tr style="text-align:left">
-      <td>Fabricate (Artifice5 Tran): R50' Create 100' cu (10' mineral cu) of finished items from raw materials</td>
+      <td>Fabricate (Artifice5 Tran): R50' Creates 100' cu (10' cu mineral) of finished items from raw materials</td>
     </tr><tr style="text-align:left">
-      <td>Feast Of Champions (C9 Conj): R50' Food for 10 creatures cures disease, sickness, exhaustion, and 2d8+10 HP, grants poison and fear immunity, 1d8+5 temporary HP</td>
+      <td>Feast Of Champions (C9 Conj): R50' Food for 10 creatures cures disease, sickness, exhaustion, and 2d8+10 HP, gives 1d8+5 temporary HP, +1 attack, skill, ability, and saves, and immunity to poison and fear for 12 hr</td>
     </tr><tr style="text-align:left">
-      <td>Feast Of Champions (Feast9 Conj): R50' Food for 10 creatures cures disease, sickness, exhaustion, and 2d8+10 HP, grants poison and fear immunity, 1d8+5 temporary HP</td>
+      <td>Feast Of Champions (Feast9 Conj): R50' Food for 10 creatures cures disease, sickness, exhaustion, and 2d8+10 HP, gives 1d8+5 temporary HP, +1 attack, skill, ability, and saves, and immunity to poison and fear for 12 hr</td>
     </tr><tr style="text-align:left">
       <td>Find The Path (Meditation6 Divi): Touched knows most direct route to location for 100 min</td>
     </tr><tr style="text-align:left">
@@ -458,81 +458,81 @@ var attributes = {
     </tr><tr style="text-align:left">
       <td>Freedom (Exorcism9 Abju): R50' Target released from movement restrictions</td>
     </tr><tr style="text-align:left">
-      <td>Gate (Dragon9 Conj): R200' 5'-20' disk connects another plane for conc or 10 rd, allows summoning of extraplanar creature</td>
+      <td>Gate (Dragon9 Conj): R200' 5' - 20' disk connects to another plane for conc or 10 rd, allows summoning of extraplanar creature</td>
     </tr><tr style="text-align:left">
       <td>Geas/Quest (Charm6 Ench): R50' Target must complete task</td>
     </tr><tr style="text-align:left">
-      <td>Glibness (Commerce4 Tran): Self +30 Bluff, SR 25 (magical lie detection) for 100 min</td>
+      <td>Glibness (Commerce4 Tran): Self gains +30 Bluff, SR 25 (magical lie detection) for 100 min</td>
     </tr><tr style="text-align:left">
-      <td>Goodberry (Feast1 Tran): 2d4 berries provide meal and heal 1 HP for 10 dy</td>
+      <td>Goodberry (Feast1 Tran): 2d4 berries provide a full meal and heal 1 HP for 10 dy</td>
     </tr><tr style="text-align:left">
-      <td>Greater Command (Passion5 Ench): R50' 10 targets in 15' radius approach, drop, fall, flee, or halt for 10 rd (DC 18 Will neg)</td>
+      <td>Greater Command (Passion5 Ench): R50' 10 targets in 15' radius obey self commands to approach, drop, fall, flee, or halt for 10 rd (DC 18 Will neg)</td>
     </tr><tr style="text-align:left">
-      <td>Greater Heroism (Passion6 Ench): Touched +4 attack, saves, and skill checks, +10 HP, immune fear for 100 min</td>
+      <td>Greater Heroism (Passion6 Ench): Touched gains +4 attack, saves, and skill checks, +10 temporary HP, and immunity to fear for 100 min</td>
     </tr><tr style="text-align:left">
-      <td>Greater Planar Ally (Dragon8 Conj): Purchase service from extraplanar creature w/up to 18 HD</td>
+      <td>Greater Planar Ally (Dragon8 Conj): Self purchases service from extraplanar creature w/up to 18 HD</td>
     </tr><tr style="text-align:left">
       <td>Greater Shadow Conjuration (Shadow7 Illu): Mimics conjuration (creation or summoning) spell up to 6th level (DC 20 Will 60% effect)</td>
     </tr><tr style="text-align:left">
       <td>Greater Shadow Evocation (Shadow8 Illu): Mimics evocation spell up to 7th level (DC 21 Will 60% effect)</td>
     </tr><tr style="text-align:left">
-      <td>Greater Status (Community4 Divi): Monitor condition and position of and remotely cast level 0-2 touch spell on 3 touched allies for 10 hr</td>
+      <td>Greater Status (Community4 Divi): Self monitors condition and position of and remotely casts level 0-2 touch spells on 3 touched allies for 10 hr</td>
     </tr><tr style="text-align:left">
-      <td>Hallow (Deathless5 Evoc): 40' radius from touched gives +2 AC and saves vs. evil, suppresses mental control, bars contact by summoned evil creatures, prevents undead creation, grants +4 turn undead bonus, and evokes boon spell</td>
+      <td>Hallow (Deathless5 Evoc): 40' radius from touched gives +2 AC and saves vs. evil, suppresses mental control, bars contact by summoned evil creatures, prevents undead creation, gives +4 turn undead bonus, and evokes boon spell</td>
     </tr><tr style="text-align:left">
-      <td>Halt Deathless (Deathless3 Necr): R200' 3 deathless in 15' radius immobilized for 10 rd (DC 16 Will neg)</td>
+      <td>Halt Deathless (Deathless3 Necr): R200' Immobilizes 3 deathless in 15' radius for 10 rd (DC 16 Will neg)</td>
     </tr><tr style="text-align:left">
       <td>Hardening (Artifice7 Tran): Touched 10 10' cu item (10' cu metal or mineral) resists damage</td>
     </tr><tr style="text-align:left">
-      <td>Hero's Blade (Deathless9 Necr): Touched blade good-aligned, dbl crit threat, +2d6 HP (+2d10 crit) to evil, +2d8 (+2d12 crit) to evil outsider or undead, crit blinds and deafens evil for 1d4 rd (DC 22 Will neg), crit banishes evil outsider (DC 22 Will neg) for 10 min</td>
+      <td>Hero's Blade (Deathless9 Necr): Touched blade becomes good-aligned, inflicts +2d6 HP (+2d10 HP crit) on evil, +2d8 HP (+2d12 HP crit) on evil outsider or undead, crit threat dbl, crit blinds and deafens evil for 1d4 rd (DC 22 Will neg) and banishes evil outsider (DC 22 Will neg) for 10 min</td>
     </tr><tr style="text-align:left">
-      <td>Heroes' Feast (Community6 Conj): R50' Food for 10 creatures cures sickness and disease, 1d8+5 temporary HP, +1 attack and Will saves, immune poison and fear for 12 hr</td>
+      <td>Heroes' Feast (Community6 Conj): R50' Food for 10 creatures cures sickness and disease, gives 1d8+5 temporary HP, +1 attack and Will saves and immunity to poison and fear for 12 hr</td>
     </tr><tr style="text-align:left">
-      <td>Heroes' Feast (Feast6 Conj): R50' Food for 10 creatures cures sickness and disease, 1d8+5 temporary HP, +1 attack and Will saves, immune poison and fear for 12 hr</td>
+      <td>Heroes' Feast (Feast6 Conj): R50' Food for 10 creatures cures sickness and disease, gives 1d8+5 temporary HP, +1 attack and Will saves and immunity to poison and fear for 12 hr</td>
     </tr><tr style="text-align:left">
-      <td>Heroism (Charm4 Ench): Touched +2 attack, saves, and skill checks for 100 min</td>
+      <td>Heroism (Charm4 Ench): Touched gains +2 attack, saves, and skill checks for 100 min</td>
     </tr><tr style="text-align:left">
-      <td>Hide From Undead (Life1 Abju): 10 touched imperceptible to undead for 100 min (DC 14 Will neg)</td>
+      <td>Hide From Undead (Life1 Abju): 10 touched become imperceptible to undead for 100 min (DC 14 Will neg)</td>
     </tr><tr style="text-align:left">
-      <td>Holy Aura (Exorcism8 Abju): 10 creatures in 20' radius +4 AC and saves, SR 25 (evil), suppress mental control, and striking foes blinded (DC 21 Fort neg) for 10 rd</td>
+      <td>Holy Aura (Exorcism8 Abju): 10 creatures in 20' radius gain +4 AC and saves and SR 25 (evil), suppress mental control, and blind successful evil attacker (DC 21 Fort neg) for 10 rd</td>
     </tr><tr style="text-align:left">
       <td>Holy Word (Exorcism7 Evoc): Nongood creatures in 40' radius with equal/-1/-5/-10 HD deafened for 1d4 rd/blinded for 2d4 rd/paralyzed for 1d10 min/killed and banished (DC 20 Will neg)</td>
     </tr><tr style="text-align:left">
-      <td>Horrid Wilting (Decay8 Necr): R800' 10d6 HP (10d8 plants or water elementals) in 30' radius (DC 21 Fort half)</td>
+      <td>Horrid Wilting (Decay8 Necr): R800' Creatures in 30' radius suffer 10d6 HP (plants or water elementals 10d8 HP) (DC 21 Fort half)</td>
     </tr><tr style="text-align:left">
-      <td>Horrid Wilting (Necromancer8 Necr): R800' 10d6 HP (10d8 plants or water elementals) in 30' radius (DC 21 Fort half)</td>
+      <td>Horrid Wilting (Necromancer8 Necr): R800' Creatures in 30' radius suffer 10d6 HP (plants or water elementals 10d8 HP) (DC 21 Fort half)</td>
     </tr><tr style="text-align:left">
-      <td>Insanity (Charm7 Ench): R200' Target randomly 10% attack caster/10% act normal/30% babble/20% flee/30% attack nearest permanently (DC 20 Will neg)</td>
+      <td>Insanity (Charm7 Ench): R200' Target permanently randomly 10% attacks caster/10% acts normal/30% babbles/20% flees/30% attacks nearest (DC 20 Will neg)</td>
     </tr><tr style="text-align:left">
-      <td>Insanity (Madness7 Ench): R200' Target randomly 10% attack caster/10% act normal/30% babble/20% flee/30% attack nearest permanently (DC 20 Will neg)</td>
+      <td>Insanity (Madness7 Ench): R200' Target permanently randomly 10% attacks caster/10% acts normal/30% babbles/20% flees/30% attacks nearest (DC 20 Will neg)</td>
     </tr><tr style="text-align:left">
-      <td>Leomund's Secret Chest (Commerce6 Conj): 10' cu ethereal chest can be recalled at will for 60 dy</td>
+      <td>Leomund's Secret Chest (Commerce6 Conj): Self can summon 10' cu ethereal chest at will for 60 dy</td>
     </tr><tr style="text-align:left">
-      <td>Leomund's Secure Shelter (Feast5 Conj): R50' 20'x20' cottage lasts 20 hr</td>
+      <td>Leomund's Secure Shelter (Feast5 Conj): R50' Creates 20'x20' cottage that lasts 20 hr</td>
     </tr><tr style="text-align:left">
       <td>Lesser Confusion (Madness1 Ench): R200' Target randomly 10% attack caster/10% act normal/30% babble/20% flee/30% attack nearest for 1 rd (DC 14 Will neg)</td>
     </tr><tr style="text-align:left">
-      <td>Lesser Planar Ally (Dragon4 Conj): Purchase service from extraplanar creature w/up to 6 HD</td>
+      <td>Lesser Planar Ally (Dragon4 Conj): Self purchases service from extraplanar creature w/up to 6 HD</td>
     </tr><tr style="text-align:left">
-      <td>Lesser Restoration (Life2 Conj): Dispels magical ability harm from touched or heals 1d4 temporary ability damage, removes fatigue, reduces exhaustion</td>
+      <td>Lesser Restoration (Life2 Conj): Dispels magical ability harm from touched or heals 1d4 temporary ability damage, removes fatigue, and reduces exhaustion</td>
     </tr><tr style="text-align:left">
-      <td>Locate Object (Meditation3 Divi): Self sense direction of object or type in 800' radius for 10 min</td>
+      <td>Locate Object (Meditation3 Divi): Self senses direction of object or type in 800' radius for 10 min</td>
     </tr><tr style="text-align:left">
       <td>Maddening Scream (Madness8 Ench): Touched acts madly (-4 AC, Ref save requires nat 20) for 1d4+1 rd</td>
     </tr><tr style="text-align:left">
-      <td>Magic Circle Against Evil (Exorcism2 Abju): 10' radius from touched +2 AC, +2 saves, suppresses mental control, no contact and bar entry (SR neg) by nongood summoned creatures for 100 min</td>
+      <td>Magic Circle Against Evil (Exorcism2 Abju): 10' radius from touched gives +2 AC and saves, suppresses mental control, bars contact and entry (SR neg) by nongood summoned creatures for 100 min</td>
     </tr><tr style="text-align:left">
-      <td>Major Creation (Artifice6 Conj): R50' Create 10' cu plant or mineral object for up to 20 hr</td>
+      <td>Major Creation (Artifice6 Conj): R50' Creates 10' cu plant or mineral object for up to 20 hr</td>
     </tr><tr style="text-align:left">
-      <td>Mass Heal (Community9 Conj): R50' Targets in 15' radius regain 100 HP and remove negative conditions (damages undead)</td>
+      <td>Mass Heal (Community9 Conj): R50' Targets in 15' radius heal (undead suffer) 100 HP and remove negative conditions</td>
     </tr><tr style="text-align:left">
-      <td>Mass Heal (Life9 Conj): R50' Targets in 15' radius regain 100 HP and remove negative conditions (damages undead)</td>
+      <td>Mass Heal (Life9 Conj): R50' Targets in 15' radius heal (undead suffer) 100 HP and remove negative conditions</td>
     </tr><tr style="text-align:left">
-      <td>Mind Blank (Meditation8 Abju): R50' Target immune divination and mental effects for 1 dy</td>
+      <td>Mind Blank (Meditation8 Abju): R50' Target gains immunity to divination and mental effects for 1 dy</td>
     </tr><tr style="text-align:left">
-      <td>Minor Creation (Artifice4 Conj): Create a 10' cu plant object lasting 10 hr</td>
+      <td>Minor Creation (Artifice4 Conj): Creates a 10' cu plant object lasting 10 hr</td>
     </tr><tr style="text-align:left">
-      <td>Mordenkainen's Magnificent Mansion (Feast7 Conj): R50' Door to extradimensional mansion for 20 hr</td>
+      <td>Mordenkainen's Magnificent Mansion (Feast7 Conj): R50' Creates door to extradimensional mansion for 20 hr</td>
     </tr><tr style="text-align:left">
       <td>Neutralize Poison (Feast4 Conj): Touched neutralized 100 min, immunized, or detoxified</td>
     </tr><tr style="text-align:left">
@@ -540,37 +540,37 @@ var attributes = {
     </tr><tr style="text-align:left">
       <td>Obscuring Mist (Weather1 Conj): Fog in 20' radius obscures vision for 10 min</td>
     </tr><tr style="text-align:left">
-      <td>Otto's Irresistible Dance (Passion8 Ench): Touched dance (-4 AC, -10 Reflex) for d4+1 rd</td>
+      <td>Otto's Irresistible Dance (Passion8 Ench): Touched dances (-4 AC, -10 Reflex) for d4+1 rd</td>
     </tr><tr style="text-align:left">
-      <td>Owl's Wisdom (Meditation2 Tran): Touched +4 Wis for 10 min</td>
+      <td>Owl's Wisdom (Meditation2 Tran): Touched gains +4 Wisdom for 10 min</td>
     </tr><tr style="text-align:left">
-      <td>Phantasmal Killer (Madness6 Illu): R200' Fears of target create creature (DC 19 Will neg), touch kills (DC 19 Fort 3d6 HP)</td>
+      <td>Phantasmal Killer (Madness6 Illu): R200' Fears of target create creature (DC 19 Will neg) whose touch kills target (DC 19 Fort suffers 3d6 HP)</td>
     </tr><tr style="text-align:left">
-      <td>Planar Ally (Dragon6 Conj): Purchase service from extraplanar creature w/up to 12 HD</td>
+      <td>Planar Ally (Dragon6 Conj): Self purchases service from extraplanar creature w/up to 12 HD</td>
     </tr><tr style="text-align:left">
       <td>Plant Growth (Life3 Tran): Vegetation in 800' radius becomes dense or 1/2 mile radius increases productivity</td>
     </tr><tr style="text-align:left">
       <td>Polymorph Any Object (Commerce9 Tran): R50' Target becomes something else (DC 22 Fort neg)</td>
     </tr><tr style="text-align:left">
-      <td>Prayer (Community3 Ench): Allies in 40' radius +1 attack, damage, save, and skill, foes -1 for 10 rd</td>
+      <td>Prayer (Community3 Ench): Allies in 40' radius gain +1 attack, damage, save, and skill, foes suffer -1 for 10 rd</td>
     </tr><tr style="text-align:left">
-      <td>Prismatic Sphere (Artifice9 Abju): 10' sphere blocks attacks and harms attackers, blinds viewers w/up to 7 HD w/in 20' for 2d4x10 min for 100 min</td>
+      <td>Prismatic Sphere (Artifice9 Abju): 10' sphere blocks attacks and harms attackers, blinds viewers w/in 20' w/up to 7 HD for 2d4x10 min for 100 min</td>
     </tr><tr style="text-align:left">
-      <td>Protection From Evil (Exorcism1 Abju): Touched +2 AC, +2 saves, suppress mental control, no contact by nongood summoned creatures for 10 min</td>
+      <td>Protection From Evil (Exorcism1 Abju): Touched gains +2 AC and saves, suppresses mental control, and bars contact by nongood summoned creatures for 10 min</td>
     </tr><tr style="text-align:left">
-      <td>Rage (Madness3 Ench): R200' 3 willing targets in 15' radius +2 Str, +2 Con, +1 Will, -2 AC for conc + 10 rd</td>
+      <td>Rage (Madness3 Ench): R200' 3 willing targets in 15' radius gain +2 Strength and Constitution, +1 Will, suffer -2 AC for conc + 10 rd</td>
     </tr><tr style="text-align:left">
       <td>Rary's Telepathic Bond (Community5 Divi): R50' Self and/or 3 willing targets in 15' diameter share thoughts for 100 min</td>
     </tr><tr style="text-align:left">
-      <td>Ray Of Enfeeblement (Decay2 Necr): R50' Ranged touch 1d6+5 Str for 10 min</td>
+      <td>Ray Of Enfeeblement (Decay2 Necr): R50' Ranged touch inflicts -1d6+5 Strength for 10 min</td>
     </tr><tr style="text-align:left">
-      <td>Ray Of Enfeeblement (Necromancer1 Necr): R50' Ranged touch 1d6+5 Str for 10 min</td>
+      <td>Ray Of Enfeeblement (Necromancer1 Necr): R50' Ranged touch inflicts -1d6+5 Strength for 10 min</td>
     </tr><tr style="text-align:left">
       <td>Refuge (Commerce7 Conj): Breaking object transports target to your home</td>
     </tr><tr style="text-align:left">
       <td>Refuge (Community7 Conj): Breaking object transports target to your home</td>
     </tr><tr style="text-align:left">
-      <td>Regenerate (Life7 Conj): Touched regrow maims, heal 4d8+10 HP, eliminate fatigue, exhaustion, and nonlethal damage</td>
+      <td>Regenerate (Life7 Conj): Touched regrows maims, heals 4d8+10 HP, eliminates fatigue, exhaustion, and nonlethal damage</td>
     </tr><tr style="text-align:left">
       <td>Remove Curse (Exorcism3 Abju): Dispels all curses from touched</td>
     </tr><tr style="text-align:left">
@@ -582,25 +582,25 @@ var attributes = {
     </tr><tr style="text-align:left">
       <td>Shadow Walk (Shadow6 Illu): Self and 10 touched travel quickly via Plane of Shadow for 10 hr (DC 19 Will Neg)</td>
     </tr><tr style="text-align:left">
-      <td>Slay Living (Dragon5 Necr): Touched slain (DC 18 Fort 3d6+10 HP)</td>
+      <td>Slay Living (Dragon5 Necr): Touched slain (DC 18 Fort suffers 3d6+10 HP)</td>
     </tr><tr style="text-align:left">
-      <td>Sleet Storm (Weather4 Conj): R800' Blinding sleet in 40' radius, creatures DC 10 Balance to move for 10 rd</td>
+      <td>Sleet Storm (Weather4 Conj): R800' Sleet in 40' radius blinds, requires DC 10 Balance to move for 10 rd</td>
     </tr><tr style="text-align:left">
-      <td>Song Of Discord (Passion7 Ench): R200' Creatures in 20' radius 50% chance each rd to attack neighbor for 10 rd (DC 20 Will neg)</td>
+      <td>Song Of Discord (Passion7 Ench): R200' Creatures in 20' radius have 50% chance each rd of attacking neighbor for 10 rd (DC 20 Will neg)</td>
     </tr><tr style="text-align:left">
-      <td>Spell Resistance (Meditation5 Abju): Touched SR 22 for 10 min</td>
+      <td>Spell Resistance (Meditation5 Abju): Touched gains SR 22 for 10 min</td>
     </tr><tr style="text-align:left">
       <td>Spell Turning (Meditation7 Abju): 1d4+6 levels of non-area, non-ranged-touch spells directed at self reflect onto caster for 100 min</td>
     </tr><tr style="text-align:left">
-      <td>Spirit Steed (Deathless4 Necr): Touched animal speed +30', increased run, no hustle damage for 10 hr</td>
+      <td>Spirit Steed (Deathless4 Necr): Touched animal gains +30' Speed, increased run, and no hustle damage for 10 hr</td>
     </tr><tr style="text-align:left">
-      <td>Status (Community2 Divi): Monitor condition and position of 3 touched allies for 10 hr</td>
+      <td>Status (Community2 Divi): Self monitors condition and position of 3 touched allies for 10 hr</td>
     </tr><tr style="text-align:left">
-      <td>Stone Shape (Artifice3 Tran): Shape 20' cu of stone</td>
+      <td>Stone Shape (Artifice3 Tran): Self reshapes 20' cu of stone</td>
     </tr><tr style="text-align:left">
-      <td>Storm Of Vengeance (Weather9 Conj): R800' 360' radius storm deafens for 1d4x10 min (DC 22 Fort neg), then rain acid 1d6 HP, then 6 bolts lightning 10d6 (DC 22 Ref half), then hail 5d6 HP, then obscure vision for 6 rd</td>
+      <td>Storm Of Vengeance (Weather9 Conj): R800' 360' radius storm deafens for 1d4x10 min (DC 22 Fort neg), then rains acid inflicting 1d6 HP, then generates 6 bolts lightning that inflict 10d6 HP each (DC 22 Ref half), then hail that inflicts 5d6 HP, then obscures vision for 6 rd</td>
     </tr><tr style="text-align:left">
-      <td>Suggestion (Charm3 Ench): R50' Target follow reasonable suggestion for 10 hr (DC 16 Will neg)</td>
+      <td>Suggestion (Charm3 Ench): R50' Target follows reasonable suggestion for 10 hr (DC 16 Will neg)</td>
     </tr><tr style="text-align:left">
       <td>Sympathy (Community8 Ench): R50' Named creature kind or alignment drawn to 100' cu for 20 hr (DC 21 Will neg)</td>
     </tr><tr style="text-align:left">
@@ -612,21 +612,21 @@ var attributes = {
     </tr><tr style="text-align:left">
       <td>Touch Of Madness (Madness2 Ench): Touched dazed for 20 rd</td>
     </tr><tr style="text-align:left">
-      <td>True Creation (Artifice8 Conj): Create permanent 10' cu plant or mineral object</td>
+      <td>True Creation (Artifice8 Conj): Creates permanent 10' cu plant or mineral object</td>
     </tr><tr style="text-align:left">
-      <td>True Seeing (Commerce5 Divi): Touched sees through 120' darkness, illusion, and invisible for 10 min</td>
+      <td>True Seeing (Commerce5 Divi): Touched sees through 120' darkness, illusion, and invisibility for 10 min</td>
     </tr><tr style="text-align:left">
-      <td>Vampiric Touch (Necromancer3 Necr): Touched 5d6 HP, self gain same as temporary HP for 1 hr</td>
+      <td>Vampiric Touch (Necromancer3 Necr): Touched suffers 5d6 HP, self gains same as temporary HP for 1 hr</td>
     </tr><tr style="text-align:left">
       <td>Waves Of Fatigue (Necromancer5 Necr): Creatures in 30' cone fatigued</td>
     </tr><tr style="text-align:left">
-      <td>Weird (Madness9 Illu): R200' Fears of targets in 15' radius create creatures (DC 22 Will neg), touch kills (DC 22 Fort 3d6 HP, 1d4 Str, stunned for 1 rd)</td>
+      <td>Weird (Madness9 Illu): R200' Fears of targets in 15' radius create creatures (DC 22 Will neg) whose touch kills targets (DC 22 Fort suffer 3d6 HP, -1d4 Str, stunned for 1 rd)</td>
     </tr><tr style="text-align:left">
-      <td>Whirlwind (Weather8 Evoc): R800' Wind in 10' radius 3d6 HP, then 1d8 HP/rd for 10 rd (DC 21 Ref neg)</td>
+      <td>Whirlwind (Weather8 Evoc): R800' Wind in 10' radius inflicts 3d6 HP, then 1d8 HP/rd for 10 rd (DC 21 Ref neg)</td>
     </tr><tr style="text-align:left">
-      <td>Withering Palm (Decay7 Necr): Touched loses 5 Str and Con (DC 20 Fort neg)</td>
+      <td>Withering Palm (Decay7 Necr): Touched suffers -5 Strength and Constitution (DC 20 Fort neg)</td>
     </tr><tr style="text-align:left">
-      <td>Wood Shape (Artifice2 Tran): Shape 20' cu of wood (DC 15 Will neg)</td>
+      <td>Wood Shape (Artifice2 Tran): Self shapes 20' cu of wood (DC 15 Will neg)</td>
     </tr><tr style="text-align:left">
       <td>Zone Of Truth (Commerce2 Ench): R50' Creatures in 20' radius cannot lie for 10 min (DC 15 Will neg)</td>
     </tr></table>
@@ -653,6 +653,16 @@ var attributes = {
       <td>Spontaneous Cleric Spell: Cast <i>Cure</i> or <i>Inflict</i> in place of known spell</td>
     </tr><tr style="text-align:center">
       <td>Touch Of Decay: Touched 1d4 Con (living) or 2d6+10 HP (undead) 1/dy</td>
+    </tr></table>
+</td>
+  </tr></table>
+</td>
+</tr><tr style="text-align:center">
+  <td style="border:1px solid black"><b>Notes</b><br/>  <table id="NotesArea" style="width:100%">
+  <tr style="text-align:center">
+    <td>    <table id="ValidationPart" style="width:100%">
+    <tr style="text-align:center">
+      <td><b>Validation Errors</b>: Selectable Feature Allocation: 2 available vs. 16 allocated</td>
     </tr></table>
 </td>
   </tr></table>
