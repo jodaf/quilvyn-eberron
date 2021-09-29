@@ -1033,15 +1033,15 @@ Eberron.SPELLS_ADDED = {
   'Create Deathless':
     'School=Necromancy ' +
     'Level=Deathless6 ' +
-    'Description="R$RS\' Create deathless soldier"',
+    'Description="R$RS\' Creates deathless soldier"',
   'Create Greater Deathless':
     'School=Necromancy ' +
     'Level=Deathless8 ' +
-    'Description="R$RS\' Create deathless councilor"',
+    'Description="R$RS\' Creates deathless councilor"',
   'Detect Aberration':
     'School=Divination ' +
     'Level=D1 ' +
-    'Description="R60\' cone gives self info on aberrations for conc or $L min"',
+    'Description="R60\' Cone gives self info on aberrations for conc or $L min"',
   'Detoxify':
     'School=Conjuration ' +
     'Level=Feast8 ' +
@@ -1181,7 +1181,7 @@ Eberron.SPELLS_ADDED = {
   'Skill Enhancement':
     'School=Transmutation ' +
     'Level=A1 ' +
-    'Description="Touched gains +$Ldiv2plus2 specified skill checks for $L10 min"',
+    'Description="Touched gains +$Ldiv2plus2 on specified skill checks for $L10 min"',
   'Spell Storing Item':
     'School=Transmutation ' +
     'Level=A1 ' +
@@ -1205,7 +1205,7 @@ Eberron.SPELLS_ADDED = {
   'Touch Of Madness':
     'School=Enchantment ' +
     'Level=Madness2 ' +
-    'Description="Touched dazed for $L2 rd"',
+    'Description="Dazes touched for $L2 rd"',
   'Toughen Construct':
     'School=Transmutation ' +
     'Level=A2 ' +
@@ -1229,7 +1229,7 @@ Eberron.SPELLS_ADDED = {
   'Zone Of Natural Purity':
     'School=Evocation ' +
     'Level=Gatekeeper2 ' +
-    'Description="R$RS\' Fey and plants in 20\' radius gain +1 attack, damage, and save, abberations suffer -1, for $L2 hr"'
+    'Description="R$RS\' Fey and plants in 20\' radius gain +1 attack, damage, and saves, and abberations suffer -1, for $L2 hr"'
 };
 Eberron.SPELLS = Object.assign(
   {}, window.PHB35 != null ? PHB35.SPELLS : SRD35.SPELLS, Eberron.SPELLS_ADDED
