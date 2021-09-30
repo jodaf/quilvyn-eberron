@@ -3007,17 +3007,22 @@ Eberron.randomizeOneAttribute = function(attributes, attribute) {
 
 /* Returns an array of plugins upon which this one depends. */
 Eberron.getPlugins = function() {
-  return [this.basePlugin].concat(this.basePlugin.getPlugins());
+  var base = this.basePlugin == window.SRD35 ? window.PHB35 : this.basePlugin;
+  return [base].concat(base.getPlugins());
 };
 
 /* Returns HTML body content for user notes associated with this rule set. */
 Eberron.ruleNotes = function() {
   return '' +
-    '<h2>Eberron Quilvyn Plugin Notes</h2>\n' +
-    'Eberron Quilvyn Plugin Version ' + Eberron.VERSION + '\n' +
+    '<h2>Quilvyn Eberron Rule Set Notes</h2>\n' +
+    'Quilvyn Eberron Rule Set Version ' + Eberron.VERSION + '\n' +
     '<p>\n' +
-    'Quilvyn\'s Eberron rule set is unofficial Fan Content permitted under ' +
-    'Wizards of the Coast\'s ' +
+    'There are no known bugs, limitations, or usage notes specific to the Eberron Rule Set.\n' +
+    '</p>\n' +
+    '<h3>Copyrights and Licensing</h3>\n' +
+    '<p>\n' +
+    "Quilvyn's Eberron rule set is unofficial Fan Content permitted under " +
+    "Wizards of the Coast's " +
     '<a href="https://company.wizards.com/en/legal/fancontentpolicy">Fan Content Policy</a>.\n' +
     '</p><p>\n' +
     'Quilvyn is not approved or endorsed by Wizards of the Coast. Portions ' +
@@ -3027,9 +3032,7 @@ Eberron.ruleNotes = function() {
     'Dungeons & Dragons Eberron Campaign Setting © 2004 Wizards of ' +
     'the Coast, Inc.\n' +
     '</p><p>\n' +
-    'Dungeons & Dragons Player\'s Handbook v3.5 © 2003 Wizards of the Coast, ' +
+    "Dungeons & Dragons Player's Handbook v3.5 © 2003 Wizards of the Coast, " +
     'Inc.\n' +
-    '<p>\n' +
-    'There are no known bugs, limitations, or usage notes specific to the Eberron plugin\n' +
     '</p>\n';
 };
