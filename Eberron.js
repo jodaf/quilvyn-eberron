@@ -16,6 +16,8 @@ Place, Suite 330, Boston, MA 02111-1307 USA.
 */
 
 /*jshint esversion: 6 */
+/* jshint forin: false */
+/* globals Quilvyn, QuilvynRules, QuilvynUtils, SRD35, PHB35, Pathfinder */
 "use strict";
 
 /*
@@ -133,7 +135,7 @@ function Eberron(baseRules) {
 
 }
 
-Eberron.VERSION = '2.3.1.0';
+Eberron.VERSION = '2.3.1.1';
 
 // Eberron uses PHB35 as its default base ruleset. If USE_PATHFINDER is true,
 // the Eberron function will instead use rules taken from the Pathfinder plugin.
@@ -1014,6 +1016,9 @@ Eberron.SCHOOLS = Object.assign({}, SRD35.SCHOOLS);
 Eberron.SHIELDS = Object.assign({}, SRD35.SHIELDS);
 Eberron.SKILLS = Object.assign({}, SRD35.SKILLS);
 Eberron.SPELLS_ADDED = {
+  // NOTE: It's unclear which of these spells might be available in potion/oil
+  // form. The source book describes Oil Of Repair, which duplicates Repair xxx
+  // Damage, and makes a passing reference to Oil Of Stone Construct.
   'Armor Enhancement':
     'School=Transmutation ' +
     'Level=A2 ' +
@@ -1161,15 +1166,18 @@ Eberron.SPELLS_ADDED = {
   'Repair Light Damage':
     'School=Transmutation ' +
     'Level=A1,Cannith1,W1 ' +
-    'Description="Touched construct heals 1d8+$Lmin5"',
+    'Description="Touched construct heals 1d8+$Lmin5" ' +
+    'Liquid=Oil',
   'Repair Moderate Damage':
     'School=Transmutation ' +
     'Level=A2,W2 ' +
-    'Description="Touched construct heals 2d8+$Lmin10"',
+    'Description="Touched construct heals 2d8+$Lmin10" ' +
+    'Liquid=Oil',
   'Repair Serious Damage':
     'School=Transmutation ' +
     'Level=A3,Cannith2,W3 ' +
-    'Description="Touched construct heals 3d8+$Lmin15"',
+    'Description="Touched construct heals 3d8+$Lmin15" ' +
+    'Liquid=Oil',
   'Resistance Item':
     'School=Abjuration ' +
     'Level=A1 ' +
@@ -1193,7 +1201,8 @@ Eberron.SPELLS_ADDED = {
   'Stone Construct':
     'School=Transmutation ' +
     'Level=A3 ' +
-    'Description="Touched construct gains DR 10/adamantine for $L10min150 HP or $L10 min"',
+    'Description="Touched construct gains DR 10/adamantine for $L10min150 HP or $L10 min" ' +
+    'Liquid=Oil',
   'Suppress Requirement':
     'School=Transmutation ' +
     'Level=A3 ' +
@@ -1914,6 +1923,7 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
   } else if(type == 'Spell') {
     var description = QuilvynUtils.getAttrValue(attrs, 'Description');
     var groupLevels = QuilvynUtils.getAttrValueArray(attrs, 'Level');
+    var liquids = QuilvynUtils.getAttrValueArray(attrs, 'Liquid');
     var school = QuilvynUtils.getAttrValue(attrs, 'School');
     var schoolAbbr = (school || 'Universal').substring(0, 4);
     for(var i = 0; i < groupLevels.length; i++) {
@@ -1929,7 +1939,8 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
       var domainSpell =
         Eberron.PATHS[group + ' Domain'] != null || group == 'Dragon';
       Eberron.spellRules
-        (rules, fullName, school, group, level, description, domainSpell);
+        (rules, fullName, school, group, level, description, domainSpell,
+         liquids);
       rules.addChoice('spells', fullName, attrs);
     }
   } else if(type == 'Track')
@@ -2337,7 +2348,7 @@ Eberron.classRulesExtra = function(rules, name) {
     );
     rules.defineRule('weapons.Claws',
       'combatNotes.bear', '=', '1',
-      'combatNotes.tiger', '=', '1',
+      'combatNotes.tiger', '=', '1'
     );
     rules.defineRule('weapons.Fangs',
       'combatNotes.boar', '=', '1',
@@ -2455,7 +2466,7 @@ Eberron.featRulesExtra = function(rules, name) {
       'saveNotes.dragonTotem(Green)', '=', '"acid"',
       'saveNotes.dragonTotem(Silver)', '=', '"cold"',
       'saveNotes.dragonTotem(White)', '=', '"cold"'
-    )
+    );
   } else if(name == 'Extra Music') {
     rules.defineRule
       ('featureNotes.extraMusic', 'feats.Extra Music', '=', '4 * source');
@@ -2938,13 +2949,15 @@ Eberron.skillRules = function(
  * Defines in #rules# the rules associated with spell #name#, which is from
  * magic school #school#. #casterGroup# and #level# are used to compute any
  * saving throw value required by the spell. #description# is a concise
- * description of the spell's effects.
+ * description of the spell's effects. #liquids# lists any liquid forms via
+ * which the spell can be applied.
  */
 Eberron.spellRules = function(
-  rules, name, school, casterGroup, level, description, domainSpell
+  rules, name, school, casterGroup, level, description, domainSpell, liquids
 ) {
   rules.basePlugin.spellRules
-    (rules, name, school, casterGroup, level, description, domainSpell);
+    (rules, name, school, casterGroup, level, description, domainSpell,
+     liquids);
   // No changes needed to the rules defined by base method
 };
 
@@ -2975,12 +2988,12 @@ Eberron.choiceEditorElements = function(rules, type) {
   if(type == 'House')
     result.push(
       ['Dragonmark', 'Dragonmark', 'text', [20]],
-      ['Features', 'Features', 'text', [40]]
+      ['Features', 'Features', 'text', [40]],
       ['Spells', 'Spells', 'text', [80]]
     );
   else
     result = rules.basePlugin.choiceEditorElements(rules, type);
-  return result
+  return result;
 };
 
 /* Returns an ObjectViewer loaded with the default character sheet format. */
@@ -3016,9 +3029,14 @@ Eberron.ruleNotes = function() {
   return '' +
     '<h2>Quilvyn Eberron Rule Set Notes</h2>\n' +
     'Quilvyn Eberron Rule Set Version ' + Eberron.VERSION + '\n' +
-    '<p>\n' +
-    'There are no known bugs, limitations, or usage notes specific to the Eberron Rule Set.\n' +
-    '</p>\n' +
+    '<h3>Usage Notes</h3>\n' +
+    '<ul>\n' +
+    '  <li>\n' +
+    '    Quilvyn represents the Oil of Repair magic item described in the\n' +
+    '    rule book as Repair Light/Moderate/Serious Damage Oil in the\n' +
+    '    Potions/Oils menu.\n' +
+    '  </li>\n' +
+    '</ul>\n' +
     '<h3>Copyrights and Licensing</h3>\n' +
     '<p>\n' +
     "Quilvyn's Eberron rule set is unofficial Fan Content permitted under " +
