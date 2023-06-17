@@ -135,7 +135,7 @@ function Eberron(baseRules) {
 
 }
 
-Eberron.VERSION = '2.3.1.1';
+Eberron.VERSION = '2.3.1.2';
 
 // Eberron uses PHB35 as its default base ruleset. If USE_PATHFINDER is true,
 // the Eberron function will instead use rules taken from the Pathfinder plugin.
@@ -1093,7 +1093,7 @@ Eberron.SPELLS_ADDED = {
     'Description="R$RM\' Immobilizes 3 deathless in 15\' radius for $L rd (Will neg)"',
   'Hardening':
     'School=Transmutation ' +
-    'Level=A6,Artifice7,W6 ' +
+    'Level=A6,Artifice7,S6,W6 ' +
     'Description="Touched $L 10\' cu item ($L\' cu metal or mineral) resists damage"',
   "Hero's Blade":
     'School=Necromancy ' +
@@ -1137,11 +1137,11 @@ Eberron.SPELLS_ADDED = {
     'Description="Touched weapon gains +1 or 10K GP enhancement for $L10 min"',
   'Maddening Scream':
     'School=Enchantment ' +
-    'Level=Madness8,W8 ' +
+    'Level=Madness8,S8,W8 ' +
     'Description="Touched acts madly (-4 AC, Ref save requires nat 20) for 1d4+1 rd"',
   'Magecraft':
     'School=Divination ' +
-    'Level=W1 ' +
+    'Level=S1,W1 ' +
     'Description="Self gains +5 same-day Craft check"',
   'Metamagic Item':
     'School=Transmutation ' +
@@ -1161,21 +1161,21 @@ Eberron.SPELLS_ADDED = {
     'Description="Touched magic item gains $Ldiv5 charges for $L min"',
   'Repair Critical Damage':
     'School=Transmutation ' +
-    'Level=A4,W4 ' +
+    'Level=A4,S4,W4 ' +
     'Description="Touched construct heals 4d8+$Lmin20"',
   'Repair Light Damage':
     'School=Transmutation ' +
-    'Level=A1,Cannith1,W1 ' +
+    'Level=A1,Cannith1,S1,W1 ' +
     'Description="Touched construct heals 1d8+$Lmin5" ' +
     'Liquid=Oil',
   'Repair Moderate Damage':
     'School=Transmutation ' +
-    'Level=A2,W2 ' +
+    'Level=A2,S2,W2 ' +
     'Description="Touched construct heals 2d8+$Lmin10" ' +
     'Liquid=Oil',
   'Repair Serious Damage':
     'School=Transmutation ' +
-    'Level=A3,Cannith2,W3 ' +
+    'Level=A3,Cannith2,S3,W3 ' +
     'Description="Touched construct heals 3d8+$Lmin15" ' +
     'Liquid=Oil',
   'Resistance Item':
@@ -1892,9 +1892,7 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
       QuilvynUtils.getAttrValueArray(attrs, 'Require'),
       QuilvynUtils.getAttrValueArray(attrs, 'Features'),
       QuilvynUtils.getAttrValueArray(attrs, 'Selectables'),
-      QuilvynUtils.getAttrValueArray(attrs, 'Languages'),
-      QuilvynUtils.getAttrValue(attrs, 'SpellAbility'),
-      QuilvynUtils.getAttrValueArray(attrs, 'SpellSlots')
+      QuilvynUtils.getAttrValueArray(attrs, 'Languages')
     );
     Eberron.raceRulesExtra(rules, name);
   } else if(type == 'School') {
@@ -2834,8 +2832,7 @@ Eberron.raceRules = function(
   spellSlots
 ) {
   rules.basePlugin.raceRules
-    (rules, name, requires, features, selectables, languages, spellAbility,
-     spellSlots);
+    (rules, name, requires, features, selectables, languages);
   // No changes needed to the rules defined by base method
 };
 
