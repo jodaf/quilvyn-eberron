@@ -135,7 +135,7 @@ function Eberron(baseRules) {
 
 }
 
-Eberron.VERSION = '2.3.1.2';
+Eberron.VERSION = '2.3.1.3';
 
 // Eberron uses PHB35 as its default base ruleset. If USE_PATHFINDER is true,
 // the Eberron function will instead use rules taken from the Pathfinder plugin.
@@ -152,9 +152,9 @@ SRD35.ABBREVIATIONS['AP'] = 'Action Points';
 Eberron.ALIGNMENTS = Object.assign({}, SRD35.ALIGNMENTS);
 Eberron.ANIMAL_COMPANIONS = Object.assign({}, SRD35.ANIMAL_COMPANIONS);
 Eberron.ARMORS_ADDED = {
-  'Darkleaf Banded':'AC=6 Weight=2 Dex=2 Skill=4 Spell=30',
-  'Darkleaf Breastplate':'AC=5 Weight=1 Dex=4 Skill=2 Spell=20',
-  'Leafweave':'AC=2 Weight=1 Dex=7 Skill=0 Spell=5'
+  'Darkleaf Banded':'AC=6 Weight=Medium Dex=2 Skill=4 Spell=30',
+  'Darkleaf Breastplate':'AC=5 Weight=Light Dex=4 Skill=2 Spell=20',
+  'Leafweave':'AC=2 Weight=Light Dex=7 Skill=0 Spell=5'
 };
 Eberron.ARMORS = Object.assign({}, SRD35.ARMORS, Eberron.ARMORS_ADDED);
 Eberron.FAMILIARS = Object.assign({}, SRD35.FAMILIARS);
@@ -1479,11 +1479,13 @@ for(var s in Eberron.SPELLS_LEVELS) {
     Eberron.SPELLS[s].replace('Level=', 'Level=' + levels + ',');
 }
 Eberron.WEAPONS_ADDED = {
-  'Talenta Boomerang':'Level=3 Category=R Damage=d4 Range=30',
-  'Talenta Sharrash':'Level=3 Category=2h Damage=d10 Crit=4 Threat=19',
-  'Talenta Tangat':'Level=3 Category=2h Damage=d10 Threat=18',
-  'Valenar Double Scimitar':'Level=3 Category=2h Damage=d6/d6 Threat=18',
-  "Xen'drik Boomerang":'Level=3 Category=R Damage=d6 Range=20'
+  'Talenta Boomerang':'Level=Exotic Category=Ranged Damage=d4 Range=30',
+  'Talenta Sharrash':
+    'Level=Exotic Category=Two-Handed Damage=d10 Crit=4 Threat=19',
+  'Talenta Tangat':'Level=Exotic Category=Two-Handed Damage=d10 Threat=18',
+  'Valenar Double Scimitar':
+    'Level=Exotic Category=Two-Handed Damage=d6/d6 Threat=18',
+  "Xen'drik Boomerang":'Level=Exotic Category=Ranged Damage=d6 Range=20'
 };
 Eberron.WEAPONS = Object.assign({}, SRD35.WEAPONS, Eberron.WEAPONS_ADDED);
 Eberron.CLASSES_ADDED = {
@@ -1808,7 +1810,7 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
       QuilvynUtils.getAttrValue(attrs, 'Skill'),
       QuilvynUtils.getAttrValue(attrs, 'Spell')
     );
-  else if(type == 'Class' || type == 'Npc' || type == 'Prestige') {
+  else if(type == 'Class' || type.match(/^npc$/i) || type == 'Prestige') {
     Eberron.classRules(rules, name,
       QuilvynUtils.getAttrValueArray(attrs, 'Require'),
       QuilvynUtils.getAttrValue(attrs, 'HitDie'),
@@ -2859,8 +2861,10 @@ Eberron.raceRulesExtra = function(rules, name) {
     rules.defineRule('selectableFeatureCount.Shifter',
       'race', '=', 'source == "Shifter" ? 1 : null'
     );
-    Eberron.weaponRules(rules, 'Claws', 0, 'Un', 'd4', 20, 2, null);
-    Eberron.weaponRules(rules, 'Fangs', 0, 'Un', 'd6', 20, 2, null);
+    Eberron.weaponRules
+      (rules, 'Claws', 'Unarmed', 'Unarmed', 'd4', 20, 2, null);
+    Eberron.weaponRules
+      (rules, 'Fangs', 'Unarmed', 'Unarmed', 'd6', 20, 2, null);
     rules.defineRule('clawsDamageProgression',
       'combatNotes.razorclaw', '+=', '1',
       'features.Large', '+', '1'
@@ -2894,7 +2898,7 @@ Eberron.raceRulesExtra = function(rules, name) {
       'intelligenceModifier', '=', '-Math.max(source, 0)'
     );
     rules.defineRule('languageCount', 'negateLanguageBonus', '+', null);
-    Eberron.weaponRules(rules, 'Slam', 0, 'Un', 'd4', 20, 2, null);
+    Eberron.weaponRules(rules, 'Slam', 'Unarmed', 'Unarmed', 'd4', 20, 2, null);
     rules.defineRule('weapons.Slam', 'combatNotes.slamWeapon', '=', '1');
   } else if(rules.basePlugin.raceRulesExtra) {
     rules.basePlugin.raceRulesExtra(rules, name);
