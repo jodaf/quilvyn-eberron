@@ -1,5 +1,5 @@
 /*
-Copyright 2021, James J. Hayes
+Copyright 2023, James J. Hayes
 
 This program is free software; you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software
@@ -41,10 +41,11 @@ function Eberron(baseRules) {
     window.Pathfinder != null && Pathfinder.SRD35_SKILL_MAP &&
     baseRules != null && baseRules.includes('Pathfinder');
 
-  var rules = new QuilvynRules(
+  let rules = new QuilvynRules(
     'Eberron - ' + (Eberron.USE_PATHFINDER ? 'Pathfinder 1E' : 'D&D v3.5'),
     Eberron.VERSION
   );
+  rules.plugin = Eberron;
   rules.basePlugin = Eberron.USE_PATHFINDER ? Pathfinder : SRD35;
   Eberron.rules = rules;
 
@@ -52,6 +53,7 @@ function Eberron(baseRules) {
   rules.defineChoice('choices', Eberron.CHOICES);
   rules.choiceEditorElements = Eberron.choiceEditorElements;
   rules.choiceRules = Eberron.choiceRules;
+  rules.removeChoice = SRD35.removeChoice;
   rules.editorElements = SRD35.initialEditorElements();
   rules.getFormats = SRD35.getFormats;
   rules.getPlugins = Eberron.getPlugins;
@@ -61,6 +63,7 @@ function Eberron(baseRules) {
     rules.basePlugin.RANDOMIZABLE_ATTRIBUTES.concat
     (Eberron.RANDOMIZABLE_ATTRIBUTES_ADDED);
   rules.defineChoice('random', Eberron.RANDOMIZABLE_ATTRIBUTES);
+  rules.getChoices = SRD35.getChoices;
   rules.ruleNotes = Eberron.ruleNotes;
 
   if(rules.basePlugin == window.Pathfinder) {
@@ -69,16 +72,42 @@ function Eberron(baseRules) {
   }
 
   SRD35.createViewers(rules, SRD35.VIEWERS);
-  rules.defineChoice('extras', 'feats', 'featCount', 'selectableFeatureCount');
+  rules.defineChoice('extras',
+    'feats', 'featCount', 'sanityNotes', 'selectableFeatureCount',
+    'validationNotes');
   rules.defineChoice('preset',
     'race:Race,select-one,races', 'levels:Class Levels,bag,levels',
     'prestige:Prestige Levels,bag,prestiges', 'npc:NPC Levels,bag,npcs');
 
   Eberron.ALIGNMENTS = Object.assign({}, rules.basePlugin.ALIGNMENTS);
   Eberron.ANIMAL_COMPANIONS =
-    Object.assign( {}, rules.basePlugin.ANIMAL_COMPANIONS);
+    Object.assign({}, rules.basePlugin.ANIMAL_COMPANIONS);
   Eberron.ARMORS =
     Object.assign({}, rules.basePlugin.ARMORS, Eberron.ARMORS_ADDED);
+  Eberron.CLASSES =
+    Object.assign({}, rules.basePlugin.CLASSES, Eberron.CLASSES_ADDED);
+  Eberron.NPC_CLASSES = Object.assign({}, rules.basePlugin.NPC_CLASSES);
+  for(let c in Eberron.CLASS_FEATURES_ADDED) {
+    let features =
+      QuilvynUtils.getAttrValueArray(Eberron.CLASS_FEATURES_ADDED[c], 'Features');
+    let selectables =
+      QuilvynUtils.getAttrValueArray(Eberron.CLASS_FEATURES_ADDED[c], 'Selectables');
+    if(c in Eberron.CLASSES) {
+      Eberron.CLASSES[c] =
+        Eberron.CLASSES[c].replace(
+          'Features=', 'Features="' + features.join('","') + '",'
+        ).replace(
+          'Selectables=', 'Selectables="' + selectables.join('","') + '",'
+        );
+    } else if(c in Eberron.NPC_CLASSES) {
+      Eberron.NPC_CLASSES[c] =
+        Eberron.NPC_CLASSES[c].replace(
+          'Features=', 'Features="' + features.join('","') + '",'
+        ).replace(
+          'Selectables=', 'Selectables="' + selectables.join('","') + '",'
+        );
+    }
+  }
   Eberron.FAMILIARS = Object.assign({}, rules.basePlugin.FAMILIARS);
   Eberron.FEATS =
     Object.assign({}, rules.basePlugin.FEATS, Eberron.FEATS_ADDED);
@@ -98,8 +127,8 @@ function Eberron(baseRules) {
     ({}, Eberron.USE_PATHFINDER ? Pathfinder.SPELLS :
          window.PHB35 != null ? PHB35.SPELLS : SRD35.SPELLS,
      Eberron.SPELLS_ADDED);
-  for(var s in Eberron.SPELLS_LEVELS) {
-    var levels = Eberron.SPELLS_LEVELS[s];
+  for(let s in Eberron.SPELLS_LEVELS) {
+    let levels = Eberron.SPELLS_LEVELS[s];
     if(!(s in Eberron.SPELLS)) {
       if(window.PHB35 && PHB35.SPELL_RENAMES && s in PHB35.SPELL_RENAMES) {
         s = PHB35.SPELL_RENAMES[s];
@@ -113,9 +142,6 @@ function Eberron(baseRules) {
   }
   Eberron.WEAPONS =
     Object.assign({}, rules.basePlugin.WEAPONS, Eberron.WEAPONS_ADDED);
-  Eberron.CLASSES =
-    Object.assign({}, rules.basePlugin.CLASSES, Eberron.CLASSES_ADDED);
-  Eberron.NPC_CLASSES = Object.assign({}, rules.basePlugin.NPC_CLASSES);
 
   Eberron.abilityRules(rules);
   Eberron.aideRules(rules, Eberron.ANIMAL_COMPANIONS, Eberron.FAMILIARS);
@@ -123,8 +149,8 @@ function Eberron(baseRules) {
   Eberron.magicRules(rules, Eberron.SCHOOLS, Eberron.SPELLS);
   // Feats must be defined before classes
   Eberron.talentRules
-    (rules, Eberron.FEATS, Eberron.FEATURES, Eberron.GOODIES,
-     Eberron.LANGUAGES, Eberron.SKILLS);
+    (rules, Eberron.FEATS, Eberron.FEATURES, Eberron.GOODIES, Eberron.LANGUAGES,
+     Eberron.SKILLS);
   Eberron.identityRules(
     rules, Eberron.ALIGNMENTS, Eberron.CLASSES, Eberron.DEITIES,
     Eberron.HOUSES, Eberron.PATHS, Eberron.RACES, Eberron.PRESTIGE_CLASSES,
@@ -135,7 +161,7 @@ function Eberron(baseRules) {
 
 }
 
-Eberron.VERSION = '2.3.1.3';
+Eberron.VERSION = '2.4.1.0';
 
 // Eberron uses PHB35 as its default base ruleset. If USE_PATHFINDER is true,
 // the Eberron function will instead use rules taken from the Pathfinder plugin.
@@ -157,6 +183,277 @@ Eberron.ARMORS_ADDED = {
   'Leafweave':'AC=2 Weight=Light Dex=7 Skill=0 Spell=5'
 };
 Eberron.ARMORS = Object.assign({}, SRD35.ARMORS, Eberron.ARMORS_ADDED);
+Eberron.CLASSES_ADDED = {
+  'Artificer':
+    'HitDie=d6 Attack=3/4 SkillPoints=4 Fortitude=1/3 Reflex=1/3 Will=1/2 ' +
+    'Skills=' +
+      'Balance,Bluff,Climb,Craft,"Escape Artist","Handle Animal",Hide,Jump,' +
+      '"Knowledge (Local)","Knowledge (Shadow)",Listen,"Move Silently",' +
+      'Profession,Ride,"Sense Motive","Speak Language",Swim,Tumble ' +
+    'Features=' +
+      '"1:Armor Proficiency (Medium)","1:Shield Proficiency",' +
+      '"1:Weapon Proficiency (Simple)",' +
+      '"1:Artificer Knowledge","1:Artisan Bonus","1:Craft Reserve",' +
+      '"1:Disable Trap","1:Item Creation","1:Scribe Scroll","2:Brew Potion",' +
+      '"3:Craft Wondrous Item","4:Artificer Feat Bonus","4:Craft Homunculus",' +
+      '"5:Craft Magic Arms And Armor","5:Retain Essence",' +
+      '"6:Metamagic Spell Trigger","7:Craft Wand","9:Craft Rod",' +
+      '"11:Metamagic Spell Completion","12:Craft Staff",' +
+      '"13:Artificer Skill Mastery","14:Forge Ring" ' +
+    'Skills=' +
+      'Appraise,Concentration,Craft,"Disable Device","Knowledge (Arcana)",' +
+      '"Knowledge (Engineering)","Knowledge (Planes)","Open Lock",' +
+      'Profession,Search,Spellcraft,"Use Magic Device" ' +
+    'SpellAbility=intelligence ' +
+    'SpellSlots=' +
+      'A1:1=2;2=3;14=4,' +
+      'A2:3=1;4=2;5=3;15=4,' +
+      'A3:5=1;6=2;8=3;16=4,' +
+      'A4:8=1;9=2;13=3;17=4,' +
+      'A5:11=1;12=2;14=3;18=4,' +
+      'A6:14=1;15=2;17=3;19=4'
+};
+Eberron.CLASS_FEATURES_ADDED = {
+  'Cleric':
+    'Features=' +
+      '"features.Artifice Domain ? 1:Artifice Master",' +
+      '"features.Artifice Domain ? 1:Empowered Creation",' +
+      '"features.Charm Domain ? 1:Turn On The Charm",' +
+      '"features.Commerce Domain ? 1:Commercial",' +
+      '"features.Community Domain ? 1:Community Pillar",' +
+      '"features.Deathless Domain ? 1:Rebuke Deathless",' +
+      '"features.Decay Domain ? 1:Touch Of Decay",' +
+      '"features.Dragon Below Domain ? 1:Augment Summoning",' +
+      '"features.Exorcism Domain ? 1:Exorcise",' +
+      '"features.Feast Domain ? 1:Feast Gut",' +
+      '"features.Life Domain ? 1:Add Life",' +
+      '"features.Madness Domain ? 1:Clarity Of True Madness",' +
+      '"features.Madness Domain ? 1:Madness-Weakened",' +
+      '"features.Meditation Domain ? 1:Meditative Casting",' +
+      '"features.Necromancer Domain ? 1:Empowered Necromancy",' +
+      '"features.Passion Domain ? 1:Fit Of Passion",' +
+      '"features.Shadow Domain ? 1:Blind-Fight",' +
+      '"features.Weather Domain ? 1:All-Weather",' +
+      '"features.Weather Domain ? 1:Weather-Wise" ' +
+    'Selectables=' +
+      '"deityDomains =~ \'Artifice\' ? 1:Artifice Domain:Domain",' +
+      '"deityDomains =~ \'Charm\' ? 1:Charm Domain:Domain",' +
+      '"deityDomains =~ \'Commerce\' ? 1:Commerce Domain:Domain",' +
+      '"deityDomains =~ \'Community\' ? 1:Community Domain:Domain",' +
+      '"deityDomains =~ \'Deathless\' ? 1:Deathless Domain:Domain",' +
+      '"deityDomains =~ \'Decay\' ? 1:Decay Domain:Domain",' +
+      '"deityDomains =~ \'Dragon Below\' ? 1:Dragon Below Domain:Domain",' +
+      '"deityDomains =~ \'Exorcism\' ? 1:Exorcism Domain:Domain",' +
+      '"deityDomains =~ \'Feast\' ? 1:Feast Domain:Domain",' +
+      '"deityDomains =~ \'Life\' ? 1:Life Domain:Domain",' +
+      '"deityDomains =~ \'Madness\' ? 1:Madness Domain:Domain",' +
+      '"deityDomains =~ \'Meditation\' ? 1:Meditation Domain:Domain",' +
+      '"deityDomains =~ \'Necromancer\' ? 1:Necromancer Domain:Domain",' +
+      '"deityDomains =~ \'Passion\' ? 1:Passion Domain:Domain",' +
+      '"deityDomains =~ \'Shadow\' ? 1:Shadow Domain:Domain",' +
+      '"deityDomains =~ \'Weather\' ? 1:Weather Domain:Domain"',
+};
+Eberron.CLASSES = Object.assign({}, SRD35.CLASSES, Eberron.CLASSES_ADDED);
+Eberron.NPC_CLASSES = Object.assign({}, SRD35.NPC_CLASSES);
+for(let c in Eberron.CLASS_FEATURES_ADDED) {
+  let features =
+    QuilvynUtils.getAttrValueArray(Eberron.CLASS_FEATURES_ADDED[c], 'Features');
+  let selectables =
+    QuilvynUtils.getAttrValueArray(Eberron.CLASS_FEATURES_ADDED[c], 'Selectables');
+  if(c in Eberron.CLASSES) {
+    Eberron.CLASSES[c] =
+      Eberron.CLASSES[c].replace(
+        'Features=', 'Features="' + features.join('","') + '",'
+      ).replace(
+        'Selectables=', 'Selectables="' + selectables.join('","') + '",'
+      );
+  } else if(c in Eberron.NPC_CLASSES) {
+    Eberron.NPC_CLASSES[c] =
+      Eberron.NPC_CLASSES[c].replace(
+        'Features=', 'Features="' + features.join('","') + '",'
+      ).replace(
+        'Selectables=', 'Selectables="' + selectables.join('","') + '",'
+      );
+  }
+}
+Eberron.PRESTIGE_CLASSES = {
+  'Dragonmark Heir':
+    'Require=' +
+      '"features.Favored In House","features.Least Dragonmark",' +
+      '"house != \'None\'",' +
+      '"race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Elf|Half-Orc|Human\'",' +
+      '"countSkillsGe7 >= 2" ' +
+    'HitDie=d8 Attack=3/4 SkillPoints=4 Fortitude=1/2 Reflex=1/2 Will=1/2 ' +
+    'Skills=' +
+      'Appraise,Bluff,Diplomacy,"Gather Information",Intimidate,' +
+      '"Knowledge (Arcana)","Knowledge (Nobility)",Perform,Ride,' +
+      '"Sense Motive","Speak Language",Spellcraft ' +
+    'Features=' +
+      '"1:House Status","1:Lesser Dragonmark","2:Additional Action Points",' +
+      '"2:Improved Least Dragonmark","3:Improved Lesser Dragonmark",' +
+      '"4:Greater Dragonmark","5:Improved Greater Dragonmark"',
+  'Eldeen Ranger':
+    'Require=' +
+      '"baseAttack >= 5","features.Track","features.Favored Enemy",' +
+      '"skills.Knowledge (Nature) >= 6","skills.Survival >= 8" ' +
+    'HitDie=d8 Attack=1 SkillPoints=6 Fortitude=1/2 Reflex=1/2 Will=1/3 ' +
+    'Skills=' +
+      'Climb,Craft,"Handle Animal",Heal,Hide,Jump,' +
+      '"Knowledge (Dungeoneering)","Knowledge (Geography)",' +
+      '"Knowledge (Nature)",Listen,"Move Silently",Profession,Ride,Search,' +
+      'Spot,Survival,Swim,"Use Rope" ' +
+    'Features=' +
+      '"1:Armor Proficiency (Light)","1:Shield Proficiency",' +
+      '"1:Weapon Proficiency (Martial)",' +
+      '"features.Ashbound ? 1:Resist The Arcane",' +
+      '"features.Children Of Winter ? 1:Resist Poison",' +
+      '"features.Gatekeepers ? 1:Resist Corruption (Gatekeepers)",' +
+      '"features.Greensingers ? 1:Resist Nature\'s Lure",' +
+      '"features.Wardens Of The Wood ? 1:Nature Sense",' +
+      '"2:Hated Foe",' +
+      '"features.Ashbound ? 3:Ferocity",' +
+      '"features.Children Of Winter ? 3:Resist Corruption (Children Of Winter)",' +
+      '"features.Gatekeepers ? 3:Darkvision",' +
+      '"features.Greensingers ? 3:Unearthly Grace",' +
+      '"features.Wardens Of The Wood ? 3:Improved Critical",' +
+      '"4:Favored Enemy",' +
+      '"features.Ashbound ? 5:Spell Resistance",' +
+      '"features.Children Of Winter ? 5:Touch Of Contagion",' +
+      '"features.Gatekeepers ? 5:Slippery Mind",' +
+      '"features.Greensingers ? 5:Greensinger Damage Reduction",' +
+      '"features.Wardens Of The Wood ? 5:Smite Evil" ' +
+    'Selectables=' +
+      '1:Ashbound,' +
+      '"alignment !~ \'Good\' ? 1:Children Of Winter",' +
+      '"alignment !~ \'Evil\' ? 1:Gatekeepers",' +
+      '"alignment =~ \'Chaotic\' ? 1:Greensingers",' +
+      '"alignment !~ \'Evil\' ? 1:Wardens Of The Wood"',
+  'Exorcist Of The Silver Flame':
+    'Require=' +
+      '"baseAttack >= 3","casterLevelDivine >= 1",' +
+      '"deity == \'The Silver Flame\'","skills.Knowledge (Planes) >= 3",' +
+      '"skills.Knowledge (Religion) >= 8" ' +
+    'HitDie=d8 Attack=1 SkillPoints=2 Fortitude=1/2 Reflex=1/3 Will=1/2 ' +
+    'Skills=' +
+      'Concentration,Craft,Intimidate,"Knowledge (Arcana)",' +
+      '"Knowledge (Planes)","Knowledge (Religion)",Profession,"Sense Motive",' +
+      'Spellcraft ' +
+    'Features=' +
+      '"1:Flame Of Censure","1:Weapon Of The Exorcist",' +
+      '"2:Caster Level Bonus","2:Weapon Of Silver",3:Darkvision,' +
+      '"3:Resist Charm","3:Resist Possession","3:Resist Unnatural",' +
+      '"3:Smite Evil","4:Detect Thoughts","4:Weapon Of Good",' +
+      '"5:Silver Exorcism","6:Weapon Of Flame","8:Weapon Of Law",' +
+      '"9:Weapon Of Sacred Flame","10:Warding Flame"',
+  'Extreme Explorer':
+    'Require=' +
+      '"baseAttack >= 4","features.Action Boost",' +
+      '"skills.Knowledge (Dungeoneering) >= 4","skills.Survival >= 4"' +
+    'HitDie=d8 Attack=3/4 SkillPoints=6 Fortitude=1/3 Reflex=1/2 Will=1/3 ' +
+    'Skills=' +
+      'Balance,Climb,"Decipher Script","Disable Device","Escape Artist",' +
+      'Jump,"Knowledge (Arcana)","Knowledge (Dungeoneering)",' +
+      '"Knowledge (History)",Listen,"Open Lock",Ride,Search,"Speak Language",' +
+      'Survival,Swim,Tumble,"Use Magic Device","Use Rope" ' +
+    'Features=' +
+      '"1:Additional Action Points","1:Trap Sense","2:Dodge Bonus",2:Evasion,' +
+      '"2:Extreme Hustle","3:Extreme Explorer Feat Bonus","4:Extreme Action"',
+  'Heir Of Siberys':
+    'Require=' +
+      '"features.Aberrant Dragonmark == 0","features.Heroic Spirit",' +
+      '"features.Least Dragonmark == 0",' +
+      '"race =~ \'Dwarf|Elf|Gnome|Halfling|Half Orc|Human\'",' +
+      '"countSkillsGe15 >= 2" ' +
+    'HitDie=d6 Attack=3/4 SkillPoints=2 Fortitude=1/2 Reflex=1/2 Will=1/2 ' +
+    // Note: Heir Of Siberys grants no additional class skills
+    'Features=' +
+      '"1:Additional Action Points","1:Heir Of Siberys Feat Bonus",' +
+      '"2:Siberys Mark","3:Improved Siberys Mark",' +
+      '"casterLevel ? 2:Caster Level Bonus",' +
+      '"casterLevel == 0 ? 2:Feat Bonus"',
+  'Master Inquisitive':
+    'Require=' +
+      '"features.Investigate","skills.Gather Information >= 6",' +
+      '"skills.Search >= 3","skills.Sense Motive >= 6" ' +
+    'HitDie=d8 Attack=3/4 SkillPoints=6 Fortitude=1/3 Reflex=1/2 Will=1/3 ' +
+    'Skills=' +
+      'Bluff,"Decipher Script","Gather Information","Knowledge (Local)",' +
+      'Listen,Search,"Sense Motive",Spot ' +
+    'Features=' +
+      '"1:Zone Of Truth",2:Contact,"2:Master Inquisitive Feat Bonus",' +
+      '"3:Discern Lies","5:True Seeing"',
+  'Warforged Juggernaut':
+    'Require=' +
+     '"baseAttack >= 5","features.Adamantine Body",' +
+     '"features.Improved Bull Rush","features.Power Attack",' +
+     '"race == \'Warforged\'" ' +
+    'HitDie=d12 Attack=3/4 SkillPoints=2 Fortitude=1/2 Reflex=1/3 Will=1/3 ' +
+    'Skills=' +
+      'Climb,Craft,Intimidate,Jump,Survival,Swim ' +
+    'Features=' +
+      '"1:Armor Spikes","1:Expert Bull Rush","1:Powerful Charge",1:Reserved,' +
+      '"2:Charge Bonus","2:Construct Perfection I","2:Extended Charge",' +
+      '"3:Healing Immunity","3:Construct Perfection II",' +
+      '"3:Superior Bull Rush","4:Construct Perfection III",' +
+      '"5:Construct Perfection IV","5:Greater Powerful Charge"',
+  'Weretouched Master':
+    'Require=' +
+      '"baseAttack >= 4","sumShifterFeats >= 1","race == \'Shifter\'",' +
+      '"skills.Knowledge (Nature) >= 5","skills.Survival >= 8" ' +
+    'HitDie=d8 Attack=3/4 SkillPoints=2 Fortitude=1/2 Reflex=1/2 Will=1/3 ' +
+    'Skills=' +
+      'Balance,Climb,"Handle Animal",Hide,Intimidate,Jump,' +
+      '"Knowledge (Nature)",Listen,"Move Silently",Spot,Survival,Swim ' +
+    'Features=' +
+      '"2:Weretouched Feat Bonus","2:Wild Empathy",3:Scent,' +
+      '"features.Bear ? 3:Improved Grab",' +
+      '"features.Boar ? 3:Fierce Will",' +
+      '"features.Rat ? 3:Climb Speed",' +
+      '"features.Tiger ? 3:Pounce",' +
+      '"features.Wolf ? 3:Trip",' +
+      '"features.Wolverine ? 3:Weretouched Rage",' +
+      '"4:Frightful Shifting",' +
+      '"features.Bear ? 5:Alternate Form (Bear)",' +
+      '"features.Boar ? 5:Alternate Form (Boar)",' +
+      '"features.Rat ? 5:Alternate Form (Rat)",' +
+      '"features.Tiger ? 5:Alternate Form (Tiger)",' +
+      '"features.Wolf ? 5:Alternate Form (Wolf)",' +
+      '"features.Wolverine ? 5:Alternate Form (Wolverine)" ' +
+    'Selectables=' +
+      '1:Bear,1:Boar,1:Rat,1:Tiger,1:Wolf,1:Wolverine'
+};
+Eberron.DEITIES = {
+  'None':'',
+  'Arawai':'Alignment=NG Weapon=Morningstar Domain=Good,Life,Plant,Weather',
+  'Aureon':'Alignment=LN Weapon=Quarterstaff Domain=Knowledge,Law,Magic',
+  'Balinor':'Alignment=N Weapon=Battleaxe Domain=Air,Animal,Earth',
+  'Boldrei':'Alignment=LG Weapon=Spear Domain=Community,Good,Law,Protection',
+  'Dol Arrah':'Alignment=LG Weapon=Halberd Domain=Good,Law,Sun,War',
+  'Dol Dorn':'Alignment=CG Weapon=Longsword Domain=Chaos,Good,Strength,War',
+  'Kol Korran':
+    'Alignment=N Weapon="Heavy Mace","Light Mace" Domain=Charm,Commerce,Travel',
+  'Olladra':'Alignment=NG Weapon=Sickle Domain=Feast,Good,Healing,Luck',
+  'Onatar':'Alignment=NG Weapon=Warhammer Domain=Artifice,Fire,Good',
+  'The Blood Of Vol':
+    'Alignment=LE Weapon=Dagger Domain=Death,Evil,Law,Necromancer',
+  'The Cults Of The Dragon Below':
+    'Alignment=LN Weapon="Heavy Pick" Domain="Dragon Below",Earth,Evil,Madness',
+  'The Devourer':
+    'Alignment=NE Weapon=Trident Domain=Destruction,Evil,Water,Weather',
+  'The Fury':'Alignment=NE Weapon=Rapier Domain=Evil,Madness,Passion',
+  'The Keeper':'Alignment=NE Weapon=Scythe Domain=Death,Decay,Evil',
+  'The Mockery':'Alignment=NE Weapon=Kama Domain=Destruction,Evil,Trickery,War',
+  'The Path Of Light':
+    'Alignment=LN Weapon=Unarmed Domain=Law,Meditation,Protection',
+  'The Shadow':
+    'Alignment=CE Weapon=Quarterstaff Domain=Chaos,Evil,Magic,Shadow',
+  'The Silver Flame':
+    'Alignment=LG Weapon=Longbow Domain=Exorcism,Good,Law,Protection',
+  'The Traveler':
+    'Alignment=CN Weapon=Scimitar Domain=Artifice,Chaos,Travel,Trickery',
+  'The Undying Court':
+    'Alignment=NG Weapon=Scimitar Domain=Deathless,Good,Protection'
+};
 Eberron.FAMILIARS = Object.assign({}, SRD35.FAMILIARS);
 Eberron.FEATS_ADDED = {
   'Aberrant Dragonmark':
@@ -832,6 +1129,7 @@ Eberron.FEATURES_ADDED = {
 
 };
 Eberron.FEATURES = Object.assign({}, SRD35.FEATURES, Eberron.FEATURES_ADDED);
+Eberron.GOODIES = Object.assign({}, SRD35.GOODIES);
 Eberron.HOUSES = {
   'None':
     '',
@@ -888,7 +1186,6 @@ Eberron.HOUSES = {
     'Race=Human ' +
     'Features=Handler'
 };
-Eberron.GOODIES = Object.assign({}, SRD35.GOODIES);
 Eberron.LANGUAGES_ADDED = {
   'Argon':'',
   'Daan':'',
@@ -902,89 +1199,7 @@ Eberron.LANGUAGES_ADDED = {
   'Syranian':''
 };
 Eberron.LANGUAGES = Object.assign({}, SRD35.LANGUAGES, Eberron.LANGUAGES_ADDED);
-Eberron.PATHS_ADDED = {
-  'Artifice Domain':
-    'Group=Cleric ' +
-    'Level=levels.Cleric ' +
-    'Features=' +
-      '"1:Artifice Master","1:Empowered Creation"',
-  'Charm Domain':
-    'Group=Cleric ' +
-    'Level=levels.Cleric ' +
-    'Features=' +
-      '"1:Turn On The Charm"',
-  'Commerce Domain':
-    'Group=Cleric ' +
-    'Level=levels.Cleric ' +
-    'Features=' +
-      '1:Commercial',
-  'Community Domain':
-    'Group=Cleric ' +
-    'Level=levels.Cleric ' +
-    'Features=' +
-      '"1:Community Pillar"',
-  'Deathless Domain':
-    'Group=Cleric ' +
-    'Level=levels.Cleric ' +
-    'Features=' +
-      '"1:Rebuke Deathless"',
-  'Decay Domain':
-    'Group=Cleric ' +
-    'Level=levels.Cleric ' +
-    'Features=' +
-      '"1:Touch Of Decay"',
-  'Dragon Below Domain':
-    'Group=Cleric ' +
-    'Level=levels.Cleric ' +
-    'Features=' +
-      '"1:Augment Summoning"',
-  'Exorcism Domain':
-    'Group=Cleric ' +
-    'Level=levels.Cleric ' +
-    'Features=' +
-      '1:Exorcise',
-  'Feast Domain':
-    'Group=Cleric ' +
-    'Level=levels.Cleric ' +
-    'Features=' +
-      '"1:Feast Gut"',
-  'Life Domain':
-    'Group=Cleric ' +
-    'Level=levels.Cleric ' +
-    'Features=' +
-      '"1:Add Life"',
-  'Madness Domain':
-    'Group=Cleric ' +
-    'Level=levels.Cleric ' +
-    'Features=' +
-      '"1:Clarity Of True Madness","1:Madness-Weakened"',
-  'Meditation Domain':
-    'Group=Cleric ' +
-    'Level=levels.Cleric ' +
-    'Features=' +
-      '"1:Meditative Casting"',
-  'Necromancer Domain':
-    'Group=Cleric ' +
-    'Level=levels.Cleric ' +
-    'Features=' +
-      '"1:Empowered Necromancy"',
-  'Passion Domain':
-    'Group=Cleric ' +
-    'Level=levels.Cleric ' +
-    'Features=' +
-      '"1:Fit Of Passion"',
-  'Shadow Domain':
-    'Group=Cleric ' +
-    'Level=levels.Cleric ' +
-    'Features=' +
-      '1:Blind-Fight',
-  'Weather Domain':
-    'Group=Cleric ' +
-    'Level=levels.Cleric ' +
-    'Features=' +
-      '1:All-Weather,1:Weather-Wise'
-};
-Eberron.PATHS = Object.assign({}, SRD35.PATHS, Eberron.PATHS_ADDED);
+Eberron.PATHS = {};
 Eberron.RACES_ADDED = {
   'Changeling':
     'Features=' +
@@ -1016,6 +1231,7 @@ Eberron.SCHOOLS = Object.assign({}, SRD35.SCHOOLS);
 Eberron.SHIELDS = Object.assign({}, SRD35.SHIELDS);
 Eberron.SKILLS = Object.assign({}, SRD35.SKILLS);
 Eberron.SPELLS_ADDED = {
+
   // NOTE: It's unclear which of these spells might be available in potion/oil
   // form. The source book describes Oil Of Repair, which duplicates Repair xxx
   // Damage, and makes a passing reference to Oil Of Stone Construct.
@@ -1239,6 +1455,7 @@ Eberron.SPELLS_ADDED = {
     'School=Evocation ' +
     'Level=Gatekeeper2 ' +
     'Description="R$RS\' Fey and plants in 20\' radius gain +1 attack, damage, and saves, and abberations suffer -1, for $L2 hr"'
+
 };
 Eberron.SPELLS = Object.assign(
   {}, window.PHB35 != null ? PHB35.SPELLS : SRD35.SPELLS, Eberron.SPELLS_ADDED
@@ -1463,8 +1680,8 @@ Eberron.SPELLS_LEVELS = {
   'Wood Shape':'Artifice2',
   'Zone Of Truth':'Commerce2'
 };
-for(var s in Eberron.SPELLS_LEVELS) {
-  var levels = Eberron.SPELLS_LEVELS[s];
+for(let s in Eberron.SPELLS_LEVELS) {
+  let levels = Eberron.SPELLS_LEVELS[s];
   if(!(s in Eberron.SPELLS)) {
     if(window.PHB35 && PHB35.SPELL_RENAMES && s in PHB35.SPELL_RENAMES) {
       s = PHB35.SPELL_RENAMES[s];
@@ -1488,216 +1705,6 @@ Eberron.WEAPONS_ADDED = {
   "Xen'drik Boomerang":'Level=Exotic Category=Ranged Damage=d6 Range=20'
 };
 Eberron.WEAPONS = Object.assign({}, SRD35.WEAPONS, Eberron.WEAPONS_ADDED);
-Eberron.CLASSES_ADDED = {
-  'Artificer':
-    'HitDie=d6 Attack=3/4 SkillPoints=4 Fortitude=1/3 Reflex=1/3 Will=1/2 ' +
-    'Skills=' +
-      'Balance,Bluff,Climb,Craft,"Escape Artist","Handle Animal",Hide,Jump,' +
-      '"Knowledge (Local)","Knowledge (Shadow)",Listen,"Move Silently",' +
-      'Profession,Ride,"Sense Motive","Speak Language",Swim,Tumble ' +
-    'Features=' +
-      '"1:Armor Proficiency (Medium)","1:Shield Proficiency",' +
-      '"1:Weapon Proficiency (Simple)",' +
-      '"1:Artificer Knowledge","1:Artisan Bonus","1:Craft Reserve",' +
-      '"1:Disable Trap","1:Item Creation","1:Scribe Scroll","2:Brew Potion",' +
-      '"3:Craft Wondrous Item","4:Artificer Feat Bonus","4:Craft Homunculus",' +
-      '"5:Craft Magic Arms And Armor","5:Retain Essence",' +
-      '"6:Metamagic Spell Trigger","7:Craft Wand","9:Craft Rod",' +
-      '"11:Metamagic Spell Completion","12:Craft Staff",' +
-      '"13:Artificer Skill Mastery","14:Forge Ring" ' +
-    'Skills=' +
-      'Appraise,Concentration,Craft,"Disable Device","Knowledge (Arcana)",' +
-      '"Knowledge (Engineering)","Knowledge (Planes)","Open Lock",' +
-      'Profession,Search,Spellcraft,"Use Magic Device" ' +
-    'SpellAbility=intelligence ' +
-    'SpellSlots=' +
-      'A1:1=2;2=3;14=4,' +
-      'A2:3=1;4=2;5=3;15=4,' +
-      'A3:5=1;6=2;8=3;16=4,' +
-      'A4:8=1;9=2;13=3;17=4,' +
-      'A5:11=1;12=2;14=3;18=4,' +
-      'A6:14=1;15=2;17=3;19=4'
-};
-Eberron.CLASSES = Object.assign({}, SRD35.CLASSES, Eberron.CLASSES_ADDED);
-Eberron.PRESTIGE_CLASSES = {
-  'Dragonmark Heir':
-    'Require=' +
-      '"features.Favored In House","features.Least Dragonmark",' +
-      '"house != \'None\'",' +
-      '"race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Elf|Half-Orc|Human\'",' +
-      '"countSkillsGe7 >= 2" ' +
-    'HitDie=d8 Attack=3/4 SkillPoints=4 Fortitude=1/2 Reflex=1/2 Will=1/2 ' +
-    'Skills=' +
-      'Appraise,Bluff,Diplomacy,"Gather Information",Intimidate,' +
-      '"Knowledge (Arcana)","Knowledge (Nobility)",Perform,Ride,' +
-      '"Sense Motive","Speak Language",Spellcraft ' +
-    'Features=' +
-      '"1:House Status","1:Lesser Dragonmark","2:Additional Action Points",' +
-      '"2:Improved Least Dragonmark","3:Improved Lesser Dragonmark",' +
-      '"4:Greater Dragonmark","5:Improved Greater Dragonmark"',
-  'Eldeen Ranger':
-    'Require=' +
-      '"baseAttack >= 5","features.Track","features.Favored Enemy",' +
-      '"skills.Knowledge (Nature) >= 6","skills.Survival >= 8" ' +
-    'HitDie=d8 Attack=1 SkillPoints=6 Fortitude=1/2 Reflex=1/2 Will=1/3 ' +
-    'Skills=' +
-      'Climb,Craft,"Handle Animal",Heal,Hide,Jump,' +
-      '"Knowledge (Dungeoneering)","Knowledge (Geography)",' +
-      '"Knowledge (Nature)",Listen,"Move Silently",Profession,Ride,Search,' +
-      'Spot,Survival,Swim,"Use Rope" ' +
-    'Features=' +
-      '"1:Armor Proficiency (Light)","1:Shield Proficiency",' +
-      '"1:Weapon Proficiency (Martial)",' +
-      '"features.Ashbound ? 1:Resist The Arcane",' +
-      '"features.Children Of Winter ? 1:Resist Poison",' +
-      '"features.Gatekeepers ? 1:Resist Corruption (Gatekeepers)",' +
-      '"features.Greensingers ? 1:Resist Nature\'s Lure",' +
-      '"features.Wardens Of The Wood ? 1:Nature Sense",' +
-      '"2:Hated Foe",' +
-      '"features.Ashbound ? 3:Ferocity",' +
-      '"features.Children Of Winter ? 3:Resist Corruption (Children Of Winter)",' +
-      '"features.Gatekeepers ? 3:Darkvision",' +
-      '"features.Greensingers ? 3:Unearthly Grace",' +
-      '"features.Wardens Of The Wood ? 3:Improved Critical",' +
-      '"4:Favored Enemy",' +
-      '"features.Ashbound ? 5:Spell Resistance",' +
-      '"features.Children Of Winter ? 5:Touch Of Contagion",' +
-      '"features.Gatekeepers ? 5:Slippery Mind",' +
-      '"features.Greensingers ? 5:Greensinger Damage Reduction",' +
-      '"features.Wardens Of The Wood ? 5:Smite Evil" ' +
-    'Selectables=' +
-      '1:Ashbound,' +
-      '"alignment !~ \'Good\' ? 1:Children Of Winter",' +
-      '"alignment !~ \'Evil\' ? 1:Gatekeepers",' +
-      '"alignment =~ \'Chaotic\' ? 1:Greensingers",' +
-      '"alignment !~ \'Evil\' ? 1:Wardens Of The Wood"',
-  'Exorcist Of The Silver Flame':
-    'Require=' +
-      '"baseAttack >= 3","casterLevelDivine >= 1",' +
-      '"deity == \'The Silver Flame\'","skills.Knowledge (Planes) >= 3",' +
-      '"skills.Knowledge (Religion) >= 8" ' +
-    'HitDie=d8 Attack=1 SkillPoints=2 Fortitude=1/2 Reflex=1/3 Will=1/2 ' +
-    'Skills=' +
-      'Concentration,Craft,Intimidate,"Knowledge (Arcana)",' +
-      '"Knowledge (Planes)","Knowledge (Religion)",Profession,"Sense Motive",' +
-      'Spellcraft ' +
-    'Features=' +
-      '"1:Flame Of Censure","1:Weapon Of The Exorcist",' +
-      '"2:Caster Level Bonus","2:Weapon Of Silver",3:Darkvision,' +
-      '"3:Resist Charm","3:Resist Possession","3:Resist Unnatural",' +
-      '"3:Smite Evil","4:Detect Thoughts","4:Weapon Of Good",' +
-      '"5:Silver Exorcism","6:Weapon Of Flame","8:Weapon Of Law",' +
-      '"9:Weapon Of Sacred Flame","10:Warding Flame"',
-  'Extreme Explorer':
-    'Require=' +
-      '"baseAttack >= 4","features.Action Boost",' +
-      '"skills.Knowledge (Dungeoneering) >= 4","skills.Survival >= 4"' +
-    'HitDie=d8 Attack=3/4 SkillPoints=6 Fortitude=1/3 Reflex=1/2 Will=1/3 ' +
-    'Skills=' +
-      'Balance,Climb,"Decipher Script","Disable Device","Escape Artist",' +
-      'Jump,"Knowledge (Arcana)","Knowledge (Dungeoneering)",' +
-      '"Knowledge (History)",Listen,"Open Lock",Ride,Search,"Speak Language",' +
-      'Survival,Swim,Tumble,"Use Magic Device","Use Rope" ' +
-    'Features=' +
-      '"1:Additional Action Points","1:Trap Sense","2:Dodge Bonus",2:Evasion,' +
-      '"2:Extreme Hustle","3:Extreme Explorer Feat Bonus","4:Extreme Action"',
-  'Heir Of Siberys':
-    'Require=' +
-      '"features.Aberrant Dragonmark == 0","features.Heroic Spirit",' +
-      '"features.Least Dragonmark == 0",' +
-      '"race =~ \'Dwarf|Elf|Gnome|Halfling|Half Orc|Human\'",' +
-      '"countSkillsGe15 >= 2" ' +
-    'HitDie=d6 Attack=3/4 SkillPoints=2 Fortitude=1/2 Reflex=1/2 Will=1/2 ' +
-    // Note: Heir Of Siberys grants no additional class skills
-    'Features=' +
-      '"1:Additional Action Points","1:Heir Of Siberys Feat Bonus",' +
-      '"2:Siberys Mark","3:Improved Siberys Mark",' +
-      '"casterLevel ? 2:Caster Level Bonus",' +
-      '"casterLevel == 0 ? 2:Feat Bonus"',
-  'Master Inquisitive':
-    'Require=' +
-      '"features.Investigate","skills.Gather Information >= 6",' +
-      '"skills.Search >= 3","skills.Sense Motive >= 6" ' +
-    'HitDie=d8 Attack=3/4 SkillPoints=6 Fortitude=1/3 Reflex=1/2 Will=1/3 ' +
-    'Skills=' +
-      'Bluff,"Decipher Script","Gather Information","Knowledge (Local)",' +
-      'Listen,Search,"Sense Motive",Spot ' +
-    'Features=' +
-      '"1:Zone Of Truth",2:Contact,"2:Master Inquisitive Feat Bonus",' +
-      '"3:Discern Lies","5:True Seeing"',
-  'Warforged Juggernaut':
-    'Require=' +
-     '"baseAttack >= 5","features.Adamantine Body",' +
-     '"features.Improved Bull Rush","features.Power Attack",' +
-     '"race == \'Warforged\'" ' +
-    'HitDie=d12 Attack=3/4 SkillPoints=2 Fortitude=1/2 Reflex=1/3 Will=1/3 ' +
-    'Skills=' +
-      'Climb,Craft,Intimidate,Jump,Survival,Swim ' +
-    'Features=' +
-      '"1:Armor Spikes","1:Expert Bull Rush","1:Powerful Charge",1:Reserved,' +
-      '"2:Charge Bonus","2:Construct Perfection I","2:Extended Charge",' +
-      '"3:Healing Immunity","3:Construct Perfection II",' +
-      '"3:Superior Bull Rush","4:Construct Perfection III",' +
-      '"5:Construct Perfection IV","5:Greater Powerful Charge"',
-  'Weretouched Master':
-    'Require=' +
-      '"baseAttack >= 4","sumShifterFeats >= 1","race == \'Shifter\'",' +
-      '"skills.Knowledge (Nature) >= 5","skills.Survival >= 8" ' +
-    'HitDie=d8 Attack=3/4 SkillPoints=2 Fortitude=1/2 Reflex=1/2 Will=1/3 ' +
-    'Skills=' +
-      'Balance,Climb,"Handle Animal",Hide,Intimidate,Jump,' +
-      '"Knowledge (Nature)",Listen,"Move Silently",Spot,Survival,Swim ' +
-    'Features=' +
-      '"2:Weretouched Feat Bonus","2:Wild Empathy",3:Scent,' +
-      '"features.Bear ? 3:Improved Grab",' +
-      '"features.Boar ? 3:Fierce Will",' +
-      '"features.Rat ? 3:Climb Speed",' +
-      '"features.Tiger ? 3:Pounce",' +
-      '"features.Wolf ? 3:Trip",' +
-      '"features.Wolverine ? 3:Weretouched Rage",' +
-      '"4:Frightful Shifting",' +
-      '"features.Bear ? 5:Alternate Form (Bear)",' +
-      '"features.Boar ? 5:Alternate Form (Boar)",' +
-      '"features.Rat ? 5:Alternate Form (Rat)",' +
-      '"features.Tiger ? 5:Alternate Form (Tiger)",' +
-      '"features.Wolf ? 5:Alternate Form (Wolf)",' +
-      '"features.Wolverine ? 5:Alternate Form (Wolverine)" ' +
-    'Selectables=' +
-      '1:Bear,1:Boar,1:Rat,1:Tiger,1:Wolf,1:Wolverine'
-};
-Eberron.NPC_CLASSES = Object.assign({}, SRD35.NPC_CLASSES);
-Eberron.DEITIES = {
-  'None':'Domain=' + QuilvynUtils.getKeys(Eberron.PATHS).filter(x => x.match(/Domain$/)).map(x => '"' + x.replace(' Domain', '') + '"').join(','),
-  'Arawai':'Alignment=NG Weapon=Morningstar Domain=Good,Life,Plant,Weather',
-  'Aureon':'Alignment=LN Weapon=Quarterstaff Domain=Knowledge,Law,Magic',
-  'Balinor':'Alignment=N Weapon=Battleaxe Domain=Air,Animal,Earth',
-  'Boldrei':'Alignment=LG Weapon=Spear Domain=Community,Good,Law,Protection',
-  'Dol Arrah':'Alignment=LG Weapon=Halberd Domain=Good,Law,Sun,War',
-  'Dol Dorn':'Alignment=CG Weapon=Longsword Domain=Chaos,Good,Strength,War',
-  'Kol Korran':
-    'Alignment=N Weapon="Heavy Mace","Light Mace" Domain=Charm,Commerce,Travel',
-  'Olladra':'Alignment=NG Weapon=Sickle Domain=Feast,Good,Healing,Luck',
-  'Onatar':'Alignment=NG Weapon=Warhammer Domain=Artifice,Fire,Good',
-  'The Blood Of Vol':
-    'Alignment=LE Weapon=Dagger Domain=Death,Evil,Law,Necromancer',
-  'The Cults Of The Dragon Below':
-    'Alignment=LN Weapon="Heavy Pick" Domain="Dragon Below",Earth,Evil,Madness',
-  'The Devourer':
-    'Alignment=NE Weapon=Trident Domain=Destruction,Evil,Water,Weather',
-  'The Fury':'Alignment=NE Weapon=Rapier Domain=Evil,Madness,Passion',
-  'The Keeper':'Alignment=NE Weapon=Scythe Domain=Death,Decay,Evil',
-  'The Mockery':'Alignment=NE Weapon=Kama Domain=Destruction,Evil,Trickery,War',
-  'The Path Of Light':
-    'Alignment=LN Weapon=Unarmed Domain=Law,Meditation,Protection',
-  'The Shadow':
-    'Alignment=CE Weapon=Quarterstaff Domain=Chaos,Evil,Magic,Shadow',
-  'The Silver Flame':
-    'Alignment=LG Weapon=Longbow Domain=Exorcism,Good,Law,Protection',
-  'The Traveler':
-    'Alignment=CN Weapon=Scimitar Domain=Artifice,Chaos,Travel,Trickery',
-  'The Undying Court':
-    'Alignment=NG Weapon=Scimitar Domain=Deathless,Good,Protection'
-};
 
 /* Defines the rules related to character abilities. */
 Eberron.abilityRules = function(rules) {
@@ -1714,7 +1721,6 @@ Eberron.aideRules = function(rules, companions, familiars) {
 /* Defines rules related to combat. */
 Eberron.combatRules = function(rules, armors, shields, weapons) {
   rules.basePlugin.combatRules(rules, armors, shields, weapons);
-  // No changes needed to the rules defined by base method
   rules.defineChoice('notes',
     'damageReduction.Adamantine:%V/%N',
     'damageReduction.Cold Iron:%V/%N',
@@ -1729,7 +1735,7 @@ Eberron.identityRules = function(
 ) {
 
   QuilvynUtils.checkAttrTable
-    (houses, ['Dragonmark', 'Race', 'Features', 'Spells']);
+    (houses, ['Dragonmark', 'Race', 'Features']);
 
   if(rules.basePlugin == window.Pathfinder)
     Pathfinder.identityRules(
@@ -1741,9 +1747,8 @@ Eberron.identityRules = function(
       rules, alignments, classes, deities, paths, races,
       Eberron.PRESTIGE_CLASSES, Eberron.NPC_CLASSES
     );
-  // No changes needed to the rules defined by base method
 
-  for(var house in houses) {
+  for(let house in houses) {
     rules.choiceRules(rules, 'House', house, houses[house]);
   }
 
@@ -1772,12 +1777,6 @@ Eberron.talentRules = function(
   rules.basePlugin.talentRules
     (rules, feats, features, goodies, languages, skills);
   // No changes needed to the rules defined by base method
-  for(var skill in skills) {
-    rules.defineRule
-      ('countSkillsGe9', 'skills.' + skill, '+=', 'source >= 9 ? 1 : null');
-    rules.defineRule
-      ('countSkillsGe12', 'skills.' + skill, '+=', 'source >= 12 ? 1 : null');
-  }
 };
 
 /*
@@ -1879,7 +1878,7 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
     );
   else if(type == 'Language')
     Eberron.languageRules(rules, name);
-  else if(type == 'Path') {
+  else if(type == 'Path')
     Eberron.pathRules(rules, name,
       QuilvynUtils.getAttrValue(attrs, 'Group'),
       QuilvynUtils.getAttrValue(attrs, 'Level'),
@@ -1888,8 +1887,7 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
       QuilvynUtils.getAttrValue(attrs, 'SpellAbility'),
       QuilvynUtils.getAttrValueArray(attrs, 'SpellSlots')
     );
-    Eberron.pathRulesExtra(rules, name);
-  } else if(type == 'Race') {
+  else if(type == 'Race') {
     Eberron.raceRules(rules, name,
       QuilvynUtils.getAttrValueArray(attrs, 'Require'),
       QuilvynUtils.getAttrValueArray(attrs, 'Features'),
@@ -1911,7 +1909,7 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
       QuilvynUtils.getAttrValue(attrs, 'Spell')
     );
   else if(type == 'Skill') {
-    var untrained = QuilvynUtils.getAttrValue(attrs, 'Untrained');
+    let untrained = QuilvynUtils.getAttrValue(attrs, 'Untrained');
     Eberron.skillRules(rules, name,
       QuilvynUtils.getAttrValue(attrs, 'Ability'),
       untrained != 'n' && untrained != 'N',
@@ -1921,23 +1919,25 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
     if(rules.basePlugin.skillRulesExtra)
       rules.basePlugin.skillRulesExtra(rules, name);
   } else if(type == 'Spell') {
-    var description = QuilvynUtils.getAttrValue(attrs, 'Description');
-    var groupLevels = QuilvynUtils.getAttrValueArray(attrs, 'Level');
-    var liquids = QuilvynUtils.getAttrValueArray(attrs, 'Liquid');
-    var school = QuilvynUtils.getAttrValue(attrs, 'School');
-    var schoolAbbr = (school || 'Universal').substring(0, 4);
-    for(var i = 0; i < groupLevels.length; i++) {
-      var matchInfo = groupLevels[i].match(/^(\D+)(\d+)$/);
+    let description = QuilvynUtils.getAttrValue(attrs, 'Description');
+    let groupLevels = QuilvynUtils.getAttrValueArray(attrs, 'Level');
+    let liquids = QuilvynUtils.getAttrValueArray(attrs, 'Liquid');
+    let school = QuilvynUtils.getAttrValue(attrs, 'School');
+    let schoolAbbr = (school || 'Universal').substring(0, 4);
+    for(let i = 0; i < groupLevels.length; i++) {
+      let matchInfo = groupLevels[i].match(/^(\D+)(\d+)$/);
       if(!matchInfo) {
         console.log('Bad level "' + groupLevels[i] + '" for spell ' + name);
         continue;
       }
-      var group = matchInfo[1];
-      var level = matchInfo[2] * 1;
-      var fullName = name + '(' + group + level + ' ' + schoolAbbr + ')';
-      // TODO indicate domain spells in attributes?
-      var domainSpell =
-        Eberron.PATHS[group + ' Domain'] != null || group == 'Dragon';
+      let group = matchInfo[1];
+      let level = matchInfo[2] * 1;
+      let fullName = name + '(' + group + level + ' ' + schoolAbbr + ')';
+      let domainSpell =
+        (rules.getChoices('selectableFeatures') != null &&
+         ('Cleric - ' + group + ' Domain') in rules.getChoices('selectableFeatures')) ||
+        group == 'Dragon' || // Dragon Below domain
+        Eberron.CLASSES.Cleric.includes(group + ' Domain');
       Eberron.spellRules
         (rules, fullName, school, group, level, description, domainSpell,
          liquids);
@@ -1967,9 +1967,8 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
     console.log('Unknown choice type "' + type + '"');
     return;
   }
-  if(type != 'Feature' && type != 'Path' && type != 'Spell') {
+  if(type != 'Spell') {
     type = type == 'Class' ? 'levels' :
-    type = type == 'Deity' ? 'deities' :
     (type.substring(0,1).toLowerCase() + type.substring(1).replaceAll(' ', '') + 's');
     rules.addChoice(type, name, attrs);
   }
@@ -2020,14 +2019,14 @@ Eberron.classRules = function(
   casterLevelDivine, spellAbility, spellSlots
 ) {
   if(rules.basePlugin == window.Pathfinder) {
-    for(var i = 0; i < requires.length; i++) {
-      for(var skill in Pathfinder.SRD35_SKILL_MAP) {
+    for(let i = 0; i < requires.length; i++) {
+      for(let skill in Pathfinder.SRD35_SKILL_MAP) {
         requires[i] =
           requires[i].replaceAll(skill, Pathfinder.SRD35_SKILL_MAP[skill]);
       }
     }
-    for(var i = skills.length - 1; i >= 0; i--) {
-      var skill = skills[i];
+    for(let i = skills.length - 1; i >= 0; i--) {
+      let skill = skills[i];
       if(!(skill in Pathfinder.SRD35_SKILL_MAP))
         continue;
       if(Pathfinder.SRD35_SKILL_MAP[skill] == '')
@@ -2043,6 +2042,7 @@ Eberron.classRules = function(
   );
   if(name == 'Druid') {
     // Expand Druid's armor choices to include Darkleaf and Leafweave
+    delete rules.choices.notes['validationNotes.druidClass'];
     QuilvynRules.prerequisiteRules
       (rules, 'validation', 'druidClass', 'levels.Druid',
        ["alignment =~ 'Neutral'",
@@ -2059,8 +2059,8 @@ Eberron.classRulesExtra = function(rules, name) {
 
   if(name == 'Artificer') {
 
-    var allFeats = rules.getChoices('feats');
-    for(var feat in allFeats) {
+    let allFeats = rules.getChoices('feats');
+    for(let feat in allFeats) {
       if(feat == 'Wand Mastery' || allFeats[feat].indexOf('Item Creation') >= 0)
         allFeats[feat] = allFeats[feat].replace('Type=', 'Type=Artificer,');
     }
@@ -2084,8 +2084,8 @@ Eberron.classRulesExtra = function(rules, name) {
 
   } else if(name == 'Dragonmark Heir') {
 
-    var allSkills = rules.getChoices('skills');
-    for(var skill in allSkills) {
+    let allSkills = rules.getChoices('skills');
+    for(let skill in allSkills) {
       rules.defineRule
         ('countSkillsGe7', 'skills.' + skill, '+=', 'source >= 7 ? 1 : null');
     }
@@ -2166,8 +2166,8 @@ Eberron.classRulesExtra = function(rules, name) {
 
   } else if(name == 'Extreme Explorer') {
 
-    var allFeats = rules.getChoices('feats');
-    for(var feat in
+    let allFeats = rules.getChoices('feats');
+    for(let feat in
       {'Action Surge':'', 'Heroic Spirit':'', 'Pursue':'',
        'Spontaneous Casting':''}
     ) {
@@ -2199,8 +2199,8 @@ Eberron.classRulesExtra = function(rules, name) {
 
   } else if(name == 'Heir Of Siberys') {
 
-    var allFeats = rules.getChoices('feats');
-    for(var feat in
+    let allFeats = rules.getChoices('feats');
+    for(let feat in
       {'Action Boost':'', 'Action Surge':'', 'Favored In House':'', 'Pursue':'',
        'Spontaneous Casting':''}
     ) {
@@ -2211,8 +2211,8 @@ Eberron.classRulesExtra = function(rules, name) {
         console.log('Missing Heir Of Siberys feat "' + feat + '"');
       }
     }
-    var allSkills = rules.getChoices('skills');
-    for(var skill in allSkills) {
+    let allSkills = rules.getChoices('skills');
+    for(let skill in allSkills) {
       rules.defineRule
         ('countSkillsGe15', 'skills.' + skill, '+=', 'source >= 15 ? 1 : null');
     }
@@ -2232,8 +2232,8 @@ Eberron.classRulesExtra = function(rules, name) {
 
   } else if(name == 'Master Inquisitive') {
 
-    var allFeats = rules.getChoices('feats');
-    var miFeats = 
+    let allFeats = rules.getChoices('feats');
+    let miFeats = 
       {'Alertness':'', 'Deceitful':'', 'Heroic Spirit':'',
        'Improved Initiative':'', 'Iron Will':'', 'Persuasive':'',
        'Recognize Impostor':'', 'Research':'', 'Toughness':'',
@@ -2242,7 +2242,7 @@ Eberron.classRulesExtra = function(rules, name) {
       // Pathfinder doesn't define these feats
       miFeats['Negotiator'] = miFeats['Track'] = '';
     }
-    for(var feat in miFeats) {
+    for(let feat in miFeats) {
       if(feat in allFeats) {
         allFeats[feat] =
           allFeats[feat].replace('Type=', 'Type="Master Inquisitive",');
@@ -2312,7 +2312,7 @@ Eberron.classRulesExtra = function(rules, name) {
 
   } else if(name == 'Weretouched Master') {
 
-    var allFeats = rules.getChoices('feats');
+    let allFeats = rules.getChoices('feats');
     rules.defineRule
       ('combatNotes.frightfulShifting', 'level', '=', 'source - 1');
     rules.defineRule('combatNotes.frightfulShifting.1',
@@ -2357,9 +2357,30 @@ Eberron.classRulesExtra = function(rules, name) {
       'combatNotes.wolverine', '=', '1'
     );
 
-  } else if(rules.basePlugin.classRulesExtra) {
+  } else {
 
-    rules.basePlugin.classRulesExtra(rules, name);
+    if(name == 'Cleric') {
+      // Artifice Domain
+      for(let s in rules.getChoices('skills')) {
+        if(s.startsWith('Craft '))
+          rules.defineRule
+            ('skillModifier.' + s, 'skillNotes.artificeMaster', '+', '4');
+      }
+      // Decay Domain
+      rules.defineRule('magicNotes.touchOfDecay', 'levels.Cleric', '=', null);
+      // Life Domain
+      rules.defineRule('magicNotes.addLife', 'levels.Cleric', '=', null);
+      rules.defineRule('magicNotes.addLife.1', 'levels.Cleric', '=', null);
+      // Madness Domain
+      rules.defineRule('featureNotes.clarityOfTrueMadness',
+        'levels.Cleric', '=', 'Math.floor(source / 2)'
+      );
+      // Passion Domain
+      rules.defineRule('combatNotes.fitOfPassion', 'levels.Cleric', '=', null);
+    }
+
+    if(rules.basePlugin.classRulesExtra)
+      rules.basePlugin.classRulesExtra(rules, name);
 
   }
 
@@ -2427,7 +2448,7 @@ Eberron.featRules = function(rules, name, requires, implies, types) {
  */
 Eberron.featRulesExtra = function(rules, name) {
 
-  var matchInfo;
+  let matchInfo;
 
   if(name == 'Adamantine Body') {
     rules.defineRule('combatNotes.dexterityArmorClassAdjustment',
@@ -2449,7 +2470,7 @@ Eberron.featRulesExtra = function(rules, name) {
     rules.defineRule
       ('abilityNotes.cliffwalk', 'abilityNotes.cliffwalkElite', '+', '10');
   } else if((matchInfo = name.match(/Dragon Totem \((.*)\)/)) != null) {
-    var energy =
+    let energy =
       'BlackCopperGreen'.includes(matchInfo[1]) ? 'Acid' :
       'BlueBronze'.includes(matchInfo[1]) ? 'Electricity' :
       'BrassGoldRed'.includes(matchInfo[1]) ? 'Fire' : 'Cold';
@@ -2508,6 +2529,10 @@ Eberron.featRulesExtra = function(rules, name) {
       'level', '=', 'Math.floor(source / 4)',
       'strengthModifier', '+', 'Math.floor(source / 2)'
     );
+  } else if(name == 'Greater Dragonmark') {
+    for(let s in rules.getChoices('skills'))
+      rules.defineRule
+        ('countSkillsGe12', 'skills.' + s, '+=', 'source >= 12 ? 1 : null');
   } else if(name == 'Greater Powerful Charge') {
     rules.defineRule('combatNotes.greaterPowerfulCharge',
       '', '=', '"2d6"',
@@ -2563,6 +2588,10 @@ Eberron.featRulesExtra = function(rules, name) {
     rules.defineRule('skillNotes.armorSkillCheckPenalty',
       'features.Mithral Body', '=', '2'
     );
+  } else if(name == 'Lesser Dragonmark') {
+    for(let s in rules.getChoices('skills'))
+      rules.defineRule
+        ('countSkillsGe9', 'skills.' + s, '+=', 'source >= 9 ? 1 : null');
   } else if(name == 'Mithral Fluidity') {
     rules.defineRule
       ('mithralBodyDexACCap', 'combatNotes.mithralFluidity', '+', '1');
@@ -2619,14 +2648,14 @@ Eberron.featRulesExtra = function(rules, name) {
  */
 Eberron.featureRules = function(rules, name, sections, notes) {
   if(rules.basePlugin == window.Pathfinder) {
-    for(var i = 0; i < sections.length; i++) {
+    for(let i = 0; i < sections.length; i++) {
       if(sections[i] != 'skill')
         continue;
-      var note = notes[i];
-      for(var skill in Pathfinder.SRD35_SKILL_MAP) {
+      let note = notes[i];
+      for(let skill in Pathfinder.SRD35_SKILL_MAP) {
         if(note.indexOf(skill) < 0)
           continue;
-        var pfSkill = Pathfinder.SRD35_SKILL_MAP[skill];
+        let pfSkill = Pathfinder.SRD35_SKILL_MAP[skill];
         if(pfSkill == '' || note.indexOf(pfSkill) >= 0) {
           note = note.replace(new RegExp('[,/]?[^,/:]*' + skill + '[^,/]*', 'g'), '');
         } else {
@@ -2637,6 +2666,26 @@ Eberron.featureRules = function(rules, name, sections, notes) {
     }
   }
   rules.basePlugin.featureRules(rules, name, sections, notes);
+  // No changes needed to the rules defined by base method
+};
+
+/*
+ * Defines in #rules# the rules associated with goody #name#, triggered by
+ * a starred line in the character notes that matches #pattern#. #effect#
+ * specifies the effect of the goody on each attribute in list #attributes#.
+ * This is one of "increment" (adds #value# to the attribute), "set" (replaces
+ * the value of the attribute by #value#), "lower" (decreases the value to
+ * #value#), or "raise" (increases the value to #value#). #value#, if null,
+ * defaults to 1; occurrences of $1, $2, ... in #value# reference capture
+ * groups in #pattern#. #sections# and #notes# list the note sections
+ * ("attribute", "combat", "companion", "feature", "magic", "save", or "skill")
+ * and formats that show the effects of the goody on the character sheet.
+ */
+Eberron.goodyRules = function(
+  rules, name, pattern, effect, value, attributes, sections, notes
+) {
+  rules.basePlugin.goodyRules
+    (rules, name, pattern, effect, value, attributes, sections, notes);
   // No changes needed to the rules defined by base method
 };
 
@@ -2675,9 +2724,9 @@ Eberron.houseRules = function(rules, name, dragonmark, races, features) {
   rules.houseStats.dragonmark[name] = dragonmark;
   rules.houseStats.races[name] = races.join('|');
 
-  var prefix =
+  let prefix =
     name.charAt(0).toLowerCase() + name.substring(1).replaceAll(' ', '');
-  var houseLevel = prefix + 'Level';
+  let houseLevel = prefix + 'Level';
 
   rules.defineRule(houseLevel,
     'house', '?', 'source == "' + name + '"',
@@ -2732,32 +2781,12 @@ Eberron.houseRules = function(rules, name, dragonmark, races, features) {
       (rules, 'validation', 'house' + name, houseLevel,
        "race =~ '" + races.join("|") + "'");
   if(name == 'Cannith') {
-    for(var s in rules.getChoices('skills')) {
+    for(let s in rules.getChoices('skills')) {
       if(s.startsWith('Craft '))
         rules.defineRule('skillModifier.' + s, 'skillNotes.maker', '+', '2');
     }
   }
 
-};
-
-/*
- * Defines in #rules# the rules associated with goody #name#, triggered by
- * a starred line in the character notes that matches #pattern#. #effect#
- * specifies the effect of the goody on each attribute in list #attributes#.
- * This is one of "increment" (adds #value# to the attribute), "set" (replaces
- * the value of the attribute by #value#), "lower" (decreases the value to
- * #value#), or "raise" (increases the value to #value#). #value#, if null,
- * defaults to 1; occurrences of $1, $2, ... in #value# reference capture
- * groups in #pattern#. #sections# and #notes# list the note sections
- * ("attribute", "combat", "companion", "feature", "magic", "save", or "skill")
- * and formats that show the effects of the goody on the character sheet.
- */
-Eberron.goodyRules = function(
-  rules, name, pattern, effect, value, attributes, sections, notes
-) {
-  rules.basePlugin.goodyRules
-    (rules, name, pattern, effect, value, attributes, sections, notes);
-  // No changes needed to the rules defined by base method
 };
 
 /* Defines in #rules# the rules associated with language #name#. */
@@ -2788,37 +2817,6 @@ Eberron.pathRules = function(
       rules, name, group, levelAttr, features, selectables, spellAbility,
       spellSlots
     );
-  // Add new domains to Cleric selections
-  if(name.match(/Domain$/))
-    QuilvynRules.featureListRules
-      (rules, ["deityDomains =~ '" + name.replace(' Domain', '') + "' ? 1:" + name], 'Cleric', 'levels.Cleric', true);
-};
-
-/*
- * Defines in #rules# the rules associated with path #name# that cannot be
- * derived directly from the abilities passed to pathRules.
- */
-Eberron.pathRulesExtra = function(rules, name) {
-  if(name == 'Artifice Domain') {
-    for(var s in rules.getChoices('skills')) {
-      if(s.startsWith('Craft '))
-        rules.defineRule
-          ('skillModifier.' + s, 'skillNotes.artificeMaster', '+', '4');
-    }
-  } else if(name == 'Decay Domain') {
-    rules.defineRule('magicNotes.touchOfDecay', 'levels.Cleric', '=', null);
-  } else if(name == 'Life Domain') {
-    rules.defineRule('magicNotes.addLife', 'levels.Cleric', '=', null);
-    rules.defineRule('magicNotes.addLife.1', 'levels.Cleric', '=', null);
-  } else if(name == 'Madness Domain') {
-    rules.defineRule('featureNotes.clarityOfTrueMadness',
-      'levels.Cleric', '=', 'Math.floor(source / 2)'
-    );
-  } else if(name == 'Passion Domain') {
-    rules.defineRule('combatNotes.fitOfPassion', 'levels.Cleric', '=', null);
-  } else if(rules.basePlugin.pathRulesExtra) {
-    rules.basePlugin.pathRulesExtra(rules, name);
-  }
 };
 
 /*
@@ -2985,11 +2983,11 @@ Eberron.weaponRules = function(
  * item to #rules#.
  */
 Eberron.choiceEditorElements = function(rules, type) {
-  var result = [];
+  let result = [];
   if(type == 'House')
     result.push(
       ['Dragonmark', 'Dragonmark', 'text', [20]],
-      ['Features', 'Features', 'text', [40]],
+      ['Race', 'Race', 'select-one', 'races'],
       ['Spells', 'Spells', 'text', [80]]
     );
   else
@@ -3006,10 +3004,10 @@ Eberron.createViewers = function(rules, viewers) {
 /* Sets #attributes#'s #attribute# attribute to a random value. */
 Eberron.randomizeOneAttribute = function(attributes, attribute) {
   if(attribute == 'house') {
-    var allHouses = this.getChoices('houses');
-    var choices = ['None'];
-    var race = attributes.race;
-    for(var house in allHouses) {
+    let allHouses = this.getChoices('houses');
+    let choices = ['None'];
+    let race = attributes.race;
+    for(let house in allHouses) {
       if(allHouses[house].match(race))
         choices.push(house);
     }
@@ -3021,7 +3019,7 @@ Eberron.randomizeOneAttribute = function(attributes, attribute) {
 
 /* Returns an array of plugins upon which this one depends. */
 Eberron.getPlugins = function() {
-  var base = this.basePlugin == window.SRD35 ? window.PHB35 : this.basePlugin;
+  let base = this.basePlugin == window.SRD35 ? window.PHB35 : this.basePlugin;
   return [base].concat(base.getPlugins());
 };
 
@@ -3036,6 +3034,11 @@ Eberron.ruleNotes = function() {
     '    Quilvyn represents the Oil of Repair magic item described in the\n' +
     '    rule book as Repair Light/Moderate/Serious Damage Oil in the\n' +
     '    Potions/Oils menu.\n' +
+    '  </li><li>\n' +
+    '    The Eberrong rule set allows you to add homebrew choices for all\n' +
+    '    of the same types discussed in the <a href="plugins/homebrew-srd35.html">SRD v3.5 Homebrew Examples document</a>.\n' +
+    '    In addition, the FR rule set allows adding homebrew houses, which\n' +
+    '    require specifying the region name, race, and associated dragonmark.\n' +
     '  </li>\n' +
     '</ul>\n' +
     '<h3>Copyrights and Licensing</h3>\n' +
