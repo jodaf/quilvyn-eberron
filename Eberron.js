@@ -578,7 +578,7 @@ Eberron.FEATS_ADDED = {
   'Haunting Melody':
     'Type=General ' +
     'Require="features.Bardic Music",' +
-            '"Sum \'^skills.Perform\' >= 9"',
+            '"sumPerformRanks >= 9"',
   'Healing Factor':
     'Type=General,Shifter Require="constitution >= 13","race == \'Shifter\'"',
   'Heroic Spirit':'Type=General',
@@ -684,7 +684,7 @@ Eberron.FEATURES_ADDED = {
   'Artificer Feat Bonus':'Section=feature Note="%V Artificer feats"',
   'Artificer Knowledge':
     'Section=skill ' +
-    'Note="Successful +%V DC 15 check determines whether an item is magical"',
+    'Note="Successful +%{levels.Artificer+intelligenceModifier} DC 15 check determines whether an item is magical"',
   'Artificer Skill Mastery':
     'Section=skill ' +
     'Note="May take 10 on Spellcraft or Use Magic Device when distracted"',
@@ -702,14 +702,16 @@ Eberron.FEATURES_ADDED = {
     'Note="Successful +2 DC 20+caster level check creates magic items"',
   'Metamagic Spell Completion':
     'Section=skill ' +
-    'Note="Successful DC 20 + 3x modified spell level Use Magic Device applies metamagic feat to spell from scroll %V/dy"',
+    'Note="Successful DC 20 + 3x modified spell level Use Magic Device applies metamagic feat to spell from scroll %{intelligenceModifier+3}/dy"',
   'Metamagic Spell Trigger':
     'Section=magic Note="May apply metamagic feats to spells cast from wands"',
   'Retain Essence':
     'Section=magic Note="May drain magic item XP into craft reserve"',
 
   // Domain
-  'Add Life':'Section=magic Note="Touched gains 1d6+%V temporary HP for %1 hr"',
+  'Add Life':
+    'Section=magic ' +
+    'Note="Touched gains 1d6+%{levels.Cleric} temporary HP for %{levels.Cleric} hr"',
   'All-Weather':
     'Section=feature,skill ' +
     'Note="Can see clearly in any weather",' +
@@ -717,7 +719,7 @@ Eberron.FEATURES_ADDED = {
   'Artifice Master':'Section=skill Note="+4 all Craft"',
   'Clarity Of True Madness':
     'Section=feature ' +
-    'Note="May add %V to a Wisdom skill check or Will save 1/dy"',
+    'Note="May add %{levels.Cleric//2} to a Wisdom skill check or Will save 1/dy"',
   'Commercial':
     'Section=skill ' +
     'Note="+10 Profession (earn a living)/Appraise is a class skill"',
@@ -733,7 +735,7 @@ Eberron.FEATURES_ADDED = {
   'Feast Gut':'Section=save Note="Immune to ingested poison and disease"',
   'Fit Of Passion':
     'Section=combat ' +
-    'Note="May gain +4 Strength, +4 Constitution, and +2 Will save and suffer -2 AC for %V rd/dy"',
+    'Note="May gain +4 Strength, +4 Constitution, and +2 Will save and suffer -2 AC for %{levels.Cleric} rd/dy"',
   'Madness-Weakened':'Section=save Note="-1 Will"',
   'Meditative Casting':
     'Section=magic Note="May gain x1.5 chosen spell variable effects 1/dy"',
@@ -741,7 +743,7 @@ Eberron.FEATURES_ADDED = {
     'Section=combat Note="May use Turn Undead to rebuke deathless 1/dy"',
   'Touch Of Decay':
     'Section=magic ' +
-    'Note="Touch inflicts -1d4 Constitution (living) or 2d6+%V HP (undead) 1/dy"',
+    'Note="Touch inflicts -1d4 Constitution (living) or 2d6+%{levels.Cleric} HP (undead) 1/dy"',
   'Turn On The Charm':
     'Section=ability Note="May gain +4 Charisma for 1 min 1/dy"',
 
@@ -812,18 +814,18 @@ Eberron.FEATURES_ADDED = {
     'Section=magic Note="Reduces item creation base price by 25%"',
   'Favored In House':
     'Section=feature ' +
-    'Note="+%V attempts to acquire favors from house contacts %1/wk"',
+    'Note="+%{level>=16 ? 5 : level>=12 ? 4 : level>=7 ? 3 : level>=3 ? 2 : 1} attempts to acquire favors from house contacts %{level//2>?1}/wk"',
   'Finder':'Section=skill Note="+2 Search"',
   'Flensing Strike':
     'Section=combat ' +
-    'Note="Kama causes -4 pain penalty to foe attacks, saves, and checks (DC %V Fort neg) for 1 min"',
+    'Note="Kama causes -4 pain penalty to foe attacks, saves, and checks (DC %{10+level//2+wisdomModifier} Fort neg) for 1 min"',
   'Gatekeeper Initiate':
     'Section=magic,save,skill ' +
     'Note="Has access to additional spells",' +
          '"+2 vs. supernatural and aberrations",' +
          '"Knowledge (Planes) is a class skill"',
   'Great Bite':'Section=combat Note="Fangs Crit is x3"',
-  'Great Rend':'Section=combat Note="+1d4+%V HP on hit w/both claws"',
+  'Great Rend':'Section=combat Note="+1d4+%{level//4+strengthModifier//2} HP on hit w/both claws"',
   'Greater Dragonmark':
     'Section=magic Note="May cast choice of level 3 dragonmark spell 1/dy"',
   'Greater Powerful Charge':
@@ -836,10 +838,12 @@ Eberron.FEATURES_ADDED = {
          '"Bluff is a class skill/Hide is a class skill/Perform is a class skill"',
   'Handler':'Section=skill Note="+2 Handle Animal"',
   'Haunting Melody':
-    'Section=magic Note="R30\' Shakes foes (DC %V Will neg) for %1 rd"',
+    'Section=magic ' +
+    'Note="R30\' Shakes foes (DC %{10+levels.Bard//2+charismaModifier} Will neg) for %{sumPerformRanks} rd"',
   'Healer':'Section=skill Note="+2 Heal"',
-  'Healing Factor':'Section=combat Note="Recovers %V HP when shifting ends"',
-  'Heroic Spirit':'Section=ability Note="+%V AP"',
+  'Healing Factor':
+    'Section=combat Note="Recovers %{level} HP when shifting ends"',
+  'Heroic Spirit':'Section=ability Note="+%{level*3} AP"',
   'Hospitaler':'Section=skill Note="+2 Diplomacy"',
   'Improved Damage Reduction':'Section=combat Note="DR +1/adamantine"',
   'Improved Fortification':
@@ -889,7 +893,7 @@ Eberron.FEATURES_ADDED = {
     'Section=skill Note="+4 Sense Motive vs. Bluff and Spot vs. Disguise"',
   'Repel Aberration':
     'Section=combat ' +
-    'Note="R60\' May hold at bay 2d6+%1 HD of aberrations of up to (d20+%2)/3 HD %3/dy"',
+    'Note="R60\' May hold at bay 2d6+%{levels.Druid+charismaModifier} HD of aberrations of up to (d20+%{levels.Druid*3-10+charismaModifier})/3 HD %{3+charismaModifier+combatNotes.extraTurning}/dy"',
   'Research':
     'Section=skill Note="May use Knowledge skill on library and records"',
   'Right Of Counsel':
@@ -960,7 +964,7 @@ Eberron.FEATURES_ADDED = {
   'Mechanized':'Section=feature Note="Has no need to breathe, eat, or sleep"',
   'Mindlink':
     'Section=magic ' +
-    'Note="R30\' May use telepathy with willing target for %V rd 1/dy"',
+    'Note="R30\' May use telepathy with willing target for %{level//2>?1} rd 1/dy"',
   'Minor Shape Change':
     'Section=magic Note="May use <i>Disguise Self</i> effects on body at will"',
   'Natural Psionic':'Section=magic Note="+1 PP each level"',
@@ -974,7 +978,7 @@ Eberron.FEATURES_ADDED = {
   'Resist Sleep':'Section=save Note="+2 vs. sleep effects"',
   'Shifter Ability Adjustment':
     'Section=ability Note="+2 Dexterity/-2 Intelligence/-2 Charisma"',
-  'Shifting':'Section=feature Note="May use Shifter trait for %V rd %1/dy"',
+  'Shifting':'Section=feature Note="May use Shifter trait for %V rd 1/dy"',
   'Slam Weapon':'Section=combat Note="Can attack w/slam"',
   'Stable':
     'Section=combat ' +
@@ -1014,7 +1018,7 @@ Eberron.FEATURES_ADDED = {
     'Section=ability ' +
     'Note="May shift to animal (+4 Strength, +4 Dexterity, +8 Constitution) or bipedal hybrid form"',
   'Animalistic Heritage':'Section=skill Note="+2 Balance/+2 Climb/+2 Jump"',
-  'Armor Spikes':'Section=combat Note="Grapple attack inflicts %V HP"',
+  'Armor Spikes':'Section=combat Note="Grapple attack inflicts 1d%{$\'levels.Warforged Juggernaut\'>=4 ? 8 : 6} HP"',
   'Bear':
     'Section=ability,combat ' +
     'Note="+2 Strength while shifting",' +
@@ -1025,7 +1029,9 @@ Eberron.FEATURES_ADDED = {
          '"Can attack w/tusks (fangs) while shifting"',
   'Caster Level Bonus':
     'Section=magic Note="+%V base class level for spells known and spells/dy"',
-  'Charge Bonus':'Section=combat Note="+%V attack when charging"',
+  'Charge Bonus':
+    'Section=combat ' +
+    'Note="+%{$\'levels.Warforged Juggernaut\'//2} attack when charging"',
   'Climb Speed':
     'Section=ability,skill ' +
     'Note="20\' climb speed (+10 for Cliffwalk) while shifting",' +
@@ -1042,9 +1048,9 @@ Eberron.FEATURES_ADDED = {
     'Section=magic Note="May use <i>Detect Thoughts</i> effects at will"',
   'Discern Lies':
     'Section=magic ' +
-    'Note="R%1\' May reveal lies from %V creatures in 15\' radius for conc or %V rd (DC %2 Will neg) 1/dy; may spend 2 AP for 2/dy"',
+    'Note="R%{$\'levels.Master Inquisitive\'//2*5+25}\' May reveal lies from %{$\'levels.Master Inquisitive\'} creatures in 15\' radius for conc or %{$\'levels.Master Inquisitive\'} rd (DC %{14+wisdomModifier} Will neg) 1/dy; may spend 2 AP for 2/dy"',
   'Dodge Bonus':'Section=combat Note="+%V AC when unencumbered"',
-  'Expert Bull Rush':'Section=combat Note="+%V bull rush and door breakage"',
+  'Expert Bull Rush':'Section=combat Note="+%{$\'levels.Warforged Juggernaut\'} bull rush and door breakage"',
   'Extended Charge':'Section=ability Note="+5 speed when charging"',
   'Extreme Action':
     'Section=ability Note="Retains AP on successful AP roll of 8"',
@@ -1058,14 +1064,15 @@ Eberron.FEATURES_ADDED = {
     'Note="May stun or banish evil outsiders w/a successful turning check"',
   'Frightful Shifting':
     'Section=combat ' +
-    'Note="R30\' Foes up to %V HD shaken for 5d6 rounds (DC %1 Will neg)"',
+    'Note="R30\' Foes up to %{level-1} HD shaken for 5d6 rounds (DC %{$\'levels.Weretouched Master\'+10+charismaModifier} Will neg)"',
   'Greensinger Damage Reduction':'Section=combat Note="DR 3/cold iron"',
   'Hated Foe':
     'Section=combat Note="May spend 1 AP for dbl damage against favored enemy"',
   'Heir Of Siberys Feat Bonus':'Section=feature Note="1 Heir Of Siberys feat"',
   'Healing Immunity':'Section=save Note="Unaffected by healing spells"',
   'House Status':
-    'Section=skill Note="+%V Charisma-based skills w/house members"',
+    'Section=skill ' +
+    'Note="+%{$\'levels.Dragonmark Heir\'} Charisma-based skills w/house members"',
   'Improved Grab':
     'Section=combat Note="May grapple w/out provoking AOO after claw hit"',
   'Improved Greater Dragonmark':
@@ -1105,22 +1112,23 @@ Eberron.FEATURES_ADDED = {
   'Silver Exorcism':'Section=combat Note="+2 exorcism checks"',
   'Spell Resistance':'Section=save Note="Spell resistance 20"',
   'Superior Bull Rush':
-    'Section=combat Note="Inflicts +%V+%1 HP from bull rush"',
+    'Section=combat ' +
+    'Note="Inflicts +1d%{$\'levels.Warforged Juggernaut\'>=4 ? 8 : 6}+%{strengthModifier} HP from bull rush"',
   'Tiger':
     'Section=ability,combat ' +
     'Note="+2 Strength while shifting",' +
          '"Can attack w/claws while shifting"',
   'Touch Of Contagion':'Section=magic Note="May cast <i>Contagion</i> 3/dy"',
   'Trip':
-    'Section=combat Note="May trip w/out provoking AOO after successful bite "',
+    'Section=combat Note="May trip w/out provoking AOO after successful bite"',
   'True Seeing':
     'Section=magic ' +
-    'Note="May see through 120\' darkness, illusion, and invisibility for %V min 1/dy; may spend 2 AP for 2/dy"',
+    'Note="May see through 120\' darkness, illusion, and invisibility for %{$\'levels.Master Inquisitive\'} min 1/dy; may spend 2 AP for 2/dy"',
   'Unearthly Grace':'Section=save Note="+%V Fortitude/+%V Reflex/+%V Will"',
   'Warding Flame':
     'Section=combat,feature,save ' +
     'Note=' +
-      '"May gain +2 AC and inflict blindness on evil foes that strike self (DC %V Fort neg) at will",' +
+      '"May gain +2 AC and inflict blindness on evil foes that strike self (DC %{charismaModifier+20} Fort neg) at will",' +
       '"May generate 60\' light at will",' +
       '"May gain spell Resistance 25 (evil casters and spells) at will"',
   'Weapon Of Flame':
@@ -1149,7 +1157,7 @@ Eberron.FEATURES_ADDED = {
          '"Can attack w/fangs while shifting"',
   'Zone Of Truth':
     'Section=magic ' +
-    'Note="R%1\' May create 20\' radius that prohibits lying for %V min (DC %2 Will neg) 1/dy; may spend 2 AP for 2/dy"'
+    'Note="R%{$\'levels.Master Inquisitive\'//2*5+25}\' May create 20\' radius that prohibits lying for %{$\'levels.Master Inquisitive\'} min (DC %{wisdomModifier+12} Will neg) 1/dy; may spend 2 AP for 2/dy"'
 
 };
 Eberron.FEATURES = Object.assign({}, SRD35.FEATURES, Eberron.FEATURES_ADDED);
@@ -2096,13 +2104,6 @@ Eberron.classRulesExtra = function(rules, name) {
     rules.defineRule('magicNotes.craftReserve',
       'levels.Artificer', '=', '[0, 20, 40, 60, 80, 100, 150, 200, 250, 300, 400, 500, 700, 900, 1200, 1500, 2000, 2500, 3000, 4000, 5000][source]'
     );
-    rules.defineRule('skillNotes.artificerKnowledge',
-       'levels.Artificer', '=', null,
-       'intelligenceModifier', '+', null
-    );
-    rules.defineRule('skillNotes.metamagicSpellCompletion',
-      'intelligenceModifier', '=', '3 + source'
-    );
     // Artificers are neither arcane nor divine, but they are casters
     rules.defineRule('casterLevel', 'casterLevels.Artificer', '+=', null);
 
@@ -2113,8 +2114,6 @@ Eberron.classRulesExtra = function(rules, name) {
       rules.defineRule
         ('countSkillsGe7', 'skills.' + skill, '+=', 'source >= 7 ? 1 : null');
     }
-    rules.defineRule
-      ('skillNotes.houseStatus', 'levels.Dragonmark Heir', '=', null);
 
   } else if(name == 'Eldeen Ranger') {
 
@@ -2156,9 +2155,6 @@ Eberron.classRulesExtra = function(rules, name) {
     rules.defineRule('combatNotes.smiteEvil.2',
       'features.Smite Evil', '?', null,
       'levels.Exorcist Of The Silver Flame', '+=', null
-    );
-    rules.defineRule('combatNotes.wardingFlame',
-      'charismaModifier', '=', '20 + source'
     );
     rules.defineRule('combatNotes.weaponOfFlame',
       '', '=', '1',
@@ -2281,38 +2277,9 @@ Eberron.classRulesExtra = function(rules, name) {
     rules.defineRule('featureNotes.contact.1',
       'levels.Master Inquisitive', '=', 'source>=4 ? " and a level 6" : ""'
     );
-    rules.defineRule
-      ('magicNotes.discernLies', 'levels.Master Inquisitive', '=', null);
-    rules.defineRule('magicNotes.discernLies.1',
-      'levels.Master Inquisitive', '=', 'source>=3 ? Math.floor(source / 2) * 5 + 25 : null'
-    );
-    rules.defineRule('magicNotes.discernLies.2',
-      'levels.Master Inquisitive', '?', 'source >= 3',
-      'wisdomModifier', '=', '14 + source'
-    );
-    rules.defineRule
-      ('magicNotes.trueSeeing', 'levels.Master Inquisitive', '=', null);
-    rules.defineRule
-      ('magicNotes.zoneOfTruth', 'levels.Master Inquisitive', '=', null);
-    rules.defineRule('magicNotes.zoneOfTruth.1',
-      'levels.Master Inquisitive', '=', 'Math.floor(source / 2) * 5 + 25'
-    );
-    rules.defineRule('magicNotes.zoneOfTruth.2',
-      'levels.Master Inquisitive', '?', null,
-      'wisdomModifier', '=', '12 + source'
-    );
 
   } else if(name == 'Warforged Juggernaut') {
 
-    rules.defineRule('combatNotes.armorSpikes',
-      'levels.Warforged Juggernaut', '=', 'source >= 4 ? "1d8" : "1d6"'
-    );
-    rules.defineRule('combatNotes.chargeBonus',
-      'levels.Warforged Juggernaut', '=',
-      'source < 2 ? null : Math.floor(source / 2)'
-    );
-    rules.defineRule
-      ('combatNotes.expertBullRush', 'levels.Warforged Juggernaut', '=', null);
     rules.defineRule('combatNotes.greaterPowerfulCharge',
       '', '=', '"2d6"',
       'features.Large', '=', '"3d6"'
@@ -2322,24 +2289,11 @@ Eberron.classRulesExtra = function(rules, name) {
       'features.Large', '=', '"2d6"',
       'combatNotes.greaterPowerfulCharge', '=', null
     );
-    rules.defineRule('combatNotes.superiorBullRush',
-      'levels.Warforged Juggernaut', '=', 'source >= 4 ? "1d8" : "1d6"'
-    );
-    rules.defineRule('combatNotes.superiorBullRush.1',
-      'features.Superior Bull Rush', '?', null,
-      'strengthModifier', '=', null
-    );
     rules.defineRule
       ('skillNotes.reserved', 'levels.Warforged Juggernaut', '=', null);
 
   } else if(name == 'Weretouched Master') {
 
-    rules.defineRule
-      ('combatNotes.frightfulShifting', 'level', '=', 'source - 1');
-    rules.defineRule('combatNotes.frightfulShifting.1',
-      'levels.Weretouched Master', '=', 'source + 10',
-      'charismaModifier', '+', null
-    );
     rules.defineRule('clawsDamageProgression',
       'combatNotes.bear', '+=', '1',
       'combatNotes.tiger', '+=', '1'
@@ -2387,17 +2341,6 @@ Eberron.classRulesExtra = function(rules, name) {
           rules.defineRule
             ('skillModifier.' + s, 'skillNotes.artificeMaster', '+', '4');
       }
-      // Decay Domain
-      rules.defineRule('magicNotes.touchOfDecay', 'levels.Cleric', '=', null);
-      // Life Domain
-      rules.defineRule('magicNotes.addLife', 'levels.Cleric', '=', null);
-      rules.defineRule('magicNotes.addLife.1', 'levels.Cleric', '=', null);
-      // Madness Domain
-      rules.defineRule('featureNotes.clarityOfTrueMadness',
-        'levels.Cleric', '=', 'Math.floor(source / 2)'
-      );
-      // Passion Domain
-      rules.defineRule('combatNotes.fitOfPassion', 'levels.Cleric', '=', null);
     }
 
     if(rules.basePlugin.classRulesExtra)
@@ -2523,19 +2466,6 @@ Eberron.featRulesExtra = function(rules, name) {
     rules.defineRule('selectableFeatureCount.Shifter',
       'featureNotes.extraShifterTrait', '+', '1'
     );
-  } else if(name == 'Favored In House') {
-    rules.defineRule('featureNotes.favoredInHouse',
-      'level', '=', 'source>=16 ? 5 : source>=12 ? 4 : source>=7 ? 3 : source>=3 ? 2 : 1'
-    );
-    rules.defineRule('featureNotes.favoredInHouse.1',
-      'features.Favored In House', '?', null,
-      'level', '=', 'Math.max(Math.floor(source / 2), 1)'
-    );
-  } else if(name == 'Flensing Strike') {
-    rules.defineRule('combatNotes.flensingStrike',
-      'level', '=', '10 + Math.floor(source / 2)',
-      'wisdomModifier', '+', null
-    );
   } else if(name == 'Gatekeeper Initiate') {
     rules.defineRule('casterLevels.Gatekeeper',
       'features.Gatekeeper Initiate', '?', null,
@@ -2544,11 +2474,6 @@ Eberron.featRulesExtra = function(rules, name) {
     rules.defineRule('spellDifficultyClass.Gatekeeper',
       'features.Gatekeeper Initiate', '?', null,
       'spellDifficultyClass.D', '=', null
-    );
-  } else if(name == 'Great Rend') {
-    rules.defineRule('combatNotes.greatRend',
-      'level', '=', 'Math.floor(source / 4)',
-      'strengthModifier', '+', 'Math.floor(source / 2)'
     );
   } else if(name == 'Greater Dragonmark') {
     for(let s in rules.getChoices('skills'))
@@ -2572,17 +2497,9 @@ Eberron.featRulesExtra = function(rules, name) {
       'spellDifficultyClass.D', '=', null
     );
   } else if(name == 'Haunting Melody') {
-    rules.defineRule('magicNotes.hauntingMelody',
-      'levels.Bard', '=', '10 + Math.floor(source / 2)',
-      'charismaModifier', '+', null
-    );
-    rules.defineRule('magicNotes.hauntingMelody.1',
-      /^skillModifier.Perform/, '+=', null
-    );
-  } else if(name == 'Healing Factor') {
-    rules.defineRule('combatNotes.healingFactor', 'level', '=', null);
-  } else if(name == 'Heroic Spirit') {
-    rules.defineRule('abilityNotes.heroicSpirit', 'level', '=', '3 * source');
+    for(let s in rules.getChoices('skills'))
+      if(s.startsWith('Perform'))
+        rules.defineRule('sumPerformRanks', 'skills.' + s, '+=', null);
   } else if(name == 'Improved Damage Reduction') {
     rules.defineRule('damageReduction.Adamantine',
       'combatNotes.improvedDamageReduction', '+=', '1'
@@ -2626,22 +2543,6 @@ Eberron.featRulesExtra = function(rules, name) {
       'combatNotes.greaterPowerfulCharge', '=', null
     );
   } else if(name == 'Repel Aberration') {
-    rules.defineRule('combatNotes.repelAberration.1',
-      'features.Repel Aberration', '?', null,
-      'levels.Druid', '=', null,
-      'combatNotes.charismaTurningAdjustment', '+', null
-    );
-    rules.defineRule('combatNotes.repelAberration.2',
-      'features.Repel Aberration', '?', null,
-      'levels.Druid', '=', 'source * 3 - 10',
-      'combatNotes.charismaTurningAdjustment', '+', null
-    );
-    rules.defineRule('combatNotes.repelAberration.3',
-      'features.Repel Aberration', '?', null,
-      'levels.Druid', '=', '3',
-      'combatNotes.charismaTurningAdjustment', '+', null,
-      'combatNotes.extraTurning', '+', null
-    );
     // Set turning level to suppress errors on, e.g., Extra Turning feat
     rules.defineRule('turningLevel', 'combatNotes.repelAberration', '=', '1');
   } else if(name == 'Shifter Defense') {
@@ -2864,9 +2765,6 @@ Eberron.raceRules = function(
 Eberron.raceRulesExtra = function(rules, name) {
 
   if(name == 'Kalashtar') {
-    rules.defineRule('magicNotes.mindlink',
-      'kalashtarLevel', '=', 'Math.max(Math.floor(source / 2), 1)'
-    );
     rules.defineRule('saveNotes.resistPossession', 'kalashtarLevel', '+=', '2');
   } else if(name == 'Shifter') {
     rules.defineRule('abilityNotes.cliffwalk', '', '=', '20');
@@ -2876,7 +2774,6 @@ Eberron.raceRulesExtra = function(rules, name) {
       'constitutionModifier', '=', '3 + source',
       'sumShifterFeats', '+', null
     );
-    rules.defineRule('featureNotes.shifting.1', '', '=', '1');
     rules.defineRule('selectableFeatureCount.Shifter',
       'race', '=', 'source == "Shifter" ? 1 : null'
     );
