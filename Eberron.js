@@ -67,8 +67,8 @@ function Eberron(baseRules) {
   rules.ruleNotes = Eberron.ruleNotes;
 
   if(rules.basePlugin == window.Pathfinder) {
-    SRD35.ABBREVIATIONS['CMB'] = 'Combat Maneuver Bonus';
-    SRD35.ABBREVIATIONS['CMD'] = 'Combat Maneuver Defense';
+    SRD35.ABBREVIATIONS.CMB = 'Combat Maneuver Bonus';
+    SRD35.ABBREVIATIONS.CMD = 'Combat Maneuver Defense';
   }
 
   SRD35.createViewers(rules, SRD35.VIEWERS);
@@ -173,7 +173,7 @@ Eberron.RANDOMIZABLE_ATTRIBUTES_ADDED = ['house'];
 Eberron.RANDOMIZABLE_ATTRIBUTES =
   SRD35.RANDOMIZABLE_ATTRIBUTES.concat(Eberron.RANDOMIZABLE_ATTRIBUTES_ADDED);
 
-SRD35.ABBREVIATIONS['AP'] = 'Action Points';
+SRD35.ABBREVIATIONS.AP = 'Action Points';
 
 Eberron.ALIGNMENTS = Object.assign({}, SRD35.ALIGNMENTS);
 Eberron.ANIMAL_COMPANIONS = Object.assign({}, SRD35.ANIMAL_COMPANIONS);
@@ -684,77 +684,83 @@ Eberron.FEATURES_ADDED = {
   'Artificer Feat Bonus':'Section=feature Note="%V Artificer feats"',
   'Artificer Knowledge':
     'Section=skill ' +
-    'Note="+%V DC 15 check to determine whether an item is magical"',
+    'Note="Successful +%V DC 15 check determines whether an item is magical"',
   'Artificer Skill Mastery':
     'Section=skill ' +
-    'Note="Take 10 on Spellcraft or Use Magic Device when distracted"',
+    'Note="May take 10 on Spellcraft or Use Magic Device when distracted"',
   'Artisan Bonus':
-    'Section=skill Note="+2 Use Magic Device on items character can craft"',
+    'Section=skill Note="+2 Use Magic Device on items self can craft"',
   'Craft Homunculus':
-    'Section=magic Note="Create small homunculus w/up to %{level-2} HD"',
+    'Section=magic Note="May create a small homunculus w/up to %{level-2} HD"',
   'Craft Reserve':
     'Section=magic Note=%V',
   'Disable Trap':
     'Section=skill ' +
-    'Note="Use Search and Disable Device to find and remove DC 20+ traps"',
+    'Note="May use Search and Disable Device to find and remove DC 20+ traps"',
   'Item Creation':
-    'Section=magic Note="+2 DC 20+caster level check to create magic items"',
+    'Section=magic ' +
+    'Note="Successful +2 DC 20+caster level check creates magic items"',
   'Metamagic Spell Completion':
     'Section=skill ' +
-    'Note="DC 20 + 3x modified spell level Use Magic Device to apply metamagic feat to spell from scroll %V/dy"',
+    'Note="Successful DC 20 + 3x modified spell level Use Magic Device applies metamagic feat to spell from scroll %V/dy"',
   'Metamagic Spell Trigger':
-    'Section=magic Note="Apply metamagic feat to spell from wand"',
+    'Section=magic Note="May apply metamagic feats to spells cast from wands"',
   'Retain Essence':
-    'Section=magic Note="Drain magic item XP into craft reserve"',
+    'Section=magic Note="May drain magic item XP into craft reserve"',
 
   // Domain
-  'Add Life':'Section=magic Note="Touched 1d6+%V temporary HP for %1 hr"',
+  'Add Life':'Section=magic Note="Touched gains 1d6+%V temporary HP for %1 hr"',
   'All-Weather':
     'Section=feature,skill ' +
-    'Note="Vision unobstructed by weather",' +
+    'Note="Can see clearly in any weather",' +
          '"+2 Survival (weather)/Survival is a class skill"',
   'Artifice Master':'Section=skill Note="+4 all Craft"',
   'Clarity Of True Madness':
-    'Section=feature Note="+%V Wis skill check or Will save 1/dy"',
+    'Section=feature ' +
+    'Note="May add %V to a Wisdom skill check or Will save 1/dy"',
   'Commercial':
     'Section=skill ' +
     'Note="+10 Profession (earn a living)/Appraise is a class skill"',
   'Community Pillar':
     'Section=magic,skill '  +
-    'Note="<i>Calm Emotions</i> 1/dy","+2 Diplomacy"',
+    'Note="May cast <i>Calm Emotions</i> 1/dy","+2 Diplomacy"',
   'Empowered Creation':
-    'Section=magic Note="+1 caster level for Item Creation spells"',
+    'Section=magic Note="+1 caster level on Item Creation spells"',
   'Empowered Necromancy':
-    'Section=magic Note="+1 caster level necromancy spells"',
+    'Section=magic Note="+1 caster level on Necromancy spells"',
   'Exorcise':
-    'Section=combat Note="Turn Undead check to exorcise spirit"',
+    'Section=combat Note="May use Turn Undead to exorcise spirits"',
   'Feast Gut':'Section=save Note="Immune to ingested poison and disease"',
   'Fit Of Passion':
-    'Section=combat Note="+4 Str, +4 Con, +2 Will save, -2 AC for %V rd/dy"',
+    'Section=combat ' +
+    'Note="May gain +4 Strength, +4 Constitution, and +2 Will save and suffer -2 AC for %V rd/dy"',
   'Madness-Weakened':'Section=save Note="-1 Will"',
   'Meditative Casting':
-    'Section=magic Note="x1.5 chosen spell variable effects 1/dy"',
+    'Section=magic Note="May gain x1.5 chosen spell variable effects 1/dy"',
   'Rebuke Deathless':
-    'Section=combat Note="Use Turn Undead to rebuke deathless 1/dy"',
+    'Section=combat Note="May use Turn Undead to rebuke deathless 1/dy"',
   'Touch Of Decay':
-    'Section=magic Note="Touched 1d4 Con (living) or 2d6+%V HP (undead) 1/dy"',
-  'Turn On The Charm':'Section=ability Note="+4 charisma for 1 min 1/dy"',
+    'Section=magic ' +
+    'Note="Touch inflicts -1d4 Constitution (living) or 2d6+%V HP (undead) 1/dy"',
+  'Turn On The Charm':
+    'Section=ability Note="May gain +4 Charisma for 1 min 1/dy"',
 
   // Feat
-  'Aberrant Dragonmark':'Section=magic Note="Cast chosen spell 1/dy"',
+  'Aberrant Dragonmark':'Section=magic Note="May cast chosen spell 1/dy"',
   'Action Boost':
     'section=ability ' +
-    'Note="Add 1d8 instead of 1d6 when using AP on attack, skill, ability, level or saving throw"',
+    'Note="Adds 1d8 instead of 1d6 when using AP on attack, skill, ability, level or saving throw"',
   'Action Surge':
-    'Section=combat Note="Spend 2 AP to take extra move or standard action"',
+    'Section=combat ' +
+    'Note="May spend 2 AP to take an extra move or standard action"',
   'Adamantine Body':
     'Section=ability,combat Note="Max 20\' speed","+6 AC/DR 2/adamantine"',
   'Ashbound':
     'Section=magic ' +
-    'Note="Dbl <i>Summon Nature\'s Ally</i> duration, summoned creatures +3 attack"',
+    'Note="Dbl <i>Summon Nature\'s Ally</i> duration; summoned creatures gain +3 attack"',
   'Attune Magic Weapon':
     'Section=combat Note="+1 attack and damage w/magic weapons"',
-  'Beast Shape':'Section=magic Note="Wild Shape into beast totem 1/dy"',
+  'Beast Shape':'Section=magic Note="May Wild Shape into beast totem 1/dy"',
   'Beast Totem (Chimera)':'Section=save Note="+4 vs. breath weapons"',
   'Beast Totem (Digester)':'Section=save Note="+4 vs. acid"',
   'Beast Totem (Displacer Beast)':'Section=save Note="+4 vs. targeted spells"',
@@ -765,14 +771,15 @@ Eberron.FEATURES_ADDED = {
   'Beast Totem (Yrthak)':'Section=save Note="+4 vs. sonic"',
   'Beasthide Elite':'Section=combat Note="+2 Beasthide AC"',
   'Bind Elemental':
-    'Section=magic Note="Incorporate elementals into wondrous items"',
+    'Section=magic Note="May incorporate elementals into wondrous items"',
   'Child Of Winter':
-    'Section=magic Note="Use animal Druid spells on vermin, summon vermin"',
+    'Section=magic ' +
+    'Note="May use Druid animal spells on vermin and may summon vermin"',
   'Cliffwalk Elite':'Section=ability Note="+10\' Cliffwalk climb speed"',
-  'Craft Construct':'Section=magic Note="Create enchanted construct"',
+  'Craft Construct':'Section=magic Note="May create enchanted construct"',
   'Detective':'Section=skill Note="+2 Spot"',
   'Double Steel Strike':
-    'Section=combat Note="Flurry Of Blows w/two-bladed sword"',
+    'Section=combat Note="May use Flurry Of Blows w/two-bladed sword"',
   'Dragon Rage':
     'Section=combat,save ' +
     'Note="+2 AC during Rage","+10 %V resistance during Rage"',
@@ -794,133 +801,139 @@ Eberron.FEATURES_ADDED = {
     'Section=skill ' +
     'Note="All Knowledge is a class skill/+1 any 2 Knowledge skills"',
   'Exceptional Artisan':
-    'Section=magic Note="Reduce item creation base time by 25%"',
-  'Extend Rage':'Section=combat Note="Add 5 rd to Rage duration"',
-  'Extra Music':'Section=feature Note="Bardic Music %V extra times/dy"',
-  'Extra Rings':'Section=magic Note="Wear up to 4 magic rings at once"',
+    'Section=magic Note="Reduces item creation base time by 25%"',
+  'Extend Rage':'Section=combat Note="Adds 5 rd to Rage duration"',
+  'Extra Music':
+    'Section=feature Note="May use Bardic Music effects %V extra times/dy"',
+  'Extra Rings':'Section=magic Note="May wear up to 4 magic rings at once"',
   'Extra Shifter Trait':
-    'Section=feature Note="Extra Shifter trait w/out ability bonus"',
+    'Section=feature Note="Gains extra Shifter trait w/out ability bonus"',
   'Extraordinary Artisan':
-    'Section=magic Note="Reduce item creation base price by 25%"',
+    'Section=magic Note="Reduces item creation base price by 25%"',
   'Favored In House':
     'Section=feature ' +
-    'Note="+%V roll to acquire favors from house contacts %1/wk"',
+    'Note="+%V attempts to acquire favors from house contacts %1/wk"',
   'Finder':'Section=skill Note="+2 Search"',
   'Flensing Strike':
     'Section=combat ' +
-    'Note="Kama causes -4 pain penalty to foe attack, save, checks for 1 min (DC %V Fort neg)"',
+    'Note="Kama causes -4 pain penalty to foe attacks, saves, and checks (DC %V Fort neg) for 1 min"',
   'Gatekeeper Initiate':
     'Section=magic,save,skill ' +
-    'Note="Access to additional spells",' +
+    'Note="Has access to additional spells",' +
          '"+2 vs. supernatural and aberrations",' +
          '"Knowledge (Planes) is a class skill"',
   'Great Bite':'Section=combat Note="Fangs Crit is x3"',
-  'Great Rend':'Section=combat Note="+1d4+%V damage on hit w/both claws"',
+  'Great Rend':'Section=combat Note="+1d4+%V HP on hit w/both claws"',
   'Greater Dragonmark':
-    'Section=magic Note="Choice of level 3 dragonmark spell 1/dy"',
+    'Section=magic Note="May cast choice of level 3 dragonmark spell 1/dy"',
   'Greater Powerful Charge':
     'Section=combat ' +
-    'Note="Raise Powerful Charge damage one size category to %V"',
+    'Note="Raises Powerful Charge damage one size category to %V"',
   'Greater Shifter Defense':'Section=combat Note="+2 DR/silver while shifting"',
   'Greensinger Initiate':
     'Section=magic,skill ' +
-    'Note="Access to additional spells",' +
+    'Note="Has access to additional spells",' +
          '"Bluff is a class skill/Hide is a class skill/Perform is a class skill"',
   'Handler':'Section=skill Note="+2 Handle Animal"',
   'Haunting Melody':
-    'Section=magic Note="R30\' Foes shaken for %1 rd (DC %V Will neg)"',
+    'Section=magic Note="R30\' Shakes foes (DC %V Will neg) for %1 rd"',
   'Healer':'Section=skill Note="+2 Heal"',
-  'Healing Factor':'Section=combat Note="Heal %V points when shifting ends"',
+  'Healing Factor':'Section=combat Note="Recovers %V HP when shifting ends"',
   'Heroic Spirit':'Section=ability Note="+%V AP"',
   'Hospitaler':'Section=skill Note="+2 Diplomacy"',
   'Improved Damage Reduction':'Section=combat Note="DR +1/adamantine"',
   'Improved Fortification':
-    'Section=combat Note="Immune sneak attack, critical hit, healing"',
+    'Section=combat Note="Immune to sneak attacks, critical hits, and healing"',
   'Improved Natural Attack (Claws)':
     'Section=combat Note="Claw damage increases one size category"',
   'Improved Natural Attack (Fangs)':
     'Section=combat Note="Fangs damage increases one size category"',
   'Investigate':
     'Section=skill ' +
-    'Note="Use Search to find and analyze clues, synergy with appropriate Knowledge"',
+    'Note="May use Search to find and analyze clues/Gains synergy with appropriate Knowledge skill"',
   'Knight Training':
     'Section=ability ' +
-    'Note="No restrictions on combining Paladin and chosen class levels"',
+    'Note="Has no restrictions on combining Paladin and chosen class levels"',
   'Least Dragonmark':
-    'Section=magic Note="Choice of level 1 dragonmark spell 1/dy"',
+    'Section=magic Note="May cast choice of level 1 dragonmark spell 1/dy"',
   'Legendary Artisan':
-    'Section=magic Note="Reduce item creation XP price by 25%"',
+    'Section=magic Note="Reduces item creation XP price by 25%"',
   'Lesser Dragonmark':
-    'Section=magic Note="Choice of level 2 dragonmark spell 1/dy"',
+    'Section=magic Note="May cast choice of level 2 dragonmark spell 1/dy"',
   'Longstride Elite':'Section=ability Note="+10\' Longstride Speed"',
   'Maker':'Section=skill Note="+2 all Craft"',
   'Mithral Body':'Section=combat Note="+3 AC"',
   'Mithral Fluidity':
     'Section=combat,skill ' +
-    'Note="Raise Mithral Body dexterity AC limit by 1",' +
-         '"Reduce skill penalty by 1"',
+    'Note="Raises Mithral Body dexterity AC limit by 1",' +
+         '"Reduces skill penalty by 1"',
   'Monastic Training':
     'Section=ability ' +
-    'Note="No restrictions on combining Monk and chosen class levels"',
+    'Note="Has no restrictions on combining Monk and chosen class levels"',
   'Music Of Growth':
     'Section=magic ' +
-    'Note="R30\' +4 Str and Con to animal and plant creatures during Bardic Music"',
+    'Note="R30\' Bardic Music gives +4 Strength and Constitution to animal and plant creatures"',
   'Music Of Making':
     'Section=magic,skill ' +
     'Note="Dbl duration of conjuration spells involving Bardic Music",' +
          '"+4 Craft during Bardic Music"',
-  'Powerful Charge':'Section=combat Note="+%V damage from successful charge"',
+  'Powerful Charge':
+    'Section=combat Note="Successful charge inflicts +%V HP"',
   'Precise Swing':
     'Section=combat Note="Melee attack ignores less-than-total cover"',
   'Pursue':
-    'Section=combat Note="Spend 1 AP to step into area vacated by opponent"',
-  'Raging Luck':'Section=ability Note="Gain 1 AP during Rage"',
+    'Section=combat ' +
+    'Note="May spend 1 AP to step into area vacated by opponent"',
+  'Raging Luck':'Section=ability Note="Gains 1 AP during Rage"',
   'Recognize Impostor':
     'Section=skill Note="+4 Sense Motive vs. Bluff and Spot vs. Disguise"',
   'Repel Aberration':
     'Section=combat ' +
-    'Note="R60\' Hold at bay 2d6+%1 HD of aberrations of up to (d20+%2)/3 HD %3/dy"',
-  'Research':'Section=skill Note="Use Knowledge skill on library and records"',
+    'Note="R60\' May hold at bay 2d6+%1 HD of aberrations of up to (d20+%2)/3 HD %3/dy"',
+  'Research':
+    'Section=skill Note="May use Knowledge skill on library and records"',
   'Right Of Counsel':
-    'Section=feature Note="Seek advice from deathless ancestor"',
+    'Section=feature Note="May seek advice from deathless ancestor"',
   'Scribe':'Section=skill Note="+2 Decipher Script"',
   'Shadower':'Section=skill Note="+2 Gather Information"',
   'Shifter Defense':'Section=combat Note="DR 2/silver while shifting"',
   'Shifter Ferocity':
-    'Section=combat Note="Continue fighting below 0 HP while shifting"',
+    'Section=combat Note="May continue fighting below 0 HP while shifting"',
   'Sentinel':'Section=skill Note="+2 Sense Motive"',
-  'Serpent Strike':'Section=combat Note="Flurry Of Blows w/longspear"',
+  'Serpent Strike':'Section=combat Note="May use Flurry Of Blows w/longspear"',
   'Shifter Multiattack':
-    'Section=combat Note="Reduce penalty for additional natural attack to -2"',
-  'Silver Smite':'Section=combat Note="Smite Evil +1d6"',
+    'Section=combat Note="Reduces penalty for additional natural attack to -2"',
+  'Silver Smite':'Section=combat Note="Smite Evil inflicts +1d6 HP"',
   'Song Of The Heart':'Section=magic Note="+1 Bardic Music effects"',
   'Soothe The Beast':
     'Section=skill ' +
-    'Note="R30\' Perform check during Bardic Music to change animal reaction"',
+    'Note="R30\' Successful Perform check during Bardic Music changes animal reaction"',
   'Spontaneous Casting':
     'Section=magic ' +
-    'Note="Spend 2 AP to substitute any known spell for a prepared one"',
+    'Note="May spend 2 AP to substitute any known spell for a prepared one"',
   'Storm Walker':'Section=skill Note="+2 Balance"',
   'Strong Mind':'Section=save Note="+3 vs. psionics and mind attacks"',
   'Totem Companion':
-    'Section=companion Note="Beast Totem magical beast as animal companion"',
+    'Section=companion ' +
+    'Note="Has Beast Totem magical beast as an animal companion"',
   'Traveler':'Section=skill Note="+2 Survival"',
   'Undead Empathy':
     'Section=skill ' +
-    'Note="+4 Diplomacy to influence intelligent undead reaction, use Diplomacy w/mindless undead"',
+    'Note="+4 Diplomacy (influence intelligent undead reaction)/May use Diplomacy w/mindless undead"',
   'Urban Tracking':
-    'Section=skill Note="Gather Information to trace person w/in communities"',
+    'Section=skill Note="May use Gather Information to trace a person w/in communities"',
   'Vermin Companion':
-    'Section=companion Note="Vermin creature as animal companion"',
-  'Vermin Shape':'Section=magic Note="Wild Shape into vermin"',
+    'Section=companion Note="Has vermin creature as an animal companion"',
+  'Vermin Shape':'Section=magic Note="May Wild Shape into vermin"',
   'Wand Mastery':'Section=magic Note="+2 spell DC and caster level w/wands"',
   'Warden Initiate':
     'Section=combat,magic,skill ' +
     'Note="+2 AC (forests)",' +
-         '"Access to additional spells",' +
+         '"Has access to additional spells",' +
          '"Climb is a class skill/Jump is a class skill"',
   'Warder':'Section=skill Note="+2 Search"',
-  'Whirling Steel Strike':'Section=combat Note="Flurry Of Blows w/longsword"',
+  'Whirling Steel Strike':
+    'Section=combat Note="May use Flurry Of Blows w/longsword"',
 
   // Race
   'Beasthide':
@@ -928,27 +941,29 @@ Eberron.FEATURES_ADDED = {
     'Note="+2 Constitution while shifting",' +
          '"+%V AC while shifting"',
   'Cliffwalk':
-    'Section=ability Note="+2 Dexterity, %V\' climb speed while shifting"',
+    'Section=ability Note="+2 Dexterity and %V\' climb speed while shifting"',
   'Composite Plating':'Section=combat Note="+2 AC/Cannot wear armor"',
   'Deceptive':'Section=skill Note="+2 Bluff/+2 Intimidate"',
-  'Dreamless':'Section=save Note="Immune <i>Dream</i>, <i>Nightmare</i>"',
+  'Dreamless':'Section=save Note="Immune to <i>Dream</i> and <i>Nightmare</i>"',
   'Humanlike':'Section=skill Note="+2 Disguise (human)"',
   'Influential':'Section=skill Note="+2 Bluff/+2 Diplomacy/+2 Intimidate"',
   'Intuitive':'Section=skill Note="+2 Sense Motive"',
   'Light Fortification':
     'Section=combat ' +
-    'Note="25% change of negating critical hits and sneak attacks"',
+    'Note="25% chance of negating critical hits and sneak attacks"',
   'Longstride':
-    'Section=ability Note="+2 Dexterity, +%V\' Speed while shifting"',
+    'Section=ability Note="+2 Dexterity and +%V\' Speed while shifting"',
   'Longtooth':
     'Section=ability,combat ' +
     'Note="+2 Strength while shifting",' +
          '"Can attack w/fangs while shifting"',
-  'Mechanized':'Section=feature Note="No need to breathe, eat, or sleep"',
+  'Mechanized':'Section=feature Note="Has no need to breathe, eat, or sleep"',
   'Mindlink':
-    'Section=magic Note="R30\' Telepathy with willing target for %V rd 1/dy"',
-  'Minor Shape Change':'Section=magic Note="<i>Disguise Self</i> body at will"',
-  'Natural Psionic':'Section=magic Note="+1 PP/level"',
+    'Section=magic ' +
+    'Note="R30\' May use telepathy with willing target for %V rd 1/dy"',
+  'Minor Shape Change':
+    'Section=magic Note="May use <i>Disguise Self</i> effects on body at will"',
+  'Natural Psionic':'Section=magic Note="+1 PP each level"',
   'Natural Linguist':'Section=skill Note="Speak Language is a class skill"',
   'Razorclaw':
     'Section=ability,combat ' +
@@ -959,14 +974,14 @@ Eberron.FEATURES_ADDED = {
   'Resist Sleep':'Section=save Note="+2 vs. sleep effects"',
   'Shifter Ability Adjustment':
     'Section=ability Note="+2 Dexterity/-2 Intelligence/-2 Charisma"',
-  'Shifting':'Section=feature Note="Use Shifter trait for %V rd %1/dy"',
+  'Shifting':'Section=feature Note="May use Shifter trait for %V rd %1/dy"',
   'Slam Weapon':'Section=combat Note="Can attack w/slam"',
   'Stable':
     'Section=combat ' +
-    'Note="May perform strenuous activity at 0 HP, no additional loss at negative HP"',
+    'Note="May perform strenuous activity at 0 HP; suffers no additional loss at negative HP"',
   'Unhealing':
     'Section=combat ' +
-    'Note="Does not heal damage naturally, half effect from healing spells"',
+    'Note="Does not heal damage naturally; gains half effects from healing spells"',
   'Warforged Ability Adjustment':
     'Section=ability Note="+2 Constitution/-2 Wisdom/-2 Charisma"',
   'Warforged Immunity':
@@ -977,29 +992,29 @@ Eberron.FEATURES_ADDED = {
   'Wildhunt':
     'Section=ability,feature,skill ' +
     'Note="+2 Constitution while shifting",' +
-         '"R30\' Detect creature presence, track by smell",' +
+         '"R30\' May detect creature presence and track by smell",' +
          '"+2 Survival"',
 
   // Prestige classes
   'Additional Action Points':'Section=ability Note="+2 AP"',
   'Alternate Form (Bear)':
     'Section=ability ' +
-    'Note="Shift to animal (+16 Str, +2 Dex, +8 Con) or bipedal hybrid"',
+    'Note="May shift to animal (+16 Strength, +2 Dexterity, +8 Constitution) or bipedal hybrid form"',
   'Alternate Form (Boar)':
-    'Section=ability Note="Shift to animal (+4 Str, +6 Con) or bipedal hybrid"',
+    'Section=ability Note="May shift to animal (+4 Strength, +6 Constitution) or bipedal hybrid form"',
   'Alternate Form (Rat)':
-    'Section=ability Note="Shift to animal (+6 Dex, +2 Con) or bipedal hybrid"',
+    'Section=ability Note="May shift to animal (+6 Dexterity, +2 Constitution) or bipedal hybrid form"',
   'Alternate Form (Tiger)':
     'Section=ability ' +
-    'Note="Shift to animal (+12 Str, +4 Dex, +6 Con) or bipedal hybrid"',
+    'Note="May shift to animal (+12 Strength, +4 Dexterity, +6 Constitution) or bipedal hybrid form"',
   'Alternate Form (Wolf)':
     'Section=ability ' +
-    'Note="Shift to animal (+2 Str, +4 Dex, +4 Con) or bipedal hybrid"',
+    'Note="May shift to animal (+2 Strength, +4 Dexterity, +4 Constitution) or bipedal hybrid form"',
   'Alternate Form (Wolverine)':
     'Section=ability ' +
-    'Note="Shift to animal (+4 Str, +4 Dex, +8 Con) or bipedal hybrid"',
+    'Note="May shift to animal (+4 Strength, +4 Dexterity, +8 Constitution) or bipedal hybrid form"',
   'Animalistic Heritage':'Section=skill Note="+2 Balance/+2 Climb/+2 Jump"',
-  'Armor Spikes':'Section=combat Note="Grapple attack for %V damage"',
+  'Armor Spikes':'Section=combat Note="Grapple attack inflicts %V HP"',
   'Bear':
     'Section=ability,combat ' +
     'Note="+2 Strength while shifting",' +
@@ -1016,53 +1031,57 @@ Eberron.FEATURES_ADDED = {
     'Note="20\' climb speed (+10 for Cliffwalk) while shifting",' +
          '"+%V Climb"',
   'Construct Perfection I':
-    'Section=combat Note="Immune nonlethal damage and critical hits"',
+    'Section=combat Note="Immune to nonlethal damage and critical hits"',
   'Construct Perfection II':'Section=save Note="Immune to mental effects"',
   'Construct Perfection III':
     'Section=save Note="Immune to death and necromancy effects"',
   'Construct Perfection IV':
     'Section=save Note="Immune to ability damage and drain"',
-  'Contact':'Section=feature Note="Level 3%1 associate or informant"',
-  'Detect Thoughts':'Section=magic Note="<i>Detect Thoughts</i> at will"',
+  'Contact':'Section=feature Note="Has a level 3%1 associate or informant"',
+  'Detect Thoughts':
+    'Section=magic Note="May use <i>Detect Thoughts</i> effects at will"',
   'Discern Lies':
     'Section=magic ' +
-    'Note="R%1\' Reveals lies from %V creatures in 15\' radius for conc or %V rd (DC %2 Will neg) 1/dy, 2 AP for 2/dy"',
+    'Note="R%1\' May reveal lies from %V creatures in 15\' radius for conc or %V rd (DC %2 Will neg) 1/dy; may spend 2 AP for 2/dy"',
   'Dodge Bonus':'Section=combat Note="+%V AC when unencumbered"',
   'Expert Bull Rush':'Section=combat Note="+%V bull rush and door breakage"',
   'Extended Charge':'Section=ability Note="+5 speed when charging"',
   'Extreme Action':
-    'Section=ability Note="Retain AP on successful AP roll of 8"',
+    'Section=ability Note="Retains AP on successful AP roll of 8"',
   'Extreme Explorer Feat Bonus':
     'Section=feature Note="%V Extreme Explorer feats"',
-  'Extreme Hustle':'Section=combat Note="Spend 1 AP to gain a move action"',
-  'Ferocity':'Section=combat Note="Continue fighting below 0 HP"',
+  'Extreme Hustle':'Section=combat Note="May spend 1 AP to gain a move action"',
+  'Ferocity':'Section=combat Note="May continue fighting below 0 HP"',
   'Fierce Will':'Section=save Note="+4 Will while shifting"',
   'Flame Of Censure':
-    'Section=combat Note="Stun or banish evil Outsiders w/turning check"',
+    'Section=combat ' +
+    'Note="May stun or banish evil outsiders w/a successful turning check"',
   'Frightful Shifting':
     'Section=combat ' +
     'Note="R30\' Foes up to %V HD shaken for 5d6 rounds (DC %1 Will neg)"',
   'Greensinger Damage Reduction':'Section=combat Note="DR 3/cold iron"',
   'Hated Foe':
-    'Section=combat Note="Spend 1 AP for dbl damage against favored enemy"',
+    'Section=combat Note="May spend 1 AP for dbl damage against favored enemy"',
   'Heir Of Siberys Feat Bonus':'Section=feature Note="1 Heir Of Siberys feat"',
-  'Healing Immunity':'Section=save Note="No effect from healing spells"',
+  'Healing Immunity':'Section=save Note="Unaffected by healing spells"',
   'House Status':
-    'Section=skill Note="+%V charisma-based skills w/house members"',
-  'Improved Grab':'Section=combat Note="Grapple w/out AOO after claw hit"',
+    'Section=skill Note="+%V Charisma-based skills w/house members"',
+  'Improved Grab':
+    'Section=combat Note="May grapple w/out provoking AOO after claw hit"',
   'Improved Greater Dragonmark':
-    'Section=magic Note="2nd level 3 dragonmark spell or +1/dy"',
+    'Section=magic Note="May use 2nd level 3 dragonmark spell or +1/dy"',
   'Improved Least Dragonmark':
-    'Section=magic Note="2nd level 1 dragonmark spell or +1/dy"',
+    'Section=magic Note="May use 2nd level 1 dragonmark spell or +1/dy"',
   'Improved Lesser Dragonmark':
-    'Section=magic Note="2nd level 2 dragonmark spell or +1/dy"',
+    'Section=magic Note="May use 2nd level 2 dragonmark spell or +1/dy"',
   'Improved Critical':
-    'Section=feature Note="Improved Critical feat for choice of ranged weapon"',
-  'Improved Siberys Mark':'Section=magic Note="Use dragonmark spell 2/dy"',
+    'Section=feature ' +
+    'Note="+1 General Feat (Improved Critical (choice of ranged weapon))"',
+  'Improved Siberys Mark':'Section=magic Note="May use dragonmark spell 2/dy"',
   'Master Inquisitive Feat Bonus':
     'Section=feature Note="%V Master Inquisitive feats"',
   'Metal Immunity':'Section=save Note="Immune to mind-altering effects"',
-  'Pounce':'Section=combat Note="Full attack when charging"',
+  'Pounce':'Section=combat Note="May make full attack when charging"',
   'Rat':
     'Section=ability,combat ' +
     'Note="+2 Dexterity while shifting",' +
@@ -1071,7 +1090,7 @@ Eberron.FEATURES_ADDED = {
     'Section=skill ' +
     'Note="-%V Bluff/-%V Diplomacy/-%V Gather Information/-%V Sense Motive"',
   'Resist Corruption (Children Of Winter)':
-    'Section=save Note="Immune disease, +2 vs. mind-altering"',
+    'Section=save Note="Immune to disease/+2 vs. mind-altering effects"',
   'Resist Corruption (Gatekeepers)':
     'Section=save Note="+2 vs. aberration abilities"',
   'Resist Possession':'Section=save Note="+%V vs. possession"',
@@ -1079,42 +1098,47 @@ Eberron.FEATURES_ADDED = {
   'Resist Unnatural':
     'Section=save Note="+2 vs. effects of evil outsiders and undead"',
   'Scent':
-    'Section=feature Note="R30\' Detect creatures\' presence, track by smell"',
+    'Section=feature ' +
+    'Note="R30\' May detect creature presence and track by smell"',
   'Siberys Mark':
-    'Section=magic Note="Choice of house dragonmark spell %1/dy"',
+    'Section=magic Note="May use choice of house dragonmark spell %1/dy"',
   'Silver Exorcism':'Section=combat Note="+2 exorcism checks"',
   'Spell Resistance':'Section=save Note="Spell resistance 20"',
-  'Superior Bull Rush':'Section=combat Note="+%V+%1 damage from bull rush"',
+  'Superior Bull Rush':
+    'Section=combat Note="Inflicts +%V+%1 HP from bull rush"',
   'Tiger':
     'Section=ability,combat ' +
     'Note="+2 Strength while shifting",' +
          '"Can attack w/claws while shifting"',
-  'Touch Of Contagion':'Section=magic Note="<i>Contagion</i> 3/dy"',
-  'Trip':'Section=combat Note="Trip w/out AOO after bite hit"',
+  'Touch Of Contagion':'Section=magic Note="May cast <i>Contagion</i> 3/dy"',
+  'Trip':
+    'Section=combat Note="May trip w/out provoking AOO after successful bite "',
   'True Seeing':
     'Section=magic ' +
-    'Note="Self see through 120\' darkness, illusion, and invisible for %V min 1/dy, 2 AP for 2/dy"',
+    'Note="May see through 120\' darkness, illusion, and invisibility for %V min 1/dy; may spend 2 AP for 2/dy"',
   'Unearthly Grace':'Section=save Note="+%V Fortitude/+%V Reflex/+%V Will"',
   'Warding Flame':
     'Section=combat,feature,save ' +
     'Note=' +
-      '"Warding glow for +2 AC, evil foes that strike self blinded (DC %V Fort neg)",' +
-      '"60\' light",' +
-      '"Spell Resistance 25 (evil casters and spells)"',
+      '"May gain +2 AC and inflict blindness on evil foes that strike self (DC %V Fort neg) at will",' +
+      '"May generate 60\' light at will",' +
+      '"May gain spell Resistance 25 (evil casters and spells) at will"',
   'Weapon Of Flame':
-    'Section=combat Note="+%Vd6 flame damage w/exorcist weapon"',
+    'Section=combat Note="Exorcist weapon inflicts +%Vd6 HP fire"',
   'Weapon Of Good':
-    'Section=combat Note="Exorcist weapon treated as good-aligned"',
-  'Weapon Of Law':'Section=combat Note="Exorcist weapon treated as lawful"',
+    'Section=combat Note="Exorcist weapon considered good-aligned"',
+  'Weapon Of Law':
+    'Section=combat Note="Exorcist weapon considered lawful-aligned"',
   'Weapon Of Sacred Flame':
-     'Section=combat Note="Exorcist weapon does additional 1d6 flame damage"',
-  'Weapon Of Silver':'Section=combat Note="Exorcist weapon treated as silver"',
+     'Section=combat Note="Exorcist weapon inflicts +1d6 HP fire"',
+  'Weapon Of Silver':'Section=combat Note="Exorcist weapon considered silver"',
   'Weapon Of The Exorcist':
-    'Section=combat Note="+1 damage w/weapon treated as magic%1%2%3"',
+    'Section=combat ' +
+    'Note="Exorcist weapon inflicts +1 HP and is considered magic%1%2%3"',
   'Weretouched Feat Bonus':'Section=feature Note="%V Shifter feats"',
   'Weretouched Rage':
     'Section=combat ' +
-    'Note="+2 Str, +2 Con, -2 AC after taking damage until self or foe dead"',
+    'Note="Gains +2 Strength, +2 Constitution, and -2 AC after taking damage until self or foe dies"',
   'Wolf':
     'Section=ability,combat ' +
     'Note="+2 Dexterity while shifting",' +
@@ -1125,7 +1149,7 @@ Eberron.FEATURES_ADDED = {
          '"Can attack w/fangs while shifting"',
   'Zone Of Truth':
     'Section=magic ' +
-    'Note="R%1\' Creatures w/in 20\' radius cannot lie for %V min (DC %2 Will neg) 1/dy, 2 AP for 2/dy"'
+    'Note="R%1\' May create 20\' radius that prohibits lying for %V min (DC %2 Will neg) 1/dy; may spend 2 AP for 2/dy"'
 
 };
 Eberron.FEATURES = Object.assign({}, SRD35.FEATURES, Eberron.FEATURES_ADDED);
@@ -1238,119 +1262,119 @@ Eberron.SPELLS_ADDED = {
   'Armor Enhancement':
     'School=Transmutation ' +
     'Level=A2 ' +
-    'Description="Touched armor or shield gains +3 or 35K GP enhancement for $L10 min"',
+    'Description="Touched armor or shield gains +3 or 35K GP enhancement for %{lvl*10} min"',
   'Bolts Of Bedevilment':
     'School=Enchantment ' +
     'Level=Madness5 ' +
-    'Description="R$RM\' 3 targets (1/rd) become dazed for $L2 rd (Will neg)"',
+    'Description="R%{lvl*10+100}\' 3 targets (1/rd) suffer dazed (Will neg) for %{lvl*2} rd"',
   'Construct Energy Ward':
     'School=Abjuration ' +
     'Level=A3 ' +
-    'Description="Touched construct gains resistance ${lvl>10?30:lvl>6?20:10} to chosen energy for $L10 min"',
+    'Description="Touched construct gains resistance %{lvl>10?30:lvl>6?20:10} to chosen energy for %{lvl*10} min"',
   'Control Deathless':
     'School=Necromancy ' +
     'Level=Deathless7 ' +
-    'Description="R$RS\' $L2 HD deathless in 15\' radius obey self commands for $L min (Will neg)"',
+    'Description="R%{lvl//2*5+25}\' %{lvl*2} HD of deathless in 15\' radius obey self commands (Will neg) for %{lvl} min"',
   'Create Deathless':
     'School=Necromancy ' +
     'Level=Deathless6 ' +
-    'Description="R$RS\' Creates deathless soldier"',
+    'Description="R%{lvl//2*5+25}\' Creates deathless soldier"',
   'Create Greater Deathless':
     'School=Necromancy ' +
     'Level=Deathless8 ' +
-    'Description="R$RS\' Creates deathless councilor"',
+    'Description="R%{lvl//2*5+25}\' Creates deathless councilor"',
   'Detect Aberration':
     'School=Divination ' +
     'Level=D1 ' +
-    'Description="R60\' Cone gives self info on aberrations for conc or $L min"',
+    'Description="R60\' Cone gives self info on aberrations for conc or %{lvl} min"',
   'Detoxify':
     'School=Conjuration ' +
     'Level=Feast8 ' +
-    'Description="R30\' Neutralizes venom, creatures for $L10 min (Will neg)"',
+    'Description="R30\' Neutralizes venom and poisonous creatures (Will neg) for %{lvl*10} min"',
   'Dimension Leap':
     'School=Conjuration ' +
     'Level=Orien1 ' +
-    'Description="Self teleports up to $L10\'"',
+    'Description="Self teleports up to %{lvl*10}\'"',
   'Disable Construct':
     'School=Transmutation ' +
     'Level=A6 ' +
-    'Description="Touched construct suffers $L10 HP (Will half)"',
+    'Description="Touched construct suffers %{lvl*10} HP (Will half)"',
   'Energy Alteration':
     'School=Transmutation ' +
     'Level=A1 ' +
-    'Description="Touched magic item uses and affects chosen energy type for $L10 min"',
+    'Description="Touched magic item uses and affects chosen energy type for %{lvl*10} min"',
   'Enhancement Alteration':
     'School=Transmutation ' +
     'Level=A1 ' +
-    'Description="Touched shield or weapon enhancement shifts to attack or defense for $L10 min"',
+    'Description="Touched shield or weapon enhancement shifts to attack or defense for %{lvl*10} min"',
   'Feast Of Champions':
     'School=Conjuration ' +
     'Level=C9,Feast9 ' +
-    'Description="R$RS\' Food for $L creatures cures disease, sickness, exhaustion, and 2d8+$L HP, gives 1d8+$Ldiv2min10 temporary HP, +1 attack, skill, ability, and saves, and immunity to poison and fear for 12 hr"',
+    'Description="R%{lvl//2*5+25}\' Creates food for %{lvl} creatures that cures disease, sickness, exhaustion, and 2d8+%{lvl} HP, gives 1d8+%{lvl//2<?10} temporary HP, +1 attack, skill, ability, and saves, and immunity to poison and fear for 12 hr"',
   'Greater Armor Enhancement':
     'School=Transmutation ' +
     'Level=A3 ' +
-    'Description="Touched armor or shield gains +5 or 100K GP enhancement for $L10 min"',
+    'Description="Touched armor or shield gains +5 or 100K GP enhancement for %{lvl*10} min"',
   'Greater Construct Energy Ward':
     'School=Abjuration ' +
     'Level=A4 ' +
-    'Description="Touched construct gains resistance $L12min120 to chosen energy for $L10 min"',
+    'Description="Touched construct gains resistance %{lvl*12<?120} to chosen energy for %{lvl*10} min"',
   'Greater Status':
     'School=Divination ' +
     'Level=Community4 ' +
-    'Description="Self monitors condition and position of and remotely casts level 0-2 touch spells on $Ldiv3 touched allies for $L hr"',
+    'Description="Self may monitor the condition and position of and remotely casts level 0-2 touch spells on %{lvl//3} touched allies for %{lvl} hr"',
   'Greater Weapon Augmentation':
     'School=Transmutation ' +
     'Level=A6 ' +
-    'Description="Touched weapon gains +5 or 200K GP enhancement for $L10 min"',
+    'Description="Touched weapon gains +5 or 200K GP enhancement for %{lvl*10} min"',
   'Halt Deathless':
     'School=Necromancy ' +
     'Level=Deathless3 ' +
-    'Description="R$RM\' Immobilizes 3 deathless in 15\' radius for $L rd (Will neg)"',
+    'Description="R%{lvl*10+100}\' 15\' radius immobilizes 3 deathless (Will neg) for %{lvl} rd"',
   'Hardening':
     'School=Transmutation ' +
     'Level=A6,Artifice7,S6,W6 ' +
-    'Description="Touched $L 10\' cu item ($L\' cu metal or mineral) resists damage"',
+    'Description="Touched %{lvl} 10\' cu item (%{lvl}\' cu metal or mineral) resists damage"',
   "Hero's Blade":
     'School=Necromancy ' +
     'Level=Deathless9 ' +
-    'Description="Touched blade becomes good-aligned, inflicts +2d6 HP (+2d10 HP crit) on evil, +2d8 HP (+2d12 HP crit) on evil outsider or undead, crit threat dbl, crit blinds and deafens evil for 1d4 rd (Will neg) and banishes evil outsider (Will neg) for $L min"',
+    'Description="Touched blade becomes good-aligned, inflicts +2d6 HP (+2d10 HP crit) on evil, +2d8 HP (+2d12 HP crit) on evil outsider or undead, crit threat dbl, crit blinds and deafens evil for 1d4 rd (Will neg) and banishes evil outsider (Will neg) for %{lvl} min"',
   'Inflict Critical Damage':
     'School=Transmutation ' +
     'Level=A4 ' +
-    'Description="Touched construct suffers 4d8+$Lmin20 HP"',
+    'Description="Touched construct suffers 4d8+%{lvl<?20} HP"',
   'Inflict Light Damage':
     'School=Transmutation ' +
     'Level=A1 ' +
-    'Description="Touched construct suffers 1d8+$Lmin5 HP"',
+    'Description="Touched construct suffers 1d8+%{lvl<?5} HP"',
   'Inflict Moderate Damage':
     'School=Transmutation ' +
     'Level=A2 ' +
-    'Description="Touched construct suffers 2d8+$Lmin10 HP"',
+    'Description="Touched construct suffers 2d8+%{lvl<?10} HP"',
   'Inflict Serious Damage':
     'School=Transmutation ' +
     'Level=A3 ' +
-    'Description="Touched construct suffers 3d8+$Lmin15 HP"',
+    'Description="Touched construct suffers 3d8+%{lvl<?15} HP"',
   'Iron Construct':
     'School=Transmutation ' +
     'Level=A4 ' +
-    'Description="Touched construct gains DR 15/adamantine, +4 Strength, -4 Dexterity, x5 weight, takes half damage from acid and fire for $L min"',
+    'Description="Touched construct gains DR 15/adamantine, +4 Strength, -4 Dexterity, and x5 weight and takes half damage from acid and fire for %{lvl} min"',
   'Item Alteration':
     'School=Transmutation ' +
     'Level=A4 ' +
-    'Description="Touched magic item grants bonus differently for $L10 min (Will neg)"',
+    'Description="Touched magic item grants bonus differently (Will neg) for %{lvl*10} min"',
   "Legion's Shield Of Faith":
     'School=Abjuration ' +
     'Level=A4 ' +
-    'Description="R$RM\' Allies in 20\' radius gain +$Ldiv6plus2min5 AC for $L min"',
+    'Description="R%{lvl*10+100}\' Allies in 20\' radius gain +%{lvl//6+2<?5} AC for %{lvl} min"',
   'Lesser Armor Enhancement':
     'School=Transmutation ' +
     'Level=A1 ' +
-    'Description="Touched armor or shield gains +1 or 5K GP enhancement for $L10 min"',
+    'Description="Touched armor or shield gains +1 or 5K GP enhancement for %{lvl*10} min"',
   'Lesser Weapon Augmentation':
     'School=Transmutation ' +
     'Level=A2 ' +
-    'Description="Touched weapon gains +1 or 10K GP enhancement for $L10 min"',
+    'Description="Touched weapon gains +1 or 10K GP enhancement for %{lvl*10} min"',
   'Maddening Scream':
     'School=Enchantment ' +
     'Level=Madness8,S8,W8 ' +
@@ -1358,103 +1382,103 @@ Eberron.SPELLS_ADDED = {
   'Magecraft':
     'School=Divination ' +
     'Level=S1,W1 ' +
-    'Description="Self gains +5 same-day Craft check"',
+    'Description="Self gains +5 Craft check for daily item creation work"',
   'Metamagic Item':
     'School=Transmutation ' +
     'Level=A3 ' +
-    'Description="Imbues touched magic item w/metamagic property for $L rd"',
+    'Description="Imbues touched magic item w/metamagic property for %{lvl} rd"',
   "Nature's Wrath":
     'School=Evocation ' +
     'Level=Gatekeeper4 ' +
-    'Description="R$RM\' Aberrations in 20\' radius suffer ${Lmin10}d6 HP and dazed 1 rd, other unnatural suffer ${Ldiv2min5}d8 HP (Will half)"',
+    'Description="R%{lvl*10+100}\' Aberrations in 20\' radius suffer %{lvl<?10}d6 HP and dazed 1 rd, and other unnatural creatures suffer %{lvl//2<?5}d8 HP (Will half)"',
   'Personal Weapon Augmentation':
     'School=Transmutation ' +
     'Level=A1 ' +
-    'Description="Touched self weapon gains +1 or 10K GP enhancement for $L10 min"',
+    'Description="Touched self weapon gains +1 or 10K GP enhancement for %{lvl*10} min"',
   'Power Surge':
     'School=Transmutation ' +
     'Level=A3 ' +
-    'Description="Touched magic item gains $Ldiv5 charges for $L min"',
+    'Description="Touched magic item gains %{lvl//5} charges for %{lvl} min"',
   'Repair Critical Damage':
     'School=Transmutation ' +
     'Level=A4,S4,W4 ' +
-    'Description="Touched construct heals 4d8+$Lmin20"',
+    'Description="Touched construct regains 4d8+%{lvl<?20} HP"',
   'Repair Light Damage':
     'School=Transmutation ' +
     'Level=A1,Cannith1,S1,W1 ' +
-    'Description="Touched construct heals 1d8+$Lmin5" ' +
+    'Description="Touched construct regains 1d8+%{lvl<?5} HP" ' +
     'Liquid=Oil',
   'Repair Moderate Damage':
     'School=Transmutation ' +
     'Level=A2,S2,W2 ' +
-    'Description="Touched construct heals 2d8+$Lmin10" ' +
+    'Description="Touched construct regains 2d8+%{lvl<?10} HP" ' +
     'Liquid=Oil',
   'Repair Serious Damage':
     'School=Transmutation ' +
     'Level=A3,Cannith2,S3,W3 ' +
-    'Description="Touched construct heals 3d8+$Lmin15" ' +
+    'Description="Touched construct regains 3d8+%{lvl<?15} HP" ' +
     'Liquid=Oil',
   'Resistance Item':
     'School=Abjuration ' +
     'Level=A1 ' +
-    'Description="Touched gives +$Ldiv4plus1 saves for $L10 min"',
+    'Description="Holder of touched item gains +%{lvl//4+1} saves for %{lvl*10} min"',
   'Return To Nature':
     'School=Transmutation ' +
     'Level=Gatekeeper7 ' +
-    'Description="R$RS\' Target arcane spellcaster suffers 1d4 negative levels, giant <i>Reduce Person</i> (Fort neg), magical beasts/outsiders/aberrations suffers -1d6 Intelligence/${Ldiv2min10} HP/$L6 HP and -1d4/-2d4/all supernatural abilities for 1 dy (Fort half, no ability loss)"',
+    'Description="R%{lvl//2*5+25}\' Target arcane spellcaster suffers 1d4 negative levels, giant suffers <i>Reduce Person</i> (Fort neg), magical beast/outsider/aberration suffers -1d6 Intelligence/%{lvl//2<?10} HP/%{lvl*6} HP and -1d4/-2d4/all supernatural abilities for 1 dy (Fort half HP only)"',
   'Skill Enhancement':
     'School=Transmutation ' +
     'Level=A1 ' +
-    'Description="Touched gains +$Ldiv2plus2 on specified skill checks for $L10 min"',
+    'Description="Touched gains +%{lvl//2+2} on specified skill checks for %{lvl*10} min"',
   'Spell Storing Item':
     'School=Transmutation ' +
     'Level=A1 ' +
-    'Description="Self successful Use Magic Device check imbues touched item with spell up to level $Ldiv2min4 for $L hr"',
+    'Description="Successful Use Magic Device imbues touched item with spell up to level %{lvl//2<?4} for %{lvl} hr"',
   'Spirit Steed':
     'School=Necromancy ' +
     'Level=Deathless4 ' +
-    'Description="Touched animal gains +30\' Speed, increased run, and no hustle damage for $L hr"',
+    'Description="Touched animal gains +30\' Speed, increased run, and no hustle damage for %{lvl} hr"',
   'Stone Construct':
     'School=Transmutation ' +
     'Level=A3 ' +
-    'Description="Touched construct gains DR 10/adamantine for $L10min150 HP or $L10 min" ' +
+    'Description="Touched construct gains DR 10/adamantine for %{lvl*10<?150} HP or %{lvl*10} min" ' +
     'Liquid=Oil',
   'Suppress Requirement':
     'School=Transmutation ' +
     'Level=A3 ' +
-    'Description="Removes usage requirement from touched magic item for $L10 min"',
+    'Description="Removes usage requirement from touched magic item for %{lvl*10} min"',
   'Total Repair':
     'School=Transmutation ' +
     'Level=A6 ' +
-    'Description="Touched construct gains $L10min150 HP, conditions removed"',
+    'Description="Restores %{lvl*10<?150} HP to and removes conditions from touched construct"',
   'Touch Of Madness':
     'School=Enchantment ' +
     'Level=Madness2 ' +
-    'Description="Dazes touched for $L2 rd"',
+    'Description="Touched suffers dazed for %{lvl*2} rd"',
   'Toughen Construct':
     'School=Transmutation ' +
     'Level=A2 ' +
-    'Description="Touched construct gains +$Ldiv3plus1max2min5 AC for $L10 min"',
+    'Description="Touched construct gains +%{(lvl//3+1)<?5>?2} AC for %{lvl*10} min"',
   'True Creation':
     'School=Conjuration ' +
     'Level=Artifice8,Cannith4 ' +
-    'Description="Creates permanent $L\' cu plant or mineral object"',
+    'Description="Creates permanent %{lvl}\' cu plant or mineral object"',
   'Weapon Augmentation':
     'School=Transmutation ' +
     'Level=A4 ' +
-    'Description="Touched weapon gains +3 or 70K GP enhancement for $L10 min"',
+    'Description="Touched weapon gains +3 or 70K GP enhancement for %{lvl*10} min"',
   "Wind's Favor":
     'School=Transmutation ' +
     'Level=Lyrandar2 ' +
-    'Description="R$RM\' Creates 10\'x10\'x$L20plus100\' 30 MPH wind for $L hr"',
+    'Description="R%{lvl*10+100}\' Creates 10\'x10\'x%{lvl*20+100}\' 30 MPH wind for %{lvl} hr"',
   'Withering Palm':
     'School=Necromancy ' +
     'Level=Decay7 ' +
-    'Description="Touched suffers -$Ldiv2 Strength and Constitution (Fort neg)"',
+    'Description="Touched suffers -%{lvl//2} Strength and Constitution (Fort neg)"',
   'Zone Of Natural Purity':
     'School=Evocation ' +
     'Level=Gatekeeper2 ' +
-    'Description="R$RS\' Fey and plants in 20\' radius gain +1 attack, damage, and saves, and abberations suffer -1, for $L2 hr"'
+    'Description="R%{lvl//2*5+25}\' Fey and plants in 20\' radius gain +1 attack, damage, and saves, and abberations suffer -1, for %{lvl*2} hr"'
 
 };
 Eberron.SPELLS = Object.assign(
@@ -2110,8 +2134,6 @@ Eberron.classRulesExtra = function(rules, name) {
     rules.defineRule('damageReduction.Cold Iron',
       'combatNotes.greensingerDamageReduction', '^=', '3'
     );
-    rules.defineRule
-      ('featCount.Fighter', 'featureNotes.improvedCritical', '+=', '1');
     rules.defineRule('saveNotes.unearthlyGrace', 'charismaModifier', '=', null);
     rules.defineRule('selectableFeatureCount.Eldeen Ranger',
       'levels.Eldeen Ranger', '=', '1'
@@ -2240,7 +2262,7 @@ Eberron.classRulesExtra = function(rules, name) {
        'Urban Tracking':''};
     if(!Eberron.USE_PATHFINDER) {
       // Pathfinder doesn't define these feats
-      miFeats['Negotiator'] = miFeats['Track'] = '';
+      miFeats.Negotiator = miFeats.Track = '';
     }
     for(let feat in miFeats) {
       if(feat in allFeats) {
@@ -2257,7 +2279,7 @@ Eberron.classRulesExtra = function(rules, name) {
       'levels.Master Inquisitive', '=', 'Math.floor(source / 2)'
     );
     rules.defineRule('featureNotes.contact.1',
-      'levels.Master Inquisitive', '=', 'source>=4 ? " and level 6" : ""'
+      'levels.Master Inquisitive', '=', 'source>=4 ? " and a level 6" : ""'
     );
     rules.defineRule
       ('magicNotes.discernLies', 'levels.Master Inquisitive', '=', null);
@@ -2312,7 +2334,6 @@ Eberron.classRulesExtra = function(rules, name) {
 
   } else if(name == 'Weretouched Master') {
 
-    let allFeats = rules.getChoices('feats');
     rules.defineRule
       ('combatNotes.frightfulShifting', 'level', '=', 'source - 1');
     rules.defineRule('combatNotes.frightfulShifting.1',
@@ -3035,7 +3056,7 @@ Eberron.ruleNotes = function() {
     '    rule book as Repair Light/Moderate/Serious Damage Oil in the\n' +
     '    Potions/Oils menu.\n' +
     '  </li><li>\n' +
-    '    The Eberrong rule set allows you to add homebrew choices for all\n' +
+    '    The Eberron rule set allows you to add homebrew choices for all\n' +
     '    of the same types discussed in the <a href="plugins/homebrew-srd35.html">SRD v3.5 Homebrew Examples document</a>.\n' +
     '    In addition, the FR rule set allows adding homebrew houses, which\n' +
     '    require specifying the region name, race, and associated dragonmark.\n' +
