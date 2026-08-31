@@ -1,5 +1,5 @@
 /*
-Copyright 2023, James J. Hayes
+Copyright 2026, James J. Hayes
 
 This program is free software; you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software
@@ -466,7 +466,7 @@ Eberron.FEATS_ADDED = {
     'Type=General ' +
     'Require="race == \'Warforged\'" ' +
     'Imply="features.Mithral Body == 0","levels.Druid == 0"',
-  'Ashbound':'Type=General Require="features.Spontaneous Druid Spell"',
+  'Ashbound':'Type=General Require="features.Spontaneous Casting (Druid)"',
   'Attune Magic Weapon':
     'Type="Item Creation" ' +
     'Require="casterLevel >= 5","features.Craft Magic Arms And Armor"',
@@ -491,7 +491,7 @@ Eberron.FEATS_ADDED = {
   'Child Of Winter':
     'Type=General ' +
     'Require="alignment !~ \'Good\'",' +
-            '"features.Spontaneous Druid Spell"',
+            '"features.Spontaneous Casting (Druid)"',
   'Cliffwalk Elite':'Type=General,Shifter Require=features.Cliffwalk',
   'Craft Construct':  // From MM, needed for Artificer class
     'Type="Item Creation" ' +
@@ -500,7 +500,7 @@ Eberron.FEATS_ADDED = {
   'Double Steel Strike':
     'Type=General ' +
     'Require="features.Flurry Of Blows",' +
-            '"features.Weapon Proficiency (Two-Bladed Sword)" ' +
+            '"weaponProficiency.Two-Bladed Sword" ' +
     'Imply="weapons.Two-Bladed Sword"',
   'Dragon Rage':
     'Type=General ' +
@@ -549,9 +549,9 @@ Eberron.FEATS_ADDED = {
   'Flensing Strike':
     'Type=General ' +
     'Require="features.Weapon Focus (Kama)",' +
-            '"features.Weapon Proficiency (Kama)"',
+            '"weaponProficiency.Kama"',
   'Gatekeeper Initiate':
-    'Type=General Require="features.Spontaneous Druid Spell"',
+    'Type=General Require="features.Spontaneous Casting (Druid)"',
   'Great Bite':
     'Type=General,Shifter Require="baseAttack >= 6",features.Longtooth',
   'Great Rend':
@@ -574,7 +574,7 @@ Eberron.FEATS_ADDED = {
             '"race == \'Shifter\'",' +
             '"sumShifterFeats >= 5"',
   'Greensinger Initiate':
-    'Type=General Require="features.Spontaneous Druid Spell"',
+    'Type=General Require="features.Spontaneous Casting (Druid)"',
   'Haunting Melody':
     'Type=General ' +
     'Require="features.Bardic Music",' +
@@ -634,7 +634,7 @@ Eberron.FEATS_ADDED = {
     'Type=General ' +
     'Require="features.Weapon Focus (Longspear)",' +
             '"features.Flurry Of Blows",' +
-            '"weaponProficiencyLevel >= 1" ' +
+            '"weaponProficiency.Simple Weapons" ' +
     'Imply="weapons.Longspear"',
   'Shifter Defense':
     'Type=General,Shifter Require="race == \'Shifter\'","sumShifterFeats >= 3"',
@@ -670,7 +670,8 @@ Eberron.FEATS_ADDED = {
             '"levels.Druid >= 5"',
   'Wand Mastery':
     'Type=General Require="casterLevel >= 9","features.Craft Wand"',
-  'Warden Initiate':'Type=General Require="features.Spontaneous Druid Spell"',
+  'Warden Initiate':
+    'Type=General Require="features.Spontaneous Casting (Druid)"',
   'Whirling Steel Strike':
     'Type=General ' +
     'Require="features.Weapon Focus (Longsword)",' +
@@ -806,7 +807,7 @@ Eberron.FEATURES_ADDED = {
     'Section=magic Note="Reduces item creation base time by 25%"',
   'Extend Rage':'Section=combat Note="Adds 5 rd to Rage duration"',
   'Extra Music':
-    'Section=feature Note="May use Bardic Music effects %V extra times/dy"',
+    'Section=skill Note="May use Bardic Music effects %V extra times/dy"',
   'Extra Rings':'Section=magic Note="May wear up to 4 magic rings at once"',
   'Extra Shifter Trait':
     'Section=feature Note="Gains extra Shifter trait w/out ability bonus"',
@@ -1831,6 +1832,7 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
       QuilvynUtils.getAttrValue(attrs, 'Attack'),
       QuilvynUtils.getAttrValueArray(attrs, 'Dam'),
       QuilvynUtils.getAttrValue(attrs, 'Size'),
+      QuilvynUtils.getAttrValue(attrs, 'Speed'),
       QuilvynUtils.getAttrValue(attrs, 'Level')
     );
   else if(type == 'Armor')
@@ -1841,7 +1843,7 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
       QuilvynUtils.getAttrValue(attrs, 'Skill'),
       QuilvynUtils.getAttrValue(attrs, 'Spell')
     );
-  else if(type == 'Class' || type.match(/^npc$/i) || type == 'Prestige') {
+  else if(type == 'Class' || type == 'Prestige' || type == 'NPC') {
     Eberron.classRules(rules, name,
       QuilvynUtils.getAttrValueArray(attrs, 'Require'),
       QuilvynUtils.getAttrValue(attrs, 'HitDie'),
@@ -1857,9 +1859,14 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
       QuilvynUtils.getAttrValue(attrs, 'CasterLevelArcane'),
       QuilvynUtils.getAttrValue(attrs, 'CasterLevelDivine'),
       QuilvynUtils.getAttrValue(attrs, 'SpellAbility'),
-      QuilvynUtils.getAttrValueArray(attrs, 'SpellSlots')
+      QuilvynUtils.getAttrValueArray(attrs, 'SpellSlots'),
+      QuilvynUtils.getAttrValueArray(attrs, 'SpellsAvailable')
     );
     Eberron.classRulesExtra(rules, name);
+    if(type == 'Prestige')
+      rules.defineRule('levels.' + name, 'prestige.' + name, '=', null);
+    else if(type == 'NPC')
+      rules.defineRule('levels.' + name, 'npc.' + name, '=', null);
   } else if(type == 'Deity')
     Eberron.deityRules(rules, name,
       QuilvynUtils.getAttrValue(attrs, 'Alignment'),
@@ -1879,6 +1886,7 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
       QuilvynUtils.getAttrValue(attrs, 'Attack'),
       QuilvynUtils.getAttrValueArray(attrs, 'Dam'),
       QuilvynUtils.getAttrValue(attrs, 'Size'),
+      QuilvynUtils.getAttrValue(attrs, 'Speed'),
       QuilvynUtils.getAttrValue(attrs, 'Level')
     );
   else if(type == 'Feat') {
@@ -1891,7 +1899,9 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
   } else if(type == 'Feature')
      Eberron.featureRules(rules, name,
       QuilvynUtils.getAttrValueArray(attrs, 'Section'),
-      QuilvynUtils.getAttrValueArray(attrs, 'Note')
+      QuilvynUtils.getAttrValueArray(attrs, 'Note'),
+      QuilvynUtils.getAttrValueArray(attrs, 'Spells'),
+      QuilvynUtils.getAttrValue(attrs, 'SpellAbility')
     );
   else if(type == 'Goody')
     Eberron.goodyRules(rules, name,
@@ -1910,21 +1920,14 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
     );
   else if(type == 'Language')
     Eberron.languageRules(rules, name);
-  else if(type == 'Path')
-    Eberron.pathRules(rules, name,
-      QuilvynUtils.getAttrValue(attrs, 'Group'),
-      QuilvynUtils.getAttrValue(attrs, 'Level'),
-      QuilvynUtils.getAttrValueArray(attrs, 'Features'),
-      QuilvynUtils.getAttrValueArray(attrs, 'Selectables'),
-      QuilvynUtils.getAttrValue(attrs, 'SpellAbility'),
-      QuilvynUtils.getAttrValueArray(attrs, 'SpellSlots')
-    );
   else if(type == 'Race') {
     Eberron.raceRules(rules, name,
       QuilvynUtils.getAttrValueArray(attrs, 'Require'),
       QuilvynUtils.getAttrValueArray(attrs, 'Features'),
       QuilvynUtils.getAttrValueArray(attrs, 'Selectables'),
-      QuilvynUtils.getAttrValueArray(attrs, 'Languages')
+      QuilvynUtils.getAttrValueArray(attrs, 'Languages'),
+      QuilvynUtils.getAttrValue(attrs, 'Size'),
+      QuilvynUtils.getAttrValue(attrs, 'Speed')
     );
     Eberron.raceRulesExtra(rules, name);
   } else if(type == 'School') {
@@ -1937,6 +1940,7 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
     Eberron.shieldRules(rules, name,
       QuilvynUtils.getAttrValue(attrs, 'AC'),
       QuilvynUtils.getAttrValue(attrs, 'Weight'),
+      QuilvynUtils.getAttrValue(attrs, 'Dex'),
       QuilvynUtils.getAttrValue(attrs, 'Skill'),
       QuilvynUtils.getAttrValue(attrs, 'Spell')
     );
@@ -1944,7 +1948,7 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
     let untrained = QuilvynUtils.getAttrValue(attrs, 'Untrained');
     Eberron.skillRules(rules, name,
       QuilvynUtils.getAttrValue(attrs, 'Ability'),
-      untrained != 'n' && untrained != 'N',
+      untrained && !(untrained+'').match(/(^n|false)$/i),
       QuilvynUtils.getAttrValueArray(attrs, 'Class'),
       QuilvynUtils.getAttrValueArray(attrs, 'Synergy')
     );
@@ -1956,25 +1960,27 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
     let liquids = QuilvynUtils.getAttrValueArray(attrs, 'Liquid');
     let school = QuilvynUtils.getAttrValue(attrs, 'School');
     let schoolAbbr = (school || 'Universal').substring(0, 4);
-    for(let i = 0; i < groupLevels.length; i++) {
-      let matchInfo = groupLevels[i].match(/^(\D+)(\d+)$/);
+    groupLevels.forEach(gl => {
+      let matchInfo = (gl + '').match(/^(\D+)(\d+)$/);
       if(!matchInfo) {
         console.log('Bad level "' + groupLevels[i] + '" for spell ' + name);
-        continue;
+      } else {
+        let group = matchInfo[1];
+        let level = matchInfo[2] * 1;
+        let fullName = name + '(' + group + level + ' ' + schoolAbbr + ')';
+        // If classes have already been processed, then domains will be listed
+        // in Cleric selectable features; otherwise, look in Eberron.CLASSES
+        let domainSpell =
+          (rules.getChoices('selectableFeatures') != null &&
+           ('Cleric - ' + group + ' Domain') in rules.getChoices('selectableFeatures')) ||
+          group == 'Dragon' || // Dragon Below domain
+          Eberron.CLASSES.Cleric.includes(group + ' Domain');
+        Eberron.spellRules
+          (rules, fullName, school, group, level, description, domainSpell,
+           liquids);
+        rules.addChoice('spells', fullName, attrs);
       }
-      let group = matchInfo[1];
-      let level = matchInfo[2] * 1;
-      let fullName = name + '(' + group + level + ' ' + schoolAbbr + ')';
-      let domainSpell =
-        (rules.getChoices('selectableFeatures') != null &&
-         ('Cleric - ' + group + ' Domain') in rules.getChoices('selectableFeatures')) ||
-        group == 'Dragon' || // Dragon Below domain
-        Eberron.CLASSES.Cleric.includes(group + ' Domain');
-      Eberron.spellRules
-        (rules, fullName, school, group, level, description, domainSpell,
-         liquids);
-      rules.addChoice('spells', fullName, attrs);
-    }
+    });
   } else if(type == 'Track')
     Pathfinder.trackRules(rules, name,
       QuilvynUtils.getAttrValueArray(attrs, 'Progression')
@@ -1993,7 +1999,8 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
       QuilvynUtils.getAttrValue(attrs, 'Damage'),
       QuilvynUtils.getAttrValue(attrs, 'Threat'),
       QuilvynUtils.getAttrValue(attrs, 'Crit'),
-      QuilvynUtils.getAttrValue(attrs, 'Range')
+      QuilvynUtils.getAttrValue(attrs, 'Range'),
+      QuilvynUtils.getAttrValueArray(attrs, 'Properties')
     );
   else {
     console.log('Unknown choice type "' + type + '"');
@@ -2359,11 +2366,11 @@ Eberron.classRulesExtra = function(rules, name) {
  */
 Eberron.companionRules = function(
   rules, name, str, dex, con, intel, wis, cha, hd, ac, attack, damage, size,
-  level
+  speed, level
 ) {
   rules.basePlugin.companionRules(
     rules, name, str, dex, con, intel, wis, cha, hd, ac, attack, damage, size,
-    level
+    speed, level
   );
   // No changes needed to the rules defined by base method
 };
@@ -2387,11 +2394,11 @@ Eberron.deityRules = function(rules, name, alignment, domains, weapons) {
  */
 Eberron.familiarRules = function(
   rules, name, str, dex, con, intel, wis, cha, hd, ac, attack, damage, size,
-  level
+  speed, level
 ) {
   rules.basePlugin.familiarRules(
     rules, name, str, dex, con, intel, wis, cha, hd, ac, attack, damage, size,
-    level
+    speed, level
   );
   // No changes needed to the rules defined by base method
 };
@@ -2454,11 +2461,11 @@ Eberron.featRulesExtra = function(rules, name) {
     );
   } else if(name == 'Extra Music') {
     rules.defineRule
-      ('featureNotes.extraMusic', 'feats.Extra Music', '=', '4 * source');
+      ('skillNotes.extraMusic', 'feats.Extra Music', '=', '4 * source');
     rules.defineRule(
       Eberron.USE_PATHFINDER ?
-        'featureNotes.bardicPerformance' : 'featureNotes.bardicMusic',
-      'featureNotes.extraMusic', '+', null
+        'skillNotes.bardicPerformance' : 'skillNotes.bardicMusic',
+      'skillNotes.extraMusic', '+', null
     );
   } else if(name == 'Extend Rage') {
     rules.defineRule('combatNotes.rage', 'combatNotes.extendRage', '+', '5');
@@ -2568,7 +2575,9 @@ Eberron.featRulesExtra = function(rules, name) {
  * the sections of the notes related to the feature and #notes# the note texts;
  * the two must have the same number of elements.
  */
-Eberron.featureRules = function(rules, name, sections, notes) {
+Eberron.featureRules = function(
+  rules, name, sections, notes, spells, spellAbility)
+{
   if(rules.basePlugin == window.Pathfinder) {
     for(let i = 0; i < sections.length; i++) {
       if(sections[i] != 'skill')
@@ -2587,7 +2596,8 @@ Eberron.featureRules = function(rules, name, sections, notes) {
       notes[i] = note;
     }
   }
-  rules.basePlugin.featureRules(rules, name, sections, notes);
+  rules.basePlugin.featureRules
+    (rules, name, sections, notes, spells, spellAbility);
   // No changes needed to the rules defined by base method
 };
 
@@ -2750,11 +2760,10 @@ Eberron.pathRules = function(
  * day granted.
  */
 Eberron.raceRules = function(
-  rules, name, requires, features, selectables, languages, spellAbility,
-  spellSlots
+  rules, name, requires, features, selectables, languages, size, speed
 ) {
   rules.basePlugin.raceRules
-    (rules, name, requires, features, selectables, languages);
+    (rules, name, requires, features, selectables, languages, size, speed);
   // No changes needed to the rules defined by base method
 };
 
@@ -2778,9 +2787,9 @@ Eberron.raceRulesExtra = function(rules, name) {
       'race', '=', 'source == "Shifter" ? 1 : null'
     );
     Eberron.weaponRules
-      (rules, 'Claws', 'Unarmed', 'Unarmed', 'd4', 20, 2, null);
+      (rules, 'Claws', 'Unarmed', 'Unarmed', 'd4', 20, 2, null, []);
     Eberron.weaponRules
-      (rules, 'Fangs', 'Unarmed', 'Unarmed', 'd6', 20, 2, null);
+      (rules, 'Fangs', 'Unarmed', 'Unarmed', 'd6', 20, 2, null, []);
     rules.defineRule('clawsDamageProgression',
       'combatNotes.razorclaw', '+=', '1',
       'features.Large', '+', '1'
@@ -2814,7 +2823,8 @@ Eberron.raceRulesExtra = function(rules, name) {
       'intelligenceModifier', '=', '-Math.max(source, 0)'
     );
     rules.defineRule('languageCount', 'negateLanguageBonus', '+', null);
-    Eberron.weaponRules(rules, 'Slam', 'Unarmed', 'Unarmed', 'd4', 20, 2, null);
+    Eberron.weaponRules
+      (rules, 'Slam', 'Unarmed', 'Unarmed', 'd4', 20, 2, null, []);
     rules.defineRule('weapons.Slam', 'combatNotes.slamWeapon', '=', '1');
   } else if(rules.basePlugin.raceRulesExtra) {
     rules.basePlugin.raceRulesExtra(rules, name);
@@ -2838,10 +2848,10 @@ Eberron.schoolRules = function(rules, name, features) {
  * #spellFail# percent chance of arcane spell failure.
  */
 Eberron.shieldRules = function(
-  rules, name, ac, profLevel, skillFail, spellFail
+  rules, name, ac, profLevel, dex, skillFail, spellFail
 ) {
   rules.basePlugin.shieldRules
-    (rules, name, ac, profLevel, skillFail, spellFail);
+    (rules, name, ac, profLevel, dex, skillFail, spellFail);
   // No changes needed to the rules defined by base method
 };
 
@@ -2888,10 +2898,12 @@ Eberron.spellRules = function(
  * increment of #range# feet.
  */
 Eberron.weaponRules = function(
-  rules, name, profLevel, category, damage, threat, critMultiplier, range
+  rules, name, profLevel, category, damage, threat, critMultiplier, range,
+  properties
 ) {
   rules.basePlugin.weaponRules(
-    rules, name, profLevel, category, damage, threat, critMultiplier, range
+    rules, name, profLevel, category, damage, threat, critMultiplier, range,
+    properties
   );
   // No changes needed to the rules defined by base method
 };
