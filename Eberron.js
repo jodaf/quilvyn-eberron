@@ -173,8 +173,6 @@ Eberron.RANDOMIZABLE_ATTRIBUTES_ADDED = ['house'];
 Eberron.RANDOMIZABLE_ATTRIBUTES =
   SRD35.RANDOMIZABLE_ATTRIBUTES.concat(Eberron.RANDOMIZABLE_ATTRIBUTES_ADDED);
 
-SRD35.ABBREVIATIONS.AP = 'Action Points';
-
 Eberron.ALIGNMENTS = Object.assign({}, SRD35.ALIGNMENTS);
 Eberron.ANIMAL_COMPANIONS = Object.assign({}, SRD35.ANIMAL_COMPANIONS);
 Eberron.ARMORS_ADDED = {
@@ -456,24 +454,31 @@ Eberron.DEITIES = {
 };
 Eberron.FAMILIARS = Object.assign({}, SRD35.FAMILIARS);
 Eberron.FEATS_ADDED = {
-  'Aberrant Dragonmark':
+  'Aberrant Dragonmark (%aberrantMarkPower)':
     'Type=General ' +
-    'Require="feats.Least Dragonmark == 0",' +
-            '"race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Elf|Half-Orc|Human\'"',
+    'Require=' +
+      '"features.Aberrant Dragonmark == 1",' +
+      '"feats.Least Dragonmark == 0",' +
+      '"race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Elf|Half-Orc|Human\'"',
   'Action Boost':'Type=General',
   'Action Surge':'Type=General Require="baseAttack >= 3"',
   'Adamantine Body':
     'Type=General ' +
     'Require="race == \'Warforged\'" ' +
-    'Imply="features.Mithral Body == 0","levels.Druid == 0"',
+    'Imply=' +
+      '"features.Mithral Body == 0",' +
+      '"levels.Druid == 0"',
   'Ashbound':'Type=General Require="features.Spontaneous Casting (Druid)"',
   'Attune Magic Weapon':
     'Type="Item Creation" ' +
-    'Require="casterLevel >= 5","features.Craft Magic Arms And Armor"',
+    'Require=' +
+      '"casterLevel >= 5",' +
+      '"features.Craft Magic Arms And Armor"',
   'Beast Shape':
     'Type=General ' +
-    'Require="Max \'^features.Beast Totem\' > 0",' +
-            '"magicNotes.wildShape =~ \'huge\'"',
+    'Require=' +
+      '"Max \'^features.Beast Totem\' > 0",' +
+      '"magicNotes.wildShape =~ \'huge\'"',
   'Beast Totem (Chimera)':'Type=General Require="features.Wild Empathy"',
   'Beast Totem (Digester)':'Type=General Require="features.Wild Empathy"',
   'Beast Totem (Displacer Beast)':
@@ -483,50 +488,85 @@ Eberron.FEATS_ADDED = {
   'Beast Totem (Unicorn)':'Type=General Require="features.Wild Empathy"',
   'Beast Totem (Winter Wolf)':'Type=General Require="features.Wild Empathy"',
   'Beast Totem (Yrthak)':'Type=General Require="features.Wild Empathy"',
-  'Beasthide Elite':'Type=General,Shifter Require=features.Beasthide',
+  'Beasthide Elite':'Type=General,Shifter Require="features.Beasthide"',
   'Bind Elemental':
     'Type="Item Creation" ' +
-    'Require="casterLevel >= 9",' +
-            '"features.Craft Wondrous Item"',
+    'Require=' +
+      '"casterLevel >= 9",' +
+      '"features.Craft Wondrous Item"',
   'Child Of Winter':
     'Type=General ' +
-    'Require="alignment !~ \'Good\'",' +
-            '"features.Spontaneous Casting (Druid)"',
-  'Cliffwalk Elite':'Type=General,Shifter Require=features.Cliffwalk',
+    'Require=' +
+      '"alignment !~ \'Good\'",' +
+      '"features.Spontaneous Casting (Druid)"',
+  'Cliffwalk Elite':'Type=General,Shifter Require="features.Cliffwalk"',
   'Craft Construct':  // From MM, needed for Artificer class
     'Type="Item Creation" ' +
-    'Require="features.Craft Magic Arms And Armor",' +
-            '"features.Craft Wondrous Item"',
+    'Require=' +
+      '"features.Craft Magic Arms And Armor",' +
+      '"features.Craft Wondrous Item"',
   'Double Steel Strike':
     'Type=General ' +
-    'Require="features.Flurry Of Blows",' +
-            '"weaponProficiency.Two-Bladed Sword" ' +
+    'Require=' +
+      '"features.Flurry Of Blows",' +
+      '"weaponProficiency.Two-Bladed Sword" ' +
     'Imply="weapons.Two-Bladed Sword"',
   'Dragon Rage':
     'Type=General ' +
-    'Require="Max \'^features.Dragon Totem\' > 0",' +
-             'features.Rage,' +
-             '"origin == \'Argonnessen\'"',
+    'Require=' +
+      '"Max \'^features.Dragon Totem\' > 0",' +
+      'features.Rage,' +
+      '"origin == \'Argonnessen\'"',
   'Dragon Totem (Black)':
-    'Type=General Require="baseAttack >= 1","origin =~ \'Argonnessen|Seren\'"',
+    'Type=General ' +
+    'Require=' +
+      '"baseAttack >= 1",' +
+      '"origin =~ \'Argonnessen|Seren\'"',
   'Dragon Totem (Blue)':
-    'Type=General Require="baseAttack >= 1","origin =~ \'Argonnessen|Seren\'"',
+    'Type=General ' +
+    'Require=' +
+      '"baseAttack >= 1",' +
+      '"origin =~ \'Argonnessen|Seren\'"',
   'Dragon Totem (Brass)':
-    'Type=General Require="baseAttack >= 1","origin =~ \'Argonnessen|Seren\'"',
+    'Type=General ' +
+    'Require=' +
+      '"baseAttack >= 1",' +
+      '"origin =~ \'Argonnessen|Seren\'"',
   'Dragon Totem (Bronze)':
-    'Type=General Require="baseAttack >= 1","origin =~ \'Argonnessen|Seren\'"',
+    'Type=General ' +
+    'Require=' +
+      '"baseAttack >= 1",' +
+      '"origin =~ \'Argonnessen|Seren\'"',
   'Dragon Totem (Copper)':
-    'Type=General Require="baseAttack >= 1","origin =~ \'Argonnessen|Seren\'"',
+    'Type=General ' +
+    'Require=' +
+      '"baseAttack >= 1",' +
+      '"origin =~ \'Argonnessen|Seren\'"',
   'Dragon Totem (Gold)':
-    'Type=General Require="baseAttack >= 1","origin =~ \'Argonnessen|Seren\'"',
+    'Type=General ' +
+    'Require=' +
+      '"baseAttack >= 1",' +
+      '"origin =~ \'Argonnessen|Seren\'"',
   'Dragon Totem (Green)':
-    'Type=General Require="baseAttack >= 1","origin =~ \'Argonnessen|Seren\'"',
+    'Type=General ' +
+    'Require=' +
+      '"baseAttack >= 1",' +
+      '"origin =~ \'Argonnessen|Seren\'"',
   'Dragon Totem (Red)':
-    'Type=General Require="baseAttack >= 1","origin =~ \'Argonnessen|Seren\'"',
+    'Type=General ' +
+    'Require=' +
+      '"baseAttack >= 1",' +
+      '"origin =~ \'Argonnessen|Seren\'"',
   'Dragon Totem (Silver)':
-    'Type=General Require="baseAttack >= 1","origin =~ \'Argonnessen|Seren\'"',
+    'Type=General ' +
+    'Require=' +
+      '"baseAttack >= 1",' +
+      '"origin =~ \'Argonnessen|Seren\'"',
   'Dragon Totem (White)':
-    'Type=General Require="baseAttack >= 1","origin =~ \'Argonnessen|Seren\'"',
+    'Type=General ' +
+    'Require=' +
+      '"baseAttack >= 1",' +
+      '"origin =~ \'Argonnessen|Seren\'"',
   'Ecclesiarch':
     'Type=General ' +
     'Require="skills.Knowledge (Religion) >= 6" ' +
@@ -534,148 +574,220 @@ Eberron.FEATS_ADDED = {
   'Education':'Type=General',
   'Exceptional Artisan':
     'Type="Item Creation" Require="sumItemCreationFeats >= 2"',
-  'Extend Rage':'Type=General Require=features.Rage',
+  'Extend Rage':'Type=General Require="features.Rage"',
   'Extra Music':'Type=General Require="features.Bardic Music"',
   'Extra Rings':
-    'Type="Item Creation" Require="casterLevel >= 12","features.Forge Ring"',
+    'Type="Item Creation" ' +
+    'Require=' +
+      '"casterLevel >= 12",' +
+      '"features.Forge Ring"',
   'Extra Shifter Trait':
-    'Type=General,Shifter Require="race == \'Shifter\'","sumShifterFeats >= 3"',
+    'Type=General,Shifter ' +
+    'Require=' +
+      '"race == \'Shifter\'",' +
+      '"sumShifterFeats >= 3"',
   'Extraordinary Artisan':
     'Type="Item Creation" Require="sumItemCreationFeats >= 2"',
   'Favored In House':
     'Type=General ' +
-    'Require="house != \'None\'",' +
-            '"race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Elf|Half-Orc|Human\'"',
+    'Require=' +
+      '"house != \'None\'",' +
+      '"race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Elf|Half-Orc|Human\'"',
   'Flensing Strike':
     'Type=General ' +
-    'Require="features.Weapon Focus (Kama)",' +
-            '"weaponProficiency.Kama"',
+    'Require=' +
+      '"features.Weapon Focus (Kama)",' +
+      '"weaponProficiency.Kama"',
   'Gatekeeper Initiate':
     'Type=General Require="features.Spontaneous Casting (Druid)"',
   'Great Bite':
-    'Type=General,Shifter Require="baseAttack >= 6",features.Longtooth',
+    'Type=General,Shifter ' +
+    'Require=' +
+      '"baseAttack >= 6",' +
+      '"features.Longtooth"',
   'Great Rend':
-    'Type=General,Shifter Require="baseAttack >= 4",features.Razorclaw',
+    'Type=General,Shifter ' +
+    'Require=' +
+      '"baseAttack >= 4",' +
+      '"features.Razorclaw"',
   'Greater Dragonmark':
     'Type=General ' +
-    'Require="features.Least Dragonmark",' +
-            '"features.Lesser Dragonmark",' +
-            '"house != \'None\'",' +
-            '"race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Elf|Half-Orc|Human\'",' +
-            '"countSkillsGe12 >= 2"',
+    'Require=' +
+      '"features.Least Dragonmark",' +
+      '"features.Lesser Dragonmark",' +
+      '"house != \'None\'",' +
+      '"race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Elf|Half-Orc|Human\'",' +
+      '"countSkillsGe12 >= 2"',
   'Greater Powerful Charge':
     'Type=General ' +
-    'Require="baseAttack >= 4",' +
-            '"features.Powerful Charge",' +
-            '"features.Small == 0"',
+    'Require=' +
+      '"baseAttack >= 4",' +
+      '"features.Powerful Charge",' +
+      '"size != \'Small\'"',
   'Greater Shifter Defense':
     'Type=General,Shifter ' +
-    'Require="features.Shifter Defense",' +
-            '"race == \'Shifter\'",' +
-            '"sumShifterFeats >= 5"',
+    'Require=' +
+      '"features.Shifter Defense",' +
+      '"race == \'Shifter\'",' +
+      '"sumShifterFeats >= 5"',
   'Greensinger Initiate':
     'Type=General Require="features.Spontaneous Casting (Druid)"',
   'Haunting Melody':
     'Type=General ' +
-    'Require="features.Bardic Music",' +
-            '"sumPerformRanks >= 9"',
+    'Require=' +
+      '"features.Bardic Music",' +
+      '"sumPerformRanks >= 9"',
   'Healing Factor':
-    'Type=General,Shifter Require="constitution >= 13","race == \'Shifter\'"',
+    'Type=General,Shifter ' +
+    'Require=' +
+      '"constitution >= 13",' +
+      '"race == \'Shifter\'"',
   'Heroic Spirit':'Type=General',
   'Improved Damage Reduction':'Type=General Require="race == \'Warforged\'"',
   'Improved Fortification':
-    'Type=General Require="baseAttack >= 6","race == \'Warforged\'"',
+    'Type=General ' +
+    'Require=' +
+      '"baseAttack >= 6",' +
+      '"race == \'Warforged\'"',
   'Improved Natural Attack (Claws)':
-    'Type=General Require="baseAttack >= 4","weapons.Claws"',
+    'Type=General ' +
+    'Require=' +
+      '"baseAttack >= 4",' +
+      '"weapons.Claws"',
   'Improved Natural Attack (Fangs)':
-    'Type=General Require="baseAttack >= 4","weapons.Fangs||weapons.Tusks"',
+    'Type=General ' +
+    'Require=' +
+      '"baseAttack >= 4",' +
+      '"weapons.Fangs || weapons.Tusks"',
   'Investigate':'Type=General',
   'Knight Training':'Type=General Imply="levels.Paladin > 0"',
   'Least Dragonmark':
     'Type=General ' +
-    'Require="house != \'None\'",' +
-            '"race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Elf|Half-Orc|Human\'"',
+    'Require=' +
+      '"house != \'None\'",' +
+      '"race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Elf|Half-Orc|Human\'"',
   'Legendary Artisan':
     'Type="Item Creation" Require="sumItemCreationFeats >= 2"',
   'Lesser Dragonmark':
     'Type=General ' +
-    'Require="house != \'None\'",' +
-            '"race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Elf|Half-Orc|Human\'",' +
-            '"features.Least Dragonmark",' +
-            '"countSkillsGe9 >= 2"',
-  'Longstride Elite':'Type=General,Shifter Require=features.Longstride',
+    'Require=' +
+      '"house != \'None\'",' +
+      '"race =~ \'Dwarf|Elf|Gnome|Halfling|Half-Elf|Half-Orc|Human\'",' +
+      '"features.Least Dragonmark",' +
+      '"countSkillsGe9 >= 2"',
+  'Longstride Elite':'Type=General,Shifter Require="features.Longstride"',
   'Mithral Body':
     'Type=General ' +
     'Require="race == \'Warforged\'" ' +
-    'Imply="features.Adamantine Body == 0","levels.Druid == 0"',
+    'Imply=' +
+      '"features.Adamantine Body == 0",' +
+      '"levels.Druid == 0"',
   'Mithral Fluidity':
-    'Type=General Require="race == \'Warforged\'","features.Mithral Body"',
+    'Type=General ' +
+    'Require=' +
+      '"race == \'Warforged\'",' +
+      '"features.Mithral Body"',
   'Monastic Training':'Type=General Imply="levels.Monk > 0"',
   'Music Of Growth':
     'Type=General ' +
-    'Require="features.Bardic Music",' +
-            '"Sum \'^skills.Perform\' >= 12"',
+    'Require=' +
+      '"features.Bardic Music",' +
+      '"Sum \'^skills.Perform\' >= 12"',
   'Music Of Making':
     'Type=General ' +
-    'Require="features.Bardic Music",' +
-            '"Sum \'^skills.Perform\' >= 9"',
+    'Require=' +
+      '"features.Bardic Music",' +
+      '"Sum \'^skills.Perform\' >= 9"',
   'Powerful Charge':
-    'Type=General Require="baseAttack >= 1","features.Small == 0"',
+    'Type=General ' +
+    'Require=' +
+      '"baseAttack >= 1",' +
+      '"size != \'Small\'"',
   'Precise Swing':'Type=General Require="baseAttack >= 5"',
   'Pursue':'Type=General Require="features.Combat Reflexes"',
-  'Raging Luck':'Type=General Require=features.Rage',
+  'Raging Luck':'Type=General Require="features.Rage"',
   'Recognize Impostor':
-    'Type=General Require="skills.Sense Motive >= 3","skills.Spot >= 3"',
+    'Type=General ' +
+    'Require=' +
+      '"skills.Sense Motive >= 3",' +
+      '"skills.Spot >= 3"',
   'Repel Aberration':
-    'Type=General Require="features.Gatekeeper Initiate","levels.Druid >= 3"',
+    'Type=General ' +
+    'Require=' +
+      '"features.Gatekeeper Initiate",' +
+      '"levels.Druid >= 3"',
   'Research':'Type=General',
   'Right Of Counsel':'Type=General Require="race == \'Elf\'"',
   'Serpent Strike':
     'Type=General ' +
-    'Require="features.Weapon Focus (Longspear)",' +
-            '"features.Flurry Of Blows",' +
-            '"weaponProficiency.Simple Weapons" ' +
+    'Require=' +
+      '"features.Weapon Focus (Longspear)",' +
+      '"features.Flurry Of Blows",' +
+      '"weaponProficiency.Simple Weapons" ' +
     'Imply="weapons.Longspear"',
   'Shifter Defense':
-    'Type=General,Shifter Require="race == \'Shifter\'","sumShifterFeats >= 3"',
+    'Type=General,Shifter ' +
+    'Require=' +
+      '"race == \'Shifter\'",' +
+      '"sumShifterFeats >= 3"',
   'Shifter Ferocity':
-    'Type=General,Shifter Require="wisdom >= 13","race == \'Shifter\'"',
+    'Type=General,Shifter ' +
+    'Require=' +
+      '"wisdom >= 13",' +
+      '"race == \'Shifter\'"',
   'Shifter Multiattack':
     'Type=General,Shifter ' +
-    'Require="baseAttack >= 6","features.Longtooth||features.Razorclaw"',
+    'Require=' +
+      '"baseAttack >= 6",' +
+      '"features.Longtooth||features.Razorclaw"',
   'Silver Smite':
     'Type=General ' +
-    'Require="deity == \'The Silver Flame\'","features.Smite Evil"',
+    'Require=' +
+      '"deity == \'The Silver Flame\'",' +
+      '"features.Smite Evil"',
   'Song Of The Heart':
     'Type=General ' +
-    'Require="features.Bardic Music",' +
-            '"features.Inspire Competence",' +
-            '"Sum \'^skills.Perform\' >= 6"',
+    'Require=' +
+      '"features.Bardic Music",' +
+      '"features.Inspire Competence",' +
+      '"Sum \'^skills.Perform\' >= 6"',
   'Soothe The Beast':
     'Type=General ' +
-    'Require="features.Bardic Music","Sum \'^skills.Perform\' >= 6"',
+    'Require=' +
+      '"features.Bardic Music",' +
+      '"Sum \'^skills.Perform\' >= 6"',
   'Spontaneous Casting':'Type=General Require="casterLevel >= 5"',
   'Strong Mind':'Type=General Require="wisdom >= 11"',
   'Totem Companion':
     'Type=General ' +
-    'Require="Max \'^features.Beast Totem\' >= 1","features.Wild Empathy"',
+    'Require=' +
+      '"Max \'^features.Beast Totem\' >= 1",' +
+      '"features.Wild Empathy"',
   'Undead Empathy':'Type=General Require="charisma >= 13"',
   'Urban Tracking':'Type=General',
   'Vermin Companion':
-    'Type=General Require="alignment !~ \'Good\'","levels.Druid >= 3"',
+    'Type=General ' +
+    'Require=' +
+      '"alignment !~ \'Good\'",' +
+      '"levels.Druid >= 3"',
   'Vermin Shape':
     'Type=General ' +
-    'Require="alignment !~ \'Good\'",' +
-            '"features.Child Of Winter",' +
-            '"levels.Druid >= 5"',
+    'Require=' +
+      '"alignment !~ \'Good\'",' +
+      '"features.Child Of Winter",' +
+      '"levels.Druid >= 5"',
   'Wand Mastery':
-    'Type=General Require="casterLevel >= 9","features.Craft Wand"',
+    'Type=General ' +
+    'Require=' +
+      '"casterLevel >= 9",' +
+      '"features.Craft Wand"',
   'Warden Initiate':
     'Type=General Require="features.Spontaneous Casting (Druid)"',
   'Whirling Steel Strike':
     'Type=General ' +
-    'Require="features.Weapon Focus (Longsword)",' +
-            '"features.Flurry Of Blows" ' +
+    'Require=' +
+      '"features.Weapon Focus (Longsword)",' +
+      '"features.Flurry Of Blows" ' +
     'Imply="weapons.Longsword"'
 };
 Eberron.FEATS = Object.assign({}, SRD35.FEATS, Eberron.FEATS_ADDED);
@@ -800,54 +912,19 @@ Eberron.FEATURES_ADDED = {
     'Section=skill ' +
     'Note="Can take 10 on Spellcraft and Use Magic Device when distracted"',
 
+  // Feats
 
-  // Domain
-  'Add Life':
+  'Aberrant Dragonmark (%aberrantMarkPower)':
     'Section=magic ' +
-    'Note="Touched gains 1d6+%{levels.Cleric} temporary HP for %{levels.Cleric} hr"',
-  'All-Weather':
-    'Section=feature,skill ' +
-    'Note="Can see clearly in any weather",' +
-         '"+2 Survival (weather)/Survival is a class skill"',
-  'Artifice Master':'Section=skill Note="+4 all Craft"',
-  'Clarity Of True Madness':
-    'Section=feature ' +
-    'Note="May add %{levels.Cleric//2} to a Wisdom skill check or Will save 1/dy"',
-  'Commercial':
-    'Section=skill ' +
-    'Note="+10 Profession (earn a living)/Appraise is a class skill"',
-  'Community Pillar':
-    'Section=magic,skill '  +
-    'Note="May cast <i>Calm Emotions</i> 1/dy","+2 Diplomacy"',
-  'Empowered Creation':
-    'Section=magic Note="+1 caster level on Item Creation spells"',
-  'Empowered Necromancy':
-    'Section=magic Note="+1 caster level on Necromancy spells"',
-  'Exorcise':
-    'Section=combat Note="May use Turn Undead to exorcise spirits"',
-  'Feast Gut':'Section=save Note="Immune to ingested poison and disease"',
-  'Fit Of Passion':
-    'Section=combat ' +
-    'Note="May gain +4 Strength, +4 Constitution, and +2 Will save and suffer -2 AC for %{levels.Cleric} rd/dy"',
-  'Madness-Weakened':'Section=save Note="-1 Will"',
-  'Meditative Casting':
-    'Section=magic Note="May gain x1.5 chosen spell variable effects 1/dy"',
-  'Rebuke Deathless':
-    'Section=combat Note="May use Turn Undead to rebuke deathless 1/dy"',
-  'Touch Of Decay':
-    'Section=magic ' +
-    'Note="Touch inflicts -1d4 Constitution (living) or 2d6+%{levels.Cleric} HP (undead) 1/dy"',
-  'Turn On The Charm':
-    'Section=ability Note="May gain +4 Charisma for 1 min 1/dy"',
-
-  // Feat
-  'Aberrant Dragonmark':'Section=magic Note="May cast chosen spell 1/dy"',
+    'Note="Can use %aberrantMarkPower as a spell-like ability once per day" ' +
+    'Spells="%aberrantMarkPower" ' +
+    'SpellAbility=Charisma',
   'Action Boost':
     'section=ability ' +
-    'Note="Adds 1d8 instead of 1d6 when using AP on attack, skill, ability, level or saving throw"',
+    'Note="Adds 1d8 instead of 1d6 when using Action Points on attack, skill, ability, level or saving throw"',
   'Action Surge':
     'Section=combat ' +
-    'Note="May spend 2 AP to take an extra move or standard action"',
+    'Note="May spend 2 Action Points to take an extra move or standard action"',
   'Adamantine Body':
     'Section=ability,combat Note="Max 20\' speed","+6 AC/DR 2/adamantine"',
   'Ashbound':
@@ -936,7 +1013,7 @@ Eberron.FEATURES_ADDED = {
   'Healer':'Section=skill Note="+2 Heal"',
   'Healing Factor':
     'Section=combat Note="Recovers %{level} HP when shifting ends"',
-  'Heroic Spirit':'Section=ability Note="+%{level*3} AP"',
+  'Heroic Spirit':'Section=ability Note="+%{level*3} Action Points"',
   'Hospitaler':'Section=skill Note="+2 Diplomacy"',
   'Improved Damage Reduction':'Section=combat Note="DR +1/adamantine"',
   'Improved Fortification':
@@ -980,8 +1057,8 @@ Eberron.FEATURES_ADDED = {
     'Section=combat Note="Melee attack ignores less-than-total cover"',
   'Pursue':
     'Section=combat ' +
-    'Note="May spend 1 AP to step into area vacated by opponent"',
-  'Raging Luck':'Section=ability Note="Gains 1 AP during Rage"',
+    'Note="May spend 1 Action Point to step into area vacated by opponent"',
+  'Raging Luck':'Section=ability Note="Gains 1 Action Point during Rage"',
   'Recognize Impostor':
     'Section=skill Note="+4 Sense Motive vs. Bluff and Spot vs. Disguise"',
   'Repel Aberration':
@@ -1007,7 +1084,7 @@ Eberron.FEATURES_ADDED = {
     'Note="R30\' Successful Perform check during Bardic Music changes animal reaction"',
   'Spontaneous Casting':
     'Section=magic ' +
-    'Note="May spend 2 AP to substitute any known spell for a prepared one"',
+    'Note="May spend 2 Action Points to substitute any known spell for a prepared one"',
   'Storm Walker':'Section=skill Note="+2 Balance"',
   'Strong Mind':'Section=save Note="+3 vs. psionics and mind attacks"',
   'Totem Companion':
@@ -1032,8 +1109,47 @@ Eberron.FEATURES_ADDED = {
   'Whirling Steel Strike':
     'Section=combat Note="May use Flurry Of Blows w/longsword"',
 
+  // Domain
+  'Add Life':
+    'Section=magic ' +
+    'Note="Touched gains 1d6+%{levels.Cleric} temporary HP for %{levels.Cleric} hr"',
+  'All-Weather':
+    'Section=feature,skill ' +
+    'Note="Can see clearly in any weather",' +
+         '"+2 Survival (weather)/Survival is a class skill"',
+  'Artifice Master':'Section=skill Note="+4 all Craft"',
+  'Clarity Of True Madness':
+    'Section=feature ' +
+    'Note="May add %{levels.Cleric//2} to a Wisdom skill check or Will save 1/dy"',
+  'Commercial':
+    'Section=skill ' +
+    'Note="+10 Profession (earn a living)/Appraise is a class skill"',
+  'Community Pillar':
+    'Section=magic,skill '  +
+    'Note="May cast <i>Calm Emotions</i> 1/dy","+2 Diplomacy"',
+  'Empowered Creation':
+    'Section=magic Note="+1 caster level on Item Creation spells"',
+  'Empowered Necromancy':
+    'Section=magic Note="+1 caster level on Necromancy spells"',
+  'Exorcise':
+    'Section=combat Note="May use Turn Undead to exorcise spirits"',
+  'Feast Gut':'Section=save Note="Immune to ingested poison and disease"',
+  'Fit Of Passion':
+    'Section=combat ' +
+    'Note="May gain +4 Strength, +4 Constitution, and +2 Will save and suffer -2 AC for %{levels.Cleric} rd/dy"',
+  'Madness-Weakened':'Section=save Note="-1 Will"',
+  'Meditative Casting':
+    'Section=magic Note="May gain x1.5 chosen spell variable effects 1/dy"',
+  'Rebuke Deathless':
+    'Section=combat Note="May use Turn Undead to rebuke deathless 1/dy"',
+  'Touch Of Decay':
+    'Section=magic ' +
+    'Note="Touch inflicts -1d4 Constitution (living) or 2d6+%{levels.Cleric} HP (undead) 1/dy"',
+  'Turn On The Charm':
+    'Section=ability Note="May gain +4 Charisma for 1 min 1/dy"',
+
   // Prestige classes
-  'Additional Action Points':'Section=ability Note="+2 AP"',
+  'Additional Action Points':'Section=ability Note="+2 Action Points"',
   'Alternate Form (Bear)':
     'Section=ability ' +
     'Note="May shift to animal (+16 Strength, +2 Dexterity, +8 Constitution) or bipedal hybrid form"',
@@ -1080,15 +1196,15 @@ Eberron.FEATURES_ADDED = {
     'Section=magic Note="May use <i>Detect Thoughts</i> effects at will"',
   'Discern Lies':
     'Section=magic ' +
-    'Note="R%{$\'levels.Master Inquisitive\'//2*5+25}\' May reveal lies from %{$\'levels.Master Inquisitive\'} creatures in 15\' radius for conc or %{$\'levels.Master Inquisitive\'} rd (DC %{14+wisdomModifier} Will neg) 1/dy; may spend 2 AP for 2/dy"',
+    'Note="R%{$\'levels.Master Inquisitive\'//2*5+25}\' May reveal lies from %{$\'levels.Master Inquisitive\'} creatures in 15\' radius for conc or %{$\'levels.Master Inquisitive\'} rd (DC %{14+wisdomModifier} Will neg) 1/dy; may spend 2 Action Points for 2/dy"',
   'Dodge Bonus':'Section=combat Note="+%V AC when unencumbered"',
   'Expert Bull Rush':'Section=combat Note="+%{$\'levels.Warforged Juggernaut\'} bull rush and door breakage"',
   'Extended Charge':'Section=ability Note="+5 speed when charging"',
   'Extreme Action':
-    'Section=ability Note="Retains AP on successful AP roll of 8"',
+    'Section=ability Note="Retains Action Points on successful roll of 8"',
   'Extreme Explorer Feat Bonus':
     'Section=feature Note="%V Extreme Explorer feats"',
-  'Extreme Hustle':'Section=combat Note="May spend 1 AP to gain a move action"',
+  'Extreme Hustle':'Section=combat Note="May spend 1 Action Point to gain a move action"',
   'Ferocity':'Section=combat Note="May continue fighting below 0 HP"',
   'Fierce Will':'Section=save Note="+4 Will while shifting"',
   'Flame Of Censure':
@@ -1099,7 +1215,7 @@ Eberron.FEATURES_ADDED = {
     'Note="R30\' Foes up to %{level-1} HD shaken for 5d6 rounds (DC %{$\'levels.Weretouched Master\'+10+charismaModifier} Will neg)"',
   'Greensinger Damage Reduction':'Section=combat Note="DR 3/cold iron"',
   'Hated Foe':
-    'Section=combat Note="May spend 1 AP for dbl damage against favored enemy"',
+    'Section=combat Note="May spend 1 Action Point for dbl damage against favored enemy"',
   'Heir Of Siberys Feat Bonus':'Section=feature Note="1 Heir Of Siberys feat"',
   'Healing Immunity':'Section=save Note="Unaffected by healing spells"',
   'House Status':
@@ -1156,7 +1272,7 @@ Eberron.FEATURES_ADDED = {
     'Section=combat Note="May trip w/out provoking AOO after successful bite"',
   'True Seeing':
     'Section=magic ' +
-    'Note="May see through 120\' darkness, illusion, and invisibility for %{$\'levels.Master Inquisitive\'} min 1/dy; may spend 2 AP for 2/dy"',
+    'Note="May see through 120\' darkness, illusion, and invisibility for %{$\'levels.Master Inquisitive\'} min 1/dy; may spend 2 Action Points for 2/dy"',
   'Unearthly Grace':'Section=save Note="+%V Fortitude/+%V Reflex/+%V Will"',
   'Warding Flame':
     'Section=combat,feature,save ' +
@@ -1190,7 +1306,7 @@ Eberron.FEATURES_ADDED = {
          '"Can attack w/fangs while shifting"',
   'Zone Of Truth':
     'Section=magic ' +
-    'Note="R%{$\'levels.Master Inquisitive\'//2*5+25}\' May create 20\' radius that prohibits lying for %{$\'levels.Master Inquisitive\'} min (DC %{wisdomModifier+12} Will neg) 1/dy; may spend 2 AP for 2/dy"'
+    'Note="R%{$\'levels.Master Inquisitive\'//2*5+25}\' May create 20\' radius that prohibits lying for %{$\'levels.Master Inquisitive\'} min (DC %{wisdomModifier+12} Will neg) 1/dy; may spend 2 Action Points for 2/dy"'
 
 };
 Eberron.FEATURES = Object.assign({}, SRD35.FEATURES, Eberron.FEATURES_ADDED);
@@ -1848,6 +1964,16 @@ Eberron.magicRules = function(rules, schools, spells) {
 Eberron.talentRules = function(
   rules, feats, features, goodies, languages, skills
 ) {
+  // these lines make defining the Aberrant Dragonmark feats easier
+  let aberrantMarkPowers = [
+    'Burning Hands', 'Cause Fear', 'Charm Person', 'Chill Touch',
+    'Detect Secret Doors', 'Feather Fall', 'Inflict Light Wounds', 'Jump',
+    'Light', 'Pass Without Trace', 'Produce Flame', 'Shield',
+    "Tenser's Floating Disk"
+  ];
+  aberrantMarkPowers.forEach(a => {
+    rules.addChoice('aberrantMarkPowers', a, '');
+  });
   rules.basePlugin.talentRules
     (rules, feats, features, goodies, languages, skills);
   // No changes needed to the rules defined by base method
@@ -2462,7 +2588,10 @@ Eberron.featRulesExtra = function(rules, name) {
 
   let matchInfo;
 
-  if(name == 'Adamantine Body') {
+  if(name.startsWith('Aberrant Dragonmark')) {
+    rules.defineRule
+      ('features.Aberrant Dragonmark', 'features.' + name, '+=', '1');
+  } else if(name == 'Adamantine Body') {
     rules.defineRule('combatNotes.dexterityArmorClassAdjustment',
       'features.Adamantine Body', 'v', '1'
     );
@@ -2639,7 +2768,13 @@ Eberron.featureRules = function(
   }
   rules.basePlugin.featureRules
     (rules, name, sections, notes, spells, spellAbility);
-  // No changes needed to the rules defined by base method
+  // for the Aberrant Dragonmark feats, correct the casterLevel == level
+  // computed by the base featureRules with level // 2
+  if(name.startsWith('Aberrant Dragonmark')) {
+    rules.defineRule('casterLevels.' + name.replace(/[ ()]/g, ''),
+      'level', '=', 'Math.floor(source / 2)'
+    );
+  }
 };
 
 /*
