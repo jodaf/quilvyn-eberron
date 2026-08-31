@@ -86,7 +86,7 @@ var attributes = {
       <tr style="text-align:center">
         <td><b>Feats</b>: Great Fortitude; Mounted Combat</td>
         <td><b>Human Features</b>: Human Feat Bonus; Human Skill Bonus</td>
-        <td><b>Artificer Features</b>: Armor Proficiency (Medium); Artificer Knowledge; Artisan Bonus; Craft Reserve; Disable Trap; Item Creation; Scribe Scroll; Shield Proficiency; Weapon Proficiency (Simple)</td>
+        <td><b>Artificer Features</b>: Armor Proficiency (Light; Medium; Shield); Artificer Knowledge; Artisan Bonus; Craft Reserve; Disable Trap; Item Creation; Scribe Scroll; Weapon Proficiency (Simple Weapons)</td>
       </tr></table>
 </td>
     </tr><tr style="text-align:center">
@@ -175,11 +175,13 @@ var attributes = {
       </tr><tr style="text-align:center">
         <td><i>Intelligence Skill Points Adjustment: +16</i></td>
       </tr><tr style="text-align:center">
-        <td>Artificer Knowledge: Successful +5 DC 15 check determines whether an item is magical</td>
+        <td>Artificer Knowledge: Can make a +5 check against a DC of 15 to determine whether a held item has a magical aura</td>
       </tr><tr style="text-align:center">
-        <td>Artisan Bonus: +2 Use Magic Device on items self can craft</td>
+        <td>Artisan Bonus: +2 Use Magic Device on items corresponding to a known item creation feat</td>
       </tr><tr style="text-align:center">
-        <td>Disable Trap: May use Search and Disable Device to find and remove DC 20+ traps</td>
+        <td>Disable Trap: Can use Search and Disable Device to find and disable DC 20+ traps</td>
+      </tr><tr style="text-align:center">
+        <td>Item Creation: Can use Use Magic Device to satisfy spell (DC 20 + spell level) and other requirements when making a magic item</td>
       </tr></table>
 </td>
     </tr></table>
@@ -203,8 +205,8 @@ var attributes = {
     </tr><tr style="text-align:center">
       <td>      <table id="Proficiencies" style="width:100%">
       <tr style="text-align:center">
-        <td><b>Armor Proficiency</b>: Medium; Shield</td>
-        <td><b>Weapon Proficiency</b>: Simple</td>
+        <td><b>Armor Proficiency</b>: Light; Medium; Shield</td>
+        <td><b>Weapon Proficiency</b>: Simple Weapons</td>
       </tr></table>
 </td>
     </tr><tr style="text-align:center">
@@ -212,7 +214,7 @@ var attributes = {
       <tr style="text-align:center">
         <td><b>Armor</b>: Leather</td>
         <td><b>Shield</b>: None</td>
-        <td><b>Weapons</b>: Battleaxe (-2 d8+3 x3@20); Longbow (-4 d8 x3@20 R100'); Spiked Gauntlet (-2 d4+2 x2@20); Unarmed Strike (+2 d3+2 x2@20)</td>
+        <td><b>Weapons</b>: Battleaxe (-2 d8+3 x3@20); Longbow (-4 d8 x3@20 R100'); Spiked Gauntlet (+2 d4+2 x2@20); Unarmed Strike (+2 d3+2 x2@20)</td>
       </tr></table>
 </td>
     </tr><tr style="text-align:center">
@@ -231,8 +233,6 @@ var attributes = {
         <td><i>Unproficient Weapon Penalty.Battleaxe: -4 attack</i></td>
       </tr><tr style="text-align:center">
         <td><i>Unproficient Weapon Penalty.Longbow: -4 attack</i></td>
-      </tr><tr style="text-align:center">
-        <td><i>Unproficient Weapon Penalty.Spiked Gauntlet: -4 attack</i></td>
       </tr><tr style="text-align:center">
         <td>Mounted Combat: Can use a reaction and a successful Ride skill check (DC foe attack roll) to negate damage to mount once per rd</td>
       </tr></table>
@@ -275,9 +275,7 @@ var attributes = {
     <tr style="text-align:center">
       <td><i>Intelligence Artificer Spell Slot Bonus: Spell level A1, A2, A3, A4</i></td>
     </tr><tr style="text-align:center">
-      <td>Craft Reserve: 20</td>
-    </tr><tr style="text-align:center">
-      <td>Item Creation: Successful +2 DC 20+caster level check creates magic items</td>
+      <td>Craft Reserve: Has a pool of 20 points to use in place of XP when creating magic items</td>
     </tr><tr style="text-align:center">
       <td>Scribe Scroll: Can create scrolls for known spells</td>
     </tr></table>

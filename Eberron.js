@@ -191,15 +191,15 @@ Eberron.CLASSES_ADDED = {
       '"Knowledge (Local)","Knowledge (Shadow)",Listen,"Move Silently",' +
       'Profession,Ride,"Sense Motive","Speak Language",Swim,Tumble ' +
     'Features=' +
-      '"1:Armor Proficiency (Medium)","1:Shield Proficiency",' +
-      '"1:Weapon Proficiency (Simple)",' +
+      '"1:Armor Proficiency (Light; Medium; Shield)",' +
+      '"1:Weapon Proficiency (Simple Weapons)",' +
       '"1:Artificer Knowledge","1:Artisan Bonus","1:Craft Reserve",' +
       '"1:Disable Trap","1:Item Creation","1:Scribe Scroll","2:Brew Potion",' +
-      '"3:Craft Wondrous Item","4:Artificer Feat Bonus","4:Craft Homunculus",' +
-      '"5:Craft Magic Arms And Armor","5:Retain Essence",' +
-      '"6:Metamagic Spell Trigger","7:Craft Wand","9:Craft Rod",' +
-      '"11:Metamagic Spell Completion","12:Craft Staff",' +
-      '"13:Artificer Skill Mastery","14:Forge Ring" ' +
+      '"3:Craft Wondrous Item","4:Bonus Feats (Artificer)",' +
+      '"4:Craft Homunculus","5:Craft Magic Arms And Armor",' +
+      '"5:Retain Essence","6:Metamagic Spell Trigger","7:Craft Wand",' +
+      '"9:Craft Rod","11:Metamagic Spell Completion","12:Craft Staff",' +
+      '"13:Skill Mastery (Artificer)","14:Forge Ring" ' +
     'Skills=' +
       'Appraise,Concentration,Craft,"Disable Device","Knowledge (Arcana)",' +
       '"Knowledge (Engineering)","Knowledge (Planes)","Open Lock",' +
@@ -681,33 +681,125 @@ Eberron.FEATS_ADDED = {
 Eberron.FEATS = Object.assign({}, SRD35.FEATS, Eberron.FEATS_ADDED);
 Eberron.FEATURES_ADDED = {
 
-  // Class
-  'Artificer Feat Bonus':'Section=feature Note="%V Artificer feats"',
+  // Race
+
+  // Changeling
+  'Changeling Resistances':'Section=save Note="+2 vs. charm and sleep effects"',
+  'Intuitive':'Section=skill Note="+2 Bluff/+2 Intimidate/+2 Sense Motive"',
+  'Minor Shape Change':
+    'Section=skill ' +
+    'Note="Can use a full-round action to make minor alterations to appearance, gaining +10 to Disguise"',
+  'Natural Linguist':'Section=skill Note="Speak Language is a class skill"',
+
+  // Kalashtar
+  'Dreamless':
+    'Section=save ' +
+    'Note="Immune to <i>Dream</i>, <i>Nightmare</i>, and other effects that target dreams"',
+  'Human-Like':'Section=skill Note="+2 Disguise (human)"',
+  'Kalashtar Resistances':
+    'Section=save Note="+2 vs. mind-altering effects and possession"',
+  'Mindlink':
+    'Section=magic ' +
+    'Note="R30\' Can use telepathy with a willing target with at least 3 Intelligence for %{level//2>?1} rd once per day"',
+  'Naturally Psionic':'Section=magic Note="+%{level} Power Points"',
+  'Social Mastery':'Section=skill Note="+2 Bluff/+2 Diplomacy/+2 Intimidate"',
+
+  // Shifter
+  'Animalistic Heritage':'Section=skill Note="+2 Balance/+2 Climb/+2 Jump"',
+  'Beasthide':
+    'Section=ability,combat ' +
+    'Note=' +
+      '"+2 Constitution while shifting",' +
+      '"+%V natural armor bonus to Armor Class while shifting"',
+  'Cliffwalk':
+    'Section=ability ' +
+    'Note="+2 Dexterity and has a %V\' climb Speed while shifting"',
+  'Longstride':
+    'Section=ability Note="+2 Dexterity and +%V\' Speed while shifting"',
+  'Longtooth':
+    'Section=ability,combat ' +
+    'Note=' +
+      '"+2 Strength while shifting",' +
+      '"Can attack with fangs once per rd while shifting"',
+  'Low-Light Vision':SRD35.FEATURES['Low-Light Vision'],
+  'Razorclaw':
+    'Section=ability,combat ' +
+    'Note=' +
+      '"+2 Strength while shifting",' +
+      '"Can attack with claws once per rd while shifting"',
+  'Shifter Ability Adjustment':
+    'Section=ability Note="+2 Dexterity/-2 Intelligence/-2 Charisma"',
+  'Shifting':'Section=feature Note="Can use Shifter traits for %{constitutionModifier+3+(sumShifterFeats||0)} rd %{(sumShifterFeats||0)>1?sumShifterFeats//2+1+\' times\':\'once\'} per day"',
+  'Wildhunt':
+    'Section=ability,skill,skill ' +
+    'Note=' +
+      '"+2 Constitution while shifting",' +
+      '"+2 Survival",' +
+      '"R30\' Can detect creature presence and track by smell"',
+
+  // Warforged
+  'Composite Plating':
+    'Section=combat Note="Attached plating prohibits weaing additional armor"',
+  'Inherently Stable':
+    'Section=combat ' +
+    'Note="Can perform strenuous activity when at 0 hit points and suffers no additional loss at negative hit points unless further damaged"',
+  'Living Construct':
+    'Section=save ' +
+    'Note="Affected by spells that target living creatures and those that target constructs/Has no need to breathe, eat, or sleep"',
+  'Hard To Heal':
+    'Section=combat ' +
+    'Note="Does not heal damage naturally and gains half effects from healing spells, but gains full effects from repair spells"',
+  'Light Fortification':
+    'Section=combat ' +
+    'Note="25% chance of negating critical hits and sneak attacks"',
+  'Slam Weapon':'Section=combat Note="Can attack with a slam"',
+  'Warforged Ability Adjustment':
+    'Section=ability Note="+2 Constitution/-2 Wisdom/-2 Charisma"',
+  'Warforged Immunities':
+    'Section=save ' +
+    'Note="Immune to poison, sleep, paralysis, disease, nausea, fatigue, exhaustion, sickening, and energy drain"',
+  'Warforged Vulnerabilities':
+    'Section=save Note="Affected by effects that target wood or metal"',
+
+  // Class - Artificer
+  'Bonus Feats (Artificer)':'Section=feature Note="+%V Artificer Feats"',
   'Artificer Knowledge':
     'Section=skill ' +
-    'Note="Successful +%{levels.Artificer+intelligenceModifier} DC 15 check determines whether an item is magical"',
-  'Artificer Skill Mastery':
-    'Section=skill ' +
-    'Note="May take 10 on Spellcraft or Use Magic Device when distracted"',
+    'Note="Can make a +%{levels.Artificer+intelligenceModifier} check against a DC of 15 to determine whether a held item has a magical aura"',
   'Artisan Bonus':
-    'Section=skill Note="+2 Use Magic Device on items self can craft"',
-  'Craft Homunculus':
-    'Section=magic Note="May create a small homunculus w/up to %{level-2} HD"',
-  'Craft Reserve':
-    'Section=magic Note=%V',
-  'Disable Trap':
     'Section=skill ' +
-    'Note="May use Search and Disable Device to find and remove DC 20+ traps"',
-  'Item Creation':
+    'Note="+2 Use Magic Device on items corresponding to a known item creation feat"',
+  'Brew Potion':SRD35.FEATURES['Brew Potion'],
+  'Craft Homunculus':
     'Section=magic ' +
-    'Note="Successful +2 DC 20+caster level check creates magic items"',
+    'Note="Can create a Small homunculus with up to %{level-2} Hit Dice"',
+  'Craft Magic Arms And Armor':SRD35.FEATURES['Craft Magic Arms And Armor'],
+  'Craft Reserve':
+    'Section=magic ' +
+    'Note="Has a pool of %V points to use in place of XP when creating magic items"',
+  'Craft Rod':SRD35.FEATURES['Craft Rod'],
+  'Craft Staff':SRD35.FEATURES['Craft Staff'],
+  'Craft Wand':SRD35.FEATURES['Craft Wand'],
+  'Craft Wondrous Item':SRD35.FEATURES['Craft Wondrous Item'],
+  'Disable Trap':SRD35.FEATURES['Trapfinding'],
+  'Forge Ring':SRD35.FEATURES['Forge Ring'],
+  'Item Creation':
+    'Section=skill ' +
+    'Note="Can use Use Magic Device to satisfy spell (DC 20 + spell level) and other requirements when making a magic item"',
   'Metamagic Spell Completion':
     'Section=skill ' +
-    'Note="Successful DC 20 + 3x modified spell level Use Magic Device applies metamagic feat to spell from scroll %{intelligenceModifier+3}/dy"',
+    'Note="Can apply known metamagic feats to a spell cast from a scroll or another spell completion item with a successful DC 20 + 3x the modified spell level Use Magic Device %{intelligenceModifier+3} times per day"',
   'Metamagic Spell Trigger':
-    'Section=magic Note="May apply metamagic feats to spells cast from wands"',
+    'Section=magic ' +
+    'Note="Can apply known metamagic feats to a spell cast from a wand or another spell trigger item by spending additional charges"',
   'Retain Essence':
-    'Section=magic Note="May drain magic item XP into craft reserve"',
+    'Section=magic ' +
+    'Note="Can destroy a magic item to drain any remaining XP used to charge it into craft reserve"',
+  'Scribe Scroll':SRD35.FEATURES['Scribe Scroll'],
+  'Skill Mastery (Artificer)':
+    'Section=skill ' +
+    'Note="Can take 10 on Spellcraft and Use Magic Device when distracted"',
+
 
   // Domain
   'Add Life':
@@ -939,86 +1031,6 @@ Eberron.FEATURES_ADDED = {
   'Warder':'Section=skill Note="+2 Search"',
   'Whirling Steel Strike':
     'Section=combat Note="May use Flurry Of Blows w/longsword"',
-
-  // Race
-
-  // Changeling
-  'Changeling Resistances':'Section=save Note="+2 vs. charm and sleep effects"',
-  'Intuitive':'Section=skill Note="+2 Bluff/+2 Intimidate/+2 Sense Motive"',
-  'Minor Shape Change':
-    'Section=skill ' +
-    'Note="Can use a full-round action to make minor alterations to appearance, gaining +10 to Disguise"',
-  'Natural Linguist':'Section=skill Note="Speak Language is a class skill"',
-
-  // Kalashtar
-  'Dreamless':
-    'Section=save ' +
-    'Note="Immune to <i>Dream</i>, <i>Nightmare</i>, and other effects that target dreams"',
-  'Human-Like':'Section=skill Note="+2 Disguise (human)"',
-  'Kalashtar Resistances':
-    'Section=save Note="+2 vs. mind-altering effects and possession"',
-  'Mindlink':
-    'Section=magic ' +
-    'Note="R30\' Can use telepathy with a willing target with at least 3 Intelligence for %{level//2>?1} rd once per day"',
-  'Naturally Psionic':'Section=magic Note="+%{level} Power Points"',
-  'Social Mastery':'Section=skill Note="+2 Bluff/+2 Diplomacy/+2 Intimidate"',
-
-  // Shifter
-  'Animalistic Heritage':'Section=skill Note="+2 Balance/+2 Climb/+2 Jump"',
-  'Beasthide':
-    'Section=ability,combat ' +
-    'Note=' +
-      '"+2 Constitution while shifting",' +
-      '"+%V natural armor bonus to Armor Class while shifting"',
-  'Cliffwalk':
-    'Section=ability ' +
-    'Note="+2 Dexterity and has a %V\' climb Speed while shifting"',
-  'Longstride':
-    'Section=ability Note="+2 Dexterity and +%V\' Speed while shifting"',
-  'Longtooth':
-    'Section=ability,combat ' +
-    'Note=' +
-      '"+2 Strength while shifting",' +
-      '"Can attack with fangs once per rd while shifting"',
-  'Low-Light Vision':SRD35.FEATURES['Low-Light Vision'],
-  'Razorclaw':
-    'Section=ability,combat ' +
-    'Note=' +
-      '"+2 Strength while shifting",' +
-      '"Can attack with claws once per rd while shifting"',
-  'Shifter Ability Adjustment':
-    'Section=ability Note="+2 Dexterity/-2 Intelligence/-2 Charisma"',
-  'Shifting':'Section=feature Note="Can use Shifter traits for %{constitutionModifier+3+(sumShifterFeats||0)} rd %{(sumShifterFeats||0)>1?sumShifterFeats//2+1+\' times\':\'once\'} per day"',
-  'Wildhunt':
-    'Section=ability,skill,skill ' +
-    'Note=' +
-      '"+2 Constitution while shifting",' +
-      '"+2 Survival",' +
-      '"R30\' Can detect creature presence and track by smell"',
-
-  // Warforged
-  'Composite Plating':
-    'Section=combat Note="Attached plating prohibits weaing additional armor"',
-  'Inherently Stable':
-    'Section=combat ' +
-    'Note="Can perform strenuous activity when at 0 hit points and suffers no additional loss at negative hit points unless further damaged"',
-  'Living Construct':
-    'Section=save ' +
-    'Note="Affected by spells that target living creatures and those that target constructs/Has no need to breathe, eat, or sleep"',
-  'Hard To Heal':
-    'Section=combat ' +
-    'Note="Does not heal damage naturally and gains half effects from healing spells, but gains full effects from repair spells"',
-  'Light Fortification':
-    'Section=combat ' +
-    'Note="25% chance of negating critical hits and sneak attacks"',
-  'Slam Weapon':'Section=combat Note="Can attack with a slam"',
-  'Warforged Ability Adjustment':
-    'Section=ability Note="+2 Constitution/-2 Wisdom/-2 Charisma"',
-  'Warforged Immunities':
-    'Section=save ' +
-    'Note="Immune to poison, sleep, paralysis, disease, nausea, fatigue, exhaustion, sickening, and energy drain"',
-  'Warforged Vulnerabilities':
-    'Section=save Note="Affected by effects that target wood or metal"',
 
   // Prestige classes
   'Additional Action Points':'Section=ability Note="+2 AP"',
@@ -2133,8 +2145,8 @@ Eberron.classRulesExtra = function(rules, name) {
         allFeats[feat] = allFeats[feat].replace('Type=', 'Type=Artificer,');
     }
     rules.defineRule
-      ('featCount.Artificer', 'featureNotes.artificerFeatBonus', '=', null);
-    rules.defineRule('featureNotes.artificerFeatBonus',
+      ('featCount.Artificer', 'featureNotes.bonusFeats(Artificer)', '+=', null);
+    rules.defineRule('featureNotes.bonusFeats(Artificer)',
       'levels.Artificer', '=', 'Math.floor(source / 4)'
     );
     rules.defineRule('magicNotes.craftReserve',

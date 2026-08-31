@@ -115,13 +115,13 @@ var attributes = {
         <td><b>Feats</b>: Attune Magic Weapon; Bind Elemental; Blind-Fight; Education; Exceptional Artisan; Extend Spell; Extra Rings; Extraordinary Artisan; Maximize Spell; Quicken Spell; Research; Still Spell; Wand Mastery</td>
         <td><b>Vadalis Features</b>: Handler</td>
         <td><b>Human Features</b>: Human Feat Bonus; Human Skill Bonus</td>
-        <td><b>Artificer Features</b>: Armor Proficiency (Medium); Artificer Feat Bonus; Artificer Knowledge; Artificer Skill Mastery; Artisan Bonus; Brew Potion; Craft Homunculus; Craft Magic Arms And Armor; Craft Reserve; Craft Rod; Craft Staff; Craft Wand; Craft Wondrous Item; Disable Trap; Forge Ring; Item Creation; Metamagic Spell Completion; Metamagic Spell Trigger; Retain Essence; Scribe Scroll; Shield Proficiency; Weapon Proficiency (Simple)</td>
+        <td><b>Artificer Features</b>: Armor Proficiency (Light; Medium; Shield); Artificer Knowledge; Artisan Bonus; Bonus Feats (Artificer); Brew Potion; Craft Homunculus; Craft Magic Arms And Armor; Craft Reserve; Craft Rod; Craft Staff; Craft Wand; Craft Wondrous Item; Disable Trap; Forge Ring; Item Creation; Metamagic Spell Completion; Metamagic Spell Trigger; Retain Essence; Scribe Scroll; Skill Mastery (Artificer); Weapon Proficiency (Simple Weapons)</td>
       </tr></table>
 </td>
     </tr><tr style="text-align:center">
       <td><b>Feature Notes</b>:       <table id="FeatureNotes" style="width:100%">
       <tr style="text-align:center">
-        <td><i>Artificer Feat Bonus: 5 Artificer feats</i></td>
+        <td><i>Bonus Feats (Artificer): +5 Artificer Feats</i></td>
       </tr><tr style="text-align:center">
         <td><i>Human Feat Bonus: +1 General Feat</i></td>
       </tr></table>
@@ -174,21 +174,23 @@ var attributes = {
       </tr><tr style="text-align:center">
         <td><i>Survival Synergy: +2 Knowledge (Nature)</i></td>
       </tr><tr style="text-align:center">
-        <td>Artificer Knowledge: Successful +23 DC 15 check determines whether an item is magical</td>
+        <td>Artificer Knowledge: Can make a +23 check against a DC of 15 to determine whether a held item has a magical aura</td>
       </tr><tr style="text-align:center">
-        <td>Artificer Skill Mastery: May take 10 on Spellcraft or Use Magic Device when distracted</td>
-      </tr><tr style="text-align:center">
-        <td>Artisan Bonus: +2 Use Magic Device on items self can craft</td>
+        <td>Artisan Bonus: +2 Use Magic Device on items corresponding to a known item creation feat</td>
       </tr><tr style="text-align:center">
         <td>Craft (Armor) Synergy: +2 Appraise (related)</td>
       </tr><tr style="text-align:center">
-        <td>Disable Trap: May use Search and Disable Device to find and remove DC 20+ traps</td>
+        <td>Disable Trap: Can use Search and Disable Device to find and disable DC 20+ traps</td>
+      </tr><tr style="text-align:center">
+        <td>Item Creation: Can use Use Magic Device to satisfy spell (DC 20 + spell level) and other requirements when making a magic item</td>
       </tr><tr style="text-align:center">
         <td>Knowledge (Nature) Synergy: +2 Survival (outdoors)</td>
       </tr><tr style="text-align:center">
-        <td>Metamagic Spell Completion: Successful DC 20 + 3x modified spell level Use Magic Device applies metamagic feat to spell from scroll 6/dy</td>
+        <td>Metamagic Spell Completion: Can apply known metamagic feats to a spell cast from a scroll or another spell completion item with a successful DC 20 + 3x the modified spell level Use Magic Device 6 times per day</td>
       </tr><tr style="text-align:center">
         <td>Research: May use Knowledge skill on library and records</td>
+      </tr><tr style="text-align:center">
+        <td>Skill Mastery (Artificer): Can take 10 on Spellcraft and Use Magic Device when distracted</td>
       </tr><tr style="text-align:center">
         <td>Use Magic Device Synergy: +2 Spellcraft (scroll)</td>
       </tr></table>
@@ -214,8 +216,8 @@ var attributes = {
     </tr><tr style="text-align:center">
       <td>      <table id="Proficiencies" style="width:100%">
       <tr style="text-align:center">
-        <td><b>Armor Proficiency</b>: Medium; Shield</td>
-        <td><b>Weapon Proficiency</b>: Simple</td>
+        <td><b>Armor Proficiency</b>: Light; Medium; Shield</td>
+        <td><b>Weapon Proficiency</b>: Simple Weapons</td>
       </tr></table>
 </td>
     </tr><tr style="text-align:center">
@@ -406,11 +408,11 @@ var attributes = {
     </tr><tr style="text-align:center">
       <td>Brew Potion: Can create potions for known, targeted spells of up to 3rd level</td>
     </tr><tr style="text-align:center">
-      <td>Craft Homunculus: May create a small homunculus w/up to 18 HD</td>
+      <td>Craft Homunculus: Can create a Small homunculus with up to 18 Hit Dice</td>
     </tr><tr style="text-align:center">
       <td>Craft Magic Arms And Armor: Can create and mend magic weapons, armor, and shields</td>
     </tr><tr style="text-align:center">
-      <td>Craft Reserve: 5000</td>
+      <td>Craft Reserve: Has a pool of 5000 points to use in place of XP when creating magic items</td>
     </tr><tr style="text-align:center">
       <td>Craft Rod: Can create magic rods</td>
     </tr><tr style="text-align:center">
@@ -430,15 +432,13 @@ var attributes = {
     </tr><tr style="text-align:center">
       <td>Forge Ring: Can create and mend magic rings</td>
     </tr><tr style="text-align:center">
-      <td>Item Creation: Successful +2 DC 20+caster level check creates magic items</td>
-    </tr><tr style="text-align:center">
       <td>Maximize Spell: Can cast a spell using a spell slot 3 levels higher than normal to maximize all of its variable effects</td>
     </tr><tr style="text-align:center">
-      <td>Metamagic Spell Trigger: May apply metamagic feats to spells cast from wands</td>
+      <td>Metamagic Spell Trigger: Can apply known metamagic feats to a spell cast from a wand or another spell trigger item by spending additional charges</td>
     </tr><tr style="text-align:center">
       <td>Quicken Spell: Once per rd, can cast a spell with a casting time of up to 1 rd as a free action, using a spell slot 4 levels higher than normal</td>
     </tr><tr style="text-align:center">
-      <td>Retain Essence: May drain magic item XP into craft reserve</td>
+      <td>Retain Essence: Can destroy a magic item to drain any remaining XP used to charge it into craft reserve</td>
     </tr><tr style="text-align:center">
       <td>Scribe Scroll: Can create scrolls for known spells</td>
     </tr><tr style="text-align:center">

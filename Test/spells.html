@@ -111,7 +111,7 @@ var attributes = {
         <td><b>Feats</b>: Gatekeeper Initiate; Improved Unarmed Strike; Least Dragonmark; Skill Focus (Knowledge (Planes))</td>
         <td><b>Orien Features</b>: Traveler</td>
         <td><b>Human Features</b>: Human Feat Bonus; Human Skill Bonus</td>
-        <td><b>Artificer Features</b>: Armor Proficiency (Medium); Artificer Knowledge; Artisan Bonus; Brew Potion; Craft Reserve; Disable Trap; Item Creation; Scribe Scroll; Shield Proficiency; Weapon Proficiency (Simple)</td>
+        <td><b>Artificer Features</b>: Armor Proficiency (Light; Medium; Shield); Artificer Knowledge; Artisan Bonus; Brew Potion; Craft Reserve; Disable Trap; Item Creation; Scribe Scroll; Weapon Proficiency (Simple Weapons)</td>
         <td><b>Druid Features</b>: Animal Companion; Armor Proficiency (Light; Medium; Shield); Nature Sense; Spontaneous Casting (Druid); Weapon Proficiency (Club; Dagger; Dart; Quarterstaff; Scimitar; Sickle; Shortspear; Sling; Spear); Wild Empathy; Woodland Stride</td>
         <td><b>Cleric Features</b>: Armor Proficiency (Light; Medium; Heavy; Shield); Artifice Domain; Artifice Master; Aura; Empowered Creation; Empowered Good; Good Domain; Spontaneous Casting (Cleric); Turn Undead; Weapon Proficiency (Simple Weapons)</td>
       </tr></table>
@@ -184,13 +184,15 @@ var attributes = {
       </tr><tr style="text-align:center">
         <td><i>Traveler: +2 Survival</i></td>
       </tr><tr style="text-align:center">
-        <td>Artificer Knowledge: Successful +3 DC 15 check determines whether an item is magical</td>
+        <td>Artificer Knowledge: Can make a +3 check against a DC of 15 to determine whether a held item has a magical aura</td>
       </tr><tr style="text-align:center">
-        <td>Artisan Bonus: +2 Use Magic Device on items self can craft</td>
+        <td>Artisan Bonus: +2 Use Magic Device on items corresponding to a known item creation feat</td>
       </tr><tr style="text-align:center">
         <td>Craft (Alchemy) Synergy: +2 Appraise (related)</td>
       </tr><tr style="text-align:center">
-        <td>Disable Trap: May use Search and Disable Device to find and remove DC 20+ traps</td>
+        <td>Disable Trap: Can use Search and Disable Device to find and disable DC 20+ traps</td>
+      </tr><tr style="text-align:center">
+        <td>Item Creation: Can use Use Magic Device to satisfy spell (DC 20 + spell level) and other requirements when making a magic item</td>
       </tr><tr style="text-align:center">
         <td>Link: +4 Handle Animal and Wild Empathy with companion, and can command companion as a free action</td>
       </tr><tr style="text-align:center">
@@ -221,7 +223,7 @@ var attributes = {
       <td>      <table id="Proficiencies" style="width:100%">
       <tr style="text-align:center">
         <td><b>Armor Proficiency</b>: Heavy; Light; Medium; Shield</td>
-        <td><b>Weapon Proficiency</b>: Club; Dagger; Dart; Quarterstaff; Scimitar; Shortspear; Sickle; Simple Weapons; Simple; Sling; Spear</td>
+        <td><b>Weapon Proficiency</b>: Club; Dagger; Dart; Quarterstaff; Scimitar; Shortspear; Sickle; Simple Weapons; Sling; Spear</td>
       </tr></table>
 </td>
     </tr><tr style="text-align:center">
@@ -400,15 +402,13 @@ var attributes = {
     </tr><tr style="text-align:center">
       <td>Brew Potion: Can create potions for known, targeted spells of up to 3rd level</td>
     </tr><tr style="text-align:center">
-      <td>Craft Reserve: 40</td>
+      <td>Craft Reserve: Has a pool of 40 points to use in place of XP when creating magic items</td>
     </tr><tr style="text-align:center">
       <td>Empowered Creation: +1 caster level on Item Creation spells</td>
     </tr><tr style="text-align:center">
       <td>Empowered Good: +1 caster level on Good spells</td>
     </tr><tr style="text-align:center">
       <td>Gatekeeper Initiate: Has access to additional spells</td>
-    </tr><tr style="text-align:center">
-      <td>Item Creation: Successful +2 DC 20+caster level check creates magic items</td>
     </tr><tr style="text-align:center">
       <td>Scribe Scroll: Can create scrolls for known spells</td>
     </tr><tr style="text-align:center">
