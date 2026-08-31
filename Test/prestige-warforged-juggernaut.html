@@ -88,19 +88,13 @@ var attributes = {
       <td>      <table id="FeatLists" style="width:100%">
       <tr style="text-align:center">
         <td><b>Feats</b>: Adamantine Body; Improved Bull Rush; Improved Shield Bash; Improved Unarmed Strike; Lightning Reflexes; Point-Blank Shot; Power Attack</td>
-        <td><b>Warforged Features</b>: Composite Plating; Light Fortification; Mechanized; Slam Weapon; Stable; Unhealing; Warforged Ability Adjustment; Warforged Immunity; Warforged Vulnerability</td>
+        <td><b>Warforged Features</b>: Composite Plating; Hard To Heal; Inherenty Stable; Light Fortification; Living Construct; Slam Weapon; Warforged Ability Adjustment; Warforged Immunities; Warforged Vulnerabilities</td>
         <td><b>Warforged Juggernaut Features</b>: Armor Spikes; Charge Bonus; Construct Perfection I; Construct Perfection II; Construct Perfection III; Construct Perfection IV; Expert Bull Rush; Extended Charge; Greater Powerful Charge; Healing Immunity; Powerful Charge; Reserved; Superior Bull Rush</td>
         <td><b>Fighter Features</b>: Armor Proficiency (Light; Medium; Heavy; Shield; Tower Shield); Bonus Feat (Fighter); Weapon Proficiency (Simple Weapons; Martial Weapons)</td>
       </tr></table>
 </td>
     </tr><tr style="text-align:center">
-      <td><b>Feature Notes</b>:       <table id="FeatureNotes" style="width:100%">
-      <tr style="text-align:center">
-        <td><i>Bonus Feat (Fighter): +3 Fighter Feats</i></td>
-      </tr><tr style="text-align:center">
-        <td>Mechanized: Has no need to breathe, eat, or sleep</td>
-      </tr></table>
-</td>
+      <td><b>Feature Notes</b>: <i>Bonus Feat (Fighter): +3 Fighter Feats</i></td>
     </tr></table>
 </td>
   </tr><tr style="text-align:center">
@@ -114,14 +108,14 @@ var attributes = {
       <col style="width:34%"/>
       <tr style="text-align:left">
         <td>Craft (Bows): (int) 13 (+14)</td>
-        <td>Move Silently: (dex;cc) 4 (+2)</td>
-        <td>Swim: (str) 6 (+9)</td>
+        <td>Move Silently: (dex;cc) 4 (+0)</td>
+        <td>Swim: (str) 6 (+5)</td>
       </tr><tr style="text-align:left">
         <td>Disguise: (cha;cc) 2 (+1)</td>
         <td>Perform (Act): (cha;cc) 6 (+3)</td>
         <td></td>
       </tr><tr style="text-align:left">
-        <td>Jump: (str) 2 (-1)</td>
+        <td>Jump: (str) 2 (-3)</td>
         <td>Spot: (wis;cc) 12 (+7)</td>
         <td></td>
       </tr></table>
@@ -131,6 +125,10 @@ var attributes = {
     </tr><tr style="text-align:center">
       <td><b>Skill Notes</b>:       <table id="SkillNotes" style="width:100%">
       <tr style="text-align:center">
+        <td><i>Armor Skill Check Penalty: -2 Balance/-2 Climb/-2 Escape Artist/-2 Hide/-2 Jump/-2 Move Silently/-2 Sleight Of Hand/-2 Tumble</i></td>
+      </tr><tr style="text-align:center">
+        <td><i>Armor Swim Check Penalty: -4 Swim</i></td>
+      </tr><tr style="text-align:center">
         <td><i>Intelligence Language Adjustment: +1</i></td>
       </tr><tr style="text-align:center">
         <td><i>Intelligence Skill Points Adjustment: +13</i></td>
@@ -155,7 +153,7 @@ var attributes = {
       <tr style="text-align:center">
         <td><b>Hit Points</b>: 90</td>
         <td><b>Initiative</b>: +0</td>
-        <td><b>AC/Touch/Flat</b>: 20/18/20</td>
+        <td><b>AC/Touch/Flat</b>: 20/16/20</td>
         <td><b>Damage Reduction</b>: 2/Adamantine</td>
         <td><b>Attacks Per Round</b>: 2</td>
         <td><b>Base/Melee/Ranged Attack</b>: +8/+11/+8</td>
@@ -171,7 +169,7 @@ var attributes = {
     </tr><tr style="text-align:center">
       <td>      <table id="Gear" style="width:100%">
       <tr style="text-align:center">
-        <td><b>Armor</b>: None</td>
+        <td><b>Armor</b>: Composite Plating</td>
         <td><b>Shield</b>: Heavy Steel</td>
         <td><b>Weapons</b>: Light Hammer (+11 d4+3 x2@20 R20'); Morningstar (+11 d8+3 x2@20); Slam (+11 d4+3 x2@20); Sling (+8 d4+3 x2@20 R50'); Unarmed Strike (+11 d3+3 x2@20)</td>
       </tr></table>
@@ -181,15 +179,13 @@ var attributes = {
       <tr style="text-align:center">
         <td><i>Adamantine Body: +6 AC/DR 2/adamantine</i></td>
       </tr><tr style="text-align:center">
-        <td><i>Armor Class Modifiers: Armor +0; Deflection +0; Dexterity +0; Dodge +0; Natural Armor +0; Shield +2; Size +0</i></td>
-      </tr><tr style="text-align:center">
-        <td><i>Composite Plating: +2 AC/Cannot wear armor</i></td>
+        <td><i>Armor Class Modifiers: Armor +2; Deflection +0; Dexterity +0; Dodge +0; Natural Armor +0; Shield +2; Size +0</i></td>
       </tr><tr style="text-align:center">
         <td><i>Constitution Hit Points Adjustment: +20</i></td>
       </tr><tr style="text-align:center">
         <td><i>Greater Powerful Charge: Raises Powerful Charge damage one size category to 2d6</i></td>
       </tr><tr style="text-align:center">
-        <td><i>Slam Weapon: Can attack w/slam</i></td>
+        <td><i>Slam Weapon: Can attack with a slam</i></td>
       </tr><tr style="text-align:center">
         <td><i>Strength Attack Adjustment: +3</i></td>
       </tr><tr style="text-align:center">
@@ -199,9 +195,13 @@ var attributes = {
       </tr><tr style="text-align:center">
         <td>Charge Bonus: +2 attack when charging</td>
       </tr><tr style="text-align:center">
+        <td>Composite Plating: Attached plating prohibits weaing additional armor</td>
+      </tr><tr style="text-align:center">
         <td>Construct Perfection I: Immune to nonlethal damage and critical hits</td>
       </tr><tr style="text-align:center">
         <td>Expert Bull Rush: +5 bull rush and door breakage</td>
+      </tr><tr style="text-align:center">
+        <td>Hard To Heal: Does not heal damage naturally and gains half effects from healing spells, but gains full effects from repair spells</td>
       </tr><tr style="text-align:center">
         <td>Improved Bull Rush: +4 on Bull Rush attempts, and they provoke no AOO from the target</td>
       </tr><tr style="text-align:center">
@@ -217,11 +217,7 @@ var attributes = {
       </tr><tr style="text-align:center">
         <td>Powerful Charge: Successful charge inflicts +2d6 HP</td>
       </tr><tr style="text-align:center">
-        <td>Stable: May perform strenuous activity at 0 HP; suffers no additional loss at negative HP</td>
-      </tr><tr style="text-align:center">
         <td>Superior Bull Rush: Inflicts +1d8+3 HP from bull rush</td>
-      </tr><tr style="text-align:center">
-        <td>Unhealing: Does not heal damage naturally; gains half effects from healing spells</td>
       </tr></table>
 </td>
     </tr><tr style="text-align:center">
@@ -247,9 +243,11 @@ var attributes = {
       </tr><tr style="text-align:center">
         <td>Healing Immunity: Unaffected by healing spells</td>
       </tr><tr style="text-align:center">
-        <td>Warforged Immunity: Immune to poison, sleep, paralysis, disease, nausea, fatigue, exhaustion, sickening, and energy drain</td>
+        <td>Living Construct: Affected by spells that target living creatures and those that target constructs/Has no need to breathe, eat, or sleep</td>
       </tr><tr style="text-align:center">
-        <td>Warforged Vulnerability: Affected by effects that target wood or metal</td>
+        <td>Warforged Immunities: Immune to poison, sleep, paralysis, disease, nausea, fatigue, exhaustion, sickening, and energy drain</td>
+      </tr><tr style="text-align:center">
+        <td>Warforged Vulnerabilities: Affected by effects that target wood or metal</td>
       </tr></table>
 </td>
     </tr></table>

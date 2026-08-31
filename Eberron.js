@@ -941,64 +941,84 @@ Eberron.FEATURES_ADDED = {
     'Section=combat Note="May use Flurry Of Blows w/longsword"',
 
   // Race
+
+  // Changeling
+  'Changeling Resistances':'Section=save Note="+2 vs. charm and sleep effects"',
+  'Intuitive':'Section=skill Note="+2 Bluff/+2 Intimidate/+2 Sense Motive"',
+  'Minor Shape Change':
+    'Section=skill ' +
+    'Note="Can use a full-round action to make minor alterations to appearance, gaining +10 to Disguise"',
+  'Natural Linguist':'Section=skill Note="Speak Language is a class skill"',
+
+  // Kalashtar
+  'Dreamless':
+    'Section=save ' +
+    'Note="Immune to <i>Dream</i>, <i>Nightmare</i>, and other effects that target dreams"',
+  'Human-Like':'Section=skill Note="+2 Disguise (human)"',
+  'Kalashtar Resistances':
+    'Section=save Note="+2 vs. mind-altering effects and possession"',
+  'Mindlink':
+    'Section=magic ' +
+    'Note="R30\' Can use telepathy with a willing target with at least 3 Intelligence for %{level//2>?1} rd once per day"',
+  'Naturally Psionic':'Section=magic Note="+%{level} Power Points"',
+  'Social Mastery':'Section=skill Note="+2 Bluff/+2 Diplomacy/+2 Intimidate"',
+
+  // Shifter
+  'Animalistic Heritage':'Section=skill Note="+2 Balance/+2 Climb/+2 Jump"',
   'Beasthide':
     'Section=ability,combat ' +
-    'Note="+2 Constitution while shifting",' +
-         '"+%V AC while shifting"',
+    'Note=' +
+      '"+2 Constitution while shifting",' +
+      '"+%V natural armor bonus to Armor Class while shifting"',
   'Cliffwalk':
-    'Section=ability Note="+2 Dexterity and %V\' climb speed while shifting"',
-  'Composite Plating':'Section=combat Note="+2 AC/Cannot wear armor"',
-  'Deceptive':'Section=skill Note="+2 Bluff/+2 Intimidate"',
-  'Dreamless':'Section=save Note="Immune to <i>Dream</i> and <i>Nightmare</i>"',
-  'Humanlike':'Section=skill Note="+2 Disguise (human)"',
-  'Influential':'Section=skill Note="+2 Bluff/+2 Diplomacy/+2 Intimidate"',
-  'Intuitive':'Section=skill Note="+2 Sense Motive"',
-  'Light Fortification':
-    'Section=combat ' +
-    'Note="25% chance of negating critical hits and sneak attacks"',
+    'Section=ability ' +
+    'Note="+2 Dexterity and has a %V\' climb Speed while shifting"',
   'Longstride':
     'Section=ability Note="+2 Dexterity and +%V\' Speed while shifting"',
   'Longtooth':
     'Section=ability,combat ' +
-    'Note="+2 Strength while shifting",' +
-         '"Can attack w/fangs while shifting"',
-  'Mechanized':'Section=feature Note="Has no need to breathe, eat, or sleep"',
-  'Mindlink':
-    'Section=magic ' +
-    'Note="R30\' May use telepathy with willing target for %{level//2>?1} rd 1/dy"',
-  'Minor Shape Change':
-    'Section=magic Note="May use <i>Disguise Self</i> effects on body at will"',
-  'Natural Psionic':'Section=magic Note="+1 PP each level"',
-  'Natural Linguist':'Section=skill Note="Speak Language is a class skill"',
+    'Note=' +
+      '"+2 Strength while shifting",' +
+      '"Can attack with fangs once per rd while shifting"',
+  'Low-Light Vision':SRD35.FEATURES['Low-Light Vision'],
   'Razorclaw':
     'Section=ability,combat ' +
-    'Note="+2 Strength while shifting",' +
-         '"Can attack w/claws while shifting"',
-  'Resist Charm':'Section=save Note="+2 vs. charm effects"',
-  'Resist Mental':'Section=save Note="+2 vs. mind-altering effects"',
-  'Resist Sleep':'Section=save Note="+2 vs. sleep effects"',
+    'Note=' +
+      '"+2 Strength while shifting",' +
+      '"Can attack with claws once per rd while shifting"',
   'Shifter Ability Adjustment':
     'Section=ability Note="+2 Dexterity/-2 Intelligence/-2 Charisma"',
-  'Shifting':'Section=feature Note="May use Shifter trait for %V rd 1/dy"',
-  'Slam Weapon':'Section=combat Note="Can attack w/slam"',
-  'Stable':
+  'Shifting':'Section=feature Note="Can use Shifter traits for %{constitutionModifier+3+(sumShifterFeats||0)} rd %{(sumShifterFeats||0)>1?sumShifterFeats//2+1+\' times\':\'once\'} per day"',
+  'Wildhunt':
+    'Section=ability,skill,skill ' +
+    'Note=' +
+      '"+2 Constitution while shifting",' +
+      '"+2 Survival",' +
+      '"R30\' Can detect creature presence and track by smell"',
+
+  // Warforged
+  'Composite Plating':
+    'Section=combat Note="Attached plating prohibits weaing additional armor"',
+  'Inherently Stable':
     'Section=combat ' +
-    'Note="May perform strenuous activity at 0 HP; suffers no additional loss at negative HP"',
-  'Unhealing':
+    'Note="Can perform strenuous activity when at 0 hit points and suffers no additional loss at negative hit points unless further damaged"',
+  'Living Construct':
+    'Section=save ' +
+    'Note="Affected by spells that target living creatures and those that target constructs/Has no need to breathe, eat, or sleep"',
+  'Hard To Heal':
     'Section=combat ' +
-    'Note="Does not heal damage naturally; gains half effects from healing spells"',
+    'Note="Does not heal damage naturally and gains half effects from healing spells, but gains full effects from repair spells"',
+  'Light Fortification':
+    'Section=combat ' +
+    'Note="25% chance of negating critical hits and sneak attacks"',
+  'Slam Weapon':'Section=combat Note="Can attack with a slam"',
   'Warforged Ability Adjustment':
     'Section=ability Note="+2 Constitution/-2 Wisdom/-2 Charisma"',
-  'Warforged Immunity':
+  'Warforged Immunities':
     'Section=save ' +
     'Note="Immune to poison, sleep, paralysis, disease, nausea, fatigue, exhaustion, sickening, and energy drain"',
-  'Warforged Vulnerability':
+  'Warforged Vulnerabilities':
     'Section=save Note="Affected by effects that target wood or metal"',
-  'Wildhunt':
-    'Section=ability,feature,skill ' +
-    'Note="+2 Constitution while shifting",' +
-         '"R30\' May detect creature presence and track by smell",' +
-         '"+2 Survival"',
 
   // Prestige classes
   'Additional Action Points':'Section=ability Note="+2 AP"',
@@ -1018,7 +1038,6 @@ Eberron.FEATURES_ADDED = {
   'Alternate Form (Wolverine)':
     'Section=ability ' +
     'Note="May shift to animal (+4 Strength, +4 Dexterity, +8 Constitution) or bipedal hybrid form"',
-  'Animalistic Heritage':'Section=skill Note="+2 Balance/+2 Climb/+2 Jump"',
   'Armor Spikes':'Section=combat Note="Grapple attack inflicts 1d%{$\'levels.Warforged Juggernaut\'>=4 ? 8 : 6} HP"',
   'Bear':
     'Section=ability,combat ' +
@@ -1097,6 +1116,7 @@ Eberron.FEATURES_ADDED = {
   'Reserved':
     'Section=skill ' +
     'Note="-%V Bluff/-%V Diplomacy/-%V Gather Information/-%V Sense Motive"',
+  'Resist Charm':'Section=save Note="+2 vs. charm effects"',
   'Resist Corruption (Children Of Winter)':
     'Section=save Note="Immune to disease/+2 vs. mind-altering effects"',
   'Resist Corruption (Gatekeepers)':
@@ -1235,28 +1255,37 @@ Eberron.LANGUAGES = Object.assign({}, SRD35.LANGUAGES, Eberron.LANGUAGES_ADDED);
 Eberron.PATHS = {};
 Eberron.RACES_ADDED = {
   'Changeling':
+    'Size=Medium ' +
+    'Speed=30 ' +
     'Features=' +
-      '1:Deceptive,1:Intuitive,"1:Minor Shape Change","1:Natural Linguist",' +
-      '"1:Resist Charm","1:Resist Sleep" ' +
+      '"1:Changeling Resistances","1:Intuitive","1:Minor Shape Change",' +
+      '"1:Natural Linguist" ' +
     'Languages=Common',
   'Kalashtar':
+    'Size=Medium ' +
+    'Speed=30 ' +
     'Features=' +
-      '1:Dreamless,1:Humanlike,1:Influential,1:Mindlink,"1:Natural Psionic",' +
-      '"1:Resist Mental","1:Resist Possession" ' +
+      '"1:Dreamless","1:Human-Like","1:Kalashtar Resistances","1:Mindlink",' +
+      '"1:Naturally Psionic","1:Social Mastery" ' +
     'Languages=Common,Quori',
   'Shifter':
+    'Size=Medium ' +
+    'Speed=30 ' +
     'Features=' +
-      '"Animalistic Heritage","1:Shifter Ability Adjustment",' +
-      '"1:Low-Light Vision",1:Shifting ' +
+      '"1:Animalistic Heritage","1:Low-Light Vision",' +
+      '"1:Shifter Ability Adjustment","1:Shifting" ' +
     'Selectables=' +
-      '1:Beasthide,1:Longtooth,1:Cliffwalk,1:Razorclaw,1:Longstride,' +
-      '1:Wildhunt ' +
+      '"1:Beasthide","1:Longtooth","1:Cliffwalk","1:Razorclaw",' +
+      '"1:Longstride","1:Wildhunt" ' +
     'Languages=Common',
   'Warforged':
+    'Size=Medium ' +
+    'Speed=30 ' +
     'Features=' +
-      '"1:Composite Plating","1:Light Fortification",1:Mechanized,' +
-      '"1:Slam Weapon",1:Stable,1:Unhealing,"1:Warforged Ability Adjustment",' +
-      '"1:Warforged Immunity","1:Warforged Vulnerability" ' +
+      '"1:Composite Plating","1:Hard To Heal","1:Inherenty Stable",' +
+      '"1:Light Fortification","1:Living Construct","1:Slam Weapon",' +
+      '"1:Warforged Ability Adjustment","1:Warforged Immunities",' +
+      '"1:Warforged Vulnerabilities" ' +
     'Languages=Common'
 };
 Eberron.RACES = Object.assign({}, SRD35.RACES, Eberron.RACES_ADDED);
@@ -2773,16 +2802,10 @@ Eberron.raceRules = function(
  */
 Eberron.raceRulesExtra = function(rules, name) {
 
-  if(name == 'Kalashtar') {
-    rules.defineRule('saveNotes.resistPossession', 'kalashtarLevel', '+=', '2');
-  } else if(name == 'Shifter') {
+  if(name == 'Shifter') {
     rules.defineRule('abilityNotes.cliffwalk', '', '=', '20');
     rules.defineRule('abilityNotes.longstride', '', '=', '10');
     rules.defineRule('combatNotes.beasthide', '', '=', '2');
-    rules.defineRule('featureNotes.shifting',
-      'constitutionModifier', '=', '3 + source',
-      'sumShifterFeats', '+', null
-    );
     rules.defineRule('selectableFeatureCount.Shifter',
       'race', '=', 'source == "Shifter" ? 1 : null'
     );
@@ -2814,11 +2837,9 @@ Eberron.raceRulesExtra = function(rules, name) {
       'shifterLevels', '+', 'Math.floor(source / 4) + 1'
     );
   } else if(name == 'Warforged') {
+    Eberron.armorRules(rules, 'Composite Plating', 2, 'Light', 10, 0, 5);
     rules.defineRule
-      ('armor', 'combatNotes.compositePlating', '=', '"None"');
-    rules.defineRule('magicNotes.arcaneSpellFailure',
-      'combatNotes.compositePlating', '+=', '5'
-    );
+      ('armor', 'features.Composite Plating', '=', '"Composite Plating"');
     rules.defineRule('negateLanguageBonus',
       'intelligenceModifier', '=', '-Math.max(source, 0)'
     );
