@@ -176,8 +176,8 @@ Eberron.RANDOMIZABLE_ATTRIBUTES =
 Eberron.ALIGNMENTS = Object.assign({}, SRD35.ALIGNMENTS);
 Eberron.ANIMAL_COMPANIONS = Object.assign({}, SRD35.ANIMAL_COMPANIONS);
 Eberron.ARMORS_ADDED = {
-  'Darkleaf Banded':'AC=6 Weight=Medium Dex=2 Skill=4 Spell=30',
-  'Darkleaf Breastplate':'AC=5 Weight=Light Dex=4 Skill=2 Spell=20',
+  'Darkleaf Banded':'AC=6 Weight=Medium Dex=2 Skill=-4 Spell=30',
+  'Darkleaf Breastplate':'AC=5 Weight=Light Dex=4 Skill=-2 Spell=20',
   'Leafweave':'AC=2 Weight=Light Dex=7 Skill=0 Spell=5'
 };
 Eberron.ARMORS = Object.assign({}, SRD35.ARMORS, Eberron.ARMORS_ADDED);
@@ -822,10 +822,10 @@ Eberron.FEATURES_ADDED = {
     'Section=ability,combat ' +
     'Note=' +
       '"+2 Constitution while shifting",' +
-      '"+%V natural armor bonus to Armor Class while shifting"',
+      '"+%{combatNotes.beasthideElite?4:2} natural armor bonus to Armor Class while shifting"',
   'Cliffwalk':
     'Section=ability ' +
-    'Note="+2 Dexterity and has a %V\' climb Speed while shifting"',
+    'Note="Has +2 Dexterity and a %{abilityNotes.cliffwalkElite?30:20}\' climb Speed while shifting"',
   'Longstride':
     'Section=ability Note="+2 Dexterity and +%V\' Speed while shifting"',
   'Longtooth':
@@ -921,18 +921,19 @@ Eberron.FEATURES_ADDED = {
     'SpellAbility=Charisma',
   'Action Boost':
     'section=ability ' +
-    'Note="Adds 1d8 instead of 1d6 when using Action Points on attack, skill, ability, level or saving throw"',
+    'Note="Adds 1d8 instead of 1d6 when using Action Points on attacks, skill checks, ability checks, level checks, and saves"',
   'Action Surge':
     'Section=combat ' +
-    'Note="May spend 2 Action Points to take an extra move or standard action"',
+    'Note="Can spend 2 Action Points to take an extra move or standard action"',
   'Adamantine Body':
-    'Section=ability,combat Note="Max 20\' speed","+6 AC/DR 2/adamantine"',
+    'Section=combat Note="Has adamantine-plated armor and DR 2/adamantine"',
   'Ashbound':
     'Section=magic ' +
-    'Note="Dbl <i>Summon Nature\'s Ally</i> duration; summoned creatures gain +3 attack"',
+    'Note="Doubles the duration of <i>Summon Nature\'s Ally</i>, and summoned creatures gain +3 attack"',
   'Attune Magic Weapon':
-    'Section=combat Note="+1 attack and damage w/magic weapons"',
-  'Beast Shape':'Section=magic Note="May Wild Shape into beast totem 1/dy"',
+    'Section=combat Note="+1 attacks and damage with magic weapons"',
+  'Beast Shape':
+    'Section=magic Note="Can Wild Shape into a %V once per day"',
   'Beast Totem (Chimera)':'Section=save Note="+4 vs. breath weapons"',
   'Beast Totem (Digester)':'Section=save Note="+4 vs. acid"',
   'Beast Totem (Displacer Beast)':'Section=save Note="+4 vs. targeted spells"',
@@ -941,54 +942,61 @@ Eberron.FEATURES_ADDED = {
   'Beast Totem (Unicorn)':'Section=save Note="+4 vs. poison"',
   'Beast Totem (Winter Wolf)':'Section=save Note="+4 vs. cold"',
   'Beast Totem (Yrthak)':'Section=save Note="+4 vs. sonic"',
-  'Beasthide Elite':'Section=combat Note="+2 Beasthide AC"',
+  'Beasthide Elite':'Section=combat Note="Has increased Beasthide effects"',
   'Bind Elemental':
-    'Section=magic Note="May incorporate elementals into wondrous items"',
+    'Section=magic ' +
+    'Note="Can use <i>Planar Binding</i> and a Khyber dragonshard to incorporate an elemental when crafting a wondrous item"',
   'Child Of Winter':
     'Section=magic ' +
-    'Note="May use Druid animal spells on vermin and may summon vermin"',
-  'Cliffwalk Elite':'Section=ability Note="+10\' Cliffwalk climb speed"',
-  'Craft Construct':'Section=magic Note="May create enchanted construct"',
-  'Detective':'Section=skill Note="+2 Spot"',
+    'Note="Can summon vermin and use Druid animal spells on them"',
+  'Cliffwalk Elite':'Section=ability Note="Has increased Cliffwalk effects"',
+  'Craft Construct': // From MM, needed for Artificer class
+    'Section=magic Note="Can create enchanted constructs"',
   'Double Steel Strike':
-    'Section=combat Note="May use Flurry Of Blows w/two-bladed sword"',
+    'Section=combat Note="Can use Flurry Of Blows with a two-bladed sword"',
   'Dragon Rage':
     'Section=combat,save ' +
-    'Note="+2 AC during Rage","+10 %V resistance during Rage"',
-  'Dragon Totem (Black)':'Section=save Note="Resistance 5 to acid"',
-  'Dragon Totem (Blue)':'Section=save Note="Resistance 5 to electricity"',
-  'Dragon Totem (Brass)':'Section=save Note="Resistance 5 to fire"',
-  'Dragon Totem (Bronze)':'Section=save Note="Resistance 5 to electricity"',
-  'Dragon Totem (Copper)':'Section=save Note="Resistance 5 to acid"',
-  'Dragon Totem (Gold)':'Section=save Note="Resistance 5 to fire"',
-  'Dragon Totem (Green)':'Section=save Note="Resistance 5 to acid"',
-  'Dragon Totem (Red)':'Section=save Note="Resistance 5 to fire"',
-  'Dragon Totem (Silver)':'Section=save Note="Resistance 5 to cold"',
-  'Dragon Totem (White)':'Section=save Note="Resistance 5 to cold"',
+    'Note=' +
+      '"+2 Armor Class during Rage",' +
+      '"Dragon Totem resistance increases to 15 during Rage"',
+  'Dragon Totem (Black)':'Section=save Note="Has resistance 5 to acid"',
+  'Dragon Totem (Blue)':'Section=save Note="Has resistance 5 to electricity"',
+  'Dragon Totem (Brass)':'Section=save Note="Has resistance 5 to fire"',
+  'Dragon Totem (Bronze)':'Section=save Note="Has resistance 5 to electricity"',
+  'Dragon Totem (Copper)':'Section=save Note="Has resistance 5 to acid"',
+  'Dragon Totem (Gold)':'Section=save Note="Has resistance 5 to fire"',
+  'Dragon Totem (Green)':'Section=save Note="Has resistance 5 to acid"',
+  'Dragon Totem (Red)':'Section=save Note="Has resistance 5 to fire"',
+  'Dragon Totem (Silver)':'Section=save Note="Has resistance 5 to cold"',
+  'Dragon Totem (White)':'Section=save Note="Has resistance 5 to cold"',
   'Ecclesiarch':
     'Section=feature,skill ' +
-    'Note="+2 Leadership",' +
-         '"Gather Information is a class skill/Knowledge (Local) is a class skill"',
+    'Note=' +
+      '"+2 Leadership",' +
+      '"Gather Information is a class skill/Knowledge (Local) is a class skill"',
   'Education':
-    'Section=skill ' +
-    'Note="All Knowledge is a class skill/+1 any 2 Knowledge skills"',
+    'Section=skill,skill ' +
+    'Note=' +
+      '"All Knowledge skills are class skills",' +
+      '"+1 on 2 choices of Knowledge skills"',
   'Exceptional Artisan':
     'Section=magic Note="Reduces item creation base time by 25%"',
-  'Extend Rage':'Section=combat Note="Adds 5 rd to Rage duration"',
+  'Extend Rage':'Section=combat Note="Adds 5 rd to maximum Rage duration"',
   'Extra Music':
-    'Section=skill Note="May use Bardic Music effects %V extra times/dy"',
-  'Extra Rings':'Section=magic Note="May wear up to 4 magic rings at once"',
+    'Section=skill ' +
+    'Note="Can use Bardic Music effects an additional %V times per day"',
+  'Extra Rings':'Section=magic Note="Can wear up to 4 magic rings at once"',
   'Extra Shifter Trait':
-    'Section=feature Note="Gains extra Shifter trait w/out ability bonus"',
+    'Section=feature ' +
+    'Note="Gains an extra Shifter trait without its ability bonus"',
   'Extraordinary Artisan':
     'Section=magic Note="Reduces item creation base price by 25%"',
   'Favored In House':
-    'Section=feature ' +
-    'Note="+%{level>=16 ? 5 : level>=12 ? 4 : level>=7 ? 3 : level>=3 ? 2 : 1} attempts to acquire favors from house contacts %{level//2>?1}/wk"',
-  'Finder':'Section=skill Note="+2 Search"',
+    'Section=skill ' +
+    'Note="Can make +%{level>=16?5:level>=12?4:level>=7?3:level>=3?2:1} attempts to acquire favors from house contacts %{level>3?level//2+\' times\':\'once\'} per week"',
   'Flensing Strike':
     'Section=combat ' +
-    'Note="Kama causes -4 pain penalty to foe attacks, saves, and checks (DC %{10+level//2+wisdomModifier} Fort neg) for 1 min"',
+    'Note="Hit with a kama inflicts -4 on foe attacks, saves, and checks (save Fortitude DC %{10+level//2+wisdomModifier} (+2 if wielding multiple kamas) negates) for 1 min"',
   'Gatekeeper Initiate':
     'Section=magic,save,skill ' +
     'Note="Has access to additional spells",' +
@@ -1306,7 +1314,11 @@ Eberron.FEATURES_ADDED = {
          '"Can attack w/fangs while shifting"',
   'Zone Of Truth':
     'Section=magic ' +
-    'Note="R%{$\'levels.Master Inquisitive\'//2*5+25}\' May create 20\' radius that prohibits lying for %{$\'levels.Master Inquisitive\'} min (DC %{wisdomModifier+12} Will neg) 1/dy; may spend 2 Action Points for 2/dy"'
+    'Note="R%{$\'levels.Master Inquisitive\'//2*5+25}\' May create 20\' radius that prohibits lying for %{$\'levels.Master Inquisitive\'} min (DC %{wisdomModifier+12} Will neg) 1/dy; may spend 2 Action Points for 2/dy"',
+
+  // House
+  'Detective':'Section=skill Note="+2 Spot"',
+  'Finder':'Section=skill Note="+2 Search"'
 
 };
 Eberron.FEATURES = Object.assign({}, SRD35.FEATURES, Eberron.FEATURES_ADDED);
@@ -2592,24 +2604,14 @@ Eberron.featRulesExtra = function(rules, name) {
     rules.defineRule
       ('features.Aberrant Dragonmark', 'features.' + name, '+=', '1');
   } else if(name == 'Adamantine Body') {
-    rules.defineRule('combatNotes.dexterityArmorClassAdjustment',
-      'features.Adamantine Body', 'v', '1'
-    );
+    Eberron.armorRules(rules, 'Adamantine-Plated', 8, 'Heavy', 1, -5, 35);
     rules.defineRule
      ('damageReduction.Adamantine', 'combatNotes.adamantineBody', '^=', '2');
-    rules.defineRule('magicNotes.arcaneSpellFailure',
-      'features.Adamantine Body', '^', '35'
-    );
-    rules.defineRule('skillNotes.armorSkillCheckPenalty',
-      'features.Adamantine Body', '=', '5'
-    );
     rules.defineRule('speed', 'abilityNotes.adamantineBody', 'v', '20');
-  } else if(name == 'Beasthide Elite') {
+  } else if(name.startsWith('Beast Totem')) {
+    let beast = name.replace('Beast Totem (', '').replace(')', '');
     rules.defineRule
-      ('combatNotes.beasthide', 'combatNotes.beasthideElite', '+', '2');
-  } else if(name == 'Cliffwalk Elite') {
-    rules.defineRule
-      ('abilityNotes.cliffwalk', 'abilityNotes.cliffwalkElite', '+', '10');
+      ('magicNotes.beastShape', 'features.' + name, '=', '"' + beast + '"');
   } else if((matchInfo = name.match(/Dragon Totem \((.*)\)/)) != null) {
     let energy =
       'BlackCopperGreen'.includes(matchInfo[1]) ? 'Acid' :
@@ -2617,17 +2619,6 @@ Eberron.featRulesExtra = function(rules, name) {
       'BrassGoldRed'.includes(matchInfo[1]) ? 'Fire' : 'Cold';
     rules.defineRule('resistance.' + energy,
       'saveNotes.dragonTotem(' + matchInfo[1] + ')', '^=', '5'
-    );
-  } else if(name == 'Dragon Rage') {
-    rules.defineRule(
-      'saveNotes.dragonRage', '', '=', '"fire"',
-      'saveNotes.dragonTotem(Black)', '=', '"acid"',
-      'saveNotes.dragonTotem(Blue)', '=', '"electricity"',
-      'saveNotes.dragonTotem(Bronze)', '=', '"electricity"',
-      'saveNotes.dragonTotem(Copper)', '=', '"acid"',
-      'saveNotes.dragonTotem(Green)', '=', '"acid"',
-      'saveNotes.dragonTotem(Silver)', '=', '"cold"',
-      'saveNotes.dragonTotem(White)', '=', '"cold"'
     );
   } else if(name == 'Extra Music') {
     rules.defineRule
@@ -2701,7 +2692,7 @@ Eberron.featRulesExtra = function(rules, name) {
     );
     rules.defineRule('mithralBodyDexACCap', 'features.Mithral Body', '=', '5');
     rules.defineRule('skillNotes.armorSkillCheckPenalty',
-      'features.Mithral Body', '=', '2'
+      'features.Mithral Body', '=', '-2'
     );
   } else if(name == 'Lesser Dragonmark') {
     for(let s in rules.getChoices('skills'))
@@ -2711,7 +2702,7 @@ Eberron.featRulesExtra = function(rules, name) {
     rules.defineRule
       ('mithralBodyDexACCap', 'combatNotes.mithralFluidity', '+', '1');
     rules.defineRule('skillNotes.armorSkillCheckPenalty',
-      'skillNotes.mithralFluidity', '+', '-1'
+      'skillNotes.mithralFluidity', '+', '1'
     );
   } else if(name == 'Powerful Charge') {
     rules.defineRule('combatNotes.powerfulCharge',
@@ -2950,9 +2941,7 @@ Eberron.raceRules = function(
 Eberron.raceRulesExtra = function(rules, name) {
 
   if(name == 'Shifter') {
-    rules.defineRule('abilityNotes.cliffwalk', '', '=', '20');
     rules.defineRule('abilityNotes.longstride', '', '=', '10');
-    rules.defineRule('combatNotes.beasthide', '', '=', '2');
     rules.defineRule('selectableFeatureCount.Shifter',
       'race', '=', 'source == "Shifter" ? 1 : null'
     );
@@ -2985,8 +2974,12 @@ Eberron.raceRulesExtra = function(rules, name) {
     );
   } else if(name == 'Warforged') {
     Eberron.armorRules(rules, 'Composite Plating', 2, 'Light', 10, 0, 5);
-    rules.defineRule
-      ('armor', 'features.Composite Plating', '=', '"Composite Plating"');
+    rules.defineRule('armor',
+      'features.Composite Plating', '=', '"Composite Plating"',
+      // This is here instead of in featRulesExtra to ensure that Adamantine
+      // Body overrides Composite Plating
+      'combatNotes.adamantineBody', '=', '"Adamantine-Plated"'
+    );
     rules.defineRule('negateLanguageBonus',
       'intelligenceModifier', '=', '-Math.max(source, 0)'
     );
@@ -3037,7 +3030,8 @@ Eberron.skillRules = function(
 ) {
   rules.basePlugin.skillRules
     (rules, name, ability, untrained, classes, synergies);
-  // No changes needed to the rules defined by base method
+  if(name.startsWith('Knowledge ('))
+    rules.defineRule('classSkills.' + name, 'skillNotes.education', '=', '1');
 };
 
 /*
