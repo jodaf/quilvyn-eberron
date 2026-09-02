@@ -827,7 +827,8 @@ Eberron.FEATURES_ADDED = {
     'Section=ability ' +
     'Note="Has +2 Dexterity and a %{abilityNotes.cliffwalkElite?30:20}\' climb Speed while shifting"',
   'Longstride':
-    'Section=ability Note="+2 Dexterity and +%V\' Speed while shifting"',
+    'Section=ability ' +
+    'Note="+2 Dexterity and +%{abilityNotes.longstrideElite?20:10}\' Speed while shifting"',
   'Longtooth':
     'Section=ability,combat ' +
     'Note=' +
@@ -864,7 +865,7 @@ Eberron.FEATURES_ADDED = {
   'Light Fortification':
     'Section=combat ' +
     'Note="25% chance of negating critical hits and sneak attacks"',
-  'Slam Weapon':'Section=combat Note="Can attack with a slam"',
+  'Slam Weapon':'Section=combat Note="Can use slam as a natural weapon"',
   'Warforged Ability Adjustment':
     'Section=ability Note="+2 Constitution/-2 Wisdom/-2 Charisma"',
   'Warforged Immunities':
@@ -926,7 +927,7 @@ Eberron.FEATURES_ADDED = {
     'Section=combat ' +
     'Note="Can spend 2 Action Points to take an extra move or standard action"',
   'Adamantine Body':
-    'Section=combat Note="Has adamantine-plated armor and DR 2/adamantine"',
+    'Section=combat Note="Has adamantine plating armor and DR 2/adamantine"',
   'Ashbound':
     'Section=magic ' +
     'Note="Doubles the duration of <i>Summon Nature\'s Ally</i>, and summoned creatures gain +3 attack"',
@@ -980,7 +981,7 @@ Eberron.FEATURES_ADDED = {
       '"All Knowledge skills are class skills",' +
       '"+1 on 2 choices of Knowledge skills"',
   'Exceptional Artisan':
-    'Section=magic Note="Reduces item creation base time by 25%"',
+    'Section=magic Note="Reduces magic item creation base time by 25%"',
   'Extend Rage':'Section=combat Note="Adds 5 rd to maximum Rage duration"',
   'Extra Music':
     'Section=skill ' +
@@ -990,7 +991,7 @@ Eberron.FEATURES_ADDED = {
     'Section=feature ' +
     'Note="Gains an extra Shifter trait without its ability bonus"',
   'Extraordinary Artisan':
-    'Section=magic Note="Reduces item creation base price by 25%"',
+    'Section=magic Note="Reduces magic item creation base price by 25%"',
   'Favored In House':
     'Section=skill ' +
     'Note="Can make +%{level>=16?5:level>=12?4:level>=7?3:level>=3?2:1} attempts to acquire favors from house contacts %{level>3?level//2+\' times\':\'once\'} per week"',
@@ -998,69 +999,86 @@ Eberron.FEATURES_ADDED = {
     'Section=combat ' +
     'Note="Hit with a kama inflicts -4 on foe attacks, saves, and checks (save Fortitude DC %{10+level//2+wisdomModifier} (+2 if wielding multiple kamas) negates) for 1 min"',
   'Gatekeeper Initiate':
-    'Section=magic,save,skill ' +
-    'Note="Has access to additional spells",' +
-         '"+2 vs. supernatural and aberrations",' +
-         '"Knowledge (Planes) is a class skill"',
-  'Great Bite':'Section=combat Note="Fangs Crit is x3"',
-  'Great Rend':'Section=combat Note="+1d4+%{level//4+strengthModifier//2} HP on hit w/both claws"',
-  'Greater Dragonmark':
-    'Section=magic Note="May cast choice of level 3 dragonmark spell 1/dy"',
-  'Greater Powerful Charge':
+    'Section=magic,save,skill,skill ' +
+    'Note=' +
+      '"Has access to additional spells",' +
+      '"+2 vs. the supernatural and spell-like abilities of aberrations",' +
+      '"Knowledge (Planes) is a class skill",' +
+      '"Can use Knowledge (Planes) to identify aberrations and their abilities"',
+  'Great Bite':
+    'Section=combat Note="Fangs inflict x3 damage on a critical hit"',
+  'Great Rend':
     'Section=combat ' +
-    'Note="Raises Powerful Charge damage one size category to %V"',
-  'Greater Shifter Defense':'Section=combat Note="+2 DR/silver while shifting"',
+    'Note="Inflicts +1d4+%{level//4+strengthModifier//2} HP when both claw attacks hit"',
+  'Greater Dragonmark':
+    'Section=magic ' +
+    // TODO revisit
+    'Note="Can cast a choice of a level 3 dragonmark spell once per day"',
+  'Greater Powerful Charge':
+    'Section=combat Note="Has increased Powerful Charge effects"',
+  'Greater Shifter Defense':
+    'Section=combat Note="Has increased Shifter Defense effects"',
   'Greensinger Initiate':
     'Section=magic,skill ' +
-    'Note="Has access to additional spells",' +
-         '"Bluff is a class skill/Hide is a class skill/Perform is a class skill"',
-  'Handler':'Section=skill Note="+2 Handle Animal"',
+    'Note=' +
+      '"Has access to additional spells",' +
+      '"Bluff is a class skill/Hide is a class skill/Perform is a class skill"',
   'Haunting Melody':
     'Section=magic ' +
-    'Note="R30\' Shakes foes (DC %{10+levels.Bard//2+charismaModifier} Will neg) for %{sumPerformRanks} rd"',
-  'Healer':'Section=skill Note="+2 Heal"',
+    'Note="R30\' Can use Bardic Music to inflict shaken on foes (save Will DC %{10+levels.Bard//2+charismaModifier} Will negates) for %{sumPerformRanks} rd"',
   'Healing Factor':
-    'Section=combat Note="Recovers %{level} HP when shifting ends"',
+    'Section=combat Note="Regains %{level} hit points when shifting ends"',
   'Heroic Spirit':'Section=ability Note="+%{level*3} Action Points"',
-  'Hospitaler':'Section=skill Note="+2 Diplomacy"',
-  'Improved Damage Reduction':'Section=combat Note="DR +1/adamantine"',
+  'Improved Damage Reduction':'Section=combat Note="Has DR +%1/adamantine"',
   'Improved Fortification':
-    'Section=combat Note="Immune to sneak attacks, critical hits, and healing"',
+    'Section=combat ' +
+    'Note="Immune to sneak attacks, critical hits, and healing spells"',
   'Improved Natural Attack (Claws)':
-    'Section=combat Note="Claw damage increases one size category"',
+    'Section=combat ' +
+    'Note="Claw damage increases by %1 size categor%{$\'features.Improved Natural Attack (Claws)\'>1?\'ies\':\'y\'}"',
   'Improved Natural Attack (Fangs)':
-    'Section=combat Note="Fangs damage increases one size category"',
+    'Section=combat ' +
+    'Note="Fangs or Tusks damage increases by %1 size categor%{$\'features.Improved Natural Attack (Claws)\'>1?\'ies\':\'y\'}"',
+  'Improved Natural Attack (Slam)':
+    'Section=combat ' +
+    'Note="Slam damage increases by %1 size categor%{$\'features.Improved Natural Attack (Slam)\'>1?\'ies\':\'y\'}"',
   'Investigate':
     'Section=skill ' +
-    'Note="May use Search to find and analyze clues/Gains synergy with appropriate Knowledge skill"',
+    'Note="Can use Search to find and analyze clues, and 5 ranks in an appropriate Knowledge skill gives +2 on the Search"',
   'Knight Training':
     'Section=ability ' +
     'Note="Has no restrictions on combining Paladin and chosen class levels"',
   'Least Dragonmark':
-    'Section=magic Note="May cast choice of level 1 dragonmark spell 1/dy"',
+    'Section=magic ' +
+    // TODO revisit
+    'Note="Can cast a choice of a level 1 dragonmark spell once per day"',
   'Legendary Artisan':
-    'Section=magic Note="Reduces item creation XP price by 25%"',
+    'Section=magic Note="Reduces magic item creation XP price by 25%"',
   'Lesser Dragonmark':
-    'Section=magic Note="May cast choice of level 2 dragonmark spell 1/dy"',
-  'Longstride Elite':'Section=ability Note="+10\' Longstride Speed"',
-  'Maker':'Section=skill Note="+2 all Craft"',
-  'Mithral Body':'Section=combat Note="+3 AC"',
+    'Section=magic ' +
+    // TODO revisit
+    'Note="Can cast a choice of a level 2 dragonmark spell once per day"',
+  'Longstride Elite':'Section=ability Note="Has increased Longstride effects"',
+  'Mithral Body':'Section=combat Note="Has mithral plating armor"',
   'Mithral Fluidity':
     'Section=combat,skill ' +
-    'Note="Raises Mithral Body dexterity AC limit by 1",' +
-         '"Reduces skill penalty by 1"',
+    'Note=' +
+      '"Raises Dexterity Armor Class limit by %1",' +
+      '"Reduces armor skill penalty by %1"',
   'Monastic Training':
     'Section=ability ' +
     'Note="Has no restrictions on combining Monk and chosen class levels"',
   'Music Of Growth':
     'Section=magic ' +
-    'Note="R30\' Bardic Music gives +4 Strength and Constitution to animal and plant creatures"',
+    'Note="R30\' Can use Bardic Music to give +4 Strength and Constitution to animal and plant creatures"',
   'Music Of Making':
     'Section=magic,skill ' +
-    'Note="Dbl duration of conjuration spells involving Bardic Music",' +
-         '"+4 Craft during Bardic Music"',
+    'Note=' +
+      '"Doubles the duration of creation spells cast during Bardic Music",' +
+      '"+4 Craft during Bardic Music"',
   'Powerful Charge':
-    'Section=combat Note="Successful charge inflicts +%V HP"',
+    'Section=combat ' +
+    'Note="Successful charge inflicts +%{features.Large?(combatNotes.greaterPowerfulCharge?\'3d6\':\'2d6\'):combatNotes.greaterPowerfulCharge?\'2d6\':\'1d8\'} HP"',
   'Precise Swing':
     'Section=combat Note="Melee attack ignores less-than-total cover"',
   'Pursue':
@@ -1078,7 +1096,9 @@ Eberron.FEATURES_ADDED = {
     'Section=feature Note="May seek advice from deathless ancestor"',
   'Scribe':'Section=skill Note="+2 Decipher Script"',
   'Shadower':'Section=skill Note="+2 Gather Information"',
-  'Shifter Defense':'Section=combat Note="DR 2/silver while shifting"',
+  'Shifter Defense':
+    'Section=combat ' +
+    'Note="Has DR %{combatNotes.greaterShifterDefense?4:2}/silver while shifting"',
   'Shifter Ferocity':
     'Section=combat Note="May continue fighting below 0 HP while shifting"',
   'Sentinel':'Section=skill Note="+2 Sense Motive"',
@@ -1318,7 +1338,11 @@ Eberron.FEATURES_ADDED = {
 
   // House
   'Detective':'Section=skill Note="+2 Spot"',
-  'Finder':'Section=skill Note="+2 Search"'
+  'Finder':'Section=skill Note="+2 Search"',
+  'Handler':'Section=skill Note="+2 Handle Animal"',
+  'Healer':'Section=skill Note="+2 Heal"',
+  'Hospitaler':'Section=skill Note="+2 Diplomacy"',
+  'Maker':'Section=skill Note="+2 all Craft"'
 
 };
 Eberron.FEATURES = Object.assign({}, SRD35.FEATURES, Eberron.FEATURES_ADDED);
@@ -2466,25 +2490,16 @@ Eberron.classRulesExtra = function(rules, name) {
 
   } else if(name == 'Warforged Juggernaut') {
 
-    rules.defineRule('combatNotes.greaterPowerfulCharge',
-      '', '=', '"2d6"',
-      'features.Large', '=', '"3d6"'
-    );
-    rules.defineRule('combatNotes.powerfulCharge',
-      '', '=', '"1d8"',
-      'features.Large', '=', '"2d6"',
-      'combatNotes.greaterPowerfulCharge', '=', null
-    );
     rules.defineRule
       ('skillNotes.reserved', 'levels.Warforged Juggernaut', '=', null);
 
   } else if(name == 'Weretouched Master') {
 
-    rules.defineRule('clawsDamageProgression',
+    rules.defineRule('clawsDamageBoosts',
       'combatNotes.bear', '+=', '1',
       'combatNotes.tiger', '+=', '1'
     );
-    rules.defineRule('fangsDamageProgression',
+    rules.defineRule('fangsDamageBoosts',
       'combatNotes.boar', '+=', '1',
       'combatNotes.rat', '+=', '1',
       'combatNotes.wolf', '+=', '1',
@@ -2604,7 +2619,8 @@ Eberron.featRulesExtra = function(rules, name) {
     rules.defineRule
       ('features.Aberrant Dragonmark', 'features.' + name, '+=', '1');
   } else if(name == 'Adamantine Body') {
-    Eberron.armorRules(rules, 'Adamantine-Plated', 8, 'Heavy', 1, -5, 35);
+    Eberron.armorRules(rules, 'Adamantine Plating', 8, 'Heavy', 1, -5, 35);
+    // N.B. Assignment to armor attribute is in raceRulesExtra
     rules.defineRule
      ('damageReduction.Adamantine', 'combatNotes.adamantineBody', '^=', '2');
     rules.defineRule('speed', 'abilityNotes.adamantineBody', 'v', '20');
@@ -2647,11 +2663,6 @@ Eberron.featRulesExtra = function(rules, name) {
     for(let s in rules.getChoices('skills'))
       rules.defineRule
         ('countSkillsGe12', 'skills.' + s, '+=', 'source >= 12 ? 1 : null');
-  } else if(name == 'Greater Powerful Charge') {
-    rules.defineRule('combatNotes.greaterPowerfulCharge',
-      '', '=', '"2d6"',
-      'features.Large', '=', '"3d6"'
-    );
   } else if(name == 'Greater Shifter Defense') {
     rules.defineRule
       ('damageReduction.Silver', 'combatNotes.greaterShifterDefense', '+', '2');
@@ -2669,46 +2680,63 @@ Eberron.featRulesExtra = function(rules, name) {
       if(s.startsWith('Perform'))
         rules.defineRule('sumPerformRanks', 'skills.' + s, '+=', null);
   } else if(name == 'Improved Damage Reduction') {
+    rules.defineRule('combatNotes.improvedDamageReduction.1',
+      'combatNotes.improvedDamageReduction', '?', null,
+      'features.Improved Damage Reduction', '=', null
+    );
     rules.defineRule('damageReduction.Adamantine',
-      'combatNotes.improvedDamageReduction', '+=', '1'
+      'combatNotes.improvedDamageReduction.1', '+=', null
     );
   } else if(name == 'Improved Natural Attack (Claws)') {
-    rules.defineRule('clawsDamageProgression',
-      'combatNotes.improvedNaturalAttack(Claws)', '+', '1'
+    rules.defineRule('combatNotes.improvedNaturalAttack(Claws).1',
+      'combatNotes.improvedNaturalAttack(Claws)', '?', null,
+      'features.Improved Natural Attack (Claws)', '=', null
+    );
+    rules.defineRule('clawsDamageBoosts',
+      'combatNotes.improvedNaturalAttack(Claws).1', '+', null
     );
   } else if(name == 'Improved Natural Attack (Fangs)') {
-    rules.defineRule('fangsDamageProgression',
-      'combatNotes.improvedNaturalAttack(Fangs)', '+', '1'
+    rules.defineRule('combatNotes.improvedNaturalAttack(Fangs).1',
+      'combatNotes.improvedNaturalAttack(Fangs)', '?', null,
+      'features.Improved Natural Attack (Fangs)', '=', null
     );
-  } else if(name == 'Longstride Elite') {
-    rules.defineRule
-      ('abilityNotes.longstride', 'abilityNotes.longstrideElite', '+', '10');
-  } else if(name == 'Mithral Body') {
-    rules.defineRule('combatNotes.dexterityArmorClassAdjustment',
-      'mithralBodyDexACCap', 'v', null
+    rules.defineRule('fangsDamageBoosts',
+      'combatNotes.improvedNaturalAttack(Fangs).1', '+', null
     );
-    rules.defineRule('magicNotes.arcaneSpellFailure',
-      'features.Mithral Body', '^', '15'
+  } else if(name == 'Improved Natural Attack (Slam)') {
+    rules.defineRule('combatNotes.improvedNaturalAttack(Slam).1',
+      'combatNotes.improvedNaturalAttack(Slam)', '?', null,
+      'features.Improved Natural Attack (Slam)', '=', null
     );
-    rules.defineRule('mithralBodyDexACCap', 'features.Mithral Body', '=', '5');
-    rules.defineRule('skillNotes.armorSkillCheckPenalty',
-      'features.Mithral Body', '=', '-2'
+    rules.defineRule('slamDamageBoosts',
+      'combatNotes.improvedNaturalAttack(Slam).1', '+', null
     );
   } else if(name == 'Lesser Dragonmark') {
     for(let s in rules.getChoices('skills'))
       rules.defineRule
         ('countSkillsGe9', 'skills.' + s, '+=', 'source >= 9 ? 1 : null');
-  } else if(name == 'Mithral Fluidity') {
+  } else if(name == 'Mithral Body') {
+    // Set initial dex cap for Mithral Plating to 10, instead of the basic 5,
+    // to allow for multiple selections of Mithral Fluidity that raise it
+    Eberron.armorRules(rules, 'Mithral Plating', 5, 'Light', 10, -2, 15);
+    // N.B. Assignment to armor attribute is in raceRulesExtra
     rules.defineRule
-      ('mithralBodyDexACCap', 'combatNotes.mithralFluidity', '+', '1');
-    rules.defineRule('skillNotes.armorSkillCheckPenalty',
-      'skillNotes.mithralFluidity', '+', '1'
+      ('armorClassDexterityModifier', 'mithralBodyDexterityCap', 'v', null);
+    rules.defineRule
+      ('mithralBodyDexterityCap', 'features.Mithral Body', '=', '5');
+  } else if(name == 'Mithral Fluidity') {
+    rules.defineRule('combatNotes.mithralFluidity.1',
+      'combatNotes.mithralFluidity', '?', null,
+      'features.Mithral Fluidity', '=', null
     );
-  } else if(name == 'Powerful Charge') {
-    rules.defineRule('combatNotes.powerfulCharge',
-      '', '=', '"1d8"',
-      'features.Large', '=', '"2d6"',
-      'combatNotes.greaterPowerfulCharge', '=', null
+    rules.defineRule
+      ('mithralBodyDexterityCap', 'combatNotes.mithralFluidity.1', '+', null);
+    rules.defineRule('skillNotes.armorSkillCheckPenalty',
+      'skillNotes.mithralFluidity.1', '+', null
+    );
+    rules.defineRule('skillNotes.mithralFluidity.1',
+      'skillNotes.mithralFluidity', '?', null,
+      'features.Mithral Fluidity', '=', null
     );
   } else if(name == 'Repel Aberration') {
     // Set turning level to suppress errors on, e.g., Extra Turning feat
@@ -2941,7 +2969,6 @@ Eberron.raceRules = function(
 Eberron.raceRulesExtra = function(rules, name) {
 
   if(name == 'Shifter') {
-    rules.defineRule('abilityNotes.longstride', '', '=', '10');
     rules.defineRule('selectableFeatureCount.Shifter',
       'race', '=', 'source == "Shifter" ? 1 : null'
     );
@@ -2949,19 +2976,21 @@ Eberron.raceRulesExtra = function(rules, name) {
       (rules, 'Claws', 'Unarmed', 'Unarmed', 'd4', 20, 2, null, []);
     Eberron.weaponRules
       (rules, 'Fangs', 'Unarmed', 'Unarmed', 'd6', 20, 2, null, []);
-    rules.defineRule('clawsDamageProgression',
-      'combatNotes.razorclaw', '+=', '1',
-      'features.Large', '+', '1'
+    rules.defineRule('clawsDamageBoosts',
+      'combatNotes.razorclaw', '+=', '0',
+      'features.Large', '+', '1',
+      'features.Small', '+', '-1'
     );
     rules.defineRule('clawsDamageDice',
-      'clawsDamageProgression', '=', '["d3", "d4", "d6", "d8", "2d6", "3d6", "4d6", "6d6", "8d6", "12d6"][source]'
+      'clawsDamageBoosts', '=', '["d3", "d4", "d6", "d8", "2d6", "3d6", "4d6", "6d6", "8d6", "12d6"][source+1]'
     );
-    rules.defineRule('fangsDamageProgression',
-      'combatNotes.longtooth', '+=', '1',
-      'features.Large', '+', '1'
+    rules.defineRule('fangsDamageBoosts',
+      'combatNotes.longtooth', '+=', '0',
+      'features.Large', '+', '1',
+      'features.Small', '+', '-1'
     );
     rules.defineRule('fangsDamageDice',
-      'fangsDamageProgression', '=', '["d4", "d6", "d8", "2d6", "3d6", "4d6", "6d6", "8d6", "12d6"][source]'
+      'fangsDamageBoosts', '=', '["d4", "d6", "d8", "2d6", "3d6", "4d6", "6d6", "8d6", "12d6"][source+1]'
     );
     rules.defineRule('weapons.Claws', 'combatNotes.razorclaw', '=', '1');
     rules.defineRule('weapons.Fangs', 'combatNotes.longtooth', '=', '1');
@@ -2976,9 +3005,10 @@ Eberron.raceRulesExtra = function(rules, name) {
     Eberron.armorRules(rules, 'Composite Plating', 2, 'Light', 10, 0, 5);
     rules.defineRule('armor',
       'features.Composite Plating', '=', '"Composite Plating"',
-      // This is here instead of in featRulesExtra to ensure that Adamantine
-      // Body overrides Composite Plating
-      'combatNotes.adamantineBody', '=', '"Adamantine-Plated"'
+      // These are here instead of in featRulesExtra to ensure that Adamantine
+      // Body and Mithral Body override Composite Plating
+      'combatNotes.adamantineBody', '=', '"Adamantine Plating"',
+      'combatNotes.mithralBody', '=', '"Mithral Plating"'
     );
     rules.defineRule('negateLanguageBonus',
       'intelligenceModifier', '=', '-Math.max(source, 0)'
@@ -2987,6 +3017,14 @@ Eberron.raceRulesExtra = function(rules, name) {
     Eberron.weaponRules
       (rules, 'Slam', 'Unarmed', 'Unarmed', 'd4', 20, 2, null, []);
     rules.defineRule('weapons.Slam', 'combatNotes.slamWeapon', '=', '1');
+    rules.defineRule('slamDamageBoosts',
+      'combatNotes.slamWeapon', '+=', '0',
+      'features.Large', '+', '1',
+      'features.Small', '+', '-1'
+    );
+    rules.defineRule('slamDamageDice',
+      'slamDamageBoosts', '=', '["d3", "d4", "d6", "d8", "2d6", "3d6", "4d6", "6d6", "8d6", "12d6"][source+1]'
+    );
   } else if(rules.basePlugin.raceRulesExtra) {
     rules.basePlugin.raceRulesExtra(rules, name);
   }
