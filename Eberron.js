@@ -1079,63 +1079,68 @@ Eberron.FEATURES_ADDED = {
   'Powerful Charge':
     'Section=combat ' +
     'Note="Successful charge inflicts +%{features.Large?(combatNotes.greaterPowerfulCharge?\'3d6\':\'2d6\'):combatNotes.greaterPowerfulCharge?\'2d6\':\'1d8\'} HP"',
-  'Precise Swing':
-    'Section=combat Note="Melee attack ignores less-than-total cover"',
+  'Precise Swing':'Section=combat Note="Melee attacks ignore partial cover"',
   'Pursue':
     'Section=combat ' +
-    'Note="May spend 1 Action Point to step into area vacated by opponent"',
-  'Raging Luck':'Section=ability Note="Gains 1 Action Point during Rage"',
+    'Note="Can spend 1 Action Point to step into a square that a foe has just stepped out of"',
+  'Raging Luck':
+    'Section=ability Note="Gains 1 temporary Action Point during Rage"',
   'Recognize Impostor':
     'Section=skill Note="+4 Sense Motive vs. Bluff and Spot vs. Disguise"',
   'Repel Aberration':
     'Section=combat ' +
-    'Note="R60\' May hold at bay 2d6+%{levels.Druid+charismaModifier} HD of aberrations of up to (d20+%{levels.Druid*3-10+charismaModifier})/3 HD %{3+charismaModifier+combatNotes.extraTurning}/dy"',
+    'Note="R60\' Can prevent 2d6+%{levels.Druid+charismaModifier} HD of aberrations of up to (d20+%{levels.Druid*3-10+charismaModifier})/3 HD from approaching %{3+charismaModifier+combatNotes.extraTurning} times per day"',
   'Research':
-    'Section=skill Note="May use Knowledge skill on library and records"',
+    'Section=skill ' +
+    'Note="Can use Knowledge skills to conduct research in libraries and archives"',
   'Right Of Counsel':
-    'Section=feature Note="May seek advice from deathless ancestor"',
-  'Scribe':'Section=skill Note="+2 Decipher Script"',
-  'Shadower':'Section=skill Note="+2 Gather Information"',
+    'Section=feature ' +
+    'Note="Can ask questions of or request use of a spell-like ability by a deathless ancestor"',
+  'Serpent Strike':
+    'Section=combat Note="Can use Flurry Of Blows with a longspear"',
   'Shifter Defense':
     'Section=combat ' +
     'Note="Has DR %{combatNotes.greaterShifterDefense?4:2}/silver while shifting"',
   'Shifter Ferocity':
-    'Section=combat Note="May continue fighting below 0 HP while shifting"',
-  'Sentinel':'Section=skill Note="+2 Sense Motive"',
-  'Serpent Strike':'Section=combat Note="May use Flurry Of Blows w/longspear"',
+    'Section=combat ' +
+    'Note="Can continue fighting with 0 or negative hit points while shifting"',
   'Shifter Multiattack':
-    'Section=combat Note="Reduces penalty for additional natural attack to -2"',
+    'Section=combat ' +
+    'Note="Reduces the penalty for taking a second attack with a natural weapon to -2"',
   'Silver Smite':'Section=combat Note="Smite Evil inflicts +1d6 HP"',
   'Song Of The Heart':'Section=magic Note="+1 Bardic Music effects"',
   'Soothe The Beast':
     'Section=skill ' +
-    'Note="R30\' Successful Perform check during Bardic Music changes animal reaction"',
+    'Note="R30\' Can use Bardic Music to change animal attitudes"',
   'Spontaneous Casting':
     'Section=magic ' +
-    'Note="May spend 2 Action Points to substitute any known spell for a prepared one"',
-  'Storm Walker':'Section=skill Note="+2 Balance"',
+    'Note="Can spend 2 Action Points to substitute any known spell for a prepared one"',
   'Strong Mind':'Section=save Note="+3 vs. psionics and mind attacks"',
   'Totem Companion':
     'Section=companion ' +
-    'Note="Has Beast Totem magical beast as an animal companion"',
-  'Traveler':'Section=skill Note="+2 Survival"',
+    'Note="Can have a Beast Totem magical beast as an animal companion"',
   'Undead Empathy':
     'Section=skill ' +
-    'Note="+4 Diplomacy (influence intelligent undead reaction)/May use Diplomacy w/mindless undead"',
+    'Note="+4 Diplomacy to influence intelligent undead reactions, and can use Diplomacy with mindless undead within 30\'"',
   'Urban Tracking':
-    'Section=skill Note="May use Gather Information to trace a person w/in communities"',
+    'Section=skill ' +
+    'Note="Can use Gather Information to trace a person within communities"',
   'Vermin Companion':
-    'Section=companion Note="Has vermin creature as an animal companion"',
-  'Vermin Shape':'Section=magic Note="May Wild Shape into vermin"',
-  'Wand Mastery':'Section=magic Note="+2 spell DC and caster level w/wands"',
+    'Section=companion ' +
+    'Note="Can have a vermin creature as an animal companion"',
+  'Vermin Shape':
+    'Section=magic ' +
+    'Note="Can Wild Shape into a %{levels.Druid<11?\'Small\':\'Tiny\'}-%{levels.Druid<8?\'Medium\':levels.Druid<15?\'Large\':\'Huge\'} vermin with up to %{level} HD"',
+  'Wand Mastery':
+    'Section=magic Note="+2 spell DC and caster level when using a wand"',
   'Warden Initiate':
     'Section=combat,magic,skill ' +
-    'Note="+2 AC (forests)",' +
-         '"Has access to additional spells",' +
-         '"Climb is a class skill/Jump is a class skill"',
-  'Warder':'Section=skill Note="+2 Search"',
+    'Note=' +
+      '"+2 deflection bonus to Armor Class in forests",' +
+      '"Has access to additional spells",' +
+      '"Climb is a class skill/Jump is a class skill"',
   'Whirling Steel Strike':
-    'Section=combat Note="May use Flurry Of Blows w/longsword"',
+    'Section=combat Note="Can use Flurry Of Blows with a longsword"',
 
   // Domain
   'Add Life':
@@ -1342,7 +1347,13 @@ Eberron.FEATURES_ADDED = {
   'Handler':'Section=skill Note="+2 Handle Animal"',
   'Healer':'Section=skill Note="+2 Heal"',
   'Hospitaler':'Section=skill Note="+2 Diplomacy"',
-  'Maker':'Section=skill Note="+2 all Craft"'
+  'Maker':'Section=skill Note="+2 all Craft"',
+  'Scribe':'Section=skill Note="+2 Decipher Script"',
+  'Sentinel':'Section=skill Note="+2 Sense Motive"',
+  'Shadower':'Section=skill Note="+2 Gather Information"',
+  'Storm Walker':'Section=skill Note="+2 Balance"',
+  'Traveler':'Section=skill Note="+2 Survival"',
+  'Warder':'Section=skill Note="+2 Search"'
 
 };
 Eberron.FEATURES = Object.assign({}, SRD35.FEATURES, Eberron.FEATURES_ADDED);
