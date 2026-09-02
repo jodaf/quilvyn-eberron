@@ -806,13 +806,13 @@ Eberron.FEATURES_ADDED = {
   // Kalashtar
   'Dreamless':
     'Section=save ' +
-    'Note="Immune to <i>Dream</i>, <i>Nightmare</i>, and other effects that target dreams"',
+    'Note="Has immunity to <i>Dream</i>, <i>Nightmare</i>, and other effects that target dreams"',
   'Human-Like':'Section=skill Note="+2 Disguise (human)"',
   'Kalashtar Resistances':
     'Section=save Note="+2 vs. mind-altering effects and possession"',
   'Mindlink':
-    'Section=magic ' +
-    'Note="R30\' Can use telepathy with a willing target with at least 3 Intelligence for %{level//2>?1} rd once per day"',
+    'Section=skill ' +
+    'Note="R30\' Can use telepathy with a willing target of at least 3 Intelligence for %{level//2>?1} rd once per day"',
   'Naturally Psionic':'Section=magic Note="+%{level} Power Points"',
   'Social Mastery':'Section=skill Note="+2 Bluff/+2 Diplomacy/+2 Intimidate"',
 
@@ -825,7 +825,7 @@ Eberron.FEATURES_ADDED = {
       '"+%{combatNotes.beasthideElite?4:2} natural armor bonus to Armor Class while shifting"',
   'Cliffwalk':
     'Section=ability ' +
-    'Note="Has +2 Dexterity and a %{abilityNotes.cliffwalkElite?30:20}\' climb Speed while shifting"',
+    'Note="+2 Dexterity and has a %{abilityNotes.cliffwalkElite?30:20}\' climb Speed while shifting"',
   'Longstride':
     'Section=ability ' +
     'Note="+2 Dexterity and +%{abilityNotes.longstrideElite?20:10}\' Speed while shifting"',
@@ -870,8 +870,8 @@ Eberron.FEATURES_ADDED = {
     'Section=ability Note="+2 Constitution/-2 Wisdom/-2 Charisma"',
   'Warforged Immunities':
     'Section=save ' +
-    'Note="Immune to poison, sleep, paralysis, disease, nausea, fatigue, exhaustion, sickening, and energy drain"',
-  'Warforged Vulnerabilities':
+    'Note="Has immunity to poison, sleep, paralysis, disease, nausea, fatigue, exhaustion, sickening, and energy drain"',
+  'Warforged Vulnerability':
     'Section=save Note="Affected by effects that target wood or metal"',
 
   // Class - Artificer
@@ -1024,7 +1024,7 @@ Eberron.FEATURES_ADDED = {
       '"Has access to additional spells",' +
       '"Bluff is a class skill/Hide is a class skill/Perform is a class skill"',
   'Haunting Melody':
-    'Section=magic ' +
+    'Section=skill ' +
     'Note="R30\' Can use Bardic Music to inflict shaken on foes (save Will DC %{10+levels.Bard//2+charismaModifier} Will negates) for %{sumPerformRanks} rd"',
   'Healing Factor':
     'Section=combat Note="Regains %{level} hit points when shifting ends"',
@@ -1032,7 +1032,7 @@ Eberron.FEATURES_ADDED = {
   'Improved Damage Reduction':'Section=combat Note="Has DR +%1/adamantine"',
   'Improved Fortification':
     'Section=combat ' +
-    'Note="Immune to sneak attacks, critical hits, and healing spells"',
+    'Note="Has immunity to sneak attacks, critical hits, and healing spells"',
   'Improved Natural Attack (Claws)':
     'Section=combat ' +
     'Note="Claw damage increases by %1 size categor%{$\'features.Improved Natural Attack (Claws)\'>1?\'ies\':\'y\'}"',
@@ -1069,7 +1069,7 @@ Eberron.FEATURES_ADDED = {
     'Section=ability ' +
     'Note="Has no restrictions on combining Monk and chosen class levels"',
   'Music Of Growth':
-    'Section=magic ' +
+    'Section=skill ' +
     'Note="R30\' Can use Bardic Music to give +4 Strength and Constitution to animal and plant creatures"',
   'Music Of Making':
     'Section=magic,skill ' +
@@ -1108,7 +1108,8 @@ Eberron.FEATURES_ADDED = {
     'Section=combat ' +
     'Note="Reduces the penalty for taking a second attack with a natural weapon to -2"',
   'Silver Smite':'Section=combat Note="Smite Evil inflicts +1d6 HP"',
-  'Song Of The Heart':'Section=magic Note="+1 Bardic Music effects"',
+  // TODO implement?
+  'Song Of The Heart':'Section=skill Note="+1 Bardic Music effects"',
   'Soothe The Beast':
     'Section=skill ' +
     'Note="R30\' Can use Bardic Music to change animal attitudes"',
@@ -1166,7 +1167,7 @@ Eberron.FEATURES_ADDED = {
     'Section=magic Note="+1 caster level on Necromancy spells"',
   'Exorcise':
     'Section=combat Note="May use Turn Undead to exorcise spirits"',
-  'Feast Gut':'Section=save Note="Immune to ingested poison and disease"',
+  'Feast Gut':'Section=save Note="Has immunity to ingested poison and disease"',
   'Fit Of Passion':
     'Section=combat ' +
     'Note="May gain +4 Strength, +4 Constitution, and +2 Will save and suffer -2 AC for %{levels.Cleric} rd/dy"',
@@ -1218,12 +1219,13 @@ Eberron.FEATURES_ADDED = {
     'Note="20\' climb speed (+10 for Cliffwalk) while shifting",' +
          '"+%V Climb"',
   'Construct Perfection I':
-    'Section=combat Note="Immune to nonlethal damage and critical hits"',
-  'Construct Perfection II':'Section=save Note="Immune to mental effects"',
+    'Section=combat Note="Has immunity to nonlethal damage and critical hits"',
+  'Construct Perfection II':
+    'Section=save Note="Has immunity to mental effects"',
   'Construct Perfection III':
-    'Section=save Note="Immune to death and necromancy effects"',
+    'Section=save Note="Has immunity to death and necromancy effects"',
   'Construct Perfection IV':
-    'Section=save Note="Immune to ability damage and drain"',
+    'Section=save Note="Has immunity to ability damage and drain"',
   'Contact':'Section=feature Note="Has a level 3%1 associate or informant"',
   'Detect Thoughts':
     'Section=magic Note="May use <i>Detect Thoughts</i> effects at will"',
@@ -1268,7 +1270,7 @@ Eberron.FEATURES_ADDED = {
   'Improved Siberys Mark':'Section=magic Note="May use dragonmark spell 2/dy"',
   'Master Inquisitive Feat Bonus':
     'Section=feature Note="%V Master Inquisitive feats"',
-  'Metal Immunity':'Section=save Note="Immune to mind-altering effects"',
+  'Metal Immunity':'Section=save Note="Has immunity to mind-altering effects"',
   'Pounce':'Section=combat Note="May make full attack when charging"',
   'Rat':
     'Section=ability,combat ' +
@@ -1279,7 +1281,7 @@ Eberron.FEATURES_ADDED = {
     'Note="-%V Bluff/-%V Diplomacy/-%V Gather Information/-%V Sense Motive"',
   'Resist Charm':'Section=save Note="+2 vs. charm effects"',
   'Resist Corruption (Children Of Winter)':
-    'Section=save Note="Immune to disease/+2 vs. mind-altering effects"',
+    'Section=save Note="Has immunity to disease/+2 vs. mind-altering effects"',
   'Resist Corruption (Gatekeepers)':
     'Section=save Note="+2 vs. aberration abilities"',
   'Resist Possession':'Section=save Note="+%V vs. possession"',
@@ -1457,10 +1459,10 @@ Eberron.RACES_ADDED = {
     'Size=Medium ' +
     'Speed=30 ' +
     'Features=' +
-      '"1:Composite Plating","1:Hard To Heal","1:Inherenty Stable",' +
+      '"1:Composite Plating","1:Hard To Heal","1:Inherently Stable",' +
       '"1:Light Fortification","1:Living Construct","1:Slam Weapon",' +
       '"1:Warforged Ability Adjustment","1:Warforged Immunities",' +
-      '"1:Warforged Vulnerabilities" ' +
+      '"1:Warforged Vulnerability" ' +
     'Languages=Common'
 };
 Eberron.RACES = Object.assign({}, SRD35.RACES, Eberron.RACES_ADDED);
@@ -2752,9 +2754,6 @@ Eberron.featRulesExtra = function(rules, name) {
   } else if(name == 'Repel Aberration') {
     // Set turning level to suppress errors on, e.g., Extra Turning feat
     rules.defineRule('turningLevel', 'combatNotes.repelAberration', '=', '1');
-  } else if(name == 'Shifter Defense') {
-    rules.defineRule
-      ('damageReduction.Silver', 'combatNotes.shifterDefense', '^=', '2');
   } else if(name == 'Warden Initiate') {
     rules.defineRule('casterLevels.Warden',
       'features.Warden Initiate', '?', null,
