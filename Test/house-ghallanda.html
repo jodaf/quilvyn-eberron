@@ -12,13 +12,14 @@ var attributes = {
   "feats.Least Dragonmark":1, "feats.Lesser Dragonmark":1, "gender":"Female", "hitPoints":10, 
   "house":"Ghallanda", "intelligence":14, "levels.Fighter":9, "name":"House-Ghallanda", 
   "race":"Halfling", "shield":"None", "skills.Climb":1, "skills.Craft (Alchemy)":12, 
-  "skills.Handle Animal":12, "skills.Heal":1, "skills.Knowledge (Geography)":4, "skills.Listen":1, 
-  "skills.Perform (Dance)":2, "skills.Search":1, "skills.Spellcraft":2, "skills.Spot":12, 
-  "spells.Create Food And Water(Ghallanda2 Conj)":1, "spells.Heroes' Feast(Ghallanda3 Conj)":1, 
-  "spells.Leomund's Secure Shelter(Ghallanda2 Conj)":1, "spells.Mordenkainen's Magnificent Mansion(Ghallanda3 Conj)":1, 
-  "spells.Prestidigitation(Ghallanda1 Univ)":1, "spells.Purify Food And Drink(Ghallanda1 Tran)":1, 
-  "spells.Refuge(Ghallanda4 Conj)":1, "spells.Unseen Servant(Ghallanda1 Conj)":1, "spells_filter":"\"\"", 
-  "strength":15, "weapons.Club":1, "weapons.Shortbow":1, "wisdom":15
+  "skills.Diplomacy":1, "skills.Handle Animal":12, "skills.Heal":1, 
+  "skills.Knowledge (Geography)":4, "skills.Listen":1, "skills.Perform (Dance)":2, "skills.Search":1, 
+  "skills.Spellcraft":2, "skills.Spot":11, "spells.Create Food And Water(Ghallanda2 Conj)":1, 
+  "spells.Heroes' Feast(Ghallanda3 Conj)":1, "spells.Leomund's Secure Shelter(Ghallanda2 Conj)":1, 
+  "spells.Mordenkainen's Magnificent Mansion(Ghallanda3 Conj)":1, "spells.Prestidigitation(Ghallanda1 Univ)":1, 
+  "spells.Purify Food And Drink(Ghallanda1 Tran)":1, "spells.Refuge(Ghallanda4 Conj)":1, 
+  "spells.Unseen Servant(Ghallanda1 Conj)":1, "spells_filter":"\"\"", "strength":15, "weapons.Club":1, 
+  "weapons.Shortbow":1, "wisdom":15
 };
   </script>
 </head>
@@ -108,19 +109,19 @@ var attributes = {
       <col style="width:34%"/>
       <tr style="text-align:left">
         <td>Climb: (str) 1 (+4)</td>
+        <td>Heal: (wis;cc) 1 (+2.5)</td>
+        <td>Search: (int;cc) 1 (+2.5)</td>
+      </tr><tr style="text-align:left">
+        <td>Craft (Alchemy): (int) 12 (+14)</td>
         <td>Knowledge (Geography): (int;cc) 4 (+4)</td>
         <td>Spellcraft: (int;cc) 2 (+3)</td>
       </tr><tr style="text-align:left">
-        <td>Craft (Alchemy): (int) 12 (+14)</td>
+        <td>Diplomacy: (cha;cc) 1 (+2.5)</td>
         <td>Listen: (wis;cc) 1 (+4.5)</td>
-        <td>Spot: (wis;cc) 12 (+8)</td>
+        <td>Spot: (wis;cc) 11 (+7.5)</td>
       </tr><tr style="text-align:left">
         <td>Handle Animal: (cha) 12 (+12)</td>
         <td>Perform (Dance): (cha;cc) 2 (+1)</td>
-        <td></td>
-      </tr><tr style="text-align:left">
-        <td>Heal: (wis;cc) 1 (+2.5)</td>
-        <td>Search: (int;cc) 1 (+2.5)</td>
         <td></td>
       </tr></table>
 </td>
@@ -271,8 +272,6 @@ var attributes = {
   <tr style="text-align:center">
     <td>    <table id="ValidationPart" style="width:100%">
     <tr style="text-align:center">
-      <td><b>Validation Warnings</b>: Mark Of Hospitality: Implies diplomacy skill</td>
-    </tr><tr style="text-align:center">
       <td><b>Validation Errors</b>: Feat Allocation: 9 available vs. 3 allocated</td>
     </tr></table>
 </td>

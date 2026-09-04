@@ -8,8 +8,8 @@
 var attributes = {
   "_path":"ztest/eberron/skills/heir of siberys", 
   "alignment":"Chaotic Neutral", "armor":"Leather", "charisma":10, "constitution":12, "deity":"None", 
-  "dexterity":11, "experience":376, "feats.Great Fortitude":1, "feats.Mounted Combat":1, 
-  "gender":"Male", "hitPoints":12, "intelligence":18, "languages.Abyssal":1, 
+  "dexterity":11, "experience":376, "feats.Action Boost":1, "feats.Great Fortitude":1, 
+  "feats.Mounted Combat":1, "gender":"Male", "hitPoints":12, "intelligence":18, "languages.Abyssal":1, 
   "languages.Gnome":1, "languages.Quori":1, "name":"Skills-Heir Of Siberys", 
   "prestige.Heir Of Siberys":1, "race":"Human", "shield":"None", "skills.Appraise":2, "skills.Balance":2, 
   "skills.Bluff":2, "skills.Climb":2, "skills.Concentration":2, "skills.Craft (Alchemy)":2, 
@@ -70,7 +70,13 @@ var attributes = {
     </tr></table>
 </td>
   </tr><tr style="text-align:center">
-    <td><b>Ability Notes</b>: <i>Additional Action Points: +2 Action Points</i></td>
+    <td><b>Ability Notes</b>:     <table id="AbilityNotes" style="width:100%">
+    <tr style="text-align:center">
+      <td><i>Additional Action Points: +2 Action Points</i></td>
+    </tr><tr style="text-align:center">
+      <td>Action Boost: Adds 1d8 instead of 1d6 when using Action Points on attacks, skill checks, ability checks, level checks, and saves</td>
+    </tr></table>
+</td>
   </tr></table>
 </td>
 </tr><tr style="text-align:center">
@@ -86,7 +92,7 @@ var attributes = {
     </tr><tr style="text-align:center">
       <td>      <table id="FeatLists" style="width:100%">
       <tr style="text-align:center">
-        <td><b>Feats</b>: Great Fortitude; Mounted Combat</td>
+        <td><b>Feats</b>: Action Boost; Great Fortitude; Mounted Combat</td>
         <td><b>Human Features</b>: Human Feat Bonus; Human Skill Bonus</td>
         <td><b>Heir Of Siberys Features</b>: Additional Action Points; Bonus Feat (Heir Of Siberys)</td>
       </tr></table>
@@ -259,8 +265,6 @@ var attributes = {
     <tr style="text-align:center">
       <td><b>Validation Errors</b>:       <table id="ValidationNotes" style="width:100%">
       <tr style="text-align:center">
-        <td>Feat Allocation: 3 available vs. 2 allocated</td>
-      </tr><tr style="text-align:center">
         <td>Heir Of Siberys Class: Requires aberrant dragonmark feature == 0, heroic spirit feature, least dragonmark feature == 0, race (currently Human) matches 'Dwarf|Elf|Gnome|Halfling|Half Orc|Human' and count skills ge15 >= 2</td>
       </tr><tr style="text-align:center">
         <td>Skill Allocation: 28 available vs. 90 allocated</td>
