@@ -1142,6 +1142,20 @@ Eberron.FEATURES_ADDED = {
   'Whirling Steel Strike':
     'Section=combat Note="Can use Flurry Of Blows with a longsword"',
 
+  // Dragonmarks
+  'Mark Of Detection':'Section=skill Note="+2 Spot"',
+  'Mark Of Finding':'Section=skill Note="+2 Search"',
+  'Mark Of Handling':'Section=skill Note="+2 Handle Animal"',
+  'Mark Of Healing':'Section=skill Note="+2 Heal"',
+  'Mark Of Hospitality':'Section=skill Note="+2 Diplomacy"',
+  'Mark Of Making':'Section=skill Note="+2 all Craft"',
+  'Mark Of Passage':'Section=skill Note="+2 Survival"',
+  'Mark Of Scribing':'Section=skill Note="+2 Decipher Script"',
+  'Mark Of Sentinel':'Section=skill Note="+2 Sense Motive"',
+  'Mark Of Shadow':'Section=skill Note="+2 Gather Information"',
+  'Mark Of Storm':'Section=skill Note="+2 Balance"',
+  'Mark Of Warding':'Section=skill Note="+2 Search"',
+
   // Prestige classes
 
   // Dragonmark Heir
@@ -1419,21 +1433,7 @@ Eberron.FEATURES_ADDED = {
     'Section=magic ' +
     'Note="Touch inflicts -1d4 Constitution (living) or 2d6+%{levels.Cleric} HP (undead) 1/dy"',
   'Turn On The Charm':
-    'Section=ability Note="May gain +4 Charisma for 1 min 1/dy"',
-
-  // House
-  'Detective':'Section=skill Note="+2 Spot"',
-  'Finder':'Section=skill Note="+2 Search"',
-  'Handler':'Section=skill Note="+2 Handle Animal"',
-  'Healer':'Section=skill Note="+2 Heal"',
-  'Hospitaler':'Section=skill Note="+2 Diplomacy"',
-  'Maker':'Section=skill Note="+2 all Craft"',
-  'Scribe':'Section=skill Note="+2 Decipher Script"',
-  'Sentinel':'Section=skill Note="+2 Sense Motive"',
-  'Shadower':'Section=skill Note="+2 Gather Information"',
-  'Storm Walker':'Section=skill Note="+2 Balance"',
-  'Traveler':'Section=skill Note="+2 Survival"',
-  'Warder':'Section=skill Note="+2 Search"'
+    'Section=ability Note="May gain +4 Charisma for 1 min 1/dy"'
 
 };
 Eberron.FEATURES = Object.assign({}, SRD35.FEATURES, Eberron.FEATURES_ADDED);
@@ -1442,57 +1442,44 @@ Eberron.HOUSES = {
   'None':
     '',
   'Cannith':
-    'Dragonmark=Making ' +
-    'Race=Human ' +
-    'Features=Maker',
+    'Dragonmark="Mark Of Making" ' +
+    'Race=Human',
   'Deneith':
-    'Dragonmark=Sentinel ' +
-    'Race=Human ' +
-    'Features=Sentinel',
+    'Dragonmark="Mark Of Sentinel" ' +
+    'Race=Human',
   'Ghallanda':
-    'Dragonmark=Hospitality ' +
-    'Race=Halfling ' +
-    'Features=Hospitaler',
+    'Dragonmark="Mark Of Hospitality" ' +
+    'Race=Halfling',
   'Jorasco':
-    'Dragonmark=Healing ' +
-    'Race=Halfling ' +
-    'Features=Healer',
+    'Dragonmark="Mark Of Healing" ' +
+    'Race=Halfling',
   'Kundarak':
-    'Dragonmark=Warding ' +
-    'Race=Dwarf ' +
-    'Features=Warder',
+    'Dragonmark="Mark Of Warding" ' +
+    'Race=Dwarf',
   'Lyrandar':
-    'Dragonmark=Storm ' +
-    'Race=Half-Elf ' +
-    'Features="Storm Walker"',
+    'Dragonmark="Mark Of Storm" ' +
+    'Race=Half-Elf',
   'Medani':
-    'Dragonmark=Detection ' +
-    'Race=Half-Elf ' +
-    'Features=Detective',
+    'Dragonmark="Mark Of Detection" ' +
+    'Race=Half-Elf',
   'Orien':
-    'Dragonmark=Passage ' +
-    'Race=Human ' +
-    'Features=Traveler',
+    'Dragonmark="Mark Of Passage" ' +
+    'Race=Human',
   'Phiarlan':
-    'Dragonmark=Shadow ' +
-    'Race=Elf ' +
-    'Features=Shadower',
+    'Dragonmark="Mark Of Shadow" ' +
+    'Race=Elf',
   'Sivis':
-    'Dragonmark=Scribing ' +
-    'Race=Gnome ' +
-    'Features=Scribe',
+    'Dragonmark="Mark Of Scribing" ' +
+    'Race=Gnome',
   'Tharashk':
-    'Dragonmark=Finding ' +
-    'Race=Half-Orc,Human ' +
-    'Features=Finder',
+    'Dragonmark="Mark Of Finding" ' +
+    'Race=Half-Orc,Human',
   'Thuranni':
-    'Dragonmark=Shadow ' +
-    'Race=Elf ' +
-    'Features=Shadower',
+    'Dragonmark="Mark Of Shadow" ' +
+    'Race=Elf',
   'Vadalis':
-    'Dragonmark=Handling ' +
-    'Race=Human ' +
-    'Features=Handler'
+    'Dragonmark="Mark Of Handling" ' +
+    'Race=Human'
 };
 Eberron.LANGUAGES_ADDED = {
   'Argon':'',
@@ -2212,8 +2199,7 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
   else if(type == 'House')
     Eberron.houseRules(rules, name,
       QuilvynUtils.getAttrValue(attrs, 'Dragonmark'),
-      QuilvynUtils.getAttrValueArray(attrs, 'Race'),
-      QuilvynUtils.getAttrValueArray(attrs, 'Features')
+      QuilvynUtils.getAttrValueArray(attrs, 'Race')
     );
   else if(type == 'Language')
     Eberron.languageRules(rules, name);
@@ -2924,9 +2910,8 @@ Eberron.goodyRules = function(
 /*
  * Defines rules related to Eberron house #name#. #dragonmark# is the
  * dragonmark associated with the house and #races# lists its races.
- * #features# lists the features acquired by members of the house.
  */
-Eberron.houseRules = function(rules, name, dragonmark, races, features) {
+Eberron.houseRules = function(rules, name, dragonmark, races) {
 
   if(!name) {
     console.log('Empty house name');
@@ -2940,10 +2925,6 @@ Eberron.houseRules = function(rules, name, dragonmark, races, features) {
   }
   if(!Array.isArray(races)) {
     console.log('Bad race list "' + races + '" for house ' + name);
-    return;
-  }
-  if(!Array.isArray(features)) {
-    console.log('Bad features list "' + features + '" for house ' + name);
     return;
   }
 
@@ -2965,10 +2946,6 @@ Eberron.houseRules = function(rules, name, dragonmark, races, features) {
     'level', '=', null
   );
 
-  QuilvynRules.featureListRules(rules, features, name, houseLevel, false);
-  rules.defineSheetElement(name + ' Features', 'Feats+', null, '; ');
-  rules.defineChoice('extras', prefix + 'Features');
-
   rules.defineRule('casterLevels.' + name,
     'house', '?', 'source == "' + name + '"',
     'magicNotes.leastDragonmark', '=', '1',
@@ -2979,6 +2956,9 @@ Eberron.houseRules = function(rules, name, dragonmark, races, features) {
   );
   rules.defineRule('dragonmark',
     'house', '=', QuilvynUtils.dictLit(rules.houseStats.dragonmark) + '[source]'
+  );
+  rules.defineRule('features.' + dragonmark,
+    'dragonmark', '=', 'source=="' + dragonmark + '" ? 1 : null'
   );
   rules.defineRule('spellDifficultyClass.' + name,
     'house', '?', 'source == "' + name + '"',
@@ -3012,10 +2992,11 @@ Eberron.houseRules = function(rules, name, dragonmark, races, features) {
     QuilvynRules.prerequisiteRules
       (rules, 'validation', 'house' + name, houseLevel,
        "race =~ '" + races.join("|") + "'");
-  if(name == 'Cannith') {
+  if(dragonmark == 'Mark Of Making') {
     for(let s in rules.getChoices('skills')) {
       if(s.startsWith('Craft '))
-        rules.defineRule('skillModifier.' + s, 'skillNotes.maker', '+', '2');
+        rules.defineRule
+          ('skillModifier.' + s, 'skillNotes.markOfMaking', '+', '2');
     }
   }
 
