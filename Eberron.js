@@ -303,6 +303,7 @@ Eberron.PRESTIGE_CLASSES = {
     'Features=' +
       '"1:Armor Proficiency (Light)","1:Shield Proficiency",' +
       '"1:Weapon Proficiency (Martial)",' +
+      '"1:Sect",' +
       '"features.Ashbound ? 1:Resist The Arcane",' +
       '"features.Children Of Winter ? 1:Resist Poison",' +
       '"features.Gatekeepers ? 1:Resist Corruption (Gatekeepers)",' +
@@ -318,14 +319,14 @@ Eberron.PRESTIGE_CLASSES = {
       '"features.Ashbound ? 5:Spell Resistance",' +
       '"features.Children Of Winter ? 5:Touch Of Contagion",' +
       '"features.Gatekeepers ? 5:Slippery Mind",' +
-      '"features.Greensingers ? 5:Greensinger Damage Reduction",' +
+      '"features.Greensingers ? 5:Damage Reduction (Greensinger)",' +
       '"features.Wardens Of The Wood ? 5:Smite Evil" ' +
     'Selectables=' +
-      '1:Ashbound,' +
-      '"alignment !~ \'Good\' ? 1:Children Of Winter",' +
-      '"alignment !~ \'Evil\' ? 1:Gatekeepers",' +
-      '"alignment =~ \'Chaotic\' ? 1:Greensingers",' +
-      '"alignment !~ \'Evil\' ? 1:Wardens Of The Wood"',
+      '"1:Ashbound:Sect",' +
+      '"alignment !~ \'Good\' ? 1:Children Of Winter:Sect",' +
+      '"alignment !~ \'Evil\' ? 1:Gatekeepers:Sect",' +
+      '"alignment =~ \'Chaotic\' ? 1:Greensingers:Sect",' +
+      '"alignment !~ \'Evil\' ? 1:Wardens Of The Wood:Sect"',
   'Exorcist Of The Silver Flame':
     'Require=' +
       '"baseAttack >= 3","casterLevelDivine >= 1",' +
@@ -338,11 +339,10 @@ Eberron.PRESTIGE_CLASSES = {
       'Spellcraft ' +
     'Features=' +
       '"1:Flame Of Censure","1:Weapon Of The Exorcist",' +
-      '"2:Caster Level Bonus","2:Weapon Of Silver",3:Darkvision,' +
-      '"3:Resist Charm","3:Resist Possession","3:Resist Unnatural",' +
-      '"3:Smite Evil","4:Detect Thoughts","4:Weapon Of Good",' +
-      '"5:Silver Exorcism","6:Weapon Of Flame","8:Weapon Of Law",' +
-      '"9:Weapon Of Sacred Flame","10:Warding Flame"',
+      '"2:Divine Caster Level Bonus","2:Weapon Of Silver","3:Darkvision",' +
+      '"3:Resist Possession","3:Smite Evil","4:Detect Thoughts",' +
+      '"4:Weapon Of Good","5:Silver Exorcism","6:Weapon Of Flame",' +
+      '"8:Weapon Of Law","9:Weapon Of Sacred Flame","10:Warding Flame"',
   'Extreme Explorer':
     'Require=' +
       '"baseAttack >= 4","features.Action Boost",' +
@@ -355,7 +355,7 @@ Eberron.PRESTIGE_CLASSES = {
       'Survival,Swim,Tumble,"Use Magic Device","Use Rope" ' +
     'Features=' +
       '"1:Additional Action Points","1:Trap Sense","2:Dodge Bonus",2:Evasion,' +
-      '"2:Extreme Hustle","3:Extreme Explorer Feat Bonus","4:Extreme Action"',
+      '"2:Extreme Hustle","3:Bonus Feat (Extreme Explorer)","4:Extreme Action"',
   'Heir Of Siberys':
     'Require=' +
       '"features.Aberrant Dragonmark == 0","features.Heroic Spirit",' +
@@ -365,10 +365,9 @@ Eberron.PRESTIGE_CLASSES = {
     'HitDie=d6 Attack=3/4 SkillPoints=2 Fortitude=1/2 Reflex=1/2 Will=1/2 ' +
     // Note: Heir Of Siberys grants no additional class skills
     'Features=' +
-      '"1:Additional Action Points","1:Heir Of Siberys Feat Bonus",' +
+      '"1:Additional Action Points","1:Bonus Feat (Heir Of Siberys)",' +
       '"2:Siberys Mark","3:Improved Siberys Mark",' +
-      '"casterLevel ? 2:Caster Level Bonus",' +
-      '"casterLevel == 0 ? 2:Feat Bonus"',
+      '"casterLevel ? 2:Caster Level Bonus"',
   'Master Inquisitive':
     'Require=' +
       '"features.Investigate","skills.Gather Information >= 6",' +
@@ -378,7 +377,7 @@ Eberron.PRESTIGE_CLASSES = {
       'Bluff,"Decipher Script","Gather Information","Knowledge (Local)",' +
       'Listen,Search,"Sense Motive",Spot ' +
     'Features=' +
-      '"1:Zone Of Truth",2:Contact,"2:Master Inquisitive Feat Bonus",' +
+      '"1:Zone Of Truth",2:Contact,"2:Bonus Feat (Master Inquisitive)",' +
       '"3:Discern Lies","5:True Seeing"',
   'Warforged Juggernaut':
     'Require=' +
@@ -403,7 +402,7 @@ Eberron.PRESTIGE_CLASSES = {
       'Balance,Climb,"Handle Animal",Hide,Intimidate,Jump,' +
       '"Knowledge (Nature)",Listen,"Move Silently",Spot,Survival,Swim ' +
     'Features=' +
-      '"2:Weretouched Feat Bonus","2:Wild Empathy",3:Scent,' +
+      '"2:Bonus Shifter Feat","2:Wild Empathy",3:Scent,' +
       '"features.Bear ? 3:Improved Grab",' +
       '"features.Boar ? 3:Fierce Will",' +
       '"features.Rat ? 3:Climb Speed",' +
@@ -852,7 +851,7 @@ Eberron.FEATURES_ADDED = {
 
   // Warforged
   'Composite Plating':
-    'Section=combat Note="Attached plating prohibits weaing additional armor"',
+    'Section=combat Note="Attached plating prohibits wearing additional armor"',
   'Inherently Stable':
     'Section=combat ' +
     'Note="Can perform strenuous activity when at 0 hit points and suffers no additional loss at negative hit points unless further damaged"',
@@ -1143,6 +1142,246 @@ Eberron.FEATURES_ADDED = {
   'Whirling Steel Strike':
     'Section=combat Note="Can use Flurry Of Blows with a longsword"',
 
+  // Prestige classes
+
+  // Dragonmark Heir
+  'Additional Action Points':'Section=ability Note="+%V Action Points"',
+  'House Status':
+    'Section=skill ' +
+    'Note="+%{$\'levels.Dragonmark Heir\'} Charisma-based skills when interacting with fellow house members"',
+  'Improved Greater Dragonmark':
+    'Section=magic ' +
+    'Note="Can use a previously-chosen level 3 dragonmark spell-like ability 2 times per day or choose another to use once per day"',
+  'Improved Least Dragonmark':
+    'Section=magic ' +
+    'Note="Can use a previously-chosen level 1 dragonmark spell-like ability 2 times per day or choose another to use once per day"',
+  'Improved Lesser Dragonmark':
+    'Section=magic ' +
+    'Note="Can use a previously-chosen level 2 dragonmark spell-like ability 2 times per day or choose another to use once per day"',
+  // Lesser Dragonmark as above
+
+  // Eldeen Ranger
+  'Darkvision':SRD35.FEATURES.Darkvision,
+  'Favored Enemy':SRD35.FEATURES['Favored Enemy'],
+  'Ferocity':
+    'Section=combat Note="Can continue fighting with 0 or negative hit points"',
+  'Damage Reduction (Greensinger)':'Section=combat Note="Has DR 3/cold iron"',
+  'Hated Foe':
+    'Section=combat ' +
+    'Note="Can spend 1 Action Point when attacking a favored enemy to inflict double damage with a hit"',
+  'Improved Critical':
+    'Section=feature ' +
+    'Note="+1 General Feat (Improved Critical for a choice of a ranged or thrown weapon)"',
+  'Nature Sense':SRD35.FEATURES['Nature Sense'],
+  'Resist The Arcane':'Section=save Note="+2 vs. arcane spells"',
+  'Resist Corruption (Children Of Winter)':
+    'Section=save ' +
+    'Note="Has immunity to disease/+2 vs. mind-affecting spells and abilities"',
+  'Resist Corruption (Gatekeepers)':
+    'Section=save Note="+2 vs. aberration abilities"',
+  "Resist Nature's Lure":SRD35.FEATURES["Resist Nature's Lure"],
+  'Resist Poison':SRD35.FEATURES['Resist Poison'],
+  'Sect':'Section=feature Note="1 Selection"',
+  'Slippery Mind':SRD35.FEATURES['Slippery Mind'],
+  'Smite Evil':SRD35.FEATURES['Smite Evil'],
+  'Spell Resistance':'Section=save Note="Has SR 20"',
+  'Touch Of Contagion':
+    'Section=magic ' +
+    'Note="Can use <i>Contagion</i> effects 3 times per day" ' +
+    'Spells=Contagion ' +
+    'SpellAbility=Charisma',
+  'Unearthly Grace':'Section=save Note="+%V Fortitude/+%V Reflex/+%V Will"',
+
+  // Exorcist Of The Silver Flame
+  // TODO 30' at level 3, 60' at level 6
+  // Darkvision as above
+  'Detect Thoughts':
+    'Section=magic ' +
+    'Note="Can use <i>Detect Thoughts</i> effects at will" ' +
+    'Spells="Detect Thoughts" ' +
+    'SpellAbility=Charisma',
+  'Divine Caster Level Bonus':SRD35.FEATURES['Divine Caster Level Bonus'],
+  'Flame Of Censure':
+    'Section=combat ' +
+    'Note="R60\' Can stun for 1 rd 2d6+%1 HD of evil outsiders of up to (d20+%2)/3 HD, banishing those with up to %{$\'levels.Exorcist Of The Silver Flame\'//2} HD, %3 times per day"',
+  'Resist Possession':
+    'Section=save ' +
+    'Note="+4 vs. possession/+2 vs. charm effects from evil outsiders and undead"',
+  'Silver Exorcism':
+    'Section=magic ' +
+    'Note="+2 exorcism checks and dispel and caster level checks vs. evil outsiders"',
+  // Smite Evil as above
+  'Warding Flame':
+    'Section=combat ' +
+    'Note="Can generate at will a 30\' bright light that gives a +2 sacred bonus to Armor Class, gives SR 25 vs. evil casters and spells, and inflicts blindness on successful evil attackers (save Fortitude DC %{charismaModifier+20} negates)"',
+  'Weapon Of Flame':
+    'Section=combat Note="Exorcist weapon inflicts +1d6 HP fire"',
+  'Weapon Of Good':
+    'Section=combat Note="Exorcist weapon is considered good-aligned"',
+  'Weapon Of Law':
+    'Section=combat Note="Exorcist weapon is considered lawful-aligned"',
+  'Weapon Of Sacred Flame':
+     'Section=combat Note="Exorcist weapon inflicts +1d6 HP sacred"',
+  'Weapon Of Silver':
+    'Section=combat Note="Exorcist weapon is considered silver"',
+  'Weapon Of The Exorcist':
+    'Section=combat ' +
+    'Note="Chosen weapon inflicts +1 HP and is considered magic%1%2%3"',
+
+  // Extreme Explorer
+  // Additional Action Points as above
+  'Bonus Feat (Extreme Explorer)':
+    'Section=feature Note="+%V Extreme Explorer Feats"',
+  'Dodge Bonus':
+    'Section=combat ' +
+    'Note="+%V dodge bonus to Armor Class; medium or heavy armor, a shield, or a medium or heavy load negates"',
+  'Evasion':SRD35.FEATURES.Evasion,
+  'Extreme Action':
+    'Section=ability ' +
+    'Note="Retains Action Points spent to increase d20 rolls when the modified roll is successful and the Action Point die shows an 8"',
+  'Extreme Hustle':
+    'Section=combat Note="Can spend 1 Action Point to gain a move action"',
+  'Trap Sense':SRD35.FEATURES['Trap Sense'],
+
+  // Heir Of Siberys
+  // Additional Action Points as above
+  'Bonus Feat (Heir Of Siberys)':
+    'Section=feature ' +
+    'Note="+1 Heir Of Siberys Feat%{casterLevel?\'\':\'/+\'+($\'levels.Heir Of Siberys\'>2?2:1)+\' General Feat\'}"',
+  'Caster Level Bonus':SRD35.FEATURES['Caster Level Bonus'],
+  'Improved Siberys Mark':
+    'Section=magic Note="Has increased Siberys Mark effects"',
+  'Siberys Mark':
+    'Section=magic ' +
+    'Note="Can use a choice of house dragonmark spell %{magicNotes.improvedSiberysMark?\'2 times\':\'once\'} per day"',
+
+  // Master Inquisitive
+  'Bonus Feat (Master Inquisitive)':
+    'Section=feature Note="%V Master Inquisitive feats"',
+  'Contact':
+    'Section=feature ' +
+    'Note="Has a level 3%{$\'levels.Master Inquisitive\'>3?\' and a level 6\':\'\'} associate or informant"',
+  'Discern Lies':
+    'Section=magic ' +
+    'Note="Can use <i>Discern Lies</i> effects once per day, and can spend 2 Action points for a second use" ' +
+    'Spells="Discern Lies" ' +
+    'SpellAbility=Charisma',
+  'True Seeing':
+    'Section=magic ' +
+    'Note="Can use <i>True Seeing</i> effects once per day, and can spend 2 Action points for a second use" ' +
+    'Spells="True Seeing" ' +
+    'SpellAbility=Charisma',
+  'Zone Of Truth':
+    'Section=magic ' +
+    'Note="Can use <i>Zone Of Truth</i> effects once per day, and can spend 2 Action points for a second use" ' +
+    'Spells="Zone Of Truth" ' +
+    'SpellAbility=Charisma',
+
+  // Warforged Juggernaut
+  'Armor Spikes':
+    'Section=combat ' +
+    'Note="Grapple inflicts 1d%{$\'levels.Warforged Juggernaut\'>3?8:6} HP piercing"',
+  'Charge Bonus':
+    'Section=combat ' +
+    'Note="+%{$\'levels.Warforged Juggernaut\'//2} attack when charging"',
+  'Construct Perfection I':
+    'Section=combat Note="Has immunity to nonlethal damage and critical hits"',
+  'Construct Perfection II':
+    'Section=save Note="Has immunity to mind-affecting spells and abilities"',
+  'Construct Perfection III':
+    'Section=save Note="Has immunity to death and necromancy effects"',
+  'Construct Perfection IV':
+    'Section=save Note="Has immunity to ability damage and drain"',
+  'Expert Bull Rush':
+    'Section=combat ' +
+    'Note="+%{$\'levels.Warforged Juggernaut\'} bull rush and to break down doors"',
+  'Extended Charge':'Section=ability Note="+5 Speed when charging"',
+  // Greater Powerful Charge as above
+  'Healing Immunity':
+    'Section=save Note="Unaffected by healing spells and consumables"',
+  // Powerful Charge as above
+  'Reserved':
+    'Section=skill ' +
+    'Note="-%V Bluff/-%V Diplomacy/-%V Gather Information/-%V Sense Motive"',
+  'Superior Bull Rush':
+    'Section=combat ' +
+    'Note="Bull Rush inflicts +1d%{$\'levels.Warforged Juggernaut\'>=4?8:6}+%{strengthModifier} HP"',
+
+  // Weretouched Master
+  'Alternate Form (Bear)':
+    'Section=ability ' +
+    'Note="Can shift into a bear or a bipedal hybrid form with +16 Strength, +2 Dexterity, and +8 Constitution"',
+  'Alternate Form (Boar)':
+    'Section=ability ' +
+    'Note="Can shift into a boar or a bipedal hybrid form with +4 Strength and +6 Constitution"',
+  'Alternate Form (Rat)':
+    'Section=ability ' +
+    'Note="Can shift into a rat or a bipedal hybrid for with +6 Dexterity and +2 Constitution"',
+  'Alternate Form (Tiger)':
+    'Section=ability ' +
+    'Note="Can shift into a rat or a bipedal hybrid for with +12 Strength, +4 Dexterity, and +6 Constitution"',
+  'Alternate Form (Wolf)':
+    'Section=ability ' +
+    'Note="Can shift into a rat or a bipedal hybrid for with +2 Strength, +4 Dexterity, and +4 Constitution"',
+  'Alternate Form (Wolverine)':
+    'Section=ability ' +
+    'Note="Can shift into a rat or a bipedal hybrid for with +4 Strength, +4 Dexterity, and +8 Constitution"',
+  'Bear':
+    'Section=ability,combat ' +
+    'Note=' +
+      '"+2 Strength while shifting",' +
+      '"Can attack with claws while shifting"',
+  'Boar':
+    'Section=ability,combat ' +
+    'Note=' +
+      '"+2 Constitution while shifting",' +
+      '"Can attack with tusks (fangs) while shifting"',
+  'Bonus Shifter Feat':'Section=feature Note="+%V Shifter Feats"',
+  'Climb Speed':
+    'Section=ability,skill ' +
+    'Note=' +
+      '"20\' climb Speed (+10 for Cliffwalk) while shifting",' +
+      '"+%V Climb"',
+  'Fierce Will':'Section=save Note="+4 Will while shifting"',
+  'Frightful Shifting':
+    'Section=combat ' +
+    'Note="Attacks inflict shaken for 5d6 rounds on foes within 30\' with up to %{level-1} HD (save Will DC %{$\'levels.Weretouched Master\'+10+charismaModifier} negates for 24 hr)"',
+  'Improved Grab':
+    'Section=combat ' +
+    'Note="Can grapple without provoking an AOO after a claw hit"',
+  'Pounce':
+    'Section=combat Note="Can make a full attack at the end of a charge"',
+  'Rat':
+    'Section=ability,combat ' +
+    'Note=' +
+      '"+2 Dexterity while shifting",' +
+      '"Can attack with fangs while shifting"',
+  'Scent':
+    'Section=feature ' +
+    'Note="R30\' Can detect creature presence and track by smell"',
+  'Tiger':
+    'Section=ability,combat ' +
+    'Note=' +
+      '"+2 Strength while shifting",' +
+      '"Can attack with claws while shifting"',
+  'Trip':
+    'Section=combat ' +
+    'Note="Can trip without provoking an AOO after a successful bite"',
+  'Weretouched Rage':
+    'Section=combat ' +
+    'Note="Gains +2 Strength, +2 Constitution, and -2 Armor Class after taking damage until foe dies, self dies, or shifting ends"',
+  'Wild Empathy':SRD35.FEATURES['Wild Empathy'],
+  'Wolf':
+    'Section=ability,combat ' +
+    'Note=' +
+      '"+2 Dexterity while shifting",' +
+      '"Can attack with fangs while shifting"',
+  'Wolverine':
+    'Section=ability,combat ' +
+    'Note=' +
+      '"+2 Constitution while shifting",' +
+      '"Can attack with fangs while shifting"',
+
   // Domain
   'Add Life':
     'Section=magic ' +
@@ -1181,167 +1420,6 @@ Eberron.FEATURES_ADDED = {
     'Note="Touch inflicts -1d4 Constitution (living) or 2d6+%{levels.Cleric} HP (undead) 1/dy"',
   'Turn On The Charm':
     'Section=ability Note="May gain +4 Charisma for 1 min 1/dy"',
-
-  // Prestige classes
-  'Additional Action Points':'Section=ability Note="+2 Action Points"',
-  'Alternate Form (Bear)':
-    'Section=ability ' +
-    'Note="May shift to animal (+16 Strength, +2 Dexterity, +8 Constitution) or bipedal hybrid form"',
-  'Alternate Form (Boar)':
-    'Section=ability Note="May shift to animal (+4 Strength, +6 Constitution) or bipedal hybrid form"',
-  'Alternate Form (Rat)':
-    'Section=ability Note="May shift to animal (+6 Dexterity, +2 Constitution) or bipedal hybrid form"',
-  'Alternate Form (Tiger)':
-    'Section=ability ' +
-    'Note="May shift to animal (+12 Strength, +4 Dexterity, +6 Constitution) or bipedal hybrid form"',
-  'Alternate Form (Wolf)':
-    'Section=ability ' +
-    'Note="May shift to animal (+2 Strength, +4 Dexterity, +4 Constitution) or bipedal hybrid form"',
-  'Alternate Form (Wolverine)':
-    'Section=ability ' +
-    'Note="May shift to animal (+4 Strength, +4 Dexterity, +8 Constitution) or bipedal hybrid form"',
-  'Armor Spikes':'Section=combat Note="Grapple attack inflicts 1d%{$\'levels.Warforged Juggernaut\'>=4 ? 8 : 6} HP"',
-  'Bear':
-    'Section=ability,combat ' +
-    'Note="+2 Strength while shifting",' +
-         '"Can attack w/claws while shifting"',
-  'Boar':
-    'Section=ability,combat ' +
-    'Note="+2 Constitution while shifting",' +
-         '"Can attack w/tusks (fangs) while shifting"',
-  'Caster Level Bonus':
-    'Section=magic Note="+%V base class level for spells known and spells/dy"',
-  'Charge Bonus':
-    'Section=combat ' +
-    'Note="+%{$\'levels.Warforged Juggernaut\'//2} attack when charging"',
-  'Climb Speed':
-    'Section=ability,skill ' +
-    'Note="20\' climb speed (+10 for Cliffwalk) while shifting",' +
-         '"+%V Climb"',
-  'Construct Perfection I':
-    'Section=combat Note="Has immunity to nonlethal damage and critical hits"',
-  'Construct Perfection II':
-    'Section=save Note="Has immunity to mental effects"',
-  'Construct Perfection III':
-    'Section=save Note="Has immunity to death and necromancy effects"',
-  'Construct Perfection IV':
-    'Section=save Note="Has immunity to ability damage and drain"',
-  'Contact':'Section=feature Note="Has a level 3%1 associate or informant"',
-  'Detect Thoughts':
-    'Section=magic Note="May use <i>Detect Thoughts</i> effects at will"',
-  'Discern Lies':
-    'Section=magic ' +
-    'Note="R%{$\'levels.Master Inquisitive\'//2*5+25}\' May reveal lies from %{$\'levels.Master Inquisitive\'} creatures in 15\' radius for conc or %{$\'levels.Master Inquisitive\'} rd (DC %{14+wisdomModifier} Will neg) 1/dy; may spend 2 Action Points for 2/dy"',
-  'Dodge Bonus':'Section=combat Note="+%V AC when unencumbered"',
-  'Expert Bull Rush':'Section=combat Note="+%{$\'levels.Warforged Juggernaut\'} bull rush and door breakage"',
-  'Extended Charge':'Section=ability Note="+5 speed when charging"',
-  'Extreme Action':
-    'Section=ability Note="Retains Action Points on successful roll of 8"',
-  'Extreme Explorer Feat Bonus':
-    'Section=feature Note="%V Extreme Explorer feats"',
-  'Extreme Hustle':'Section=combat Note="May spend 1 Action Point to gain a move action"',
-  'Ferocity':'Section=combat Note="May continue fighting below 0 HP"',
-  'Fierce Will':'Section=save Note="+4 Will while shifting"',
-  'Flame Of Censure':
-    'Section=combat ' +
-    'Note="May stun or banish evil outsiders w/a successful turning check"',
-  'Frightful Shifting':
-    'Section=combat ' +
-    'Note="R30\' Foes up to %{level-1} HD shaken for 5d6 rounds (DC %{$\'levels.Weretouched Master\'+10+charismaModifier} Will neg)"',
-  'Greensinger Damage Reduction':'Section=combat Note="DR 3/cold iron"',
-  'Hated Foe':
-    'Section=combat Note="May spend 1 Action Point for dbl damage against favored enemy"',
-  'Heir Of Siberys Feat Bonus':'Section=feature Note="1 Heir Of Siberys feat"',
-  'Healing Immunity':'Section=save Note="Unaffected by healing spells"',
-  'House Status':
-    'Section=skill ' +
-    'Note="+%{$\'levels.Dragonmark Heir\'} Charisma-based skills w/house members"',
-  'Improved Grab':
-    'Section=combat Note="May grapple w/out provoking AOO after claw hit"',
-  'Improved Greater Dragonmark':
-    'Section=magic Note="May use 2nd level 3 dragonmark spell or +1/dy"',
-  'Improved Least Dragonmark':
-    'Section=magic Note="May use 2nd level 1 dragonmark spell or +1/dy"',
-  'Improved Lesser Dragonmark':
-    'Section=magic Note="May use 2nd level 2 dragonmark spell or +1/dy"',
-  'Improved Critical':
-    'Section=feature ' +
-    'Note="+1 General Feat (Improved Critical (choice of ranged weapon))"',
-  'Improved Siberys Mark':'Section=magic Note="May use dragonmark spell 2/dy"',
-  'Master Inquisitive Feat Bonus':
-    'Section=feature Note="%V Master Inquisitive feats"',
-  'Metal Immunity':'Section=save Note="Has immunity to mind-altering effects"',
-  'Pounce':'Section=combat Note="May make full attack when charging"',
-  'Rat':
-    'Section=ability,combat ' +
-    'Note="+2 Dexterity while shifting",' +
-         '"Can attack w/fangs while shifting"',
-  'Reserved':
-    'Section=skill ' +
-    'Note="-%V Bluff/-%V Diplomacy/-%V Gather Information/-%V Sense Motive"',
-  'Resist Charm':'Section=save Note="+2 vs. charm effects"',
-  'Resist Corruption (Children Of Winter)':
-    'Section=save Note="Has immunity to disease/+2 vs. mind-altering effects"',
-  'Resist Corruption (Gatekeepers)':
-    'Section=save Note="+2 vs. aberration abilities"',
-  'Resist Possession':'Section=save Note="+%V vs. possession"',
-  'Resist The Arcane':'Section=save Note="+2 vs. arcane spells"',
-  'Resist Unnatural':
-    'Section=save Note="+2 vs. effects of evil outsiders and undead"',
-  'Scent':
-    'Section=feature ' +
-    'Note="R30\' May detect creature presence and track by smell"',
-  'Siberys Mark':
-    'Section=magic Note="May use choice of house dragonmark spell %1/dy"',
-  'Silver Exorcism':'Section=combat Note="+2 exorcism checks"',
-  'Spell Resistance':'Section=save Note="Spell resistance 20"',
-  'Superior Bull Rush':
-    'Section=combat ' +
-    'Note="Inflicts +1d%{$\'levels.Warforged Juggernaut\'>=4 ? 8 : 6}+%{strengthModifier} HP from bull rush"',
-  'Tiger':
-    'Section=ability,combat ' +
-    'Note="+2 Strength while shifting",' +
-         '"Can attack w/claws while shifting"',
-  'Touch Of Contagion':'Section=magic Note="May cast <i>Contagion</i> 3/dy"',
-  'Trip':
-    'Section=combat Note="May trip w/out provoking AOO after successful bite"',
-  'True Seeing':
-    'Section=magic ' +
-    'Note="May see through 120\' darkness, illusion, and invisibility for %{$\'levels.Master Inquisitive\'} min 1/dy; may spend 2 Action Points for 2/dy"',
-  'Unearthly Grace':'Section=save Note="+%V Fortitude/+%V Reflex/+%V Will"',
-  'Warding Flame':
-    'Section=combat,feature,save ' +
-    'Note=' +
-      '"May gain +2 AC and inflict blindness on evil foes that strike self (DC %{charismaModifier+20} Fort neg) at will",' +
-      '"May generate 60\' light at will",' +
-      '"May gain spell Resistance 25 (evil casters and spells) at will"',
-  'Weapon Of Flame':
-    'Section=combat Note="Exorcist weapon inflicts +%Vd6 HP fire"',
-  'Weapon Of Good':
-    'Section=combat Note="Exorcist weapon considered good-aligned"',
-  'Weapon Of Law':
-    'Section=combat Note="Exorcist weapon considered lawful-aligned"',
-  'Weapon Of Sacred Flame':
-     'Section=combat Note="Exorcist weapon inflicts +1d6 HP fire"',
-  'Weapon Of Silver':'Section=combat Note="Exorcist weapon considered silver"',
-  'Weapon Of The Exorcist':
-    'Section=combat ' +
-    'Note="Exorcist weapon inflicts +1 HP and is considered magic%1%2%3"',
-  'Weretouched Feat Bonus':'Section=feature Note="%V Shifter feats"',
-  'Weretouched Rage':
-    'Section=combat ' +
-    'Note="Gains +2 Strength, +2 Constitution, and -2 AC after taking damage until self or foe dies"',
-  'Wolf':
-    'Section=ability,combat ' +
-    'Note="+2 Dexterity while shifting",' +
-         '"Can attack w/fangs while shifting"',
-  'Wolverine':
-    'Section=ability,combat ' +
-    'Note="+2 Constitution while shifting",' +
-         '"Can attack w/fangs while shifting"',
-  'Zone Of Truth':
-    'Section=magic ' +
-    'Note="R%{$\'levels.Master Inquisitive\'//2*5+25}\' May create 20\' radius that prohibits lying for %{$\'levels.Master Inquisitive\'} min (DC %{wisdomModifier+12} Will neg) 1/dy; may spend 2 Action Points for 2/dy"',
 
   // House
   'Detective':'Section=skill Note="+2 Spot"',
@@ -2023,6 +2101,9 @@ Eberron.talentRules = function(
   aberrantMarkPowers.forEach(a => {
     rules.addChoice('aberrantMarkPowers', a, '');
   });
+  for(let f in features)
+    if(features[f] == null)
+      console.log(f);
   rules.basePlugin.talentRules
     (rules, feats, features, goodies, languages, skills);
   // No changes needed to the rules defined by base method
@@ -2312,6 +2393,8 @@ Eberron.classRules = function(
  */
 Eberron.classRulesExtra = function(rules, name) {
 
+  let classLevel = 'levels.' + name;
+
   if(name == 'Artificer') {
 
     let allFeats = rules.getChoices('feats');
@@ -2337,6 +2420,9 @@ Eberron.classRulesExtra = function(rules, name) {
       rules.defineRule
         ('countSkillsGe7', 'skills.' + skill, '+=', 'source >= 7 ? 1 : null');
     }
+    rules.defineRule('abilityNotes.additionalActionPoints',
+      classLevel, '+=', 'source * 2 - 2'
+    );
 
   } else if(name == 'Eldeen Ranger') {
 
@@ -2354,10 +2440,10 @@ Eberron.classRulesExtra = function(rules, name) {
       'levels.Eldeen Ranger', '+=', null
     );
     rules.defineRule('damageReduction.Cold Iron',
-      'combatNotes.greensingerDamageReduction', '^=', '3'
+      'combatNotes.damageReduction(Greensinger)', '^=', '3'
     );
     rules.defineRule('saveNotes.unearthlyGrace', 'charismaModifier', '=', null);
-    rules.defineRule('selectableFeatureCount.Eldeen Ranger',
+    rules.defineRule('selectableFeatureCount.Eldeen Ranger (Sect)',
       'levels.Eldeen Ranger', '=', '1'
     );
     rules.defineRule('skillNotes.favoredEnemy',
@@ -2368,6 +2454,16 @@ Eberron.classRulesExtra = function(rules, name) {
 
   } else if(name == 'Exorcist Of The Silver Flame') {
 
+    rules.defineRule('combatNotes.flameOfCensure.1',
+      classLevel, '=', null,
+      'charismaModifier', '+', null
+    );
+    rules.defineRule('combatNotes.flameOfCensure.2',
+      classLevel, '=', null,
+      'charismaModifier', '+', null
+    );
+    rules.defineRule
+      ('combatNotes.flameOfCensure.3', 'charismaModifier', '=', '3 + source');
     rules.defineRule('combatNotes.smiteEvil',
       'levels.Exorcist Of The Silver Flame', '+=', 'source>=7 ? 2 : source>=3 ? 1 : null'
     );
@@ -2379,30 +2475,20 @@ Eberron.classRulesExtra = function(rules, name) {
       'features.Smite Evil', '?', null,
       'levels.Exorcist Of The Silver Flame', '+=', null
     );
-    rules.defineRule('combatNotes.weaponOfFlame',
-      '', '=', '1',
-      'combatNotes.weaponOfSacredFlame', '+', '1'
-    );
     rules.defineRule('combatNotes.weaponOfTheExorcist.1',
-      'features.Weapon Of The Exorcist', '?', null,
-      '', '=', '""',
+      'features.Weapon Of The Exorcist', '=', '""',
       'combatNotes.weaponOfSilver', '=', '", silver"'
     );
     rules.defineRule('combatNotes.weaponOfTheExorcist.2',
-      'features.Weapon Of The Exorcist', '?', null,
-      '', '=', '""',
+      'features.Weapon Of The Exorcist', '=', '""',
       'combatNotes.weaponOfGood', '=', '", good"'
     );
     rules.defineRule('combatNotes.weaponOfTheExorcist.3',
-      'features.Weapon Of The Exorcist', '?', null,
-      '', '=', '""',
+      'features.Weapon Of The Exorcist', '=', '""',
       'combatNotes.weaponOfLaw', '=', '", lawful"'
     );
-    rules.defineRule('magicNotes.casterLevelBonus',
+    rules.defineRule('magicNotes.divineCasterLevelBonus',
       'levels.Exorcist Of The Silver Flame', '+=', 'Math.floor(source*2/3)'
-    );
-    rules.defineRule('saveNotes.resistPossession',
-      'exorcistOfTheSilverFlameFeatures.Resist Possession', '+=', '4'
     );
 
   } else if(name == 'Extreme Explorer') {
@@ -2419,6 +2505,9 @@ Eberron.classRulesExtra = function(rules, name) {
         console.log('Missing Extreme Explorer feat "' + feat + '"');
       }
     }
+
+    rules.defineRule
+      ('abilityNotes.additionalActionPoints', classLevel, '+=', 'source * 2');
     // Arrange for dodge bonus note to show even when wearing non-light armor
     rules.defineRule('armorClass', 'combatNotes.dodgeBonus.1', '+', null);
     rules.defineRule('combatNotes.dodgeBonus',
@@ -2426,12 +2515,13 @@ Eberron.classRulesExtra = function(rules, name) {
     );
     rules.defineRule('combatNotes.dodgeBonus.1',
       'armorWeight', '?', 'source <= 1',
+      'shield', '?', 'source == "None"',
       'combatNotes.dodgeBonus', '=', null
     );
     rules.defineRule('featCount.Extreme Explorer',
-      'featureNotes.extremeExplorerFeatBonus', '+=', null
+      'featureNotes.bonusFeat(ExtremeExplorer)', '+=', null
     );
-    rules.defineRule('featureNotes.extremeExplorerFeatBonus',
+    rules.defineRule('featureNotes.bonusFeat(ExtremeExplorer)',
       'levels.Extreme Explorer', '=', 'Math.floor((source - 1) / 2)'
     );
     rules.defineRule('saveNotes.trapSense',
@@ -2457,18 +2547,25 @@ Eberron.classRulesExtra = function(rules, name) {
       rules.defineRule
         ('countSkillsGe15', 'skills.' + skill, '+=', 'source >= 15 ? 1 : null');
     }
+
+    rules.defineRule
+      ('abilityNotes.additionalActionPoints', classLevel, '+=', 'source * 2');
     rules.defineRule('casterLevels.Dragonmark',
       'levels.Heir Of Siberys', '^=', 'source >= 2 ? 15 : null'
     );
+    rules.defineRule('featureNotes.bonusFeat(HeirOfSiberys).1',
+      'featureNotes.bonusFeat(HeirOfSiberys)', '?', null,
+      'casterLevel', '?', '!source',
+      classLevel, '=', 'source<3 ? source - 1 : 2'
+    );
+    rules.defineRule('featCount.General',
+      'featureNotes.bonusFeat(HeirOfSiberys).1', '+=', null
+    );
     rules.defineRule('featCount.Heir Of Siberys',
-      'featureNotes.heirOfSiberysFeatBonus', '=', '1'
+      'featureNotes.bonusFeat(HeirOfSiberys)', '=', '1'
     );
     rules.defineRule('magicNotes.casterLevelBonus',
       'levels.Heir Of Siberys', '+=', 'source - 1'
-    );
-    rules.defineRule('magicNotes.siberysMark.1',
-      'features.Siberys Mark', '=', '1',
-      'magicNotes.improvedSiberysMark', '+', '1'
     );
 
   } else if(name == 'Master Inquisitive') {
@@ -2491,14 +2588,12 @@ Eberron.classRulesExtra = function(rules, name) {
         console.log('Missing Master Inquisitive feat "' + feat + '"');
       }
     }
+
     rules.defineRule('featCount.Master Inquisitive',
-      'featureNotes.masterInquisitiveFeatBonus', '+=', null
+      'featureNotes.bonusFeat(MasterInquisitive)', '+=', null
     );
-    rules.defineRule('featureNotes.masterInquisitiveFeatBonus',
+    rules.defineRule('featureNotes.bonusFeat(MasterInquisitive)',
       'levels.Master Inquisitive', '=', 'Math.floor(source / 2)'
-    );
-    rules.defineRule('featureNotes.contact.1',
-      'levels.Master Inquisitive', '=', 'source>=4 ? " and a level 6" : ""'
     );
 
   } else if(name == 'Warforged Juggernaut') {
@@ -2519,8 +2614,8 @@ Eberron.classRulesExtra = function(rules, name) {
       'combatNotes.wolverine', '+=', '1'
     );
     rules.defineRule
-      ('featCount.Shifter', 'featureNotes.weretouchedFeatBonus', '=', null);
-    rules.defineRule('featureNotes.weretouchedFeatBonus',
+      ('featCount.Shifter', 'featureNotes.bonusShifterFeat', '=', null);
+    rules.defineRule('featureNotes.bonusShifterFeat',
       'levels.Weretouched Master', '+=', 'Math.floor(source / 2)'
     );
     rules.defineRule('selectableFeatureCount.Weretouched Master',

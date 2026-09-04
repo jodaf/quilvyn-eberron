@@ -77,7 +77,7 @@ var attributes = {
       <td>      <table id="FeatStats" style="width:100%">
       <tr style="text-align:center">
         <td><b>Feat Count</b>: General: 6</td>
-        <td><b>Selectable Feature Count</b>: Eldeen Ranger; Ranger (Combat Style)</td>
+        <td><b>Selectable Feature Count</b>: Eldeen Ranger (Sect); Ranger (Combat Style)</td>
       </tr></table>
 </td>
     </tr><tr style="text-align:center">
@@ -85,7 +85,7 @@ var attributes = {
       <tr style="text-align:center">
         <td><b>Feats</b>: Agile; Athletic; Beast Totem (Yrthak); Combat Casting; Combat Reflexes; Toughness</td>
         <td><b>Human Features</b>: Human Feat Bonus; Human Skill Bonus</td>
-        <td><b>Eldeen Ranger Features</b>: Armor Proficiency (Light); Ashbound; Children Of Winter; Darkvision; Favored Enemy; Ferocity; Gatekeepers; Greensinger Damage Reduction; Greensingers; Hated Foe; Improved Critical; Nature Sense; Resist Corruption (Children Of Winter); Resist Corruption (Gatekeepers); Resist Nature's Lure; Resist Poison; Resist The Arcane; Shield Proficiency; Slippery Mind; Smite Evil; Spell Resistance; Touch Of Contagion; Unearthly Grace; Wardens Of The Wood; Weapon Proficiency (Martial)</td>
+        <td><b>Eldeen Ranger Features</b>: Armor Proficiency (Light); Ashbound; Children Of Winter; Damage Reduction (Greensinger); Darkvision; Favored Enemy; Ferocity; Gatekeepers; Greensingers; Hated Foe; Improved Critical; Nature Sense; Resist Corruption (Children Of Winter); Resist Corruption (Gatekeepers); Resist Nature's Lure; Resist Poison; Resist The Arcane; Sect; Shield Proficiency; Slippery Mind; Smite Evil; Spell Resistance; Touch Of Contagion; Unearthly Grace; Wardens Of The Wood; Weapon Proficiency (Martial)</td>
         <td><b>Ranger Features</b>: Animal Companion; Armor Proficiency (Light; Shield); Combat Style (Archery); Combat Style; Endurance; Favored Enemy; Track; Weapon Proficiency (Simple Weapons; Martial Weapons); Wild Empathy</td>
       </tr></table>
 </td>
@@ -96,9 +96,11 @@ var attributes = {
       </tr><tr style="text-align:center">
         <td><i>Human Feat Bonus: +1 General Feat</i></td>
       </tr><tr style="text-align:center">
-        <td><i>Improved Critical: +1 General Feat (Improved Critical (choice of ranged weapon))</i></td>
+        <td><i>Improved Critical: +1 General Feat (Improved Critical for a choice of a ranged or thrown weapon)</i></td>
       </tr><tr style="text-align:center">
         <td>Darkvision: R60' Has black and white vision in complete darkness</td>
+      </tr><tr style="text-align:center">
+        <td>Sect: 1 Selection</td>
       </tr></table>
 </td>
     </tr></table>
@@ -225,9 +227,9 @@ var attributes = {
       </tr><tr style="text-align:center">
         <td><i>Constitution Hit Points Adjustment: +10</i></td>
       </tr><tr style="text-align:center">
-        <td><i>Dexterity Attack Adjustment: +3</i></td>
+        <td><i>Damage Reduction (Greensinger): Has DR 3/cold iron</i></td>
       </tr><tr style="text-align:center">
-        <td><i>Greensinger Damage Reduction: DR 3/cold iron</i></td>
+        <td><i>Dexterity Attack Adjustment: +3</i></td>
       </tr><tr style="text-align:center">
         <td><i>Strength Attack Adjustment: +1</i></td>
       </tr><tr style="text-align:center">
@@ -241,9 +243,9 @@ var attributes = {
       </tr><tr style="text-align:center">
         <td>Favored Enemy: Has 5 +2 damage bonuses distributed among 3 chosen creature types</td>
       </tr><tr style="text-align:center">
-        <td>Ferocity: May continue fighting below 0 HP</td>
+        <td>Ferocity: Can continue fighting with 0 or negative hit points</td>
       </tr><tr style="text-align:center">
-        <td>Hated Foe: May spend 1 Action Point for dbl damage against favored enemy</td>
+        <td>Hated Foe: Can spend 1 Action Point when attacking a favored enemy to inflict double damage with a hit</td>
       </tr><tr style="text-align:center">
         <td>Rapid Shot: Can make an extra ranged attack during a full attack, suffering a -2 penalty on all ranged attacks during the rd</td>
       </tr><tr style="text-align:center">
@@ -264,7 +266,7 @@ var attributes = {
       </tr><tr style="text-align:center">
         <td><i>Dexterity Reflex Adjustment: +3</i></td>
       </tr><tr style="text-align:center">
-        <td><i>Spell Resistance: Spell resistance 20</i></td>
+        <td><i>Spell Resistance: Has SR 20</i></td>
       </tr><tr style="text-align:center">
         <td><i>Unearthly Grace: +1 Fortitude/+1 Reflex/+1 Will</i></td>
       </tr><tr style="text-align:center">
@@ -276,7 +278,7 @@ var attributes = {
       </tr><tr style="text-align:center">
         <td>Endurance: +4 vs. damage from extended physical action, starvation, thirst, and suffocation/Can sleep in light or medium armor without becoming fatigued</td>
       </tr><tr style="text-align:center">
-        <td>Resist Corruption (Children Of Winter): Immune to disease/+2 vs. mind-altering effects</td>
+        <td>Resist Corruption (Children Of Winter): Has immunity to disease/+2 vs. mind-affecting spells and abilities</td>
       </tr><tr style="text-align:center">
         <td>Resist Corruption (Gatekeepers): +2 vs. aberration abilities</td>
       </tr><tr style="text-align:center">
@@ -301,17 +303,19 @@ var attributes = {
       <td>      <table id="SpellStats" style="width:100%">
       <tr style="text-align:center">
         <td><b>Spell Slots</b>: R1: 0</td>
-        <td><b>Spell DC</b>: R: 9</td>
+        <td><b>Spell DC</b>: R: 9; Touch Of Contagion: 11</td>
       </tr></table>
 </td>
     </tr></table>
 </td>
   </tr><tr style="text-align:center">
+    <td><b>Spells</b>:<br/>Contagion (Touch Of Contagion3 Necr): Touched contracts a random disease (save Fortitude negates)</td>
+  </tr><tr style="text-align:center">
     <td><b>Magic Notes</b>:     <table id="MagicNotes" style="width:100%">
     <tr style="text-align:center">
       <td>Ashbound: Doubles the duration of <i>Summon Nature's Ally</i>, and summoned creatures gain +3 attack</td>
     </tr><tr style="text-align:center">
-      <td>Touch Of Contagion: May cast <i>Contagion</i> 3/dy</td>
+      <td>Touch Of Contagion: Can use <i>Contagion</i> effects 3 times per day</td>
     </tr></table>
 </td>
   </tr></table>
