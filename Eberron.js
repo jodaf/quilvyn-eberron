@@ -893,7 +893,7 @@ Eberron.FEATURES_ADDED = {
   'Craft Staff':SRD35.FEATURES['Craft Staff'],
   'Craft Wand':SRD35.FEATURES['Craft Wand'],
   'Craft Wondrous Item':SRD35.FEATURES['Craft Wondrous Item'],
-  'Disable Trap':SRD35.FEATURES['Trapfinding'],
+  'Disable Trap':SRD35.FEATURES.Trapfinding,
   'Forge Ring':SRD35.FEATURES['Forge Ring'],
   'Item Creation':
     'Section=skill ' +
@@ -2417,7 +2417,7 @@ Eberron.choiceRules = function(rules, type, name, attrs) {
     groupLevels.forEach(gl => {
       let matchInfo = (gl + '').match(/^(\D+)(\d+)$/);
       if(!matchInfo) {
-        console.log('Bad level "' + groupLevels[i] + '" for spell ' + name);
+        console.log('Bad level "' + gl + '" for spell ' + name);
       } else {
         let group = matchInfo[1];
         let level = matchInfo[2] * 1;
