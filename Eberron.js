@@ -3049,12 +3049,27 @@ Eberron.featureRules = function(
   }
   rules.basePlugin.featureRules
     (rules, name, sections, notes, spells, spellAbility);
-  // for the Aberrant Dragonmark feats, correct the casterLevel == level
-  // computed by the base featureRules with level // 2
   if(name.startsWith('Aberrant Dragonmark')) {
+    // correct the casterLevel == level computed by the base featureRules to
+    // level // 2
     rules.defineRule('casterLevels.' + name.replace(/[ ()]/g, ''),
       'level', '=', 'Math.floor(source / 2)'
     );
+  } else if(name.match(/^(Greater|Least|Lesser) Dragonmark \(/)) {
+    // correct the casterLevel == level computed by the base featureRules to
+    // 1, 6, or 10 + any Heir Of Siberys level
+    let level = 'casterLevels.' + name.replaceAll(/[\s()]/g, '');
+    rules.defineRule(level,
+      'level', '=', '1',
+      'features.Least Dragonmark', '+', '5',
+      'features.Greater Dragonmark', '+', '4',
+      'levels.Heir Of Siberys', '+', null
+    );
+  } else if(name.match(/^Siberys Mark \(/)) {
+    // correct the casterLevel == level computed by the base featureRules to
+    // a flat 15
+    let level = 'casterLevels.' + name.replaceAll(/[\s()]/g, '');
+    rules.defineRule(level, 'level', '=', '15');
   }
 };
 
