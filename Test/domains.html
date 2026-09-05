@@ -141,7 +141,7 @@ var attributes = {
     </tr><tr style="text-align:center">
       <td>Blind-Fight: Can move at 3/4 Speed in darkness or poor visibility</td>
     </tr><tr style="text-align:center">
-      <td>Turn On The Charm: May gain +4 Charisma for 1 min 1/dy</td>
+      <td>Charisma Boost: Can gain +4 charisma for 1 min once per day</td>
     </tr></table>
 </td>
   </tr></table>
@@ -162,7 +162,7 @@ var attributes = {
       <tr style="text-align:center">
         <td><b>Feats</b>: Improved Initiative; Investigate; Precise Swing; Quick Draw; Run</td>
         <td><b>Human Features</b>: Human Feat Bonus; Human Skill Bonus</td>
-        <td><b>Cleric Features</b>: Add Life; All-Weather; Armor Proficiency (Light; Medium; Heavy; Shield); Artifice Domain; Artifice Master; Augment Summoning; Aura; Blind-Fight; Charm Domain; Clarity Of True Madness; Commerce Domain; Commercial; Community Domain; Community Pillar; Deathless Domain; Decay Domain; Dragon Below Domain; Empowered Creation; Empowered Necromancy; Exorcise; Exorcism Domain; Feast Domain; Feast Gut; Fit Of Passion; Life Domain; Madness Domain; Madness-Weakened; Meditation Domain; Meditative Casting; Necromancer Domain; Passion Domain; Rebuke Deathless; Shadow Domain; Spontaneous Casting (Cleric); Touch Of Decay; Turn On The Charm; Turn Undead; Weapon Proficiency (Simple Weapons); Weather Domain; Weather-Wise</td>
+        <td><b>Cleric Features</b>: Add Life; All-Weather; Armor Proficiency (Light; Medium; Heavy; Shield); Artifice Domain; Augment Summoning; Aura; Blind-Fight; Boost Spell; Charisma Boost; Charm Domain; Clarity Of True Madness; Commerce Domain; Community Domain; Community Leader; Deathless Domain; Decay Domain; Dragon Below Domain; Empowered Creation; Empowered Necromancy; Exorcise; Exorcism Domain; Feast Domain; Fit Of Passion; Ingestion Immunities; Life Domain; Madness Domain; Meditation Domain; Necromancer Domain; Passion Domain; Rebuke Deathless; Shadow Domain; Skilled Crafter; Skilled Professional; Spontaneous Casting (Cleric); Touch Of Decay; Turn Undead; Unsound Mind; Weapon Proficiency (Simple Weapons); Weather Domain; Weather-Wise</td>
       </tr></table>
 </td>
     </tr><tr style="text-align:center">
@@ -173,8 +173,6 @@ var attributes = {
         <td>All-Weather: Can see clearly in any weather</td>
       </tr><tr style="text-align:center">
         <td>Aura: Visible to <i>Detect Chaos/Evil/Good/Law</i>, depending on deity alignment and domains</td>
-      </tr><tr style="text-align:center">
-        <td>Clarity Of True Madness: May add 5 to a Wisdom skill check or Will save 1/dy</td>
       </tr></table>
 </td>
     </tr></table>
@@ -190,8 +188,8 @@ var attributes = {
       <col style="width:34%"/>
       <tr style="text-align:left">
         <td>Bluff: (cha;cc) 13 (+5.5)</td>
-        <td>Heal: (wis) 1 (+4)</td>
-        <td>Profession (Tanner): (wis) 6 (+9)</td>
+        <td>Heal: (wis) 1 (+3)</td>
+        <td>Profession (Tanner): (wis) 6 (+8)</td>
       </tr><tr style="text-align:left">
         <td>Craft (Alchemy): (int) 2 (+7)</td>
         <td>Knowledge (History): (int) 9 (+10)</td>
@@ -211,19 +209,15 @@ var attributes = {
     </tr><tr style="text-align:center">
       <td><b>Skill Notes</b>:       <table id="SkillNotes" style="width:100%">
       <tr style="text-align:center">
-        <td><i>All-Weather: +2 Survival (weather)/Survival is a class skill</i></td>
+        <td><i>All-Weather: Survival is a class skill</i></td>
       </tr><tr style="text-align:center">
         <td><i>Armor Skill Check Penalty: -1 Balance/-1 Climb/-1 Escape Artist/-1 Hide/-1 Jump/-1 Move Silently/-1 Sleight Of Hand/-1 Tumble</i></td>
       </tr><tr style="text-align:center">
         <td><i>Armor Swim Check Penalty: -2 Swim</i></td>
       </tr><tr style="text-align:center">
-        <td><i>Artifice Master: +4 all Craft</i></td>
-      </tr><tr style="text-align:center">
         <td><i>Bluff Synergy: +2 Diplomacy/+2 Disguise (acting)/+2 Intimidate/+2 Sleight Of Hand</i></td>
       </tr><tr style="text-align:center">
-        <td><i>Commercial: +10 Profession (earn a living)/Appraise is a class skill</i></td>
-      </tr><tr style="text-align:center">
-        <td><i>Community Pillar: +2 Diplomacy</i></td>
+        <td><i>Community Leader: +2 Diplomacy</i></td>
       </tr><tr style="text-align:center">
         <td><i>Human Skill Bonus: +13 Skill Points</i></td>
       </tr><tr style="text-align:center">
@@ -233,9 +227,21 @@ var attributes = {
       </tr><tr style="text-align:center">
         <td><i>Knowledge (History) Synergy: +2 Bardic knowledge</i></td>
       </tr><tr style="text-align:center">
+        <td><i>Skilled Crafter: +4 all Craft skills</i></td>
+      </tr><tr style="text-align:center">
+        <td><i>Skilled Professional: Appraise is a class skill</i></td>
+      </tr><tr style="text-align:center">
+        <td><i>Unsound Mind: -1 all Wisdom skills</i></td>
+      </tr><tr style="text-align:center">
+        <td>All-Weather: +2 Survival with weather-related checks</td>
+      </tr><tr style="text-align:center">
+        <td>Clarity Of True Madness: Can add 5 to a Wisdom skill check or Will save once per day</td>
+      </tr><tr style="text-align:center">
         <td>Investigate: Can use Search to find and analyze clues, and 5 ranks in an appropriate Knowledge skill gives +2 on the Search</td>
       </tr><tr style="text-align:center">
         <td>Run: +4 running Jump</td>
+      </tr><tr style="text-align:center">
+        <td>Skilled Professional: +10 Profession to earn a living</td>
       </tr></table>
 </td>
     </tr></table>
@@ -286,17 +292,19 @@ var attributes = {
       </tr><tr style="text-align:center">
         <td>Blind-Fight: Can reroll misses due to concealment, retains Dexterity bonus to Armor Class when fighting invisible attackers, and invisible attackers gain no melee attack bonus</td>
       </tr><tr style="text-align:center">
-        <td>Exorcise: May use Turn Undead to exorcise spirits</td>
+        <td>Exorcise: Can use a Turn Undead check to force a possessing spirit out of a body for 24 hr</td>
       </tr><tr style="text-align:center">
-        <td>Fit Of Passion: May gain +4 Strength, +4 Constitution, and +2 Will save and suffer -2 AC for 10 rd/dy</td>
+        <td>Fit Of Passion: Can gain +4 Strength, +4 Constitution, and +2 Will and suffer -2 Armor Class for 10 rd per day</td>
       </tr><tr style="text-align:center">
         <td>Precise Swing: Melee attacks ignore partial cover</td>
       </tr><tr style="text-align:center">
         <td>Quick Draw: Can draw a weapon as a free action and throw weapons at the full attack rate</td>
       </tr><tr style="text-align:center">
-        <td>Rebuke Deathless: May use Turn Undead to rebuke deathless 1/dy</td>
+        <td>Rebuke Deathless: Can use Turn Undead to command deathless once per day</td>
       </tr><tr style="text-align:center">
         <td>Run: Retains Dexterity bonus to Armor Class while running</td>
+      </tr><tr style="text-align:center">
+        <td>Touch Of Decay: Touch inflicts -1d4 Constitution to a living creature or 2d6+10 HP to an undead, object, or construct one once per day</td>
       </tr><tr style="text-align:center">
         <td>Turn Undead: R60' Can turn or rebuke 2d6+9 HD of undead creatures of up to (d20+19)/3 HD 2 times per day</td>
       </tr></table>
@@ -314,11 +322,13 @@ var attributes = {
       </tr><tr style="text-align:center">
         <td><i>Dexterity Reflex Adjustment: +3</i></td>
       </tr><tr style="text-align:center">
-        <td><i>Madness-Weakened: -1 Will</i></td>
+        <td><i>Unsound Mind: -1 Will</i></td>
       </tr><tr style="text-align:center">
         <td><i>Wisdom Will Adjustment: +3</i></td>
       </tr><tr style="text-align:center">
-        <td>Feast Gut: Has immunity to ingested poison and disease</td>
+        <td>Clarity Of True Madness: Can add 5 to a Wisdom skill check or Will save once per day</td>
+      </tr><tr style="text-align:center">
+        <td>Ingestion Immunities: Has immunity to ingested poison and disease</td>
       </tr></table>
 </td>
     </tr></table>
@@ -333,7 +343,7 @@ var attributes = {
       <td>      <table id="SpellStats" style="width:100%">
       <tr style="text-align:center">
         <td><b>Spell Slots</b>: C0: 6; C1: 5; C2: 5; C3: 4; C4: 3; C5: 2; Domain1: 1; Domain2: 1; Domain3: 1; Domain4: 1; Domain5: 1</td>
-        <td><b>Spell DC</b>: C: 13; Domain: 13</td>
+        <td><b>Spell DC</b>: C: 13; Community Leader: 9; Domain: 13</td>
       </tr></table>
 </td>
     </tr></table>
@@ -370,6 +380,8 @@ var attributes = {
       <td>Call Lightning Storm (Weather5 Evoc): R800' 1 bolt per rd inflicts 5d6 HP electricity (or 5d10 HP during a storm) (save Reflex half) for 10 min or 10 bolts</td>
     </tr><tr style="text-align:left">
       <td>Calm Emotions (Charm2 Ench): R200' Pacifies creatures in a 20' radius (save Will negates), negating rage and morale bonuses, for concentration up to 10 rd or until any target is attacked</td>
+    </tr><tr style="text-align:left">
+      <td>Calm Emotions (Community Leader2 Ench): R200' Pacifies creatures in a 20' radius (save Will negates), negating rage and morale bonuses, for concentration up to 10 rd or until any target is attacked</td>
     </tr><tr style="text-align:left">
       <td>Cause Fear (Dragon1 Necr): R50' Target with up to 5 HD becomes frightened and flees for 1d4 rd (save Will inflicts shaken for 1 rd)</td>
     </tr><tr style="text-align:left">
@@ -641,17 +653,15 @@ var attributes = {
     </tr><tr style="text-align:center">
       <td>Augment Summoning: Summoned creatures gain +4 Strength and Constitution</td>
     </tr><tr style="text-align:center">
-      <td>Community Pillar: May cast <i>Calm Emotions</i> 1/dy</td>
+      <td>Boost Spell: Can increase a spell's variable effects by 50% once per day</td>
     </tr><tr style="text-align:center">
-      <td>Empowered Creation: +1 caster level on Item Creation spells</td>
+      <td>Community Leader: Can use <i>Calm Emotions</i> as a spell-like ability once per day</td>
+    </tr><tr style="text-align:center">
+      <td>Empowered Creation: +1 caster level on Creation spells</td>
     </tr><tr style="text-align:center">
       <td>Empowered Necromancy: +1 caster level on Necromancy spells</td>
     </tr><tr style="text-align:center">
-      <td>Meditative Casting: May gain x1.5 chosen spell variable effects 1/dy</td>
-    </tr><tr style="text-align:center">
       <td>Spontaneous Casting (Cleric): Can cast <i>Cure</i> or <i>Inflict</i> spells in place of prepared spells</td>
-    </tr><tr style="text-align:center">
-      <td>Touch Of Decay: Touch inflicts -1d4 Constitution (living) or 2d6+10 HP (undead) 1/dy</td>
     </tr></table>
 </td>
   </tr></table>

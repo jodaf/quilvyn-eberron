@@ -214,20 +214,20 @@ Eberron.CLASSES_ADDED = {
 Eberron.CLASS_FEATURES_ADDED = {
   'Cleric':
     'Features=' +
-      '"features.Artifice Domain ? 1:Artifice Master",' +
+      '"features.Artifice Domain ? 1:Skilled Crafter",' +
       '"features.Artifice Domain ? 1:Empowered Creation",' +
-      '"features.Charm Domain ? 1:Turn On The Charm",' +
-      '"features.Commerce Domain ? 1:Commercial",' +
-      '"features.Community Domain ? 1:Community Pillar",' +
+      '"features.Charm Domain ? 1:Charisma Boost",' +
+      '"features.Commerce Domain ? 1:Skilled Professional",' +
+      '"features.Community Domain ? 1:Community Leader",' +
       '"features.Deathless Domain ? 1:Rebuke Deathless",' +
       '"features.Decay Domain ? 1:Touch Of Decay",' +
       '"features.Dragon Below Domain ? 1:Augment Summoning",' +
       '"features.Exorcism Domain ? 1:Exorcise",' +
-      '"features.Feast Domain ? 1:Feast Gut",' +
+      '"features.Feast Domain ? 1:Ingestion Immunities",' +
       '"features.Life Domain ? 1:Add Life",' +
       '"features.Madness Domain ? 1:Clarity Of True Madness",' +
-      '"features.Madness Domain ? 1:Madness-Weakened",' +
-      '"features.Meditation Domain ? 1:Meditative Casting",' +
+      '"features.Madness Domain ? 1:Unsound Mind",' +
+      '"features.Meditation Domain ? 1:Boost Spell",' +
       '"features.Necromancer Domain ? 1:Empowered Necromancy",' +
       '"features.Passion Domain ? 1:Fit Of Passion",' +
       '"features.Shadow Domain ? 1:Blind-Fight",' +
@@ -363,7 +363,7 @@ Eberron.PRESTIGE_CLASSES = {
       '"race =~ \'Dwarf|Elf|Gnome|Halfling|Half Orc|Human\'",' +
       '"countSkillsGe15 >= 2" ' +
     'HitDie=d6 Attack=3/4 SkillPoints=2 Fortitude=1/2 Reflex=1/2 Will=1/2 ' +
-    // Note: Heir Of Siberys grants no additional class skills
+    // N.B.: Heir Of Siberys grants no additional class skills
     'Features=' +
       '"1:Additional Action Points","1:Bonus Feat (Heir Of Siberys)",' +
       '"2:Siberys Mark","3:Improved Siberys Mark",' +
@@ -1633,43 +1633,79 @@ Eberron.FEATURES_ADDED = {
       '"Can attack with fangs while shifting"',
 
   // Domain
+  // Artifice
+  'Empowered Creation':
+    'Section=magic Note="+1 caster level on Creation spells"',
+  'Skilled Crafter':'Section=skill Note="+4 all Craft skills"',
+  // Charm
+  'Charisma Boost': // ref Realms
+    'Section=ability Note="Can gain +4 charisma for 1 min once per day"',
+  // Commerce
+  'Skilled Professional':
+    'Section=skill,skill ' +
+    'Note=' +
+      '"Appraise is a class skill",' +
+      '"+10 Profession to earn a living"',
+  // Community
+  'Community Leader':
+    'Section=magic,skill '  +
+    'Note=' +
+      '"Can use <i>Calm Emotions</i> as a spell-like ability once per day",' +
+      '"+2 Diplomacy" ' +
+    'Spells="Calm Emotions" ' +
+    'SpellAbility=Charisma',
+  // Deathless
+  'Rebuke Deathless':
+    'Section=combat ' +
+    'Note="Can use Turn Undead to command deathless once per day"',
+  // Decay
+  'Touch Of Decay':
+    'Section=combat ' +
+    'Note="Touch inflicts -1d4 Constitution to a living creature or 2d6+%{levels.Cleric} HP to an undead, object, or construct one once per day"',
+  // Dragon Below
+  'Augment Summoning':SRD35.FEATURES['Augment Summoning'],
+  // Exorcism
+  'Exorcise':
+    'Section=combat ' +
+    'Note="Can use a Turn Undead check to force a possessing spirit out of a body for 24 hr"',
+  // Feast
+  'Ingestion Immunities':
+    'Section=save Note="Has immunity to ingested poison and disease"',
+  // Life
   'Add Life':
     'Section=magic ' +
     'Note="Touched gains 1d6+%{levels.Cleric} temporary HP for %{levels.Cleric} hr"',
-  'All-Weather':
-    'Section=feature,skill ' +
-    'Note="Can see clearly in any weather",' +
-         '"+2 Survival (weather)/Survival is a class skill"',
-  'Artifice Master':'Section=skill Note="+4 all Craft"',
+  // Madness
   'Clarity Of True Madness':
-    'Section=feature ' +
-    'Note="May add %{levels.Cleric//2} to a Wisdom skill check or Will save 1/dy"',
-  'Commercial':
-    'Section=skill ' +
-    'Note="+10 Profession (earn a living)/Appraise is a class skill"',
-  'Community Pillar':
-    'Section=magic,skill '  +
-    'Note="May cast <i>Calm Emotions</i> 1/dy","+2 Diplomacy"',
-  'Empowered Creation':
-    'Section=magic Note="+1 caster level on Item Creation spells"',
+    'Section=save,skill ' +
+    'Note=' +
+      '"Can add %{levels.Cleric//2} to a Wisdom skill check or Will save once per day",' +
+      '"Can add %{levels.Cleric//2} to a Wisdom skill check or Will save once per day"',
+  'Unsound Mind':
+    'Section=save,skill ' +
+    'Note=' +
+      '"-1 Will",' +
+      '"-1 all Wisdom skills"',
+  // Meditation
+  'Boost Spell':
+    'Section=magic ' +
+    'Note="Can increase a spell\'s variable effects by 50% once per day"',
+  // Necromancer
   'Empowered Necromancy':
     'Section=magic Note="+1 caster level on Necromancy spells"',
-  'Exorcise':
-    'Section=combat Note="May use Turn Undead to exorcise spirits"',
-  'Feast Gut':'Section=save Note="Has immunity to ingested poison and disease"',
+  // Passion
   'Fit Of Passion':
     'Section=combat ' +
-    'Note="May gain +4 Strength, +4 Constitution, and +2 Will save and suffer -2 AC for %{levels.Cleric} rd/dy"',
-  'Madness-Weakened':'Section=save Note="-1 Will"',
-  'Meditative Casting':
-    'Section=magic Note="May gain x1.5 chosen spell variable effects 1/dy"',
-  'Rebuke Deathless':
-    'Section=combat Note="May use Turn Undead to rebuke deathless 1/dy"',
-  'Touch Of Decay':
-    'Section=magic ' +
-    'Note="Touch inflicts -1d4 Constitution (living) or 2d6+%{levels.Cleric} HP (undead) 1/dy"',
-  'Turn On The Charm':
-    'Section=ability Note="May gain +4 Charisma for 1 min 1/dy"'
+    'Note="Can gain +4 Strength, +4 Constitution, and +2 Will and suffer -2 Armor Class for %{levels.Cleric} rd per day"',
+  // Shadow
+  'Blind-Fight':SRD35.FEATURES['Blind-Fight'],
+  // Weather
+  'All-Weather':
+    'Section=feature,skill,skill ' +
+    'Note=' +
+      '"Can see clearly in any weather",' +
+      '"Survival is a class skill",' +
+      '"+2 Survival with weather-related checks"'
 
 };
 Eberron.FEATURES = Object.assign({}, SRD35.FEATURES, Eberron.FEATURES_ADDED);
@@ -3316,10 +3352,14 @@ Eberron.skillRules = function(
     (rules, name, ability, untrained, classes, synergies);
   if(name.startsWith('Craft ('))
     rules.defineRule('skillModifier.' + name,
-      'skillNotes.leastDragonmark(MarkOfMaking)', '+', '2'
+      'skillNotes.leastDragonmark(MarkOfMaking)', '+', '2',
+      'skillNotes.skilledCrafter', '+', '4'
     );
   else if(name.startsWith('Knowledge ('))
     rules.defineRule('classSkills.' + name, 'skillNotes.education', '=', '1');
+  if(ability == 'Wisdom')
+    rules.defineRule
+      ('skillModifier.' + name, 'skillNotes.unsoundMind', '+', '-1');
 };
 
 /*
