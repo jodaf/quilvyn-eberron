@@ -14,11 +14,8 @@ var attributes = {
   "name":"House-Cannith", "race":"Human", "shield":"None", "skills.Climb":1, 
   "skills.Craft (Alchemy)":12, "skills.Diplomacy":12, "skills.Handle Animal":12, "skills.Heal":1, 
   "skills.Knowledge (Geography)":4, "skills.Listen":1, "skills.Perform (Dance)":2, "skills.Search":1, 
-  "skills.Spellcraft":2, "skills.Spot":12, "spells.Fabricate(Cannith3 Tran)":1, 
-  "spells.Major Creation(Cannith3 Conj)":1, "spells.Make Whole(Cannith1 Tran)":1, "spells.Mending(Cannith1 Tran)":1, 
-  "spells.Minor Creation(Cannith2 Conj)":1, "spells.Repair Light Damage(Cannith1 Tran)":1, 
-  "spells.Repair Serious Damage(Cannith2 Tran)":1, "spells.True Creation(Cannith4 Conj)":1, "spells_filter":"", "strength":15, 
-  "weapons.Club":1, "weapons.Shortbow":1, "wisdom":15
+  "skills.Spellcraft":2, "skills.Spot":12, "spells_filter":"", "strength":15, "weapons.Club":1, 
+  "weapons.Shortbow":1, "wisdom":15
 };
   </script>
 </head>
@@ -135,7 +132,7 @@ var attributes = {
       </tr><tr style="text-align:center">
         <td><i>Intelligence Skill Points Adjustment: +24</i></td>
       </tr><tr style="text-align:center">
-        <td><i>Mark Of Making: +2 all Craft</i></td>
+        <td><i>Least Dragonmark (Mark Of Making): +2 all Craft skills</i></td>
       </tr><tr style="text-align:center">
         <td>Craft (Alchemy) Synergy: +2 Appraise (related)</td>
       </tr></table>
@@ -204,8 +201,7 @@ var attributes = {
     <tr style="text-align:center">
       <td>      <table id="SpellStats" style="width:100%">
       <tr style="text-align:center">
-        <td><b>Spell Slots</b>: Cannith1; Cannith2; Cannith3</td>
-        <td><b>Spell DC</b>: Cannith: 10</td>
+        <td><b>Spell DC</b>: Greater Dragonmark Mark Of Making: 10; Least Dragonmark Mark Of Making: 10; Lesser Dragonmark Mark Of Making: 10</td>
       </tr></table>
 </td>
     </tr></table>
@@ -213,31 +209,29 @@ var attributes = {
   </tr><tr style="text-align:center">
     <td><b>Spells</b>:<br/>    <table id="Spells" style="width:100%">
     <tr style="text-align:left">
-      <td>Fabricate (Cannith3 Tran): R50' Creates finished items from 100 cubic feet of raw materials, or 10 cubic feet if working with minerals</td>
+      <td>Fabricate (Greater Dragonmark Mark Of Making5 Tran): R45' Creates finished items from 90 cubic feet of raw materials, or 9 cubic feet if working with minerals</td>
     </tr><tr style="text-align:left">
-      <td>Major Creation (Cannith3 Conj): R50' Creates a 10 cubic foot plant or mineral object lasting 20 hr (plant), 10 hr (stone or metal), 200 min (precious metal), 100 min (gems), or 10 rd (rare metal)</td>
+      <td>Major Creation (Greater Dragonmark Mark Of Making5 Conj): R45' Creates a 9 cubic foot plant or mineral object lasting 18 hr (plant), 9 hr (stone or metal), 180 min (precious metal), 90 min (gems), or 9 rd (rare metal)</td>
     </tr><tr style="text-align:left">
-      <td>Make Whole (Cannith1 Tran): R50' Repairs damage to a 100 cubic foot object</td>
+      <td>Make Whole (Least Dragonmark Mark Of Making2 Tran): R45' Repairs damage to a 90 cubic foot object</td>
     </tr><tr style="text-align:left">
-      <td>Mending (Cannith1 Tran): R10' Repairs minor damage to an object weighing up to 1 lb</td>
+      <td>Mending (Least Dragonmark Mark Of Making0 Tran): R10' Repairs minor damage to an object weighing up to 1 lb</td>
     </tr><tr style="text-align:left">
-      <td>Minor Creation (Cannith2 Conj): Creates a 10 cubic foot plant object that lasts for 10 hr</td>
+      <td>Minor Creation (Lesser Dragonmark Mark Of Making4 Conj): Creates a 9 cubic foot plant object that lasts for 9 hr</td>
     </tr><tr style="text-align:left">
-      <td>Repair Light Damage (Cannith1 Tran): Touched construct regains 1d8+5 HP</td>
+      <td>Repair Light Damage (Least Dragonmark Mark Of Making1 Tran): Touched construct regains 1d8+5 HP</td>
     </tr><tr style="text-align:left">
-      <td>Repair Serious Damage (Cannith2 Tran): Touched construct regains 3d8+10 HP</td>
-    </tr><tr style="text-align:left">
-      <td>True Creation (Cannith4 Conj): Creates permanent 10' cu plant or mineral object</td>
+      <td>Repair Serious Damage (Lesser Dragonmark Mark Of Making3 Tran): Touched construct regains 3d8+9 HP</td>
     </tr></table>
 </td>
   </tr><tr style="text-align:center">
     <td><b>Magic Notes</b>:     <table id="MagicNotes" style="width:100%">
     <tr style="text-align:center">
-      <td><i>Greater Dragonmark: Can cast a choice of a level 3 dragonmark spell once per day</i></td>
+      <td>Greater Dragonmark (Mark Of Making): Can use a choice of <i>Fabricate</i> or <i>Major Creation</i> once per day as a spell-like ability</td>
     </tr><tr style="text-align:center">
-      <td><i>Least Dragonmark: Can cast a choice of a level 1 dragonmark spell once per day</i></td>
+      <td>Least Dragonmark (Mark Of Making): Can use a choice of <i>Make Whole</i> once per day, <i>Mending</i> 2 times per day, or <i>Repair Light Damage</i> once per day as a spell-like ability</td>
     </tr><tr style="text-align:center">
-      <td><i>Lesser Dragonmark: Can cast a choice of a level 2 dragonmark spell once per day</i></td>
+      <td>Lesser Dragonmark (Mark Of Making): Can use a choice of <i>Minor Creation</i> or <i>Repair Serious Damage</i> once per day as a spell-like ability</td>
     </tr></table>
 </td>
   </tr></table>

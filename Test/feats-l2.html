@@ -17,9 +17,8 @@ var attributes = {
   "skills.Craft (Alchemy)":4, "skills.Diplomacy":1, "skills.Gather Information":1, 
   "skills.Knowledge (Local)":7, "skills.Knowledge (Nature)":2, "skills.Knowledge (Religion)":12, 
   "skills.Ride":2, "skills.Sense Motive":12, "skills.Spot":3, "skills.Survival":2, 
-  "spells.Expeditious Retreat(Orien1 Tran)":1, "spells.Overland Flight(Orien3 Tran)":1, 
-  "spells.Phantom Steed(Orien2 Conj)":1, "strength":10, "weapons.Kama":1, "weapons.Lance":1, "weapons.Sap":1, 
-  "weapons.Scythe":1, "wisdom":14
+  "strength":10, "weapons.Kama":1, "weapons.Lance":1, "weapons.Sap":1, "weapons.Scythe":1, 
+  "wisdom":14
 };
   </script>
 </head>
@@ -143,7 +142,7 @@ var attributes = {
       </tr><tr style="text-align:center">
         <td><i>Knowledge (Religion) Synergy: +2 Undead turning checks</i></td>
       </tr><tr style="text-align:center">
-        <td><i>Mark Of Passage: +2 Survival</i></td>
+        <td><i>Least Dragonmark (Mark Of Passage): +2 Survival</i></td>
       </tr><tr style="text-align:center">
         <td><i>Sense Motive Synergy: +2 Diplomacy</i></td>
       </tr></table>
@@ -228,8 +227,7 @@ var attributes = {
     <tr style="text-align:center">
       <td>      <table id="SpellStats" style="width:100%">
       <tr style="text-align:center">
-        <td><b>Spell Slots</b>: Orien1; Orien2; Orien3</td>
-        <td><b>Spell DC</b>: Orien: 12</td>
+        <td><b>Spell DC</b>: Greater Dragonmark Mark Of Passage: 12; Least Dragonmark Mark Of Passage: 12; Lesser Dragonmark Mark Of Passage: 12</td>
       </tr></table>
 </td>
     </tr></table>
@@ -237,21 +235,29 @@ var attributes = {
   </tr><tr style="text-align:center">
     <td><b>Spells</b>:<br/>    <table id="Spells" style="width:100%">
     <tr style="text-align:left">
-      <td>Expeditious Retreat (Orien1 Tran): Gives self +30' Speed for 10 min</td>
+      <td>Dimension Door (Lesser Dragonmark Mark Of Passage4 Conj): Teleports self and a touched object or 3 willing creatures 760'</td>
     </tr><tr style="text-align:left">
-      <td>Overland Flight (Orien3 Tran): Self gains a 40' fly Speed for 10 hr</td>
+      <td>Dimension Leap (Least Dragonmark Mark Of Passage1 Conj): Self teleports up to 90'</td>
     </tr><tr style="text-align:left">
-      <td>Phantom Steed (Orien2 Conj): Creates a mount with 17 hit points, Armor Class 18, and 200' Speed that only the target can ride for 10 hr; the mount can ride over sandy, muddy, and swampy ground at full speed and use <i>Water Walk</i> effects at will</td>
+      <td>Expeditious Retreat (Least Dragonmark Mark Of Passage1 Tran): Gives self +30' Speed for 9 min</td>
+    </tr><tr style="text-align:left">
+      <td>Mount (Least Dragonmark Mark Of Passage1 Conj): R45' Summons a riding horse with bit, bridle, and saddle that serves self for 18 hr</td>
+    </tr><tr style="text-align:left">
+      <td>Overland Flight (Greater Dragonmark Mark Of Passage5 Tran): Self gains a 40' fly Speed for 9 hr</td>
+    </tr><tr style="text-align:left">
+      <td>Phantom Steed (Lesser Dragonmark Mark Of Passage3 Conj): Creates a mount with 16 hit points, Armor Class 18, and 180' Speed that only the target can ride for 9 hr; the mount can ride over sandy, muddy, and swampy ground at full speed</td>
+    </tr><tr style="text-align:left">
+      <td>Teleport (Greater Dragonmark Mark Of Passage5 Conj): Transports self and 3 willing targets up to 900 miles; greater familiarity with the destination improves accuracy</td>
     </tr></table>
 </td>
   </tr><tr style="text-align:center">
     <td><b>Magic Notes</b>:     <table id="MagicNotes" style="width:100%">
     <tr style="text-align:center">
-      <td><i>Greater Dragonmark: Can cast a choice of a level 3 dragonmark spell once per day</i></td>
+      <td>Greater Dragonmark (Mark Of Passage): Can use a choice of <i>Overland Flight</i> or <i>Teleport</i> once per day as a spell-like ability</td>
     </tr><tr style="text-align:center">
-      <td><i>Least Dragonmark: Can cast a choice of a level 1 dragonmark spell once per day</i></td>
+      <td>Least Dragonmark (Mark Of Passage): Can use a choice of <i>Expeditious Retreat</i>, <i>Mount</i>, or <i>Dimension Leap</i> once per day as a spell-like ability</td>
     </tr><tr style="text-align:center">
-      <td><i>Lesser Dragonmark: Can cast a choice of a level 2 dragonmark spell once per day</i></td>
+      <td>Lesser Dragonmark (Mark Of Passage): Can use a choice of <i>Dimension Door</i> or <i>Phantom Steed</i> once per day as a spell-like ability</td>
     </tr></table>
 </td>
   </tr></table>

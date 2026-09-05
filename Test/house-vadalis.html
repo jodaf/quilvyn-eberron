@@ -14,12 +14,7 @@ var attributes = {
   "name":"House-Vadalis", "race":"Human", "shield":"None", "skills.Craft (Alchemy)":12, 
   "skills.Diplomacy":12, "skills.Gather Information":5, "skills.Handle Animal":12, 
   "skills.Knowledge (Geography)":2, "skills.Perform (Dance)":2, "skills.Search":1, "skills.Spellcraft":2, 
-  "skills.Spot":12, "spells.Animal Growth(Vadalis3 Tran)":1, "spells.Awaken(Vadalis4 Tran)":1, 
-  "spells.Calm Animals(Vadalis1 Ench)":1, "spells.Charm Animal(Vadalis1 Ench)":1, 
-  "spells.Dominate Animal(Vadalis2 Ench)":1, "spells.Greater Magic Fang(Vadalis2 Tran)":1, 
-  "spells.Speak With Animals(Vadalis1 Divi)":1, "spells.Summon Nature's Ally V(Vadalis3 Conj)":1, 
-  "spells.Summon Nature's Ally VI(Vadalis4 Conj)":1, "spells_filter":"", "strength":15, "weapons.Club":1, "weapons.Shortbow":1, 
-  "wisdom":15
+  "skills.Spot":12, "strength":15, "weapons.Club":1, "weapons.Shortbow":1, "wisdom":15
 };
   </script>
 </head>
@@ -132,7 +127,7 @@ var attributes = {
       </tr><tr style="text-align:center">
         <td><i>Intelligence Skill Points Adjustment: +24</i></td>
       </tr><tr style="text-align:center">
-        <td><i>Mark Of Handling: +2 Handle Animal</i></td>
+        <td><i>Least Dragonmark (Mark Of Handling): +2 Handle Animal</i></td>
       </tr><tr style="text-align:center">
         <td>Craft (Alchemy) Synergy: +2 Appraise (related)</td>
       </tr></table>
@@ -201,8 +196,7 @@ var attributes = {
     <tr style="text-align:center">
       <td>      <table id="SpellStats" style="width:100%">
       <tr style="text-align:center">
-        <td><b>Spell Slots</b>: Vadalis1; Vadalis2; Vadalis3</td>
-        <td><b>Spell DC</b>: Vadalis: 10</td>
+        <td><b>Spell DC</b>: Greater Dragonmark Mark Of Handling: 10; Least Dragonmark Mark Of Handling: 10; Lesser Dragonmark Mark Of Handling: 10</td>
       </tr></table>
 </td>
     </tr></table>
@@ -210,33 +204,29 @@ var attributes = {
   </tr><tr style="text-align:center">
     <td><b>Spells</b>:<br/>    <table id="Spells" style="width:100%">
     <tr style="text-align:left">
-      <td>Animal Growth (Vadalis3 Tran): R200' 5 animal targets in a 15' radius double in size (save Fortitude negates), gaining +8 Strength, +4 Constitution, +2 natural armor, DR 10/magic, and +4 saves and suffering -2 Dexterity for 10 min</td>
+      <td>Animal Growth (Greater Dragonmark Mark Of Handling5 Tran): R190' 4 animal targets in a 15' radius double in size (save Fortitude negates), gaining +8 Strength, +4 Constitution, +2 natural armor, DR 10/magic, and +4 saves and suffering -2 Dexterity for 9 min</td>
     </tr><tr style="text-align:left">
-      <td>Awaken (Vadalis4 Tran): Successful DC 10 + target HD Will save gives a touched animal or tree human sentience and makes it friendly; awakened animals have 3d6 Intelligence, +1d3 Charisma, and +2 HD, and awakened trees have 3d6 Intelligence, Wisdom, and Charisma</td>
+      <td>Calm Animals (Least Dragonmark Mark Of Handling1 Ench): R45' 2d4+9 HD of animals in a 15' radius become docile (save Will negates) for 9 min</td>
     </tr><tr style="text-align:left">
-      <td>Calm Animals (Vadalis1 Ench): R50' 2d4+10 HD of animals in a 15' radius become docile (save Will negates) for 10 min</td>
+      <td>Charm Animal (Least Dragonmark Mark Of Handling1 Ench): R45' Target animal treats self as a trusted friend (save Will negates; +5 if being threatened) for 9 hr</td>
     </tr><tr style="text-align:left">
-      <td>Charm Animal (Vadalis1 Ench): R50' Target animal treats self as a trusted friend (save Will negates; +5 if being threatened) for 10 hr</td>
+      <td>Dominate Animal (Lesser Dragonmark Mark Of Handling3 Ench): R45' Target animal obeys mental commands (save Will negates) for 9 rd</td>
     </tr><tr style="text-align:left">
-      <td>Dominate Animal (Vadalis2 Ench): R50' Target animal obeys mental commands (save Will negates) for 10 rd</td>
+      <td>Greater Magic Fang (Lesser Dragonmark Mark Of Handling3 Tran): R45' target gains +2 attacks and damage when using a specified magic weapon, or +1 attacks and damage when using any natural weapon, for 9 hr</td>
     </tr><tr style="text-align:left">
-      <td>Greater Magic Fang (Vadalis2 Tran): R50' target gains +2 attacks and damage when using a specified magic weapon, or +1 attacks and damage when using any natural weapon, for 10 hr</td>
+      <td>Speak With Animals (Least Dragonmark Mark Of Handling1 Divi): Allows self to converse with animals for 9 min</td>
     </tr><tr style="text-align:left">
-      <td>Speak With Animals (Vadalis1 Divi): Allows self to converse with animals for 10 min</td>
-    </tr><tr style="text-align:left">
-      <td>Summon Nature's Ally V (Vadalis3 Conj): R50' Summons 1 5th-level, 1d3 4th-level, or 1d4+1 lower-level creatures that fight foes and obey orders for 10 rd</td>
-    </tr><tr style="text-align:left">
-      <td>Summon Nature's Ally VI (Vadalis4 Conj): R50' Summons 1 6th-level, 1d3 5th-level, or 1d4+1 lower-level creatures that fight foes and obey orders for 10 rd</td>
+      <td>Summon Nature's Ally V (Greater Dragonmark Mark Of Handling5 Conj): R45' Summons 1 5th-level, 1d3 4th-level, or 1d4+1 lower-level creatures that fight foes and obey orders for 9 rd</td>
     </tr></table>
 </td>
   </tr><tr style="text-align:center">
     <td><b>Magic Notes</b>:     <table id="MagicNotes" style="width:100%">
     <tr style="text-align:center">
-      <td><i>Greater Dragonmark: Can cast a choice of a level 3 dragonmark spell once per day</i></td>
+      <td>Greater Dragonmark (Mark Of Handling): Can use a choice of <i>Animal Growth</i> or <i>Summon Nature's Ally V</i> once per day as a spell-like ability</td>
     </tr><tr style="text-align:center">
-      <td><i>Least Dragonmark: Can cast a choice of a level 1 dragonmark spell once per day</i></td>
+      <td>Least Dragonmark (Mark Of Handling): Can use a choice of <i>Calm Animals</i>, <i>Charm Animal</i>, or <i>Speak With Animals</i> once per day as a spell-like ability</td>
     </tr><tr style="text-align:center">
-      <td><i>Lesser Dragonmark: Can cast a choice of a level 2 dragonmark spell once per day</i></td>
+      <td>Lesser Dragonmark (Mark Of Handling): Can use a choice of <i>Dominate Animal</i> or <i>Greater Magic Fang</i> once per day as a spell-like ability</td>
     </tr></table>
 </td>
   </tr></table>

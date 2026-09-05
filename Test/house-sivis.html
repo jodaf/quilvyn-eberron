@@ -13,11 +13,8 @@ var attributes = {
   "house":"Sivis", "intelligence":14, "levels.Fighter":9, "name":"House-Sivis", "race":"Gnome", 
   "shield":"None", "skills.Climb":1, "skills.Craft (Alchemy)":12, "skills.Decipher Script":4, 
   "skills.Handle Animal":12, "skills.Heal":1, "skills.Listen":1, "skills.Perform (Dance)":2, 
-  "skills.Search":1, "skills.Spellcraft":2, "skills.Spot":12, 
-  "spells.Arcane Mark(Sivis1 Univ)":1, "spells.Comprehend Languages(Sivis1 Divi)":1, 
-  "spells.Illusory Script(Sivis2 Illu)":1, "spells.Secret Page(Sivis2 Tran)":1, "spells.Sending(Sivis3 Evoc)":1, 
-  "spells.Symbol Of Death(Sivis4 Necr)":1, "spells.Tongues(Sivis2 Divi)":1, "spells.Whispering Wind(Sivis1 Tran)":1, 
-  "spells_filter":"", "strength":15, "weapons.Club":1, "weapons.Shortbow":1, "wisdom":15
+  "skills.Search":1, "skills.Spellcraft":2, "skills.Spot":12, "strength":15, "weapons.Club":1, 
+  "weapons.Shortbow":1, "wisdom":15
 };
   </script>
 </head>
@@ -142,7 +139,7 @@ var attributes = {
       </tr><tr style="text-align:center">
         <td><i>Keen Ears: +2 Listen</i></td>
       </tr><tr style="text-align:center">
-        <td><i>Mark Of Scribing: +2 Decipher Script</i></td>
+        <td><i>Least Dragonmark (Mark Of Scribing): +2 Decipher Script</i></td>
       </tr><tr style="text-align:center">
         <td><i>Sensitive Nose: +2 Craft (Alchemy)</i></td>
       </tr><tr style="text-align:center">
@@ -233,8 +230,7 @@ var attributes = {
     <tr style="text-align:center">
       <td>      <table id="SpellStats" style="width:100%">
       <tr style="text-align:center">
-        <td><b>Spell Slots</b>: Sivis1; Sivis2; Sivis3</td>
-        <td><b>Spell DC</b>: Gnome Magic: 10; Sivis: 10</td>
+        <td><b>Spell DC</b>: Gnome Magic: 10; Greater Dragonmark Mark Of Scribing: 10; Least Dragonmark Mark Of Scribing: 10; Lesser Dragonmark Mark Of Scribing: 10</td>
       </tr></table>
 </td>
     </tr></table>
@@ -242,43 +238,41 @@ var attributes = {
   </tr><tr style="text-align:center">
     <td><b>Spells</b>:<br/>    <table id="Spells" style="width:100%">
     <tr style="text-align:left">
-      <td>Arcane Mark (Sivis1 Univ): Inscribes a personal rune on touched, lasting a month on a creature or permanently on an object</td>
+      <td>Arcane Mark (Least Dragonmark Mark Of Scribing0 Univ): Inscribes a personal rune on touched, lasting a month on a creature or permanently on an object</td>
     </tr><tr style="text-align:left">
-      <td>Comprehend Languages (Sivis1 Divi): Allows self to understand touched written text and words spoken in any language by touched creatures for 100 min</td>
+      <td>Comprehend Languages (Least Dragonmark Mark Of Scribing1 Divi): Allows self to understand touched written text and words spoken in any language by touched creatures for 90 min</td>
     </tr><tr style="text-align:left">
       <td>Dancing Lights (Gnome Magic0 Evoc): R190' Creates a humanoid-shaped light, 4 torch lights, or 4 glowing spheres in a 10' radius that can be moved 100' each rd for 1 min</td>
     </tr><tr style="text-align:left">
       <td>Ghost Sound (Gnome Magic0 Illu): R45' Produces the sound volume of 20 humans (save Will upon interaction disbelieves) for 9 rd</td>
     </tr><tr style="text-align:left">
-      <td>Illusory Script (Sivis2 Illu): Touched writing transmits a suggestion of up to 30 min duration to unauthorized readers (save Will negates) for 10 days</td>
+      <td>Illusory Script (Lesser Dragonmark Mark Of Scribing3 Illu): Touched writing transmits a suggestion of up to 30 min duration to unauthorized readers (save Will negates) for 9 days</td>
     </tr><tr style="text-align:left">
       <td>Prestidigitation (Gnome Magic0 Univ): R10' Allows performing minor magic effects for 1 hr</td>
     </tr><tr style="text-align:left">
-      <td>Secret Page (Sivis2 Tran): Permanently alters the text on a touched page so that a password is required to read it</td>
+      <td>Secret Page (Lesser Dragonmark Mark Of Scribing3 Tran): Permanently alters the text on a touched page so that a password is required to read it</td>
     </tr><tr style="text-align:left">
-      <td>Sending (Sivis3 Evoc): Allows self to exchange 25-word messages with a familiar target</td>
+      <td>Sending (Greater Dragonmark Mark Of Scribing5 Evoc): Allows self to exchange 25-word messages with a familiar target</td>
     </tr><tr style="text-align:left">
       <td>Speak With Animals (Gnome Magic1 Divi): Allows self to converse with animals for 9 min</td>
     </tr><tr style="text-align:left">
-      <td>Symbol Of Death (Sivis4 Necr): R60' Rune slays creatures in a 60' radius (save Fortitude negates) when triggered, working outward from the closest creatures, for 100 min or until creatures with 150 HP total have been killed</td>
+      <td>Tongues (Lesser Dragonmark Mark Of Scribing3 Divi): Allows touched to communicate in any language for 90 min</td>
     </tr><tr style="text-align:left">
-      <td>Tongues (Sivis2 Divi): Allows touched to communicate in any language for 100 min</td>
-    </tr><tr style="text-align:left">
-      <td>Whispering Wind (Sivis1 Tran): R10 miles Allows sending a whispered 25-word message or sound to a familiar 10' area</td>
+      <td>Whispering Wind (Least Dragonmark Mark Of Scribing2 Tran): R9 miles Allows sending a whispered 25-word message or sound to a familiar 10' area</td>
     </tr></table>
 </td>
   </tr><tr style="text-align:center">
     <td><b>Magic Notes</b>:     <table id="MagicNotes" style="width:100%">
     <tr style="text-align:center">
-      <td><i>Greater Dragonmark: Can cast a choice of a level 3 dragonmark spell once per day</i></td>
-    </tr><tr style="text-align:center">
-      <td><i>Least Dragonmark: Can cast a choice of a level 1 dragonmark spell once per day</i></td>
-    </tr><tr style="text-align:center">
-      <td><i>Lesser Dragonmark: Can cast a choice of a level 2 dragonmark spell once per day</i></td>
-    </tr><tr style="text-align:center">
       <td><i>Natural Illusionist: +1 Spell DC (Illusion)</i></td>
     </tr><tr style="text-align:center">
       <td>Gnome Magic: Can cast <i>Speak With Animals</i> to communicate with burrowing mammals for 1 min, <i>Dancing Lights</i>, <i>Ghost Sound</i>, and <i>Prestidigitation</i>, each once per day</td>
+    </tr><tr style="text-align:center">
+      <td>Greater Dragonmark (Mark Of Scribing): Can use <i>Sending</i> once per day as a spell-like ability</td>
+    </tr><tr style="text-align:center">
+      <td>Least Dragonmark (Mark Of Scribing): Can use a choice of <i>Arcane Mark</i> 2 times per day, <i>Comprehend Languages</i> once per day, or <i>Whispering Wind</i> once per day as a spell-like ability</td>
+    </tr><tr style="text-align:center">
+      <td>Lesser Dragonmark (Mark Of Scribing): Can use a choice of <i>Illusory Script</i>, <i>Secret Page</i>, or <i>Tongues</i> once per day as a spell-like ability</td>
     </tr></table>
 </td>
   </tr></table>

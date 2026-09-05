@@ -13,13 +13,8 @@ var attributes = {
   "house":"Lyrandar", "intelligence":14, "levels.Fighter":9, "name":"House-Lyrandar", 
   "race":"Half-Elf", "shield":"None", "skills.Balance":2, "skills.Climb":1, 
   "skills.Diplomacy":12, "skills.Gather Information":12, "skills.Heal":1, "skills.Listen":1, 
-  "skills.Perform (Dance)":2, "skills.Search":1, "skills.Sense Motive":4, "skills.Spot":12, 
-  "spells.Control Weather(Lyrandar3 Tran)":1, "spells.Control Winds(Lyrandar3 Tran)":1, 
-  "spells.Endure Elements(Lyrandar1 Abju)":1, "spells.Fog Cloud(Lyrandar1 Conj)":1, 
-  "spells.Gust Of Wind(Lyrandar1 Evoc)":1, "spells.Sleet Storm(Lyrandar2 Conj)":1, 
-  "spells.Storm Of Vengeance(Lyrandar4 Conj)":1, "spells.Wind Wall(Lyrandar2 Evoc)":1, 
-  "spells.Wind's Favor(Lyrandar2 Tran)":1, "spells_filter":"", "strength":15, "weapons.Club":1, "weapons.Shortbow":1, 
-  "wisdom":15
+  "skills.Perform (Dance)":2, "skills.Search":1, "skills.Sense Motive":4, "skills.Spot":12, "strength":15, 
+  "weapons.Club":1, "weapons.Shortbow":1, "wisdom":15
 };
   </script>
 </head>
@@ -136,7 +131,7 @@ var attributes = {
       </tr><tr style="text-align:center">
         <td><i>Keen Senses (Half-Elf): +1 Listen/+1 Search/+1 Spot</i></td>
       </tr><tr style="text-align:center">
-        <td><i>Mark Of Storm: +2 Balance</i></td>
+        <td><i>Least Dragonmark (Mark Of Storm): +2 Balance</i></td>
       </tr><tr style="text-align:center">
         <td><i>Sociable: +2 Diplomacy/+2 Gather Information</i></td>
       </tr></table>
@@ -211,8 +206,7 @@ var attributes = {
     <tr style="text-align:center">
       <td>      <table id="SpellStats" style="width:100%">
       <tr style="text-align:center">
-        <td><b>Spell Slots</b>: Lyrandar1; Lyrandar2; Lyrandar3</td>
-        <td><b>Spell DC</b>: Lyrandar: 10</td>
+        <td><b>Spell DC</b>: Greater Dragonmark Mark Of Storm: 10; Least Dragonmark Mark Of Storm: 10; Lesser Dragonmark Mark Of Storm: 10</td>
       </tr></table>
 </td>
     </tr></table>
@@ -220,33 +214,31 @@ var attributes = {
   </tr><tr style="text-align:center">
     <td><b>Spells</b>:<br/>    <table id="Spells" style="width:100%">
     <tr style="text-align:left">
-      <td>Control Weather (Lyrandar3 Tran): Modifies seasonal weather in a 2 mile radius for 4d12 hr</td>
+      <td>Control Weather (Greater Dragonmark Mark Of Storm7 Tran): Modifies seasonal weather in a 2 mile radius for 4d12 hr</td>
     </tr><tr style="text-align:left">
-      <td>Control Winds (Lyrandar3 Tran): R400' Changes wind direction and speed by 3 levels in a 400'x40' cylinder for 100 min</td>
+      <td>Control Winds (Greater Dragonmark Mark Of Storm5 Tran): R360' Changes wind direction and speed by 3 levels in a 360'x40' cylinder for 90 min</td>
     </tr><tr style="text-align:left">
-      <td>Endure Elements (Lyrandar1 Abju): Touched remains comfortable between -50F and 140F for 1 day</td>
+      <td>Endure Elements (Least Dragonmark Mark Of Storm1 Abju): Touched remains comfortable between -50F and 140F for 1 day</td>
     </tr><tr style="text-align:left">
-      <td>Fog Cloud (Lyrandar1 Conj): R200' 20' radius fog obscures vision for 100 min</td>
+      <td>Fog Cloud (Least Dragonmark Mark Of Storm2 Conj): R190' 20' radius fog obscures vision for 90 min</td>
     </tr><tr style="text-align:left">
-      <td>Gust Of Wind (Lyrandar1 Evoc): Creates a 60' line of wind for 1 rd that moves objects, extinguishes unprotected flames, knocks down Small and smaller creatures, and halts Medium ones; Tiny creatures are also pushed 1d4x10', suffering 1d4 HP nonlethal per 10'; flying Medium, Small, or Tiny creatures are instead pushed 1d6x5', 1d6x10', or 2d6x10', with Tiny flying creatures also suffering 2d6 HP nonlethal (save Fortitude negates)</td>
+      <td>Gust Of Wind (Least Dragonmark Mark Of Storm2 Evoc): Creates a 60' line of wind for 1 rd that moves objects, extinguishes unprotected flames, knocks down Small and smaller creatures, and halts Medium ones; Tiny creatures are also pushed 1d4x10', suffering 1d4 HP nonlethal per 10'; flying Medium, Small, or Tiny creatures are instead pushed 1d6x5', 1d6x10', or 2d6x10', with Tiny flying creatures also suffering 2d6 HP nonlethal (save Fortitude negates)</td>
     </tr><tr style="text-align:left">
-      <td>Sleet Storm (Lyrandar2 Conj): R800' 40' radius, 20' high cylinder blocks sight, extinguishes small fires, and requires a DC 10 Balance check to move at half speed (failure by 5 or more causes a fall) for 10 rd</td>
+      <td>Sleet Storm (Lesser Dragonmark Mark Of Storm3 Conj): R760' 40' radius, 20' high cylinder blocks sight, extinguishes small fires, and requires a DC 10 Balance check to move at half speed (failure by 5 or more causes a fall) for 9 rd</td>
     </tr><tr style="text-align:left">
-      <td>Storm Of Vengeance (Lyrandar4 Conj): R800' 360' radius storm deafens for 1d4x10 min (save Fortitude negates), then produces rain that inflicts 1d6 HP acid, then generates lightning bolts that inflict 10d6 HP electricity on 6 targets (save Reflex half), then creates hail that inflicts 5d6 HP bludgeoning, then obscures vision and reduces Speed by 3/4 for 6 rd; the storm also prevents ranged attacks and disrupts spellcasting (save Concentration negates; add the level of the spell to be cast to the DC)</td>
+      <td>Wind Wall (Lesser Dragonmark Mark Of Storm3 Evoc): R190' Creates a 90'x45'x2' curtain of air that scatters objects, bars gasses and Small or smaller flying creatures, and deflects arrows and bolts for 9 rd</td>
     </tr><tr style="text-align:left">
-      <td>Wind Wall (Lyrandar2 Evoc): R200' Creates a 100'x50'x2' curtain of air that scatters objects, bars gasses and Small or smaller flying creatures, and deflects arrows and bolts for 10 rd</td>
-    </tr><tr style="text-align:left">
-      <td>Wind's Favor (Lyrandar2 Tran): R200' Creates 10'x10'x300' 30 MPH wind for 10 hr</td>
+      <td>Wind's Favor (Lesser Dragonmark Mark Of Storm2 Tran): R190' Creates 10'x10'x280' 30 MPH wind for 9 hr</td>
     </tr></table>
 </td>
   </tr><tr style="text-align:center">
     <td><b>Magic Notes</b>:     <table id="MagicNotes" style="width:100%">
     <tr style="text-align:center">
-      <td><i>Greater Dragonmark: Can cast a choice of a level 3 dragonmark spell once per day</i></td>
+      <td>Greater Dragonmark (Mark Of Storm): Can use a choice of <i>Control Winds</i> or <i>Control Weather</i> once per day as a spell-like ability</td>
     </tr><tr style="text-align:center">
-      <td><i>Least Dragonmark: Can cast a choice of a level 1 dragonmark spell once per day</i></td>
+      <td>Least Dragonmark (Mark Of Storm): Can use a choice of <i>Endure Elements</i>, <i>Fog Cloud</i>, or <i>Gust Of Wind</i> once per day as a spell-like ability</td>
     </tr><tr style="text-align:center">
-      <td><i>Lesser Dragonmark: Can cast a choice of a level 2 dragonmark spell once per day</i></td>
+      <td>Lesser Dragonmark (Mark Of Storm): Can use a choice of <i>Sleet Storm</i>, <i>Wind's Favor</i>, or <i>Wind Wall</i> once per day as a spell-like ability</td>
     </tr></table>
 </td>
   </tr></table>

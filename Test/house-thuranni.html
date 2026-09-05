@@ -14,12 +14,7 @@ var attributes = {
   "race":"Elf", "shield":"None", "skills.Climb":1, "skills.Diplomacy":12, 
   "skills.Gather Information":12, "skills.Heal":1, "skills.Listen":1, "skills.Perform (Dance)":2, 
   "skills.Search":1, "skills.Sense Motive":4, "skills.Spellcraft":2, "skills.Spot":12, 
-  "spells.Clairaudience/Clairvoyance(Thuranni2 Divi)":1, "spells.Darkness(Thuranni1 Evoc)":1, 
-  "spells.Disguise Self(Thuranni1 Illu)":1, "spells.Greater Prying Eyes(Thuranni4 Divi)":1, 
-  "spells.Minor Image(Thuranni1 Illu)":1, "spells.Mislead(Thuranni3 Illu)":1, "spells.Prying Eyes(Thuranni3 Divi)":1, 
-  "spells.Scrying(Thuranni2 Divi)":1, "spells.Shadow Conjuration(Thuranni2 Illu)":1, 
-  "spells.Shadow Walk(Thuranni3 Illu)":1, "spells_filter":"", "strength":15, "weapons.Club":1, "weapons.Shortbow":1, 
-  "wisdom":15
+  "strength":15, "weapons.Club":1, "weapons.Shortbow":1, "wisdom":15
 };
   </script>
 </head>
@@ -136,7 +131,7 @@ var attributes = {
       </tr><tr style="text-align:center">
         <td><i>Keen Senses (Elf): +2 Listen/+2 Search/+2 Spot</i></td>
       </tr><tr style="text-align:center">
-        <td><i>Mark Of Shadow: +2 Gather Information</i></td>
+        <td><i>Least Dragonmark (Mark Of Shadow): +2 Gather Information</i></td>
       </tr><tr style="text-align:center">
         <td>Keen Senses (Elf): Makes an automatic Search for secret doors within 5'</td>
       </tr></table>
@@ -219,8 +214,7 @@ var attributes = {
     <tr style="text-align:center">
       <td>      <table id="SpellStats" style="width:100%">
       <tr style="text-align:center">
-        <td><b>Spell Slots</b>: Thuranni1; Thuranni2; Thuranni3</td>
-        <td><b>Spell DC</b>: Thuranni: 10</td>
+        <td><b>Spell DC</b>: Greater Dragonmark Mark Of Shadow: 10; Least Dragonmark Mark Of Shadow: 10; Lesser Dragonmark Mark Of Shadow: 10</td>
       </tr></table>
 </td>
     </tr></table>
@@ -228,35 +222,33 @@ var attributes = {
   </tr><tr style="text-align:center">
     <td><b>Spells</b>:<br/>    <table id="Spells" style="width:100%">
     <tr style="text-align:left">
-      <td>Clairaudience/Clairvoyance (Thuranni2 Divi): 800' Self gains a choice of remote sight or hearing of a known location for 10 min</td>
+      <td>Clairaudience/Clairvoyance (Lesser Dragonmark Mark Of Shadow3 Divi): 760' Self gains a choice of remote sight or hearing of a known location for 9 min</td>
     </tr><tr style="text-align:left">
-      <td>Darkness (Thuranni1 Evoc): Touched object radiates shadows, giving creatures concealment, in a 20' radius for 100 min</td>
+      <td>Darkness (Least Dragonmark Mark Of Shadow2 Evoc): Touched object radiates shadows, giving creatures concealment, in a 20' radius for 90 min</td>
     </tr><tr style="text-align:left">
-      <td>Disguise Self (Thuranni1 Illu): Changes the appearance of self (save Will upon interaction disbelieves) and gives +10 Disguise, for 100 min</td>
+      <td>Disguise Self (Least Dragonmark Mark Of Shadow1 Illu): Changes the appearance of self (save Will upon interaction disbelieves) and gives +10 Disguise, for 90 min</td>
     </tr><tr style="text-align:left">
-      <td>Greater Prying Eyes (Thuranni4 Divi): 1d4+10 floating eyes (Armor Class 18, 1 HP, +16 Hide, +10 Spot, Fly 30') with True Seeing scout up to 1 mile and return to show observations within 10 hr</td>
+      <td>Minor Image (Least Dragonmark Mark Of Shadow2 Illu): R760' Creates a 130 cubic foot movable image with sound (save Will upon interaction disbelieves) for concentration + 2 rd</td>
     </tr><tr style="text-align:left">
-      <td>Minor Image (Thuranni1 Illu): R800' Creates a 140 cubic foot movable image with sound (save Will upon interaction disbelieves) for concentration + 2 rd</td>
+      <td>Mislead (Greater Dragonmark Mark Of Shadow6 Illu): R45' Makes self invisible for 9 rd and creates a false double (save Will upon interaction disbelieves) for concentration + 3 rd</td>
     </tr><tr style="text-align:left">
-      <td>Mislead (Thuranni3 Illu): R50' Makes self invisible for 10 rd and creates a false double (save Will upon interaction disbelieves) for concentration + 3 rd</td>
+      <td>Prying Eyes (Greater Dragonmark Mark Of Shadow5 Divi): 1d4+9 floating eyes (Armor Class 18, 1 HP, +16 Hide, +9 Spot, 30' fly Speed) scout up to 1 mile and return to show observations within 9 hr</td>
     </tr><tr style="text-align:left">
-      <td>Prying Eyes (Thuranni3 Divi): 1d4+10 floating eyes (Armor Class 18, 1 HP, +16 Hide, +10 Spot, 30' fly Speed) scout up to 1 mile and return to show observations within 10 hr</td>
+      <td>Scrying (Lesser Dragonmark Mark Of Shadow4 Divi): Self sees and hears a 10' radius around the target (save Will, modified by familiarity and connection with the target, negates for 24 hr) for 9 min</td>
     </tr><tr style="text-align:left">
-      <td>Scrying (Thuranni2 Divi): Self sees and hears a 10' radius around the target (save Will, modified by familiarity and connection with the target, negates for 24 hr) for 10 min</td>
+      <td>Shadow Conjuration (Lesser Dragonmark Mark Of Shadow4 Illu): Mimics a creation or summoning conjuration spell of up to 3rd level (save Will reduces the mimicked spell's effects by 80%); mimicked spells are subject to SR and have a save DC as a 4th-level spell, and creatures summoned by a mimicked spell have 20% of their normal hit points</td>
     </tr><tr style="text-align:left">
-      <td>Shadow Conjuration (Thuranni2 Illu): Mimics a creation or summoning conjuration spell of up to 3rd level (save Will reduces the mimicked spell's effects by 80%); mimicked spells are subject to SR and have a save DC as a 4th-level spell, and creatures summoned by a mimicked spell have 20% of their normal hit points</td>
-    </tr><tr style="text-align:left">
-      <td>Shadow Walk (Thuranni3 Illu): Allows self and 10 touched to travel at 50 MPH via the Plane of Shadow (save Will negates) for 10 hr</td>
+      <td>Shadow Walk (Greater Dragonmark Mark Of Shadow6 Illu): Allows self and 9 touched to travel at 50 MPH via the Plane of Shadow (save Will negates) for 9 hr</td>
     </tr></table>
 </td>
   </tr><tr style="text-align:center">
     <td><b>Magic Notes</b>:     <table id="MagicNotes" style="width:100%">
     <tr style="text-align:center">
-      <td><i>Greater Dragonmark: Can cast a choice of a level 3 dragonmark spell once per day</i></td>
+      <td>Greater Dragonmark (Mark Of Shadow): Can use a choice of <i>Mislead</i>, <i>Prying Eyes</i>, or <i>Shadow Walk</i> once per day as a spell-like ability</td>
     </tr><tr style="text-align:center">
-      <td><i>Least Dragonmark: Can cast a choice of a level 1 dragonmark spell once per day</i></td>
+      <td>Least Dragonmark (Mark Of Shadow): Can use a choice of <i>Darkness</i>, <i>Disguise Self</i>, or <i>Minor Image</i> once per day as a spell-like ability</td>
     </tr><tr style="text-align:center">
-      <td><i>Lesser Dragonmark: Can cast a choice of a level 2 dragonmark spell once per day</i></td>
+      <td>Lesser Dragonmark (Mark Of Shadow): Can use a choice of <i>Clairaudience/Clairvoyance</i>, <i>Scrying</i>, or <i>Shadow Conjuration</i> once per day as a spell-like ability</td>
     </tr></table>
 </td>
   </tr></table>

@@ -15,11 +15,7 @@ var attributes = {
   "skills.Craft (Alchemy)":12, "skills.Handle Animal":12, "skills.Heal":1, 
   "skills.Knowledge (Geography)":4, "skills.Knowledge (Nature)":1, "skills.Listen":1, 
   "skills.Perform (Dance)":2, "skills.Search":1, "skills.Spellcraft":2, "skills.Spot":11, 
-  "skills.Survival":12, "spells.Dimension Door(Orien2 Conj)":1, 
-  "spells.Dimension Leap(Orien1 Conj)":1, "spells.Expeditious Retreat(Orien1 Tran)":1, 
-  "spells.Greater Teleport(Orien4 Conj)":1, "spells.Mount(Orien1 Conj)":1, "spells.Overland Flight(Orien3 Tran)":1, 
-  "spells.Phantom Steed(Orien2 Conj)":1, "spells.Teleport(Orien3 Conj)":1, "spells_filter":"", "strength":15, 
-  "weapons.Club":1, "weapons.Shortbow":1, "wisdom":15
+  "skills.Survival":12, "strength":15, "weapons.Club":1, "weapons.Shortbow":1, "wisdom":15
 };
   </script>
 </head>
@@ -136,7 +132,7 @@ var attributes = {
       </tr><tr style="text-align:center">
         <td><i>Intelligence Skill Points Adjustment: +24</i></td>
       </tr><tr style="text-align:center">
-        <td><i>Mark Of Passage: +2 Survival</i></td>
+        <td><i>Least Dragonmark (Mark Of Passage): +2 Survival</i></td>
       </tr><tr style="text-align:center">
         <td><i>Survival Synergy: +2 Knowledge (Nature)</i></td>
       </tr><tr style="text-align:center">
@@ -207,8 +203,7 @@ var attributes = {
     <tr style="text-align:center">
       <td>      <table id="SpellStats" style="width:100%">
       <tr style="text-align:center">
-        <td><b>Spell Slots</b>: Orien1; Orien2; Orien3</td>
-        <td><b>Spell DC</b>: Orien: 10</td>
+        <td><b>Spell DC</b>: Greater Dragonmark Mark Of Passage: 10; Least Dragonmark Mark Of Passage: 10; Lesser Dragonmark Mark Of Passage: 10</td>
       </tr></table>
 </td>
     </tr></table>
@@ -216,31 +211,29 @@ var attributes = {
   </tr><tr style="text-align:center">
     <td><b>Spells</b>:<br/>    <table id="Spells" style="width:100%">
     <tr style="text-align:left">
-      <td>Dimension Door (Orien2 Conj): Teleports self and a touched object or 3 willing creatures 800'</td>
+      <td>Dimension Door (Lesser Dragonmark Mark Of Passage4 Conj): Teleports self and a touched object or 3 willing creatures 760'</td>
     </tr><tr style="text-align:left">
-      <td>Dimension Leap (Orien1 Conj): Self teleports up to 100'</td>
+      <td>Dimension Leap (Least Dragonmark Mark Of Passage1 Conj): Self teleports up to 90'</td>
     </tr><tr style="text-align:left">
-      <td>Expeditious Retreat (Orien1 Tran): Gives self +30' Speed for 10 min</td>
+      <td>Expeditious Retreat (Least Dragonmark Mark Of Passage1 Tran): Gives self +30' Speed for 9 min</td>
     </tr><tr style="text-align:left">
-      <td>Greater Teleport (Orien4 Conj): Transports self and 3 willing targets any distance with no chance of error</td>
+      <td>Mount (Least Dragonmark Mark Of Passage1 Conj): R45' Summons a riding horse with bit, bridle, and saddle that serves self for 18 hr</td>
     </tr><tr style="text-align:left">
-      <td>Mount (Orien1 Conj): R50' Summons a riding horse with bit, bridle, and saddle that serves self for 20 hr</td>
+      <td>Overland Flight (Greater Dragonmark Mark Of Passage5 Tran): Self gains a 40' fly Speed for 9 hr</td>
     </tr><tr style="text-align:left">
-      <td>Overland Flight (Orien3 Tran): Self gains a 40' fly Speed for 10 hr</td>
+      <td>Phantom Steed (Lesser Dragonmark Mark Of Passage3 Conj): Creates a mount with 16 hit points, Armor Class 18, and 180' Speed that only the target can ride for 9 hr; the mount can ride over sandy, muddy, and swampy ground at full speed</td>
     </tr><tr style="text-align:left">
-      <td>Phantom Steed (Orien2 Conj): Creates a mount with 17 hit points, Armor Class 18, and 200' Speed that only the target can ride for 10 hr; the mount can ride over sandy, muddy, and swampy ground at full speed and use <i>Water Walk</i> effects at will</td>
-    </tr><tr style="text-align:left">
-      <td>Teleport (Orien3 Conj): Transports self and 3 willing targets up to 1000 miles; greater familiarity with the destination improves accuracy</td>
+      <td>Teleport (Greater Dragonmark Mark Of Passage5 Conj): Transports self and 3 willing targets up to 900 miles; greater familiarity with the destination improves accuracy</td>
     </tr></table>
 </td>
   </tr><tr style="text-align:center">
     <td><b>Magic Notes</b>:     <table id="MagicNotes" style="width:100%">
     <tr style="text-align:center">
-      <td><i>Greater Dragonmark: Can cast a choice of a level 3 dragonmark spell once per day</i></td>
+      <td>Greater Dragonmark (Mark Of Passage): Can use a choice of <i>Overland Flight</i> or <i>Teleport</i> once per day as a spell-like ability</td>
     </tr><tr style="text-align:center">
-      <td><i>Least Dragonmark: Can cast a choice of a level 1 dragonmark spell once per day</i></td>
+      <td>Least Dragonmark (Mark Of Passage): Can use a choice of <i>Expeditious Retreat</i>, <i>Mount</i>, or <i>Dimension Leap</i> once per day as a spell-like ability</td>
     </tr><tr style="text-align:center">
-      <td><i>Lesser Dragonmark: Can cast a choice of a level 2 dragonmark spell once per day</i></td>
+      <td>Lesser Dragonmark (Mark Of Passage): Can use a choice of <i>Dimension Door</i> or <i>Phantom Steed</i> once per day as a spell-like ability</td>
     </tr></table>
 </td>
   </tr></table>

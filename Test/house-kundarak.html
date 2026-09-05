@@ -13,14 +13,8 @@ var attributes = {
   "house":"Kundarak", "intelligence":14, "levels.Fighter":9, "name":"House-Kundarak", 
   "race":"Dwarf", "shield":"None", "skills.Balance":2, "skills.Climb":1, 
   "skills.Diplomacy":12, "skills.Gather Information":12, "skills.Heal":1, "skills.Listen":1, 
-  "skills.Perform (Dance)":2, "skills.Search":1, "skills.Sense Motive":4, "skills.Spot":12, 
-  "spells.Alarm(Kundarak1 Abju)":1, "spells.Arcane Lock(Kundarak1 Abju)":1, 
-  "spells.Explosive Runes(Kundarak2 Abju)":1, "spells.Fire Trap(Kundarak1 Abju)":1, 
-  "spells.Glyph Of Warding(Kundarak2 Abju)":1, "spells.Greater Glyph Of Warding(Kundarak3 Abju)":1, 
-  "spells.Guards And Wards(Kundarak3 Abju)":1, "spells.Misdirection(Kundarak1 Illu)":1, 
-  "spells.Mordenkainen's Faithful Hound(Kundarak3 Conj)":1, "spells.Nondetection(Kundarak2 Abju)":1, 
-  "spells.Prismatic Wall(Kundarak4 Abju)":1, "spells_filter":"\"\"", "strength":15, "weapons.Club":1, 
-  "weapons.Shortbow":1, "wisdom":15
+  "skills.Perform (Dance)":2, "skills.Search":1, "skills.Sense Motive":4, "skills.Spot":12, "strength":15, 
+  "weapons.Club":1, "weapons.Shortbow":1, "wisdom":15
 };
   </script>
 </head>
@@ -141,7 +135,7 @@ var attributes = {
       </tr><tr style="text-align:center">
         <td><i>Intelligence Skill Points Adjustment: +24</i></td>
       </tr><tr style="text-align:center">
-        <td><i>Mark Of Warding: +2 Search</i></td>
+        <td><i>Least Dragonmark (Mark Of Warding): +2 Search</i></td>
       </tr><tr style="text-align:center">
         <td><i>Speed Jump Modifier: -6</i></td>
       </tr><tr style="text-align:center">
@@ -232,8 +226,7 @@ var attributes = {
     <tr style="text-align:center">
       <td>      <table id="SpellStats" style="width:100%">
       <tr style="text-align:center">
-        <td><b>Spell Slots</b>: Kundarak1; Kundarak2; Kundarak3</td>
-        <td><b>Spell DC</b>: Kundarak: 9</td>
+        <td><b>Spell DC</b>: Greater Dragonmark Mark Of Warding: 9; Least Dragonmark Mark Of Warding: 9; Lesser Dragonmark Mark Of Warding: 9</td>
       </tr></table>
 </td>
     </tr></table>
@@ -241,37 +234,35 @@ var attributes = {
   </tr><tr style="text-align:center">
     <td><b>Spells</b>:<br/>    <table id="Spells" style="width:100%">
     <tr style="text-align:left">
-      <td>Alarm (Kundarak1 Abju): R50' Entry into a 20' radius by a Tiny or larger creature triggers a choice of an audible or mental alarm (password negates) for 20 hr</td>
+      <td>Alarm (Least Dragonmark Mark Of Warding1 Abju): R45' Entry into a 20' radius by a Tiny or larger creature triggers a choice of an audible or mental alarm (password negates) for 18 hr</td>
     </tr><tr style="text-align:left">
-      <td>Arcane Lock (Kundarak1 Abju): Increases by 10 the DC for others to open a touched door, portal, or chest</td>
+      <td>Arcane Lock (Least Dragonmark Mark Of Warding2 Abju): Increases by 10 the DC for others to open a touched door, portal, or chest</td>
     </tr><tr style="text-align:left">
-      <td>Explosive Runes (Kundarak2 Abju): Runes inflict 6d6 HP force in a 10' radius when read by an unauthorized person (save Reflex half; adjacent creatures automatically fail)</td>
+      <td>Explosive Runes (Lesser Dragonmark Mark Of Warding3 Abju): Runes inflict 6d6 HP force in a 10' radius when read by an unauthorized person (save Reflex half; adjacent creatures automatically fail)</td>
     </tr><tr style="text-align:left">
-      <td>Fire Trap (Kundarak1 Abju): Touched object inflicts 1d4+10 HP fire in a 5' radius (save Reflex half) when opened</td>
+      <td>Fire Trap (Least Dragonmark Mark Of Warding4 Abju): Touched object inflicts 1d4+9 HP fire in a 5' radius (save Reflex half) when opened</td>
     </tr><tr style="text-align:left">
-      <td>Glyph Of Warding (Kundarak2 Abju): Creatures with specified characteristics who enter a 50 square foot area trigger a blast that inflicts 5d8 HP of a choice of acid, cold, fire, electricity, or sonic in a 5' radius (save Reflex half; password negates) or a harmful spell of up to 3rd level</td>
+      <td>Glyph Of Warding (Lesser Dragonmark Mark Of Warding3 Abju): Creatures with specified characteristics who enter a 45 square foot area trigger a blast that inflicts 4d8 HP of a choice of acid, cold, fire, electricity, or sonic in a 5' radius (save Reflex half; password negates) or a harmful spell of up to 3rd level</td>
     </tr><tr style="text-align:left">
-      <td>Greater Glyph Of Warding (Kundarak3 Abju): Creatures with specified characteristics who enter a 50 square foot area trigger a blast that inflicts 5d8 HP of a choice of acid, cold, fire, electricity, or sonic in a 5' radius (save Reflex half; password negates) or a harmful spell of up to 6th level</td>
+      <td>Greater Glyph Of Warding (Greater Dragonmark Mark Of Warding6 Abju): Creatures with specified characteristics who enter a 45 square foot area trigger a blast that inflicts 4d8 HP of a choice of acid, cold, fire, electricity, or sonic in a 5' radius (save Reflex half; password negates) or a harmful spell of up to 6th level</td>
     </tr><tr style="text-align:left">
-      <td>Guards And Wards (Kundarak3 Abju): Multiple magic effects protect a 2000' sq area for 20 hr</td>
+      <td>Guards And Wards (Greater Dragonmark Mark Of Warding6 Abju): Multiple magic effects protect a 1800' sq area for 18 hr</td>
     </tr><tr style="text-align:left">
-      <td>Misdirection (Kundarak1 Illu): R50' Divination spells cast upon a target show the auras of another selected object or creature (save Will by the diviner negates) for 10 hr</td>
+      <td>Misdirection (Least Dragonmark Mark Of Warding2 Illu): R45' Divination spells cast upon a target show the auras of another selected object or creature (save Will by the diviner negates) for 9 hr</td>
     </tr><tr style="text-align:left">
-      <td>Mordenkainen's Faithful Hound (Kundarak3 Conj): R50' Creates an invisible dog that barks at Small and larger intruders who enter a 30' radius, including those invisible or ethereal, and bites those who come with 5' (magical +10 attack once per rd inflicts 2d6+3 HP piercing) for 10 hr or until triggered + 10 rd</td>
+      <td>Mordenkainen's Faithful Hound (Greater Dragonmark Mark Of Warding5 Conj): R45' Creates an invisible dog that barks at Small and larger intruders who enter a 30' radius, including those invisible or ethereal, and bites those who come with 5' (magical +10 attack once per rd inflicts 2d6+3 HP piercing) for 9 hr or until triggered + 9 rd</td>
     </tr><tr style="text-align:left">
-      <td>Nondetection (Kundarak2 Abju): Touched gains SR 21 vs. divination, or self or a possession gains SR 25, for 10 hr</td>
-    </tr><tr style="text-align:left">
-      <td>Prismatic Wall (Kundarak4 Abju): R50' 40'x20' wall lasting 100 min blinds for 2d4 rd creatures with up to 7 HD who look at it from within 20', blocks magical and nonmagical ranged attacks, poisons, gasses, petrification, breath weapons, divination, mental attacks, spells, objects, and effects, and inflicts on creatures other than self who pass through all of these effects: 20 HP fire (save Reflex half); 40 HP acid (save Reflex half); 80 HP electricity (save Reflex half); slain by poison (save Fortitude inflicts 1d6 Constitution damage); turned to stone (save Fortitude negates); insanity (save Will negates); sent to another plane (save will negates)</td>
+      <td>Nondetection (Lesser Dragonmark Mark Of Warding3 Abju): Touched gains SR 20 vs. divination, or self or a possession gains SR 24, for 9 hr</td>
     </tr></table>
 </td>
   </tr><tr style="text-align:center">
     <td><b>Magic Notes</b>:     <table id="MagicNotes" style="width:100%">
     <tr style="text-align:center">
-      <td><i>Greater Dragonmark: Can cast a choice of a level 3 dragonmark spell once per day</i></td>
+      <td>Greater Dragonmark (Mark Of Warding): Can use a choice of <i>Greater Glyph Of Warding</i>, <i>Guards And Wards</i>, or <i>Mordenkainen's Faithful Hound</i> once per day as a spell-like ability</td>
     </tr><tr style="text-align:center">
-      <td><i>Least Dragonmark: Can cast a choice of a level 1 dragonmark spell once per day</i></td>
+      <td>Least Dragonmark (Mark Of Warding): Can use a choice of <i>Alarm</i>, <i>Arcane Lock</i>, <i>Fire Trap</i>, or <i>Misdirection</i> once per day as a spell-like ability</td>
     </tr><tr style="text-align:center">
-      <td><i>Lesser Dragonmark: Can cast a choice of a level 2 dragonmark spell once per day</i></td>
+      <td>Lesser Dragonmark (Mark Of Warding): Can use a choice of <i>Explosive Runes</i>, <i>Glyph Of Warding</i>, or <i>Nondetection</i> once per day as a spell-like ability</td>
     </tr></table>
 </td>
   </tr></table>

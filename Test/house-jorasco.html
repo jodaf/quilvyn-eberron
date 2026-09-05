@@ -13,11 +13,7 @@ var attributes = {
   "house":"Jorasco", "intelligence":14, "levels.Fighter":9, "name":"House-Jorasco", 
   "race":"Halfling", "shield":"None", "skills.Climb":1, "skills.Craft (Alchemy)":12, 
   "skills.Handle Animal":12, "skills.Heal":1, "skills.Knowledge (Geography)":4, "skills.Listen":1, 
-  "skills.Perform (Dance)":2, "skills.Search":1, "skills.Spellcraft":2, "skills.Spot":12, 
-  "spells.Cure Light Wounds(Jorasco1 Conj)":1, "spells.Cure Serious Wounds(Jorasco2 Conj)":1, 
-  "spells.Heal(Jorasco3 Conj)":1, "spells.Lesser Restoration(Jorasco1 Conj)":1, 
-  "spells.Mass Heal(Jorasco4 Conj)":1, "spells.Neutralize Poison(Jorasco2 Conj)":1, 
-  "spells.Remove Disease(Jorasco2 Conj)":1, "spells.Restoration(Jorasco2 Conj)":1, "spells_filter":"", "strength":15, 
+  "skills.Perform (Dance)":2, "skills.Search":1, "skills.Spellcraft":2, "skills.Spot":12, "strength":15, 
   "weapons.Club":1, "weapons.Shortbow":1, "wisdom":15
 };
   </script>
@@ -137,7 +133,7 @@ var attributes = {
       </tr><tr style="text-align:center">
         <td><i>Keen Ears: +2 Listen</i></td>
       </tr><tr style="text-align:center">
-        <td><i>Mark Of Healing: +2 Heal</i></td>
+        <td><i>Least Dragonmark (Mark Of Healing): +2 Heal</i></td>
       </tr><tr style="text-align:center">
         <td><i>Small: +4 Hide/-4 Intimidate</i></td>
       </tr><tr style="text-align:center">
@@ -228,8 +224,7 @@ var attributes = {
     <tr style="text-align:center">
       <td>      <table id="SpellStats" style="width:100%">
       <tr style="text-align:center">
-        <td><b>Spell Slots</b>: Jorasco1; Jorasco2; Jorasco3</td>
-        <td><b>Spell DC</b>: Jorasco: 10</td>
+        <td><b>Spell DC</b>: Greater Dragonmark Mark Of Healing: 10; Least Dragonmark Mark Of Healing: 10; Lesser Dragonmark Mark Of Healing: 10</td>
       </tr></table>
 </td>
     </tr></table>
@@ -237,31 +232,29 @@ var attributes = {
   </tr><tr style="text-align:center">
     <td><b>Spells</b>:<br/>    <table id="Spells" style="width:100%">
     <tr style="text-align:left">
-      <td>Cure Light Wounds (Jorasco1 Conj): Touched regains 1d8+5 hit points; undead instead suffer the same amount (save Will half)</td>
+      <td>Cure Light Wounds (Least Dragonmark Mark Of Healing1 Conj): Touched regains 1d8+5 hit points; undead instead suffer the same amount (save Will half)</td>
     </tr><tr style="text-align:left">
-      <td>Cure Serious Wounds (Jorasco2 Conj): Touched regains 3d8+10 hit points; undead instead suffer the same amount (save Will half)</td>
+      <td>Cure Serious Wounds (Lesser Dragonmark Mark Of Healing3 Conj): Touched regains 3d8+9 hit points; undead instead suffer the same amount (save Will half)</td>
     </tr><tr style="text-align:left">
-      <td>Heal (Jorasco3 Conj): Touched regains 100 hit points and recovers from negative conditions; undead instead suffer the same amount (save Will negates)</td>
+      <td>Heal (Greater Dragonmark Mark Of Healing6 Conj): Touched regains 90 hit points and recovers from negative conditions; undead instead suffer the same amount (save Will negates)</td>
     </tr><tr style="text-align:left">
-      <td>Lesser Restoration (Jorasco1 Conj): Dispels magical ability harm from touched or cures 1d4 temporary ability damage, removes fatigue, and reduces exhaustion</td>
+      <td>Lesser Restoration (Least Dragonmark Mark Of Healing2 Conj): Dispels magical ability harm from touched or cures 1d4 temporary ability damage, removes fatigue, and reduces exhaustion</td>
     </tr><tr style="text-align:left">
-      <td>Mass Heal (Jorasco4 Conj): R50' Targets in a 15' radius regain 100 hit points and recover from negative conditions; undead instead suffer the same amount (save Will negates)</td>
+      <td>Neutralize Poison (Lesser Dragonmark Mark Of Healing4 Conj): Touched gains immunity to poison or has its poison neutralized for 90 min</td>
     </tr><tr style="text-align:left">
-      <td>Neutralize Poison (Jorasco2 Conj): Touched gains immunity to poison or has its poison neutralized for 100 min</td>
+      <td>Remove Disease (Lesser Dragonmark Mark Of Healing3 Conj): Cures touched of all diseases</td>
     </tr><tr style="text-align:left">
-      <td>Remove Disease (Jorasco2 Conj): Cures touched of all diseases</td>
-    </tr><tr style="text-align:left">
-      <td>Restoration (Jorasco2 Conj): Dispels magical ability harm from touched and cures all temporary ability damage, restores 1 drained ability, removes fatigue or exhaustion, removes temporary negative levels, and restores 1 drained level with the minimum necessary XP</td>
+      <td>Restoration (Lesser Dragonmark Mark Of Healing4 Conj): Dispels magical ability harm from touched and cures all temporary ability damage, restores 1 drained ability, removes fatigue or exhaustion, removes temporary negative levels, and restores 1 drained level with the minimum necessary XP</td>
     </tr></table>
 </td>
   </tr><tr style="text-align:center">
     <td><b>Magic Notes</b>:     <table id="MagicNotes" style="width:100%">
     <tr style="text-align:center">
-      <td><i>Greater Dragonmark: Can cast a choice of a level 3 dragonmark spell once per day</i></td>
+      <td>Greater Dragonmark (Mark Of Healing): Can use <i>Heal</i> once per day as a spell-like ability</td>
     </tr><tr style="text-align:center">
-      <td><i>Least Dragonmark: Can cast a choice of a level 1 dragonmark spell once per day</i></td>
+      <td>Least Dragonmark (Mark Of Healing): Can use a choice of <i>Cure Light Wounds</i> or <i>Lesser Restoration</i> once per day as a spell-like ability</td>
     </tr><tr style="text-align:center">
-      <td><i>Lesser Dragonmark: Can cast a choice of a level 2 dragonmark spell once per day</i></td>
+      <td>Lesser Dragonmark (Mark Of Healing): Can use a choice of <i>Cure Serious Wounds</i>, <i>Neutralize Poison</i>, <i>Remove Disease</i>, or <i>Restoration</i> once per day as a spell-like ability</td>
     </tr></table>
 </td>
   </tr></table>

@@ -14,12 +14,8 @@ var attributes = {
   "race":"Halfling", "shield":"None", "skills.Climb":1, "skills.Craft (Alchemy)":12, 
   "skills.Diplomacy":1, "skills.Handle Animal":12, "skills.Heal":1, 
   "skills.Knowledge (Geography)":4, "skills.Listen":1, "skills.Perform (Dance)":2, "skills.Search":1, 
-  "skills.Spellcraft":2, "skills.Spot":11, "spells.Create Food And Water(Ghallanda2 Conj)":1, 
-  "spells.Heroes' Feast(Ghallanda3 Conj)":1, "spells.Leomund's Secure Shelter(Ghallanda2 Conj)":1, 
-  "spells.Mordenkainen's Magnificent Mansion(Ghallanda3 Conj)":1, "spells.Prestidigitation(Ghallanda1 Univ)":1, 
-  "spells.Purify Food And Drink(Ghallanda1 Tran)":1, "spells.Refuge(Ghallanda4 Conj)":1, 
-  "spells.Unseen Servant(Ghallanda1 Conj)":1, "spells_filter":"\"\"", "strength":15, "weapons.Club":1, 
-  "weapons.Shortbow":1, "wisdom":15
+  "skills.Spellcraft":2, "skills.Spot":11, "strength":15, "weapons.Club":1, "weapons.Shortbow":1, 
+  "wisdom":15
 };
   </script>
 </head>
@@ -138,7 +134,7 @@ var attributes = {
       </tr><tr style="text-align:center">
         <td><i>Keen Ears: +2 Listen</i></td>
       </tr><tr style="text-align:center">
-        <td><i>Mark Of Hospitality: +2 Diplomacy</i></td>
+        <td><i>Least Dragonmark (Mark Of Hospitality): +2 Diplomacy</i></td>
       </tr><tr style="text-align:center">
         <td><i>Small: +4 Hide/-4 Intimidate</i></td>
       </tr><tr style="text-align:center">
@@ -229,8 +225,7 @@ var attributes = {
     <tr style="text-align:center">
       <td>      <table id="SpellStats" style="width:100%">
       <tr style="text-align:center">
-        <td><b>Spell Slots</b>: Ghallanda1; Ghallanda2; Ghallanda3</td>
-        <td><b>Spell DC</b>: Ghallanda: 10</td>
+        <td><b>Spell DC</b>: Greater Dragonmark Mark Of Hospitality: 10; Least Dragonmark Mark Of Hospitality: 10; Lesser Dragonmark Mark Of Hospitality: 10</td>
       </tr></table>
 </td>
     </tr></table>
@@ -238,31 +233,29 @@ var attributes = {
   </tr><tr style="text-align:center">
     <td><b>Spells</b>:<br/>    <table id="Spells" style="width:100%">
     <tr style="text-align:left">
-      <td>Create Food And Water (Ghallanda2 Conj): R50' Creates enough food and water to sustain 30 humans or 10 horses for 24 hr; the food remains edible for 24 hr</td>
+      <td>Create Food And Water (Lesser Dragonmark Mark Of Hospitality3 Conj): R45' Creates enough food and water to sustain 27 humans or 9 horses for 24 hr; the food remains edible for 24 hr</td>
     </tr><tr style="text-align:left">
-      <td>Heroes' Feast (Ghallanda3 Conj): R50' Creates food for 10 creatures that cures sickness and disease and gives 1d8+5 temporary hit points, +1 attacks and Will saves, and immunity to poison and fear for 12 hr</td>
+      <td>Heroes' Feast (Greater Dragonmark Mark Of Hospitality6 Conj): R45' Creates food for 9 creatures that cures sickness and disease and gives 1d8+4 temporary hit points, +1 attacks and Will saves, and immunity to poison and fear for 12 hr</td>
     </tr><tr style="text-align:left">
-      <td>Leomund's Secure Shelter (Ghallanda2 Conj): R50' Creates a 20'x20' cottage, strong as a stone building, with secured entrances, resistance to fire, immunity to normal missiles, and an unseen servant that can perform tasks, for 20 hr</td>
+      <td>Leomund's Secure Shelter (Lesser Dragonmark Mark Of Hospitality4 Conj): R45' Creates a 20'x20' cottage, strong as a stone building, with secured entrances, resistance to fire, immunity to normal missiles, and an unseen servant that can perform tasks, for 18 hr</td>
     </tr><tr style="text-align:left">
-      <td>Mordenkainen's Magnificent Mansion (Ghallanda3 Conj): R50' Allows self and designated creatures to enter an extradimensional dwelling with provisions for 120 for 20 hr</td>
+      <td>Mordenkainen's Magnificent Mansion (Greater Dragonmark Mark Of Hospitality7 Conj): R45' Allows self and designated creatures to enter an extradimensional dwelling with provisions for 108 for 18 hr</td>
     </tr><tr style="text-align:left">
-      <td>Prestidigitation (Ghallanda1 Univ): R10' Allows performing minor magic effects for 1 hr</td>
+      <td>Prestidigitation (Least Dragonmark Mark Of Hospitality0 Univ): R10' Allows performing minor magic effects for 1 hr</td>
     </tr><tr style="text-align:left">
-      <td>Purify Food And Drink (Ghallanda1 Tran): R10' Makes 10 cubic feet of food and water safe to consume (save Will negates)</td>
+      <td>Purify Food And Drink (Least Dragonmark Mark Of Hospitality0 Tran): R10' Makes 9 cubic feet of food and water safe to consume (save Will negates)</td>
     </tr><tr style="text-align:left">
-      <td>Refuge (Ghallanda4 Conj): Breaking a prepared object and speaking a command word transports the possessor to self home or transports self to possessor</td>
-    </tr><tr style="text-align:left">
-      <td>Unseen Servant (Ghallanda1 Conj): R50' Creates an invisible servant with Strength 2 and a 15' Speed that can perform simple tasks for 10 hr</td>
+      <td>Unseen Servant (Least Dragonmark Mark Of Hospitality1 Conj): R45' Creates an invisible servant with Strength 2 and a 15' Speed that can perform simple tasks for 9 hr</td>
     </tr></table>
 </td>
   </tr><tr style="text-align:center">
     <td><b>Magic Notes</b>:     <table id="MagicNotes" style="width:100%">
     <tr style="text-align:center">
-      <td><i>Greater Dragonmark: Can cast a choice of a level 3 dragonmark spell once per day</i></td>
+      <td>Greater Dragonmark (Mark Of Hospitality): Can use a choice of <i>Heroes' Feast</i> or <i>Mordenkainen's Magnificent Mansion</i> once per day as a spell-like ability</td>
     </tr><tr style="text-align:center">
-      <td><i>Least Dragonmark: Can cast a choice of a level 1 dragonmark spell once per day</i></td>
+      <td>Least Dragonmark (Mark Of Hospitality): Can use a choice of <i>Purify Food And Drink</i> 2 times per day, <i>Prestidigitation</i> 2 times per day, or <i>Unseen Servant</i> once per day as a spell-like ability</td>
     </tr><tr style="text-align:center">
-      <td><i>Lesser Dragonmark: Can cast a choice of a level 2 dragonmark spell once per day</i></td>
+      <td>Lesser Dragonmark (Mark Of Hospitality): Can use a choice of <i>Create Food And Water</i> or <i>Leomund's Secure Shelter</i> once per day as a spell-like ability</td>
     </tr></table>
 </td>
   </tr></table>

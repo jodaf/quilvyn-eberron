@@ -1009,10 +1009,66 @@ Eberron.FEATURES_ADDED = {
   'Great Rend':
     'Section=combat ' +
     'Note="Inflicts +1d4+%{level//4+strengthModifier//2} HP when both claw attacks hit"',
-  'Greater Dragonmark':
+  'Greater Dragonmark (Mark Of Detection)':
     'Section=magic ' +
-    // TODO revisit
-    'Note="Can cast a choice of a level 3 dragonmark spell once per day"',
+    'Note="Can use <i>True Seeing</i> once per day as a spell-like ability" ' +
+    'Spells="True Seeing" ' +
+    'SpellAbility=Charisma',
+  'Greater Dragonmark (Mark Of Finding)':
+    'Section=magic ' +
+    'Note="Can use <i>Find The Path</i> once per day as a spell-like ability" ' +
+    'Spells="Find The Path" ' +
+    'SpellAbility=Charisma',
+  'Greater Dragonmark (Mark Of Handling)':
+    'Section=magic ' +
+    'Note="Can use a choice of <i>Animal Growth</i> or <i>Summon Nature\'s Ally V</i> once per day as a spell-like ability" ' +
+    'Spells="Animal Growth","Summon Nature\'s Ally V" ' +
+    'SpellAbility=Charisma',
+  'Greater Dragonmark (Mark Of Healing)':
+    'Section=magic ' +
+    'Note="Can use <i>Heal</i> once per day as a spell-like ability" ' +
+    'Spells="Heal" ' +
+    'SpellAbility=Charisma',
+  'Greater Dragonmark (Mark Of Hospitality)':
+    'Section=magic ' +
+    'Note="Can use a choice of <i>Heroes\' Feast</i> or <i>Mordenkainen\'s Magnificent Mansion</i> once per day as a spell-like ability" ' +
+    'Spells="Heroes\' Feast","Mordenkainen\'s Magnificent Mansion" ' +
+    'SpellAbility=Charisma',
+  'Greater Dragonmark (Mark Of Making)':
+    'Section=magic ' +
+    'Note="Can use a choice of <i>Fabricate</i> or <i>Major Creation</i> once per day as a spell-like ability" ' +
+    'Spells="Fabricate","Major Creation" ' +
+    'SpellAbility=Charisma',
+  'Greater Dragonmark (Mark Of Passage)':
+    'Section=magic ' +
+    'Note="Can use a choice of <i>Overland Flight</i> or <i>Teleport</i> once per day as a spell-like ability" ' +
+    'Spells="Overland Flight","Teleport" ' +
+    'SpellAbility=Charisma',
+  'Greater Dragonmark (Mark Of Scribing)':
+    'Section=magic ' +
+    'Note="Can use <i>Sending</i> once per day as a spell-like ability" ' +
+    'Spells="Sending" ' +
+    'SpellAbility=Charisma',
+  'Greater Dragonmark (Mark Of Sentinel)':
+    'Section=magic ' +
+    'Note="Can use <i>Globe Of Invulnerability</i> once per day as a spell-like ability" ' +
+    'Spells="Globe Of Invulnerability" ' +
+    'SpellAbility=Charisma',
+  'Greater Dragonmark (Mark Of Shadow)':
+    'Section=magic ' +
+    'Note="Can use a choice of <i>Mislead</i>, <i>Prying Eyes</i>, or <i>Shadow Walk</i> once per day as a spell-like ability" ' +
+    'Spells="Mislead","Prying Eyes","Shadow Walk" ' +
+    'SpellAbility=Charisma',
+  'Greater Dragonmark (Mark Of Storm)':
+    'Section=magic ' +
+    'Note="Can use a choice of <i>Control Winds</i> or <i>Control Weather</i> once per day as a spell-like ability" ' +
+    'Spells="Control Winds","Control Weather" ' +
+    'SpellAbility=Charisma',
+  'Greater Dragonmark (Mark Of Warding)':
+    'Section=magic ' +
+    'Note="Can use a choice of <i>Greater Glyph Of Warding</i>, <i>Guards And Wards</i>, or <i>Mordenkainen\'s Faithful Hound</i> once per day as a spell-like ability" ' +
+    'Spells="Greater Glyph Of Warding","Guards And Wards","Mordenkainen\'s Faithful Hound" ' +
+    'SpellAbility=Charisma',
   'Greater Powerful Charge':
     'Section=combat Note="Has increased Powerful Charge effects"',
   'Greater Shifter Defense':
@@ -1047,16 +1103,152 @@ Eberron.FEATURES_ADDED = {
   'Knight Training':
     'Section=ability ' +
     'Note="Has no restrictions on combining Paladin and chosen class levels"',
-  'Least Dragonmark':
-    'Section=magic ' +
-    // TODO revisit
-    'Note="Can cast a choice of a level 1 dragonmark spell once per day"',
+  'Least Dragonmark (Mark Of Detection)':
+    'Section=magic,skill ' +
+    'Note=' +
+      '"Can use a choice of <i>Detect Magic</i> or <i>Detect Poison</i> 2 times per day as a spell-like ability",' +
+      '"+2 Spot" ' +
+    'Spells="Detect Magic","Detect Poison" ' +
+    'SpellAbility=Charisma',
+  'Least Dragonmark (Mark Of Finding)':
+    'Section=magic,skill ' +
+    'Note=' +
+      '"Can use a choice of <i>Identify</i> once per day, <i>Know Direction</i> 2 times per day, or <i>Locate Object</i> once per day as a spell-like ability",' +
+      '"+2 Search" ' +
+    'Spells="Identify","Know Direction","Locate Object" ' +
+    'SpellAbility=Charisma',
+  'Least Dragonmark (Mark Of Handling)':
+    'Section=magic,skill ' +
+    'Note=' +
+      '"Can use a choice of <i>Calm Animals</i>, <i>Charm Animal</i>, or <i>Speak With Animals</i> once per day as a spell-like ability",' +
+      '"+2 Handle Animal" ' +
+    'Spells="Calm Animals","Charm Animal","Speak With Animals" ' +
+    'SpellAbility=Charisma',
+  'Least Dragonmark (Mark Of Healing)':
+    'Section=magic,skill ' +
+    'Note=' +
+      '"Can use a choice of <i>Cure Light Wounds</i> or <i>Lesser Restoration</i> once per day as a spell-like ability",' +
+      '"+2 Heal" ' +
+    'Spells="Cure Light Wounds","Lesser Restoration" ' +
+    'SpellAbility=Charisma',
+  'Least Dragonmark (Mark Of Hospitality)':
+    'Section=magic,skill ' +
+    'Note=' +
+      '"Can use a choice of <i>Purify Food And Drink</i> 2 times per day, <i>Prestidigitation</i> 2 times per day, or <i>Unseen Servant</i> once per day as a spell-like ability",' +
+      '"+2 Diplomacy" ' +
+    'Spells="Purify Food And Drink","Prestidigitation","Unseen Servant" ' +
+    'SpellAbility=Charisma',
+  'Least Dragonmark (Mark Of Making)':
+    'Section=magic,skill ' +
+    'Note=' +
+      '"Can use a choice of <i>Make Whole</i> once per day, <i>Mending</i> 2 times per day, or <i>Repair Light Damage</i> once per day as a spell-like ability",' +
+      '"+2 all Craft skills" ' +
+    'Spells="Make Whole","Mending","Repair Light Damage" ' +
+    'SpellAbility=Charisma',
+  'Least Dragonmark (Mark Of Passage)':
+    'Section=magic,skill ' +
+    'Note=' +
+      '"Can use a choice of <i>Expeditious Retreat</i>, <i>Mount</i>, or <i>Dimension Leap</i> once per day as a spell-like ability",' +
+      '"+2 Survival" ' +
+    'Spells="Expeditious Retreat","Mount","Dimension Leap" ' +
+    'SpellAbility=Charisma',
+  'Least Dragonmark (Mark Of Scribing)':
+    'Section=magic,skill ' +
+    'Note=' +
+      '"Can use a choice of <i>Arcane Mark</i> 2 times per day, <i>Comprehend Languages</i> once per day, or <i>Whispering Wind</i> once per day as a spell-like ability",' +
+      '"+2 Decipher Script" ' +
+    'Spells="Arcane Mark","Comprehend Languages","Whispering Wind" ' +
+    'SpellAbility=Charisma',
+  'Least Dragonmark (Mark Of Sentinel)':
+    'Section=magic,skill ' +
+    'Note=' +
+      '"Can use a choice of <i>Mage Armor</i>, <i>Protection From Arrows</i>, <i>Shield Of Faith</i>, or <i>Shield Other</i> once per day as a spell-like ability",' +
+      '"+2 Sense Motive" ' +
+    'Spells="Mage Armor","Protection From Arrows","Shield Of Faith","Shield Other" ' +
+    'SpellAbility=Charisma',
+  'Least Dragonmark (Mark Of Shadow)':
+    'Section=magic,skill ' +
+    'Note=' +
+      '"Can use a choice of <i>Darkness</i>, <i>Disguise Self</i>, or <i>Minor Image</i> once per day as a spell-like ability",' +
+      '"+2 Gather Information" ' +
+    'Spells="Darkness","Disguise Self","Minor Image" ' +
+    'SpellAbility=Charisma',
+  'Least Dragonmark (Mark Of Storm)':
+    'Section=magic,skill ' +
+    'Note=' +
+      '"Can use a choice of <i>Endure Elements</i>, <i>Fog Cloud</i>, or <i>Gust Of Wind</i> once per day as a spell-like ability",' +
+      '"+2 Balance" ' +
+    'Spells="Endure Elements","Fog Cloud","Gust Of Wind" ' +
+    'SpellAbility=Charisma',
+  'Least Dragonmark (Mark Of Warding)':
+    'Section=magic,skill ' +
+    'Note=' +
+      '"Can use a choice of <i>Alarm</i>, <i>Arcane Lock</i>, <i>Fire Trap</i>, or <i>Misdirection</i> once per day as a spell-like ability",' +
+      '"+2 Search" ' +
+    'Spells="Alarm","Arcane Lock","Fire Trap","Misdirection" ' +
+    'SpellAbility=Charisma',
   'Legendary Artisan':
     'Section=magic Note="Reduces magic item creation XP price by 25%"',
-  'Lesser Dragonmark':
+  'Lesser Dragonmark (Mark Of Detection)':
     'Section=magic ' +
-    // TODO revisit
-    'Note="Can cast a choice of a level 2 dragonmark spell once per day"',
+    'Note="Can use a choice of <i>Detect Scrying</i> or <i>See Invisibility</i> once per day as a spell-like ability" ' +
+    'Spells="Detect Scrying","See Invisibility" ' +
+    'SpellAbility=Charisma',
+  'Lesser Dragonmark (Mark Of Finding)':
+    'Section=magic ' +
+    'Note="Can use a choice of <i>Helping Hand</i> or <i>Locate Creature</i> once per day as a spell-like ability" ' +
+    'Spells="Helping Hand","Locate Creature" ' +
+    'SpellAbility=Charisma',
+  'Lesser Dragonmark (Mark Of Handling)':
+    'Section=magic ' +
+    'Note="Can use a choice of <i>Dominate Animal</i> or <i>Greater Magic Fang</i> once per day as a spell-like ability" ' +
+    'Spells="Dominate Animal","Greater Magic Fang" ' +
+    'SpellAbility=Charisma',
+  'Lesser Dragonmark (Mark Of Healing)':
+    'Section=magic ' +
+    'Note="Can use a choice of <i>Cure Serious Wounds</i>, <i>Neutralize Poison</i>, <i>Remove Disease</i>, or <i>Restoration</i> once per day as a spell-like ability" ' +
+    'Spells="Cure Serious Wounds","Neutralize Poison","Remove Disease","Restoration" ' +
+    'SpellAbility=Charisma',
+  'Lesser Dragonmark (Mark Of Hospitality)':
+    'Section=magic ' +
+    'Note="Can use a choice of <i>Create Food And Water</i> or <i>Leomund\'s Secure Shelter</i> once per day as a spell-like ability" ' +
+    'Spells="Create Food And Water","Leomund\'s Secure Shelter" ' +
+    'SpellAbility=Charisma',
+  'Lesser Dragonmark (Mark Of Making)':
+    'Section=magic ' +
+    'Note="Can use a choice of <i>Minor Creation</i> or <i>Repair Serious Damage</i> once per day as a spell-like ability" ' +
+    'Spells="Minor Creation","Repair Serious Damage" ' +
+    'SpellAbility=Charisma',
+  'Lesser Dragonmark (Mark Of Passage)':
+    'Section=magic ' +
+    'Note="Can use a choice of <i>Dimension Door</i> or <i>Phantom Steed</i> once per day as a spell-like ability" ' +
+    'Spells="Dimension Door","Phantom Steed" ' +
+    'SpellAbility=Charisma',
+  'Lesser Dragonmark (Mark Of Scribing)':
+    'Section=magic ' +
+    'Note="Can use a choice of <i>Illusory Script</i>, <i>Secret Page</i>, or <i>Tongues</i> once per day as a spell-like ability" ' +
+    'Spells="Illusory Script","Secret Page","Tongues" ' +
+    'SpellAbility=Charisma',
+  'Lesser Dragonmark (Mark Of Sentinel)':
+    'Section=magic ' +
+    'Note="Can use a choice of <i>Protection From Energy</i> or <i>Lesser Globe Of Invulnerability</i> once per day as a spell-like ability" ' +
+    'Spells="Protection From Energy","Lesser Globe Of Invulnerability" ' +
+    'SpellAbility=Charisma',
+  'Lesser Dragonmark (Mark Of Shadow)':
+    'Section=magic ' +
+    'Note="Can use a choice of <i>Clairaudience/Clairvoyance</i>, <i>Scrying</i>, or <i>Shadow Conjuration</i> once per day as a spell-like ability" ' +
+    'Spells="Clairaudience/Clairvoyance","Scrying","Shadow Conjuration" ' +
+    'SpellAbility=Charisma',
+  'Lesser Dragonmark (Mark Of Storm)':
+    'Section=magic ' +
+    'Note="Can use a choice of <i>Sleet Storm</i>, <i>Wind\'s Favor</i>, or <i>Wind Wall</i> once per day as a spell-like ability" ' +
+    'Spells="Sleet Storm","Wind\'s Favor","Wind Wall" ' +
+    'SpellAbility=Charisma',
+  'Lesser Dragonmark (Mark Of Warding)':
+    'Section=magic ' +
+    'Note="Can use a choice of <i>Explosive Runes</i>, <i>Glyph Of Warding</i>, or <i>Nondetection</i> once per day as a spell-like ability" ' +
+    'Spells="Explosive Runes","Glyph Of Warding","Nondetection" ' +
+    'SpellAbility=Charisma',
   'Longstride Elite':'Section=ability Note="Has increased Longstride effects"',
   'Mithral Body':'Section=combat Note="Has mithral plating armor"',
   'Mithral Fluidity':
@@ -1141,20 +1333,6 @@ Eberron.FEATURES_ADDED = {
       '"Climb is a class skill/Jump is a class skill"',
   'Whirling Steel Strike':
     'Section=combat Note="Can use Flurry Of Blows with a longsword"',
-
-  // Dragonmarks
-  'Mark Of Detection':'Section=skill Note="+2 Spot"',
-  'Mark Of Finding':'Section=skill Note="+2 Search"',
-  'Mark Of Handling':'Section=skill Note="+2 Handle Animal"',
-  'Mark Of Healing':'Section=skill Note="+2 Heal"',
-  'Mark Of Hospitality':'Section=skill Note="+2 Diplomacy"',
-  'Mark Of Making':'Section=skill Note="+2 all Craft"',
-  'Mark Of Passage':'Section=skill Note="+2 Survival"',
-  'Mark Of Scribing':'Section=skill Note="+2 Decipher Script"',
-  'Mark Of Sentinel':'Section=skill Note="+2 Sense Motive"',
-  'Mark Of Shadow':'Section=skill Note="+2 Gather Information"',
-  'Mark Of Storm':'Section=skill Note="+2 Balance"',
-  'Mark Of Warding':'Section=skill Note="+2 Search"',
 
   // Prestige classes
 
@@ -1264,10 +1442,68 @@ Eberron.FEATURES_ADDED = {
     'Note="+1 Heir Of Siberys Feat%{casterLevel?\'\':\'/+\'+($\'levels.Heir Of Siberys\'>2?2:1)+\' General Feat\'}"',
   'Caster Level Bonus':SRD35.FEATURES['Caster Level Bonus'],
   'Improved Siberys Mark':
-    'Section=magic Note="Has increased Siberys Mark effects"',
-  'Siberys Mark':
     'Section=magic ' +
-    'Note="Can use a choice of house dragonmark spell %{magicNotes.improvedSiberysMark?\'2 times\':\'once\'} per day"',
+    'Note="Can use the chosen Siberys Mark spell 2 times per day or choose another to use once per day"',
+  'Siberys Mark (Mark Of Detection)':
+    'Section=magic ' +
+    'Note="Can use <i>Moment Of Prescience</i> once per day as a spell-like ability" ' +
+    'Spells="Moment Of Prescience" ' +
+    'SpellAbility=Charisma',
+  'Siberys Mark (Mark Of Finding)':
+    'Section=magic ' +
+    'Note="Can use <i>Discern Location</i> once per day as a spell-like ability" ' +
+    'Spells="Moment Of Prescience" ' +
+    'SpellAbility=Charisma',
+  'Siberys Mark (Mark Of Handling)':
+    'Section=magic ' +
+    'Note="Can use a choice of <i>Awaken</i> or <i>Summon Nature\'s Ally VI</i> once per day as a spell-like ability" ' +
+    'Spells="Awaken","Summon Nature\'s Ally VI" ' +
+    'SpellAbility=Charisma',
+  'Siberys Mark (Mark Of Healing)':
+    'Section=magic ' +
+    'Note="Can use <i>Mass Heal</i> once per day as a spell-like ability" ' +
+    'Spells="Mass Heal" ' +
+    'SpellAbility=Charisma',
+  'Siberys Mark (Mark Of Hospitality)':
+    'Section=magic ' +
+    'Note="Can use <i>Refuge</i> once per day as a spell-like ability" ' +
+    'Spells="Refuge" ' +
+    'SpellAbility=Charisma',
+  'Siberys Mark (Mark Of Making)':
+    'Section=magic ' +
+    'Note="Can use <i>True Creation</i> once per day as a spell-like ability" ' +
+    'Spells="True Creation" ' +
+    'SpellAbility=Charisma',
+  'Siberys Mark (Mark Of Passage)':
+    'Section=magic ' +
+    'Note="Can use <i>Greater Teleport</i> once per day as a spell-like ability" ' +
+    'Spells="Greater Teleport" ' +
+    'SpellAbility=Charisma',
+  'Siberys Mark (Mark Of Scribing)':
+    'Section=magic ' +
+    'Note="Can use <i>Symbol Of Death</i> once per day as a spell-like ability" ' +
+    'Spells="Symbol Of Death" ' +
+    'SpellAbility=Charisma',
+  'Siberys Mark (Mark Of Sentinel)':
+    'Section=magic ' +
+    'Note="Can use <i>Mind Blank</i> once per day as a spell-like ability" ' +
+    'Spells="Mind Blank" ' +
+    'SpellAbility=Charisma',
+  'Siberys Mark (Mark Of Shadow)':
+    'Section=magic ' +
+    'Note="Can use a choice of <i>Greater Prying Eyes</i> or <i>Greater Scrying</i> once per day as a spell-like ability" ' +
+    'Spells="Greater Prying Eyes" ' +
+    'SpellAbility=Charisma',
+  'Siberys Mark (Mark Of Storm)':
+    'Section=magic ' +
+    'Note="Can use <i>Storm Of Vengeance</i> once per day as a spell-like ability" ' +
+    'Spells="Storm Of Vengeance" ' +
+    'SpellAbility=Charisma',
+  'Siberys Mark (Mark Of Warding)':
+    'Section=magic ' +
+    'Note="Can use <i>Prismatic Wall</i> once per day as a spell-like ability" ' +
+    'Spells="Prismatic Wall" ' +
+    'SpellAbility=Charisma',
 
   // Master Inquisitive
   'Bonus Feat (Master Inquisitive)':
@@ -1573,7 +1809,7 @@ Eberron.SPELLS_ADDED = {
     'Description="R30\' Neutralizes venom and poisonous creatures (Will neg) for %{lvl*10} min"',
   'Dimension Leap':
     'School=Conjuration ' +
-    'Level=Orien1 ' +
+    'Level=Orien1 ' + // TODO?
     'Description="Self teleports up to %{lvl*10}\'"',
   'Disable Construct':
     'School=Transmutation ' +
@@ -1685,7 +1921,7 @@ Eberron.SPELLS_ADDED = {
     'Description="Touched construct regains 4d8+%{lvl<?20} HP"',
   'Repair Light Damage':
     'School=Transmutation ' +
-    'Level=A1,Cannith1,S1,W1 ' +
+    'Level=A1,S1,W1 ' +
     'Description="Touched construct regains 1d8+%{lvl<?5} HP" ' +
     'Liquid=Oil',
   'Repair Moderate Damage':
@@ -1695,7 +1931,7 @@ Eberron.SPELLS_ADDED = {
     'Liquid=Oil',
   'Repair Serious Damage':
     'School=Transmutation ' +
-    'Level=A3,Cannith2,S3,W3 ' +
+    'Level=A3,S3,W3 ' +
     'Description="Touched construct regains 3d8+%{lvl<?15} HP" ' +
     'Liquid=Oil',
   'Resistance Item':
@@ -1741,7 +1977,7 @@ Eberron.SPELLS_ADDED = {
     'Description="Touched construct gains +%{(lvl//3+1)<?5>?2} AC for %{lvl*10} min"',
   'True Creation':
     'School=Conjuration ' +
-    'Level=Artifice8,Cannith4 ' +
+    'Level=Artifice8 ' +
     'Description="Creates permanent %{lvl}\' cu plant or mineral object"',
   'Weapon Augmentation':
     'School=Transmutation ' +
@@ -1749,7 +1985,7 @@ Eberron.SPELLS_ADDED = {
     'Description="Touched weapon gains +3 or 70K GP enhancement for %{lvl*10} min"',
   "Wind's Favor":
     'School=Transmutation ' +
-    'Level=Lyrandar2 ' +
+    'Level=Lyrandar2 ' + // TODO ?
     'Description="R%{lvl*10+100}\' Creates 10\'x10\'x%{lvl*20+100}\' 30 MPH wind for %{lvl} hr"',
   'Withering Palm':
     'School=Necromancy ' +
@@ -1765,18 +2001,13 @@ Eberron.SPELLS = Object.assign(
   {}, window.PHB35 != null ? PHB35.SPELLS : SRD35.SPELLS, Eberron.SPELLS_ADDED
 );
 Eberron.SPELLS_LEVELS = {
-  'Alarm':'Kundarak1',
   'Align Weapon':'A2',
   'Analyze Dweomer':'Commerce8',
-  'Animal Growth':'Vadalis3',
   'Animate Objects':'Life6',
   'Animate Plants':'Life8',
   'Animate Rope':'Artifice1',
   'Antilife Shell':'Decay6',
-  'Arcane Lock':'Kundarak1',
-  'Arcane Mark':'Sivis1',
   'Astral Projection':'Meditation9',
-  'Awaken':'Vadalis4',
   'Banishment':'Exorcism6,Gatekeeper5,Warden7',
   "Bear's Endurance":'A2',
   'Bestow Curse':'Dragon3',
@@ -1787,191 +2018,133 @@ Eberron.SPELLS_LEVELS = {
   "Bull's Strength":'A2',
   'Call Lightning':'Weather3',
   'Call Lightning Storm':'Weather5',
-  'Calm Animals':'Vadalis1',
   'Calm Emotions':'Charm2',
   "Cat's Grace":'A2',
   'Cause Fear':'Dragon1,Passion1',
-  'Charm Animal':'Vadalis1',
   'Charm Monster':'Charm5,Greensinger4',
   'Charm Person':'Charm1,Greensinger1',
   'Chill Metal':'A2',
-  'Clairaudience/Clairvoyance':'Phiarlan2,Thuranni2',
   'Command Undead':'Necromancer2',
-  'Comprehend Languages':'Commerce1,Meditation1,Sivis1',
+  'Comprehend Languages':'Commerce1,Meditation1',
   'Confusion':'Madness4,Passion3',
   'Consecrate':'Deathless2',
   'Contagion':'Decay3',
   'Control Undead':'Necromancer7',
-  'Control Weather':'Lyrandar3,Weather7',
-  'Control Winds':'Lyrandar3,Weather6',
-  'Create Food And Water':'Feast3,Ghallanda2',
+  'Control Weather':'Weather7',
+  'Control Winds':'Weather6',
+  'Create Food And Water':'Feast3',
   'Crushing Despair':'Passion4',
-  'Cure Light Wounds':'Jorasco1',
-  'Cure Serious Wounds':'Jorasco2',
-  'Darkness':'Phiarlan1,Shadow2,Thuranni1',
+  'Darkness':'Shadow2',
   'Daze Monster':'Greensinger2',
   'Death Knell':'Dragon2',
   'Death Ward':'Life4',
   'Deeper Darkness':'Shadow3',
   'Delay Poison':'Feast2',
   'Demand':'Charm8',
-  'Detect Magic':'Medani1',
-  'Detect Poison':'Medani1',
-  'Detect Scrying':'Medani2',
   'Detect Thoughts':'Warden2',
   'Detect Undead':'Deathless1',
-  'Dimension Door':'Orien2',
   'Dimensional Anchor':'Gatekeeper3',
   'Dimensional Lock':'Gatekeeper6',
-  'Discern Location':'Tharashk4',
-  'Disguise Self':'Phiarlan1,Thuranni1',
   'Dismissal':'Exorcism4',
   'Dispel Evil':'Exorcism5',
   'Displacement':'Greensinger3,Warden3',
   'Disrupting Weapon':'A5,Life5',
-  'Dominate Animal':'Vadalis2',
   'Dominate Monster':'Charm9,Passion9',
   'Doom':'Decay1',
   "Eagle's Splendor":'A2',
-  'Endure Elements':'Lyrandar1',
   'Energy Drain':'Decay9,Necromancer9',
   'Enervation':'Decay4,Necromancer4',
   'Ethereal Jaunt':'Greensinger7',
   'Etherealness':'Greensinger9',
-  'Expeditious Retreat':'Orien1',
-  'Explosive Runes':'Kundarak2',
   'Eyebite':'Necromancer6',
-  'Fabricate':'A5,Artifice5,Cannith3',
-  'Find The Path':'Meditation6,Tharashk3',
-  'Fire Trap':'Kundarak1',
-  'Fog Cloud':'Lyrandar1,Weather2',
+  'Fabricate':'A5,Artifice5',
+  'Find The Path':'Meditation6',
+  'Fog Cloud':'Weather2',
   "Fox's Cunning":'A2',
   'Freedom':'Exorcism9',
   'Gate':'Dragon9',
   'Geas/Quest':'Charm6',
   'Glibness':'Commerce4',
-  'Globe Of Invulnerability':'A6,Deneith3',
-  'Glyph Of Warding':'Kundarak2',
+  'Globe Of Invulnerability':'A6',
   'Goodberry':'Feast1',
   'Greater Command':'Passion5',
-  'Greater Glyph Of Warding':'Kundarak3',
   'Greater Heroism':'Passion6',
-  'Greater Magic Fang':'Vadalis2',
   'Greater Magic Weapon':'A3',
   'Greater Planar Ally':'Dragon8',
-  'Greater Prying Eyes':'Phiarlan4,Thuranni4',
   'Greater Shadow Conjuration':'Shadow7',
   'Greater Shadow Evocation':'Shadow8',
-  'Greater Teleport':'Orien4',
-  'Guards And Wards':'Kundarak3',
-  'Gust Of Wind':'Lyrandar1',
   'Hallow':'Deathless5',
-  'Heal':'Jorasco3',
   'Heat Metal':'A2',
-  'Helping Hand':'Tharashk2',
-  "Heroes' Feast":'Community6,Feast6,Ghallanda3',
+  "Heroes' Feast":'Community6,Feast6',
   'Heroism':'Charm4',
   'Hide From Undead':'Life1',
   'Hold Monster':'Greensinger5,Warden5',
   'Holy Aura':'Exorcism8',
   'Holy Word':'Exorcism7',
   'Horrid Wilting':'Decay8,Necromancer8',
-  'Identify':'A1,Tharashk1',
+  'Identify':'A1',
   'Imprisonment':'Gatekeeper9',
-  'Illusory Script':'Sivis2',
   'Insanity':'Charm7,Madness7',
-  'Know Direction':'Tharashk1',
   "Leomund's Secret Chest":'Commerce6',
-  "Leomund's Secure Shelter":'Feast5,Ghallanda2',
+  "Leomund's Secure Shelter":'Feast5',
   'Lesser Confusion':'Madness1',
-  'Lesser Globe Of Invulnerability':'A4,Deneith2',
+  'Lesser Globe Of Invulnerability':'A4',
   'Lesser Planar Ally':'Dragon4',
-  'Lesser Restoration':'Jorasco1,Life2',
+  'Lesser Restoration':'Life2',
   'Light':'A1',
-  'Locate Creature':'Tharashk2,Warden4',
-  'Locate Object':'Meditation3,Tharashk1',
-  'Mage Armor':'Deneith1',
+  'Locate Creature':'Warden4',
+  'Locate Object':'Meditation3',
   'Magic Circle Against Evil':'Exorcism2',
   'Magic Stone':'A1',
   'Magic Vestment':'A1',
   'Magic Weapon':'A1',
-  'Major Creation':'A5,Artifice6,Cannith3',
-  'Make Whole':'Cannith1',
+  'Major Creation':'A5,Artifice6',
   "Mass Cat's Grace":'Greensinger6',
   'Mass Charm Monster':'Greensinger8',
-  'Mass Heal':'Community9,Life9,Jorasco4',
+  'Mass Heal':'Community9,Life9',
   'Mass Hold Monster':'Warden9',
-  'Mending':'Cannith1',
-  'Mind Blank':'Deneith4,Gatekeeper8,Meditation8',
-  'Minor Creation':'A4,Artifice4,Cannith2',
-  'Minor Image':'Phiarlan1,Thuranni1',
-  'Misdirection':'Kundarak1',
-  'Mislead':'Phiarlan3,Thuranni3',
-  'Moment Of Prescience':'Medani4',
-  "Mordenkainen's Faithful Hound":'Kundarak3',
-  "Mordenkainen's Magnificent Mansion":'Feast7,Ghallanda3',
-  'Mount':'Orien1',
+  'Mind Blank':'Gatekeeper8,Meditation8',
+  'Minor Creation':'A4,Artifice4',
+  "Mordenkainen's Magnificent Mansion":'Feast7',
   'Move Earth':'A6',
-  'Neutralize Poison':'Feast4,Jorasco2',
-  'Nondetection':'Kundarak2',
+  'Neutralize Poison':'Feast4',
   'Obscuring Mist':'Shadow1,Weather1',
   "Otto's Irresistible Dance":'Passion8',
-  'Overland Flight':'Orien3',
   "Owl's Wisdom":'A2,Meditation2',
   'Phantasmal Killer':'Madness6',
-  'Phantom Steed':'Orien2',
   'Planar Ally':'Dragon6',
   'Plant Growth':'Life3',
   'Polymorph Any Object':'Commerce9',
   'Prayer':'Community3',
-  'Prestidigitation':'Ghallanda1',
   'Prismatic Sphere':'Artifice9',
-  'Prismatic Wall':'Kundarak4',
-  'Protection From Arrows':'Deneith1',
-  'Protection From Energy':'Deneith2',
   'Protection From Evil':'Exorcism1,Gatekeeper1,Warden1',
-  'Prying Eyes':'Phiarlan3,Thuranni3',
-  'Purify Food And Drink':'Ghallanda1',
   'Rage':'Madness3',
   "Rary's Telepathic Bond":'Community5',
   'Ray Of Enfeeblement':'Decay2,Necromancer1',
-  'Refuge':'Commerce7,Community7,Ghallanda4',
+  'Refuge':'Commerce7,Community7',
   'Regenerate':'Life7',
   'Remove Curse':'Exorcism3',
-  'Remove Disease':'Jorasco2',
   'Repulsion':'Warden6',
-  'Restoration':'Jorasco2',
   'Rusting Grasp':'A4',
   'Screen':'Warden8',
-  'Scrying':'Phiarlan2,Thuranni2',
-  'Secret Page':'Sivis2',
-  'See Invisibility':'Medani2',
-  'Sending':'Sivis3',
   'Shades':'Shadow9',
-  'Shadow Conjuration':'Phiarlan2,Shadow4,Thuranni2',
+  'Shadow Conjuration':'Shadow4',
   'Shadow Evocation':'Shadow5',
-  'Shadow Walk':'Phiarlan3,Shadow6,Thuranni3',
-  'Shield Of Faith':'A1,Deneith1',
-  'Shield Other':'Deneith1',
+  'Shadow Walk':'Shadow6',
+  'Shield Of Faith':'A1',
   'Slay Living':'Dragon5',
-  'Sleet Storm':'Lyrandar2,Weather4',
+  'Sleet Storm':'Weather4',
   'Song Of Discord':'Passion7',
-  'Speak With Animals':'Vadalis1',
   'Spell Resistance':'Meditation5',
   'Spell Turning':'Meditation7',
   'Status':'Community2',
   'Stone Shape':'Artifice3',
-  'Storm Of Vengeance':'Lyrandar4,Weather9',
+  'Storm Of Vengeance':'Weather9',
   'Suggestion':'Charm3',
-  "Summon Nature's Ally V":'Vadalis3',
-  "Summon Nature's Ally VI":'Vadalis4',
-  'Symbol Of Death':'Sivis4',
   'Sympathy':'Community8',
   "Tasha's Hideous Laughter":'Passion2',
-  'Teleport':'Orien3',
-  'Tongues':'Commerce3,Meditation4,Sivis2',
-  'True Seeing':'Commerce5,Medani3',
-  'Unseen Servant':'Ghallanda1',
+  'Tongues':'Commerce3,Meditation4',
+  'True Seeing':'Commerce5',
   'Vampiric Touch':'Necromancer3',
   'Wall Of Force':'A5',
   'Wall Of Iron':'A6',
@@ -1979,8 +2152,6 @@ Eberron.SPELLS_LEVELS = {
   'Waves Of Fatigue':'Necromancer5',
   'Weird':'Madness9',
   'Whirlwind':'Weather8',
-  'Whispering Wind':'Sivis1',
-  'Wind Wall':'Lyrandar2',
   'Wood Shape':'Artifice2',
   'Zone Of Truth':'Commerce2'
 };
@@ -2946,43 +3117,24 @@ Eberron.houseRules = function(rules, name, dragonmark, races) {
     'level', '=', null
   );
 
-  rules.defineRule('casterLevels.' + name,
-    'house', '?', 'source == "' + name + '"',
-    'magicNotes.leastDragonmark', '=', '1',
-    'magicNotes.lesserDragonmark', '+', '5',
-    'magicNotes.greaterDragonmark', '+', '4',
-    'magicNotes.siberysMark', '^=', '15',
-    'levels.Dragonmark Heir', '+', null
-  );
   rules.defineRule('dragonmark',
     'house', '=', QuilvynUtils.dictLit(rules.houseStats.dragonmark) + '[source]'
   );
-  rules.defineRule('features.' + dragonmark,
+  rules.defineRule('features.Greater Dragonmark (' + dragonmark + ')',
+    'features.Greater Dragonmark', '?', null,
     'dragonmark', '=', 'source=="' + dragonmark + '" ? 1 : null'
   );
-  rules.defineRule('spellDifficultyClass.' + name,
-    'house', '?', 'source == "' + name + '"',
-    'casterLevels.' + name, '?', null,
-    'charismaModifier', '=', '10 + source'
+  rules.defineRule('features.Least Dragonmark (' + dragonmark + ')',
+    'features.Least Dragonmark', '?', null,
+    'dragonmark', '=', 'source=="' + dragonmark + '" ? 1 : null'
   );
-  rules.defineRule('spellSlots.' + name + '1',
-    'casterLevels.' + name, '?', null,
-    'magicNotes.leastDragonmark', '=', '1',
-    'magicNotes.improvedLeastDragonmark', '+', '1'
+  rules.defineRule('features.Lesser Dragonmark (' + dragonmark + ')',
+    'features.Lesser Dragonmark', '?', null,
+    'dragonmark', '=', 'source=="' + dragonmark + '" ? 1 : null'
   );
-  rules.defineRule('spellSlots.' + name + '2',
-    'casterLevels.' + name, '?', null,
-    'magicNotes.lesserDragonmark', '=', '1',
-    'magicNotes.improvedLesserDragonmark', '+', '1'
-  );
-  rules.defineRule('spellSlots.' + name + '3',
-    'casterLevels.' + name, '?', null,
-    'magicNotes.greaterDragonmark', '=', '1',
-    'magicNotes.improvedGreaterDragonmark', '+', '1'
-  );
-  rules.defineRule('spellSlots.' + name + '4',
-    'casterLevels.' + name, '?', null,
-    'magicNotes.siberysMark', '=', '1'
+  rules.defineRule('features.Siberys Mark (' + dragonmark + ')',
+    'features.Siberys Mark', '?', null,
+    'dragonmark', '=', 'source=="' + dragonmark + '" ? 1 : null'
   );
   if(races.length == 1)
     QuilvynRules.prerequisiteRules
@@ -2992,13 +3144,6 @@ Eberron.houseRules = function(rules, name, dragonmark, races) {
     QuilvynRules.prerequisiteRules
       (rules, 'validation', 'house' + name, houseLevel,
        "race =~ '" + races.join("|") + "'");
-  if(dragonmark == 'Mark Of Making') {
-    for(let s in rules.getChoices('skills')) {
-      if(s.startsWith('Craft '))
-        rules.defineRule
-          ('skillModifier.' + s, 'skillNotes.markOfMaking', '+', '2');
-    }
-  }
 
 };
 
@@ -3154,7 +3299,11 @@ Eberron.skillRules = function(
 ) {
   rules.basePlugin.skillRules
     (rules, name, ability, untrained, classes, synergies);
-  if(name.startsWith('Knowledge ('))
+  if(name.startsWith('Craft ('))
+    rules.defineRule('skillModifier.' + name,
+      'skillNotes.leastDragonmark(MarkOfMaking)', '+', '2'
+    );
+  else if(name.startsWith('Knowledge ('))
     rules.defineRule('classSkills.' + name, 'skillNotes.education', '=', '1');
 };
 
