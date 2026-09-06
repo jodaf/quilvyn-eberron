@@ -231,8 +231,7 @@ Eberron.CLASS_FEATURES_ADDED = {
       '"features.Necromancer Domain ? 1:Empowered Necromancy",' +
       '"features.Passion Domain ? 1:Fit Of Passion",' +
       '"features.Shadow Domain ? 1:Blind-Fight",' +
-      '"features.Weather Domain ? 1:All-Weather",' +
-      '"features.Weather Domain ? 1:Weather-Wise" ' +
+      '"features.Weather Domain ? 1:All-Weather" ' +
     'Selectables=' +
       '"deityDomains =~ \'Artifice\' ? 1:Artifice Domain:Domain",' +
       '"deityDomains =~ \'Charm\' ? 1:Charm Domain:Domain",' +
@@ -870,7 +869,7 @@ Eberron.FEATURES_ADDED = {
   'Warforged Immunities':
     'Section=save ' +
     'Note="Has immunity to poison, sleep, paralysis, disease, nausea, fatigue, exhaustion, sickening, and energy drain"',
-  'Warforged Vulnerability':
+  'Warforged Vulnerabilities':
     'Section=save Note="Affected by effects that target wood or metal"',
 
   // Class - Artificer
@@ -974,7 +973,7 @@ Eberron.FEATURES_ADDED = {
     'Note=' +
       '"+2 Leadership",' +
       '"Gather Information is a class skill/Knowledge (Local) is a class skill"',
-  'Education':
+  'Education': // ref Realms
     'Section=skill,skill ' +
     'Note=' +
       '"All Knowledge skills are class skills",' +
@@ -996,7 +995,7 @@ Eberron.FEATURES_ADDED = {
     'Note="Can make +%{level>=16?5:level>=12?4:level>=7?3:level>=3?2:1} attempts to acquire favors from house contacts %{level>3?level//2+\' times\':\'once\'} per week"',
   'Flensing Strike':
     'Section=combat ' +
-    'Note="Hit with a kama inflicts -4 on foe attacks, saves, and checks (save Fortitude DC %{10+level//2+wisdomModifier} (+2 if wielding multiple kamas) negates) for 1 min"',
+    'Note="Hit with a kama inflicts -4 on foe attacks, saves, and checks (save Fortitude DC %{10+level//2+wisdomModifier} (DC %{12+level//2+wisdomModifier} if wielding multiple kamas) negates) for 1 min"',
   'Gatekeeper Initiate':
     'Section=magic,save,skill,skill ' +
     'Note=' +
@@ -1343,13 +1342,13 @@ Eberron.FEATURES_ADDED = {
     'Note="+%{$\'levels.Dragonmark Heir\'} Charisma-based skills when interacting with fellow house members"',
   'Improved Greater Dragonmark':
     'Section=magic ' +
-    'Note="Can use a previously-chosen level 3 dragonmark spell-like ability 2 times per day or choose another to use once per day"',
+    'Note="Can use a previously-chosen Greater Dragonmark spell-like ability 1 additional time per day or choose another to use once per day"',
   'Improved Least Dragonmark':
     'Section=magic ' +
-    'Note="Can use a previously-chosen level 1 dragonmark spell-like ability 2 times per day or choose another to use once per day"',
+    'Note="Can use a previously-chosen Least Dragonmark spell-like ability 1 additional time per day or choose another to use once per day"',
   'Improved Lesser Dragonmark':
     'Section=magic ' +
-    'Note="Can use a previously-chosen level 2 dragonmark spell-like ability 2 times per day or choose another to use once per day"',
+    'Note="Can use a previously-chosen Lesser Dragonmark spell-like ability 1 additional time per day or choose another to use once per day"',
   // Lesser Dragonmark as above
 
   // Eldeen Ranger
@@ -1452,7 +1451,7 @@ Eberron.FEATURES_ADDED = {
   'Siberys Mark (Mark Of Finding)':
     'Section=magic ' +
     'Note="Can use <i>Discern Location</i> once per day as a spell-like ability" ' +
-    'Spells="Moment Of Prescience" ' +
+    'Spells="Discern Location" ' +
     'SpellAbility=Charisma',
   'Siberys Mark (Mark Of Handling)':
     'Section=magic ' +
@@ -1492,7 +1491,7 @@ Eberron.FEATURES_ADDED = {
   'Siberys Mark (Mark Of Shadow)':
     'Section=magic ' +
     'Note="Can use a choice of <i>Greater Prying Eyes</i> or <i>Greater Scrying</i> once per day as a spell-like ability" ' +
-    'Spells="Greater Prying Eyes" ' +
+    'Spells="Greater Prying Eyes","Greater Scrying" ' +
     'SpellAbility=Charisma',
   'Siberys Mark (Mark Of Storm)':
     'Section=magic ' +
@@ -1513,17 +1512,17 @@ Eberron.FEATURES_ADDED = {
     'Note="Has a level 3%{$\'levels.Master Inquisitive\'>3?\' and a level 6\':\'\'} associate or informant"',
   'Discern Lies':
     'Section=magic ' +
-    'Note="Can use <i>Discern Lies</i> effects once per day, and can spend 2 Action points for a second use" ' +
+    'Note="Can use <i>Discern Lies</i> effects once per day as a spell-like ability, and can spend 2 Action points for a second use" ' +
     'Spells="Discern Lies" ' +
     'SpellAbility=Charisma',
   'True Seeing':
     'Section=magic ' +
-    'Note="Can use <i>True Seeing</i> effects once per day, and can spend 2 Action points for a second use" ' +
+    'Note="Can use <i>True Seeing</i> effects once per day as a spell-like ability, and can spend 2 Action points for a second use" ' +
     'Spells="True Seeing" ' +
     'SpellAbility=Charisma',
   'Zone Of Truth':
     'Section=magic ' +
-    'Note="Can use <i>Zone Of Truth</i> effects once per day, and can spend 2 Action points for a second use" ' +
+    'Note="Can use <i>Zone Of Truth</i> effects once per day as a spell-like ability, and can spend 2 Action points for a second use" ' +
     'Spells="Zone Of Truth" ' +
     'SpellAbility=Charisma',
 
@@ -1544,7 +1543,7 @@ Eberron.FEATURES_ADDED = {
     'Section=save Note="Has immunity to ability damage and drain"',
   'Expert Bull Rush':
     'Section=combat ' +
-    'Note="+%{$\'levels.Warforged Juggernaut\'} bull rush and to break down doors"',
+    'Note="+%{$\'levels.Warforged Juggernaut\'} Bull Rush and to break down doors"',
   'Extended Charge':'Section=ability Note="+5 Speed when charging"',
   // Greater Powerful Charge as above
   'Healing Immunity':
@@ -1569,13 +1568,13 @@ Eberron.FEATURES_ADDED = {
     'Note="Can shift into a rat or a bipedal hybrid for with +6 Dexterity and +2 Constitution"',
   'Alternate Form (Tiger)':
     'Section=ability ' +
-    'Note="Can shift into a rat or a bipedal hybrid for with +12 Strength, +4 Dexterity, and +6 Constitution"',
+    'Note="Can shift into a tiger or a bipedal hybrid for with +12 Strength, +4 Dexterity, and +6 Constitution"',
   'Alternate Form (Wolf)':
     'Section=ability ' +
-    'Note="Can shift into a rat or a bipedal hybrid for with +2 Strength, +4 Dexterity, and +4 Constitution"',
+    'Note="Can shift into a wolf or a bipedal hybrid for with +2 Strength, +4 Dexterity, and +4 Constitution"',
   'Alternate Form (Wolverine)':
     'Section=ability ' +
-    'Note="Can shift into a rat or a bipedal hybrid for with +4 Strength, +4 Dexterity, and +8 Constitution"',
+    'Note="Can shift into a wolverine or a bipedal hybrid for with +4 Strength, +4 Dexterity, and +8 Constitution"',
   'Bear':
     'Section=ability,combat ' +
     'Note=' +
@@ -1590,7 +1589,7 @@ Eberron.FEATURES_ADDED = {
   'Climb Speed':
     'Section=ability,skill ' +
     'Note=' +
-      '"20\' climb Speed (+10 for Cliffwalk) while shifting",' +
+      '"Has a %{features.Cliffwalk?30:20}\' climb Speed while shifting",' +
       '"+%V Climb"',
   'Fierce Will':'Section=save Note="+4 Will while shifting"',
   'Frightful Shifting':
@@ -1607,7 +1606,7 @@ Eberron.FEATURES_ADDED = {
       '"+2 Dexterity while shifting",' +
       '"Can attack with fangs while shifting"',
   'Scent':
-    'Section=feature ' +
+    'Section=skill ' +
     'Note="R30\' Can detect creature presence and track by smell"',
   'Tiger':
     'Section=ability,combat ' +
@@ -1661,7 +1660,7 @@ Eberron.FEATURES_ADDED = {
   // Decay
   'Touch Of Decay':
     'Section=combat ' +
-    'Note="Touch inflicts -1d4 Constitution to a living creature or 2d6+%{levels.Cleric} HP to an undead, object, or construct one once per day"',
+    'Note="Touch inflicts -1d4 Constitution to a living creature or 2d6+%{levels.Cleric} HP to an undead, object, or construct once per day"',
   // Dragon Below
   'Augment Summoning':SRD35.FEATURES['Augment Summoning'],
   // Exorcism
@@ -1799,7 +1798,7 @@ Eberron.RACES_ADDED = {
       '"1:Composite Plating","1:Hard To Heal","1:Inherently Stable",' +
       '"1:Light Fortification","1:Living Construct","1:Slam Weapon",' +
       '"1:Warforged Ability Adjustment","1:Warforged Immunities",' +
-      '"1:Warforged Vulnerability" ' +
+      '"1:Warforged Vulnerabilities" ' +
     'Languages=Common'
 };
 Eberron.RACES = Object.assign({}, SRD35.RACES, Eberron.RACES_ADDED);
@@ -1845,7 +1844,7 @@ Eberron.SPELLS_ADDED = {
     'Description="R30\' Neutralizes venom and poisonous creatures (Will neg) for %{lvl*10} min"',
   'Dimension Leap':
     'School=Conjuration ' +
-    'Level=Orien1 ' + // TODO?
+    'Level=B2,S2,W2 ' + // from Magic of Eberron
     'Description="Self teleports up to %{lvl*10}\'"',
   'Disable Construct':
     'School=Transmutation ' +
@@ -2021,7 +2020,7 @@ Eberron.SPELLS_ADDED = {
     'Description="Touched weapon gains +3 or 70K GP enhancement for %{lvl*10} min"',
   "Wind's Favor":
     'School=Transmutation ' +
-    'Level=Lyrandar2 ' + // TODO ?
+    'Level=D3 ' + // from Magic of Eberron
     'Description="R%{lvl*10+100}\' Creates 10\'x10\'x%{lvl*20+100}\' 30 MPH wind for %{lvl} hr"',
   'Withering Palm':
     'School=Necromancy ' +
@@ -2707,7 +2706,7 @@ Eberron.classRulesExtra = function(rules, name) {
       'levels.Extreme Explorer', '+=', 'Math.floor(source / 2)'
     );
     rules.defineRule('combatNotes.dodgeBonus.1',
-      'armorWeight', '?', 'source <= 1',
+      'armorWeight', '?', '!source.match(/Medium|Heavy/)',
       'shield', '?', 'source == "None"',
       'combatNotes.dodgeBonus', '=', null
     );
