@@ -373,7 +373,7 @@ var attributes = {
     </tr><tr style="text-align:left">
       <td>Blight (Decay5 Necr): Touched plant dies, or touched plant creature suffers 10d6 HP (save Fortitude half)</td>
     </tr><tr style="text-align:left">
-      <td>Bolts Of Bedevilment (Madness5 Ench): R200' 3 targets (1/rd) suffer dazed (Will neg) for 20 rd</td>
+      <td>Bolts Of Bedevilment (Madness5 Ench): R200' Inflicts dazed (save Will negates) on a target 3 times within 20 rd</td>
     </tr><tr style="text-align:left">
       <td>Call Lightning (Weather3 Evoc): R200' 1 bolt per rd inflicts 3d6 HP electricity (or 3d10 HP during a storm) (save Reflex half) for 10 min or 10 bolts</td>
     </tr><tr style="text-align:left">
@@ -405,7 +405,7 @@ var attributes = {
     </tr><tr style="text-align:left">
       <td>Contagion (Decay3 Necr): Touched contracts a random disease (save Fortitude negates)</td>
     </tr><tr style="text-align:left">
-      <td>Control Deathless (Deathless7 Necr): R50' 20 HD of deathless in 15' radius obey self commands (Will neg) for 10 min</td>
+      <td>Control Deathless (Deathless7 Necr): R50' 20 HD of deathless within a 15' radius obey commands (save Will negates) for 10 min</td>
     </tr><tr style="text-align:left">
       <td>Control Undead (Necromancer7 Necr): R50' 20 HD of undead in a 15' radius obey self (save Will negates) for 10 min</td>
     </tr><tr style="text-align:left">
@@ -413,11 +413,11 @@ var attributes = {
     </tr><tr style="text-align:left">
       <td>Control Winds (Weather6 Tran): R400' Changes wind direction and speed by 3 levels in a 400'x40' cylinder for 100 min</td>
     </tr><tr style="text-align:left">
-      <td>Create Deathless (Deathless6 Necr): R50' Creates deathless soldier</td>
+      <td>Create Deathless (Deathless6 Necr): R50' Target corpse becomes a deathless soldier</td>
     </tr><tr style="text-align:left">
       <td>Create Food And Water (Feast3 Conj): R50' Creates enough food and water to sustain 30 humans or 10 horses for 24 hr; the food remains edible for 24 hr</td>
     </tr><tr style="text-align:left">
-      <td>Create Greater Deathless (Deathless8 Necr): R50' Creates deathless councilor</td>
+      <td>Create Greater Deathless (Deathless8 Necr): R50' Target corpse becomes a deathless councilor</td>
     </tr><tr style="text-align:left">
       <td>Crushing Despair (Passion4 Ench): 30' cone inflicts -2 attacks, damage, saves, and checks (save Will negates) for 10 min</td>
     </tr><tr style="text-align:left">
@@ -435,7 +435,7 @@ var attributes = {
     </tr><tr style="text-align:left">
       <td>Detect Undead (Deathless1 Divi): 60' cone reveals undead and their strengths for concentration up to 10 min</td>
     </tr><tr style="text-align:left">
-      <td>Detoxify (Feast8 Conj): R30' Neutralizes venom and poisonous creatures (Will neg) for 100 min</td>
+      <td>Detoxify (Feast8 Conj): Neutralizes venom and poisonous creatures (save Will negates) within 30' for 100 min</td>
     </tr><tr style="text-align:left">
       <td>Dismissal (Exorcism4 Abju): R50' Sends the target to its native plane or (20%) to another random plane (save Will + 10 - target HD negates)</td>
     </tr><tr style="text-align:left">
@@ -461,9 +461,9 @@ var attributes = {
     </tr><tr style="text-align:left">
       <td>Fabricate (Artifice5 Tran): R50' Creates finished items from 100 cubic feet of raw materials, or 10 cubic feet if working with minerals</td>
     </tr><tr style="text-align:left">
-      <td>Feast Of Champions (C9 Conj): R50' Creates food for 10 creatures that cures disease, sickness, exhaustion, and 2d8+10 HP, gives 1d8+5 temporary HP, +1 attack, skill, ability, and saves, and immunity to poison and fear for 12 hr</td>
+      <td>Feast Of Champions (C9 Conj): R50' Creates food for 10 creatures that cures sickness, disease, exhaustion, and 2d8+10 hit points and gives 1d8+5 temporary hit points, +1 attacks, skill checks, ability checks, and saves, and immunity to poison and fear for 12 hr</td>
     </tr><tr style="text-align:left">
-      <td>Feast Of Champions (Feast9 Conj): R50' Creates food for 10 creatures that cures disease, sickness, exhaustion, and 2d8+10 HP, gives 1d8+5 temporary HP, +1 attack, skill, ability, and saves, and immunity to poison and fear for 12 hr</td>
+      <td>Feast Of Champions (Feast9 Conj): R50' Creates food for 10 creatures that cures sickness, disease, exhaustion, and 2d8+10 hit points and gives 1d8+5 temporary hit points, +1 attacks, skill checks, ability checks, and saves, and immunity to poison and fear for 12 hr</td>
     </tr><tr style="text-align:left">
       <td>Find The Path (Meditation6 Divi): Touched knows the most direct route to a specified location, as well how to bypass any traps that would slow progress, for 100 min</td>
     </tr><tr style="text-align:left">
@@ -489,15 +489,15 @@ var attributes = {
     </tr><tr style="text-align:left">
       <td>Greater Shadow Evocation (Shadow8 Illu): Mimics an evocation spell of up to 7th level (save Will reduces the mimicked spell's effects by 40%); mimicked spells are subject to SR and have a save DC as an 8th-level spell</td>
     </tr><tr style="text-align:left">
-      <td>Greater Status (Community4 Divi): Self may monitor the condition and position of and remotely casts level 0-2 touch spells on 3 touched allies for 10 hr</td>
+      <td>Greater Status (Community4 Divi): Allows monitoring the condition and position of 3 touched allies for 10 hr; also permits remote casting of touch spells of up to level 2 on the targets</td>
     </tr><tr style="text-align:left">
       <td>Hallow (Deathless5 Evoc): 40' radius around touched gives a +2 deflection bonus to Armor Class and +2 saves vs. evil, suppresses mental control, prevents possession, bars contact by summoned evil creatures, prevents undead creation, gives +4 to turn and -4 to control undead, and evokes a chosen spell upon specified creatures for 1 year</td>
     </tr><tr style="text-align:left">
-      <td>Halt Deathless (Deathless3 Necr): R200' 15' radius immobilizes 3 deathless (Will neg) for 10 rd</td>
+      <td>Halt Deathless (Deathless3 Necr): R200' 15' radius immobilizes 3 deathless (save Will negates) for 10 rd or until attacked or damaged</td>
     </tr><tr style="text-align:left">
-      <td>Hardening (Artifice7 Tran): Touched 10 10' cu item (10' cu metal or mineral) resists damage</td>
+      <td>Hardening (Artifice7 Tran): Touched 100 cubic foot item (10 cubic foot if made of metal or mineral) gains +5 hardness</td>
     </tr><tr style="text-align:left">
-      <td>Hero's Blade (Deathless9 Necr): Touched blade becomes good-aligned, inflicts +2d6 HP (+2d10 HP crit) on evil, +2d8 HP (+2d12 HP crit) on evil outsider or undead, crit threat dbl, crit blinds and deafens evil for 1d4 rd (Will neg) and banishes evil outsider (Will neg) for 10 min</td>
+      <td>Hero's Blade (Deathless9 Necr): Touched blade becomes good-aligned, gains a doubled critical threat range, and inflicts +2d6 HP on evil targets and +2d8 HP on evil outsiders and undead for 10 min; critical hits on evil targets inflict +2d8 HP, plus blinded and deafened for 1d4 rd (save Will negates blindness); critical hits on evil outsiders inflict +2d12 HP and banishment for 24 hr (save Will negates banishment)</td>
     </tr><tr style="text-align:left">
       <td>Heroes' Feast (Community6 Conj): R50' Creates food for 10 creatures that cures sickness and disease and gives 1d8+5 temporary hit points, +1 attacks and Will saves, and immunity to poison and fear for 12 hr</td>
     </tr><tr style="text-align:left">
@@ -531,7 +531,7 @@ var attributes = {
     </tr><tr style="text-align:left">
       <td>Locate Object (Meditation3 Divi): Reveals the direction of a visualized object or kind of object found within 800' for 10 min; a sheet of lead blocks the spell</td>
     </tr><tr style="text-align:left">
-      <td>Maddening Scream (Madness8 Ench): Touched acts madly (-4 AC, Ref save requires nat 20) for 1d4+1 rd</td>
+      <td>Maddening Scream (Madness8 Ench): Touched races around screaming, suffering -4 AC, loss of shield bonus, and Reflex saves that succeed only on a natural 20, for 1d4+1 rd</td>
     </tr><tr style="text-align:left">
       <td>Magic Circle Against Evil (Exorcism2 Abju): 10' radius from touched either gives a +2 deflection bonus to Armor Class and +2 saves vs. evil creatures, suppresses mental control, prevents possession, and bars contact and entry by nongood summoned creatures (SR negates) for 100 min or traps a nongood summoned creature (SR negates; additional tests each day end) for 240 hr</td>
     </tr><tr style="text-align:left">
@@ -605,7 +605,7 @@ var attributes = {
     </tr><tr style="text-align:left">
       <td>Spell Turning (Meditation7 Abju): 1d4+6 levels of spells, excluding area and ranged touch spells, directed at self within 100 min reflect onto their caster; spells between casters who both have <i>Spell Turning</i> produce one of these effects: 70% dissipate with no effect; 10% affect both casters; 17% disable both casters' <i>Spell Turning</i> for 1d4 min; 3% send both casters to another plane</td>
     </tr><tr style="text-align:left">
-      <td>Spirit Steed (Deathless4 Necr): Touched animal gains +30' Speed, increased run, and no hustle damage for 10 hr</td>
+      <td>Spirit Steed (Deathless4 Necr): Touched animal gains +30' Speed, an increased run multiplier, and immunity to hustle damage for 10 hr, but suffers fatigue afterward</td>
     </tr><tr style="text-align:left">
       <td>Status (Community2 Divi): Allows monitoring the condition and position of 3 touched allies for 10 hr</td>
     </tr><tr style="text-align:left">
@@ -623,9 +623,9 @@ var attributes = {
     </tr><tr style="text-align:left">
       <td>Tongues (Meditation4 Divi): Allows touched to communicate in any language for 100 min</td>
     </tr><tr style="text-align:left">
-      <td>Touch Of Madness (Madness2 Ench): Touched suffers dazed for 20 rd</td>
+      <td>Touch Of Madness (Madness2 Ench): Touched suffers dazed for 20 rd (save Will negates)</td>
     </tr><tr style="text-align:left">
-      <td>True Creation (Artifice8 Conj): Creates permanent 10' cu plant or mineral object</td>
+      <td>True Creation (Artifice8 Conj): R50' Creates a permanent 10 cubic foot plant or mineral object</td>
     </tr><tr style="text-align:left">
       <td>True Seeing (Commerce5 Divi): Allows touched to see through 120' darkness, illusion, and invisibility, note secret doors, and see the true forms of polymorphed items for 10 min</td>
     </tr><tr style="text-align:left">
@@ -637,7 +637,7 @@ var attributes = {
     </tr><tr style="text-align:left">
       <td>Whirlwind (Weather8 Evoc): R800' 10' radius, 30' high cyclone moves 60' as directed each rd, inflicting 3d6 HP on Large and smaller creatures (save Reflex negates), for 10 rd; it traps Medium and smaller creatures (save Reflex negates), inflicting an additional 1d8 HP on each subsequent rd</td>
     </tr><tr style="text-align:left">
-      <td>Withering Palm (Decay7 Necr): Touched suffers -5 Strength and Constitution (Fort neg)</td>
+      <td>Withering Palm (Decay7 Necr): Touch inflicts -5 Strength and Constitution (save Fortitude negates); a critical hit inflicts ability drain instead of damage</td>
     </tr><tr style="text-align:left">
       <td>Wood Shape (Artifice2 Tran): Reshapes a 20 cubic feet piece of wood (save Will negates)</td>
     </tr><tr style="text-align:left">

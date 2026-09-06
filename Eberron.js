@@ -1807,89 +1807,99 @@ Eberron.SHIELDS = Object.assign({}, SRD35.SHIELDS);
 Eberron.SKILLS = Object.assign({}, SRD35.SKILLS);
 Eberron.SPELLS_ADDED = {
 
-  // NOTE: It's unclear which of these spells might be available in potion/oil
+  // N.B.: It's unclear which of these spells might be available in potion/oil
   // form. The source book describes Oil Of Repair, which duplicates Repair xxx
   // Damage, and makes a passing reference to Oil Of Stone Construct.
   'Armor Enhancement':
     'School=Transmutation ' +
     'Level=A2 ' +
-    'Description="Touched armor or shield gains +3 or 35K GP enhancement for %{lvl*10} min"',
-  'Bolts Of Bedevilment':
-    'School=Enchantment ' +
-    'Level=Madness5 ' +
-    'Description="R%{lvl*10+100}\' 3 targets (1/rd) suffer dazed (Will neg) for %{lvl*2} rd"',
-  'Construct Energy Ward':
-    'School=Abjuration ' +
-    'Level=A3 ' +
-    'Description="Touched construct gains resistance %{lvl>10?30:lvl>6?20:10} to chosen energy for %{lvl*10} min"',
-  'Control Deathless':
-    'School=Necromancy ' +
-    'Level=Deathless7 ' +
-    'Description="R%{lvl//2*5+25}\' %{lvl*2} HD of deathless in 15\' radius obey self commands (Will neg) for %{lvl} min"',
-  'Create Deathless':
-    'School=Necromancy ' +
-    'Level=Deathless6 ' +
-    'Description="R%{lvl//2*5+25}\' Creates deathless soldier"',
-  'Create Greater Deathless':
-    'School=Necromancy ' +
-    'Level=Deathless8 ' +
-    'Description="R%{lvl//2*5+25}\' Creates deathless councilor"',
-  'Detect Aberration':
-    'School=Divination ' +
-    'Level=D1 ' +
-    'Description="R60\' Cone gives self info on aberrations for conc or %{lvl} min"',
-  'Detoxify':
-    'School=Conjuration ' +
-    'Level=Feast8 ' +
-    'Description="R30\' Neutralizes venom and poisonous creatures (Will neg) for %{lvl*10} min"',
-  'Dimension Leap':
-    'School=Conjuration ' +
-    'Level=B2,S2,W2 ' + // from Magic of Eberron
-    'Description="Self teleports up to %{lvl*10}\'"',
-  'Disable Construct':
-    'School=Transmutation ' +
-    'Level=A6 ' +
-    'Description="Touched construct suffers %{lvl*10} HP (Will half)"',
-  'Energy Alteration':
-    'School=Transmutation ' +
-    'Level=A1 ' +
-    'Description="Touched magic item uses and affects chosen energy type for %{lvl*10} min"',
-  'Enhancement Alteration':
-    'School=Transmutation ' +
-    'Level=A1 ' +
-    'Description="Touched shield or weapon enhancement shifts to attack or defense for %{lvl*10} min"',
-  'Feast Of Champions':
-    'School=Conjuration ' +
-    'Level=C9,Feast9 ' +
-    'Description="R%{lvl//2*5+25}\' Creates food for %{lvl} creatures that cures disease, sickness, exhaustion, and 2d8+%{lvl} HP, gives 1d8+%{lvl//2<?10} temporary HP, +1 attack, skill, ability, and saves, and immunity to poison and fear for 12 hr"',
+    'Description=' +
+      '"Touched armor or shield gains a special ability that normally costs up to 35K GP for %{lvl*10} min"',
   'Greater Armor Enhancement':
     'School=Transmutation ' +
     'Level=A3 ' +
-    'Description="Touched armor or shield gains +5 or 100K GP enhancement for %{lvl*10} min"',
+    'Description=' +
+      '"Touched armor or shield gains a special ability that normally costs up to 100K GP for %{lvl*10} min"',
+  'Lesser Armor Enhancement':
+    'School=Transmutation ' +
+    'Level=A1 ' +
+    'Description=' +
+      '"Touched armor or shield gains a special ability that normally costs up to 5K GP for %{lvl*10} min"',
+  'Bolts Of Bedevilment':
+    'School=Enchantment ' +
+    'Level=Madness5 ' +
+    'Description=' +
+      '"R%{lvl*10+100}\' Inflicts dazed (save Will negates) on a target 3 times within %{lvl*2} rd"',
+  'Construct Energy Ward':
+    'School=Abjuration ' +
+    'Level=A3 ' +
+    'Description=' +
+      '"Touched construct gains resistance %{lvl>10?30:lvl>6?20:10} to a choice of acid, cold, electricity, fire, or sonic for %{lvl*10} min"',
   'Greater Construct Energy Ward':
     'School=Abjuration ' +
     'Level=A4 ' +
-    'Description="Touched construct gains resistance %{lvl*12<?120} to chosen energy for %{lvl*10} min"',
-  'Greater Status':
+    'Description=' +
+      '"Touched construct gains immunity to a choice of acid, cold, electricity, fire, or sonic for %{lvl*10} min or until %{lvl*12<?120} HP have been negated"',
+  'Control Deathless':
+    'School=Necromancy ' +
+    'Level=Deathless7 ' +
+    'Description=' +
+      '"R%{lvl//2*5+25}\' %{lvl*2} HD of deathless within a 15\' radius obey commands (save Will negates) for %{lvl} min"',
+  'Create Deathless':
+    'School=Necromancy ' +
+    'Level=Deathless6 ' +
+    'Description=' +
+      '"R%{lvl//2*5+25}\' Target corpse becomes a deathless soldier"',
+  'Create Greater Deathless':
+    'School=Necromancy ' +
+    'Level=Deathless8 ' +
+    'Description=' +
+      '"R%{lvl//2*5+25}\' Target corpse becomes a deathless councilor"',
+  'Detect Aberration':
     'School=Divination ' +
-    'Level=Community4 ' +
-    'Description="Self may monitor the condition and position of and remotely casts level 0-2 touch spells on %{lvl//3} touched allies for %{lvl} hr"',
-  'Greater Weapon Augmentation':
+    'Level=D1 ' +
+    'Description=' +
+      '"60\' cone reveals the presence and power of aberrations for concentration up to %{lvl} min; the presence of an aberration with at least %{level*2>?11} HD stuns self for 1 rd after 1 rd of concentration, ending the spell"',
+  'Detoxify':
+    'School=Conjuration ' +
+    'Level=Feast8 ' +
+    'Description=' +
+      '"Neutralizes venom and poisonous creatures (save Will negates) within 30\' for %{lvl*10} min"',
+  'Disable Construct':
     'School=Transmutation ' +
     'Level=A6 ' +
-    'Description="Touched weapon gains +5 or 200K GP enhancement for %{lvl*10} min"',
+    'Description=' +
+      '"Touched construct suffers %{lvl*10<?150} HP (save Will half and leaves the target with at least 1 hit point)"',
+  'Energy Alteration':
+    'School=Transmutation ' +
+    'Level=A1 ' +
+    'Description=' +
+      '"Touched magic item employs or gives protection against a different chosen energy type for %{lvl*10} min"',
+  'Enhancement Alteration':
+    'School=Transmutation ' +
+    'Level=A1 ' +
+    'Description=' +
+      '"Enhancement on a touched shield or weapon changes to an attack or Armor Class bonus for %{lvl*10} min"',
+  'Feast Of Champions':
+    'School=Conjuration ' +
+    'Level=C9,Feast9 ' +
+    'Description=' +
+      '"R%{lvl//2*5+25}\' Creates food for %{lvl} creatures that cures sickness, disease, exhaustion, and 2d8+%{lvl} hit points and gives 1d8+%{lvl//2<?10} temporary hit points, +1 attacks, skill checks, ability checks, and saves, and immunity to poison and fear for 12 hr"',
   'Halt Deathless':
     'School=Necromancy ' +
     'Level=Deathless3 ' +
-    'Description="R%{lvl*10+100}\' 15\' radius immobilizes 3 deathless (Will neg) for %{lvl} rd"',
+    'Description=' +
+      '"R%{lvl*10+100}\' 15\' radius immobilizes 3 deathless (save Will negates) for %{lvl} rd or until attacked or damaged"',
   'Hardening':
     'School=Transmutation ' +
     'Level=A6,Artifice7,S6,W6 ' +
-    'Description="Touched %{lvl} 10\' cu item (%{lvl}\' cu metal or mineral) resists damage"',
+    'Description=' +
+      '"Touched %{lvl*10} cubic foot item (%{lvl} cubic foot if made of metal or mineral) gains +%{lvl//2} hardness"',
   "Hero's Blade":
     'School=Necromancy ' +
     'Level=Deathless9 ' +
-    'Description="Touched blade becomes good-aligned, inflicts +2d6 HP (+2d10 HP crit) on evil, +2d8 HP (+2d12 HP crit) on evil outsider or undead, crit threat dbl, crit blinds and deafens evil for 1d4 rd (Will neg) and banishes evil outsider (Will neg) for %{lvl} min"',
+    'Description=' +
+      '"Touched blade becomes good-aligned, gains a doubled critical threat range, and inflicts +2d6 HP on evil targets and +2d8 HP on evil outsiders and undead for %{lvl} min; critical hits on evil targets inflict +2d8 HP, plus blinded and deafened for 1d4 rd (save Will negates blindness); critical hits on evil outsiders inflict +2d12 HP and banishment for 24 hr (save Will negates banishment)"',
   'Inflict Critical Damage':
     'School=Transmutation ' +
     'Level=A4 ' +
@@ -1909,127 +1919,162 @@ Eberron.SPELLS_ADDED = {
   'Iron Construct':
     'School=Transmutation ' +
     'Level=A4 ' +
-    'Description="Touched construct gains DR 15/adamantine, +4 Strength, -4 Dexterity, and x5 weight and takes half damage from acid and fire for %{lvl} min"',
+    'Description=' +
+       '"Touched construct gains DR 15/adamantine, +4 Strength, and x5 weight, takes half damage from acid and fire, and suffers -4 Dexterity and vulnerability to rust attacks, for %{lvl} min"',
   'Item Alteration':
     'School=Transmutation ' +
     'Level=A4 ' +
-    'Description="Touched magic item grants bonus differently (Will neg) for %{lvl*10} min"',
-  "Legion's Shield Of Faith":
-    'School=Abjuration ' +
-    'Level=A4 ' +
-    'Description="R%{lvl*10+100}\' Allies in 20\' radius gain +%{lvl//6+2<?5} AC for %{lvl} min"',
-  'Lesser Armor Enhancement':
-    'School=Transmutation ' +
-    'Level=A1 ' +
-    'Description="Touched armor or shield gains +1 or 5K GP enhancement for %{lvl*10} min"',
-  'Lesser Weapon Augmentation':
-    'School=Transmutation ' +
-    'Level=A2 ' +
-    'Description="Touched weapon gains +1 or 10K GP enhancement for %{lvl*10} min"',
+    'Description=' +
+      '"Changes the type of bonus provided by the touched magic item (save Will negates) for %{lvl*10} min; cannot affect sacred or profane bonuses or cause an item to grant a dodge bonus to Armor Class"',
   'Maddening Scream':
     'School=Enchantment ' +
     'Level=Madness8,S8,W8 ' +
-    'Description="Touched acts madly (-4 AC, Ref save requires nat 20) for 1d4+1 rd"',
+    'Description=' +
+      '"Touched races around screaming, suffering -4 AC, loss of shield bonus, and Reflex saves that succeed only on a natural 20, for 1d4+1 rd"',
   'Magecraft':
     'School=Divination ' +
     'Level=S1,W1 ' +
-    'Description="Self gains +5 Craft check for daily item creation work"',
+    'Description="Gives self a +5 Craft check for daily item creation work"',
   'Metamagic Item':
     'School=Transmutation ' +
     'Level=A3 ' +
-    'Description="Imbues touched magic item w/metamagic property for %{lvl} rd"',
+    'Description=' +
+      '"Gives a spell stored in the touched magic item a metamagic property for %{lvl} rd"',
   "Nature's Wrath":
     'School=Evocation ' +
     'Level=Gatekeeper4 ' +
-    'Description="R%{lvl*10+100}\' Aberrations in 20\' radius suffer %{lvl<?10}d6 HP and dazed 1 rd, and other unnatural creatures suffer %{lvl//2<?5}d8 HP (Will half)"',
-  'Personal Weapon Augmentation':
-    'School=Transmutation ' +
-    'Level=A1 ' +
-    'Description="Touched self weapon gains +1 or 10K GP enhancement for %{lvl*10} min"',
+    'Description=' +
+      '"R%{lvl*10+100}\' 20\' radius inflicts %{lvl<?10}d6 HP and dazed for 1 rd on aberrations (save Will half HP only) and %{lvl//2<?5}d8 HP on other unnatural creatures (save Will half)"',
   'Power Surge':
     'School=Transmutation ' +
     'Level=A3 ' +
-    'Description="Touched magic item gains %{lvl//5} charges for %{lvl} min"',
+    'Description=' +
+      '"Touched magic item gains %{lvl//5} temporary charges for %{lvl} min"',
   'Repair Critical Damage':
     'School=Transmutation ' +
     'Level=A4,S4,W4 ' +
-    'Description="Touched construct regains 4d8+%{lvl<?20} HP"',
+    'Description="Touched construct regains 4d8+%{lvl<?20} hit points"',
   'Repair Light Damage':
     'School=Transmutation ' +
     'Level=A1,S1,W1 ' +
-    'Description="Touched construct regains 1d8+%{lvl<?5} HP" ' +
+    'Description="Touched construct regains 1d8+%{lvl<?5} hit points" ' +
     'Liquid=Oil',
   'Repair Moderate Damage':
     'School=Transmutation ' +
     'Level=A2,S2,W2 ' +
-    'Description="Touched construct regains 2d8+%{lvl<?10} HP" ' +
+    'Description="Touched construct regains 2d8+%{lvl<?10} hit points" ' +
     'Liquid=Oil',
   'Repair Serious Damage':
     'School=Transmutation ' +
     'Level=A3,S3,W3 ' +
-    'Description="Touched construct regains 3d8+%{lvl<?15} HP" ' +
+    'Description="Touched construct regains 3d8+%{lvl<?15} hit points" ' +
     'Liquid=Oil',
   'Resistance Item':
     'School=Abjuration ' +
     'Level=A1 ' +
-    'Description="Holder of touched item gains +%{lvl//4+1} saves for %{lvl*10} min"',
+    'Description=' +
+      '"Touched item gives its wearer or wielder +%{lvl//4+1} saves for %{lvl*10} min"',
   'Return To Nature':
     'School=Transmutation ' +
     'Level=Gatekeeper7 ' +
-    'Description="R%{lvl//2*5+25}\' Target arcane spellcaster suffers 1d4 negative levels, giant suffers <i>Reduce Person</i> (Fort neg), magical beast/outsider/aberration suffers -1d6 Intelligence/%{lvl//2<?10} HP/%{lvl*6} HP and -1d4/-2d4/all supernatural abilities for 1 dy (Fort half HP only)"',
+    'Description=' +
+      '"R%{lvl//2*5+25}\' Arcane spellcaster or monstrous humanoid target suffers 1d4 negative levels; giant target suffers <i>Reduce Person</i> effects (save Fortitude negates); dragon or magical beast target suffers -1d6 Intelligence and loss of 1d4 spell-like or supernatural abilities for 24 hr (save Fortitude half Intelligence loss only); non-elemental outsider target suffers %{lvl//2<?10}d8 HP and loss of 2d4 spell-like or supernatural abilities for 24 hr (save Fortitude half HP only); aberration target suffers %{lvl<?20}d6 HP and loss of all spell-like and supernatural abilities for 24 hr (save Fortitude half HP only)"',
+  "Legion's Shield Of Faith":
+    'School=Abjuration ' +
+    'Level=A4 ' +
+    'Description=' +
+      '"R%{lvl*10+100}\' Allies in a 20\' radius gain a +%{lvl//6+2<?5} deflection bonus to Armor Class for %{lvl} min"',
   'Skill Enhancement':
     'School=Transmutation ' +
     'Level=A1 ' +
-    'Description="Touched gains +%{lvl//2+2} on specified skill checks for %{lvl*10} min"',
+    'Description=' +
+      '"Touched item gives its wearer or wielder +%{lvl//2+2} on a specified skill for %{lvl*10} min"',
   'Spell Storing Item':
     'School=Transmutation ' +
     'Level=A1 ' +
-    'Description="Successful Use Magic Device imbues touched item with spell up to level %{lvl//2<?4} for %{lvl} hr"',
+    'Description=' +
+      '"Successful Use Magic Device check allows casting a spell of up to level %{lvl//2<?4} from the touched item for %{lvl} hr"',
   'Spirit Steed':
     'School=Necromancy ' +
     'Level=Deathless4 ' +
-    'Description="Touched animal gains +30\' Speed, increased run, and no hustle damage for %{lvl} hr"',
+    'Description=' +
+      '"Touched animal gains +30\' Speed, an increased run multiplier, and immunity to hustle damage for %{lvl} hr, but suffers fatigue afterward"',
+  'Greater Status':
+    'School=Divination ' +
+    'Level=Community4 ' +
+    'Description=' +
+      '"Allows monitoring the condition and position of %{lvl//3} touched allies for %{lvl} hr; also permits remote casting of touch spells of up to level 2 on the targets"',
   'Stone Construct':
     'School=Transmutation ' +
     'Level=A3 ' +
-    'Description="Touched construct gains DR 10/adamantine for %{lvl*10<?150} HP or %{lvl*10} min" ' +
+    'Description=' +
+      '"Touched construct gains DR 10/adamantine for %{lvl*10} min or until %{lvl*10<?150} HP have been negated" ' +
     'Liquid=Oil',
   'Suppress Requirement':
     'School=Transmutation ' +
     'Level=A3 ' +
-    'Description="Removes usage requirement from touched magic item for %{lvl*10} min"',
+    'Description=' +
+      '"Successful Use Magic Device check removes a class, race, ability, or alignment usage requirement from the touched magic item for %{lvl*10} min"',
   'Total Repair':
     'School=Transmutation ' +
     'Level=A6 ' +
-    'Description="Restores %{lvl*10<?150} HP to and removes conditions from touched construct"',
+    'Description=' +
+      '"Touched construct regains %{lvl*10<?150} hit points and recovers from conditions"',
   'Touch Of Madness':
     'School=Enchantment ' +
     'Level=Madness2 ' +
-    'Description="Touched suffers dazed for %{lvl*2} rd"',
+    'Description="Touched suffers dazed for %{lvl*2} rd (save Will negates)"',
   'Toughen Construct':
     'School=Transmutation ' +
     'Level=A2 ' +
-    'Description="Touched construct gains +%{(lvl//3+1)<?5>?2} AC for %{lvl*10} min"',
+    'Description=' +
+      '"Touched construct gains a +%{(lvl//3+1)<?5>?2} enhancement bonus to natural armor for %{lvl*10} min"',
   'True Creation':
     'School=Conjuration ' +
     'Level=Artifice8 ' +
-    'Description="Creates permanent %{lvl}\' cu plant or mineral object"',
+    'Description=' +
+      '"R%{25+lvl//2*5}\' Creates a permanent %{lvl} cubic foot plant or mineral object"',
   'Weapon Augmentation':
     'School=Transmutation ' +
     'Level=A4 ' +
-    'Description="Touched weapon gains +3 or 70K GP enhancement for %{lvl*10} min"',
-  "Wind's Favor":
+    'Description=' +
+      '"Touched weapon gains a special ability that normally costs up to 70K GP for %{lvl*10} min"',
+  'Greater Weapon Augmentation':
     'School=Transmutation ' +
-    'Level=D3 ' + // from Magic of Eberron
-    'Description="R%{lvl*10+100}\' Creates 10\'x10\'x%{lvl*20+100}\' 30 MPH wind for %{lvl} hr"',
+    'Level=A6 ' +
+    'Description=' +
+      '"Touched weapon gains a special ability that normally costs up to 200K GP for %{lvl*10} min"',
+  'Lesser Weapon Augmentation':
+    'School=Transmutation ' +
+    'Level=A2 ' +
+    'Description=' +
+      '"Touched weapon gains a special ability that normally costs up to 10K GP for %{lvl*10} min"',
+  'Personal Weapon Augmentation':
+    'School=Transmutation ' +
+    'Level=A1 ' +
+    'Description=' +
+      '"Touched self weapon gains a special ability that normally costs up to 10K GP for %{lvl*10} min"',
   'Withering Palm':
     'School=Necromancy ' +
     'Level=Decay7 ' +
-    'Description="Touched suffers -%{lvl//2} Strength and Constitution (Fort neg)"',
+    'Description=' +
+      '"Touch inflicts -%{lvl//2} Strength and Constitution (save Fortitude negates); a critical hit inflicts ability drain instead of damage"',
   'Zone Of Natural Purity':
     'School=Evocation ' +
     'Level=Gatekeeper2 ' +
-    'Description="R%{lvl//2*5+25}\' Fey and plants in 20\' radius gain +1 attack, damage, and saves, and abberations suffer -1, for %{lvl*2} hr"'
+    'Description=' +
+      '"R%{lvl//2*5+25}\' 20\' radius gives fey and plants +1 attacks, damage, and saves, and inflicts -1 attacks, damage, and saves on abberations, for %{lvl*2} hr"',
+
+  // Dragonmark spells
+  'Dimension Leap':
+    'School=Conjuration ' +
+    'Level=B2,S2,W2 ' + // from Magic of Eberron
+    'Description="Teleports self up to %{lvl*10}\'"',
+  "Wind's Favor":
+    'School=Transmutation ' +
+    'Level=D3 ' + // from Magic of Eberron
+    'Description=' +
+      '"R%{lvl*10+100}\' Creates a 10\'x10\'x%{lvl*10+100}\' 30 MPH wind for %{lvl} hr"'
 
 };
 Eberron.SPELLS = Object.assign(

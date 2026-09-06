@@ -41,7 +41,7 @@ var attributes = {
   "spells.Spell Storing Item(A1 Tran)":1, "spells.Spirit Steed(Deathless4 Necr)":1, 
   "spells.Stone Construct(A3 Tran)":1, "spells.Suppress Requirement(A3 Tran)":1, "spells.Total Repair(A6 Tran)":1, 
   "spells.Touch Of Madness(Madness2 Ench)":1, "spells.Toughen Construct(A2 Tran)":1, 
-  "spells.True Creation(Artifice8 Conj)":1, "spells.Weapon Augmentation(A4 Tran)":1, 
+  "spells.True Creation(Artifice8 Conj)":1, "spells.Weapon Augmentation(A4 Tran)":1, "spells.Wind's Favor(D3 Tran)":1, 
   "spells.Withering Palm(Decay7 Necr)":1, "spells.Zone Of Natural Purity(Gatekeeper2 Evoc)":1, "strength":10, 
   "weapons.Club":1, "weapons.Sling":1, "weapons.Spear":1, "wisdom":10
 };
@@ -183,7 +183,7 @@ var attributes = {
       </tr><tr style="text-align:center">
         <td><i>Survival Synergy: +2 Knowledge (Nature)</i></td>
       </tr><tr style="text-align:center">
-        <td>Artificer Knowledge: Can make a +21 check against a DC of 15 to determine whether a held item has a magical aura</td>
+        <td>Artificer Knowledge: Can make a +3 check against a DC of 15 to determine whether a held item has a magical aura</td>
       </tr><tr style="text-align:center">
         <td>Artisan Bonus: +2 Use Magic Device on items corresponding to a known item creation feat</td>
       </tr><tr style="text-align:center">
@@ -287,47 +287,47 @@ var attributes = {
   </tr><tr style="text-align:center">
     <td><b>Spells</b>:<br/>    <table id="Spells" style="width:100%">
     <tr style="text-align:left">
-      <td>Armor Enhancement (A2 Tran): Touched armor or shield gains +3 or 35K GP enhancement for 20 min</td>
+      <td>Armor Enhancement (A2 Tran): Touched armor or shield gains a special ability that normally costs up to 35K GP for 20 min</td>
     </tr><tr style="text-align:left">
-      <td>Bolts Of Bedevilment (Madness5 Ench): R120' 3 targets (1/rd) suffer dazed (Will neg) for 4 rd</td>
+      <td>Bolts Of Bedevilment (Madness5 Ench): R120' Inflicts dazed (save Will negates) on a target 3 times within 4 rd</td>
     </tr><tr style="text-align:left">
-      <td>Construct Energy Ward (A3 Abju): Touched construct gains resistance 10 to chosen energy for 20 min</td>
+      <td>Construct Energy Ward (A3 Abju): Touched construct gains resistance 10 to a choice of acid, cold, electricity, fire, or sonic for 20 min</td>
     </tr><tr style="text-align:left">
-      <td>Control Deathless (Deathless7 Necr): R30' 4 HD of deathless in 15' radius obey self commands (Will neg) for 2 min</td>
+      <td>Control Deathless (Deathless7 Necr): R30' 4 HD of deathless within a 15' radius obey commands (save Will negates) for 2 min</td>
     </tr><tr style="text-align:left">
-      <td>Create Deathless (Deathless6 Necr): R30' Creates deathless soldier</td>
+      <td>Create Deathless (Deathless6 Necr): R30' Target corpse becomes a deathless soldier</td>
     </tr><tr style="text-align:left">
-      <td>Create Greater Deathless (Deathless8 Necr): R30' Creates deathless councilor</td>
+      <td>Create Greater Deathless (Deathless8 Necr): R30' Target corpse becomes a deathless councilor</td>
     </tr><tr style="text-align:left">
-      <td>Detect Aberration (D1 Divi): R60' Cone gives self info on aberrations for conc or 2 min</td>
+      <td>Detect Aberration (D1 Divi): 60' cone reveals the presence and power of aberrations for concentration up to 2 min; the presence of an aberration with at least 12 HD stuns self for 1 rd after 1 rd of concentration, ending the spell</td>
     </tr><tr style="text-align:left">
-      <td>Detoxify (Feast8 Conj): R30' Neutralizes venom and poisonous creatures (Will neg) for 20 min</td>
+      <td>Detoxify (Feast8 Conj): Neutralizes venom and poisonous creatures (save Will negates) within 30' for 20 min</td>
     </tr><tr style="text-align:left">
-      <td>Dimension Leap (Least Dragonmark Mark Of Passage2 Conj): Self teleports up to 60'</td>
+      <td>Dimension Leap (Least Dragonmark Mark Of Passage2 Conj): Teleports self up to 60'</td>
     </tr><tr style="text-align:left">
-      <td>Disable Construct (A6 Tran): Touched construct suffers 20 HP (Will half)</td>
+      <td>Disable Construct (A6 Tran): Touched construct suffers 20 HP (save Will half and leaves the target with at least 1 hit point)</td>
     </tr><tr style="text-align:left">
-      <td>Energy Alteration (A1 Tran): Touched magic item uses and affects chosen energy type for 20 min</td>
+      <td>Energy Alteration (A1 Tran): Touched magic item employs or gives protection against a different chosen energy type for 20 min</td>
     </tr><tr style="text-align:left">
-      <td>Enhancement Alteration (A1 Tran): Touched shield or weapon enhancement shifts to attack or defense for 20 min</td>
+      <td>Enhancement Alteration (A1 Tran): Enhancement on a touched shield or weapon changes to an attack or Armor Class bonus for 20 min</td>
     </tr><tr style="text-align:left">
       <td>Expeditious Retreat (Least Dragonmark Mark Of Passage1 Tran): Gives self +30' Speed for 6 min</td>
     </tr><tr style="text-align:left">
-      <td>Feast Of Champions (C9 Conj): R30' Creates food for 2 creatures that cures disease, sickness, exhaustion, and 2d8+2 HP, gives 1d8+1 temporary HP, +1 attack, skill, ability, and saves, and immunity to poison and fear for 12 hr</td>
+      <td>Feast Of Champions (C9 Conj): R30' Creates food for 2 creatures that cures sickness, disease, exhaustion, and 2d8+2 hit points and gives 1d8+1 temporary hit points, +1 attacks, skill checks, ability checks, and saves, and immunity to poison and fear for 12 hr</td>
     </tr><tr style="text-align:left">
-      <td>Greater Armor Enhancement (A3 Tran): Touched armor or shield gains +5 or 100K GP enhancement for 20 min</td>
+      <td>Greater Armor Enhancement (A3 Tran): Touched armor or shield gains a special ability that normally costs up to 100K GP for 20 min</td>
     </tr><tr style="text-align:left">
-      <td>Greater Construct Energy Ward (A4 Abju): Touched construct gains resistance 24 to chosen energy for 20 min</td>
+      <td>Greater Construct Energy Ward (A4 Abju): Touched construct gains immunity to a choice of acid, cold, electricity, fire, or sonic for 20 min or until 24 HP have been negated</td>
     </tr><tr style="text-align:left">
-      <td>Greater Status (Community4 Divi): Self may monitor the condition and position of and remotely casts level 0-2 touch spells on 0 touched allies for 2 hr</td>
+      <td>Greater Status (Community4 Divi): Allows monitoring the condition and position of 0 touched allies for 2 hr; also permits remote casting of touch spells of up to level 2 on the targets</td>
     </tr><tr style="text-align:left">
-      <td>Greater Weapon Augmentation (A6 Tran): Touched weapon gains +5 or 200K GP enhancement for 20 min</td>
+      <td>Greater Weapon Augmentation (A6 Tran): Touched weapon gains a special ability that normally costs up to 200K GP for 20 min</td>
     </tr><tr style="text-align:left">
-      <td>Halt Deathless (Deathless3 Necr): R120' 15' radius immobilizes 3 deathless (Will neg) for 2 rd</td>
+      <td>Halt Deathless (Deathless3 Necr): R120' 15' radius immobilizes 3 deathless (save Will negates) for 2 rd or until attacked or damaged</td>
     </tr><tr style="text-align:left">
-      <td>Hardening (A6 Tran): Touched 2 10' cu item (2' cu metal or mineral) resists damage</td>
+      <td>Hardening (A6 Tran): Touched 20 cubic foot item (2 cubic foot if made of metal or mineral) gains +1 hardness</td>
     </tr><tr style="text-align:left">
-      <td>Hero's Blade (Deathless9 Necr): Touched blade becomes good-aligned, inflicts +2d6 HP (+2d10 HP crit) on evil, +2d8 HP (+2d12 HP crit) on evil outsider or undead, crit threat dbl, crit blinds and deafens evil for 1d4 rd (Will neg) and banishes evil outsider (Will neg) for 2 min</td>
+      <td>Hero's Blade (Deathless9 Necr): Touched blade becomes good-aligned, gains a doubled critical threat range, and inflicts +2d6 HP on evil targets and +2d8 HP on evil outsiders and undead for 2 min; critical hits on evil targets inflict +2d8 HP, plus blinded and deafened for 1d4 rd (save Will negates blindness); critical hits on evil outsiders inflict +2d12 HP and banishment for 24 hr (save Will negates banishment)</td>
     </tr><tr style="text-align:left">
       <td>Inflict Critical Damage (A4 Tran): Touched construct suffers 4d8+2 HP</td>
     </tr><tr style="text-align:left">
@@ -337,65 +337,67 @@ var attributes = {
     </tr><tr style="text-align:left">
       <td>Inflict Serious Damage (A3 Tran): Touched construct suffers 3d8+2 HP</td>
     </tr><tr style="text-align:left">
-      <td>Iron Construct (A4 Tran): Touched construct gains DR 15/adamantine, +4 Strength, -4 Dexterity, and x5 weight and takes half damage from acid and fire for 2 min</td>
+      <td>Iron Construct (A4 Tran): Touched construct gains DR 15/adamantine, +4 Strength, and x5 weight, takes half damage from acid and fire, and suffers -4 Dexterity and vulnerability to rust attacks, for 2 min</td>
     </tr><tr style="text-align:left">
-      <td>Item Alteration (A4 Tran): Touched magic item grants bonus differently (Will neg) for 20 min</td>
+      <td>Item Alteration (A4 Tran): Changes the type of bonus provided by the touched magic item (save Will negates) for 20 min; cannot affect sacred or profane bonuses or cause an item to grant a dodge bonus to Armor Class</td>
     </tr><tr style="text-align:left">
-      <td>Legion's Shield Of Faith (A4 Abju): R120' Allies in 20' radius gain +2 AC for 2 min</td>
+      <td>Legion's Shield Of Faith (A4 Abju): R120' Allies in a 20' radius gain a +2 deflection bonus to Armor Class for 2 min</td>
     </tr><tr style="text-align:left">
-      <td>Lesser Armor Enhancement (A1 Tran): Touched armor or shield gains +1 or 5K GP enhancement for 20 min</td>
+      <td>Lesser Armor Enhancement (A1 Tran): Touched armor or shield gains a special ability that normally costs up to 5K GP for 20 min</td>
     </tr><tr style="text-align:left">
-      <td>Lesser Weapon Augmentation (A2 Tran): Touched weapon gains +1 or 10K GP enhancement for 20 min</td>
+      <td>Lesser Weapon Augmentation (A2 Tran): Touched weapon gains a special ability that normally costs up to 10K GP for 20 min</td>
     </tr><tr style="text-align:left">
-      <td>Maddening Scream (Madness8 Ench): Touched acts madly (-4 AC, Ref save requires nat 20) for 1d4+1 rd</td>
+      <td>Maddening Scream (Madness8 Ench): Touched races around screaming, suffering -4 AC, loss of shield bonus, and Reflex saves that succeed only on a natural 20, for 1d4+1 rd</td>
     </tr><tr style="text-align:left">
-      <td>Magecraft (W1 Divi): Self gains +5 Craft check for daily item creation work</td>
+      <td>Magecraft (W1 Divi): Gives self a +5 Craft check for daily item creation work</td>
     </tr><tr style="text-align:left">
-      <td>Metamagic Item (A3 Tran): Imbues touched magic item w/metamagic property for 2 rd</td>
+      <td>Metamagic Item (A3 Tran): Gives a spell stored in the touched magic item a metamagic property for 2 rd</td>
     </tr><tr style="text-align:left">
       <td>Mount (Least Dragonmark Mark Of Passage1 Conj): R40' Summons a riding horse with bit, bridle, and saddle that serves self for 12 hr</td>
     </tr><tr style="text-align:left">
-      <td>Nature's Wrath (Gatekeeper4 Evoc): R120' Aberrations in 20' radius suffer 2d6 HP and dazed 1 rd, and other unnatural creatures suffer 1d8 HP (Will half)</td>
+      <td>Nature's Wrath (Gatekeeper4 Evoc): R120' 20' radius inflicts 2d6 HP and dazed for 1 rd on aberrations (save Will half HP only) and 1d8 HP on other unnatural creatures (save Will half)</td>
     </tr><tr style="text-align:left">
-      <td>Personal Weapon Augmentation (A1 Tran): Touched self weapon gains +1 or 10K GP enhancement for 20 min</td>
+      <td>Personal Weapon Augmentation (A1 Tran): Touched self weapon gains a special ability that normally costs up to 10K GP for 20 min</td>
     </tr><tr style="text-align:left">
-      <td>Power Surge (A3 Tran): Touched magic item gains 0 charges for 2 min</td>
+      <td>Power Surge (A3 Tran): Touched magic item gains 0 temporary charges for 2 min</td>
     </tr><tr style="text-align:left">
-      <td>Repair Critical Damage (A4 Tran): Touched construct regains 4d8+2 HP</td>
+      <td>Repair Critical Damage (A4 Tran): Touched construct regains 4d8+2 hit points</td>
     </tr><tr style="text-align:left">
-      <td>Repair Light Damage (A1 Tran): Touched construct regains 1d8+2 HP</td>
+      <td>Repair Light Damage (A1 Tran): Touched construct regains 1d8+2 hit points</td>
     </tr><tr style="text-align:left">
-      <td>Repair Moderate Damage (A2 Tran): Touched construct regains 2d8+2 HP</td>
+      <td>Repair Moderate Damage (A2 Tran): Touched construct regains 2d8+2 hit points</td>
     </tr><tr style="text-align:left">
-      <td>Repair Serious Damage (A3 Tran): Touched construct regains 3d8+2 HP</td>
+      <td>Repair Serious Damage (A3 Tran): Touched construct regains 3d8+2 hit points</td>
     </tr><tr style="text-align:left">
-      <td>Resistance Item (A1 Abju): Holder of touched item gains +1 saves for 20 min</td>
+      <td>Resistance Item (A1 Abju): Touched item gives its wearer or wielder +1 saves for 20 min</td>
     </tr><tr style="text-align:left">
-      <td>Return To Nature (Gatekeeper7 Tran): R30' Target arcane spellcaster suffers 1d4 negative levels, giant suffers <i>Reduce Person</i> (Fort neg), magical beast/outsider/aberration suffers -1d6 Intelligence/1 HP/12 HP and -1d4/-2d4/all supernatural abilities for 1 dy (Fort half HP only)</td>
+      <td>Return To Nature (Gatekeeper7 Tran): R30' Arcane spellcaster or monstrous humanoid target suffers 1d4 negative levels; giant target suffers <i>Reduce Person</i> effects (save Fortitude negates); dragon or magical beast target suffers -1d6 Intelligence and loss of 1d4 spell-like or supernatural abilities for 24 hr (save Fortitude half Intelligence loss only); non-elemental outsider target suffers 1d8 HP and loss of 2d4 spell-like or supernatural abilities for 24 hr (save Fortitude half HP only); aberration target suffers 2d6 HP and loss of all spell-like and supernatural abilities for 24 hr (save Fortitude half HP only)</td>
     </tr><tr style="text-align:left">
-      <td>Skill Enhancement (A1 Tran): Touched gains +3 on specified skill checks for 20 min</td>
+      <td>Skill Enhancement (A1 Tran): Touched item gives its wearer or wielder +3 on a specified skill for 20 min</td>
     </tr><tr style="text-align:left">
-      <td>Spell Storing Item (A1 Tran): Successful Use Magic Device imbues touched item with spell up to level 1 for 2 hr</td>
+      <td>Spell Storing Item (A1 Tran): Successful Use Magic Device check allows casting a spell of up to level 1 from the touched item for 2 hr</td>
     </tr><tr style="text-align:left">
-      <td>Spirit Steed (Deathless4 Necr): Touched animal gains +30' Speed, increased run, and no hustle damage for 2 hr</td>
+      <td>Spirit Steed (Deathless4 Necr): Touched animal gains +30' Speed, an increased run multiplier, and immunity to hustle damage for 2 hr, but suffers fatigue afterward</td>
     </tr><tr style="text-align:left">
-      <td>Stone Construct (A3 Tran): Touched construct gains DR 10/adamantine for 20 HP or 20 min</td>
+      <td>Stone Construct (A3 Tran): Touched construct gains DR 10/adamantine for 20 min or until 20 HP have been negated</td>
     </tr><tr style="text-align:left">
-      <td>Suppress Requirement (A3 Tran): Removes usage requirement from touched magic item for 20 min</td>
+      <td>Suppress Requirement (A3 Tran): Successful Use Magic Device check removes a class, race, ability, or alignment usage requirement from the touched magic item for 20 min</td>
     </tr><tr style="text-align:left">
-      <td>Total Repair (A6 Tran): Restores 20 HP to and removes conditions from touched construct</td>
+      <td>Total Repair (A6 Tran): Touched construct regains 20 hit points and recovers from conditions</td>
     </tr><tr style="text-align:left">
-      <td>Touch Of Madness (Madness2 Ench): Touched suffers dazed for 4 rd</td>
+      <td>Touch Of Madness (Madness2 Ench): Touched suffers dazed for 4 rd (save Will negates)</td>
     </tr><tr style="text-align:left">
-      <td>Toughen Construct (A2 Tran): Touched construct gains +2 AC for 20 min</td>
+      <td>Toughen Construct (A2 Tran): Touched construct gains a +2 enhancement bonus to natural armor for 20 min</td>
     </tr><tr style="text-align:left">
-      <td>True Creation (Artifice8 Conj): Creates permanent 2' cu plant or mineral object</td>
+      <td>True Creation (Artifice8 Conj): R30' Creates a permanent 2 cubic foot plant or mineral object</td>
     </tr><tr style="text-align:left">
-      <td>Weapon Augmentation (A4 Tran): Touched weapon gains +3 or 70K GP enhancement for 20 min</td>
+      <td>Weapon Augmentation (A4 Tran): Touched weapon gains a special ability that normally costs up to 70K GP for 20 min</td>
     </tr><tr style="text-align:left">
-      <td>Withering Palm (Decay7 Necr): Touched suffers -1 Strength and Constitution (Fort neg)</td>
+      <td>Wind's Favor (D3 Tran): R120' Creates a 10'x10'x120' 30 MPH wind for 2 hr</td>
     </tr><tr style="text-align:left">
-      <td>Zone Of Natural Purity (Gatekeeper2 Evoc): R30' Fey and plants in 20' radius gain +1 attack, damage, and saves, and abberations suffer -1, for 4 hr</td>
+      <td>Withering Palm (Decay7 Necr): Touch inflicts -1 Strength and Constitution (save Fortitude negates); a critical hit inflicts ability drain instead of damage</td>
+    </tr><tr style="text-align:left">
+      <td>Zone Of Natural Purity (Gatekeeper2 Evoc): R30' 20' radius gives fey and plants +1 attacks, damage, and saves, and inflicts -1 attacks, damage, and saves on abberations, for 4 hr</td>
     </tr></table>
 </td>
   </tr><tr style="text-align:center">
