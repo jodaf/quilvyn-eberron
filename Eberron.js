@@ -338,10 +338,12 @@ Eberron.PRESTIGE_CLASSES = {
       'Spellcraft ' +
     'Features=' +
       '"1:Flame Of Censure","1:Weapon Of The Exorcist",' +
-      '"2:Divine Caster Level Bonus","2:Weapon Of Silver","3:Darkvision",' +
+      '"2:Divine Caster Level Bonus","2:Weapon Of Silver",' +
       '"3:Resist Possession","3:Smite Evil","4:Detect Thoughts",' +
-      '"4:Weapon Of Good","5:Silver Exorcism","6:Weapon Of Flame",' +
-      '"8:Weapon Of Law","9:Weapon Of Sacred Flame","10:Warding Flame"',
+      '"4:Weapon Of Good","5:Silver Exorcism","6:Darkvision",' +
+      '"6:Weapon Of Flame","8:Weapon Of Law","9:Weapon Of Sacred Flame",' +
+      '"10:Warding Flame",' +
+      '"exorcistOfTheSilverFlameFeatures.Darkvision == 0 ? 3:Darkvision (30\')"',
   'Extreme Explorer':
     'Require=' +
       '"baseAttack >= 4","features.Action Boost",' +
@@ -911,6 +913,28 @@ Eberron.FEATURES_ADDED = {
     'Section=skill ' +
     'Note="Can take 10 on Spellcraft and Use Magic Device when distracted"',
 
+  // Changes to Bard features to support Song Of The Heart effects
+  'Inspire Competence':
+    SRD35.FEATURES['Inspire Competence']
+    .replace('+2', '+%{skillNotes.songOfTheHeart?3:2}'),
+  'Inspire Courage':
+    SRD35.FEATURES['Inspire Courage']
+    .replace('//6', '//6+(skillNotes.songOfTheHeart?1:0)'),
+  'Inspire Greatness':
+    SRD35.FEATURES['Inspire Greatness']
+    .replace('2d10', '%{skillNotes.songOfTheHeart?3:2}d10')
+    .replace('+2 attacks', '+%{skillNotes.songOfTheHeart?3:2} attacks')
+    .replace('+1 Fortitude', '+%{skillNotes.songOfTheHeart?3:2} Fortitude'),
+  'Inspire Heroics':
+    SRD35.FEATURES['Inspire Heroics']
+    .replaceAll('+4', '+%{skillNotes.songOfTheHeart?5:4}'),
+  'Fascinate':
+    SRD35.FEATURES.Fascinate
+    .replace('vs. Perform check', "vs. Perform check%{skillNotes.songOfTheHeart?' +1':''}"),
+  'Suggestion':
+    SRD35.FEATURES.Suggestion
+    .replace('effects', "effects%{skillNotes.songOfTheHeart?' (save DC +1)':''}"),
+
   // Feats
 
   'Aberrant Dragonmark (%aberrantMarkPower)':
@@ -1079,7 +1103,7 @@ Eberron.FEATURES_ADDED = {
       '"Bluff is a class skill/Hide is a class skill/Perform is a class skill"',
   'Haunting Melody':
     'Section=skill ' +
-    'Note="R30\' Can use Bardic Music to inflict shaken on foes (save Will DC %{10+levels.Bard//2+charismaModifier} Will negates) for %{sumPerformRanks} rd"',
+    'Note="R30\' Can use Bardic Music to inflict shaken on foes (save Will DC %{10+levels.Bard//2+charismaModifier+(skillNotes.songOfTheHeart?1:0)} Will negates) for %{sumPerformRanks} rd"',
   'Healing Factor':
     'Section=combat Note="Regains %{level} hit points when shifting ends"',
   'Heroic Spirit':'Section=ability Note="+%{level*3} Action Points"',
@@ -1260,12 +1284,12 @@ Eberron.FEATURES_ADDED = {
     'Note="Has no restrictions on combining Monk and chosen class levels"',
   'Music Of Growth':
     'Section=skill ' +
-    'Note="R30\' Can use Bardic Music to give +4 Strength and Constitution to animal and plant creatures"',
+    'Note="R30\' Can use Bardic Music to give +%{skillNotes.songOfTheHeart?6:4} Strength and Constitution to animal and plant creatures"',
   'Music Of Making':
     'Section=magic,skill ' +
     'Note=' +
       '"Doubles the duration of creation spells cast during Bardic Music",' +
-      '"+4 Craft during Bardic Music"',
+      '"+%{skillNotes.songOfTheHeart?6:4} Craft during Bardic Music"',
   'Powerful Charge':
     'Section=combat ' +
     'Note="Successful charge inflicts +%{features.Large?(combatNotes.greaterPowerfulCharge?\'3d6\':\'2d6\'):combatNotes.greaterPowerfulCharge?\'2d6\':\'1d8\'} HP"',
@@ -1298,11 +1322,10 @@ Eberron.FEATURES_ADDED = {
     'Section=combat ' +
     'Note="Reduces the penalty for taking a second attack with a natural weapon to -2"',
   'Silver Smite':'Section=combat Note="Smite Evil inflicts +1d6 HP"',
-  // TODO implement?
-  'Song Of The Heart':'Section=skill Note="+1 Bardic Music effects"',
+  'Song Of The Heart':'Section=skill Note="Has increased Bardic Music effects"',
   'Soothe The Beast':
     'Section=skill ' +
-    'Note="R30\' Can use Bardic Music to change animal attitudes"',
+    'Note="R30\' Can use Bardic Music%{skillNotes.songOfTheHeart?\' with a +2 Perform check\':\'\'} to change animal attitudes"',
   'Spontaneous Casting':
     'Section=magic ' +
     'Note="Can spend 2 Action Points to substitute any known spell for a prepared one"',
@@ -1384,8 +1407,10 @@ Eberron.FEATURES_ADDED = {
   'Unearthly Grace':'Section=save Note="+%V Fortitude/+%V Reflex/+%V Will"',
 
   // Exorcist Of The Silver Flame
-  // TODO 30' at level 3, 60' at level 6
   // Darkvision as above
+  "Darkvision (30')":
+    'Section=feature ' +
+    'Note="R30\' Has black and white vision in complete darkness"',
   'Detect Thoughts':
     'Section=magic ' +
     'Note="Can use <i>Detect Thoughts</i> effects at will" ' +
