@@ -2911,12 +2911,6 @@ Eberron.classRulesExtra = function(rules, name) {
           rules.defineRule
             ('skillModifier.' + s, 'skillNotes.artificeMaster', '+', '4');
       }
-      rules.defineRule('spellEffectsCasterLevelBonus.Creation',
-        'magicNotes.empoweredCreation', '+=', '1'
-      );
-      rules.defineRule('spellEffectsCasterLevelBonus.Necromancy',
-        'magicNotes.empoweredNecromancy', '+=', '1'
-      );
     }
 
     if(rules.basePlugin.classRulesExtra)
