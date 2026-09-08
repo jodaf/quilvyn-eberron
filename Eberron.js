@@ -1851,7 +1851,7 @@ Eberron.SPELLS_ADDED = {
     'Description=' +
       '"Touched armor or shield gains a special ability that normally costs up to 5K GP for %{lvl*10} min"',
   'Bolts Of Bedevilment':
-    'School=Enchantment ' +
+    'School="Enchantment [Mind-Affecting]" ' +
     'Level=Madness5 ' +
     'Description=' +
       '"R%{lvl*10+100}\' Inflicts dazed (save Will negates) on a target 3 times within %{lvl*2} rd"',
@@ -1871,12 +1871,12 @@ Eberron.SPELLS_ADDED = {
     'Description=' +
       '"R%{lvl//2*5+25}\' %{lvl*2} HD of deathless within a 15\' radius obey commands (save Will negates) for %{lvl} min"',
   'Create Deathless':
-    'School=Necromancy ' +
+    'School="Necromancy [Good]" ' +
     'Level=Deathless6 ' +
     'Description=' +
       '"R%{lvl//2*5+25}\' Target corpse becomes a deathless soldier"',
   'Create Greater Deathless':
-    'School=Necromancy ' +
+    'School="Necromancy [Good]" ' +
     'Level=Deathless8 ' +
     'Description=' +
       '"R%{lvl//2*5+25}\' Target corpse becomes a deathless councilor"',
@@ -1886,7 +1886,7 @@ Eberron.SPELLS_ADDED = {
     'Description=' +
       '"60\' cone reveals the presence and power of aberrations for concentration up to %{lvl} min; the presence of an aberration with at least %{level*2>?11} HD stuns self for 1 rd after 1 rd of concentration, ending the spell"',
   'Detoxify':
-    'School=Conjuration ' +
+    'School="Conjuration (Healing)" ' +
     'Level=Feast8 ' +
     'Description=' +
       '"Neutralizes venom and poisonous creatures (save Will negates) within 30\' for %{lvl*10} min"',
@@ -1906,7 +1906,7 @@ Eberron.SPELLS_ADDED = {
     'Description=' +
       '"Enhancement on a touched shield or weapon changes to an attack or Armor Class bonus for %{lvl*10} min"',
   'Feast Of Champions':
-    'School=Conjuration ' +
+    'School="Conjuration (Creation)" ' +
     'Level=C9,Feast9 ' +
     'Description=' +
       '"R%{lvl//2*5+25}\' Creates food for %{lvl} creatures that cures sickness, disease, exhaustion, and 2d8+%{lvl} hit points and gives 1d8+%{lvl//2<?10} temporary hit points, +1 attacks, skill checks, ability checks, and saves, and immunity to poison and fear for 12 hr"',
@@ -1952,7 +1952,7 @@ Eberron.SPELLS_ADDED = {
     'Description=' +
       '"Changes the type of bonus provided by the touched magic item (save Will negates) for %{lvl*10} min; cannot affect sacred or profane bonuses or cause an item to grant a dodge bonus to Armor Class"',
   'Maddening Scream':
-    'School=Enchantment ' +
+    'School="Enchantment (Compulsion) [Mind-Affecting]" ' +
     'Level=Madness8,S8,W8 ' +
     'Description=' +
       '"Touched races around screaming, suffering -4 AC, loss of shield bonus, and Reflex saves that succeed only on a natural 20, for 1d4+1 rd"',
@@ -2046,7 +2046,7 @@ Eberron.SPELLS_ADDED = {
     'Description=' +
       '"Touched construct regains %{lvl*10<?150} hit points and recovers from conditions"',
   'Touch Of Madness':
-    'School=Enchantment ' +
+    'School="Enchantment [Mind-Affecting]" ' +
     'Level=Madness2 ' +
     'Description="Touched suffers dazed for %{lvl*2} rd (save Will negates)"',
   'Toughen Construct':
@@ -2055,7 +2055,7 @@ Eberron.SPELLS_ADDED = {
     'Description=' +
       '"Touched construct gains a +%{(lvl//3+1)<?5>?2} enhancement bonus to natural armor for %{lvl*10} min"',
   'True Creation':
-    'School=Conjuration ' +
+    'School="Conjuration (Creation)" ' +
     'Level=Artifice8 ' +
     'Description=' +
       '"R%{25+lvl//2*5}\' Creates a permanent %{lvl} cubic foot plant or mineral object"',
@@ -2906,12 +2906,17 @@ Eberron.classRulesExtra = function(rules, name) {
   } else {
 
     if(name == 'Cleric') {
-      // Artifice Domain
       for(let s in rules.getChoices('skills')) {
         if(s.startsWith('Craft '))
           rules.defineRule
             ('skillModifier.' + s, 'skillNotes.artificeMaster', '+', '4');
       }
+      rules.defineRule('spellEffectsCasterLevelBonus.Creation',
+        'magicNotes.empoweredCreation', '+=', '1'
+      );
+      rules.defineRule('spellEffectsCasterLevelBonus.Necromancy',
+        'magicNotes.empoweredNecromancy', '+=', '1'
+      );
     }
 
     if(rules.basePlugin.classRulesExtra)
