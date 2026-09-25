@@ -84,7 +84,7 @@ var attributes = {
       <td>      <table id="FeatLists" style="width:100%">
       <tr style="text-align:center">
         <td><b>Feats</b>: Agile; Athletic; Beast Totem (Yrthak); Combat Casting; Combat Reflexes; Toughness</td>
-        <td><b>Human Features</b>: Human Feat Bonus; Human Skill Bonus</td>
+        <td><b>Human Features</b>: Bonus Feat (Human); Skill Bonus (Human)</td>
         <td><b>Eldeen Ranger Features</b>: Armor Proficiency (Light); Ashbound; Children Of Winter; Damage Reduction (Greensinger); Darkvision; Favored Enemy; Ferocity; Gatekeepers; Greensingers; Hated Foe; Improved Critical; Nature Sense; Resist Corruption (Children Of Winter); Resist Corruption (Gatekeepers); Resist Nature's Lure; Resist Poison; Resist The Arcane; Sect; Shield Proficiency; Slippery Mind; Smite Evil; Spell Resistance; Touch Of Contagion; Unearthly Grace; Wardens Of The Wood; Weapon Proficiency (Martial)</td>
         <td><b>Ranger Features</b>: Animal Companion; Armor Proficiency (Light; Shield); Combat Style (Archery); Combat Style; Endurance; Favored Enemy; Track; Weapon Proficiency (Simple Weapons; Martial Weapons); Wild Empathy</td>
       </tr></table>
@@ -92,9 +92,9 @@ var attributes = {
     </tr><tr style="text-align:center">
       <td><b>Feature Notes</b>:       <table id="FeatureNotes" style="width:100%">
       <tr style="text-align:center">
-        <td><i>Combat Style: 1 selection</i></td>
+        <td><i>Bonus Feat (Human): +1 General Feat</i></td>
       </tr><tr style="text-align:center">
-        <td><i>Human Feat Bonus: +1 General Feat</i></td>
+        <td><i>Combat Style: 1 selection</i></td>
       </tr><tr style="text-align:center">
         <td><i>Improved Critical: +1 General Feat (Improved Critical for a choice of a ranged or thrown weapon)</i></td>
       </tr><tr style="text-align:center">
@@ -153,8 +153,6 @@ var attributes = {
       </tr><tr style="text-align:center">
         <td><i>Athletic: +2 Climb/+2 Swim</i></td>
       </tr><tr style="text-align:center">
-        <td><i>Human Skill Bonus: +13 Skill Points</i></td>
-      </tr><tr style="text-align:center">
         <td><i>Intelligence Language Adjustment: +3</i></td>
       </tr><tr style="text-align:center">
         <td><i>Intelligence Skill Points Adjustment: +39</i></td>
@@ -163,7 +161,11 @@ var attributes = {
       </tr><tr style="text-align:center">
         <td><i>Nature Sense: +2 Knowledge (Nature)/+2 Survival</i></td>
       </tr><tr style="text-align:center">
+        <td><i>Skill Bonus (Human): +13 Skill Points</i></td>
+      </tr><tr style="text-align:center">
         <td><i>Survival Synergy: +2 Knowledge (Nature)</i></td>
+      </tr><tr style="text-align:center">
+        <td>Combat Casting: +4 Concentration to cast spells while on the defensive, grappling, or pinned</td>
       </tr><tr style="text-align:center">
         <td>Craft (Weapons) Synergy: +2 Appraise (related)</td>
       </tr><tr style="text-align:center">
@@ -181,7 +183,7 @@ var attributes = {
       </tr><tr style="text-align:center">
         <td>Track: Can use Survival to follow creatures' trails</td>
       </tr><tr style="text-align:center">
-        <td>Wild Empathy: Can make a +6 check to use Diplomacy with animals and magical beasts with an Intelligence of 1 or 2</td>
+        <td>Wild Empathy: Can make a +6 check to use Diplomacy actions with animals; using Wild Empathy with magical beasts that have an Intelligence of 1 or 2 incurs a -4 penalty on the check</td>
       </tr></table>
 </td>
     </tr></table>
@@ -197,7 +199,7 @@ var attributes = {
       <tr style="text-align:center">
         <td><b>Hit Points</b>: 62</td>
         <td><b>Initiative</b>: +3</td>
-        <td><b>AC/Touch/Flat</b>: 18/13/15</td>
+        <td><b>AC/Touch/Flat</b>: 19/13/16</td>
         <td><b>Damage Reduction</b>: 3/Cold Iron</td>
         <td><b>Attacks Per Round</b>: 2</td>
         <td><b>Base/Melee/Ranged Attack</b>: +10/+11/+13</td>
@@ -221,7 +223,7 @@ var attributes = {
     </tr><tr style="text-align:center">
       <td><b>Combat Notes</b>:       <table id="CombatNotes" style="width:100%">
       <tr style="text-align:center">
-        <td><i>Armor Class Modifiers: Armor +5; Deflection +0; Dexterity +3; Dodge +0; Natural Armor +0; Shield +0; Size +0</i></td>
+        <td><i>Armor Class Modifiers: Armor +5; Deflection +0; Dexterity +3; Dodge +0; Natural Armor +0; Shield +1; Size +0</i></td>
       </tr><tr style="text-align:center">
         <td><i>Combat Style (Archery): Has the Rapid Shot feature; medium or heavy armor negates</i></td>
       </tr><tr style="text-align:center">
@@ -237,11 +239,11 @@ var attributes = {
       </tr><tr style="text-align:center">
         <td><i>Toughness: +3 Hit Points</i></td>
       </tr><tr style="text-align:center">
-        <td><i>Two-handed Weapon With Buckler Penalty: -1 attack and Armor Class</i></td>
+        <td><i>Two-handed Weapon With Buckler Penalty: -1 attack</i></td>
       </tr><tr style="text-align:center">
-        <td>Combat Reflexes: Can make an AOO while flat-footed and make +3 AOO per rd</td>
+        <td>Combat Reflexes: Can make an AOO while flat-footed and make 4 AOO per rd</td>
       </tr><tr style="text-align:center">
-        <td>Favored Enemy: Has 5 +2 damage bonuses distributed among 3 chosen creature types</td>
+        <td>Favored Enemy: Has 5 +2 weapon damage bonuses distributed among 3 chosen creature types</td>
       </tr><tr style="text-align:center">
         <td>Ferocity: Can continue fighting with 0 or negative hit points</td>
       </tr><tr style="text-align:center">
@@ -249,7 +251,9 @@ var attributes = {
       </tr><tr style="text-align:center">
         <td>Rapid Shot: Can make an extra ranged attack during a full attack, suffering a -2 penalty on all ranged attacks during the rd</td>
       </tr><tr style="text-align:center">
-        <td>Smite Evil: Can gain +1 attack and inflict +5 HP vs. an evil foe once per day</td>
+        <td>Smite Evil: Can gain +1 attack and inflict +undefined HP vs. an evil foe once per day</td>
+      </tr><tr style="text-align:center">
+        <td>Two-handed Weapon With Buckler Penalty: Negates shield bonus to Armor Class</td>
       </tr></table>
 </td>
     </tr><tr style="text-align:center">
@@ -257,6 +261,7 @@ var attributes = {
       <tr style="text-align:center">
         <td><b>Save</b>: Fortitude: +10; Reflex: +12; Will: +2</td>
         <td><b>Spell Resistance</b>: 20</td>
+        <td><b>Resistance</b>: Disease: immune</td>
       </tr></table>
 </td>
     </tr><tr style="text-align:center">
@@ -266,6 +271,8 @@ var attributes = {
       </tr><tr style="text-align:center">
         <td><i>Dexterity Reflex Adjustment: +3</i></td>
       </tr><tr style="text-align:center">
+        <td><i>Resist Corruption (Children Of Winter): Has immunity to disease/+2 vs. mind-affecting spells and abilities</i></td>
+      </tr><tr style="text-align:center">
         <td><i>Spell Resistance: Has SR 20</i></td>
       </tr><tr style="text-align:center">
         <td><i>Unearthly Grace: +1 Fortitude/+1 Reflex/+1 Will</i></td>
@@ -274,11 +281,7 @@ var attributes = {
       </tr><tr style="text-align:center">
         <td>Beast Totem (Yrthak): +4 vs. sonic</td>
       </tr><tr style="text-align:center">
-        <td>Combat Casting: +4 Concentration checks to cast spells while on the defensive, grappling, or pinned</td>
-      </tr><tr style="text-align:center">
         <td>Endurance: +4 vs. damage from extended physical action, starvation, thirst, and suffocation/Can sleep in light or medium armor without becoming fatigued</td>
-      </tr><tr style="text-align:center">
-        <td>Resist Corruption (Children Of Winter): Has immunity to disease/+2 vs. mind-affecting spells and abilities</td>
       </tr><tr style="text-align:center">
         <td>Resist Corruption (Gatekeepers): +2 vs. aberration abilities</td>
       </tr><tr style="text-align:center">
@@ -288,7 +291,7 @@ var attributes = {
       </tr><tr style="text-align:center">
         <td>Resist The Arcane: +2 vs. arcane spells</td>
       </tr><tr style="text-align:center">
-        <td>Slippery Mind: Can attempt a second save vs. enchantment in the next rd</td>
+        <td>Slippery Mind: Can attempt a second save vs. enchantment in the following rd</td>
       </tr></table>
 </td>
     </tr></table>

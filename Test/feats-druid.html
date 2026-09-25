@@ -96,7 +96,7 @@ var attributes = {
     <tr style="text-align:center">
       <td>Trackless Step: Can leave no traces of passage through natural surroundings</td>
     </tr><tr style="text-align:center">
-      <td>Woodland Stride: Can move normally through natural undergrowth</td>
+      <td>Woodland Stride: Can move normally through natural undergrowth without damage or impairment</td>
     </tr></table>
 </td>
   </tr></table>
@@ -115,16 +115,16 @@ var attributes = {
       <td>      <table id="FeatLists" style="width:100%">
       <tr style="text-align:center">
         <td><b>Feats</b>: Ashbound; Beast Shape; Beast Totem (Chimera); Beast Totem (Digester); Beast Totem (Displacer Beast); Beast Totem (Gorgon); Beast Totem (Krenshar); Beast Totem (Unicorn); Beast Totem (Winter Wolf); Beast Totem (Yrthak); Child Of Winter; Ecclesiarch; Extra Turning; Gatekeeper Initiate; Greensinger Initiate; Leadership; Repel Aberration; Totem Companion; Vermin Companion; Vermin Shape; Warden Initiate</td>
-        <td><b>Human Features</b>: Human Feat Bonus; Human Skill Bonus</td>
-        <td><b>Druid Features</b>: A Thousand Faces; Animal Companion; Armor Proficiency (Light; Medium; Shield); Elemental Shape; Nature Sense; Resist Nature's Lure; Spontaneous Casting (Druid); Timeless Body; Trackless Step; Venom Immunity; Weapon Proficiency (Club; Dagger; Dart; Quarterstaff; Scimitar; Sickle; Shortspear; Sling; Spear); Wild Empathy; Wild Shape; Woodland Stride</td>
+        <td><b>Human Features</b>: Bonus Feat (Human); Skill Bonus (Human)</td>
+        <td><b>Druid Features</b>: A Thousand Faces; Animal Companion; Armor Proficiency (Light; Medium; Shield); Nature Sense; Resist Nature's Lure; Spontaneous Casting (Druid); Timeless Body; Trackless Step; Venom Immunity; Weapon Proficiency (Club; Dagger; Dart; Quarterstaff; Scimitar; Sickle; Shortspear; Sling; Spear); Wild Empathy; Wild Shape; Woodland Stride</td>
       </tr></table>
 </td>
     </tr><tr style="text-align:center">
       <td><b>Feature Notes</b>:       <table id="FeatureNotes" style="width:100%">
       <tr style="text-align:center">
-        <td><i>Ecclesiarch: +2 Leadership</i></td>
+        <td><i>Bonus Feat (Human): +1 General Feat</i></td>
       </tr><tr style="text-align:center">
-        <td><i>Human Feat Bonus: +1 General Feat</i></td>
+        <td><i>Ecclesiarch: +2 Leadership</i></td>
       </tr><tr style="text-align:center">
         <td>Leadership: Can attract companions and devoted followers</td>
       </tr></table>
@@ -177,13 +177,13 @@ var attributes = {
       </tr><tr style="text-align:center">
         <td><i>Greensinger Initiate: Bluff is a class skill/Hide is a class skill/Perform is a class skill</i></td>
       </tr><tr style="text-align:center">
-        <td><i>Human Skill Bonus: +19 Skill Points</i></td>
-      </tr><tr style="text-align:center">
         <td><i>Intelligence Skill Points Adjustment: -19</i></td>
       </tr><tr style="text-align:center">
         <td><i>Knowledge (Religion) Synergy: +2 Undead turning checks</i></td>
       </tr><tr style="text-align:center">
         <td><i>Nature Sense: +2 Knowledge (Nature)/+2 Survival</i></td>
+      </tr><tr style="text-align:center">
+        <td><i>Skill Bonus (Human): +19 Skill Points</i></td>
       </tr><tr style="text-align:center">
         <td><i>Warden Initiate: Climb is a class skill/Jump is a class skill</i></td>
       </tr><tr style="text-align:center">
@@ -191,7 +191,7 @@ var attributes = {
       </tr><tr style="text-align:center">
         <td>Link: +4 Handle Animal and Wild Empathy with companion, and can command companion as a free action</td>
       </tr><tr style="text-align:center">
-        <td>Wild Empathy: Can make a +20 check to use Diplomacy with animals and magical beasts with an Intelligence of 1 or 2</td>
+        <td>Wild Empathy: Can make a +20 check to use Diplomacy actions with animals; using Wild Empathy with magical beasts that have an Intelligence of 1 or 2 incurs a -4 penalty on the check</td>
       </tr></table>
 </td>
     </tr></table>
@@ -249,6 +249,7 @@ var attributes = {
       <td>      <table id="SavesAndResistance" style="width:100%">
       <tr style="text-align:center">
         <td><b>Save</b>: Fortitude: +13; Reflex: +6; Will: +10</td>
+        <td><b>Resistance</b>: Poison: immune</td>
       </tr></table>
 </td>
     </tr><tr style="text-align:center">
@@ -257,6 +258,8 @@ var attributes = {
         <td><i>Constitution Fortitude Adjustment: +3</i></td>
       </tr><tr style="text-align:center">
         <td><i>Dexterity Reflex Adjustment: +1</i></td>
+      </tr><tr style="text-align:center">
+        <td><i>Venom Immunity: Has immunity to poison</i></td>
       </tr><tr style="text-align:center">
         <td>Beast Totem (Chimera): +4 vs. breath weapons</td>
       </tr><tr style="text-align:center">
@@ -279,8 +282,6 @@ var attributes = {
         <td>Resist Nature's Lure: +4 vs. the spell-like abilities of fey creatures</td>
       </tr><tr style="text-align:center">
         <td>Timeless Body: Suffers no additional penalties from aging and has immunity to magical aging</td>
-      </tr><tr style="text-align:center">
-        <td>Venom Immunity: Has immunity to poison</td>
       </tr></table>
 </td>
     </tr></table>
@@ -407,8 +408,6 @@ var attributes = {
   </tr><tr style="text-align:center">
     <td><b>Magic Notes</b>:     <table id="MagicNotes" style="width:100%">
     <tr style="text-align:center">
-      <td><i>Wild Shape: Can change into a tiny to huge animal or plant creature with up to 16 Hit Dice for 16 hr 5 times per day</i></td>
-    </tr><tr style="text-align:center">
       <td>A Thousand Faces: Can change appearance at will while in normal form</td>
     </tr><tr style="text-align:center">
       <td>Ashbound: Doubles the duration of <i>Summon Nature's Ally</i>, and summoned creatures gain +3 attack</td>
@@ -416,8 +415,6 @@ var attributes = {
       <td>Beast Shape: Can Wild Shape into a Yrthak once per day</td>
     </tr><tr style="text-align:center">
       <td>Child Of Winter: Can summon vermin and use Druid animal spells on them</td>
-    </tr><tr style="text-align:center">
-      <td>Elemental Shape: Can change into a small to large elemental once per day</td>
     </tr><tr style="text-align:center">
       <td>Gatekeeper Initiate: Has access to additional spells</td>
     </tr><tr style="text-align:center">
@@ -428,6 +425,8 @@ var attributes = {
       <td>Vermin Shape: Can Wild Shape into a Tiny-Huge vermin with up to 16 HD</td>
     </tr><tr style="text-align:center">
       <td>Warden Initiate: Has access to additional spells</td>
+    </tr><tr style="text-align:center">
+      <td>Wild Shape: Can change into a tiny to huge animal or plant with up to 16 HD, regaining 16 hit points, for 16 hr 5 times per day; can assume an elemental shape once per day</td>
     </tr></table>
 </td>
   </tr></table>
@@ -463,21 +462,21 @@ var attributes = {
       </tr></table>
 </td>
     </tr><tr style="text-align:center">
-      <td><b>Animal Companion Features</b>: Bonus Tricks; Companion Evasion; Companion Improved Evasion; Devotion; Link; Multiattack; Share Spells</td>
+      <td><b>Animal Companion Features</b>: Bonus Tricks; Devotion; Evasion (Companion); Improved Evasion (Companion); Link; Multiattack; Share Spells</td>
     </tr></table>
 </td>
   </tr><tr style="text-align:center">
     <td><b>Companion Notes</b>:     <table id="CompanionNotes" style="width:100%">
     <tr style="text-align:center">
-      <td><i>Companion Improved Evasion: Has increased Companion Evasion effects</i></td>
+      <td><i>Improved Evasion (Companion): Has increased Evasion (Companion) effects</i></td>
     </tr><tr style="text-align:center">
       <td>Animal Companion: Can have a special bond with an animal that has expanded abilities</td>
     </tr><tr style="text-align:center">
       <td>Bonus Tricks: Companion can learn 6 additional tricks, requiring no training time or Handle Animal checks</td>
     </tr><tr style="text-align:center">
-      <td>Companion Evasion: Successful Reflex saves by companion yield no damage instead of half, and failed Reflex saves yield half damage</td>
-    </tr><tr style="text-align:center">
       <td>Devotion: Companion has +4 Will vs. enchantment</td>
+    </tr><tr style="text-align:center">
+      <td>Evasion (Companion): Successful Reflex saves by companion yield no damage instead of half, and failed Reflex saves yield half damage</td>
     </tr><tr style="text-align:center">
       <td>Multiattack: Reduces the penalty for additional attacks to -2 or gives a second attack at -5</td>
     </tr><tr style="text-align:center">

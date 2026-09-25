@@ -478,7 +478,7 @@ Eberron.FEATS_ADDED = {
     'Type=General ' +
     'Require=' +
       '"Max \'^features.Beast Totem\' > 0",' +
-      '"magicNotes.wildShape =~ \'huge\'"',
+      '"levels.Druid >= 15"',
   'Beast Totem (Chimera)':'Type=General Require="features.Wild Empathy"',
   'Beast Totem (Digester)':'Type=General Require="features.Wild Empathy"',
   'Beast Totem (Displacer Beast)':
