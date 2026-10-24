@@ -280,7 +280,7 @@ var attributes = {
     </tr><tr style="text-align:center">
       <td><b>Combat Notes</b>:       <table id="CombatNotes" style="width:100%">
       <tr style="text-align:center">
-        <td><i>Armor Class Modifiers: Armor +3; Deflection +0; Dexterity +3; Dodge +0; Natural Armor +0; Shield +0; Size +0</i></td>
+        <td><i>Armor Class Modifiers: Armor: +3; Dexterity: +3</i></td>
       </tr><tr style="text-align:center">
         <td><i>Charisma Turning Adjustment: -1</i></td>
       </tr><tr style="text-align:center">
@@ -361,13 +361,13 @@ var attributes = {
     </tr><tr style="text-align:left">
       <td>Antilife Shell (Decay6 Abju): 10' radius bars the entrance of living creatures for 100 min</td>
     </tr><tr style="text-align:left">
-      <td>Astral Projection (Meditation9 Necr): Projects self and 5 others to the Astral Plane</td>
+      <td>Astral Projection (Meditation9 Necr): Projects self and 5 willing creatures to the Astral Plane</td>
     </tr><tr style="text-align:left">
       <td>Banishment (Exorcism6 Abju): R50' Banishes 20 HD of extraplanar creatures in a 15' radius to their home planes (save Will negates; possession of an object that a target hates gives +2 DC and +1 vs. spell resistance)</td>
     </tr><tr style="text-align:left">
       <td>Bestow Curse (Dragon3 Necr): Touched permanently suffers a choice of -6 to an ability, -4 attacks, saves, and checks, or a 50% chance of losing its action each rd (save Will negates)</td>
     </tr><tr style="text-align:left">
-      <td>Blasphemy (Dragon7 Evoc): Nonevil creatures within 40' with 10/9/5/0 HD are banished to their home planes for 24 hr (save Will -4 negates) and become dazed for 1 rd/suffer -2d6 Strength for 2d4 rd/become paralyzed for 1d10 min/are killed</td>
+      <td>Blasphemy (Dragon7 Evoc): Inflicts on nonevil creatures within 40' a set of effects: banishment for 24 hr on extraplanar creatures (save Will -4 negates); killed or destroyed on creatures with up to 0 HD; paralyzed for 1d10 min on creatures with up to 5 HD; -2d6 Strength for 2d4 rd on creatures with up to 9 HD; dazed for 1 rd on creatures with up to 10 HD</td>
     </tr><tr style="text-align:left">
       <td>Bless (Community1 Ench): Allies within 50' gain +1 attacks and fear saves for 10 min</td>
     </tr><tr style="text-align:left">
@@ -375,31 +375,31 @@ var attributes = {
     </tr><tr style="text-align:left">
       <td>Bolts Of Bedevilment (Madness5 Ench): R200' Inflicts dazed (save Will negates) on a target 3 times within 20 rd</td>
     </tr><tr style="text-align:left">
-      <td>Call Lightning (Weather3 Evoc): R200' 1 bolt per rd inflicts 3d6 HP electricity (or 3d10 HP during a storm) (save Reflex half) for 10 min or 10 bolts</td>
+      <td>Call Lightning (Weather3 Evoc): R200' 1 bolt per rd inflicts 3d6 HP electricity, or 3d10 HP during a storm, (save Reflex half) for 10 bolts within 10 min</td>
     </tr><tr style="text-align:left">
-      <td>Call Lightning Storm (Weather5 Evoc): R800' 1 bolt per rd inflicts 5d6 HP electricity (or 5d10 HP during a storm) (save Reflex half) for 10 min or 10 bolts</td>
+      <td>Call Lightning Storm (Weather5 Evoc): R800' 1 bolt per rd inflicts 5d6 HP electricity, or 5d10 HP during a storm, (save Reflex half) for 10 bolts within 10 min</td>
     </tr><tr style="text-align:left">
       <td>Calm Emotions (Charm2 Ench): R200' Pacifies creatures in a 20' radius (save Will negates), negating rage and morale bonuses, for concentration up to 10 rd or until any target is attacked</td>
     </tr><tr style="text-align:left">
       <td>Calm Emotions (Community Leader2 Ench): R200' Pacifies creatures in a 20' radius (save Will negates), negating rage and morale bonuses, for concentration up to 10 rd or until any target is attacked</td>
     </tr><tr style="text-align:left">
-      <td>Cause Fear (Dragon1 Necr): R50' Target with up to 5 HD becomes frightened and flees for 1d4 rd (save Will inflicts shaken for 1 rd)</td>
+      <td>Cause Fear (Dragon1 Necr): R50' Causes a target with up to 5 HD to become frightened and flee for 1d4 rd (save Will inflicts shaken for 1 rd)</td>
     </tr><tr style="text-align:left">
-      <td>Cause Fear (Passion1 Necr): R50' Target with up to 5 HD becomes frightened and flees for 1d4 rd (save Will inflicts shaken for 1 rd)</td>
+      <td>Cause Fear (Passion1 Necr): R50' Causes a target with up to 5 HD to become frightened and flee for 1d4 rd (save Will inflicts shaken for 1 rd)</td>
     </tr><tr style="text-align:left">
       <td>Charm Monster (Charm5 Ench): R50' Target creature treats self as a trusted friend (save Will negates; +5 if being threatened) for 10 days</td>
     </tr><tr style="text-align:left">
       <td>Charm Person (Charm1 Ench): R50' Target humanoid treats self as a trusted friend (save Will negates; +5 if being threatened) for 10 hr</td>
     </tr><tr style="text-align:left">
-      <td>Command Undead (Necromancer2 Necr): R50' Undead target considers self as a friend (save Will negates) for 11 days, obeying commands only with successful opposed Charisma checks</td>
+      <td>Command Undead (Necromancer2 Necr): R50' Undead target considers self as a friend (save Will for intelligent undead negates) for 11 days, obeying commands only with successful opposed Charisma checks</td>
     </tr><tr style="text-align:left">
       <td>Comprehend Languages (Commerce1 Divi): Allows self to understand touched written text and words spoken in any language by touched creatures for 100 min</td>
     </tr><tr style="text-align:left">
       <td>Comprehend Languages (Meditation1 Divi): Allows self to understand touched written text and words spoken in any language by touched creatures for 100 min</td>
     </tr><tr style="text-align:left">
-      <td>Confusion (Madness4 Ench): R200' Creatures in a 15' radius randomly: 10% attack the caster; 10% act normally; 30% babble; 20% flee; 30% attack the nearest creature (save Will negates), for 10 rd</td>
+      <td>Confusion (Madness4 Ench): R200' Creatures in a 15' radius randomly: 10% attack the caster; 10% act normally; 30% babble; 20% flee; 30% attack the nearest creature, (save Will negates) for 10 rd</td>
     </tr><tr style="text-align:left">
-      <td>Confusion (Passion3 Ench): R200' Creatures in a 15' radius randomly: 10% attack the caster; 10% act normally; 30% babble; 20% flee; 30% attack the nearest creature (save Will negates), for 10 rd</td>
+      <td>Confusion (Passion3 Ench): R200' Creatures in a 15' radius randomly: 10% attack the caster; 10% act normally; 30% babble; 20% flee; 30% attack the nearest creature, (save Will negates) for 10 rd</td>
     </tr><tr style="text-align:left">
       <td>Consecrate (Deathless2 Evoc): R50' 20' radius gives +3 turn undead and inflicts on undead -1 attacks, damage, and saves for 20 hr; a shrine to None in the area doubles the spell's effects, while a shrine to a different deity negates the effects but renders the shrine inert</td>
     </tr><tr style="text-align:left">
@@ -411,7 +411,7 @@ var attributes = {
     </tr><tr style="text-align:left">
       <td>Control Weather (Weather7 Tran): Modifies seasonal weather in a 2 mile radius for 4d12 hr</td>
     </tr><tr style="text-align:left">
-      <td>Control Winds (Weather6 Tran): R400' Changes wind direction and speed by 3 levels in a 400'x40' cylinder for 100 min</td>
+      <td>Control Winds (Weather6 Tran): R400' Changes the wind direction and speed by 3 levels in a 400'x40' cylinder for 100 min (save Fortitude each rd negates wind effects on a creature for 1 rd)</td>
     </tr><tr style="text-align:left">
       <td>Create Deathless (Deathless6 Necr): R50' Target corpse becomes a deathless soldier</td>
     </tr><tr style="text-align:left">
@@ -421,15 +421,15 @@ var attributes = {
     </tr><tr style="text-align:left">
       <td>Crushing Despair (Passion4 Ench): 30' cone inflicts -2 attacks, damage, saves, and checks (save Will negates) for 10 min</td>
     </tr><tr style="text-align:left">
-      <td>Darkness (Shadow2 Evoc): Touched object radiates shadows, giving creatures concealment, in a 20' radius for 100 min</td>
+      <td>Darkness (Shadow2 Evoc): Touched object radiates shadows in a 20' radius, giving creatures concealment, for 100 min</td>
     </tr><tr style="text-align:left">
-      <td>Death Knell (Dragon2 Necr): Touched with negative hit points dies (save Will negates), giving self 1d8 temporary hit points, +2 Strength, and +1 caster level for 10 min per target HD</td>
+      <td>Death Knell (Dragon2 Necr): Touched creature with negative hit points dies (save Will negates), giving self 1d8 temporary hit points, +2 Strength, and +1 caster level for 10 min per target HD</td>
     </tr><tr style="text-align:left">
-      <td>Death Ward (Life4 Necr): Touched gains immunity to death spells, death effects, energy drain, and negative energy effects for 11 min</td>
+      <td>Death Ward (Life4 Necr): Gives touched immunity to death spells, death effects, energy drain, and negative energy effects (save Will negates) for 11 min</td>
     </tr><tr style="text-align:left">
-      <td>Deeper Darkness (Shadow3 Evoc): Touched object radiates shadows, giving creatures concealment, in a 60' radius for 10 days</td>
+      <td>Deeper Darkness (Shadow3 Evoc): Touched object radiates shadows in a 60' radius, giving creatures concealment, for 10 days</td>
     </tr><tr style="text-align:left">
-      <td>Delay Poison (Feast2 Conj): Touched gains immunity to poison for 10 hr</td>
+      <td>Delay Poison (Feast2 Conj): Gives touched immunity to poison (save Fortitude negates) for 10 hr</td>
     </tr><tr style="text-align:left">
       <td>Demand (Charm8 Ench): Sends to a familiar target a 25-word message that contains a <i>Suggestion</i> (save Will negates); the target can send a 25-word reply</td>
     </tr><tr style="text-align:left">
@@ -437,27 +437,27 @@ var attributes = {
     </tr><tr style="text-align:left">
       <td>Detoxify (Feast8 Conj): Neutralizes venom and poisonous creatures (save Will negates) within 30' for 100 min</td>
     </tr><tr style="text-align:left">
-      <td>Dismissal (Exorcism4 Abju): R50' Sends the target to its native plane or (20%) to another random plane (save Will + 10 - target HD negates)</td>
+      <td>Dismissal (Exorcism4 Abju): R50' Sends the target to its native plane or (20% chance) to another random plane (save Will + 10 - target HD negates)</td>
     </tr><tr style="text-align:left">
-      <td>Dispel Evil (Exorcism5 Abju): Gives self a +4 deflection bonus to Armor Class vs. evil creatures for 10 rd; can end the spell early to dismiss an evil creature (save Will negates) or spell via touch</td>
+      <td>Dispel Evil (Exorcism5 Abju): Gives self a +4 deflection bonus to Armor Class vs. evil creatures for 10 rd; can end the spell early with a touch that dismisses an evil creature (save Will negates), an evil spell, or a spell cast by an evil caster</td>
     </tr><tr style="text-align:left">
-      <td>Disrupting Weapon (Life5 Tran): Hits with the touched weapon destroy undead with up to 10 HD (save Will negates) for 10 rd</td>
+      <td>Disrupting Weapon (Life5 Tran): Enspells the touched weapon (save Will negates) so that hits with it destroy undead with up to 10 HD (save Will negates) for 10 rd</td>
     </tr><tr style="text-align:left">
       <td>Dominate Monster (Charm9 Ench): R50' Target creature obeys mental commands (save Will negates) for 10 days</td>
     </tr><tr style="text-align:left">
       <td>Dominate Monster (Passion9 Ench): R50' Target creature obeys mental commands (save Will negates) for 10 days</td>
     </tr><tr style="text-align:left">
-      <td>Doom (Decay1 Necr): R210' Makes the target shaken, inflicting -2 attacks, damage, saves, and checks (save Will negates), for 11 min</td>
+      <td>Doom (Decay1 Necr): R210' Makes the target shaken (save Will negates), inflicting -2 attacks, damage, saves, and checks, for 11 min</td>
     </tr><tr style="text-align:left">
-      <td>Energy Drain (Decay9 Necr): R50' Ranged touch inflicts 2d4 negative levels (save Fortitude for each level after 24 hr negates; failure makes the loss permanent); an undead target instead gains 2d4x5 temporary hit points for 1 hr</td>
+      <td>Energy Drain (Decay9 Necr): R50' Ranged touch attack inflicts 2d4 negative levels (save Fortitude for each level after 24 hr negates; failure makes the loss permanent); an undead target instead gains 2d4x5 temporary hit points for 1 hr</td>
     </tr><tr style="text-align:left">
-      <td>Energy Drain (Necromancer9 Necr): R50' Ranged touch inflicts 2d4 negative levels (save Fortitude for each level after 24 hr negates; failure makes the loss permanent); an undead target instead gains 2d4x5 temporary hit points for 1 hr</td>
+      <td>Energy Drain (Necromancer9 Necr): R50' Ranged touch attack inflicts 2d4 negative levels (save Fortitude for each level after 24 hr negates; failure makes the loss permanent); an undead target instead gains 2d4x5 temporary hit points for 1 hr</td>
     </tr><tr style="text-align:left">
-      <td>Enervation (Decay4 Necr): R50' Ranged touch inflicts 1d4 negative levels for 11 hr; an undead target instead gains 1d4x5 temporary hit points for 1 hr</td>
+      <td>Enervation (Decay4 Necr): R50' Ranged touch attack inflicts 1d4 negative levels for 11 hr; an undead target instead gains 1d4x5 temporary hit points for 1 hr</td>
     </tr><tr style="text-align:left">
-      <td>Enervation (Necromancer4 Necr): R50' Ranged touch inflicts 1d4 negative levels for 11 hr; an undead target instead gains 1d4x5 temporary hit points for 1 hr</td>
+      <td>Enervation (Necromancer4 Necr): R50' Ranged touch attack inflicts 1d4 negative levels for 11 hr; an undead target instead gains 1d4x5 temporary hit points for 1 hr</td>
     </tr><tr style="text-align:left">
-      <td>Eyebite (Necromancer6 Necr): R50' Renders 1 target per rd with 1/5/10 HD comatose for 110 min/panicked for 1d4 rd and shaken for 110 min/sickened for 110 min (save Fortitude negates), for 3 rd</td>
+      <td>Eyebite (Necromancer6 Necr): Inflicts on 1 target per rd for 3 rd a set of effects (save Fortitude negates): sickened for 110 min; panicked for 1d4 rd and shaken for 110 min on creatures with up to 9 HD; comatose for 110 min on creatures with up to 4 HD</td>
     </tr><tr style="text-align:left">
       <td>Fabricate (Artifice5 Tran): R50' Creates finished items from 100 cubic feet of raw materials, or 10 cubic feet if working with minerals</td>
     </tr><tr style="text-align:left">
@@ -465,15 +465,15 @@ var attributes = {
     </tr><tr style="text-align:left">
       <td>Feast Of Champions (Feast9 Conj): R50' Creates food for 11 creatures that cures sickness, disease, exhaustion, and 2d8+11 hit points and gives 1d8+5 temporary hit points, +1 attacks, skill checks, ability checks, and saves, and immunity to poison and fear for 12 hr</td>
     </tr><tr style="text-align:left">
-      <td>Find The Path (Meditation6 Divi): Touched knows the most direct route to a specified location, as well how to bypass any traps that would slow progress, for 100 min</td>
+      <td>Find The Path (Meditation6 Divi): Reveals to the touched creature the most direct route to a specified location, as well how to bypass any traps that would slow progress, (save Will negates) for 100 min</td>
     </tr><tr style="text-align:left">
-      <td>Fog Cloud (Weather2 Conj): R210' 20' radius fog obscures vision for 110 min</td>
+      <td>Fog Cloud (Weather2 Conj): R210' Creates a 20' radius fog that obscures vision, giving a 20% miss chance on attacks within 5' and a 50% miss chance on more distant attacks, for 110 min</td>
     </tr><tr style="text-align:left">
-      <td>Freedom (Exorcism9 Abju): R50' Releases the target from movement restrictions</td>
+      <td>Freedom (Exorcism9 Abju): R50' Releases the target from movement restrictions (save Will negates)</td>
     </tr><tr style="text-align:left">
-      <td>Gate (Dragon9 Conj): R200' Creates a 5'-20' diameter disk passage to another plane for concentration up to 10 rd, or, at the cost of 1000 XP, allows summoning extraplanar creatures—a named creature, a single creature of a named kind, or up to 20 HD of a named kind</td>
+      <td>Gate (Dragon9 Conj): R200' Creates a 5'-20' diameter disk passage to another plane for concentration up to 10 rd and, at the cost of 1000 XP, allows summoning extraplanar creatures—a named creature, a single creature of a named kind, or up to 20 HD of a named kind</td>
     </tr><tr style="text-align:left">
-      <td>Geas/Quest (Charm6 Ench): R50' Compels a target to complete a specified task within 10 days, suffering 3d6 HP and sickened (save Fortitude HP only) for each 24 hr spent without obeying; the sickness ends 24 hr after resuming the task</td>
+      <td>Geas/Quest (Charm6 Ench): R50' Compels the target to complete a specified task within 10 days, suffering 3d6 HP and sickened (save Fortitude HP only) for each 24 hr spent without obeying; the sickness ends 24 hr after resuming the task</td>
     </tr><tr style="text-align:left">
       <td>Glibness (Commerce4 Tran): Gives self +30 Bluff with lies and SR 25 vs. magical lie detection for 100 min</td>
     </tr><tr style="text-align:left">
@@ -481,9 +481,9 @@ var attributes = {
     </tr><tr style="text-align:left">
       <td>Greater Command (Passion5 Ench): R50' 10 targets in a 15' radius obey a command to approach, drop, fall, flee, or halt (save Will negates; additional saves each rd end) for 10 rd</td>
     </tr><tr style="text-align:left">
-      <td>Greater Heroism (Passion6 Ench): Touched gains +4 attacks, saves, and skill checks, +10 temporary hit points, and immunity to fear for 10 min</td>
+      <td>Greater Heroism (Passion6 Ench): Gives touched +4 attacks, saves, and skill checks, 10 temporary hit points, and immunity to fear (save Will negates) for 10 min</td>
     </tr><tr style="text-align:left">
-      <td>Greater Planar Ally (Dragon8 Conj): Allows negotiating the purchase of a service from an extraplanar creature with up to 18 HD</td>
+      <td>Greater Planar Ally (Dragon8 Conj): Allows negotiating the purchase of a service from 1-3 extraplanar creatures with a total of up to 18 HD</td>
     </tr><tr style="text-align:left">
       <td>Greater Shadow Conjuration (Shadow7 Illu): Mimics a creation or summoning conjuration spell of up to 6th level (save Will reduces the mimicked spell's effects by 40%); mimicked spells are subject to SR and have a save DC as a 7th-level spell, and creatures summoned by a mimicked spell have 20% of their normal hit points</td>
     </tr><tr style="text-align:left">
@@ -491,7 +491,7 @@ var attributes = {
     </tr><tr style="text-align:left">
       <td>Greater Status (Community4 Divi): Allows monitoring the condition and position of 3 touched allies for 10 hr; also permits remote casting of touch spells of up to level 2 on the targets</td>
     </tr><tr style="text-align:left">
-      <td>Hallow (Deathless5 Evoc): 40' radius around touched gives a +2 deflection bonus to Armor Class and +2 saves vs. evil, suppresses mental control, prevents possession, bars contact by summoned evil creatures, prevents undead creation, gives +4 to turn and -4 to control undead, and evokes a chosen spell upon specified creatures for 1 year</td>
+      <td>Hallow (Deathless5 Evoc): 40' radius around the touched structure or site gives a +2 deflection bonus to Armor Class and +2 saves vs. evil, suppresses existing mental control and possession, gives immunity to new attempts to control or possess, bars contact by summoned evil creatures, prevents undead creation, gives +4 to turn and -4 to control undead, and evokes a chosen spell upon specified creatures for 1 year</td>
     </tr><tr style="text-align:left">
       <td>Halt Deathless (Deathless3 Necr): R210' 15' radius immobilizes 3 deathless (save Will negates) for 11 rd or until attacked or damaged</td>
     </tr><tr style="text-align:left">
@@ -503,13 +503,13 @@ var attributes = {
     </tr><tr style="text-align:left">
       <td>Heroes' Feast (Feast6 Conj): R50' Creates food for 11 creatures that cures sickness and disease and gives 1d8+5 temporary hit points, +1 attacks and Will saves, and immunity to poison and fear for 12 hr</td>
     </tr><tr style="text-align:left">
-      <td>Heroism (Charm4 Ench): Touched gains +2 attacks, saves, and skill checks for 100 min</td>
+      <td>Heroism (Charm4 Ench): Gives touched +2 attacks, saves, and skill checks (save Will negates) for 100 min</td>
     </tr><tr style="text-align:left">
-      <td>Hide From Undead (Life1 Abju): 10 touched become imperceptible to undead (save Will for intelligent undead negates) for 100 min; turning or touching an undead or attacking any creature ends the spell for all</td>
+      <td>Hide From Undead (Life1 Abju): Makes 10 touched imperceptible to undead (save Will negates; intelligent undead can perceive the target with a successful Will save) for 100 min; turning or touching an undead or attacking any creature ends the spell for all</td>
     </tr><tr style="text-align:left">
-      <td>Holy Aura (Exorcism8 Abju): 10 creatures within 20' gain a +4 deflection bonus to Armor Class, +4 saves, and SR 25 vs. evil spells and casters, suppress mental control, and blind successful evil attackers (save Fortitude negates) for 10 rd</td>
+      <td>Holy Aura (Exorcism8 Abju): 10 creatures within 20' blind successful evil attackers (save Fortitude negates) and gain a +4 deflection bonus to Armor Class, +4 saves, SR 25 vs. evil spells and casters, suppression of existing mental control or possession, and immunity to new attempts to control or possess, for 10 rd</td>
     </tr><tr style="text-align:left">
-      <td>Holy Word (Exorcism7 Evoc): Nongood creatures within 40' with 10/9/5/0 HD are banished to their home planes for 24 hr (save Will -4 negates) and become deafened for 1d4 rd/blinded for 2d4 rd/paralyzed for 1d10 min/killed</td>
+      <td>Holy Word (Exorcism7 Evoc): Inflicts on nongood creatures within 40' a set of effects: banishment for 24 hr on extraplanar creatures (save Will -4 negates); killed or destroyed on creatures with up to 0 HD; paralyzed for 1d10 min on creatures with up to 5 HD; blinded for 2d4 rd on creatures with up to 9 HD; deafened for 1d4 rd on creatures with up to 10 HD</td>
     </tr><tr style="text-align:left">
       <td>Horrid Wilting (Decay8 Necr): R840' Creatures in a 30' radius suffer 11d6 HP, or 11d8 HP for plants or water elementals (save Fortitude half)</td>
     </tr><tr style="text-align:left">
@@ -523,17 +523,17 @@ var attributes = {
     </tr><tr style="text-align:left">
       <td>Leomund's Secure Shelter (Feast5 Conj): R50' Creates a 20'x20' cottage, strong as a stone building, with secured entrances, resistance to fire, immunity to normal missiles, and an unseen servant that can perform tasks, for 22 hr</td>
     </tr><tr style="text-align:left">
-      <td>Lesser Confusion (Madness1 Ench): R200' Target randomly: 10% attacks the caster; 10% acts normally; 30% babbles; 20% flees; 30% attacks the nearest creature (save Will negates), for 1 rd</td>
+      <td>Lesser Confusion (Madness1 Ench): R200' Target randomly: 10% attacks the caster; 10% acts normally; 30% babbles; 20% flees; 30% attacks the nearest creature, (save Will negates) for 1 rd</td>
     </tr><tr style="text-align:left">
       <td>Lesser Planar Ally (Dragon4 Conj): Allows negotiating the purchase of a service from an extraplanar creature with up to 6 HD</td>
     </tr><tr style="text-align:left">
-      <td>Lesser Restoration (Life2 Conj): Dispels magical ability harm from touched or cures 1d4 temporary ability damage, removes fatigue, and reduces exhaustion</td>
+      <td>Lesser Restoration (Life2 Conj): Dispels magical ability harm from touched or cures 1d4 temporary ability damage, removes fatigue, and reduces exhaustion (save Will negates)</td>
     </tr><tr style="text-align:left">
       <td>Locate Object (Meditation3 Divi): Reveals the direction of a visualized object or kind of object found within 800' for 10 min; a sheet of lead blocks the spell</td>
     </tr><tr style="text-align:left">
       <td>Maddening Scream (Madness8 Ench): Touched races around screaming, suffering -4 AC, loss of shield bonus, and Reflex saves that succeed only on a natural 20, for 1d4+1 rd</td>
     </tr><tr style="text-align:left">
-      <td>Magic Circle Against Evil (Exorcism2 Abju): 10' radius from touched either gives a +2 deflection bonus to Armor Class and +2 saves vs. evil creatures, suppresses mental control, prevents possession, and bars contact and entry by nongood summoned creatures (SR negates) for 100 min or traps a nongood summoned creature (SR negates; additional tests each day end) for 240 hr</td>
+      <td>Magic Circle Against Evil (Exorcism2 Abju): Either creates a 10' emanation from the touched creature that suppresses mental control, prevents possession, gives a +2 deflection bonus to Armor Class and +2 saves vs. evil creatures (save Will negates), and bars contact and entry by nongood summoned creatures (SR negates) for 100 min or traps a nongood summoned creature (SR negates; additional tests each day end) for 240 hr</td>
     </tr><tr style="text-align:left">
       <td>Major Creation (Artifice6 Conj): R50' Creates a 11 cubic foot plant or mineral object lasting 22 hr (plant), 11 hr (stone or metal), 220 min (precious metal), 110 min (gems), or 11 rd (rare metal)</td>
     </tr><tr style="text-align:left">
@@ -541,51 +541,51 @@ var attributes = {
     </tr><tr style="text-align:left">
       <td>Mass Heal (Life9 Conj): R50' Targets in a 15' radius regain 100 hit points and recover from negative conditions; undead instead suffer the same amount (save Will negates)</td>
     </tr><tr style="text-align:left">
-      <td>Mind Blank (Meditation8 Abju): R50' Target gains immunity to divination, scrying, and mental effects for 24 hr</td>
+      <td>Mind Blank (Meditation8 Abju): R50' Target gains immunity to divination, scrying, and mental effects (save Will negates) for 24 hr</td>
     </tr><tr style="text-align:left">
       <td>Minor Creation (Artifice4 Conj): Creates a 11 cubic foot plant object that lasts for 11 hr</td>
     </tr><tr style="text-align:left">
       <td>Mordenkainen's Magnificent Mansion (Feast7 Conj): R50' Allows self and designated creatures to enter an extradimensional dwelling with provisions for 132 for 22 hr</td>
     </tr><tr style="text-align:left">
-      <td>Neutralize Poison (Feast4 Conj): Touched gains immunity to poison or has its poison neutralized for 100 min</td>
+      <td>Neutralize Poison (Feast4 Conj): Neutralizes each poison affecting touched and gives it immunity to poison, or neutralizes a poisonous creature or object, (save Will negates) for 100 min</td>
     </tr><tr style="text-align:left">
-      <td>Obscuring Mist (Shadow1 Conj): Fog in a 20' radius obscures vision for 11 min</td>
+      <td>Obscuring Mist (Shadow1 Conj): Creates a 20'-radius, 20'-high cylinder fog that obscures vision, giving a 20% miss chance on attacks within 5' and a 50% chance on more distant attacks, for 11 min</td>
     </tr><tr style="text-align:left">
-      <td>Obscuring Mist (Weather1 Conj): Fog in a 20' radius obscures vision for 11 min</td>
+      <td>Obscuring Mist (Weather1 Conj): Creates a 20'-radius, 20'-high cylinder fog that obscures vision, giving a 20% miss chance on attacks within 5' and a 50% chance on more distant attacks, for 11 min</td>
     </tr><tr style="text-align:left">
       <td>Otto's Irresistible Dance (Passion8 Ench): Touched dances in place, suffering -4 Armor Class, loss of shield bonus to Armor Class, and -10 Reflex saves, for 1d4+1 rd</td>
     </tr><tr style="text-align:left">
-      <td>Owl's Wisdom (Meditation2 Tran): Touched gains +4 Wisdom for 10 min</td>
+      <td>Owl's Wisdom (Meditation2 Tran): Gives touched +4 Wisdom (save Will Negates) for 10 min</td>
     </tr><tr style="text-align:left">
-      <td>Phantasmal Killer (Madness6 Illu): R200' Fears of the target create a creature (save Will negates) whose touch kills the target (save Fortitude inflicts 3d6 HP)</td>
+      <td>Phantasmal Killer (Madness6 Illu): R200' Fears of the target create a creature (save Will upon interaction disbelieves) whose touch kills the target (save Fortitude inflicts 3d6 HP)</td>
     </tr><tr style="text-align:left">
-      <td>Planar Ally (Dragon6 Conj): Allows negotiating the purchase of a service from an extraplanar creature with up to 12 HD</td>
+      <td>Planar Ally (Dragon6 Conj): Allows negotiating the purchase of a service from 1-2 extraplanar creatures with a total of up to 12 HD</td>
     </tr><tr style="text-align:left">
-      <td>Plant Growth (Life3 Tran): Causes vegetation in a 800' radius to become overgrown, slowing movement to 5' (10' for Large creatures), or increases the productivity of plants in a 1/2 mile radius for 1 year</td>
+      <td>Plant Growth (Life3 Tran): Causes vegetation in a 100' radius to become overgrown, slowing movement to 5' (10' for Large creatures), or increases the productivity of plants in a 1/2 mile radius for 1 year</td>
     </tr><tr style="text-align:left">
-      <td>Polymorph Any Object (Commerce9 Tran): R50' Target creature or object becomes a different creature or object (save Fortitude negates); the duration depends on the degree of change, from 20 min to permanent</td>
+      <td>Polymorph Any Object (Commerce9 Tran): R50' Transforms the target creature or nonmagical object into a different creature or object (save Fortitude negates); the duration depends on the degree of change, from 20 min to permanent</td>
     </tr><tr style="text-align:left">
-      <td>Prayer (Community3 Ench): Allies within 40' gain +1 attacks, damage, saves, and skill checks, and foes suffer -1, for 10 rd</td>
+      <td>Prayer (Community3 Ench): Gives allies within 40' +1 attacks, weapon damage, saves, and skill checks, and inflicts -1 of the same on foes, for 10 rd</td>
     </tr><tr style="text-align:left">
-      <td>Prismatic Sphere (Artifice9 Abju): 10' sphere lasting 100 min blinds for 2d4x10 min creatures with up to 7 HD who look at it from within 20', blocks magical and nonmagical ranged attacks, poisons, gasses, petrification, breath weapons, divination, mental attacks, spells, objects, and effects, and inflicts on creatures other than self who pass through all of these effects: 20 HP fire (save Reflex half); 40 HP acid (save Reflex half); 80 HP electricity (save Reflex half); slain by poison (save Fortitude inflicts 1d6 Constitution damage); turned to stone (save Fortitude negates); insanity (save Will negates); sent to another plane (save will negates)</td>
+      <td>Prismatic Sphere (Artifice9 Abju): 10' sphere lasting 100 min blinds for 2d4x10 min creatures with up to 7 HD who look at it from within 20', blocks magical and nonmagical ranged attacks, poisons, gasses, petrification, breath weapons, divination, mental attacks, spells, objects, and effects, and inflicts on creatures other than self who pass through all of these effects: 20 HP fire (save Reflex half); 40 HP acid (save Reflex half); 80 HP electricity (save Reflex half); slain by poison (save Fortitude inflicts 1d6 points of Constitution damage); turned to stone (save Fortitude negates); insanity (save Will negates); sent to another plane (save Will negates)</td>
     </tr><tr style="text-align:left">
-      <td>Protection From Evil (Exorcism1 Abju): Gives touched a +2 deflection bonus to Armor Class and +2 saves vs. evil creatures, suppresses mental control, prevents possession, and bars contact by nongood summoned creatures for 10 min</td>
+      <td>Protection From Evil (Exorcism1 Abju): Wards the touched creature from attacks from evil creatures, mental control, and summoned creatures (save Will negates): gives a +2 deflection bonus to Armor Class and +2 saves vs. evil creatures, suppresses mental control, prevents possession, and bars contact by nongood summoned creatures for 10 min</td>
     </tr><tr style="text-align:left">
-      <td>Rage (Madness3 Ench): R200' 3 willing targets in a 15' radius gain +2 Strength, +2 Constitution, and +1 Will and suffer -2 Armor Class for concentration + 10 rd</td>
+      <td>Rage (Madness3 Ench): R200' Gives 3 willing targets in a 15' radius +2 Strength, +2 Constitution, +1 Will, and -2 Armor Class for concentration + 10 rd</td>
     </tr><tr style="text-align:left">
       <td>Rary's Telepathic Bond (Community5 Divi): R50' Allows self and/or 3 willing targets in a 15' radius with at least 3 Intelligence to share thoughts for 100 min</td>
     </tr><tr style="text-align:left">
-      <td>Ray Of Enfeeblement (Decay2 Necr): R50' Ranged touch inflicts -1d6+5 Strength for 11 min</td>
+      <td>Ray Of Enfeeblement (Decay2 Necr): R50' Ranged touch attack reduces Strength by 1d6+5 (save Fortitude half; will not lower Strength below 1) for 11 min</td>
     </tr><tr style="text-align:left">
-      <td>Ray Of Enfeeblement (Necromancer1 Necr): R50' Ranged touch inflicts -1d6+5 Strength for 11 min</td>
+      <td>Ray Of Enfeeblement (Necromancer1 Necr): R50' Ranged touch attack reduces Strength by 1d6+5 (save Fortitude half; will not lower Strength below 1) for 11 min</td>
     </tr><tr style="text-align:left">
       <td>Refuge (Commerce7 Conj): Breaking a prepared object and speaking a command word transports the possessor to self home or transports self to possessor</td>
     </tr><tr style="text-align:left">
       <td>Refuge (Community7 Conj): Breaking a prepared object and speaking a command word transports the possessor to self home or transports self to possessor</td>
     </tr><tr style="text-align:left">
-      <td>Regenerate (Life7 Conj): Touched living creature regrows missing body parts, regains 4d8+10 hit points, and recovers from fatigue, exhaustion, and nonlethal damage</td>
+      <td>Regenerate (Life7 Conj): Touched living creature regrows missing body parts, regains 4d8+10 hit points, and recovers from fatigue, exhaustion, and nonlethal damage (save Fortitude negates)</td>
     </tr><tr style="text-align:left">
-      <td>Remove Curse (Exorcism3 Abju): Dispels all curses from touched</td>
+      <td>Remove Curse (Exorcism3 Abju): Dispels all curses from touched (save Will negates)</td>
     </tr><tr style="text-align:left">
       <td>Shades (Shadow9 Illu): Mimics a creation or summoning conjuration spell of up to 8th level (save Will reduces the mimicked spell's effects by 20%); mimicked spells are subject to SR and have a save DC as a 9th-level spell, and creatures summoned by a mimicked spell have 20% of their normal hit points</td>
     </tr><tr style="text-align:left">
@@ -593,49 +593,49 @@ var attributes = {
     </tr><tr style="text-align:left">
       <td>Shadow Evocation (Shadow5 Illu): Mimics an evocation spell of up to 4th level (save Will reduces the mimicked spell's effects by 80%); mimicked spells are subject to SR and have a save DC as a 5th-level spell</td>
     </tr><tr style="text-align:left">
-      <td>Shadow Walk (Shadow6 Illu): Allows self and 10 touched to travel at 50 MPH via the Plane of Shadow (save Will negates) for 10 hr</td>
+      <td>Shadow Walk (Shadow6 Illu): Allows self and 10 touched to travel via the Plane of Shadow at 50 MPH (save Will negates) for 10 hr</td>
     </tr><tr style="text-align:left">
-      <td>Slay Living (Dragon5 Necr): Touch kills the target (save Fortitude inflicts 3d6+11 HP)</td>
+      <td>Slay Living (Dragon5 Necr): Melee touch attack kills the target (save Fortitude inflicts 3d6+11 HP)</td>
     </tr><tr style="text-align:left">
       <td>Sleet Storm (Weather4 Conj): R840' 40' radius, 20' high cylinder blocks sight, extinguishes small fires, and requires a DC 10 Balance check to move at half Speed (failure by 5 or more causes a fall) for 11 rd</td>
     </tr><tr style="text-align:left">
-      <td>Song Of Discord (Passion7 Ench): R200' Creatures in a 20' radius have a 50% chance each rd of attacking the nearest creature (save Will negates) for 10 rd</td>
+      <td>Song Of Discord (Passion7 Ench): R200' Causes creatures in a 20' radius to have a 50% chance each rd of attacking the nearest creature (save Will negates) for 10 rd</td>
     </tr><tr style="text-align:left">
-      <td>Spell Resistance (Meditation5 Abju): Gives touched SR 22 for 10 min</td>
+      <td>Spell Resistance (Meditation5 Abju): Gives touched SR 22 (save Will negates) for 10 min</td>
     </tr><tr style="text-align:left">
-      <td>Spell Turning (Meditation7 Abju): 1d4+6 levels of spells, excluding area and ranged touch spells, directed at self within 100 min reflect onto their caster; spells between casters who both have <i>Spell Turning</i> produce one of these effects: 70% dissipate with no effect; 10% affect both casters; 17% disable both casters' <i>Spell Turning</i> for 1d4 min; 3% send both casters to another plane</td>
+      <td>Spell Turning (Meditation7 Abju): Reflects 1d4+6 levels of targeted, non-ranged-touch spells directed at self within 100 min onto their caster; spells between casters who are both warded by <i>Spell Turning</i> produce one of these effects: 70% dissipate with no effect; 10% affect both casters; 17% disable both casters' <i>Spell Turning</i> for 1d4 min; 3% send both casters to another plane</td>
     </tr><tr style="text-align:left">
       <td>Spirit Steed (Deathless4 Necr): Touched animal gains +30' Speed, an increased run multiplier, and immunity to hustle damage for 11 hr, but suffers fatigue afterward</td>
     </tr><tr style="text-align:left">
-      <td>Status (Community2 Divi): Allows monitoring the condition and position of 3 touched allies for 10 hr</td>
+      <td>Status (Community2 Divi): Allows monitoring the condition and position of 3 touched creatures (save Will negates) for 10 hr</td>
     </tr><tr style="text-align:left">
       <td>Stone Shape (Artifice3 Tran): Reshapes 20 cubic feet of stone</td>
     </tr><tr style="text-align:left">
-      <td>Storm Of Vengeance (Weather9 Conj): R800' 360' radius storm deafens for 1d4x10 min (save Fortitude negates), then produces rain that inflicts 1d6 HP acid, then generates lightning bolts that inflict 10d6 HP electricity on 6 targets (save Reflex half), then creates hail that inflicts 5d6 HP bludgeoning, then obscures vision and reduces Speed by 3/4 for 6 rd; the storm also prevents ranged attacks and disrupts spellcasting (save Concentration negates; add the level of the spell to be cast to the DC)</td>
+      <td>Storm Of Vengeance (Weather9 Conj): R800' Creates a 360' radius storm that inflicts deafened for 1d4x10 min (save Fortitude negates), then produces rain that inflicts 1d6 HP acid, then generates lightning bolts that inflict 10d6 HP electricity on 6 targets (save Reflex half), then creates hail that inflicts 5d6 HP bludgeoning, then produces violent wind and rain that reduce Speed by 3/4 and obscure vision, giving a 20% miss chance on attacks within 5' and a 50% miss chance on more distant attacks, for 6 rd; the storm also prevents ranged attacks and disrupts spellcasting (save Concentration negates; add the level of the spell to be cast to the DC)</td>
     </tr><tr style="text-align:left">
-      <td>Suggestion (Charm3 Ench): R50' Target follows a reasonable suggestion (save Will negates) for 10 hr</td>
+      <td>Suggestion (Charm3 Ench): R50' Causes the target to follow a reasonable suggestion (save Will negates) for up to 10 hr</td>
     </tr><tr style="text-align:left">
-      <td>Sympathy (Community8 Ench): R50' Specified intelligent creature kind or alignment is drawn to a target object or a 100 cubic foot area (save Will negates; requires another save 1d6x10 min later) for 20 hr</td>
+      <td>Sympathy (Community8 Ench): R50' Attracts a specified intelligent creature kind or alignment to a target object or a 100 cubic foot area (save Will negates; requires another save 1d6x10 min later) for 20 hr</td>
     </tr><tr style="text-align:left">
       <td>Tasha's Hideous Laughter (Passion2 Ench): R50' Target falls into uncontrollable laughter (save Will negates, creatures of a different type than the caster gain +4) for 10 rd</td>
     </tr><tr style="text-align:left">
-      <td>Tongues (Commerce3 Divi): Allows touched to communicate in any language for 100 min</td>
+      <td>Tongues (Commerce3 Divi): Allows touched to communicate in any language (save Will negates) for 100 min</td>
     </tr><tr style="text-align:left">
-      <td>Tongues (Meditation4 Divi): Allows touched to communicate in any language for 100 min</td>
+      <td>Tongues (Meditation4 Divi): Allows touched to communicate in any language (save Will negates) for 100 min</td>
     </tr><tr style="text-align:left">
       <td>Touch Of Madness (Madness2 Ench): Touched suffers dazed for 20 rd (save Will negates)</td>
     </tr><tr style="text-align:left">
       <td>True Creation (Artifice8 Conj): R50' Creates a permanent 11 cubic foot plant or mineral object</td>
     </tr><tr style="text-align:left">
-      <td>True Seeing (Commerce5 Divi): Allows touched to see through 120' darkness, illusion, and invisibility, note secret doors, and see the true forms of polymorphed items for 10 min</td>
+      <td>True Seeing (Commerce5 Divi): Allows touched to see things as they really are (save Will negates) for 10 min: to see through 120' darkness, illusion, and invisibility, note secret doors, and see the true forms of polymorphed items</td>
     </tr><tr style="text-align:left">
-      <td>Vampiric Touch (Necromancer3 Necr): Melee touch attack inflicts 5d6 HP and gives self the same number of temporary HP for 1 hr</td>
+      <td>Vampiric Touch (Necromancer3 Necr): Melee touch inflicts 5d6 HP and gives self the same number of temporary hit points for 1 hr</td>
     </tr><tr style="text-align:left">
       <td>Waves Of Fatigue (Necromancer5 Necr): 30' cone inflicts fatigued</td>
     </tr><tr style="text-align:left">
-      <td>Weird (Madness9 Illu): R200' Fears of targets in a 15' radius create creatures (save Will negates) whose touch kills its target (save Fortitude inflicts 3d6 HP, -1d4 Strength, and stunned for 1 rd)</td>
+      <td>Weird (Madness9 Illu): R200' Fears of targets in a 15' radius create creatures (save Will upon interaction disbelieves) whose touch kills its target (save Fortitude inflicts 3d6 HP, 1d4 points of Strength damage, and stunned for 1 rd)</td>
     </tr><tr style="text-align:left">
-      <td>Whirlwind (Weather8 Evoc): R800' 10' radius, 30' high cyclone moves 60' as directed each rd, inflicting 3d6 HP on Large and smaller creatures (save Reflex negates), for 10 rd; it traps Medium and smaller creatures (save Reflex negates), inflicting an additional 1d8 HP on each subsequent rd</td>
+      <td>Whirlwind (Weather8 Evoc): R800' Creates a 10' radius, 30' high cyclone that moves 60' as directed each rd, inflicting 3d6 HP on Large and smaller creatures (save Reflex negates), for 10 rd; it traps Medium and smaller creatures (save Reflex negates), inflicting an additional 1d8 HP on each subsequent rd</td>
     </tr><tr style="text-align:left">
       <td>Withering Palm (Decay7 Necr): Touch inflicts -5 Strength and Constitution (save Fortitude negates); a critical hit inflicts ability drain instead of damage</td>
     </tr><tr style="text-align:left">

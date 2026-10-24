@@ -204,7 +204,7 @@ var attributes = {
     </tr><tr style="text-align:center">
       <td><b>Combat Notes</b>:       <table id="CombatNotes" style="width:100%">
       <tr style="text-align:center">
-        <td><i>Armor Class Modifiers: Armor +2; Deflection +0; Dexterity +3; Dodge +0; Natural Armor +0; Shield +0; Size +0</i></td>
+        <td><i>Armor Class Modifiers: Armor: +2; Dexterity: +3</i></td>
       </tr><tr style="text-align:center">
         <td><i>Constitution Hit Points Adjustment: +45</i></td>
       </tr><tr style="text-align:center">
@@ -253,11 +253,11 @@ var attributes = {
   </tr><tr style="text-align:center">
     <td><b>Spells</b>:<br/>    <table id="Spells" style="width:100%">
     <tr style="text-align:left">
-      <td>Acid Splash (S0 Conj): R60' Ranged touch inflicts 1d3 HP acid</td>
+      <td>Acid Splash (S0 Conj): R60' Ranged touch attack inflicts 1d3 HP acid</td>
     </tr><tr style="text-align:left">
       <td>Animal Growth (S5 Tran): R240' 7 animal targets in a 15' radius double in size (save Fortitude negates), gaining +8 Strength, +4 Constitution, +2 natural armor, DR 10/magic, and +4 saves and suffering -2 Dexterity for 14 min</td>
     </tr><tr style="text-align:left">
-      <td>Arcane Eye (S4 Divi): Allows seeing through an invisible remote sensor that can be moved 30' per rd for 14 min</td>
+      <td>Arcane Eye (S4 Divi): Allows self to see through an invisible remote sensor that can be moved 30' per rd for 14 min</td>
     </tr><tr style="text-align:left">
       <td>Arcane Lock (S2 Abju): Increases by 10 the DC for others to open a touched door, portal, or chest</td>
     </tr><tr style="text-align:left">
@@ -265,45 +265,45 @@ var attributes = {
     </tr><tr style="text-align:left">
       <td>Charm Person (S1 Ench): R60' Target humanoid treats self as a trusted friend (save Will negates; +5 if being threatened) for 14 hr</td>
     </tr><tr style="text-align:left">
-      <td>Cloudkill (S5 Conj): R240' 20' fog cylinder moves away 10' per rd, killing creatures within with up to 6 HD (save Fortitude for those with 4-6 HD inflicts -1d4 Constitution) and inflicting -1d4 Constitution on those with more HD (save Fortitude half) for 14 min</td>
+      <td>Cloudkill (S5 Conj): R240' Creates a 20' fog cylinder that moves away 10' per rd, killing creatures within with up to 6 HD (save Fortitude for those with 4-6 HD inflicts 1d4 points of Constitution damage) and inflicting 1d4 points of Constitution damage on those with more HD (save Fortitude half) for 14 min</td>
     </tr><tr style="text-align:left">
-      <td>Continual Flame (S2 Evoc): Touched permanently emits a heatless torch flame</td>
+      <td>Continual Flame (S2 Evoc): Touched object permanently emits a heatless torch flame</td>
     </tr><tr style="text-align:left">
-      <td>Daze (S0 Ench): R60' Humanoid target with up to 4 HD loses its actions for 1 rd (save Will negates)</td>
+      <td>Daze (S0 Ench): R60' Target humanoid with up to 4 HD loses its actions for 1 rd (save Will negates)</td>
     </tr><tr style="text-align:left">
       <td>Detect Undead (S1 Divi): 60' cone reveals undead and their strengths for concentration up to 14 min</td>
     </tr><tr style="text-align:left">
-      <td>Dimension Door (S4 Conj): Teleports self and a touched object or 4 willing creatures 960'</td>
+      <td>Dimension Door (S4 Conj): Teleports self, held objects (save Will negates), and 4 willing Medium creatures 960'</td>
     </tr><tr style="text-align:left">
-      <td>Disintegrate (S6 Tran): R240' Ranged touch inflicts 28d6 HP (save Fortitude inflicts 5d6 HP), turning a slain target to dust, or disintegrates a 10' cube of matter</td>
+      <td>Disintegrate (S6 Tran): R240' Ranged touch attack inflicts 28d6 HP (save Fortitude inflicts 5d6 HP), turning a slain target to dust, or disintegrates a 10' cube of matter</td>
     </tr><tr style="text-align:left">
-      <td>Displacement (S3 Illu): Foes attacking touched suffer a 50% miss chance for 14 rd</td>
+      <td>Displacement (S3 Illu): Makes the touched creature's location appear to be shifted (save Will negates), inflicting a 50% miss chance on foe attacks, for 14 rd</td>
     </tr><tr style="text-align:left">
-      <td>Disrupt Undead (S0 Necr): R60' Ranged touched on an undead target inflicts 1d6 HP positive energy</td>
+      <td>Disrupt Undead (S0 Necr): R60' Ranged touch attack on an undead target inflicts 1d6 HP positive energy</td>
     </tr><tr style="text-align:left">
-      <td>Erase (S1 Tran): R60' Two pages of writing vanish; magical writing requires a successful 1d20+14 caster check with a DC of 15</td>
+      <td>Erase (S1 Tran): R60' Causes 2 pages of writing to vanish; magical writing requires a successful DC 15 caster level check</td>
     </tr><tr style="text-align:left">
       <td>Fear (S4 Necr): 30' cone causes creatures to flee for 14 rd (save Will inflicts shaken for 1 rd)</td>
     </tr><tr style="text-align:left">
-      <td>Fire Shield (S4 Evoc): Envelopes self in cold or hot flames that inflict 1d6+14 HP cold or fire on melee attackers and reduce heat or cold damage taken by half, or negate it entirely with a successful allowed Reflex save, for 14 rd</td>
+      <td>Fire Shield (S4 Evoc): Envelopes self in cold or hot flames that inflict 1d6+14 HP cold or fire on melee attackers (SR may negate) and either reduce heat or cold damage taken by half or negate it entirely with a successful allowed Reflex save, for 14 rd</td>
     </tr><tr style="text-align:left">
       <td>Gentle Repose (S3 Necr): Preserves a touched corpse from decay (save Will negates) for 14 days</td>
     </tr><tr style="text-align:left">
-      <td>Greater Dispel Magic (S6 Abju): R240' Successful d20+14 check vs. 11+caster level cancels an ongoing targeted spell, suppresses a magic item for 1d4 rd, cancels 1 spell on each creature in a 20' radius, or disrupts a foe's spell casting</td>
+      <td>Greater Dispel Magic (S6 Abju): R240' Successful caster level check (+20 maximum) vs. 11+caster level cancels an ongoing targeted spell, suppresses a magic item for 1d4 rd, cancels 1 spell on each creature in a 20' radius, or disrupts a foe's spell casting</td>
     </tr><tr style="text-align:left">
       <td>Hold Monster (S5 Ench): R240' Paralyzes the target (save Will negates; additional saves each rd end) for 14 rd</td>
     </tr><tr style="text-align:left">
-      <td>Magic Circle Against Good (S3 Abju): 10' radius from touched either gives a +2 deflection bonus to Armor Class and +2 saves vs. good creatures, suppresses mental control, prevents possession, and bars contact and entry by nonevil summoned creatures (SR negates) for 140 min or traps a nonevil summoned creature (SR negates; additional tests each day end) for 336 hr</td>
+      <td>Magic Circle Against Good (S3 Abju): Either creates a 10' emanation from the touched creature that suppresses mental control, prevents possession, gives a +2 deflection bonus to Armor Class and +2 saves vs. good creatures (save Will negates), and bars contact and entry by nonevil summoned creatures (SR negates) for 140 min or traps a nonevil summoned creature (SR negates; additional tests each day end) for 336 hr</td>
     </tr><tr style="text-align:left">
-      <td>Magic Jar (S5 Necr): R240' Transfers self soul into a gem or crystal from which it can detect life forces within 140' and attempt to swap places with the soul of a target (save Will negates) for 14 hr</td>
+      <td>Magic Jar (S5 Necr): R240' Transfers self soul into a gem or crystal from which it can detect life forces within 140' and swap places with the soul of a target (save Will negates) for 14 hr</td>
     </tr><tr style="text-align:left">
-      <td>Mass Bull's Strength (S6 Tran): R60' 14 targets in a 15' radius gain +4 Strength for 14 min</td>
+      <td>Mass Bull's Strength (S6 Tran): R60' 14 targets in a 15' radius gain +4 Strength (save Will negates) for 14 min</td>
     </tr><tr style="text-align:left">
       <td>Mass Hold Person (S7 Ench): R240' Paralyzes humanoid targets in a 15' radius (save Will negates; additional saves each rd end) for 14 rd</td>
     </tr><tr style="text-align:left">
-      <td>Melf's Acid Arrow (S2 Conj): R960' Ranged touch inflicts 2d4 HP acid per rd for 5 rd</td>
+      <td>Melf's Acid Arrow (S2 Conj): R960' Ranged touch attack inflicts 2d4 HP acid per rd for 5 rd</td>
     </tr><tr style="text-align:left">
-      <td>Mending (S0 Tran): R10' Repairs minor damage to an object weighing up to 1 lb</td>
+      <td>Mending (S0 Tran): R10' Repairs minor damage to an object weighing up to 1 lb (save Will negates)</td>
     </tr><tr style="text-align:left">
       <td>Mislead (S6 Illu): R60' Makes self invisible for 14 rd and creates a false double (save Will upon interaction disbelieves) for concentration + 3 rd</td>
     </tr><tr style="text-align:left">
@@ -311,17 +311,17 @@ var attributes = {
     </tr><tr style="text-align:left">
       <td>Persistent Image (S5 Illu): R960' Creates a 180 cubic foot movable, scripted image with sound, smell, and thermal effects (save Will upon interaction disbelieves) for 14 min</td>
     </tr><tr style="text-align:left">
-      <td>Phantasmal Killer (S4 Illu): R240' Fears of the target create a creature (save Will negates) whose touch kills the target (save Fortitude inflicts 3d6 HP)</td>
+      <td>Phantasmal Killer (S4 Illu): R240' Fears of the target create a creature (save Will upon interaction disbelieves) whose touch kills the target (save Fortitude inflicts 3d6 HP)</td>
     </tr><tr style="text-align:left">
-      <td>Planar Binding (S6 Conj): Traps 1-3 extraplanar creatures with up to 12 HD total in a <i>Magic Circle</i> (save Will negates) until they perform a task (opposed Charisma allows refusal), escape via SR, dimensional travel, or a 24 Charisma check, or 14 days pass</td>
+      <td>Planar Binding (S6 Conj): Traps 1-3 extraplanar creatures with up to 12 HD total in a <i>Magic Circle</i> (save Will negates) until they perform a task (opposed Charisma allows refusal), or escape via SR, dimensional travel, or a DC 24 Charisma check</td>
     </tr><tr style="text-align:left">
       <td>Prestidigitation (S0 Univ): R10' Allows performing minor magic effects for 1 hr</td>
     </tr><tr style="text-align:left">
-      <td>Protection From Law (S1 Abju): Gives touched a +2 deflection bonus to Armor Class and +2 saves vs. lawful creatures, suppresses mental control, prevents possession, and bars contact by nonchaotic summoned creatures for 14 min</td>
+      <td>Protection From Law (S1 Abju): Wards the touched creature from attacks from lawful creatures, mental control, and summoned creatures (save Will negates): gives a +2 deflection bonus to Armor Class and +2 saves vs. lawful creatures, suppresses mental control, prevents possession, and bars contact by nonchaotic summoned creatures for 14 min</td>
     </tr><tr style="text-align:left">
-      <td>Rary's Mnemonic Enhancer (S4 Tran): Allows self to memorize 3 additional spell levels or to retain a just-cast spell of up to 3rd level for 24 hr</td>
+      <td>Rary's Mnemonic Enhancer (S4 Tran): 1</td>
     </tr><tr style="text-align:left">
-      <td>Ray Of Frost (S0 Evoc): R60' Ranged touch inflicts 1d3 HP cold</td>
+      <td>Ray Of Frost (S0 Evoc): R60' Ranged touch attack inflicts 1d3 HP cold</td>
     </tr><tr style="text-align:left">
       <td>Repair Serious Damage (S3 Tran): Touched construct regains 3d8+14 hit points</td>
     </tr><tr style="text-align:left">
@@ -329,19 +329,19 @@ var attributes = {
     </tr><tr style="text-align:left">
       <td>Shocking Grasp (S1 Evoc): Melee touch attack (+3 vs. metal) inflicts 5d6 HP electricity</td>
     </tr><tr style="text-align:left">
-      <td>Spectral Hand (S2 Necr): R240' Creates an incorporeal hand (1d4 hit points temporarily taken from self; Armor Class 1; improved evasion) that can make +2 melee touch attacks to deliver touch spells up to 4th level for 14 min</td>
+      <td>Spectral Hand (S2 Necr): R240' Creates an incorporeal hand (1d4 hit points temporarily taken from self; Armor Class 1; improved evasion) that can make +2 melee touch attacks to deliver touch spells of up to 4th level for 14 min</td>
     </tr><tr style="text-align:left">
-      <td>Teleport (S5 Conj): Transports self and 4 willing targets up to 1400 miles; greater familiarity with the destination improves accuracy</td>
+      <td>Teleport (S5 Conj): Transports self, touched objects (save Will negates), and 4 willing targets up to 1400 miles; greater familiarity with the destination improves accuracy</td>
     </tr><tr style="text-align:left">
       <td>True Creation (Siberys Mark Mark Of Making8 Conj): R60' Creates a permanent 15 cubic foot plant or mineral object</td>
     </tr><tr style="text-align:left">
-      <td>Vampiric Touch (S3 Necr): Melee touch attack inflicts 7d6 HP and gives self the same number of temporary HP for 1 hr</td>
+      <td>Vampiric Touch (S3 Necr): Melee touch inflicts 7d6 HP and gives self the same number of temporary hit points for 1 hr</td>
     </tr><tr style="text-align:left">
-      <td>Vision (S7 Divi): Allows a successful caster level check to answer a question about a specified person, place, or object; the DC varies from 20 to 30 depending on the familiarity of the subject</td>
+      <td>Vision (S7 Divi): Allows a successful caster level check (+25 maximum) to answer a question about a specified person, place, or object; the DC varies from 20 to 30 depending on the familiarity of the subject</td>
     </tr><tr style="text-align:left">
-      <td>Water Breathing (S3 Tran): Allows touched creatures to breathe underwater for a total of 28 hrs</td>
+      <td>Water Breathing (S3 Tran): Allows touched creatures to breathe underwater (save Will negates) for a total of 28 hrs divided among them</td>
     </tr><tr style="text-align:left">
-      <td>Web (S2 Conj): R240' Anchored web strands in a 20' radius immobilize creatures (save Reflex negates, and a DC 20 Strength or DC 25 Escape Artist breaks free) for 140 min; movement through the web requires a Strength or Escape Artist check each rd, allowing 5' of movement for each 5 points that the check exceeds 10; burning clears the web, inflicting 2d4 HP fire on those within</td>
+      <td>Web (S2 Conj): R240' Creates anchored web strands in a 20' radius that entangle creatures (save Reflex negates, and a DC 20 Strength or DC 25 Escape Artist breaks free) for 140 min; movement through the web requires a Strength or Escape Artist check each rd, allowing 5' of movement for each 5 points that the check exceeds 10; burning clears the web, inflicting 2d4 HP fire on those within</td>
     </tr></table>
 </td>
   </tr><tr style="text-align:center">
