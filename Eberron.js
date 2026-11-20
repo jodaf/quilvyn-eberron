@@ -1113,13 +1113,13 @@ Eberron.FEATURES_ADDED = {
     'Note="Has immunity to sneak attacks, critical hits, and healing spells"',
   'Improved Natural Attack (Claws)':
     'Section=combat ' +
-    'Note="Claw damage increases by %1 size categor%{$\'features.Improved Natural Attack (Claws)\'>1?\'ies\':\'y\'}"',
+    'Note="Claw damage increases by %1 size %{$\'features.Improved Natural Attack (Claws)\'>1?\'categories\':\'category\'}"',
   'Improved Natural Attack (Fangs)':
     'Section=combat ' +
-    'Note="Fangs or Tusks damage increases by %1 size categor%{$\'features.Improved Natural Attack (Claws)\'>1?\'ies\':\'y\'}"',
+    'Note="Fangs or Tusks damage increases by %1 size %{$\'features.Improved Natural Attack (Claws)\'>1?\'categories\':\'category\'}"',
   'Improved Natural Attack (Slam)':
     'Section=combat ' +
-    'Note="Slam damage increases by %1 size categor%{$\'features.Improved Natural Attack (Slam)\'>1?\'ies\':\'y\'}"',
+    'Note="Slam damage increases by %1 size %{$\'features.Improved Natural Attack (Slam)\'>1?\'categories\':\'category\'}"',
   'Investigate':
     'Section=skill ' +
     'Note="Can use Search to find and analyze clues, and 5 ranks in an appropriate Knowledge skill gives +2 on the Search"',
@@ -1832,54 +1832,56 @@ Eberron.SHIELDS = Object.assign({}, SRD35.SHIELDS);
 Eberron.SKILLS = Object.assign({}, SRD35.SKILLS);
 Eberron.SPELLS_ADDED = {
 
-  // N.B.: It's unclear which of these spells might be available in potion/oil
-  // form. The source book describes Oil Of Repair, which duplicates Repair xxx
-  // Damage, and makes a passing reference to Oil Of Stone Construct.
+  // N.B.: Unlike the core rulebook, the Eberron Campaign Setting book contains
+  // no list of potions based on its spells. The source book describes Oil Of
+  // Repair, which duplicates Repair xxx Damage, and makes a passing reference
+  // to Oil Of Stone Construct. Presumably, targeted spells of level 1-3 could
+  // also be made into potions or oils, but these are left to user homebrew.
   'Armor Enhancement':
     'School=Transmutation ' +
     'Level=A2 ' +
     'Description=' +
-      '"Touched armor or shield gains a special ability that normally costs up to 35K GP for %{lvl*10} min"',
+      '"Gives the touched armor or shield a special ability equivalent to a +3 enhancement or that normally costs up to 35K GP for %{lvl*10} min"',
   'Greater Armor Enhancement':
     'School=Transmutation ' +
     'Level=A3 ' +
     'Description=' +
-      '"Touched armor or shield gains a special ability that normally costs up to 100K GP for %{lvl*10} min"',
+      '"Gives the touched armor or shield a special ability equivalent to a +5 enhancement or that normally costs up to 100K GP for %{lvl*10} min"',
   'Lesser Armor Enhancement':
     'School=Transmutation ' +
     'Level=A1 ' +
     'Description=' +
-      '"Touched armor or shield gains a special ability that normally costs up to 5K GP for %{lvl*10} min"',
+      '"Gives the touched armor or shield a special ability equivalent to a +1 enhancement or that normally costs up to 5K GP for %{lvl*10} min"',
   'Bolts Of Bedevilment':
     'School="Enchantment [Mind-Affecting]" ' +
     'Level=Madness5 ' +
     'Description=' +
-      '"R%{lvl*10+100}\' Inflicts dazed (save Will negates) on a target 3 times within %{lvl*2} rd"',
+      '"R%{lvl*10+100}\' Inflicts dazed on a target (save Will negates) 3 times within %{lvl*2} rd"',
   'Construct Energy Ward':
     'School=Abjuration ' +
     'Level=A3 ' +
     'Description=' +
-      '"Touched construct gains resistance %{lvl>10?30:lvl>6?20:10} to a choice of acid, cold, electricity, fire, or sonic for %{lvl*10} min"',
+      '"Gives the touched construct resistance %{lvl>10?30:lvl>6?20:10} to a choice of acid, cold, electricity, fire, or sonic (save Will negates) for %{lvl*10} min"',
   'Greater Construct Energy Ward':
     'School=Abjuration ' +
     'Level=A4 ' +
     'Description=' +
-      '"Touched construct gains immunity to a choice of acid, cold, electricity, fire, or sonic for %{lvl*10} min or until %{lvl*12<?120} HP have been negated"',
+      '"Gives the touched construct immunity to a choice of acid, cold, electricity, fire, or sonic (save Will negates) for %{lvl*10} min or until %{lvl*12<?120} HP have been negated"',
   'Control Deathless':
     'School=Necromancy ' +
     'Level=Deathless7 ' +
     'Description=' +
-      '"R%{lvl//2*5+25}\' %{lvl*2} HD of deathless within a 15\' radius obey commands (save Will negates) for %{lvl} min"',
+      '"R%{lvl//2*5+25}\' Causes %{lvl*2} HD of deathless within a 15\' radius to obey self (save Will negates) for %{lvl} min"',
   'Create Deathless':
     'School="Necromancy [Good]" ' +
     'Level=Deathless6 ' +
     'Description=' +
-      '"R%{lvl//2*5+25}\' Target corpse becomes a deathless soldier"',
+      '"R%{lvl//2*5+25}\' Creates a deathless soldier from the target corpse"',
   'Create Greater Deathless':
     'School="Necromancy [Good]" ' +
     'Level=Deathless8 ' +
     'Description=' +
-      '"R%{lvl//2*5+25}\' Target corpse becomes a deathless councilor"',
+      '"R%{lvl//2*5+25}\' Creates a deathless councilor from the target corpse"',
   'Detect Aberration':
     'School=Divination ' +
     'Level=D1 ' +
@@ -1889,42 +1891,43 @@ Eberron.SPELLS_ADDED = {
     'School="Conjuration (Healing)" ' +
     'Level=Feast8 ' +
     'Description=' +
-      '"Neutralizes venom and poisonous creatures (save Will negates) within 30\' for %{lvl*10} min"',
+      '"Neutralizes venom and poisonous creatures within 30\' (save Will negates) for %{lvl*10} min"',
   'Disable Construct':
     'School=Transmutation ' +
     'Level=A6 ' +
     'Description=' +
-      '"Touched construct suffers %{lvl*10<?150} HP (save Will half and leaves the target with at least 1 hit point)"',
+      '"Melee touch attack on a construct inflicts %{lvl*10<?150} HP (save Will half), leaving the target with at least 1 hit point"',
   'Energy Alteration':
     'School=Transmutation ' +
     'Level=A1 ' +
     'Description=' +
-      '"Touched magic item employs or gives protection against a different chosen energy type for %{lvl*10} min"',
+      '"Causes the touched magic item to employ or give protection against a different chosen energy type (save Will negates) for %{lvl*10} min"',
   'Enhancement Alteration':
     'School=Transmutation ' +
     'Level=A1 ' +
     'Description=' +
-      '"Enhancement on a touched shield or weapon changes to an attack or Armor Class bonus for %{lvl*10} min"',
+      '"Causes some or all of the enhancement on a touched shield or weapon to change to an attack or Armor Class bonus (save Will negates) for %{lvl*10} min"',
   'Feast Of Champions':
     'School="Conjuration (Creation)" ' +
     'Level=C9,Feast9 ' +
+    // Varies somewhat from SRD35 Heroes' Feast
     'Description=' +
       '"R%{lvl//2*5+25}\' Creates food for %{lvl} creatures that cures sickness, disease, exhaustion, and 2d8+%{lvl} hit points and gives 1d8+%{lvl//2<?10} temporary hit points, +1 attacks, skill checks, ability checks, and saves, and immunity to poison and fear for 12 hr"',
   'Halt Deathless':
     'School=Necromancy ' +
     'Level=Deathless3 ' +
     'Description=' +
-      '"R%{lvl*10+100}\' 15\' radius immobilizes 3 deathless (save Will negates) for %{lvl} rd or until attacked or damaged"',
+      '"R%{lvl*10+100}\' Immobilizes 3 deathless in a 15\' radius (save Will negates) for %{lvl} rd; attacking a held creature ends the spell"',
   'Hardening':
     'School=Transmutation ' +
     'Level=A6,Artifice7,S6,W6 ' +
     'Description=' +
-      '"Touched %{lvl*10} cubic foot item (%{lvl} cubic foot if made of metal or mineral) gains +%{lvl//2} hardness"',
+      '"Gives the touched %{lvl*10} cubic foot item, or %{lvl} cubic foot metal or mineral item, +%{lvl//2} hardness"',
   "Hero's Blade":
     'School=Necromancy ' +
     'Level=Deathless9 ' +
     'Description=' +
-      '"Touched blade becomes good-aligned, gains a doubled critical threat range, and inflicts +2d6 HP on evil targets and +2d8 HP on evil outsiders and undead for %{lvl} min; critical hits on evil targets inflict +2d8 HP, plus blinded and deafened for 1d4 rd (save Will negates blindness); critical hits on evil outsiders inflict +2d12 HP and banishment for 24 hr (save Will negates banishment)"',
+      '"Makes the touched blade good-aligned, doubles its critical threat range, and causes it to inflict +2d6 HP on evil targets and +2d8 HP on evil outsiders and undead (save Will negates) for %{lvl} min; critical hits on evil targets inflict +2d10 HP, plus blinded and deafened for 1d4 rd (save Will negates blindness); critical hits on evil outsiders inflict +2d12 HP and banishment for 24 hr (save Will negates banishment)"',
   'Inflict Critical Damage':
     'School=Transmutation ' +
     'Level=A4 ' +
@@ -1945,7 +1948,7 @@ Eberron.SPELLS_ADDED = {
     'School=Transmutation ' +
     'Level=A4 ' +
     'Description=' +
-       '"Touched construct gains DR 15/adamantine, +4 Strength, and x5 weight, takes half damage from acid and fire, and suffers -4 Dexterity and vulnerability to rust attacks, for %{lvl} min"',
+       '"Gives the touched construct DR 15/adamantine, +4 Strength, x5 weight, half damage from acid and fire, -4 Dexterity, and vulnerability to rust attacks, (save Will negates) for %{lvl} min"',
   'Item Alteration':
     'School=Transmutation ' +
     'Level=A4 ' +
@@ -1955,7 +1958,7 @@ Eberron.SPELLS_ADDED = {
     'School="Enchantment (Compulsion) [Mind-Affecting]" ' +
     'Level=Madness8,S8,W8 ' +
     'Description=' +
-      '"Touched races around screaming, suffering -4 AC, loss of shield bonus, and Reflex saves that succeed only on a natural 20, for 1d4+1 rd"',
+      '"Melee touch attack causes the living target to race around screaming, suffering -4 Armor Class, loss of shield bonus, and Reflex saves that succeed only on a natural 20, for 1d4+1 rd"',
   'Magecraft':
     'School=Divination ' +
     'Level=S1,W1 ' +
@@ -1964,7 +1967,7 @@ Eberron.SPELLS_ADDED = {
     'School=Transmutation ' +
     'Level=A3 ' +
     'Description=' +
-      '"Gives a spell stored in the touched magic item a metamagic property for %{lvl} rd"',
+      '"Gives a spell stored in the touched magic item a metamagic property (save Will negates) for %{lvl} rd"',
   "Nature's Wrath":
     'School=Evocation ' +
     'Level=Gatekeeper4 ' +
@@ -1974,7 +1977,7 @@ Eberron.SPELLS_ADDED = {
     'School=Transmutation ' +
     'Level=A3 ' +
     'Description=' +
-      '"Touched magic item gains %{lvl//5} temporary charges for %{lvl} min"',
+      '"Gives the touched wand or staff %{lvl//5} temporary charges for %{lvl} min"',
   'Repair Critical Damage':
     'School=Transmutation ' +
     'Level=A4,S4,W4 ' +
@@ -1998,97 +2001,98 @@ Eberron.SPELLS_ADDED = {
     'School=Abjuration ' +
     'Level=A1 ' +
     'Description=' +
-      '"Touched item gives its wearer or wielder +%{lvl//4+1} saves for %{lvl*10} min"',
+      '"Enchants the touched object to give its wearer or wielder +%{lvl//4+1} saves for %{lvl*10} min"',
   'Return To Nature':
     'School=Transmutation ' +
     'Level=Gatekeeper7 ' +
     'Description=' +
-      '"R%{lvl//2*5+25}\' Arcane spellcaster or monstrous humanoid target suffers 1d4 negative levels; giant target suffers <i>Reduce Person</i> effects (save Fortitude negates); dragon or magical beast target suffers -1d6 Intelligence and loss of 1d4 spell-like or supernatural abilities for 24 hr (save Fortitude half Intelligence loss only); non-elemental outsider target suffers %{lvl//2<?10}d8 HP and loss of 2d4 spell-like or supernatural abilities for 24 hr (save Fortitude half HP only); aberration target suffers %{lvl<?20}d6 HP and loss of all spell-like and supernatural abilities for 24 hr (save Fortitude half HP only)"',
+      '"R%{lvl//2*5+25}\' Inflicts 1d4 negative levels on an arcane spellcaster or monstrous humanoid, <i>Reduce Person</i> effects on a giant (save Fortitude negates), -1d6 Intelligence and loss of 1d4 spell-like or supernatural abilities for 24 hr on a dragon or magical beast (save Fortitude half Intelligence loss only), %{lvl//2<?10}d8 HP and loss of 2d4 spell-like or supernatural abilities for 24 hr on a non-elemental outsider (save Fortitude half HP only), or %{lvl<?20}d6 HP and loss of all spell-like and supernatural abilities for 24 hr on an aberration (save Fortitude half HP only)"',
   "Legion's Shield Of Faith":
     'School=Abjuration ' +
     'Level=A4 ' +
     'Description=' +
-      '"R%{lvl*10+100}\' Allies in a 20\' radius gain a +%{lvl//6+2<?5} deflection bonus to Armor Class for %{lvl} min"',
+      '"R%{lvl*10+100}\' Gives allies in a 20\' radius a +%{lvl//6+2<?5} deflection bonus to Armor Class (save Will negates) for %{lvl} min"',
   'Skill Enhancement':
     'School=Transmutation ' +
     'Level=A1 ' +
     'Description=' +
-      '"Touched item gives its wearer or wielder +%{lvl//2+2} on a specified skill for %{lvl*10} min"',
+      '"Enchants the touched object to give its wearer or wielder +%{lvl//2+2} on a specified skill for %{lvl*10} min"',
   'Spell Storing Item':
     'School=Transmutation ' +
     'Level=A1 ' +
     'Description=' +
-      '"Successful Use Magic Device check allows casting a spell of up to level %{lvl//2<?4} from the touched item for %{lvl} hr"',
+      '"Allows a successful Use Magic Device check to enchant a touched object so that it can be used by self to cast a chosen spell of up to level %{lvl//2<?4} once within %{lvl} hr"',
   'Spirit Steed':
     'School=Necromancy ' +
     'Level=Deathless4 ' +
     'Description=' +
-      '"Touched animal gains +30\' Speed, an increased run multiplier, and immunity to hustle damage for %{lvl} hr, but suffers fatigue afterward"',
+      '"Gives the touched living animal +30\' Speed, an increased run multiplier, and immunity to hustle damage (save Will negates) for %{lvl} hr; the target suffers fatigue afterward"',
   'Greater Status':
     'School=Divination ' +
     'Level=Community4 ' +
     'Description=' +
-      '"Allows monitoring the condition and position of %{lvl//3} touched allies for %{lvl} hr; also permits remote casting of touch spells of up to level 2 on the targets"',
+      '"Allows monitoring the condition and position of %{lvl>5?lvl//3+\' touched living creatures\':\'a touched living creature\'} (save Will negates) for %{lvl} hr; also permits remote casting of touch spells of up to level 2 on the targets"',
   'Stone Construct':
     'School=Transmutation ' +
     'Level=A3 ' +
     'Description=' +
-      '"Touched construct gains DR 10/adamantine for %{lvl*10} min or until %{lvl*10<?150} HP have been negated" ' +
+      '"Gives the touched construct DR 10/adamantine (save Will negates) for %{lvl*10} min or until %{lvl*10<?150} HP have been negated" ' +
     'Liquid=Oil',
   'Suppress Requirement':
     'School=Transmutation ' +
     'Level=A3 ' +
     'Description=' +
-      '"Successful Use Magic Device check removes a class, race, ability, or alignment usage requirement from the touched magic item for %{lvl*10} min"',
+      '"Allows a successful Use Magic Device check to bypass a class, race, ability, or alignment usage requirement of the touched magic item (save Will negates) for %{lvl*10} min"',
   'Total Repair':
     'School=Transmutation ' +
     'Level=A6 ' +
     'Description=' +
-      '"Touched construct regains %{lvl*10<?150} hit points and recovers from conditions"',
+      '"Touched construct regains %{lvl*10<?150} hit points and recovers from ability damage, blinded, confused, dazed, dazzled, deafened, feebleminded, and insanity (save Will negates)"',
   'Touch Of Madness':
     'School="Enchantment [Mind-Affecting]" ' +
     'Level=Madness2 ' +
-    'Description="Touched suffers dazed for %{lvl*2} rd (save Will negates)"',
+    'Description=' +
+      '"Melee touch attack inflicts dazed on the living target for %{lvl*2} rd (save Will negates)"',
   'Toughen Construct':
     'School=Transmutation ' +
     'Level=A2 ' +
     'Description=' +
-      '"Touched construct gains a +%{(lvl//3+1)<?5>?2} enhancement bonus to natural armor for %{lvl*10} min"',
+      '"Gives the touched construct a +%{(lvl//3+1)<?5>?2} enhancement bonus to natural armor for %{lvl*10} min"',
   'True Creation':
     'School="Conjuration (Creation)" ' +
     'Level=Artifice8 ' +
     'Description=' +
-      '"R%{25+lvl//2*5}\' Creates a permanent %{lvl} cubic foot plant or mineral object"',
+      '"R%{25+lvl//2*5}\' Creates a permanent %{lvl} cubic foot vegetable or mineral object"',
   'Weapon Augmentation':
     'School=Transmutation ' +
     'Level=A4 ' +
     'Description=' +
-      '"Touched weapon gains a special ability that normally costs up to 70K GP for %{lvl*10} min"',
+      '"Gives the touched weapon or collection of up to 50 projectiles a special ability equivalent to a +3 enhancement or that normally costs up to 70K GP for %{lvl*10} min"',
   'Greater Weapon Augmentation':
     'School=Transmutation ' +
     'Level=A6 ' +
     'Description=' +
-      '"Touched weapon gains a special ability that normally costs up to 200K GP for %{lvl*10} min"',
+      '"Gives the touched weapon or collection of up to 50 projectiles a special ability equivalent to a +5 enhancement or that normally costs up to 200K GP for %{lvl*10} min"',
   'Lesser Weapon Augmentation':
     'School=Transmutation ' +
     'Level=A2 ' +
     'Description=' +
-      '"Touched weapon gains a special ability that normally costs up to 10K GP for %{lvl*10} min"',
+      '"Gives the touched weapon or collection of up to 50 projectiles a special ability equivalent to a +1 enhancement or that normally costs up to 10K GP for %{lvl*10} min"',
   'Personal Weapon Augmentation':
     'School=Transmutation ' +
     'Level=A1 ' +
     'Description=' +
-      '"Touched self weapon gains a special ability that normally costs up to 10K GP for %{lvl*10} min"',
+      '"Gives the touched self weapon a special ability equivalent to a +1 enhancement or that normally costs up to 10K GP for %{lvl*10} min"',
   'Withering Palm':
     'School=Necromancy ' +
     'Level=Decay7 ' +
     'Description=' +
-      '"Touch inflicts -%{lvl//2} Strength and Constitution (save Fortitude negates); a critical hit inflicts ability drain instead of damage"',
+      '"Melee touch attack inflicts on a living target %{lvl//2} points of Strength and Constitution damage (save Fortitude negates); a critical hit inflicts ability drain instead of damage"',
   'Zone Of Natural Purity':
     'School=Evocation ' +
     'Level=Gatekeeper2 ' +
     'Description=' +
-      '"R%{lvl//2*5+25}\' 20\' radius gives fey and plants +1 attacks, damage, and saves, and inflicts -1 attacks, damage, and saves on abberations, for %{lvl*2} hr"',
+      '"R%{lvl//2*5+25}\' 20\' radius gives fey and plants +1 attacks, damage, and saves, and inflicts -1 of the same on aberrations, for %{lvl*2} hr"',
 
   // Dragonmark spells
   'Dimension Leap':
